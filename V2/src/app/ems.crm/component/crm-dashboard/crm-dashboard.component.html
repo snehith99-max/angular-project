@@ -1,0 +1,307 @@
+<div class="card">
+  <div class="card-bordered" style="background-color: white;">
+    <div class="card-header d-flex justify-content-center"style="background: rgb(81,183,204);background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);height:60px;">
+      <div class="card-title ">
+        <h1 class="card-title fw-bold fs-3" style="color:black;"><b>Marketing Dashboard</b></h1>
+      </div>
+    </div>
+    <br>
+    <div class="row m-3">
+      <div class="col-lg-3 col-md-3 col-sm-3">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-skyblue">
+          <div class="card-body12">
+            <div class="d-flex align-items-center">
+              <div>
+                <h5 class="mb-0 text-secondary">Total Leads</h5>
+
+                <div class="d-flex">
+                  <h4 class="badge-blue  badge-outline-blue fs-4 mt-2">{{total_count}}</h4>
+                </div>
+              </div>
+              <div class="widgets-icons-2 rounded-circle bg-gradient-skyblue text-white ms-auto"><i
+                  class="fa-solid fa-users"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-violet">
+          <div class="card-body12">
+            <div class="d-flex align-items-center">
+              <div>
+                <h5 class="mb-0 text-secondary">MTD / {{mtd_month | uppercase }}</h5>
+                <div class="d-flex" *ngFor="let MyTodayTaskCount_List of MyLeadsCount_List">
+                  <h4 class="badge-violet  badge-outline-violet fs-4 mt-2">{{mtd_count}}</h4>
+                </div>
+              </div>
+              <div class="widgets-icons-2 rounded-circle bg-gradient-violet text-white ms-auto"><i
+                  class="fa-solid fa-calendar-days"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-brown">
+          <div class="card-body12">
+            <div class="d-flex align-items-center">
+              <div>
+                <h5 class="mb-0 text-secondary"> YTD / {{ytd_year}}</h5>
+                <div *ngFor="let MyUpcomingTaskCount_List of MyLeadsCount_List">
+                  <h4 class="badge-maroon badge-outline-maroon fs-4 mt-2">{{ytd_count}}
+                  </h4>
+                </div>
+              </div>
+              <div class="widgets-icons-2 rounded-circle bg-gradient-brown text-white ms-auto"><i
+                  class="fa-solid fa-calendar-plus"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-darkblue">
+          <div class="card-body12">
+            <div class="d-flex align-items-center">
+              <div>
+                <h5 class="mb-0 text-secondary">Purchase</h5>
+                <div class="d-flex" *ngFor="let MyNewTaskCount_List of MyLeadsCount_List">
+                  <h4 class="badge-blue  badge-outline-blue fs-4 mt-2">{{customer_count}}</h4>
+                </div>
+              </div>
+              <div class="widgets-icons-2 rounded-circle bg-gradient-darkblue text-white ms-auto"><i
+                  class="fa-solid fa-user-check"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="m-5 me-1 d-flex flex-wrap mb-0 mt-0 ">
+      <div class="col-12 col-lg-12 row">
+        <div class="col-12 col-lg-6 pe-0">
+          <div class="m-3 me-0 card border  p-3 rounded" style="height:470px;border: 2px solid rgb(255, 254, 254);">
+            <div class="me-0">
+              <div class="card-header justify-content-center"
+                style="background: rgb(81,183,204);
+              background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;">
+                <b style="padding-top: 12px;">Overall Performance</b>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center mt-4 ms-2 pe-4">
+              <div class="row d-flex justify-content-center ">
+                <div class="col-lg-6">
+                  <div class="btn-group " role="group">
+                    <button type="button" title="Lead & Purchase" class="btn btn-current btn-sm text-black border"
+                      [class.highlighted]="selectedChartType === 'Lead'  || !selectedChartType"
+                      (click)="UpdateChart('Lead')" >Lead&nbsp;&&nbsp;Purchase</button>
+                    <button type="button" title="Region" class="btn btn-current btn-sm text-black border"
+                      [class.highlighted]="selectedChartType === 'Region'" (click)="UpdateChart('Region')">Region</button>
+                    <button type="button" title="Source" class="btn btn-current btn-sm text-black border"
+                      [class.highlighted]="selectedChartType === 'Source'"
+                      (click)="UpdateChart('Source')">Source</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="selectedChartType === 'Lead'">
+              <ng-container *ngIf="flag">
+                <div #chartRef class="d-flex flex-column mixed-widget-2-chart card-rounded-bottom">
+                  <apx-chart [series]="crmleadchart.series" [chart]="crmleadchart.chart" [xaxis]="crmleadchart.xaxis"
+                    [yaxis]="crmleadchart.yaxis" [dataLabels]="crmleadchart.dataLabels" [stroke]="crmleadchart.stroke"
+                    [legend]="crmleadchart.legend" [fill]="crmleadchart.fill" [states]="crmleadchart.states"
+                    [tooltip]="crmleadchart.tooltip" [colors]="crmleadchart.colors" [markers]="crmleadchart.markers"
+                    [plotOptions]="crmleadchart.plotOptions">
+                  </apx-chart>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="!flag">
+                <div class="d-flex justify-content-center">
+                  <span>
+                    <img src=".\assets\media\images\No_data_found.png" class="h-78px w-300px">
+                  </span>
+                </div>
+              </ng-container>
+            </div>
+            <div *ngIf="selectedChartType === 'Region'">
+              <ng-container *ngIf="regionflag">
+                <div #chartRef class="d-flex flex-column mixed-widget-2-chart card-rounded-bottom">
+                  <apx-chart [series]="crmregionchart.series" [chart]="crmregionchart.chart"
+                    [xaxis]="crmregionchart.xaxis" [yaxis]="crmregionchart.yaxis"
+                    [dataLabels]="crmregionchart.dataLabels" [stroke]="crmregionchart.stroke"
+                    [fill]="crmregionchart.fill" [states]="crmregionchart.states"
+                    [plotOptions]="crmregionchart.plotOptions">
+                  </apx-chart>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="!regionflag">
+                <div class="d-flex justify-content-center">
+                  <span>
+                    <img src=".\assets\media\images\No_data_found.png" class="h-78px w-300px">
+                  </span>
+                </div>
+              </ng-container>
+            </div>
+            <div *ngIf="selectedChartType === 'Source'">
+              <ng-container *ngIf="sourceflag">
+                <div #chartRef class="d-flex flex-column mixed-widget-2-chart card-rounded-bottom">
+                  <apx-chart [series]="crmsourcechart.series" [chart]="crmsourcechart.chart"
+                    [xaxis]="crmsourcechart.xaxis" [yaxis]="crmsourcechart.yaxis"
+                    [dataLabels]="crmsourcechart.dataLabels" [stroke]="crmsourcechart.stroke"
+                    [legend]="crmsourcechart.legend" [fill]="crmsourcechart.fill" [states]="crmsourcechart.states"
+                    [tooltip]="crmsourcechart.tooltip" [colors]="crmsourcechart.colors"
+                    [markers]="crmsourcechart.markers" [plotOptions]="crmsourcechart.plotOptions">
+                  </apx-chart>
+                </div>
+
+              </ng-container>
+              <ng-container *ngIf="!sourceflag">
+                <div class="d-flex justify-content-center">
+                  <span>
+                    <img src=".\assets\media\images\No_data_found.png" class="h-78px w-300px">
+                  </span>
+                </div>
+              </ng-container>
+            </div>
+            <div *ngIf="!selectedChartType">
+              <ng-container *ngIf="flag">
+                <div #chartRef class="d-flex flex-column mixed-widget-2-chart card-rounded-bottom">
+                  <apx-chart [series]="crmleadchart.series" [chart]="crmleadchart.chart" [xaxis]="crmleadchart.xaxis"
+                    [yaxis]="crmleadchart.yaxis" [dataLabels]="crmleadchart.dataLabels" [stroke]="crmleadchart.stroke"
+                    [legend]="crmleadchart.legend" [fill]="crmleadchart.fill" [states]="crmleadchart.states"
+                    [tooltip]="crmleadchart.tooltip" [colors]="crmleadchart.colors" [markers]="crmleadchart.markers"
+                    [plotOptions]="crmleadchart.plotOptions">
+                  </apx-chart>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="!flag">
+                <div class="d-flex justify-content-center">
+                  <span>
+                    <img src=".\assets\media\images\No_data_found.png" class="h-78px w-300px">
+                  </span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6 pe-0">
+          <div class="m-3 me-0 card border p-3 rounded" style="height:470px;border: 2px solid rgb(255, 254, 254);">
+            <div class="card-header justify-content-center"
+              style="background: rgb(81,183,204);
+      background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;">
+              <b style="padding-top: 12px;">Campaign</b>
+            </div>
+            <ng-container *ngIf="campaignflag1">
+              <apx-chart [series]="crmcampaignsentchart.series" [chart]="crmcampaignsentchart.chart"
+                [xaxis]="crmcampaignsentchart.xaxis" [yaxis]="crmcampaignsentchart.yaxis"
+                [dataLabels]="crmcampaignsentchart.dataLabels" [stroke]="crmcampaignsentchart.stroke"
+                [legend]="crmcampaignsentchart.legend" [fill]="crmcampaignsentchart.fill"
+                [states]="crmcampaignsentchart.states" [tooltip]="crmcampaignsentchart.tooltip"
+                [colors]="crmcampaignsentchart.colors" [markers]="crmcampaignsentchart.markers"
+                [plotOptions]="crmcampaignsentchart.plotOptions">
+              </apx-chart>
+            </ng-container>
+            <ng-container *ngIf="!campaignflag1">
+              <div class="d-flex justify-content-center">
+                <span>
+                  <img src=".\assets\media\images\No_data_found.png" class="h-78px w-300px">
+                </span>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="m-5 me-1 d-flex flex-wrap mb-0 mt-0 ">
+      <div class="col-12 col-lg-12 row">
+        <div class="col-12 col-lg-6 pe-0">
+          <div class="m-3 me-0 card border p-3 rounded" style="height:360px; border: 2px solid rgb(255, 254, 254);">
+            <div class="card-header justify-content-center"
+              style="background: rgb(81,183,204);
+        background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;">
+              <b style="padding-top: 12px;">Lead Stages</b>
+            </div>
+            <div class="d-flex flex-column mixed-widget-2-chart card-rounded-bottom">
+              <ng-container *ngIf="overallchartflag">
+                <apx-chart [series]="leadstagechart.series" [chart]="leadstagechart.chart"
+                  [xaxis]="leadstagechart.xaxis" [yaxis]="leadstagechart.yaxis" [dataLabels]="leadstagechart.dataLabels"
+                  [stroke]="leadstagechart.stroke" [legend]="leadstagechart.legend" [fill]="leadstagechart.fill"
+                  [states]="leadstagechart.states" [tooltip]="leadstagechart.tooltip" [colors]="leadstagechart.colors"
+                  [markers]="leadstagechart.markers" [plotOptions]="leadstagechart.plotOptions">
+                </apx-chart>
+              </ng-container>
+              <ng-container *ngIf="!overallchartflag">
+                <div class="d-flex justify-content-center">
+                  <span>
+                    <img src=".\assets\media\images\No_data_found.png" class="h-78px w-300px">
+                  </span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6 pe-0">
+          <div class="m-3 me-0 card border p-3 rounded" style="height:360px; border: 2px solid rgb(255, 254, 254);">
+            <div class="card-header justify-content-center"
+              style="background: rgb(81,183,204);
+    background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;">
+              <b style="padding-top: 12px;">Opportunity</b>
+            </div>
+            <div class="me-2">
+              <div class="d-flex flex-column mixed-widget-2-chart card-rounded-bottom">
+                <ng-container *ngIf="leadbankflag">
+                  <div id="chart">
+                    <apx-chart [series]="leadchart.series" [chart]="leadchart.chart" [xaxis]="leadchart.xaxis"
+                    [yaxis]="leadchart.yaxis" [dataLabels]="leadchart.dataLabels" [stroke]="leadchart.stroke"
+                    [legend]="leadchart.legend" [fill]="leadchart.fill" [states]="leadchart.states"
+                    [tooltip]="leadchart.tooltip" [colors]="leadchart.colors" [markers]="leadchart.markers"
+                    [plotOptions]="leadchart.plotOptions">
+                  </apx-chart></div>
+                </ng-container>
+                <ng-container *ngIf="!leadbankflag">
+                  <div class="d-flex justify-content-center">
+                    <span>
+                      <img src=".\assets\media\images\No_data_found.png" class="h-78px w-300px">
+                    </span>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-row m-3" style="background-color: white;">
+      <div class=" col-12 mb-7 border p-3 rounded">
+        <div class="card-header justify-content-center"
+          style="background: rgb(81,183,204);
+        background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;">
+          <b style="padding-top: 12px;">User Access</b>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 row " style="margin: 6px; margin-left: 0;">
+          <div *ngFor=" let list1 of menu; let j = index;" class="col-lg-2 col-md-2 col-sm-2">
+            <div *ngIf="list1 != null">
+              <h3 style="padding: 10px;">{{list1.text}}</h3>
+              <hr>
+              <div *ngFor=" let list2 of list1.sub1menu; let k = index;">
+                <div *ngIf="list2.menu_access == 'true'">
+                  <div style="padding: 5px;">
+                    <a (click)="redirect_menu(list2.sref, j, k)"
+                      style="color:#009ef7;cursor: pointer;">{{list2.text}}</a>
+                  </div>
+                </div>
+                <div *ngIf="list2.menu_access != 'true'">
+                  <div style="padding: 5px;">{{list2.text}}</div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="list1 == null">
+              <h3 class="text-center">No Records found for this menu</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

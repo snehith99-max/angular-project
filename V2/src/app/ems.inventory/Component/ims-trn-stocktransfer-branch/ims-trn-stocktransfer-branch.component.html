@@ -1,0 +1,44 @@
+<div class="card rounded-top mt-4">
+    <div class="card-title p-5 pb-3 pt-3 rounded-top bg-primary d-flex justify-content-between 
+    align-items-center">
+        <h3 class="fw-bolder text-white"><i class="fas fa-plus fw-bolder fs-3"></i>&nbsp;&nbsp; Transfer Stock To Branch 
+        </h3>
+        <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer "
+        routerLink="/ims/ImsTrnStockTransfer"><i class="fa-solid fa-arrow-left-long fs-1 fw-bold"></i></button>
+    </div>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="branchaddsummary" class="table table-stripped table-row-bordered border-bottom gs-7">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue algin-middle">
+                        <th>S.No</th>
+                        <th>Branch</th>
+                        <th>Location</th>
+                        <th>Product Group</th>
+                        <th>Product</th>
+                        <th>Stock Balance</th>
+                        <th class="text-center bg-lightblue ">Action</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of branchaddsummary; let i=index;">
+                        <td style="width: 5%;">{{i+1}}</td>
+                        <td style="width: 15%;">{{data.branch_name}}</td>
+                        <td style="width: 15%;">{{data.location_name}}</td>
+                        <td>{{data.productgroup_name}}</td>
+                        <td class="ellipsis">{{data.product_code}}/
+                            {{data.product_name}}
+                        </td>
+                        <td>{{data.stock_balance}} {{data.productuom_name}}</td>
+                        <td class="text-center" style="width: 5%;" >
+                            <button title="Transfer" type="button" (click)="stocktransfer(data.stock_gid)" class="btn-lg btn-primary"
+                            style="height: 20px; display: flex; align-items: center; justify-content: center;">
+                            Transfer
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

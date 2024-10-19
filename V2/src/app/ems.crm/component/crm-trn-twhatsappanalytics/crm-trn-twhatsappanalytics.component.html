@@ -1,0 +1,182 @@
+<div class="card card-bordered bg-white">
+    <div class="card-header d-flex  mb-3 bg-whatsapp">
+        <h1 class="card-title fs-2 text-white justify-content-center"><i class="fab fa-whatsapp"
+                style="font-size: 22px;  margin-right: 5px;"></i> WhatsApp Analytics</h1>
+        <div style="margin: 13px; ">
+            <div class="float-end">
+                <button title="Back" routerLink="/crm/CrmSmmWhatsappcampaign"
+                    class="btn-secondary btn-sm text-black me-4"><i class="ki-duotone ki-entrance-right fs-5">
+                        <i class="path1"></i>
+                        <i class="path2"></i>
+                    </i>&nbsp;Back</button>
+            </div>
+
+        </div>
+    </div>
+    <ng-container *ngIf="!individualreportopen">
+        <div class="row justify-content-center">
+            <div class="row">
+                <div class="col-md-2 mt-3 ">
+                    <label for="FromDate"><b>From Date:</b></label>
+                    <input type="date" pattern="^(?!\s*$).+" [max]="maxDate" [(ngModel)]="from_date"
+                        class="form-control form-control-lg form-control date-picker custom-input mb-3 mb-lg-0 bg-white"
+                        placeholder="DD-MM-YYYY" />
+                </div>
+                <div class="col-md-2 mt-3">
+                    <label for="ToDate"><b>To Date:</b></label>
+                    <input type="date" pattern="^(?!\s*$).+" [max]="maxDate" [(ngModel)]="to_date"
+                        class="form-control form-control-lg form-control date-picker custom-input mb-3 mb-lg-0 bg-white"
+                        placeholder="DD-MM-YYYY" />
+                </div>
+                <div class="col-md-1 mt-7">
+                    <button title="Retrive" class="btn-success btn-sm text-black ms-5 float-end"
+                        (click)="onSearchClick()">Retrive</button>
+                </div>
+                <div class="col-md-1 mt-7">
+                    <button title="Refresh" class="btn-warning btn-sm text-black"
+                        (click)="onrefreshclick()">Refresh</button>
+                </div>
+
+
+                <div class="col-lg-5 mt-5">
+                    <div class="float-end me-20">
+                        <label><b>Recent Activities</b></label><br>
+                        <div class="btn-group" role="group" style="width: 160%;">
+                            <button type="button" title="Current" class="btn btn-default1 btn-sm text-black"
+                                [class.btn-current]="selectedTab === 'current'"
+                                (click)="selectTab('current')">Current</button>
+                            <button type="button" title="Last 7 Days" class="btn btn-default2 btn-sm text-black"
+                                [class.btn-days]="selectedTab === '7day'" (click)="selectTab('7day')">7 D</button>
+                            <button type="button" title="Last 1 Month" class="btn btn-default3 btn-sm text-black"
+                                [class.btn-month]="selectedTab === 'month'" (click)="selectTab('month')">1 M</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card  mt-8 mb-8">
+            <div class="row ms-1 me-1 mt-5">
+                <div class="col-8  ">
+                    <div class="col-12 card bg-white rounded ">
+                        <div class="col-12 card  bg-white rounded">
+                            <div class="card-header justify-content-center bg-whatsapp">
+                                <h3 class="card-title fs-4 text-white"><i class="fas fa-bullhorn"
+                                        style="font-size: 18px;  margin-right: 5px;"></i>Campaign Run Report</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-container *ngIf="flag">
+                        <div class="d-flex flex-column border">
+                            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                                [xaxis]="chartOptions.xaxis" [yaxis]="chartOptions.yaxis"
+                                [dataLabels]="chartOptions.dataLabels" [stroke]="chartOptions.stroke"
+                                [legend]="chartOptions.legend" [fill]="chartOptions.fill" [states]="chartOptions.states"
+                                [tooltip]="chartOptions.tooltip" [colors]="chartOptions.colors"
+                                [markers]="chartOptions.markers" [plotOptions]="chartOptions.plotOptions">
+                            </apx-chart>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="!flag">
+                        <div class="d-flex justify-content-center">
+                            <span>
+                                <img src=".\assets\media\images\No_data_found.png" class="h-78px w-300px">
+                            </span>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="col-4 ">
+                    <div class="col-12 card  border mb-3 bg-white rounded">
+                        <div class="col-12 card  bg-white rounded">
+                            <div class="card-header justify-content-center bg-whatsapp">
+                                <h3 class="card-title fs-4 text-white"><i class="fas fa-bullhorn"
+                                        style="font-size: 18px;  margin-right: 5px;"></i>Campaign Run Summary</h3>
+                            </div>
+                            <div class="table-responsive">
+                                <div class="card card-body p-3 mb-5 ">
+                                    <div class="mx-1 p-1  pb-0  table-responsive custom-tbody1 scrollbar">
+                                        <table id="GetOrderForLastSixMonths_List"
+                                            class="table table-striped table-row-bordered gy-5 gs-7">
+                                            <thead>
+                                                <tr class="fs-5 text-nowrap bg-lightblues text-white">
+                                                    <th class="text-center">Month</th>
+                                                    <th class="text-center">Sent Count</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <ng-container
+                                                    *ngFor="let data of GetOrderForLastSixMonths_List; let i=index;">
+                                                    <tr class="orderhover" (click)="ondetail(data.month,data.year)">
+                                                        <td class="text-center">{{ data.months }}</td>
+                                                        <td class="text-center">{{ data.whatsappsent_count }}</td>
+                                                    </tr>
+                                                </ng-container>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="isExpand">
+        <div class="col-12 card  bg-white rounded ">
+            <div class="card-header justify-content-center ms-3 me-3 bg-whatsapp">
+                <h3 class="card-title fs-4 text-white"><i class="far fa-paper-plane"
+                        style="font-size: 18px;  margin-right: 5px;"></i>&nbsp;Campaign Sent Summary</h3>
+            </div>
+            <div class="table-responsive mb-10 mt-3 border">
+                <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded custom-tbody scrollbar">
+                    <table id="GetOrderDetailSummary" class="table table-striped table-row-bordered gy-5 gs-7  ">
+                        <thead>
+                            <tr class="fs-5 text-nowrap bg-lightblues align-middle text-white">
+                                <th style="width: 1px;">S.No</th>
+                                <th style="width: 30px;" style="width: 100px;"> Campaign Title</th>
+                                <th class="text-center">Customer Name</th>
+                                <th class="text-center">Mobile Number</th>
+                                <th class="text-center"> Region</th>
+                                <th class="text-center"> Source</th>
+                                <!-- <th class="text-center">Customer Type</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let data of GetOrderDetailSummary; let i=index;"
+                                style="white-space: nowrap;">
+                                <tr class="orderhover">
+                                    <td style="width: 1px;">{{i+1}}</td>
+                                    <td style="width: 150px;"> <span *ngIf="data.campaign_title === '' "> - </span>
+                                        <span *ngIf="data.campaign_title !== ''">{{data.campaign_title}}</span>
+                                    </td>
+                                    <td class="text-center" style="width: 150px;"><span
+                                            *ngIf="data.leadbank_name === '' "> - </span>
+                                        <span *ngIf="data.leadbank_name !== ''">{{data.leadbank_name}}</span>
+                                    </td>
+                                    <td class="text-center" style="width: 100px;"><span
+                                            *ngIf="data.identifiervalue === '' "> - </span>
+                                        <span *ngIf="data.identifiervalue !== ''">{{data.identifiervalue}}</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span *ngIf="data.region === '' "> - </span>
+                                        <span *ngIf="data.region !== ''">{{data.region}}</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span *ngIf="data.source === '' "> - </span>
+                                        <span *ngIf="data.source !== ''">{{data.source}}</span>
+                                    </td>
+                                    <!-- <td class="text-center">
+                                        <span *ngIf="data.customer_type === '' "> - </span>
+                                        <span *ngIf="data.customer_type !== ''" >{{data.customer_type}}</span>                                    </td> -->
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>

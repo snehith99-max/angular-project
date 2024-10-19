@@ -1,0 +1,127 @@
+<div class="card  cardHead1  white mt-6">
+    <div class="card-header justify-content-center  text-black bg-gradient-SD" style="background: rgb(81,183,204);
+    background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);">
+      <h2 class="card-title fs-3 text-black p-5"><b>Legal Dashboard</b></h2>
+    </div>
+    <br>
+
+
+    <div class="row m-3 ">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="cardHead radius-10 border-start border-0 border-3 border-violet1">
+            <div class="card-body12">
+              <div class="d-flex align-items-center">
+                <div>
+                  <h5 class="mb-2 text-secondary text-center"><b>Case Type</b></h5>
+                  <div class="d-flex">
+                    <h4 class="badge-blue  badge-outline-blue fs-4 mt-2">{{casetype_count}}</h4>
+                  </div>
+                </div>
+                <div class="widgets-icons-2 rounded-circle bg-gradient-Mtd text-white ms-auto">
+                  <i class="fa-solid fa-file-invoice-dollar"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="cardHead radius-10 border-start border-0 border-3 border-Due">
+            <div class="card-body12">
+              <div class="d-flex align-items-center">
+                <div>
+                  <h5 class="mb-2 text-secondary text-center "><b>Institute</b></h5>
+                  <div class="d-flex">
+                    <h4 class="badge-blue1  badge-outline-blue1 fs-4 mt-2">{{institute_count}}</h4>
+                  </div>
+                </div>
+                <div class="widgets-icons-2 rounded-circle bg-gradient-Cdue text-white ms-auto">
+                  <i class="fa-solid fa-money-check"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="cardHead radius-10 border-start border-0 border-3 border-brown">
+            <div class="card-body12">
+              <div class="d-flex align-items-center">
+                <div>
+                  <h5 class="mb-2 text-secondary text-center"><b>Case &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></h5>
+                  <div class="d-flex">
+                    <h4 class="badge-blue2  badge-outline-blue2 fs-4 mt-2">{{case_count}}</h4>
+                  </div>
+                </div>
+                <div class="widgets-icons-2 rounded-circle bg-gradient-Odue text-white ms-auto">
+                  <i class="fa-solid fa-money-check"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row m-3 ">
+        <div class="col-lg-8 col-md-6 col-sm-12 shadow-sm">
+        <div class="p-3 m-2 card border border-secondary">
+            <apx-chart [series]="cOptions.series" [chart]="cOptions.chart" [yaxis]="cOptions.yaxis"
+                [xaxis]="cOptions.xaxis" [labels]="cOptions.labels" [stroke]="cOptions.stroke"
+                [markers]="cOptions.markers" [fill]="cOptions.fill" [tooltip]="cOptions.tooltip"></apx-chart>
+        </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="m-2 card shadow-lg radius-10">
+            <div class="card-header  d-flex justify-content-center color bg-gradient-color">
+                <h1 class="card-title fw-bold fs-3">Institute</h1>
+            </div>
+            <div class="row p-3">
+                <div class=" col-lg-6 col-md-6 col-sm-12 mt-3">
+                    <div class="cardhea1 radius-10 border-start border-0 border-3 border-warning">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <h3 class="mb-0 text-secondary fs-6">Active Institute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+                            </div>
+                            <span class="count12 fs-6">  <h3 class="my-1 text-info text-center" id=active_count>{{active_count}} </h3></span>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-lg-6 col-md-6 col-sm-12 mt-3">
+                    <div class="cardhea1 radius-10 border-start border-0 border-3 border-warning">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <h3 class="mb-0 text-secondary fs-6">InActive Institute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </h3>
+                            </div>
+                            <span class="count12 fs-6">  <h3 class="my-1 text-info text-center" id=Inactive_count>{{Inactive_count}} </h3></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </div>
+       <div class="m-2 card shadow-lg">
+        <div class="card-header  d-flex justify-content-center color bg-gradient-color">
+            <h1 class="card-title fw-bold fs-3">Case</h1>
+        </div>
+        <div class="row p-3">
+            <div class=" col-lg-6 col-md-6 col-sm-12 mt-3">
+                <div class="cardhea1 radius-10 border-start border-0 border-3 border-success">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h3 class="mb-0 text-secondary fs-6">Last Week</h3>
+                        </div>
+                        <span class="count14 fs-6">  <h3 class="my-1 text-info text-center" id=case_week>{{case_week}} </h3></span>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-lg-6 col-md-6 col-sm-12 mt-3">
+                <div class="cardhea1 radius-10 border-start border-0 border-3 border-success">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h3 class="mb-0 text-secondary fs-6">Last
+                                Month</h3>
+                        </div>
+                        <span class="count14 fs-6">  <h3 class="my-1 text-info text-center" id=case_month>{{case_month}} </h3></span>
+                    </div>
+                </div>
+            </div>
+   </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+	
+.nav-twotabs .twotab.active, .nav-twotabs .nav-items.show  {
+    color: #ffffff !important;
+    background-color: #009EF7;   
+  }
+  .twotab:hover{
+    background-color:#009EF7 ;
+    color: #ffffff !important;
+  
+  }
+  
+  .modal-lgpopup{
+    --bs-modal-width: 570px;
+  }
+  .inputfield:disabled {
+    background-color: #eaedf0 !important;
+    cursor: not-allowed !important;
+  }
+  .btn-success:disabled {
+    background-color: #cccccc !important;
+    cursor: not-allowed !important;
+  }
+  .otp-input {
+    width: 35px; 
+    margin-right: 0.5rem; 
+}
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none; /* Prevent interaction */
+}
+

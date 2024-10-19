@@ -1,0 +1,313 @@
+<div class="card shadow-sm">
+  <div class="card-header bg-primary">
+    <h3 class="fw-bolder text-white mt-5">Employee Asset Custodian</h3>
+  </div>
+  <div class="m-1" *ngFor="let m of getuserdtl1">
+    <div class="d-flex flex-row flex-wrap m-6 justify-content-center">
+      <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+        <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row">
+          <h1 class="card-title fw-bold fs-3">Employee: <span class="ms-4" style="color: maroon;">{{m.user_name}}</span>
+          </h1>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- summary of the asset cusdotian -->
+
+  <form [formGroup]="reactiveFormadd" #form="ngForm">
+    <div class="d-flex flex-row fv-row flex-wrap m-6">
+      <div class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="font-bold required">Asset Name</span>
+        <ng-select class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" formControlName="asset_name"
+          bindLabel="asset_name" bindValue="asset_name" [items]="asset_list" [class.is-invalid]="reactiveFormadd.get('asset_name')?.invalid
+                      && (reactiveFormadd.get('asset_name')?.dirty || reactiveFormadd.get('asset_name')?.touched)"
+          [ngClass]="{'invalid-border': reactiveFormadd.get('asset_name')?.invalid &&
+                          reactiveFormadd.get('asset_name')?.touched}" [(ngModel)]="asset_model"
+          placeholder="Select an option" required></ng-select>
+
+
+
+
+
+        <!-- <ng-select class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" formControlName="asset_name"
+          bindLabel="asset_name" bindValue="asset_name" [items]="asset_list"
+          [ngStyle]="{'border-color': asset_name.invalid && asset_name.touched ? 'red' : 'rgb(209, 209, 209)'}"
+          class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+          [(ngModel)]="asset_model" placeholder="Select an option" style="width:75%" required></ng-select> -->
+        <div *ngIf="asset_name.invalid && (asset_name.dirty || asset_name.touched)">
+          <div *ngIf="asset_name.errors?.['required']">
+            <span class="text-red">Asset Name is required</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-1 col-md-1 col-sm-12"><span class="font-bold required">Asset ID</span>
+        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+          <input formControlName="asset_id" type="text"
+            [ngStyle]="{'border-color': asset_id.invalid && asset_id.touched ? 'red' : 'rgb(209, 209, 209)'}"
+            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+            placeholder="Asset ID" name="asset_id" required />
+        </div>
+        <div *ngIf="asset_id.invalid && (asset_id.dirty || asset_id.touched)">
+          <div *ngIf="asset_id.errors?.['required']">
+            <span class="text-red">Asset ID is required</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-1 col-md-1 col-sm-12 ms-10"><span class="font-bold required"> Assigned Date</span>
+        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+          <input type="text"
+            [ngStyle]="{'border-color': assigned_date.invalid && assigned_date.touched ? 'red' : 'rgb(209, 209, 209)'}"
+            class="form-control form-control-lg form-control-solid date-picker mb-3 mb-lg-0 bg-white custom-input"
+            placeholder="DD-MM-YYYY" formControlName="assigned_date" style="width:125%" />
+        </div>
+        <div *ngIf="assigned_date.invalid && (assigned_date.dirty || assigned_date.touched)">
+          <div *ngIf="assigned_date.errors?.['required']">
+            <span class="text-red">Assigned Date is required</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-1 col-md-1 col-sm-12 ms-20"><span class="font-bold required">Returned Date</span>
+        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+          <input type="text"
+            [ngStyle]="{ 'border-color': reactiveFormadd.get('returned_date')?.hasError('required') && reactiveFormadd.get('returned_date')?.touched ? 'red' : 'rgb(209, 209, 209)' }"
+            class="form-control form-control-lg form-control-solid date-picker mb-3 mb-lg-0 bg-white custom-input"
+            placeholder="DD-MM-YYYY" formControlName="returned_date" style="width:125%" />
+        </div>
+        <div *ngIf="returned_date.invalid && (returned_date.dirty || returned_date.touched)">
+          <div *ngIf="returned_date.errors?.['required']">
+            <span class="text-red">Returned Date is required</span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-12 col-lg-1 col-md-2 col-sm-12 mt-8 ms-20">
+        <button class="btn-success" [disabled]="reactiveFormadd.invalid" type="button" title="Add" class="btn-primary btn-sm text-white me-2 float-end"
+                style="height: 25px; line-height: 20px; padding: 0 10px; display: flex; align-items: center;" (click)="GetAddAssetcustodian()">
+                <i class="fas fa-plus"></i>&nbsp;Add
+                </button>
+
+      </div>
+
+    </div>
+
+  </form>
+
+  <!-- <div class="mt-5 p-7">
+    <div class="card-header bg-lightblue card-height55">
+      <div class="card-title mt-4">
+        <h4 class="fw-bolder text-blue">Employee Asset</h4>
+      </div>
+    </div>
+  </div> -->
+  <div class="table-responsive">
+    <div class="card card-body m-3 p-3 mb-3 bg-white rounded">
+      <table id="custodianadd_list" class="table table-striped table-row-bordered gy-5 gs-7 ">
+        <thead>
+          <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue align-middle">
+            <th>S.No</th>
+            <th>Asset Name</th>
+            <th>Asset ID</th>
+            <th>Assigned Date</th>
+            <th>Returned Date</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of custodianadd_list; let i=index;" class="align-middle">
+            <td>{{i+1}}</td>
+            <td>{{data.asset_name}}</td>
+            <td>{{data.assetref_no}}</td>
+            <td>{{data.custodian_date}}</td>
+            <td>{{data.custodian_enddate}}</td>
+
+            <td class="text-center text-nowrap">
+               <button title="Upload Document" type="button" class="btn btn-icon btn-sm bg-primary me-2"
+                data-bs-toggle="modal" data-bs-target="#myModaladd" (click)="openModaldtl(data)">
+                <i class="fa fa-upload" aria-hidden="true"></i>
+              </button>
+
+              <button title="Edit" type="button" class="btn btn-icon btn-sm bg-etdark me-2" data-bs-toggle="modal"
+                data-bs-target="#myModaledit" (click)="openModaledit(data)">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+              </button>
+             
+
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+
+
+
+  <div class="text-center my-4">
+
+    <button class="btn-primary btn-sm text-white me-4" routerLink="/hrm/HrmTrnAssetCustodian">
+      <i class="fas fa-arrow-left"></i> &nbsp; Back
+    </button>
+  </div>
+
+  <form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="modal" id="myModaladd" data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+            <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i class></i> Upload Document
+              Details</h2>
+          </div>
+          <div class="modal-body">
+            <div class="col-12 col-lg-10 col-md-6 col-sm-12">
+              <span class="font-bold">Upload Document</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input (change)="onChange2($event)" accept=".pdf, .xlsx, .xls, .jpg, .jpeg, .png" type="file" #fileInput
+                  class="form-control form-control-lg form-control-solid bg-white mb-3 mb-lg-0 borderc-secondary custom-input"
+                  name="fName" formControlName="asset_document" />
+              </div>
+            </div>
+          </div>
+
+          <table style="margin-left: 80px;">
+            <tbody>
+              <tr *ngFor="let data of Document_list; let i=index;">
+                <td>{{i+1}}</td>
+                <td style="color: black;"><b>{{data.document_path.split('/').pop()}}</b></td>
+                <td class="text-center text-nowrap">
+                  <button title="download Document" type="button" class="btn btn-icon btn-sm bg-primary me-2"
+                    (click)="downloadDocument(data.document_gid)">
+                    <i class="fa fa-download" aria-hidden="true"></i>
+                  </button>
+                </td>
+            </tbody>
+
+          </table>
+          <div class="text-center my-4">
+            <button class="btn-success btn-sm text-white me-4" (click)="onupload()" [disabled]="reactiveForm.invalid"
+              [ngClass]="{
+                    'primary-button': !reactiveForm.invalid,
+                    'secondary-button': reactiveForm.invalid
+                  }" data-bs-dismiss="modal">
+              <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+            </button> &nbsp;&nbsp;
+            <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+              <i class="fas fa-close text-white"></i> &nbsp;Close
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </form>
+
+  <form [formGroup]="reactiveFormEdit" #form="ngForm">
+    <div class="modal mt-20" id="myModaledit" data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+
+          <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+            <div>
+              <h2 class="fw-bolder ms-5 mt-4" style="color: #ffffff;">Edit Asset Date Details</h2>
+            </div>
+          </div>
+          <div class="modal-body">
+
+            <div class="row mt-1">
+              <span class="font-bold required">Asset ID</span>
+              <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                <input formControlName="assetref_no" type="text"
+                  [ngStyle]="{'border-color': assetref_no.invalid && assetref_no.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                  class="form-control form-control-lg form-control-solid  borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+                  placeholder="Enter Asset ID" name="assetref_no" required style="width:95%;" />
+                <div *ngIf="assetref_no.invalid && (assetref_no.dirty || assetref_no.touched)">
+                  <div *ngIf="assetref_no.errors?.['required']">
+                    <span class="text-red">Asset ID is required</span>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="d-flex flex-row flex-wrap mt-4">
+
+              <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Asset Assigned
+                  Date</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                  <input type="date" formControlName="custodian_date" name="custodian_date"
+                    class="form-control form-control-lg form-control-solid borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input date-picker"
+                    [ngStyle]="{'border-color': custodian_date.invalid && custodian_date.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                    placeholder="DD-MM-YYYY" />
+                  <div *ngIf="custodian_date.invalid && (custodian_date.dirty || custodian_date.touched)">
+                    <div *ngIf="custodian_date.errors?.['required']">
+                      <span class="text-red">Asset Assigned Date is required</span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Asset Returned
+                  Date</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                  <input type="date" formControlName="custodian_enddate" name="custodian_enddate"
+                    class="form-control form-control-lg form-control-solid borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input date-picker"
+                    [ngStyle]="{'border-color': custodian_enddate.invalid && custodian_enddate.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                    placeholder="DD-MM-YYYY" />
+                  <div *ngIf="custodian_enddate.invalid && (custodian_enddate.dirty || custodian_enddate.touched)">
+                    <div *ngIf="custodian_enddate.errors?.['required']">
+                      <span class="text-red">Asset Returned Date is required</span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-4">
+              <span class="font-bold required">Remarks</span>
+              <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                <textarea formControlName="remarks" type="text"
+                  class="form-control form-control-lg form-control-solid borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+                  [ngStyle]="{'border-color': remarks.invalid && remarks.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                  placeholder="Enter Remarks`" name="remarks" rows="3" style="width:96%" required></textarea>
+                <div *ngIf="remarks.invalid && (remarks.dirty || remarks.touched)">
+                  <div *ngIf="remarks.errors?.['required']">
+                    <span class="text-red">Remarks is required</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+
+            <div class="text-center my-4">
+              <button class="me-4 btn-success" (click)="onupdate()" [disabled]="reactiveFormEdit.invalid"
+                [ngClass]="{'primary-button': !reactiveFormEdit.invalid, 'secondary-button': reactiveFormEdit.invalid}"
+                data-bs-dismiss="modal">
+                <i class="bi bi-check-square text-white fs-5"></i>
+                <span class="ms-3">Update</span>
+              </button>
+              <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+                <i class="fas fa-close text-white"></i>
+                <span class="ms-3">Close</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

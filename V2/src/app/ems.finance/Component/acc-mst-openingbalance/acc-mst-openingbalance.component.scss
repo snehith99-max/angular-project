@@ -1,0 +1,45 @@
+#kt_chat_contacts_body1 {
+    // max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+     scrollbar-color: lightblue #e4e4e4;
+  }
+   
+   
+  #kt_chat_contacts_body1::-webkit-scrollbar {
+    width: 8px;
+    /* You can adjust the width to your preference */
+  }
+   
+  #kt_chat_contacts_body1::-webkit-scrollbar-thumb {
+    background: #888;
+    /* You can set the color of the scrollbar thumb */
+    border-radius: 10px;
+    /* You can adjust the border radius to your preference */
+    height: 5px;
+  }
+  // .table thead th {
+  //   position: sticky;
+  //   top: 0;
+  //   background: #def0ff; /* Background color of the header */
+  //   z-index: 1;
+  //   border-bottom: 2px solid #ddd;
+  // }
+
+
+//   .active-custom-tab {
+//     // color: #fafafa !important;
+//     border-radius: 6px;
+//     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 6px -6px, rgba(9, 30, 66, 0.08) 0px 0px 0px 0px;
+//     font-weight: 600;
+//     // background-color:#009ef7;
+//     color: #000000 !important;  background: -webkit-linear-gradient(45deg, #009df8, #399C91)!important;
+// }
+
+.active-custom-tab {
+  border-radius: 6px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 6px -6px, rgba(9, 30, 66, 0.08) 0px 0px 0px 0px;
+  font-weight: 600;
+  color: #000000 !important;
+  background: -webkit-linear-gradient(45deg, #009ef7, #a1d0ec, #009ef7)!important;
+}

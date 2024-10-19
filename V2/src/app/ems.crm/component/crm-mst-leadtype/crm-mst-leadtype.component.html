@@ -1,0 +1,290 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col ">
+          <h3 class="card-title ">Lead Type  Summary</h3>
+        </div>
+    
+        <div class="col me-5">
+          <button type="button" class="btn-primary btn-sm text-white me-4 float-end" data-bs-toggle="modal"
+            data-bs-target="#myModaladd" >
+            <i class="fas fa-plus"></i> &nbsp;&nbsp;&nbsp; Add Lead Type
+          </button>
+        </div>
+      </div>
+    <br>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded" >
+            <table id="leadtype_list" class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                <thead>
+                    <tr  class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th style="width:2%">S.No</th>
+                        <th>Lead Type  Code</th>
+                        <th>Lead Type  </th>
+                        <th>Created By</th>
+                        <th>Created Date</th>
+                        <th style="text-align: center;">Status</th>
+                        <th class="text-center">Action</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of leadtype_list; let i=index;" class="align-middle">
+                        <td>{{i+1}}</td>    
+                        <td>{{data.leadtype_code}}</td>
+                        <td>{{data.leadtype_name}}</td>
+                        <td>{{data.created_by}}</td>
+                        <td>{{data.created_date}}</td>
+                        <td [ngSwitch]="data.status_flag">
+                            <span *ngIf="data.status_flag === 'N'"><label class="ms-3"
+                                class="badge bg-warning text-white ">Inactive</label></span>
+                        <span *ngIf="data.status_flag == 'Y'"><label class="ms-3"
+                                class="badge bg-success text-white ">Active</label></span>
+                        </td>
+                        <td class="text-center text-nowrap">
+
+                            <!-- Edit -->
+                            <button title="Edit" type="button" *ngIf="data.status_flag === 'Y'" class="btn btn-icon btn-sm bg-edit me-2"
+                                  (click)="openModaledit(data)" data-bs-toggle="modal" data-bs-target="#myModaledit"><span
+                                class="fa-solid fa-pencil text-white  fs-6"></span></button>
+
+                                <button title="Edit" type="button" *ngIf="data.status_flag === 'N'" class="btn btn-icon btn-sm bg-edit me-2"
+                                [disabled]="data.leadtype_gid !=='No'" (click)="openModaledit(data)" data-bs-toggle="modal" data-bs-target="#myModaledit"><span
+                                class="fa-solid fa-pencil text-white  fs-6"></span></button>
+
+                                <!-- Stauts button -->
+                                <ng-container [ngSwitch]="data.status_flag" class="text-center" style="width: 5%;">
+                                    <button *ngSwitchCase="'N'" title="Activate" type="button" (click)="statusvalue(data.status_flag,data.leadtype_gid)"
+                                        class="btn btn-icon btn-sm bg-stssuccess me-2" data-bs-target="#statusupdate"
+                                        data-bs-toggle="modal" >
+                                        <span class="fas fa-thumbs-up fs-4" style="color: #ffffff;"></span>
+                                    </button>
+                                    <button *ngSwitchCase="'Y'" title="Deactivate" type="button" (click)="statusvalue(data.status_flag,data.leadtype_gid)"
+                                        class="btn btn-icon btn-sm bg-inactive me-2" data-bs-target="#statusupdate"
+                                        data-bs-toggle="modal" >
+                                        <span class="fas fa-thumbs-down fs-4" style="color: #ffffff;"></span>
+                                    </button>
+                                </ng-container>
+
+                            <!-- Delete -->
+                                <button title="Delete" type="button"  (click)="openModaldelete(data.leadtype_gid)" data-bs-toggle="modal" data-bs-target="#myModaldelete"
+                                class="btn btn-icon btn-sm bg-danger me-2"><span
+                                    class="fa-solid fa-trash text-white  fs-6"></span></button>
+                                  
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="modal" id="myModaladd" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+
+                <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                    <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                            class="fas fa-plus fw-bolder fs-3"></i> &nbsp;&nbsp;Add Lead type </h2>
+
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+
+        
+                    <div class="mb-4"><span class="fw-bold ">Lead Type Code</span>
+                        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                           <label placeholder="Auto Generate">Auto Generate</label>
+                      </div>
+                  </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label"><b>Lead Type </b><span
+                            class="ms-1 text-red">*</span></label>
+                        <input formControlName="leadtype_name" type="text" class="
+                    form-control form-control-lg form-control-solid
+                    custom-input
+                    mb-3 mb-lg-0
+                    bg-white
+                    custom-input
+                  " [ngStyle]="{
+                    'border-color':
+                    leadtype_name.invalid && leadtype_name.touched
+                        ? 'red'
+                        : 'rgb(209, 209, 209)'
+                  }" pattern="^(?!\s*$).+" name="leadtype_name" required placeholder="Enter Lead Type " maxlength="120"/>
+                    </div>
+
+                    <div *ngIf="leadtype_name.invalid && (leadtype_name.dirty || leadtype_name.touched)">
+                        <div *ngIf="leadtype_name.errors?.['required']">
+                            <span style="color:red;">Lead Type is required.</span>
+                        </div>    
+                    </div>
+                    <div *ngIf="leadtype_name.invalid && (leadtype_name.dirty || leadtype_name.touched)">
+                        <div *ngIf="leadtype_name.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format.</span>
+                        </div>
+                </div>
+
+                </div>
+             <br>
+                <!-- Modal footer -->
+
+                <div class="text-center my-4">
+
+                    <button (click)="onsubmit()" [disabled]="reactiveForm.invalid"
+                            [ngStyle]="{ 'cursor': reactiveForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !reactiveForm.invalid,
+                                     'btn-secondary': reactiveForm.invalid }" data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i> &nbsp;Submit
+                        </button>
+                        &nbsp;&nbsp;
+                    <button class="btn-danger btn-sm text-white me-4"  (click)="onclose()" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white"></i> &nbsp;Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form [formGroup]="reactiveFormEdit" #form="ngForm">
+    <div class="modal" id="myModaledit" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+
+                <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                    <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                            class="fas fa-solid fa-pen-to-square fs-3"></i> &nbsp;&nbsp;Edit Lead Type </h2>
+
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <input class="form-control form-control-lg" formControlName="leadtype_gid" hidden
+                        type="text" 
+                        aria-label=".form-control-lg example" autocomplete="off" required pattern="^(?!\s*$).+" >
+
+                    <div class="row"><span class="font-bold"><b>Lead Type Code</b><span
+                                class="ms-1 text-red"></span></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+
+                            <input  [readonly]="isReadOnly" formControlName="leadtype_codeedit" type="text" class="
+                            form-control form-control-lg form-control-solid
+                            custom-input
+                            mb-3 mb-lg-0
+                            bg-white
+                            custom-input
+                          " [ngStyle]="{
+                            'border-color':
+                            leadtype_codeedit.invalid && leadtype_codeedit.touched
+                                ? 'red'
+                                : 'rgb(209, 209, 209)'
+                          }"  pattern="^(?!\s*$).+" name="leadtype_codeedit" required  maxlength="120"/>
+
+                        </div>
+
+                    </div>
+                    <div
+                        *ngIf="leadtype_codeedit.invalid && (leadtype_codeedit.dirty || leadtype_codeedit.touched)">
+                        <div *ngIf="leadtype_codeedit.errors?.['required']">
+                            <span style="color:red;">Lead Type Code is required.</span>
+                        </div>
+                    </div>
+                    <div *ngIf="leadtype_codeedit.invalid && (leadtype_codeedit.dirty || leadtype_codeedit.touched)">
+                        <div *ngIf="leadtype_codeedit.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format</span>
+                        </div>
+                    </div>
+                    
+                    <br>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label"><b>Lead Type </b><span
+                            class="ms-1 text-red">*</span></label>
+                        <input formControlName="leadtype_nameedit" type="text" class="
+                            form-control form-control-lg form-control-solid
+                            custom-input
+                            mb-3 mb-lg-0
+                            bg-white
+                            custom-input
+                          " [ngStyle]="{
+                            'border-color':
+                            leadtype_nameedit.invalid && leadtype_nameedit.touched
+                                ? 'red'
+                                : 'rgb(209, 209, 209)'
+                          }"  pattern="^(?!\s*$).+" name="leadtype_nameedit" required  placeholder="Enter Lead Type"/>
+                    </div>
+                    <div
+                        *ngIf="leadtype_nameedit.invalid && (leadtype_nameedit.dirty || leadtype_nameedit.touched)">
+                        <div *ngIf="leadtype_nameedit.errors?.['required']">
+                            <span style="color:red;">Lead Type is required.</span>
+                        </div>
+                        
+                    </div>
+                    <div *ngIf="leadtype_nameedit.invalid && (leadtype_nameedit.dirty || leadtype_nameedit.touched)">
+                        <div *ngIf="leadtype_nameedit.errors?.['pattern']">
+                          <span style="color:red;">Invalid Format.</span>
+                        </div>
+                      </div>
+                </div>
+<br>
+                <!-- Modal footer -->
+                <div class="text-center my-4">
+                    <button (click)="onupdate()" [disabled]="reactiveFormEdit.invalid" [ngClass]="{
+                    'primary-button': !reactiveFormEdit.invalid,
+                    'secondary-button': reactiveFormEdit.invalid
+                  }" data-bs-dismiss="modal">
+                        <i class="fas fa-check text-white fs-5 "></i> &nbsp;Update
+                    </button> &nbsp;&nbsp;
+                    <button class="btn-danger btn-sm text-white me-4"  (click)="onclose()" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white"></i> &nbsp;Close
+                    </button>
+                </div>
+</div>
+            </div>
+        </div>
+    
+    
+</form>
+<div id="statusupdate" class="modal fade">
+    <div class="modal-dialog modal-confirm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="text-center  my-4">
+                <h2><b>Are you sure?</b></h2>
+                <br>
+                <p style="display: block;" *ngIf="status == 'N'"> Do You Want To Active the Constitution?</p>
+                <p style="display: block;" *ngIf="status == 'Y'"> Do You Want To Inactive the Constitution?</p>
+
+            </div>
+            <div class="modal-footer justify-content-center">
+                
+                <button type="button" class="btn-success btn-sm text-white me-4" data-bs-dismiss="modal"   (click)="onstatusupdate(leadtype_gid,'Y')" *ngIf="status === 'N'"
+                    > <i class="fa fa-toggle-on fs-5 me-2 "></i> &nbsp;Active</button>
+                    <button type="button" class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal"   (click)="onstatusupdate(leadtype_gid,'N')" *ngIf="status == 'Y'"
+                    > <i class="fa fa-toggle-on fs-5 me-2 "></i> &nbsp;Inactive</button>
+                    <button type="button" class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal"><i class="fas fa-close text-white me-2"></i> &nbsp;Close</button>&nbsp;
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModaldelete" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="text-center my-4">
+            <h2><b>Are you sure?</b></h2>
+            <br>
+            <p style="display: block;">Do You Want To Delete the Record ?</p><br>
+          <div class="text-center my-4">
+            <button class="btn-danger btn-sm text-white me-4"  (click)="ondelete()"  data-bs-dismiss="modal" >          
+                <i class="fas fa-trash text-white fs-5 "></i> &nbsp;Delete
+            </button>
+            <button class="btn-primary btn-sm text-white me-2"  data-bs-dismiss="modal">
+                <i class="fas fa-close text-white"></i> &nbsp;Close
+                </button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,573 @@
+<div class="card mt-4">
+  <div class="row ms-3 mt-3 d-flex align-items-center">
+    <div class="col" *ngFor="let data of customertotalcount_list">
+      <h3 class="card-title">Customer Summary - Total Customers:<span
+          class="ms-3 p-1 fs-4 badge bg-success text-white">{{data.total_count}}</span></h3>
+    </div>
+
+    <br>
+    <div class="col me-5 mt-2 ">
+
+      <!-- <button title="Customer Type Count" type="button" class="btn btn-icon btn-sm bg-user me-4  float-end">
+        <i class="fa-solid fa-user-check fs-4" data-bs-toggle="modal" data-bs-target="#customercountpopup"></i></button> -->
+      <button title="Export Excel" type="button" class="btn btn-icon btn-sm bg-success me-2 float-end"
+        (click)="customerexportExcel()"><i class="bi bi-file-earmark-arrow-up fs-3"></i></button>
+      <button title="Import Excel" class="btn btn-icon btn-sm  bg-export me-2 float-end " data-bs-toggle="modal"
+        data-bs-target="#myModalexcelimport"><i class="bi bi-file-earmark-arrow-down fs-3"></i>
+      </button>
+      <button title="Add Customer" class="btn-primary btn-sm text-white me-2 float-end"
+        routerLink="/smr/SmrTrnCustomeradd"><i class="fas fa-plus fw-bolder fs-3"></i>&nbsp;
+        Add Customer</button>
+
+    </div>
+  </div>
+  <br>
+  
+  <div class="d-flex justify-content-between">
+    <div class="d-flex align-items-center">
+        <div class="form-group me-2">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label for="itemsPerPageSelect" class="me-1">Show</label>
+        </div>
+        <div class="form-group me-2">
+            <select id="itemsPerPageSelect" class="form-control d-inline-block" [(ngModel)]="itemsPerPage"
+                (ngModelChange)="onItemsPerPageChange()">
+                <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="itemsPerPageSelect" class="ms-1">entries</label>
+        </div>
+    </div>
+    <div class="d-flex align-items-center">
+        <div class="form-group me-2" style="margin-right: 10px;">
+            <label for="searchInput" class="ms-1" style="margin-left: -5px;">Search:</label>
+        </div>
+        <div class="form-group" style="margin-right: 10px;">
+            <input type="text" class="form-control" style="width:130px;" id="searchInput" (keyup)="search($event)"
+                placeholder="" />
+        </div>
+    </div>
+</div>
+<br>
+    <div class="table-responsive">
+      <div class="mx-3 p-0 pt-0 pb-0 bg-white rounded table-responsive">
+        <table class="table table-striped table-row-bordered border-bottom gs-7 align-bottom">
+          <thead>
+            <tr class="fw-bolder fs-5 bg-lightblue text-blue align-bottom text-nowrap">
+              <th class="align-bottom" style="width: 1%;">S.No</th>
+              <th style="width: 9%;" (click)="sort('customer_id')">Code</th>
+              <th style="width: 12%;" (click)="sort('customer_name')">Customer</th>
+              <th style="width: 25%;" (click)="sort('contact_details')">Contact</th>
+              <th style="width: 8%;" (click)="sort('region_name')">Region</th>
+              <th style="width: 10%;">Price Segment</th>
+              <th style="width: 8%;">Sales Person</th>
+              <th style="width: 10%;">Customer Since</th>
+              <th class="text-center bg-lightblue ">Action</th> 
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of page_list; let i=index;" class="align-middle">
+              <td style="width: 1%;">{{i+1}}</td>
+              <td style="width: 9%;">{{data.customer_id}}</td>
+              <td style="width: 12%;">{{data.customer_name}}</td>
+              <td style="width: 25%;">{{data.contact_details}}</td>
+              <td style="width: 8%;">{{data.region_name}}</td>
+              <td style="width: 10%;">{{data.pricesegment_name}}</td>
+              <td style="width: 8%;">{{data.sales_person}}</td>
+              <td style="width: 10%;">
+                <a class="ms-6 count font-bold">{{data.customer_since}}</a>
+              </td>
+              <!-- <td [ngSwitch]="data.statuses">
+                <label *ngSwitchCase="'Active'" class="badge bg-success text-white ">Active</label>
+                <label *ngSwitchCase="'Inactive'" class="badge bg-danger text-white ">Inactive</label>
+              </td> -->
+              <td [ngSwitch]="data.statuses" class="text-center text-nowrap" style="width: 3%;">
+
+                <button title="360 View" type="button" class="btn btn-icon btn-sm  me-2 bg-gradient-darkblue"
+                [disabled]="data.statuses === 'Inactive'"
+                (click)="Onopen(data.customer_gid,data.lead2campaign_gid,data.customercontact_gid)">
+                <i class="fa-solid fa-arrows-spin fa-spin" style="font-size:14px;font-weight:bolder;"></i>
+              </button>
+              <button title=" Edit" type="button" (click)="onedit(data.customer_gid)" 
+              [disabled]="data.statuses === 'Inactive'" class="btn btn-icon btn-sm bg-etdark me-2"><span
+                class="fas fa-pencil text-white fs-6"></span>
+            </button> 
+            <button title="{{ data.statuses === 'Active' ? 'Inactive' : 'Active' }}" type="button"
+            class="btn btn-icon btn-sm {{ data.statuses === 'Active' ? 'bg-danger' : 'bg-success' }} me-2"
+            (click)="toggleStatus(data.customer_gid)"
+            [attr.data-bs-target]="data.statuses === 'Active' ? '#myModalinactive' : '#myModalactive'"
+            [attr.data-bs-toggle]="data.statuses === 'Active' ? 'modal' : 'modal'">
+            <span class="fa-solid fa-thumbs-{{ data.statuses === 'Active' ? 'down' : 'up' }} text-white fs-6"></span>
+            </button>
+            <button title=" Branch" type="button" (click)="onbranch(data.customer_gid)" 
+            [disabled]="data.statuses === 'Inactive'" class="btn btn-icon btn-sm bg-user me-2"><span
+              class="fa-solid fa-network-wired text-white fs-6"></span>
+          </button> 
+          <button title="E-portal" type="button" (click)="oneportal(data.customer_gid)"
+          data-bs-toggle="modal" data-bs-target="#myModaleportal"
+          [disabled]="data.statuses === 'Inactive'" class="btn btn-icon btn-sm bg-darkblue me-2"><span
+            class="fa-solid fa-globe text-white fs-6"></span>
+        </button> 
+
+                <!-- <span (click)="toggleOptions(data.customer_gid)" style="cursor: pointer;">
+                  <button class="btn me-2 p-1 "><span class="fa-solid fa-ellipsis-vertical fs-1"
+                      style="color: #4d4d4d;"></span></button>
+                  <div *ngIf="showOptionsDivId === data.customer_gid"
+                    class="pb-0 rounded bg-white cursor-pointer icon_menu">
+
+                   
+                   
+                    <div class="d-flex p-3 pb-3 Icon_hover" [ngClass]="{'disabled': data.statuses === 'Inactive'}"
+                      (click)="data.statuses !== 'Inactive' && onbranch(data.customer_gid)"
+                      *ngIf="data.has_child != 'N'">
+                      <span><i class="fa-solid fa-network-wired fs-3 me-4"></i></span>
+                      <span>Branch</span>
+                    </div>
+                    <div class="d-flex p-3 pb-3 Icon_hover" [ngClass]="{'disabled': data.statuses === 'Inactive'}"
+                      data-bs-toggle="modal" data-bs-target="#myModaleportal"
+                      (click)="data.statuses !== 'Inactive' && oneportal(data.customer_gid)" *ngIf="data.has_child != 'N'">
+                      <span><i class="fa-solid fa-globe fs-3 me-4"></i></span>
+                      <span>E-Portal</span>
+                    </div>
+                  </div>
+                </span> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="noResultsMessage" class="text-center">
+          {{ noResultsMessage }}
+      </div>
+      <div class="d-flex justify-content-between align-items-center">
+          <div class="text-nowrap">
+              Showing {{ startIndex + 1 }} to {{ endIndex }} of {{ total_list }} entries
+          </div>
+          <div class="pagination-container float-end">
+            <div class="pagination-scroll-container" style="margin-left: 122px;">
+                <pagination [boundaryLinks]="false" [maxSize]="8" [totalItems]="total_list"
+                    [itemsPerPage]="itemsPerPage" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"
+                    [directionLinks]="true" previousText="Previous" nextText="Next" class="pagination-controls">
+                </pagination>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Modal Active -->
+
+    <div class="modal" id="myModalactive" data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog del_modal-dialog modal-dialog-centered">
+        <div class="modal-content del_modal-content">
+          <div class="text-center my-4">
+            <h2><b>Are you sure?</b></h2>
+            <p style="display: block;">Do You Want To Active the Customer?</p>
+            <div class="text-center my-4">
+              <button class="btn-success btn-sm text-white me-4" (click)="onactive()" data-bs-dismiss="modal">
+                <i class="fa fa-toggle-on fs-5 me-2"></i>Active
+              </button>
+              <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+                <i class="fas fa-close text-white me-2"></i>Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Modal Inactive -->
+
+    <div class="modal" id="myModalinactive" data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog del_modal-dialog modal-dialog-centered">
+        <div class="modal-content del_modal-content">
+          <div class="text-center my-4">
+            <h2><b>Are you sure?</b></h2>
+            <p style="display: block;">Do You Want To Inactive the Customer?</p>
+            <div class="text-center my-4">
+              <button class="btn-danger btn-sm text-white me-4" (click)="oninactive()" data-bs-dismiss="modal">
+                <i class="fa fa-toggle-off fs-5 me-2"></i>Inactive
+              </button>
+              <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+                <i class="fas fa-close text-white me-2"></i>Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <form [formGroup]="reactiveForm" #form="ngForm">
+      <div class="modal" id="myModalexcelimport" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+
+            <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+              <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                  class="fas fa-lock fw-bolder fs-3"></i> &nbsp;&nbsp;CUSTOMER EXCEL FILE IMPORT</h2>
+
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+
+              <button type="submit" style="margin-left: 290px;" class="btn-danger btn-sm text-white me-2"
+                (click)="downloadfileformat()">
+                <i class="bi bi-cloud-download fs-5"></i>&nbsp;&nbsp;Download</button>
+              <br>
+              <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                <span class="font-bold"><b>Select an Excel File to Import</b><span class="ms-1 text-red">*</span></span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+                  <input style="width: 300%;" (change)="onChange1($event)" accept=".xlsx, .xls" type="file" #fileInput
+                    class="
+                              form-control form-control-lg form-control-solid bg-white
+                              mb-3 mb-lg-0  borderc-secondary custom-input
+                            " name="fName" />
+
+
+                </div>
+              </div>
+              <br>
+              <!-- Modal footer -->
+              <div class="text-center my-4">
+                <button type="submit" class="btn-success btn-sm text-white me-2" data-bs-dismiss="modal"
+                  (click)="importexcel()">
+                  <i class="bi bi-check-square fs-5"></i>&nbsp;Upload</button>
+
+                <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+                  <i class="fas fa-arrow-left"></i> &nbsp;Back
+                </button>&nbsp;
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </form>
+    <form [formGroup]="reactiveForm" #form="ngForm">
+      <div class="modal" id="myModalviewexcelimport" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered"
+          style="width: 90%; max-width: 900px; height: 100%; max-height: 0vh;">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+
+            <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+              <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i class="fas fw-bolder fs-3"></i>
+                CUSTOMER EXCEL FILE IMPORTED DETAILS AND ERROR LOG</h2>
+
+            </div>
+
+            <!-- Modal body -->
+            <div class="table-responsive">
+              <div class="card card-body m-1 shadow-lg p-3 mb-5 bg-white rounded">
+                <table id="" class="table table-striped table-row-bordered gy-5 gs-7">
+                  <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                      <th></th>
+                      <th style="font-size:11px;">S.No</th>
+                      <th style="font-size:11px;">Document name</th>
+                      <th style="font-size:11px;">Updated by</th>
+                      <th style="font-size:11px;">Updated Time</th>
+                      <th style="font-size:11px;">Import Count</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of Document_list; let i=index;">
+                      <td (click)="ondetail(data.document_name)" (click)="data.isExpand = !data.isExpand">
+                        <i *ngIf="!data.isExpand" class="bi-chevron-right"></i>
+                        <i *ngIf="data.isExpand" class="bi-chevron-up"></i>
+                      </td>
+                      <td style="font-size:11px;">{{i+1}}</td>
+                      <td style="font-size:11px;">{{data.document_name}}</td>
+                      <td style="font-size:11px;">{{data.updated_by}}</td>
+                      <td style="font-size:11px;">{{data.uploaded_date}}</td>
+                      <td style="font-size:11px;">{{data.importcount}}</td>
+                      <td *ngIf="data.isExpand">
+                        <br> <br> <br>
+                        <div class="table-responsive" style="margin-left:-850px;">
+                          <div class="card card-body m-3 shadow-lg p-3 mb-5 bg-white rounded">
+                            <table id="" class="table table-striped table-row-bordered gy-5 gs-7 ">
+                              <thead>
+                                <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue">
+                                  <th>Customer Code</th>
+                                  <th>Customer Name</th>
+                                  <th>Remark</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let data1 of Documentdtl_list; let i=index;">
+                                  <td>{{data1.customercode}}</td>
+                                  <td>{{data1.customername}}</td>
+                                  <td>{{data1.remarks}}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="text-center my-4">
+                  <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal" (click)="onclose()">
+                    <i class="fas fa-close text-white"></i> &nbsp;Close
+                  </button>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </form>
+
+
+    <!-- Total Active Employee's Popup -->
+    <div class="modal fade" id="customerdaycount">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-primary ">
+            <h4 class="text-white fw-bold">Last Order's Raised</h4>
+          </div>
+          <div class="modal-body">
+            <div class="col-lg-12 col-md-4 col-sm-4">
+              <div id="collapseFive" data-bs-parent="#accordionExample5">
+                <div class="accordion-body">
+                  <div class="row">
+                    <div class="table-responsive">
+                      <div class="card card-body m-3  p-3 mb-5 bg-white rounded " id="kt_chat_contacts_body"
+                        style=" max-height: 270px; overflow-y: auto;overflow-x: hidden;">
+                        <div class="me-n5 pe-5 h-300px h-lg-auto" data-kt-element="messages" data-kt-scroll="true"
+                          data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
+                          data-kt-scroll-dependencies="#kt_header, #kt_app_header, #kt_app_toolbar, #kt_toolbar, #kt_footer, #kt_app_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer"
+                          data-kt-scroll-wrappers="#kt_content, #kt_app_content, #kt_chat_messenger_body"
+                          data-kt-scroll-offset="5px">
+                          <div *ngFor="let data of customerordercount;">
+                            <div>
+                              <div class="row">
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                  <label><b>SO Ref.No</b></label>
+                                  <br />
+                                  <div>
+                                    <p>{{data.so_referenceno1}}</p>
+                                  </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                  <label><b>SO Date</b></label>
+                                  <br />
+                                  <div>
+                                    <p>{{data.salesorder_date}}</p>
+                                  </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                  <label><b>Assigned To</b></label>
+                                  <br />
+                                  <div>
+                                    <p>{{data.salesperson}}</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                  <label><b>Order Type</b></label>
+                                  <br />
+                                  <div>
+                                    <p>{{data.so_type}}</p>
+                                  </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-3 col-sm-3">
+                                  <label><b>Amount</b></label>
+                                  <br />
+                                  <div>
+                                    <p class="text-red">{{data.Grandtotal}}</p>
+                                  </div>
+                                </div>
+                              </div>
+
+
+                            </div>
+                            <hr />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button type="button" class="btn-danger mb-5" data-bs-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Customer Count Pop -->
+    <div class="modal" id="customercountpopup" tabindex="-1" data-bs-backdrop='static'
+      aria-labelledby="editamlcategoryLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content ">
+          <div class="modal-header bg-primary mb-5">
+            <h3 class="modal-title text-white"><i class="fa-solid fa-eye fs-3"></i> &nbsp; Customer Type Count</h3>
+          </div>
+          <div class="d-flex justify-content-center">
+            <div style="max-height: 160px;" class="overflow-auto p-3 col-10 " id="scroll-bar-table">
+              <table id="LeadsCountList"
+                class="table table-striped table-bordered table-hover table-sm table-responsive">
+                <thead style="background-color:#def0ff;">
+                  <th class="text-center">Customer Type</th>
+                  <th class="text-center">Total Count</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of customercount_list; let i=index;">
+                    <td class="text-center">{{data.display_name}}</td>
+                    <td class="text-center">{{data.customercount}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="text-center mb-3 mt-2">
+            <button type="button" class="btn-danger text-white" data-bs-dismiss="modal">
+              <i class="fa fa-close fs-5 text-center"></i>
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="eportalform" #form="ngForm">
+    <div class="modal" id="myModaleportal" data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog p-10 modal-dialog-centered">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="card-header pb-3 pt-6 rounded-top bg-primary">
+            <div>
+              <h3 class="fw-bolder text-white">
+                <i class="fa-solid fa-globe"></i>&nbsp;Activate Order Portal
+              </h3>
+            </div>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <input type="text" formControlName="customer_gid" hidden />
+            <div class="row"><span class="fw-bold">Email Id<span class="ms-1 text-red required "></span></span>
+              <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                <input formControlName="eportalemail_id" type="text" class="
+                          form-control form-control-lg form-control-solid
+                          custom-input
+                          mb-3 mb-lg-0 
+                          bg-white
+                          custom-input
+                        " [ngStyle]="{
+                         'border-color':
+                         eportalemail_id.invalid && eportalemail_id.touched
+                             ? 'red'
+                             : 'rgb(209, 209, 209)'
+                       }" style="width: 420px;border: 0px solid grey;" placeholder="Enter Email"
+                  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" name="eportalemail_id" required
+                  style="height:40px;" />
+              </div>
+              <div
+                *ngIf="eportalform.get('eportalemail_id')?.hasError('required') && eportalform.get('eportalemail_id')?.touched || eportalform.get('eportalemail_id')?.hasError('pattern')"
+                class="text-red">Invalid Format.</div>
+
+            </div>
+            <br>
+            <div class="row">
+              <div [hidden]="!showhide"><span class="font-bold">
+                  Password<span class="ms-1 text-red">*</span></span>
+                <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+                  <div class="input-group">
+                    <input [(ngModel)]="password"
+                      [ngStyle]="{ 'border-color': eportalform.get('password')?.hasError('required') && eportalform.get('password')?.touched ? 'red' : 'rgb(209, 209, 209)','height': '42px' }"
+                      type="{{ showPassword ? 'text' : 'password' }}"
+                      class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                      placeholder="Password" required formControlName="password" id="password" maxlength="20" />
+
+                    <div class="input-group-prepend ">
+                      <span class="input-group-text password-toggle" (click)="togglePasswordVisibility()">
+                        <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-red" *ngIf="eportalform.get('password')?.hasError('pattern')">
+                  Password should contain: "Atleast one upper case letter,
+                  one lower case letter, one special character,
+                  one number and minimum eight characters".
+                </div>
+                <div *ngIf="eportalform.get('password')?.hasError('required') && eportalform.get('password')?.touched"
+                  class="text-red">Password is required.
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div [hidden]="!showhide"><span class="font-bold">Confirm
+                  Password<span class="ms-1 text-red">*</span></span>
+                <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-2">
+                  <div class="input-group">
+                    <input [(ngModel)]="confirmpassword"
+                      [ngStyle]="{ 'border-color': eportalform.get('confirmpassword')?.hasError('required') && eportalform.get('confirmpassword')?.touched ? 'red' : 'rgb(209, 209, 209)','height': '42px' }"
+                      type="{{ showConfrimPassword ? 'text' : 'password' }}"
+                      class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input "
+                      placeholder="Confirm Password" required formControlName="confirmpassword" id="confirmpassword"
+                      (focus)="confirmPasswordTouched = true" maxlength="20" />
+
+                    <div class="input-group-prepend">
+                      <span class="input-group-text password-toggle" (click)="toggleconfirmPasswordVisibility()">
+                        <i class="fa" [ngClass]="showConfrimPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div
+                    *ngIf="eportalform.get('confirmpassword')?.hasError('required') && eportalform.get('confirmpassword')?.touched"
+                    class="text-red">
+                    Confirm Password is required.
+                  </div>
+
+                  <div *ngIf="confirmPasswordTouched && !passwordsMatch()" class="text-red">
+                    Password do not match.
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="text-center my-4">
+            <button (click)="oneportalsubmit()" [disabled]="eportalform.invalid" [ngClass]="{
+                    'primary-button': !eportalform.invalid,
+                    'secondary-button': eportalform.invalid
+                  }" data-bs-dismiss="modal">
+              <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+            </button> &nbsp;&nbsp;
+            <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal" (click)="oneportalclose()">
+              <i class="fas fa-close text-white"></i> &nbsp;Close
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </form>

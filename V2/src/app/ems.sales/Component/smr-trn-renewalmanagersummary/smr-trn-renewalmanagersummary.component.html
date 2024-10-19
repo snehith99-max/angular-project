@@ -1,0 +1,50 @@
+
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title" style="padding-top: 5px;">Renewal Manager</h3>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="renewalsummary_list" class="table table-striped table-row-bordered gy-5 gs-7 ">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th >S.No</th>
+                        <th class="text-nowrap" >Team Name</th>
+                        <th class="text-nowrap" >Branch</th>
+                        <th class="text-nowrap"  >Assigned Employee</th>
+                        <th class="text-nowrap" >No Of Renewals Assigned</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of renewalsummary_list; let i = index;">
+                        <td >{{i + 1}}</td>
+                        <td class="text-nowrap" >{{data.team_name}}</td>
+                        <td class="text-nowrap" >{{data.team_branch}}</td>
+                        <td class="text-nowrap"  >
+                            <a data-bs-toggle="modal"data-bs-target="#assignmanagerpopup"  title="Assigned Employee"
+                                class="ms-6 count font-bold">{{data.assigned_employee}}</a>
+                        </td>
+                        <td class="text-nowrap" >
+                            <a data-bs-toggle="modal"data-bs-target="#assignmanagerpopup"  title="Assigned Renewals"
+                                class="ms-6 count font-bold">{{data.renewals_assigned}}</a>
+                        </td  >
+                        <td class="text-nowrap" >
+                            <button title="360" (click)="onadd()" type="button"  class="btn btn-icon btn-sm  me-2"
+                                style="background-color:#29ABE2;"><i class="fa-solid fa-user" style="font-size:16px;"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                
+            </table>
+        </div>
+    </div>            
+</div>
+                             
+
+                            
+                             

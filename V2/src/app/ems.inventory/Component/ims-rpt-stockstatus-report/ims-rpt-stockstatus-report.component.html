@@ -1,0 +1,76 @@
+<div class="card mt-4">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title fw-bold"><b>Stock Status Report</b></h3>
+        </div>
+
+        <div class="col me-2">
+        </div>
+    </div>
+    <form [formGroup]="StockStatusform">
+        <div class="d-flex flex-row ms-6 justify-content-center">
+            <div class="col-12 col-lg-2 col-md-2 col-12 mt-5 ps-8">
+                <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                    <label class="font-bold">From Date</label>
+                    <input type="date" placeholder="" placeholder="DD-MM-YYYY" formControlName="from_date"
+                        class="form-control date-picker custom-input mb-3 bg-white custom-input mt-2" style="height: 25px !important;"
+                        pattern="^(?!\s*$).+" />
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-2 col-md-2 col-12 mt-5">
+                <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                    <label class="font-bold">To Date</label>
+                    <input type="date" placeholder="" placeholder="DD-MM-YYYY" formControlName="to_date"
+                        class="form-control date-picker custom-input mb-3 bg-white custom-input mt-2" style="height: 25px !important;"
+                        pattern="^(?!\s*$).+" />
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-2 col-md-2 col-12 mt-12">
+                <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                    <!-- <button title="Search" type="button" (click)="OnChangeFinancialYear()" 
+                        [disabled]="StockStatusform.invalid" class="btn-success btn-sm text-black me-1" >Search
+                    </button>
+                    <button title="Search" type="button" (click)="onrefreshclick()" 
+                        [disabled]="StockStatusform.invalid" class="btn-warning btn-sm text-black ms-1" >Refresh
+                    </button> -->
+                   
+                        <button title="search" class="btn btn-icon btn-sm bg-success me-1" (click)="OnChangeFinancialYear()"><i class="fa-solid fa-magnifying-glass text-white"></i></button>
+                        <button title="refresh" class="btn btn-icon btn-sm bg-warning me-1" (click)="onrefreshclick()"><i class="fa-solid fa-rotate-right text-white"></i></button>
+                      
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="GetSaleLedger_list" class="table table-striped table-row-bordered gy-5 gs-7 ">
+                <thead>
+                    <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue  align-middle">
+                        <th>S.No </th>
+                        <th>Date</th>
+                        <th>Branch</th>
+                        <th>Vendor</th>
+                        <th>Quantity</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of GetSaleLedger_list;let i=index;">
+                        <td style="width: 5%;">{{i+1}}</td>
+                        <td style="width: 10%;">{{data.grn_date}}</td>
+                        <td style="width: 35%;">{{data.branch_name}}</td>
+                        <td style="width: 35%;">{{data.vendor_companyname}}</td>
+                        <td>{{data.stock_qty}} {{data.productuom_name}}</td>
+                    </tr>
+                </tbody>
+                <tfoot *ngIf="GetSaleLedger_list && GetSaleLedger_list.length > 0">
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <td colspan="4" class="text-end">Total</td>
+                        <td>{{ Quantity }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

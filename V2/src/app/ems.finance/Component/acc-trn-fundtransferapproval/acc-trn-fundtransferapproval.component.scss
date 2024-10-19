@@ -1,0 +1,50 @@
+.link-button {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+    color: blue; 
+}
+.reject-button {
+    background-color: red;
+    color: #fff !important;
+    font-size: 1.1rem !important;
+    font-weight: 630 !important;
+    padding: 9px 16px 9px 13px !important;
+    border-radius: 3px;
+    border: 0;
+}
+.status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.bg-success {
+    background-color: rgb(13, 224, 83);
+    color: white;
+}
+
+.bg-danger {
+    background-color: red;
+    color: white;
+}
+
+.bg-warning {
+    background-color: rgb(255, 174, 0);
+    color: white;
+}
+
+
+  .bg-review {
+    background-color: #6f42c1; /* Purple color for approval */
+    color: #ffffff; /* White text color */
+  }
+  
+  .bg-review:hover {
+    background-color: #563d7c; /* Darker purple on hover */
+  }
+  

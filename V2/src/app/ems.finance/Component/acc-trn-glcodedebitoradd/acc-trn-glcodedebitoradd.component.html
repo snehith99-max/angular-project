@@ -1,0 +1,416 @@
+<div class="card">
+    <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+        <h3 class="fw-bolder text-white">&nbsp;&nbsp; Add Debtor
+        </h3>
+    </div>
+    <form [formGroup]="reactiveform">
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold required"> Customer Code </span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <!-- <input type="text" formControlName="customer_code" required
+                        class="form-control form-control-lg form-control-solid  mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        placeholder="" class="form-control" /> -->
+
+                    <input formControlName="customer_code" type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                        [ngStyle]="{'border-color': customer_code.invalid && customer_code.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                        placeholder="Customer Code" name="customer_code" required />
+
+                    <div *ngIf="customer_code.invalid && (customer_code.dirty || customer_code.touched)">
+                        <div *ngIf="customer_code.errors?.['required']"><span class="text-red">Customer code is
+                                required.</span></div>
+                    </div>
+
+                </div>
+                <!-- <div *ngIf="customer_code.invalid && (customer_code.dirty || customer_code.touched)">
+                    <div *ngIf="customer_code.errors?.['required']">
+                        <span style="color:red;">Customer Code is required.</span>
+                    </div>
+                </div>
+                <div *ngIf="customer_code.invalid && (customer_code.dirty || customer_code.touched)">
+                    <div *ngIf="customer_code.errors?.['pattern']">
+                        <span style="color:red;">Invalid Format.</span>
+                    </div>
+                </div> -->
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold required">Customer Name</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <!-- <input type="text" formControlName="customer_name" required
+                        class="form-control form-control-lg form-control-solid  mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        placeholder="" class="form-control" /> -->
+
+                    <input formControlName="customer_name" type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                        [ngStyle]="{'border-color': customer_name.invalid && customer_name.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                        placeholder="Customer Name" name="customer_name" required />
+
+                    <div *ngIf="customer_name.invalid && (customer_name.dirty || customer_name.touched)">
+                        <div *ngIf="customer_name.errors?.['required']"><span class="text-red">Customer name is
+                                required.</span></div>
+                    </div>
+
+                </div>
+                <!-- <div *ngIf="customer_name.invalid && (customer_name.dirty || customer_name.touched)">
+                    <div *ngIf="customer_name.errors?.['required']">
+                        <span style="color:red;">Customer Name is required.</span>
+                    </div>
+                </div>
+                <div *ngIf="customer_name.invalid && (customer_name.dirty || customer_name.touched)">
+                    <div *ngIf="customer_name.errors?.['pattern']">
+                        <span style="color:red;">Invalid Format.</span>
+                    </div>
+                </div> -->
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold required">Address Line 1</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <!-- <input type="text" formControlName="address_line1" required
+                        class="form-control form-control-lg form-control-solid  mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        placeholder="" class="form-control" /> -->
+
+                    <input formControlName="address_line1" type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                        [ngStyle]="{'border-color': address_line1.invalid && address_line1.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                        placeholder="Address" name="address_line1" required />
+
+                    <div *ngIf="address_line1.invalid && (address_line1.dirty || address_line1.touched)">
+                        <div *ngIf="address_line1.errors?.['required']"><span class="text-red">Address Line 1 is
+                                required. is
+                                required.</span></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <!-- <div class="col-12 col-lg-4 col-md-6 mt-2 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+                    <span class="font-bold">Address Line 2</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text" formControlName="address_line2"
+                            class="form-control form-control-lg form-control-solid  mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                            placeholder="Address" class="form-control" />
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="col-12 col-lg-4 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold">Address Line 2</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <!-- <input type="text" formControlName="address_line1" required
+                        class="form-control form-control-lg form-control-solid  mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        placeholder="" class="form-control" /> -->
+
+                    <input formControlName="address_line2" type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 border-secondary  mb-lg-0 bg-white  custom-input"
+                        placeholder="Address" name="address_line2" />
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold required">Region</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <!-- <ng-select [items]="RegionName_List" class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                        bindLabel="region_name" bindValue="region_gid" formControlName="region_name" required
+                        placeholder="Select an Option"></ng-select> -->
+                    <ng-select [items]="RegionName_List" placeholder="Select an option" required
+                        formControlName="region_name" class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row"
+                        bindLabel="region_name" bindValue="region_gid"
+                        [class.is-invalid]="reactiveform.get('region_name')?.invalid && (reactiveform.get('region_name')?.dirty || reactiveform.get('region_name')?.touched)"
+                        [ngClass]="{'invalid-border': reactiveform.get('region_name')?.invalid && reactiveform.get('region_name')?.touched}">
+                    </ng-select>
+                </div>
+                <div *ngIf="region_name.invalid && (region_name.dirty || region_name.touched)">
+                    <div *ngIf="region_name.errors?.['required']">
+                        <span style="color:red;">Region is required.</span>
+                    </div>
+                </div>
+                <div *ngIf="region_name.invalid && (region_name.dirty || region_name.touched)">
+                    <div *ngIf="region_name.errors?.['pattern']">
+                        <span style="color:red;">Invalid Format.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold required">City</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input formControlName="city_name" type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                        [ngStyle]="{'border-color': city_name.invalid && city_name.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                        placeholder="City" name="city_name" required />
+                </div>
+                <div *ngIf="city_name.invalid && (city_name.dirty || city_name.touched)">
+                    <div *ngIf="city_name.errors?.['required']"><span class="text-red">City is
+                            required.</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold required">State</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <!-- <input type="text" formControlName="state_name" required
+                        class="form-control form-control-lg form-control-solid  mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        placeholder="" class="form-control" /> -->
+
+                    <input formControlName="state_name" type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                        [ngStyle]="{'border-color': state_name.invalid && state_name.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                        placeholder="State" name="state_name" required />
+
+                </div>
+
+                <div *ngIf="state_name.invalid && (state_name.dirty || state_name.touched)">
+                    <div *ngIf="state_name.errors?.['required']"><span class="text-red">State is
+                            required</span></div>
+                </div>
+                <!-- <div *ngIf="state_name.invalid && (state_name.dirty || state_name.touched)">
+                    <div *ngIf="state_name.errors?.['required']">
+                        <span style="color:red;">State is required.</span>
+                    </div>
+                </div>
+                <div *ngIf="state_name.invalid && (state_name.dirty || state_name.touched)">
+                    <div *ngIf="state_name.errors?.['pattern']">
+                        <span style="color:red;">Invalid Format.</span>
+                    </div>
+                </div> -->
+            </div>
+            <!-- <div class="col-12 col-lg-4 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold">Pincode</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" formControlName="pincode"
+                        class="form-control form-control-lg form-control-solid  mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        placeholder="" class="form-control" />
+                </div>
+            </div> -->
+
+            <div class="col-12 col-lg-4 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold">Pincode</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input formControlName="pincode" type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 border-secondary  mb-lg-0 bg-white  custom-input"
+                        placeholder="Pincode" name="pincode" />
+                </div>
+            </div>
+
+
+            <div class="col-12 col-lg-4 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold required">Country</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <ng-select [items]="CountryName_List" formControlName="country_name" required
+                        class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="country_name"
+                        bindValue="country_gid" placeholder="Select an Option"></ng-select>
+
+                </div>
+                <div *ngIf="country_name.invalid && (country_name.dirty || country_name.touched)">
+                    <div *ngIf="country_name.errors?.['required']">
+                        <span style="color:red;">Country is required.</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold required">Contact Person Name</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <!-- <input type="text" formControlName="contactperson_name" required
+                        class="form-control form-control-lg form-control-solid  mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        placeholder="" class="form-control" /> -->
+
+                    <input formControlName="contactperson_name" type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                        [ngStyle]="{'border-color': contactperson_name.invalid && contactperson_name.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                        placeholder="Contact Person Name" name="contactperson_name" required />
+
+                </div>
+
+                <div *ngIf="contactperson_name.invalid && (contactperson_name.dirty || contactperson_name.touched)">
+                    <div *ngIf="contactperson_name.errors?.['required']"><span class="text-red">Contact person name is
+                            required.</span></div>
+                </div>
+                <!-- <div *ngIf="contactperson_name.invalid && (contactperson_name.dirty || contactperson_name.touched)">
+                    <div *ngIf="contactperson_name.errors?.['required']">
+                        <span style="color:red;">Contact Person Name is required.</span>
+                    </div>
+                </div> -->
+                <!-- <div *ngIf="contactperson_name.invalid && (contactperson_name.dirty || contactperson_name.touched)">
+                    <div *ngIf="contactperson_name.errors?.['pattern']">
+                        <span style="color:red;">Invalid Format.</span>
+                    </div>
+                </div> -->
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold required">Mobile Number </span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input formControlName="mobile_number" type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                        [ngStyle]="{'border-color': mobile_number.invalid && mobile_number.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                        placeholder="Mobile Number" name="mobile_number" required />
+
+                </div>
+
+                <div *ngIf="reactiveform.get('mobile_number')?.hasError('pattern') && reactiveform.get('mobile_number')?.touched || reactiveform.get('mobile_number')?.hasError('pattern')" class="text-red">Maximum 12 digits.</div>
+
+
+                <!-- <div *ngIf="mobile_number.invalid && (mobile_number.dirty || mobile_number.touched)">
+                    <div *ngIf="mobile_number.errors?.['required']"><span class="text-red">Mobile Number is
+                            required.</span></div>
+                </div> -->
+                <!-- <div *ngIf="mobile_number.invalid && (mobile_number.dirty || mobile_number.touched)">
+                    <div *ngIf="mobile_number.errors?.['required']">
+                        <span style="color:red;">Mobile Number is required.</span>
+                    </div>
+                </div>
+                <div *ngIf="mobile_number.invalid && (mobile_number.dirty || mobile_number.touched)">
+                    <div *ngIf="mobile_number.errors?.['pattern']">
+                        <span style="color:red;">Invalid Format.</span>
+                    </div>
+                </div> -->
+            </div>
+            <!-- <div class="col-12 col-lg-4 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold">Designation </span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" formControlName="designation"
+                        class="form-control form-control-lg form-control-solid  mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        placeholder="" class="form-control" />
+                </div>
+            </div> -->
+
+            <div class="col-12 col-lg-4 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold">Designation</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input formControlName="designation" type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 border-secondary  mb-lg-0 bg-white  custom-input"
+                        placeholder="Designation" name="Designation" />
+                </div>
+            </div>
+
+
+        </div>
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold required">Email Address</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <!-- <input type="text" formControlName="email_address" required
+                        class="form-control form-control-lg form-control-solid  mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        placeholder="Email Address" class="form-control" /> -->
+
+                    <input formControlName="email_address" type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                        [ngStyle]="{'border-color': email_address.invalid && email_address.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                        placeholder="Email Address" name="email_address" required />
+
+                    <!-- <div *ngIf="address_line1.invalid && (address_line1.dirty || address_line1.touched)">
+                        <div *ngIf="address_line1.errors?.['required']"><span class="text-red">Address Line 1 is
+                                required. is
+                                required.</span></div>
+                    </div> -->
+                </div>
+                <div *ngIf="email_address.invalid && (email_address.dirty || email_address.touched)">
+                    <div *ngIf="email_address.errors?.['required']"><span class="text-red">Email Address is
+                            required.</span></div>
+                </div>
+                <!-- <div *ngIf="email_address.invalid && (email_address.dirty || email_address.touched)">
+                    <div *ngIf="email_address.errors?.['required']">
+                        <span style="color:red;">Email Address is required.</span>
+                    </div>
+                </div>
+                <div *ngIf="email_address.invalid && (email_address.dirty || email_address.touched)">
+                    <div *ngIf="email_address.errors?.['pattern']">
+                        <span style="color:red;">Invalid Format.</span>
+                    </div>
+                </div> -->
+            </div>
+            <!-- <div class="col-12 col-lg-4 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold">Company Website</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" formControlName="company_website"
+                        class="form-control form-control-lg form-control-solid  mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        placeholder="" class="form-control" />
+                </div>
+            </div> -->
+
+            <div class="col-12 col-lg-4 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold">Company Website</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input formControlName="pincode" type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 border-secondary  mb-lg-0 bg-white  custom-input"
+                        placeholder="Company Website" name="Company Website" />
+                </div>
+            </div>
+            <div class="col-12 col-lg-1 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold">Country Code</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" formControlName="contactcountry_code"
+                        class="form-control form-control-lg form-control-solid  mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        placeholder="" class="form-control" />
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-1 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold">Area Code</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" formControlName="countryarea_code"
+                        class="form-control form-control-lg form-control-solid  mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        placeholder="" class="form-control" />
+
+                </div>
+            </div>
+            <div class="col-12 col-lg-2 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold">Contact No</span>
+                <div class="col-lg-10 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" formControlName="countrycontact_number"
+                        class="form-control form-control-lg form-control-solid  mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        placeholder="" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-1 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold">Country Code</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" formControlName="faxcountry_code"
+                        class="form-control form-control-lg form-control-solid  mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        placeholder="" class="form-control" />
+                </div>
+            </div>
+            <div class="col-12 col-lg-1 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold">Area Code</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" formControlName="faxarea_code"
+                        class="form-control form-control-lg form-control-solid  mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        placeholder="" class="form-control" />
+
+                </div>
+            </div>
+            <div class="col-12 col-lg-2 col-md-6 mt-2 col-sm-12">
+                <span class="font-bold">Fax</span>
+                <div class="col-lg-10 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" formControlName="fax_number"
+                        class="form-control form-control-lg form-control-solid  mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        placeholder="" class="form-control" />
+                </div>
+            </div>
+            <div class="col-12 col-lg-8 col-md-6 mt-2 col-sm-12">
+            </div>
+        </div>
+        <br />
+        <div class="text-center mt-4">
+            <button type="submit" class="btn-success text-white" [disabled]="reactiveform.invalid"
+                [ngStyle]="{ 'cursor': reactiveform.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !reactiveform.invalid,
+    'btn-secondary text-white': reactiveform.invalid }" (click)="SubmitDebitor_Glcode()">
+                <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                Submit
+            </button> &nbsp;
+            <button class="btn-primary btn-sm text-white me-4" (click)="Back()">
+                <i class="fas fa-arrow-left text-white"></i> &nbsp; Back
+            </button>
+        </div>
+        <br />
+    </form>
+</div>

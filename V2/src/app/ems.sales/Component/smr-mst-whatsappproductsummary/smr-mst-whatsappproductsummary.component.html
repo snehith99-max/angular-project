@@ -1,0 +1,278 @@
+<div class="row" style="margin-top: 10px;">
+  <div class="col-lg-3 col-md-3 col-sm-3">
+    <div class="cardHeadLeads radius-10" style="border-left: 5px solid #098030; cursor: not-allowed;">
+      <div class="card-body12">
+        <div class="d-flex align-items-center">
+
+          <div>
+            <h5 class="mb-0 text-secondary ">Active Products</h5>
+            <h5 class="badge-green badge-outline-green badge-success fs-4 mt-2">{{active_Products}}</h5>
+          </div>
+          <div class="widgets-icons-2 rounded-circle bg-gradient-darkgreens text-white ms-auto"><i
+              class="fas fa-shopping-cart fs-3"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-3 col-sm-3">
+    <div class="cardHeadLeads radius-10" style="border-left: 5px solid #0d8191; cursor: not-allowed;">
+      <div class="card-body12">
+        <div class="d-flex align-items-center">
+          <div>
+            <h5 class="mb-0 text-secondary">Product Added</h5>
+            <div>
+              <h5 class="badge-blue badge-outline-blue badge-success fs-4 mt-2">{{product_added}}</h5>
+            </div>
+          </div>
+          <div class="widgets-icons-2 rounded-circle bg-gradient-darkblue text-white ms-auto"><i
+              class="fas fa-cart-plus fs-3"></i>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-3 col-sm-3">
+    <div class="cardHeadLeads radius-10 border-start border-0 border-3 border-violet" style="cursor: not-allowed">
+      <div class="card-body12">
+        <div class="d-flex align-items-center">
+          <div>
+            <h5 class="mb-0 text-secondary">
+              In Stock</h5>
+            <h5 class="badge-violet badge-outline-violet badge-success fs-4 mt-2">{{in_stock}}</h5>
+          </div>
+          <div class="widgets-icons-2 rounded-circle bg-gradient-violet text-white ms-auto"><i
+              class="fas fa-check-circle fs-3"></i>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-3 col-sm-3">
+    <div class="cardHeadLeads radius-10 border-start border-0 border-3 border-orange" style="cursor: not-allowed;">
+      <div class="card-body12">
+        <div class="d-flex align-items-center">
+          <div>
+            <h5 class="mb-0 text-secondary">Out Of Stock</h5>
+            <h5 class="badge-brown badge-outline-brown fs-4 mt-2">{{out_of_stock}}</h5>
+          </div>
+          <div class="widgets-icons-2 rounded-circle bg-gradient-darkgreen text-white ms-auto"><i
+              class="fas fa-ban fs-3"></i>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="card ">
+  <div class="row ms-3 mt-3 d-flex align-items-center">
+    <div class="col">
+      <h3 class="card-title">WhatsApp Poduct Summary</h3>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+      <table id="product" class="table table-striped table-row-bordered border-bottom gs-7 align-middle ">
+        <thead>
+          <tr class="text-white fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+            <th style="width: 3%;">S.No</th>
+            <th style="width: 10%;">Product Group</th>
+            <th style="width:9%;">Product Code</th>
+            <th style="width: 20%;">Product</th>
+            <th style="width: 10%;">Product Image</th>
+            <th>Description</th>
+            <th style="width: 5%;">Units</th>
+            <th style=" width: 5%; text-align: right;">Price</th>
+            <th class="text-center" style="width: 5%;">Status</th>
+            <th class="text-center" style="width: 5%;">Stock</th>
+            <th class="text-center bg-lightblue ">Action</th> 
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of products; let i=index;">
+            <td style="width: 2%;">{{i+1}}</td>
+            <td style="width: 10%;">{{data.productgroup_name}}</td>
+            <td style="width:9%;">{{data.product_code}}</td>
+            <td class="text-wrap" style="width: 20%;">{{data.product_name}}</td>
+            <td style="width:10%;">
+              <ng-container *ngIf="data.product_image !=='../../images/no_preview.jpg'">
+              <img
+                   title="Click to View" 
+                   (click)="openImagePopup(data.product_image)" 
+                   src="{{data.product_image}}" 
+                   alt="" 
+                   style="width:69%;height:55px;cursor:pointer;border-radius: 3px;" >
+                  </ng-container>
+                  <ng-container *ngIf="data.product_image ==='../../images/no_preview.jpg'">
+                    <img
+                    src="./assets/media/images/DefaultSignature.png"
+                    alt="" 
+                    style="width:69%;height:55px;border-radius: 3px;" >
+                  </ng-container>
+          </td>
+            <td class="ellipsis">{{data.product_desc}}</td>
+            <td style="width: 5%;">{{data.productuom_name}}</td>
+            <td style=" width: 5%; text-align: right;">{{data.mrp_price}}</td>
+            <td class="text-center" style="width: 5%;">
+              <label *ngIf="data.whatsapp_id != 'null'" class="badge bg-success text-white ">Product Added</label>
+              <label *ngIf="data.whatsapp_id == 'null'" class="badge bg-danger text-white ">Yet To add</label>
+            </td>
+            <td>
+              <div *ngIf="data.whatsapp_id != 'null'" class="d-flex align-items-center">
+                <ng-container *ngIf="data.whatsappstock_status ==='Y'">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input form-switch text-center text-nowrap  " type="checkbox" role="switch"
+                      title="Disable for Out Of Stock" (click)="toggleswitch(data)" id="flexSwitchCheckChecked"
+                      style=" background-color: #30a14a;" checked>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="data.whatsappstock_status ==='N'">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input form-switch text-center text-nowrap slider " type="checkbox"
+                      role="switch" title="Enable for In Stock" (click)="toggleswitch(data)" id="flexSwitchCheckDefault"
+                      style=" background-color: #ec9146;">
+                  </div>
+                </ng-container>
+              </div>
+            </td>
+            <!-- <td>{{data.Status}}</td> -->
+            <!-- <td>{{data.created_date}}</td>
+                <td>{{data.created_by}}</td> -->
+            <td class="text-center text-nowrap">
+              <div style="cursor: pointer;">
+                <button class="btn me-2 p-1 " title="Options" (click)="toggleOptions(data.product_gid)"><span
+                    class="fa-solid fa-ellipsis-vertical fs-1" style="color: #4d4d4d;"></span></button>
+                <div *ngIf="showOptionsDivId === data.product_gid"
+                  class="pb-0 rounded bg-white cursor-pointer icon_menu" style="right: 80px;">
+                  <div class="d-flex p-3 pb-3 Icon_hover" (click)="onedit(data.product_gid)">
+                    <span><i class="fa-regular fa-pen-to-square fs-3 me-5"></i></span><span class="tooltip">Edit</span>
+                    <span>Edit</span>
+                  </div>
+                  <div class="d-flex p-3 pb-3 Icon_hover" (click)="whatsappproduct(data.product_gid)"
+                    *ngIf="data.whatsapp_id == 'null'" data-bs-toggle="modal" data-bs-target="#whatsappproductadd">
+                    <span><i class="bi bi-whatsapp fs-3 me-5"></i></span>
+                    <span class="tooltip">Move to WhatsApp</span>
+                    <span>Move to WhatsApp</span>
+                  </div>
+                  <div class="d-flex p-3 pb-3 Icon_hover" [hidden]="data.shopify_productid  ==='No'"
+                    (click)="myModaladddetails(data)" data-bs-toggle="modal" data-bs-target="#myModalUpdateimage">
+                    <span><i class="fa-solid fa-camera  fs-3 me-5"></i></span><span class="tooltip">Upload</span>
+                    <span>Upload</span>
+                  </div>
+                  <div class="d-flex p-3 pb-3 Icon_hover"  (click)="removeproduct(data.whatsapp_id)"
+                  *ngIf="data.whatsapp_id != 'null'" data-bs-toggle="modal" data-bs-target="#removeproduct">
+                  <span><i class="bi bi-whatsapp fs-3 me-5"></i></span>
+                  <span class="tooltip">Remove from WhatsApp</span>
+                  <span>Remove from  WhatsApp</span>
+                </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<form [formGroup]="reactiveForm" #form="ngForm">
+  <div class="modal" id="myModalUpdateimage" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+
+        <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+          <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+              class="fas fa-lock fw-bolder fs-3"></i> &nbsp;&nbsp;Upload Image</h2>
+
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-12 col-lg-8 col-xl-12"> <!-- Adjusted the column sizes -->
+              <div class="mb-3">
+                <span class="font-bold"><b>Upload Photo</b><span class="ms-1 text-red">*</span></span>
+              </div>
+              <div class="fv-row mt-2">
+                <input style="width: 100%;" (change)="onChange2($event)" accept="image/*" type="file" #fileInput class="form-control form-control-lg form-control-solid bg-white
+                        mb-3 borderc-secondary custom-input" name="fName" />
+              </div>
+            </div>
+          </div>
+          <br>
+          <!-- Modal footer -->
+          <div class="text-center my-4">
+            <button type="submit" class="btn-success btn-sm text-white me-2" data-bs-dismiss="modal"
+              (click)="onsubmit()">
+              <i class="fa fa-check fs-5"></i>&nbsp;Submit
+            </button>
+            <button class="btn-danger btn-sm text-white me-2" data-bs-dismiss="modal">
+              <i class="fas fa-close fs-5"></i> &nbsp;Close
+            </button>&nbsp;
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</form>
+<!-- The Modal Active -->
+<div id="imageModal" class="modals">
+  <span class="close" (click)="closeImagePopup()">&times;</span>
+  <img class="modals-content" id="modalImage">
+</div>
+<br>
+<div class="modal" id="whatsappproductadd" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="text-center my-4">
+        <h2><b>Are you sure?</b></h2>
+        <br>
+        <p style="display: block;">Do you want to move the product to WhatsApp?</p>
+        <div class="text-center my-4">
+          <button type="submit" class="btn-success btn-sm text-white me-2" data-bs-dismiss="modal"
+          (click)="addwhatsappproduct()">
+          <i class="fa fa-check fs-5"></i>&nbsp;Submit
+        </button>
+          <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white"></i> &nbsp;Close
+          </button>&nbsp;
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="removeproduct" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="text-center my-4">
+        <h2><b>Are you sure?</b></h2>
+        <br>
+        <p style="display: block;">Do you want to move the product to WhatsApp?</p>
+        <div class="text-center my-4">
+          <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white"></i> &nbsp;Close
+          </button>&nbsp;
+          <button class="btn-danger btn-sm text-white me-4" (click)="onremove()" data-bs-dismiss="modal">
+            <i class="fas fa-trash text-white fs-5 "></i> &nbsp;Remove
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

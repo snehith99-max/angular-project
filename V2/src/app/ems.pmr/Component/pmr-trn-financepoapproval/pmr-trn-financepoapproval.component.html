@@ -1,0 +1,55 @@
+<div class="card mt-4">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+            <div class="col">
+                <h3 class="card-title fw-bold">PO Finance Approval</h3>
+            </div>
+
+</div>
+<div class="table-responsive">
+    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+        <input type="hidden" formControlName="purchaseorder_gid">
+        <table id="purchaseorder_list" class="table table-striped table-row-bordered gy-5 gs-7">
+            <thead>
+                <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                    <th style="width: 3%;">S.No</th>
+                    <th style="width: 7%;">Date</th>
+                    <th style="width: 10%;">Order Ref No</th>
+                    <th style="width: 20%;">Vendor</th>
+                    <th style="width: 25%;" >Contact</th>
+                    <th style="width: 15%;">Status</th>
+                     <th  style="width: 7%;" class="text-end" >Order Value</th>
+                     <th class="text-center bg-lightblue ">Action</th> 
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of purchaseorder_list;let i = index;">
+                    <td style="width: 3%;">{{i+1}}</td>
+                    <td style="width: 7%;">{{data.purchaseorder_date}}</td>
+                    <td style="width: 10%;">{{data.porefno}}</td>
+                    <td style="width: 20%;">{{data.Vendor}}</td>
+                    <td style="width: 25%;" >{{data.Contact }}</td> 
+                    <td style="width: 15%;">{{data.purchaseorder_status}}</td> 
+                    <td style="width: 7%;" class="text-end" >{{data.paymentamount}}</td>
+                    <!-- <td>{{data.remarks}}</td>  -->
+                    <td class="text-center">
+
+                      <button title="Review" type="button" class="btn btn-icon btn-sm bg-info me-2" (click)="onview(data.purchaseorder_gid)" >  <span
+                        class="fa-solid fa-square-check text-white  fs-3"></span></button> 
+                        <!-- <span (click)="toggleOptions(data.purchaseorder_gid)" style="cursor: pointer;">
+                          <button class="btn me-2 p-1">
+                            <span class="fa-solid fa-ellipsis-vertical fs-1" style="color: #4d4d4d;"></span>
+                          </button>
+                          <div *ngIf="showOptionsDivId === data.purchaseorder_gid" class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                            <div class="d-flex p-3 pb-3 Icon_hover" (click)="onview(data.purchaseorder_gid)">
+                              <span><i class="fa-solid fa-eye  fs-3 me-4"></i></span>
+                              <span>Review</span>
+                            </div>
+                        </div>
+                        </span> -->
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>

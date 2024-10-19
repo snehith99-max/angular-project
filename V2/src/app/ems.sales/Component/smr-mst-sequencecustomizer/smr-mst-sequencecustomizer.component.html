@@ -1,0 +1,50 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">
+                Sequence Code Customizer Summary</h3>
+        </div>
+    </div>
+        <div class="table-responsive">
+            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded  table-responsive">
+                <table id="sequenceCodeList" class="table  table-striped table-row-bordered gy-5 gs-7 ">
+                    <thead>
+                        <tr class=" text-white fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                            <th style="width: 3%;">S.No</th>
+                            <th style="width: 10%;">Branch</th>
+                            <th style="width:9%;">Sequence Code</th>
+                            <th style="width: 20%;">Sequence</th>
+                            <th class="text-center" style="width: 5%;">Company Code</th>
+                            <th class="text-center" style="width: 5%;">Branch Flag</th>
+                            <th class="text-center" style="width: 5%;">Department Flag</th>
+                            <th class="text-center" style="width: 5%;">Location Flag</th>
+                            <th class="text-center" style="width: 5%;">Year Flag</th>
+                            <th class="text-center" style="width: 5%;">Month Flag</th>
+                            <th class="text-center" style="width: 5%;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of sequenceCodeList; let i=index;" style="white-space: nowrap;"
+                            class="align-middle">
+                            <td style="width: 2%;">{{i+1}}</td>
+                            <td style="width: 10%;">{{data.branch_name}}</td>
+                            <td style="width:9%;">{{data.sequence_code}}</td>
+                            <td class="text-wrap" style="width: 20%;">{{data.sequence_name}}</td>
+                            <td class="text-center" style="width: 5%;">{{data.company_code}}</td>
+                            <td class="text-center" style="width: 5%;">{{data.branch_flag}}</td>
+                            <td class="text-center" style="width: 5%;">{{data.department_flag}}</td>
+                            <td class="text-center" style="width: 5%;">{{data.location_flag}}</td>
+                            <td class="text-center" style="width: 5%;">{{data.year_flag}}</td>
+                            <td class="text-center" style="width: 5%;">{{data.month_flag}}</td>
+                            <td class="text-center text-nowrap" style="width: 5%;">
+                                <button title="Edit" type="button" class="btn btn-icon
+                                btn-sm bg-primary me-2" (click)="SequenceEdit(data.sequencecodecustomizer_gid)">
+                                    <span class="fa-solid fa fa-pen"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>

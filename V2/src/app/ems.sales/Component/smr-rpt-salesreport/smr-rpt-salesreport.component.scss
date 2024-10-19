@@ -1,0 +1,14 @@
+.sample {
+    width: 10px;
+}
+.orderhover:hover {
+    background-color: #d8daf8;
+}
+.custom-tbody {
+    overflow-y: scroll;
+    height: 300px;
+}
+thead {
+    position: sticky;
+    top: 0;
+}

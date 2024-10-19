@@ -1,0 +1,49 @@
+<div class="container d-flex justify-content-center" style="padding-top: 20px;">
+    <div class="card shadow-lg justify-content-center" style="width: 50%; max-width: 600px;">
+        <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+            <i class="bi bi-arrow-left-square-fill float-end fs-1 me-6" (click)="back()"></i>
+            <h3 class="fw-bolder text-white">Documents Upload</h3>          
+        </div>
+        <div class="d-flex flex-row m-4 flex-wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="upload-container d-flex align-items-center justify-content-between">
+    <label for="file-upload" class="custom-file-upload">
+        <i class="bi bi-upload"></i> Choose File
+    </label>
+    <input id="file-upload" type="file" (change)="onFileSelected($event)" multiple accept="image/*,.pdf,.doc,.docx,.txt,.xlsx,.xls,.mp4" style="display: none;">
+    <i class="btnsubmit bi bi-check-square-fill float-end fs-1 me-6" (click)="sumbit()"></i>
+</div>
+
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<!-- Conditionally rendered based on whether files have been selected -->
+<div class="m-3 mt-5 border card"  *ngIf="fileArray.length > 0">
+    <div class="card-header bg-lightblue card-height55">
+        <div class="card-title m-0">
+            <h5 class="fw-bolder text-blue">Documents Details</h5>
+        </div>
+    </div>
+    <div class="card">
+    <div class="row mt-2" style="max-height: 200px;">
+        <div *ngFor="let data of fileArray; let i = index" class="col-4">
+            <div class="card">
+                <div class="card-body rounded-top">
+                    <h5 class="card-title">{{data.name}}</h5>
+                    <p class="card-text">{{data.size}} Kb</p>
+                    <button (click)="removeFile(i)" class="btn btn-hover btn-sm">
+                        <i class="fas fa-remove"></i> Remove
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+

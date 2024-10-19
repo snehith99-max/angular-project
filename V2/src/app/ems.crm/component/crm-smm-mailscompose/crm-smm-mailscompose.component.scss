@@ -1,0 +1,211 @@
+.bcc-button {
+    background-color: white;
+    border: 1px solid #6c757d;
+    color: #6c757d;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.circular-icon {
+    background-color: #f0f0f0; /* Set your desired background color */
+    border-radius: 50%; /* Make the background circular */
+    padding: 10px; /* Adjust the padding to make the circle the desired size */
+    display: inline-flex; /* Align the icon within the circle */
+    align-items: center; /* Center the icon vertically */
+    justify-content: center; /* Center the icon horizontally */
+}
+.circular-icon:hover {
+    background-color: #e0e0e0; /* Change the background color on hover */
+}
+.bcc-button:hover {
+    background-color: #f8f9fa;
+}
+.fixed-button-container {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: white; /* To ensure the background is consistent */
+    padding: 10px 0; /* Optional: Add padding for better spacing */
+}
+
+  .selected-contacts .badge {
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .selected-contacts .badge .btn-danger {
+    margin-left: 5px;
+    padding: 0 5px;
+    border-radius: 50%;
+  }
+  
+  .input-group {
+    display: flex;
+    align-items: center;
+  }
+  
+  .input-group .form-control {
+    flex: 1;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  
+  .input-group .suggestions-list {
+    width: 100%;
+    margin-top: 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .input-group .suggestions-list li {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    cursor: pointer;
+    background-color: #fff;
+    transition: background-color 0.2s;
+  }
+  
+  .input-group .suggestions-list li:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .input-group .suggestions-list li .contact-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .input-group .suggestions-list li span {
+    margin-right: 5px;
+  }
+  
+  .input-group .form-control {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+  }
+  
+  .input-group .form-control:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+  ::placeholder {
+    color: #6c757d;
+    opacity: 1;
+  }
+  
+  .form-label {
+    font-weight: 600;
+    color: #343a40;
+  }
+  
+  .required {
+    color: #dc3545;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    border: none;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+  .suggested-contacts {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    margin-top: 5px;
+    left: 113px;
+
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.contact:hover {
+    background-color: #f0f0f0;
+}
+
+.contact-image {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-name {
+    font-weight: bold;
+}
+
+.contact-email {
+    color: rgb(128, 128, 128);
+}
+.badges {
+    background-color: #def0ff;
+}
+.badge{
+  color: #2599ff;
+}
+.button-link {
+  display: inline-block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #3788d8; /* Default black font color */
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  cursor: default; /* Default cursor */
+}
+
+.text-muted {
+  color: #6c757d !important;
+}
+
+.text-danger {
+  color: #dc3545 !important;
+}
+
+.text-primary {
+  color: #007bff !important;
+}
+
+.text-success {
+  color: #28a745 !important;
+}
+
+.text-warning {
+  color: #ffc107 !important;
+}
+
+.text-secondary {
+  color: #6c757d !important;
+}
+.url {
+  color: blue;
+  text-decoration: underline;
+}

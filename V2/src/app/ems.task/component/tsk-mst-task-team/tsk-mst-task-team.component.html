@@ -1,0 +1,621 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Module</h3>
+        </div>
+        <div class="col me-5">
+            <button title="Add Module" class="btn-primary btn-sm text-white me-4 mb-2 mt-0 float-end"
+                data-bs-toggle="modal" data-bs-target="#serviceadd" (click)="openteam()">
+                <i class="fas fa-plus"></i>
+                &nbsp;Add Module</button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="bsopssummary" class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th style="width: 5%;display: none;">S.No</th>
+                        <th>Code</th>
+                        <th>Module Name</th>
+                         <th>Manager</th>
+                        <th>Member</th> 
+                        <th>Created By</th>
+                        <th>Created Date</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of Team_list; let i=index;">
+                        <td style="display: none;">{{i+1}}</td>
+                        <td>{{data.team_code}}</td>
+                        <td>{{data.team_name}}</td>
+                        <td>
+                            <a (click)="edit(data.team_gid)" title="Manager View"  data-bs-toggle="modal" data-bs-target="#managerpopup"
+                                 class="ms-7 count">{{data.total_manager_count}}</a>
+                        </td>
+                        <td>
+                            <a (click)="edit(data.team_gid)" title="Member View"  data-bs-toggle="modal" data-bs-target="#memberpopup"
+                              class="ms-7 count">{{data.total_member_count}}</a>
+                        </td> 
+                        <td>{{data.created_by}}</td>
+                        <td>{{data.created_date}}</td>
+                        <!-- <td [ngSwitch]="data.status_log">
+                            <label  *ngSwitchCase="'Y'" class="badge bg-success text-white ">Active</label>
+                            <label  *ngSwitchCase="'N'" class="badge bg-warning text-white ">Inactive</label>
+                        </td> -->
+                        <td [ngSwitch]="data.status_log"  class="text-center text-nowrap">
+                                    <button   title="Assign Manager"  type="button" class="btn btn-icon btn-sm bg-darkblue me-2"
+                                data-bs-target="#assignteam" data-bs-toggle="modal"
+                                (click)="assignmanager(data.team_gid)"><span
+                                    class="fa-solid fa fa-user text-white  fs-6"></span></button>
+                                    <button     title="Assign Member" (click)="assignsmember(data.team_gid)"   type="button" class="btn btn-icon btn-sm bg-darkedblue me-2"
+                                    data-bs-target="#assignmember" data-bs-toggle="modal"
+                                   ><span
+                                        class="fa-solid fa fa-users text-white  fs-6"></span></button>
+                                        <button  title="Edit" type="button" class="btn btn-icon btn-sm bg-etdark me-2"
+                                        [disabled]="data.Status === 'N'" data-bs-target="#edit" data-bs-toggle="modal"
+                                            (click)="edit(data.team_gid)"><span
+                                                class="fa-solid fa-pencil text-white  fs-6"></span></button>
+                            <button title="delete" type="button" class="btn btn-icon btn-sm bg-danger me-2"
+                                data-bs-target="#teamdelete" data-bs-toggle="modal"
+                                (click)="delete(data.team_gid)"><span
+                                    class="fa-solid fa-trash text-white  fs-6"></span></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+
+    <div class="modal top fade" id="serviceadd" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content">
+            <div class=" bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white "> <i class="fas fa-plus fs-5"></i>&nbsp; Add Module
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form  [formGroup]="AddForm">
+                    <div class="mb-4 ">
+                        <div class="mb-4"><span class="fw-bold ">Code</span>
+                            <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <label placeholder="Auto Generate">Auto Generate</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 ">
+                        <div class="mb-4">
+                            <span class="fw-bold required">Process</span>
+                            <div class="d-flex justify-content-start mt-4 ms-4 ">
+                                <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                                  <input  type="radio" name="rdbemployee_access" checked="checked" value="Module" formControlName="txt_process" (click)="module()">
+                                  <label class="form-check-label text-gray-700 text-nowrap" for="empAccessYes">Module</label>
+                                </div>
+                                <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+                                  <input  type="radio" name="rdbemployee_access" checked="checked" value="Other" formControlName="txt_process" (click)="other()">
+                                  <label class="form-check-label text-gray-700 text-nowrap" for="empAccessNo">Other</label>
+                                </div>
+                          </div>
+                          </div>
+                    </div>
+                    <div class="mb-4" *ngIf="hide">
+                        <span class="fw-bold required">Module</span>
+                        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" >
+                          <ng-select formControlName="txtteamname" [items]="menulevel" bindLabel="module_name"
+                            class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" placeholder="Select an option"
+                            [ngClass]="{'invalid-border': AddForm.get('txtteamname')?.invalid && (AddForm.get('txtteamname')?.touched || AddForm.get('txtteamname')?.dirty)}">
+                          </ng-select>
+                          <div *ngIf="AddForm.get('txtteamname')?.hasError('required') && (AddForm.get('txtteamname')?.touched || AddForm.get('txtteamname')?.dirty)"
+                            class="text-red">
+                            Module is required.
+                          </div>
+                        </div>
+                    </div>
+                    <div class="mb-4" *ngIf="show">
+                        <span class="fw-bold required">Module</span>
+                        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" >
+                          <input type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                            [ngStyle]="{ 'border-color': AddForm.get('txtteamnames')?.hasError('required') && AddForm.get('txtteamnames')?.touched ? 'red' : 'rgb(209, 209, 209)','height': '42px' }"
+                            pattern="^(?!\s*$).+" placeholder="Enter Module" formControlName="txtteamnames" required />
+                          <div *ngIf="AddForm.get('txtteamnames')?.hasError('required') && AddForm.get('txtteamnames')?.touched"
+                            class="text-red">
+                            Module Name is required.
+                          </div>
+                          <div class="text-red" *ngIf="AddForm.get('txtteamnames')?.hasError('pattern')">
+                            Space is not accepted.
+                          </div>
+                        </div>
+                    </div>
+                       
+                 
+                </form>
+                <div class="text-center mt-4" >
+                    <button type="submit" class="btn-success text-white" (click)="addteam()" [disabled]="AddForm.invalid"
+                        data-bs-dismiss="modal">
+                        <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                        Submit
+                    </button> &nbsp;
+                    <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                        <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                        Close
+                    </button>
+                </div>
+            </div>
+               
+            </div>
+        </div>
+    </div>
+
+<div class="modal top fade" id="edit" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+data-mdb-backdrop="static" data-mdb-keyboard="true">
+<div class="modal-dialog modal-dialog-centered ">
+    <div class="modal-content ">
+        <div class=" bg-primary rounded-top">
+            <h3 class="p-4 pt-5 text-white "> <i class="fa-solid fa-pen-to-square fs-5"></i>&nbsp;&nbsp;&nbsp;
+                Edit Module
+            </h3>
+        </div>
+        <div class="modal-body">
+            <form  [formGroup]="EditForm">
+                <div class="mb-4 ">
+                    <div class="mb-4"><span class="fw-bold ">Code</span>
+                        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                            <label placeholder="Auto Generate">Auto Generate</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4" *ngIf="hide">
+                    <span class="fw-bold required">Module</span>
+                    <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" >
+                      <ng-select formControlName="txteditteamname" [items]="menulevel" bindLabel="module_name"  [(ngModel)]="editformdata.txteditteamname"
+                        class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" placeholder="Select an option"
+                        [ngClass]="{'invalid-border': AddForm.get('txteditteamname')?.invalid && (AddForm.get('txteditteamname')?.touched || AddForm.get('txteditteamname')?.dirty)}">
+                      </ng-select>
+                      <div *ngIf="AddForm.get('txteditteamname')?.hasError('required') && (AddForm.get('txteditteamname')?.touched || AddForm.get('txteditteamname')?.dirty)"
+                        class="text-red">
+                        Module is required.
+                      </div>
+                    </div>
+                </div>
+                <div class="mb-4" *ngIf="show">
+                    <span class="fw-bold required">Module</span>
+                    <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" >
+                      <input type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                        [ngStyle]="{ 'border-color': AddForm.get('txteditteamnames')?.hasError('required') && AddForm.get('txteditteamnames')?.touched ? 'red' : 'rgb(209, 209, 209)','height': '42px' }"
+                        pattern="^(?!\s*$).+" placeholder="Enter Module" formControlName="txteditteamnames" required   [(ngModel)]="editformdata.txteditteamnames"/>
+                      <div *ngIf="AddForm.get('txteditteamnames')?.hasError('required') && AddForm.get('txteditteamnames')?.touched"
+                        class="text-red">
+                        Module Name is required.
+                      </div>
+                      <div class="text-red" *ngIf="AddForm.get('txteditteamnames')?.hasError('pattern')">
+                        Space is not accepted.
+                      </div>
+                    </div>
+                </div>
+                    <!-- <div class="mb-4"><span class="fw-bold ">Module<span
+                                class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                            <ng-select formControlName="txteditteamname"  [items]="menulevel" bindLabel="module_name"
+                            class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" 
+                            placeholder="Select an option"   [(ngModel)]="editformdata.txteditteamname"
+                            [ngClass]="{'invalid-border': EditForm.get('txteditteamname')?.invalid && (EditForm.get('txteditteamname')?.touched || EditForm.get('txteditteamname')?.dirty)}"
+                            ></ng-select>
+                            <div *ngIf="EditForm.get('txteditteamname')?.hasError('required') && (EditForm.get('txteditteamname')?.touched || EditForm.get('txteditteamname')?.dirty) || EditForm.get('txteditteamname')?.hasError('pattern')"
+                            class="text-red">
+                            Module is required.
+                            </div>
+                </div>
+                </div> -->
+            </form>
+            <div class="text-center">
+                <button type="submit" class="btn-success text-white" [disabled]="EditForm.invalid" (click)="Updateteam()"
+                    data-bs-dismiss="modal">
+                    <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                    Update
+                </button> &nbsp;
+                <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                    <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="teamdelete" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h4 class="w-100  fw-bolder fs-1 mt-5">Are you sure?</h4>
+                <p class="fw-bold fs-5 mt-4">Do You Want To Delete The Record ?</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn-danger" data-bs-dismiss="modal"
+                    (click)="ondelete()">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal top fade" id="assignteam" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-lgss modal-dialog-centered ">
+        <div class="modal-content">
+            <div class=" bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white "> <i class="fas fa-user fs-5 ms-3"></i>&nbsp;&nbsp;Assign Manager
+                </h3>
+            </div>
+
+            <div class="">
+                <div class=" col-lg-12 col-md-12 col-sm-12  ms-4 text-center mt-2">
+                    <label class=" fs-4 fw-bold">Module:</label>
+                    <label class="text-red fw-bold fs-4">&nbsp;{{editformdata.txteditteamname}}</label>
+                </div>
+                <div class="row mt-2 d-flex justify-content-center">
+
+                    <div class=" col-lg-5">
+                        <div class="card  shadow-sm p-3 m-2" style="border-top:2px solid #009ef7;height: 255px;">
+
+                            <div class="row mt-3 d-flex align-items-center">
+                                <div class="col-lg-6">
+                                    <h5 class="card-title mb-4">Unassigned Manager</h5>
+                                </div>
+                                <div class="col me-5">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control form-control-sm" placeholder="Search "
+                                            name="search" [(ngModel)]="searchText">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive" style="max-height: 200px;" id="scroll-bar-table">
+                                <div class="p-3 pt-0 pb-0 bg-white rounded">
+                                    <table id="summary"
+                                        class="table table-striped table-row-bordered border-bottom gs-7 align-middle"
+                                        class="table table-bordered ">
+                                        <thead>
+                                            <tr
+                                                class="fw-bolder fs-5 text-nowrap bg-tableheaderblue text-blue align-middle">
+                                                <th><input title="CheckAll" type="checkbox" id="checkAll"
+                                                        (change)="$event ? masterToggle3() : null"
+                                                        [checked]="selection3.hasValue() && isAllSelected3()"
+                                                        [indeterminate]="selection3.hasValue() && !isAllSelected3()" />&nbsp;
+                                                </th>
+                                                <th style="width: 70%;">Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="selectable-name"
+                                                *ngFor="let data of employeemanager_list; let i=index;"
+                                                [hidden]="!matchesSearch(data)"
+                                                [class.selected-row]="selection3.isSelected(data)">
+                                                <td (click)="$event.preventDefault(); selection3.toggle(data)"><input
+                                                        type="checkbox" (click)="$event.stopPropagation()"
+                                                        (change)="$event ? selection3.toggle(data) : null"
+                                                        [checked]="selection3.isSelected(data)" />
+                                                </td>
+                                                <td class="text-start"
+                                                    (click)="$event.preventDefault(); selection3.toggle(data)">
+                                                    {{data.employee_name}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="col-lg-1 mt-20 text-center">
+                        <button title="Tag" class="btn btn-icon bg-primary text-white btn-sm mt-15"
+                            [disabled]="!selection3.hasValue()" (click)="managertag()">
+                            <i class="fa-solid fa-arrow-right fs-5"></i>&nbsp;
+                        </button> &nbsp;
+                        <button title="UnTag" class="btn btn-icon bg-primary  btn-sm mt-2"
+                            [disabled]="!selection4.hasValue()" (click)="manageruntag()">
+                            <i class="fa-solid fa-arrow-left   fs-5"></i>&nbsp;
+                        </button> &nbsp;
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="card  shadow-sm p-3 m-2 rounded"
+                            style="border-top:2px solid #009ef7;height: 255px;">
+                            <!-- <h3 class="p-3">Assigned Member</h3> -->
+                            <div class="row mt-3 d-flex align-items-center">
+                                <div class="col-lg-6">
+                                    <h5 class="card-title mb-4">Assigned Manager</h5>
+                                </div>
+                                <div class="col me-5">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control form-control-sm" placeholder="Search "
+                                            name="search" [(ngModel)]="searchText1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive" style="max-height: 200px;" id="scroll-bar-table">
+                                <div class="p-3 pt-0 pb-0 bg-white rounded">
+                                    <table id="summary"
+                                        class="table table-striped table-row-bordered border-bottom gs-7 align-middle"
+                                        class="table table-bordered ">
+                                        <thead>
+                                            <tr
+                                                class="fw-bolder fs-5 text-nowrap bg-tableheaderblue text-blue align-middle">
+                                                <th>
+                                                    <input title="CheckAll" type="checkbox" id="checkAll2"
+                                                        (change)="$event ? masterToggle4() : null"
+                                                        [checked]="selection4.hasValue() && isSelected4()"
+                                                        [indeterminate]="selection4.hasValue() && !isSelected4()" />&nbsp;
+                                                </th>
+                                                <!-- <th>S.NO</th> -->
+                                                <th style="width: 70%;">Name</th>
+                                                <!-- <th class="text-center">Action</th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="selectable-name" *ngFor="let data of unasignedlist; let i=index;"
+                                                [hidden]="!matchesSearchs(data)"
+                                                [class.selected-row]="selection4.isSelected(data)">
+                                                <td (click)="$event.preventDefault(); selection4.toggle(data)">
+                                                    <input type="checkbox" (click)="$event.stopPropagation()"
+                                                        (change)="$event ? selection4.toggle(data) : null"
+                                                        [checked]="selection4.isSelected(data)" />
+                                                </td>
+                                                <!-- <td>{{i+1}}</td> -->
+                                                <td (click)="$event.preventDefault(); selection4.toggle(data)">
+                                                    {{data.employee_name}}
+                                                </td>
+                                                <!-- <td class="text-center text-nowrap">
+                                                    <a title="Delete" type="button" (click)="deleteMember(data)">
+                                                        <span class="fa-solid fa-trash" style="color:rgb(250, 73, 41);font-size: 14px;"></span>
+                                                    </a>
+                                                    
+                                                </td> -->
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center my-5">
+                    <button type="submit" class="btn-success text-white" (click)="assignmanagersubmit()" [disabled]="unasignedlist.length === 0"
+                         data-bs-dismiss="modal">
+                        <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                        Submit
+                    </button> &nbsp;
+                    <button type="button" class="btn-danger " data-bs-dismiss="modal" (click)="resetValues()">
+                        <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="managerpopup" tabindex="-1" data-bs-backdrop='static' aria-labelledby="editamlcategoryLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content ">
+            <div class="modal-header bg-primary mb-5">
+                <h3 class="modal-title text-white"><i class="fa-solid fa-eye fs-3"></i> &nbsp; Manager</h3>
+            </div>
+            <div *ngIf="managerlist && managerlist.length > 0" class="mt-1 mb-3 ms-3"><b>Module Manager:</b> &nbsp;<span
+                    class="view_count">{{managerlist.length}}</span></div>
+
+            <div style="max-height: 160px;" class="overflow-auto " id="scroll-bar-table">
+                <table class="table table-striped table-bordered table-hover table-sm table-responsive mt-4">
+                    <tbody>
+                        <tr *ngFor="let data of managerlist; let i=index;">
+                            <td class="px-0 text-center">{{i+1}}</td>
+                            <td>{{data.employee_name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center mb-3 mt-2">
+                <button type="button" class="btn-danger text-white" data-bs-dismiss="modal">
+                    <i class="fa fa-close fs-5 text-center"></i>
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal top fade" id="assignmember" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+data-mdb-backdrop="static" data-mdb-keyboard="true">
+<div class="modal-dialog modal-lgss modal-dialog-centered ">
+    <div class="modal-content">
+        <div class=" bg-primary rounded-top">
+            <h3 class="p-4 pt-5 text-white "> <i class="fas fa-user fs-5 ms-3"></i>&nbsp;&nbsp;Assign Member
+            </h3>
+        </div>
+
+        <div class="">
+            <div class=" col-lg-12 col-md-12 col-sm-12  ms-4 text-center mt-2">
+                <label class=" fs-4 fw-bold">Module:</label>
+                <label class="text-red fw-bold fs-4">&nbsp;{{editformdata.txteditteamname}}</label>
+            </div>
+            <div class="row mt-2 d-flex justify-content-center">
+
+                <div class=" col-lg-5">
+                    <div class="card  shadow-sm p-3 m-2" style="border-top:2px solid #009ef7;height: 255px;">
+                        <!-- <h3 class="p-3">Unassigned Member</h3> -->
+                        <div class="row mt-3 d-flex align-items-center">
+                            <div class="col-lg-6">
+                                <h5 class="card-title mb-4">Unassigned Member</h5>
+                            </div>
+                            <div class="col me-5">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Search "
+                                        name="search" [(ngModel)]="searchText">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive" style="max-height: 200px;" id="scroll-bar-table">
+                            <div class="p-3 pt-0 pb-0 bg-white rounded">
+                                <table id="summary"
+                                    class="table table-striped table-row-bordered border-bottom gs-7 align-middle"
+                                    class="table table-bordered ">
+
+                                    <!-- class="table table-striped table-row-bordered border-bottom gs-7 align-middle"> -->
+                                    <thead>
+                                        <tr
+                                            class="fw-bolder fs-5 text-nowrap bg-tableheaderblue text-blue align-middle">
+                                            <th><input title="CheckAll" type="checkbox" id="checkAll"
+                                                    (change)="$event ? masterToggle() : null"
+                                                    [checked]="selection.hasValue() && isAllSelected()"
+                                                    [indeterminate]="selection.hasValue() && !isAllSelected()" />&nbsp;
+                                            </th>
+                                            <th style="width: 70%;">Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="selectable-name" *ngFor="let data of employee_list; let i=index;"
+                                            [hidden]="!matchesSearch(data)"
+                                            [class.selected-row]="selection.isSelected(data)">
+                                            <td (click)="$event.preventDefault(); selection.toggle(data)"><input
+                                                    type="checkbox" (click)="$event.stopPropagation()"
+                                                    (change)="$event ? selection.toggle(data) : null"
+                                                    [checked]="selection.isSelected(data)" />
+                                            </td>
+                                            <td class="text-start"
+                                                (click)="$event.preventDefault(); selection.toggle(data)">
+                                                {{data.employee_name}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="col-lg-1 mt-20  text-center">
+                    <button title="Assign" [disabled]="!selection.hasValue()"
+                        class="btn btn-icon bg-primary text-white btn-sm mt-15" (click)="tag()">
+                        <i class="fa-solid fa-arrow-right fs-5"></i>&nbsp;
+                    </button> &nbsp;
+                    <button title="UnAssign" [disabled]="!selection2.hasValue()"
+                        class="btn btn-icon bg-primary  btn-sm mt-2" (click)="untag()">
+                        <i class="fa-solid fa-arrow-left   fs-5"></i>&nbsp;
+                    </button> &nbsp;
+                </div>
+                <div class="col-lg-5">
+                    <div class="card  shadow-sm p-3 m-2 rounded"
+                        style="border-top:2px solid #009ef7;height: 255px;">
+                        <!-- <h3 class="p-3">Assigned Member</h3> -->
+                        <div class="row mt-3 d-flex align-items-center">
+                            <div class="col-lg-6">
+                                <h5 class="card-title mb-4">Assigned Member</h5>
+                            </div>
+                            <div class="col me-5">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Search "
+                                        name="search" [(ngModel)]="searchText1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive" style="max-height: 200px;" id="scroll-bar-table">
+                            <div class="p-3 pt-0 pb-0 bg-white rounded">
+                                <table id="summary"
+                                    class="table table-striped table-row-bordered border-bottom gs-7 align-middle"
+                                    class="table table-bordered ">
+                                    <thead>
+                                        <tr
+                                            class="fw-bolder fs-5 text-nowrap bg-tableheaderblue text-blue align-middle">
+                                            <th>
+                                                <input title="CheckAll" type="checkbox" id="checkAll2"
+                                                    (change)="$event ? masterToggle2() : null"
+                                                    [checked]="selection2.hasValue() && isSelected2()"
+                                                    [indeterminate]="selection2.hasValue() && !isSelected2()" />&nbsp;
+                                            </th>
+                                            <th style="width: 70%;">Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="selectable-name" *ngFor="let data of list; let i=index;"
+                                            [hidden]="!matchesSearchs(data)"
+                                            [class.selected-row]="selection2.isSelected(data)">
+                                            <td (click)="$event.preventDefault(); selection2.toggle(data)">
+                                                <input type="checkbox" (click)="$event.stopPropagation()"
+                                                    (change)="$event ? selection2.toggle(data) : null"
+                                                    [checked]="selection2.isSelected(data)" />
+                                            </td>
+                                            <td (click)="$event.preventDefault(); selection2.toggle(data)">
+                                                {{data.employee_name}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center my-5">
+                <button type="submit" class="btn-success text-white" [disabled]="list.length === 0"
+                    (click)="assignsubmit()" data-bs-dismiss="modal">
+                    <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                    Submit
+                </button> &nbsp;
+                <button type="button" class="btn-danger " data-bs-dismiss="modal" (click)="resetTaggedValues()">
+                    <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="memberpopup" tabindex="-1" data-bs-backdrop='static' aria-labelledby="editamlcategoryLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content ">
+            <div class="modal-header bg-primary mb-5">
+                <h3 class="modal-title text-white"><i class="fa-solid fa-eye fs-3"></i> &nbsp; Member</h3>
+            </div>
+            <div *ngIf="member && member.length > 0" class="mt-1 mb-3 ms-3"><b>Module Member:</b> &nbsp;<span
+                    class="view_count">{{member.length}}</span></div>
+
+            <div style="max-height: 160px;" class="overflow-auto " id="scroll-bar-table">
+                <table class="table table-striped table-bordered table-hover table-sm table-responsive mt-4">
+                    <tbody>
+                        <tr *ngFor="let data of member; let i=index;">
+                            <td class="px-0 text-center">{{i+1}}</td>
+                            <td>{{data.employee_name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center mb-3 mt-2">
+                <button type="button" class="btn-danger text-white" data-bs-dismiss="modal">
+                    <i class="fa fa-close fs-5 text-center"></i>
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

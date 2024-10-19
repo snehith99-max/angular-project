@@ -1,0 +1,75 @@
+<div class="card shadow-sm">
+
+    <div class="card-header bg-linkedin" style="color: white;">
+
+        <h3 class="card-title"><i class="bi bi-linkedin"
+                style="font-size: 20px;"></i>&nbsp;&nbsp;{{lscompany_name}}-{{lstotal_post}} Posts
+        </h3>
+        <div>
+            <button style="color: black !important;"
+                class="btn btn-icon btn-sm bg-secondary cursor-pointer ms-auto mt-2"
+                (click)="postviewrefresh(account_id)" title="Refresh Summary">
+                <i class="fa-solid fas fa-sync-alt fs-1 fw-bold"></i>
+            </button>&nbsp;
+            <button style="color: black !important;"
+                class="btn btn-icon btn-sm bg-secondary cursor-pointer ms-auto mt-2 "
+                routerLink="/crm/CrmSmmLinkedaccount" title="back"><i
+                    class="fa-solid fa-arrow-left-long fs-1 fw-bold"></i></button>&nbsp;
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="table-responsive">
+        <div class="card card-body m-3 shadow-xl p-3 mb-5 bg-white rounded">
+            <table id="postsummarylistview " class="table table-striped table-row-bordered border-bottom gs-7">
+                <thead>
+                    <tr class=" text-white fw-bold fs-6 text-nowrap bg-linkedin text-center">
+                        <th>S.No</th>
+                        <th>Post</th>
+                        <th>Date Published</th>
+                        <th>Posted Type</th>
+                        <th>Caption</th>
+                        <th>Visibility</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of postsummarylistview  ;let i=index;" class="align-middle">
+                        <td>{{i+1}}</td>
+                        <td>
+                            <ng-container *ngIf="data.media_type === 'Image' ">
+                                <img src="{{ data.imagedownload_url }}" alt="" style="width:69%;height:55px;"
+                                    draggable="false">
+                            </ng-container>
+                            <ng-container *ngIf="data.media_type === 'Video'">
+                                <video controls style="width:69%;height:55px;">
+                                    <source [src]="data.imagedownload_url" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </ng-container>
+                            <ng-container *ngIf="data.media_type === ''">
+                                <img src="./assets/media/images/DefaultSignature.png" alt=""
+                                    style="width: 69%; height: 55px;" draggable="false">
+                            </ng-container>
+
+                        </td>
+                        <td style="white-space: nowrap;">{{data.createdAt}}</td>
+                        <td style="white-space: nowrap;">&nbsp;&nbsp;&nbsp;{{data.media_type}}</td>
+                        <td style="max-width: 500px; word-wrap: break-word;" [innerHTML]="data.caption"></td>
+
+                        <td class="text-center">{{data.visibility}}</td>
+                        <td class="text-center text-nowrap">
+                            
+                            <button title="Download" type="button"
+                                (click)="downloadImage(data.imagedownload_url,data.media_type)"
+                                class="btn btn-icon btn-sm bg-primary me-2"><span
+                                    class="fa-solid fa-download "></span></button>&nbsp;&nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

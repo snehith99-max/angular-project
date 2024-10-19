@@ -1,0 +1,708 @@
+<div class="card shadow-lg rounded-top">
+  <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+    <h3 class="fw-bolder text-white">
+      <i class="fa-solid fa-person-walking-arrow-right fs-3 me-5"></i>Leave Details
+    </h3>
+  </div>
+
+  <div class="back-icon">
+    <i class="bi bi-arrow-left-square-fill" title="Back" (click)="back()"></i>
+  </div>
+
+  <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-20x mb-8 fs-6">
+    <li class="nav-item ms-9">
+      <a class="nav-link active" data-bs-toggle="tab" href="#kt_tab_pane_1"><b>Leave</b></a>
+    </li>
+
+    <li class="nav-item ms-9">
+      <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_2"><b>Permission</b></a>
+    </li>
+
+    <li class="nav-item ms-9">
+      <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_3"><b>OnDuty</b></a>
+    </li>
+  </ul>
+
+  <div class="card shadow-sm p-3">
+    <div class="tab-content" id="myTabContent">
+      <!-- Leave -->
+      <div class="tab-pane fade show active ms-5" id="kt_tab_pane_1" role="tabpanel">
+        <form [formGroup]="reactiveFormLeave" #form="ngForm">
+          <div class="row" style="padding-right: 10px; padding-left: 10px;">
+            <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+              <h3 class="fw-bolder text-white"><i class="fa-solid fa-right-from-bracket fs-5 me-5"></i>Leave</h3>
+            </div>
+
+            <div class="d-flex flex-row fv-row flex-wrap">
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold required">Branch</span>
+                  <ng-select formControlName="branch_memb"
+                  [class.is-invalid]="branch_memb.invalid && (branch_memb.dirty || branch_memb.touched)"
+                  [ngClass]="{'invalid-border': branch_memb.invalid && branch_memb.touched}" [items]="branchlist" required
+                  class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" [(ngModel)]="branch_data"
+                  [ngStyle]="{'border-color': branch_memb.invalid && branch_memb.touched ? 'red' : 'rgb(209, 209, 209)'}" bindLabel="branch_name"
+                  bindValue="branch_gid" placeholder="Select an option"></ng-select>
+                    <div *ngIf="branch_memb.invalid && (branch_memb.dirty || branch_memb.touched)">
+                      <div *ngIf="branch_memb.errors?.['required']"><span class="text-red">Branch Name is required.</span>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold required">Employee</span>
+                  <ng-select formControlName="employeegid"
+                  [class.is-invalid]="employeegid.invalid && (employeegid.dirty || employeegid.touched)"
+                  [ngClass]="{'invalid-border': employeegid.invalid && employeegid.touched}" [items]="employeelist" required
+                  class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" [(ngModel)]="employee_data" (change)="datejoinFetch($event)"
+                  [ngStyle]="{'border-color': employeegid.invalid && employeegid.touched ? 'red' : 'rgb(209, 209, 209)'}" bindLabel="employee_name"
+                  bindValue="employee_gid" placeholder="Select an option"></ng-select>
+                  <div *ngIf="employeegid.invalid && (employeegid.dirty || employeegid.touched)">
+                    <div *ngIf="employeegid.errors?.['required']"><span class="text-red">Employee is required.</span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold">Type</span>
+                  <p class="mt-5">Leave</p>
+
+                </div>
+              </div>
+
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold">Apply Date</span>
+                  <input formControlName="apply_date" type="text"
+                    class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-secondary custom-input"
+                    name="apply_date" readonly />
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex flex-row fv-row flex-wrap">
+              <div *ngIf="showDateOfJoining" class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold">Date Of
+                    Joining</span>
+                  <input formControlName="employee_date" type="text"
+                    class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-secondary custom-input"
+                    name="employee_date" readonly />
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold required">Leave Date(From)</span>
+                  <input formControlName="leave_datefrom" type="date"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                    [ngStyle]="{'border-color': leave_datefrom.invalid && leave_datefrom.touched ? 'red' : 'rgb(209, 209, 209)'}" name="leave_datefrom" />
+                    <div
+                    *ngIf="reactiveFormLeave.get('leave_datefrom')?.hasError('required') && reactiveFormLeave.get('leave_datefrom')?.touched || reactiveFormLeave.get('leave_datefrom')?.hasError('pattern')"
+                    class="text-red">From is required.</div>
+                  </div>
+              </div>
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold required">Leave Date(To)</span>
+                  <input formControlName="leave_dateto" type="date"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                    [ngStyle]="{'border-color': leave_dateto.invalid && leave_dateto.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                    name="leave_dateto" />
+                    <div
+                    *ngIf="reactiveFormLeave.get('leave_dateto')?.hasError('required') && reactiveFormLeave.get('leave_dateto')?.touched || reactiveFormLeave.get('leave_dateto')?.hasError('pattern')"
+                    class="text-red">To is required.</div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12 mt-6"><span class="font-bold">Days</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5">
+                  <input class="form-check-input" id="full" type="radio" value="F" [(ngModel)]="day_user"
+                    formControlName="days_name" name="fav_language" />
+                  <label for="full" class="ms-3"><b>Full</b></label>
+                  <input class="form-check-input ms-10" id="half" type="radio" value="H" [(ngModel)]="day_user"
+                    formControlName="days_name" name="fav_language" />
+                  <label for="half" class="ms-3"><b>Half</b></label>
+                </div>
+              </div>
+
+            </div>
+
+
+            <div class="d-flex flex-row fv-row flex-wrap">
+              <div *ngIf="day_user === 'H' " class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold">Leave Date</span>
+                  <input formControlName="leave_datehalf" type="date"
+                    class="form-control form-control-lg form-control-solid borderc-secondary mb-3 mb-lg-0 bg-white custom-input"
+                    name="leave_datehalf" />
+                </div>
+              </div>
+              <div *ngIf="day_user === 'H' " class="col-12 col-lg-3 col-md-3 col-sm-12 mt-6"><span><span
+                    class="font-bold">Session</span></span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5">
+                  <input class="form-check-input" id="fn" type="radio" value="FN" formControlName="session_leave" />
+                  <label for="fn" class="ms-3"><b>FN</b></label>
+                  <input class="form-check-input ms-10" id="an" type="radio" value="AN" formControlName="session_leave" />
+                  <label for="an" class="ms-3"><b>AN</b></label>
+                </div>
+              </div>
+
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold">Leave Days</span>
+                  <input formControlName="leave_days" type="text"
+                    class="form-control form-control-lg form-control-solid borderc-secondary mb-3 mb-lg-0 bg-secondary custom-input"
+                    name="leave_days" readonly />
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold required">Leave Type</span>
+                  <!-- <ng-select formControlName="leavetype_gid" [items]="leaveavailablelist" bindLabel="leavetype_name"
+                    bindValue="leavetype_gid" [(ngModel)]="leave_data"
+                    [ngStyle]="{'border-color': leave_type.invalid && leave_type.touched ? 'red' : 'rgb(209, 209, 209)'}" 
+                    placeholder="Select an Option">
+                  </ng-select> -->
+                  <ng-select formControlName="leavetype_gid"
+                  [class.is-invalid]="leave_type.invalid && (leave_type.dirty || leave_type.touched)"
+                  [ngClass]="{'invalid-border': leave_type.invalid && leave_type.touched}" [items]="leaveavailablelist" required
+                  class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" [(ngModel)]="leave_data"
+                  [ngStyle]="{'border-color': leave_type.invalid && leave_type.touched ? 'red' : 'rgb(209, 209, 209)'}" bindLabel="leavetype_name"
+                  bindValue="leavetype_gid" placeholder="Select an option"></ng-select>
+                  <div
+                  *ngIf="reactiveFormLeave.get('leavetype_gid')?.hasError('required') && reactiveFormLeave.get('leavetype_gid')?.touched || reactiveFormLeave.get('leavetype_gid')?.hasError('pattern')"
+                  class="text-red">Leave Type is required.</div>
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="d-flex flex-row fv-row flex-wrap">
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold required">Reason</span>
+                  <textarea formControlName="reason"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                    [ngStyle]="{'border-color': reason.invalid && reason.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                    placeholder="Enter Reason" name="reason">
+                        </textarea>
+                        <div
+                        *ngIf="reactiveFormLeave.get('reason')?.hasError('required') && reactiveFormLeave.get('reason')?.touched || reactiveFormLeave.get('reason')?.hasError('pattern')"
+                        class="text-red">Reason is required.</div>
+                </div>
+              </div>
+
+
+              <div class="table-responsive1 mt-9" style="margin-left:-5px;">
+                <div class="card card-body m-1 shadow-lg p-3 mb-5 bg-white rounded">
+                  <style>
+                    #leave_list {
+                      width: 100%; 
+                      margin: 0 auto; 
+                  } </style>
+                  <table id="leave_list" class="table table-striped table-row-bordered gy-5 gs-7">
+                    <thead>
+                      <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th>S.No</th>
+                        <th>Leave Type</th>
+                        <th>Available</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of leave_list; let i=index;" class="align-middle">
+                        <td>{{i+1}}</td>
+                        <td>{{data.leavetype_name}}</td>
+                        <td>{{data.availableleave_count}}</td>
+                        </tr>
+                        </tbody>
+                        </table>
+                        </div>
+                        </div>
+                      </div>
+
+            
+                               
+
+            <div class="text-center my-4 mt-10">
+              <button class="btn-success btn-sm text-white me-2" [disabled]="reactiveFormLeave.invalid" (click)="leavesubmit()">
+                <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+              </button>
+            </div>
+
+            <div class="table-responsive">
+              <div class="card card-body m-1 shadow-lg p-3 mb-5 bg-white rounded">
+                <table id="leavemanage_list" class="table table-striped table-row-bordered gy-5 gs-7">
+                  <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                      <th>S.No</th>
+                      <th>Applied Date</th>
+                      <th>Branch</th>
+                      <th>Department</th>
+                      <th>Designation</th>            
+                      <th>Employee Name</th>          
+                      <th>Leave Type</th>
+                      <th>From Date</th>
+                      <th>To Date</th>
+                      <th>No Of Days</th>            
+                      <th>Status</th>
+                      <th>Reason</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of leavemanage_list; let i=index;" class="align-middle">
+                      <td>{{i+1}}</td>
+                      <td>{{data.created_date}}</td>
+                      <td>{{data.branch_prefix}}</td>
+                      <td>{{data.department_name}}</td>
+                      <td class="narrow-column3">{{data.designation_name}}</td>
+                      <td class="narrow-column4">{{data.user_fullname}}</td>
+                      <td>{{data.leavetype_name}}</td>
+                      <td class="narrow-column2">{{data.leave_fromdate}}</td>
+                      <td class="narrow-column1">{{data.leave_todate}}</td>
+                      <td class="center-align">{{data.leave_noofdays}}</td>
+                      <td>{{data.leave_status}}</td>
+                      <td class="narrow-column">{{data.leave_reason}}</td>
+                      <td class="text-center text-nowrap">
+                        <button title="Delete" type="button" class="btn btn-icon btn-sm bg-danger me-2"
+                          data-bs-toggle="modal" data-bs-target="#myModaldelete"
+                          (click)="openModaldelete(data.leave_gid)">
+                          <span class="fa-solid fa-trash fs-6" style="color: #ffffff;"></span>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+
+      <!-- Permission -->
+      <div class="tab-pane fade ms-5" id="kt_tab_pane_2" role="tabpanel">
+        <form [formGroup]="reactiveFormpermission" #form="ngForm">
+          <div class="row" style="padding-right: 10px; padding-left: 10px;">
+            <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+              <h3 class="fw-bolder text-white"><i class="fa-solid fa-right-from-bracket fs-5 me-5"></i>Permission</h3>
+            </div>
+            <div class="d-flex flex-row fv-row flex-wrap">
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span
+                    class="font-bold required">Branch</span>
+                  <ng-select formControlName="branch_name"
+                  [class.is-invalid]="branch_name.invalid && (branch_name.dirty || branch_name.touched)"
+                  [ngClass]="{'invalid-border': branch_name.invalid && branch_name.touched}" [items]="branchlist" required
+                  class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" [(ngModel)]="branch_permission"
+                  [ngStyle]="{'border-color': branch_name.invalid && branch_name.touched ? 'red' : 'rgb(209, 209, 209)'}" bindLabel="branch_name"
+                  bindValue="branch_name" placeholder="Select an option"></ng-select>
+                  <div *ngIf="branch_name.invalid && (branch_name.dirty || branch_name.touched)">
+                      <div *ngIf="branch_name.errors?.['required']"><span class="text-red">Branch Name is required.</span>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span
+                    class="font-bold required">Employee</span>
+                  <ng-select formControlName="employeenamegid"
+                  [class.is-invalid]="employeenamegid.invalid && (employeenamegid.dirty || employeenamegid.touched)"
+                  [ngClass]="{'invalid-border': employeenamegid.invalid && employeenamegid.touched}" [items]="employeelist" required
+                  class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" [(ngModel)]="employee_user" (change)="datejoinFetch1($event)"
+                  [ngStyle]="{'border-color': employeenamegid.invalid && employeenamegid.touched ? 'red' : 'rgb(209, 209, 209)'}" bindLabel="employee_name"
+                  bindValue="employee_gid" placeholder="Select an option"></ng-select>
+                  <div *ngIf="employeenamegid.invalid && (employeenamegid.dirty || employeenamegid.touched)">
+                      <div *ngIf="employeenamegid.errors?.['required']"><span class="text-red">Employee is required.</span>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold">Type</span>
+                  <p class="mt-5">Permission</p>
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold">Apply Date</span>
+                  <input formControlName="permissionapply_date" type="text"
+                    class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-secondary custom-input"
+                    name="permissionapply_date" readonly />
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-row fv-row flex-wrap">
+              <div *ngIf="showDateOfJoining1" class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold">Date Of
+                    Joining</span>
+                  <input formControlName="employee_date" type="text"
+                    class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-secondary custom-input"
+                    name="employee_date" readonly />
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span
+                    class="font-bold required">Permission Date</span>
+                  <input formControlName="permission_date" type="date"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                    name="permission_date"
+                    [ngStyle]="{'border-color': permission_date.invalid && permission_date.touched ? 'red' : 'rgb(209, 209, 209)'}" />
+                  <div
+                    *ngIf="reactiveFormpermission.get('permission_date')?.hasError('required') && reactiveFormpermission.get('permission_date')?.touched || reactiveFormpermission.get('permission_date')?.hasError('pattern')"
+                    class="text-red">Permission Date is required.</div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span
+                    class="font-bold required">From</span>
+                  <input formControlName="from_hrs" type="time"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                    placeholder="Enter Time"
+                    [ngStyle]="{'border-color': from_hrs.invalid && from_hrs.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                    name="from_hrs" />
+                  <div
+                    *ngIf="reactiveFormpermission.get('from_hrs')?.hasError('required') && reactiveFormpermission.get('from_hrs')?.touched || reactiveFormpermission.get('from_hrs')?.hasError('pattern')"
+                    class="text-red">From is required.</div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold required">To</span>
+                  <input formControlName="to_hrs" type="time"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                    [ngStyle]="{'border-color': to_hrs.invalid && to_hrs.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                    placeholder="Enter Time" name="to_hrs" />
+                  <div
+                    *ngIf="reactiveFormpermission.get('to_hrs')?.hasError('required') && reactiveFormpermission.get('to_hrs')?.touched || reactiveFormpermission.get('to_hrs')?.hasError('pattern')"
+                    class="text-red">To is required.</div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-row fv-row flex-wrap">
+
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold">Total Duration</span>
+                  <input formControlName="total_duration" type="text"
+                    class="form-control form-control-lg form-control-solid borderc-secondary custom-input mb-3 mb-lg-0 bg-secondary custom-input"
+                    name="total_duration" readonly />
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span
+                    class="font-bold required">Reason</span>
+                  <textarea formControlName="reason_permission"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                    [ngStyle]="{'border-color': reason_permission.invalid && reason_permission.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                    placeholder="Enter Reason" name="reason_permission">
+                  </textarea>
+                  <div
+                    *ngIf="reactiveFormpermission.get('reason_permission')?.hasError('required') && reactiveFormpermission.get('reason_permission')?.touched || reactiveFormpermission.get('reason_permission')?.hasError('pattern')"
+                    class="text-red">Reason is required.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center my-4 mt-10">
+              <button class="btn-success btn-sm text-white me-2" (click)="permissionsubmit()"
+                [disabled]="reactiveFormpermission.invalid">
+                <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+              </button>
+            </div>
+
+            <div class="table-responsive">
+              <div class="card card-body m-1 shadow-lg p-3 mb-5 bg-white rounded">
+                <table id="permission_list" class="table table-striped table-row-bordered gy-5 gs-7">
+                  <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                      <th>S.No</th>
+                      <th>Applied Date</th>
+                      <th>Employee Name</th>
+                      <th>Branch</th>
+                      <th>Department</th>
+                      <th>Designation</th>
+                      <th>Permission Date</th>
+                      <th>From Hours</th>
+                      <th>To Hours</th>
+                      <th>Duration</th>
+                      <th>Status</th>
+                      <th>Reason</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of permission_list; let i=index;" class="align-middle">
+                      <td>{{i+1}}</td>
+                      <td>{{data.created_date}}</td>
+                      <td class="narrow-column5">{{data.employee_name}}</td>
+                      <td>{{data.branch_prefix}}</td>
+                      <td class="narrow-column7">{{data.department_name}}</td>
+                      <td class="narrow-column6">{{data.designation_name}}</td>
+                      <td>{{data.permission_date}}</td>
+                      <td>{{data.permission_fromhours}}</td>
+                      <td>{{data.permission_tohours}}</td>
+                      <td class="center-align">{{data.permission_totalhours}}</td>
+                      <td>{{data.permission_status}}</td>
+                      <td>{{data.permission_reason}}</td>
+                      <td class="text-center text-nowrap">
+                        <button title="Delete" type="button" class="btn btn-icon btn-sm bg-danger me-2"
+                          data-bs-toggle="modal" data-bs-target="#myModaldelete2"
+                          (click)="openModaldelete2(data.permission_gid)">
+                          <span class="fa-solid fa-trash fs-6" style="color: #ffffff;"></span>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- OnDuty -->
+      <div class="tab-pane fade ms-5" id="kt_tab_pane_3" role="tabpanel">
+        <form [formGroup]="reactiveFormonduty" #form="ngForm">
+          <div class="row" style="padding-right: 10px; padding-left: 10px;">
+            <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+              <h3 class="fw-bolder text-white"><i class="fa-solid fa-right-from-bracket fs-5 me-5"></i>OnDuty</h3>
+            </div>
+
+            <div class="d-flex flex-row fv-row flex-wrap">
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span
+                    class="font-bold required">Branch</span>
+                  <ng-select formControlName="branch"
+                  [class.is-invalid]="branch.invalid && (branch.dirty || branch.touched)"
+                  [ngClass]="{'invalid-border': branch.invalid && branch.touched}" [items]="branchlist" required
+                  class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" [(ngModel)]="branch_onduty"
+                  [ngStyle]="{'border-color': branch.invalid && branch.touched ? 'red' : 'rgb(209, 209, 209)'}" bindLabel="branch_name"
+                  bindValue="branch_gid" placeholder="Select an option"></ng-select>
+                    <div *ngIf="branch.invalid && (branch.dirty || branch.touched)">
+                      <div *ngIf="branch.errors?.['required']"><span class="text-red">Branch Name is required.</span>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span
+                    class="font-bold required">Employee</span>
+                  <ng-select formControlName="employeedetailgid"
+                  [class.is-invalid]="employeedetailgid.invalid && (employeedetailgid.dirty || employeedetailgid.touched)"
+                  [ngClass]="{'invalid-border': employeedetailgid.invalid && employeedetailgid.touched}" [items]="employeelist" required
+                  class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" [(ngModel)]="employee_member" (change)="datejoinFetch2($event)"
+                  [ngStyle]="{'border-color': employeedetailgid.invalid && employeedetailgid.touched ? 'red' : 'rgb(209, 209, 209)'}" bindLabel="employee_name"
+                  bindValue="employee_gid" placeholder="Select an option"></ng-select>
+                    <div *ngIf="employeedetailgid.invalid && (employeedetailgid.dirty || employeedetailgid.touched)">
+                      <div *ngIf="employeedetailgid.errors?.['required']"><span class="text-red">Employee is required.</span>
+                      </div>
+                    </div>
+
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold">Type</span>
+                  <p class="mt-5">OnDuty</p>
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold">Apply Date</span>
+                  <input formControlName="ondutyapply_date" type="text"
+                    class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-secondary custom-input"
+                    name="ondutyapply_date" readonly />
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-row fv-row flex-wrap">
+              <div *ngIf="showDateOfJoining2" class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold">Date Of
+                    Joining</span>
+                  <input formControlName="employee_date" type="text"
+                    class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-secondary custom-input"
+                    name="employee_date" readonly />
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold required">OnDuty
+                    Date</span>
+                  <input formControlName="onduty_date" type="date"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                    [ngStyle]="{'border-color': onduty_date.invalid && onduty_date.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                    placeholder="DD-MM-YYYY" name="onduty_date" />
+                  <div
+                    *ngIf="reactiveFormonduty.get('onduty_date')?.hasError('required') && reactiveFormonduty.get('onduty_date')?.touched || reactiveFormonduty.get('onduty_date')?.hasError('pattern')"
+                    class="text-red">OnDuty Date is required.</div>
+
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span
+                    class="font-bold required">From</span>
+                  <input formControlName="from_hrsod" type="time"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                    [ngStyle]="{'border-color': from_hrsod.invalid && from_hrsod.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                    placeholder="Enter Time" name="from_hrsod" />
+                  <div
+                    *ngIf="reactiveFormonduty.get('from_hrsod')?.hasError('required') && reactiveFormonduty.get('from_hrsod')?.touched || reactiveFormonduty.get('from_hrsod')?.hasError('pattern')"
+                    class="text-red">From is required.</div>
+
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold required">To</span>
+                  <input formControlName="to_hrsod" type="time"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                    [ngStyle]="{'border-color': to_hrsod.invalid && to_hrsod.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                    placeholder="Enter Time" name="to_hrsod" />
+                  <div
+                    *ngIf="reactiveFormonduty.get('to_hrsod')?.hasError('required') && reactiveFormonduty.get('to_hrsod')?.touched || reactiveFormonduty.get('to_hrsod')?.hasError('pattern')"
+                    class="text-red">To is required.</div>
+
+                </div>
+              </div>
+
+            </div>
+            <div class="d-flex flex-row fv-row flex-wrap">
+             <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold">Total Duration</span>
+                  <input formControlName="total_durationod" type="text"
+                    class="form-control form-control-lg form-control-solid borderc-secondary custom-input mb-3 mb-lg-0 bg-secondary custom-input"
+                    name="total_durationod" readonly />
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12 mt-6"><span class="font-bold">OnDuty Period</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5">
+                  <input class="form-check-input" id="full" type="radio" value="FULL" [(ngModel)]="onduty_user"
+                    formControlName="onduty_period" />
+                  <label for="full" class="ms-3"><b>Full</b></label>
+                  <input class="form-check-input ms-10" id="half" type="radio" value="HALF" [(ngModel)]="onduty_user"
+                    formControlName="onduty_period" />
+                  <label for="half" class="ms-3"><b>Half</b></label>
+                </div>
+              </div>
+
+              <div *ngIf="onduty_user === 'HALF' " class="col-12 col-lg-3 col-md-3 col-sm-12 mt-6"><span><span
+                class="font-bold">Session</span></span>
+
+            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5">
+              <input class="form-check-input" id="fn" type="radio" value="FN" formControlName="session"/>
+              <label for="fn" class="ms-3"><b>FN</b></label>
+              <input class="form-check-input ms-10" id="an" type="radio" value="AN" formControlName="session"/>
+              <label for="an" class="ms-3"><b>AN</b></label>
+             </div>
+             </div>
+
+              <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5"><span
+                    class="font-bold required">Reason</span>
+                  <textarea formControlName="reason_onduty"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                    [ngStyle]="{'border-color': reason_onduty.invalid && reason_onduty.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                    placeholder="Enter Reason" name="reason_onduty"></textarea>
+                  <div
+                    *ngIf="reactiveFormonduty.get('reason_onduty')?.hasError('required') && reactiveFormonduty.get('reason_onduty')?.touched || reactiveFormonduty.get('reason_onduty')?.hasError('pattern')"
+                    class="text-red">Reason is required.</div>
+                </div>
+              </div>
+            </div>
+
+              <div class="text-center my-4 mt-10">
+              <button class="btn-success btn-sm text-white me-2" (click)="OnDutySubmit()"
+                [disabled]="reactiveFormonduty.invalid">
+                <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+              </button>
+            </div>
+
+            <div class="table-responsive">
+              <div class="card card-body m-1 shadow-lg p-3 mb-5 bg-white rounded">
+                <table id="onduty_list" class="table table-striped table-row-bordered gy-5 gs-7">
+                  <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                      <th>S.No</th>
+                      <th>Applied Date</th>
+                      <th>Employee Name</th>
+                      <th>Branch</th>
+                      <th>Department</th>
+                      <th>Designation</th>
+                      <th>Onduty Date</th>
+                      <th>From Hours</th>
+                      <th>To Hours</th>
+                      <th>Duration</th>
+                      <th>Status</th>
+                      <th>Reason</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of onduty_list; let i=index;" class="align-middle">
+                      <td>{{i+1}}</td>
+                      <td>{{data.created_date}}</td>
+                      <td class="narrow-column8">{{data.user_firstname}}</td>
+                      <td>{{data.branch_prefix}}</td>
+                      <td>{{data.department_name}}</td>
+                      <td class="narrow-column9">{{data.designation_name}}</td>
+                      <td>{{data.ondutytracker_date}}</td>
+                      <td>{{data.onduty_fromtime}}</td>
+                      <td class="narrow-column10">{{data.onduty_totime}}</td>
+                      <td>{{data.onduty_duration}}</td>
+                      <td>{{data.ondutytracker_status}}</td>
+                      <td>{{data.onduty_reason}}</td>
+                      <td class="text-center text-nowrap">
+                        <button title="Delete" type="button" class="btn btn-icon btn-sm bg-danger me-2"
+                          data-bs-toggle="modal" data-bs-target="#myModaldelete3"
+                          (click)="openModaldelete3(data.ondutytracker_gid)">
+                          <span class="fa-solid fa-trash fs-6" style="color: #ffffff;"></span>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div id="myModaldelete" class="modal fade">
+        <div class="modal-dialog modal-confirm del_modal-dialog">
+          <div class="modal-content del_modal-content">
+            <div class="text-center my-4">
+              <h4 class="w-100  fw-bolder fs-1 mt-5">Are you sure ?</h4>
+              <p class="fw-bold fs-5 mt-4">Do You Want To Delete The Record ?</p>
+              <div class="text-center my-4">
+
+                <div class="modal-footer justify-content-center">
+                  <button type="button" class="btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn-danger" data-bs-dismiss="modal" (click)="ondelete()">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="myModaldelete2" class="modal fade">
+        <div class="modal-dialog modal-confirm del_modal-dialog">
+          <div class="modal-content del_modal-content">
+            <div class="text-center my-4">
+              <h4 class="w-100  fw-bolder fs-1 mt-5">Are you sure ?</h4>
+              <p class="fw-bold fs-5 mt-4">Do You Want To Delete The Record ?</p>
+              <div class="text-center my-4">
+
+                <div class="modal-footer justify-content-center">
+                  <button type="button" class="btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn-danger" data-bs-dismiss="modal" (click)="ondelete2()">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="myModaldelete3" class="modal fade">
+        <div class="modal-dialog modal-confirm del_modal-dialog">
+          <div class="modal-content del_modal-content">
+            <div class="text-center my-4">
+              <h4 class="w-100  fw-bolder fs-1 mt-5">Are you sure ?</h4>
+              <p class="fw-bold fs-5 mt-4">Do You Want To Delete The Record ?</p>
+              <div class="text-center my-4">
+
+                <div class="modal-footer justify-content-center">
+                  <button type="button" class="btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn-danger" data-bs-dismiss="modal" (click)="ondelete3()">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>

@@ -1,0 +1,136 @@
+<div class="card">
+    <div class="m-5 me-1 d-flex flex-wrap mb-0 mt-0 ">
+        <div class="col-12 col-lg-12 row">
+            <div class="col-12 col-lg-6 pe-0" >
+                <div class="card-header "
+                    style="background: rgb(42, 54, 56);background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px;">
+                    <b>Renewal Overall Status</b>
+                </div>
+                <div class="me-2">
+                    <div class="card-body align-items-center position-relative ">
+                      <ng-container *ngIf="!paymentchartflag">
+                        <div class="d-flex flex-wrap ">
+                          <div id="chart">
+                            <apx-chart [series]="paymentchart.series" [chart]="paymentchart.chart"
+                              [labels]="paymentchart.labels" [colors]="paymentchart.colors"></apx-chart>
+                          </div>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="paymentchartflag">
+                        <div class="d-flex justify-content-center">
+                          <span>
+                            <img src=".\assets\media\images\No_data_found.png" class="h-78px w-300px">
+                          </span>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+            </div> 
+
+
+            <div class="col-12 col-lg-6 pe-0  table-responsive">
+                <div class="card-header "
+                    style="background: rgb(42, 54, 56);background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px;">
+                    <b>Renewal For Last 6 Months Status</b>
+                </div>
+                <ng-container *ngIf="!monthlyflag">
+                    <div #chartRef class="d-flex flex-column mixed-widget-2-chart card-rounded-bottom">
+                      <apx-chart [series]="chartOptions2.series" [chart]="chartOptions2.chart" [xaxis]="chartOptions2.xaxis"
+                        [dataLabels]="chartOptions2.dataLabels" [colors]="chartOptions2.colors" [title]="chartOptions2.title">
+                      </apx-chart>
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="monthlyflag">
+                    <div class="d-flex justify-content-center">
+                      <span>
+                        <img src=".\assets\media\images\No_data_found.png" class="h-400px w-600px">
+                      </span>
+                    </div>
+                  </ng-container>
+            </div>
+        </div>
+    </div>
+    
+     
+    <div class="col-12 card  bg-white rounded ">
+        <div class="card-header justify-content-center ms-3 me-3" Style="background: rgb(81,183,204);
+        background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);">
+          <h3 class="card-title fs-4 fw-bolder text-black"><i class="fa-regular fa-file"
+              style="font-size: 18px;  margin-right: 5px;"></i>Renewal Summary</h3>
+        </div>
+        <div class="table-responsive mb-10 mt-3 border">
+          <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="GetRenewalDetailSummary" class="table table-striped table-row-bordered gy-5 gs-7">
+              <thead>
+                <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle border border-secondary">
+                  <th style="width: 2%;"></th>
+                  <th>Year</th>
+                  <th>Month</th>
+                  <th class="text-center">Renewal Count</th>
+                 
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let data of GetRenewalForLastSixMonths_List; let i = index;" style="white-space: nowrap;">
+                  <tr class=" align-middle border border-secondary">
+                    <td style="width: 2%;">
+                      <a (click)="onRowClick(i); ondetail(data.months, data.year)" data-bs-toggle="collapse" href="#collapse{{i}}" role="button" [attr.aria-expanded]="expandedRowIndex === i" [attr.aria-controls]="'collapse' + i">
+                        <i class="fa-solid fa-plus fw-bold text-blue fs-3" *ngIf="!data.isExpand"></i>
+                        <i class="fa-solid fa-minus fw-bold text-blue fs-3" *ngIf="data.isExpand"></i>
+                      </a>
+                    </td>
+                    <td>{{data.year}}</td>
+                    <td>{{data.months}}</td>
+                    <td class="text-center">{{data.renewalcount}}</td>
+                   
+                  </tr>
+                  <tr *ngIf="expandedRowIndex === i">
+                    <td colspan="5">
+                      <div class="collapse show " [attr.id]="'collapse' + i">
+                        <div class="card bg-white rounded" style="max-height: 500px; overflow: auto; scrollbar-color: lightblue #ffffff;">
+                          <div class="table-responsive">
+                            <table id="Reportpayment_list" class="table table-striped table-row-bordered gy-5 gs-7">
+                              <thead>
+                                <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue border border-secondary">
+                                  <th>S.No</th>
+                                  <!-- <th class="text-start">Branch Name</th> -->
+                                  <th class="text-start">Date</th>
+                                  <th class="text-start">Renewal Ref.No</th>
+                                  <th class="text-start">Customer</th>
+                                  <th class="text-start">Contact</th>
+                                
+                                  <th class="text-start">Renewal Status</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let detail of GetRenewalDetailSummarylist; let j = index;" class="border border-secondary">
+                                  <td>{{j + 1}}</td>
+                                  <!-- <td class="text-start">{{detail.branch_name}}</td> -->
+                                  <td class="text-start text-nowrap">{{detail.renewal_date}}</td>
+                                  <td class="text-start">{{detail.renewal_gid}}</td>
+                                  <td class="text-start">{{detail.customer_name}}</td>
+                                  <td class="text-start">{{detail.contact_details}}</td>
+                                 
+                                  <td class="text-start text-nowrap">{{detail.renewal_status}}</td>
+                                </tr>
+                              </tbody>
+                              <tfoot> <tr class="border border-secondary"></tr></tfoot>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+              <tfoot> <tr class="border border-secondary"></tr></tfoot>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    
+    
+</div>
+
+

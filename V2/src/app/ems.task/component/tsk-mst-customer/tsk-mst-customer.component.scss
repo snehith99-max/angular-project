@@ -1,0 +1,28 @@
+.bg-darkblue {
+  background-color: #046eab !important;
+}
+
+.bg-darkblue:hover {
+  background-color: #03588a !important;
+}
+.selected-row {
+  background-color: #e7f4ff; /* You can change this color as needed */
+}
+.bg-tableheaderblue{
+background-color: #cad8e7 !important;
+
+}
+.selectable-name {
+cursor: pointer;
+}
+.selectable-name:hover{
+background-color: #e7f4ff;
+
+}
+.view_count {
+
+  padding: 3px 6px;
+  color: #ffffff;
+  background-color: #50cd89;
+  border-radius: 5px;
+}

@@ -1,0 +1,147 @@
+<div class="card shadow-sm ">
+  <div class="card-header justify-content-center  text-black " style="background: rgb(81,183,204);
+        background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);">
+    <h2 class="card-title fs-3 text-black p-2"><b>Portal Management Dashboard</b></h2>
+  </div>
+  <div class="row m-3">
+    <div class="col-lg-3 col-md-3 col-sm-3">
+      <div class="cardHead radius-10 border-start border-0 border-3 border-skyblue">
+        <div class="card-body12">
+          <div class="d-flex align-items-center">
+            <div>
+              <h5 class="mb-0 text-secondary">Total Servers</h5>
+              <div class="d-flex">
+                <h4 class="badge-blue  badge-outline-blue fs-4 mt-2">{{count_server}}            
+                </h4>
+              </div>
+            </div>
+            <div class="widgets-icons-2 rounded-circle bg-gradient-skyblue text-white ms-auto"><i class="fa-solid fa-users"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3">
+      <div class="cardHead radius-10 border-start border-0 border-3 border-darkblue">
+        <div class="card-body12">
+          <div class="d-flex align-items-center">
+            <div>
+              <h5 class="mb-0 text-secondary">Total Databases</h5>
+              <div class="d-flex">
+                <h4 class="badge-blue  badge-outline-blue fs-4 mt-2">{{total_count}}</h4>
+              </div>
+            </div>
+            <div class="widgets-icons-2 rounded-circle bg-gradient-darkblue text-white ms-auto"><i
+                class="fa-solid fa-users"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3">
+      <div class="cardHead radius-10 border-start border-0 border-3 border-violet">
+        <div class="card-body12">
+          <div class="d-flex align-items-center">
+            <div>
+              <h5 class="mb-0 text-secondary"> {{mtd_month | uppercase }}/Server</h5>
+              <div class="d-flex">
+                <h4 class="badge-violet  badge-outline-violet fs-4 mt-2"></h4>
+              </div>
+            </div>
+            <div class="widgets-icons-2 rounded-circle bg-gradient-violet text-white ms-auto"><i class="fa-solid fa-calendar-days"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3">
+      <div class="cardHead radius-10 border-start border-0 border-3 border-brown">
+        <div class="card-body12">
+          <div class="d-flex align-items-center">
+            <div>
+              <h5 class="mb-0 text-secondary"> {{mtd_month | uppercase }}/Database</h5>
+              <div class="d-flex">
+                <h4 class="badge-maroon badge-outline-maroon fs-4 mt-2"></h4>
+              </div>
+            </div>
+            <div class="widgets-icons-2 rounded-circle bg-gradient-brown text-white ms-auto"><i class="fa-solid fa-calendar-days"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="m-5 me-1 d-flex flex-wrap mb-0 mt-0 ">
+      <div class="col-12 col-lg-12 row">
+        <div class="col-12 col-lg-6 pe-0">
+          <div class="m-3 me-0 card border  p-3 rounded" style="height:470px;border: 2px solid rgb(255, 254, 254);">
+            <div class="me-0">
+              <div class="card-header justify-content-center"
+                style="background: rgb(81,183,204);
+              background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;">
+                <b style="padding-top: 12px;">Overall Performance</b>
+              </div>
+            </div>
+            <div>
+              <ng-container *ngIf="flag">
+                <div #chartRef class="d-flex flex-column mixed-widget-2-chart card-rounded-bottom">
+                  <apx-chart [series]="portalchart.series" [chart]="portalchart.chart" [xaxis]="portalchart.xaxis"
+                  [yaxis]="portalchart.yaxis" [dataLabels]="portalchart.dataLabels" [stroke]="portalchart.stroke"
+                  [legend]="portalchart.legend" [fill]="portalchart.fill" [states]="portalchart.states"
+                  [tooltip]="portalchart.tooltip" [colors]="portalchart.colors" [markers]="portalchart.markers"
+                  [plotOptions]="portalchart.plotOptions">
+                </apx-chart>
+                </div>
+              </ng-container>
+              <ng-container  *ngIf="!flag">
+                <div class="d-flex justify-content-center">
+                  <span>
+                    <img src=".\assets\media\images\No_data_found.png" class="h-78px w-300px">
+                  </span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6 pe-0">
+          <div class="m-3 me-0 card border p-3 rounded" style="height:470px;border: 2px solid rgb(255, 254, 254);">
+            <div class="card-header justify-content-center"
+              style="background: rgb(81,183,204);
+      background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;">
+              <b style="padding-top: 12px;">Monthwise Databases</b>
+            </div>
+            <div>
+              <ng-container *ngIf="flag1">
+                <div #chartRef class="d-flex flex-column mixed-widget-2-chart card-rounded-bottom">
+                  <apx-chart [series]="monthwisedatabase.series" [chart]="monthwisedatabase.chart"
+                  [xaxis]="monthwisedatabase.xaxis" [yaxis]="monthwisedatabase.yaxis"
+                  [dataLabels]="monthwisedatabase.dataLabels" [stroke]="monthwisedatabase.stroke"
+                  [legend]="monthwisedatabase.legend" [fill]="monthwisedatabase.fill"
+                  [states]="monthwisedatabase.states" [tooltip]="monthwisedatabase.tooltip"
+                  [colors]="monthwisedatabase.colors" [markers]="monthwisedatabase.markers"
+                  [plotOptions]="monthwisedatabase.plotOptions">
+                </apx-chart>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="!flag1">
+                <div class="d-flex justify-content-center">
+                  <span>
+                    <img src=".\assets\media\images\No_data_found.png" class="h-78px w-300px">
+                  </span>
+                </div>
+              </ng-container>
+            </div>
+          </div>          
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-row m-3" style="background-color: white;">
+      <div class=" col-12 mb-7 border p-3 rounded">
+        <div class="card-header justify-content-center"
+          style="background: rgb(81,183,204);
+        background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;">
+          <b style="padding-top: 12px;">User Access</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

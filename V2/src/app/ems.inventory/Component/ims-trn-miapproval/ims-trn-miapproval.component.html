@@ -1,0 +1,94 @@
+<div class="card shadow-sm mt-4">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title fw-bold">Indent Approval Summary</h3>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <input type="hidden" formControlName="materialrequisition_gid">
+            <table id="materialindentlist" class="table table-striped table-row-bordered gy-5 gs-7">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th style="width:2%">S.No</th>
+                        <th style="width: 7%;">Branch</th>
+                        <th style="width: 7%;">Date</th>
+                        <th style="width: 15%;">Ref.No</th>
+                        <th style="width: 15%;">Department</th>
+                        <th style="width: 5%;">Details</th> 
+                        <th style="width: 10%;">Requested By</th>
+                        <th style="width: 10%;">Requested Date</th>
+                        <th style="width: 10%;">Expected Date</th> 
+                        <!-- <th style="width: 15%;">Remarks</th>  -->
+                        <th style="width: 15%;">Status</th>
+                        
+                        <th class="text-center bg-lightblue " style="width: 20%;">Action</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of materialindent_list;let i = index;">
+                        <td>{{i+1}}</td>
+                        <td>{{ data.branch_prefix }}</td>
+                        <td style="width: 7%;">{{ data.materialrequisition_date }}</td>
+                        <td>{{ data.material }}</td>
+                        <td>{{ data.department_name }}</td>
+                        <td class="text-center">   <label title="Product Details" data-bs-toggle="modal" data-bs-target="#myModalcustomerdetail"
+                          (click)="Getproduct(data.materialrequisition_gid)">
+                          <i class="fas fa-question-circle fa-5x text-primary fs-2" style="cursor: pointer;"></i>
+                        </label></td>
+                        <td >{{ data.user_firstname }}</td>
+                        <td >{{ data.created_date }}</td>
+                        <td>{{ data.expected_date }}</td>
+                        <!-- <td class="ellipsis">{{ data.materialrequisition_remarks }}</td>  -->
+                        <td>{{ data.materialrequisition_status }}</td>
+                         <td class="text-center">
+                            <button title="View" type="button" class="btn btn-icon btn-sm bg-primary me-2"
+                            (click)="onview(data.materialrequisition_gid)" data-bs-toggle="modal"><span
+                              class="fa-solid fa-eye text-white fs-6"></span></button>
+                          </td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 
+
+<div class="modal" id="myModalcustomerdetail" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content d-flex justify-content-center">
+        <div class="card-header p-1 pb-1 pt-1 rounded-top bg-primary"
+           style="display: flex; align-items: center; height: 40px;">
+           <h3 style="margin-top: 10px; color: white; font-weight: bold" class="mt-8">
+            &nbsp;&nbsp;Product Details
+          </h3>
+       </div>
+       <div class="modal-body">
+        <table id="materialindentlist" class="table table-striped table-bordered text-blue border-bottom gs-7 align-middle ">
+          <thead>
+              <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                  <th  class="text-blue text-center" style="width:2%">S.No</th>
+                  <th  class="text-blue text-center" style="width: 20%;">Product</th>
+                  <th  class="text-blue text-center" style="width: 5%;">Requested Qty</th> 
+                  <th  class="text-blue text-center" style="width: 5%;">Available Qty </th> 
+              </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of productsummary_list;let i = index;">
+            <td>{{i+1}}</td>
+            <!-- <td>{{data.product_code}}</td> -->
+            <td>{{data.product_code}}/{{data.product_name}}</td>
+            <!-- <td>{{data.productuom_name}}</td> -->
+            <td>{{data.qty_requested}} {{data.productuom_name}}</td>
+            <td>{{data.available_quantity}} {{data.productuom_name}}</td>
+          </tr>
+        </tbody>
+          </table>
+        <div class="text-center my-4">
+          <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white"></i> &nbsp;Close
+          </button>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>

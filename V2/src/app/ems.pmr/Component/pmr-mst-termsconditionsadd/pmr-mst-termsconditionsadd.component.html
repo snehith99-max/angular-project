@@ -1,0 +1,80 @@
+<div class="card shadow-sm">
+    <div class="card m-5">
+        <div class="card-title p-5 pb-3 pt-3 rounded-top bg-primary d-flex justify-content-between align-items-center">
+        <h3 class="fw-bolder text-white"><i class="fas fa-plus fw-bolder fs-3"></i> &nbsp;&nbsp;&nbsp;Add Template</h3>
+        <div class="card-title p-2 rounded-top bg-primary d-flex justify-content-end align-items-end">
+        <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer " title="Back"
+        routerLink="/pmr/PmrMstTermsconditionssummary"><i class="fa-solid fa-arrow-left-long fs-1 fw-bold"></i></button>
+        </div>
+    </div>
+</div>
+    <br>
+
+    <form  [formGroup]="reactiveForm" #form="ngForm">
+            
+                
+                  <div class="d-flex flex-row flex-wrap mt-6 ms-3">
+         
+                    <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required" [ngClass]="{'error_input_field': template_name.invalid && template_name.touched}">Template Name</span>
+                        <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                             <input formControlName="template_name" pattern="^(?!\s*$).+" type="text" class="form-control form-control-lg  custom-input mb-3 mb-lg-0 bg-white custom-input"  placeholder="Template Name"   name="template_name" style="width:340px; height: 40px;" 
+                           [ngClass]="{'invalid-border': template_name.invalid && template_name.touched}"  required  />
+                        </div>
+                        <!-- <div *ngIf="template_name.invalid && (template_name.dirty || template_name.touched)">
+                          <div *ngIf="template_name.errors?.['required']">
+                                      <span style="color:red;">Template Name Required </span>
+                          </div>
+                        </div>  -->
+                    </div>
+                  
+                    <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required"[ngClass]="{'error_input_field': payment_terms.invalid && payment_terms.touched}" >Template Type</span>
+                  <div class="col-12 col-lg-4 col-md-3 col-sm-12">
+                    <ng-select formControlName="payment_terms"
+                         [(ngModel)]="mdlBranchName" 
+                            bindLabel="payment_terms" pattern="^(?!\s*$).+" placeholder="Select an option" style="width: 340px;" 
+                            [ngClass]="{'invalid-border': payment_terms.invalid && payment_terms.touched}">
+                            <ng-option value="General">General</ng-option>
+                            <ng-option value="Payment Terms">Payment Terms</ng-option>
+                            <ng-option value="Delivery Details">Delivery Details</ng-option>
+                            </ng-select>       
+                </div>
+                <!-- <div *ngIf="payment_terms.invalid && (payment_terms.dirty || payment_terms.touched)">
+                  <div *ngIf="payment_terms.errors?.['required']">
+                              <span style="color:red;">Template Type Required </span>
+                  </div>
+                  </div> -->
+                </div>  
+                </div>
+                <br>
+                <div >
+                  <div class="card-header bg-lightblue card-height35 table-responsive">
+                    <div class="card-title m-0">
+                      <h5 class="fw-bolder text-blue"><span class="font-bold required" >Template</span></h5>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row flex-wrap mt-6 ms-3 table-responsive">
+                    <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                      <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                      <angular-editor [config]="config" pattern="^(?!\s*$).+" formControlName="template_content">
+                      </angular-editor>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <!-- Modal footer -->
+                <div class="text-center my-3">
+                    <button class="btn-success btn-sm text-white me-2" (click)="onsubmit()" [disabled]="reactiveForm.invalid" 
+                    [ngClass]="{
+                        'primary-button': !reactiveForm.invalid,
+                        'secondary-button': reactiveForm.invalid
+                      }" data-bs-dismiss="modal">          
+                        <i class="fas fa-check text-white fs-5" ></i> &nbsp;Submit
+                    </button> &nbsp;&nbsp;
+                    <button class="btn-primary btn-sm text-white me-4" routerLink="/pmr/PmrMstTermsconditionssummary">
+                        <i class="fas fa-arrow-left"></i> &nbsp; Back
+                      </button>
+                </div>
+        
+          
+        </form></div>
+

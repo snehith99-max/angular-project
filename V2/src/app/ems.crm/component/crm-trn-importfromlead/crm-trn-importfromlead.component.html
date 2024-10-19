@@ -1,0 +1,149 @@
+
+<div class="card">
+    <div class="card-header bg-whatsapp" style="color: white;">
+        <h3 class="card-title"> <i class="bi bi-file-earmark-arrow-down fs-1"></i> &nbsp;&nbsp;
+            Import From Lead </h3>
+        <div style="margin: 13px">
+            <div class="col me-5">
+                <button type="button" title="Import" class="btn-secondary btn-sm text-black me-2"
+                style="width: 95px;text-align: center;margin:auto" (click)="OnSubmit()">
+                 <i class="fa-solid fa-file-import fs-3"></i> &nbsp;&nbsp;Import
+                 </button>&nbsp;&nbsp;
+              
+                <button title="Back" routerLink="/crm/CrmSmmWhatsappcampaign"
+                    class="btn-secondary btn-sm text-black me-4 "><i class="ki-duotone ki-entrance-right fs-5">
+                        <i class="path1"></i>
+                        <i class="path2"></i>
+                    </i>&nbsp;Back</button>
+            </div>
+        </div>
+    </div>
+    <form [formGroup]="bulkMessageForm" novalidate="novalidate">
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                <span class="font-bold ">Source</span>
+                    <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <ng-select formControlName="source_name" [items]="source_list"
+                          class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="source_name"
+                          bindValue="source_gid" placeholder="--Select Source--"></ng-select>
+                    </div>
+            </div>
+            <div class="col-12 col-lg-3 col-md-6 col-sm-12"><span class="font-bold">Region</span>
+                <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <ng-select formControlName="region_name" [items]="regionnamelist"
+                  class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="region_name"
+                  bindValue="region_gid" placeholder="--Select Region--"></ng-select>
+                </div>
+            </div>
+            <!-- <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                <span class="font-bold">Customer Type</span>
+                <ng-select formControlName="customer_type" [items]="customertype_list"
+                  class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="customer_type1"
+                  bindValue="customertype_gid1" placeholder="--Select Customer Type--"></ng-select>
+            </div> -->
+            <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                <button title="Retrive" type="button" class="btn btn-icon btn-sm ms-10"
+                data-bs-toggle="modal" data-bs-target="#myModaladd"
+                style="width: 100px;text-align: center;height: 33px;background-color:#1e8ea1;margin-top: 20px;"
+                (click)="GetPaymentSummary()">
+                Retrive
+            </button>
+
+            </div>
+        </div>
+        </form>
+        <div class="table-responsive">
+            <div class="card card-body m-3 shadow-xl p-3 mb-5 bg-white rounded">
+                <p-table #dt [value]="Contactlist" [(selection)]="selectedCustomer" dataKey="leadbank_gid"
+                    [selectionMode]="" [rowHover]="true" [rows]="200" [showCurrentPageReport]="true"
+                    [rowsPerPageOptions]="[200, 500,1000, 1500]" [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+                    paginatorDropdownAppendTo="body" compareSelectionBy="equals" [resizableColumns]="true"
+                    [globalFilterFields]="['leadbank_name', 'mobile', 'customer_type', 'source_name','region_name']"
+                    class="table table-striped table-row-bordered border-bottom gs-7">
+                    <ng-template pTemplate="caption">
+                        <div class="row">
+                            <div class="col-6 table-header">
+                                <h3>Lead Summary</h3>
+                            </div>
+                            <div class="col-6">
+                                <span class="p-input-icon-left float-end">
+                                    <i class="pi pi-search"></i>
+                                    <input pInputText class="form-control" type="text"
+                                        (input)="onGlobalFilterChange($event,dt)" placeholder="Search..." />
+                                </span>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-rowIndex="rowIndex">
+                        <tr class="fs-5">
+                            <th style="width: 2px">
+                                <div class="field-checkbox">
+                                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                </div>
+                            </th>
+                            <th pSortableColumn="leadbank_name">
+                                <div class="flex justify-content-between align-items-center text-white">
+                                    Company
+                                    <p-sortIcon field="leadbank_name"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="mobile">
+                                <div class="flex justify-content-between align-items-center text-white">Contact
+                                    <p-sortIcon field="mobile"></p-sortIcon></div>
+                            </th>
+                            <!-- <th pSortableColumn="customer_type">
+                                <div class="flex justify-content-between align-items-center text-white">Customer Type
+                                    <p-sortIcon field="customer_type"></p-sortIcon></div>
+                            </th> -->
+                            <th pSortableColumn="source_name">
+                                <div class="flex justify-content-between align-items-center text-white">Source
+                                    <p-sortIcon field="source_name"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="region_name">
+                                <div class="flex justify-content-between align-items-center text-white">Region
+                                    <p-sortIcon field="region_name"></p-sortIcon>
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-customer>
+                        <tr>
+                            <ng-container>
+                                <td>
+                                    <p-tableCheckbox [value]="customer" [disabled]="customer.value === ''"
+                                        [ngClass]="{'highlight-checkbox': customer.value === ''}"></p-tableCheckbox>
+                                </td>
+                                <td>
+                                    <span class="p-column-title">Company</span>
+                                    {{ customer.leadbank_name || '-' }}
+                                </td>
+                                <td>
+                                    <span class="p-column-title">Contact</span>{{customer.mobile || '-'}}
+                                </td>
+                                <!-- <td>
+                                    <span class="p-column-title">Customer Type</span>
+                                    {{customer.customer_type|| '-'}}
+                                </td> -->
+                                <td>
+                                    <span class="p-column-title">Source </span>
+                                    {{customer.source_name|| '-'}}
+                                </td>
+                                <td>
+                                    <span class="p-column-title">Region</span>
+                                    {{customer.region_name|| '-'}}
+                                </td>
+                            </ng-container>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="8">No customers found.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+   
+</div>

@@ -1,0 +1,1370 @@
+<div class="card">
+    <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+        <h3 class="fw-bolder text-white">Tax Filing
+        </h3>
+    </div>
+    <form [formGroup]="reactiveform">
+        <div class="m-0 me-1 d-flex flex-wrap mb-0 mt-0 ">
+            <div class="col-12 col-lg-12 row ">
+                <div class="col-12 col-lg-12 pe-0">
+                    <div class="m-3 me-0 card shadow-lg p-3 rounded">
+                        <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-20x mb-3 fs-6 border-bottom">
+                            <li class="nav-item" style="font-size: 12px;">
+                                <a class="nav-link active  btn btn-flex btn-active-light-primary" data-bs-toggle="tab"
+                                    href="#kt_tab_pane_11">
+                                    <span class="fa fa-user me-3"></span>Input Tax
+                                </a>
+                            </li>
+                            <li class="nav-item" style="font-size: 12px;">
+                                <a class="nav-link  btn btn-flex btn-active-light-primary" data-bs-toggle="tab"
+                                    href="#kt_tab_pane_12">
+                                    <span class="fa fa-user me-3"></span>Output Tax</a>
+                            </li>
+                            <li class="nav-item" style="font-size: 12px;">
+                                <a class="nav-link  btn btn-flex btn-active-light-primary" data-bs-toggle="tab"
+                                    href="#kt_tab_pane_13">
+                                    <i class="fa fa-user me-3"></i>Credit Note
+                                </a>
+                            </li>
+                            <li class="nav-item" style="font-size: 12px;">
+                                <a class="nav-link  btn btn-flex btn-active-light-primary" data-bs-toggle="tab"
+                                    href="#kt_tab_pane_14">
+                                    <i class="fa fa-user me-3"></i>Debit Note
+                                </a>
+                            </li>
+                            <li class="nav-item" style="font-size: 12px;">
+                                <a class="nav-link  btn btn-flex btn-active-light-primary" data-bs-toggle="tab"
+                                    href="#kt_tab_pane_15" (click)="compile()">
+                                    <i class="fa fa-user me-3"></i>Compile
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show  active" id="kt_tab_pane_11" role="tabpanel">
+                                <div class="d-flex flex-row flex-wrap">
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <label class="font-bold required mt-3 ms-6">Invoice From Date</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <input type="date" placeholder="DD-MM-YYYY" formControlName="from_date"
+                                                class="form-control date-picker custom-input mb-3 bg-white custom-input mt-2"
+                                                pattern="^(?!\s*$).+" style="margin-left: -30px;" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <label class="font-bold required mt-3 ms-6">Invoice To Date</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <input type="date" placeholder="DD-MM-YYYY" formControlName="to_date"
+                                                class="form-control  date-picker custom-input mb-3  bg-white custom-input mt-2"
+                                                pattern="^(?!\s*$).+" style="margin-left: -30px;" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <button class="btn-primary btn-sm text-black" (click)="onSearchClick(1)"
+                                                style="height:33px; margin-left: -30px;">
+                                                Search
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <button class="btn-primary btn-sm text-black" (click)="onrefreshclick()"
+                                                style="height:33px; margin-left: -130px;">
+                                                Refresh
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>                               
+
+                                <div class="d-flex flex-row m-6 mt-4 flex-wrap">
+                                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                                        <div class="table-responsive">
+                                            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                                <table id="InputTaxSummary_List"
+                                                    class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                                    <thead>
+                                                        <tr
+                                                            class="fw-bold bg-lightblue text-blue align-middle text-nowrap">
+                                                            <th>
+                                                                <input type="checkbox" id="checkAll"
+                                                                    (change)="$event ? masterToggle() : null"
+                                                                    [checked]="selection.hasValue() && isAllSelected()"
+                                                                    [indeterminate]="selection.hasValue() && !isAllSelected()" />
+                                                            </th>
+                                                            <th style="width: 30px;">Invoice</th>
+                                                            <th>Vendor </th>
+                                                            <th style="text-align: right;">SGST 0%</th>
+                                                            <th style="text-align: right;">SGST 2.5%</th>
+                                                            <th style="text-align: right;">SGST 6%</th>
+                                                            <th style="text-align: right;">SGST 9%</th>
+                                                            <th style="text-align: right;">SGST 14%</th>
+                                                            <th style="text-align: right;">CGST 0%</th>
+                                                            <th style="text-align: right;">CGST 2.5%</th>
+                                                            <th style="text-align: right;">CGST 6% </th>
+                                                            <th style="text-align: right;">CGST 9%</th>
+                                                            <th style="text-align: right;">CGST 14%</th>
+                                                            <th style="text-align: right;">IGST 0%</th>
+                                                            <th style="text-align: right;">IGST 5%</th>
+                                                            <th style="text-align: right;">IGST 12%</th>
+                                                            <th style="text-align: right;">IGST 18%</th>
+                                                            <th style="text-align: right;">IGST 28%</th>
+                                                            <th style="text-align: right;">Taxable Amount</th>
+                                                            <th style="text-align: right;">Tax Total</th>
+                                                            <th style="text-align: right;">Total</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr class="text-nowrap"
+                                                            *ngFor="let data of InputTaxSummary_List; let i=index;">
+                                                            <td>
+                                                                <input type="checkbox"
+                                                                    (click)="$event.stopPropagation()"
+                                                                    (change)="$event ? selection.toggle(data) : null"
+                                                                    [checked]="selection.isSelected(data)" />
+                                                            </td>
+                                                            <td>{{data.invoice_date}} ||
+                                                                {{data.invoice_refno}}</td>
+                                                            <td>{{data.vendor_name}} || {{data.gst_number}}</td>                                                            
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.SGST_0 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.SGST_0}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.SGST_2point5 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.SGST_2point5}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.SGST_6 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.SGST_6}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.SGST_9 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.SGST_9}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.SGST_14 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.SGST_14}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.CGST_0 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.CGST_0}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.CGST_2point5 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.CGST_2point5}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.CGST_6 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.CGST_6}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.CGST_9 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.CGST_9}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.CGST_14 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.CGST_14}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.IGST_0 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.IGST_0}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.IGST_5 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.IGST_5}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.IGST_12 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.IGST_12}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.IGST_18 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.IGST_18}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.IGST_28 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.IGST_28}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.Non_Taxable_Amount === '0.00' ? 'red' : 'black' }">
+                                                                {{data.Non_Taxable_Amount}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.Taxable_Amount === '0.00' ? 'red' : 'black' }">
+                                                                {{data.Taxable_Amount}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.invoice_amount === '0.00' ? 'red' : 'black' }">
+                                                                {{data.invoice_amount}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-8 col-md-8 col-sm-8">
+
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-2">
+
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-2">
+                                                <p style="font-size: 12px;">
+                                                    <b>Total Tax Amount : </b>
+                                                    <span
+                                                        [ngStyle]="{ color: calculateSelectedTaxAmount() === '0.00' ? 'red' : 'black' }">
+                                                        {{ calculateSelectedTaxAmount() }}
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="text-center mt-4">
+                                    <button type="submit" class="btn-success text-white" (click)="inputtax_submit()">
+                                        <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                                        Submit
+                                    </button> &nbsp;
+                                    <button class="btn-primary btn-sm text-white me-4" (click)="back()">
+                                        <i class="fas fa-arrow-left text-white"></i> &nbsp; Back
+                                    </button>
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show" id="kt_tab_pane_12" role="tabpanel">
+                                <div class="d-flex flex-row flex-wrap">
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <label class="font-bold required mt-3 ms-6">Invoice From Date</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <!-- <input type="date" placeholder="DD-MM-YYYY" formControlName="from_date" class="form-control date-picker custom-input mb-3 bg-white custom-input mt-2" pattern="^(?!\s*$).+" style="margin-left: -30px;"/> -->
+                                            <input type="date" placeholder="DD-MM-YYYY" formControlName="from_date"
+                                                class="form-control  date-picker custom-input mb-3  bg-white custom-input mt-2"
+                                                pattern="^(?!\s*$).+" style="margin-left: -30px;" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <label class="font-bold required mt-3 ms-6">Invoice To Date</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <!-- <input type="date" placeholder="DD-MM-YYYY" formControlName="to_date" class="form-control  date-picker custom-input mb-3  bg-white custom-input mt-2" pattern="^(?!\s*$).+" style="margin-left: -30px;"/> -->
+
+                                            <input type="date" placeholder="" placeholder="DD-MM-YYYY"
+                                                formControlName="to_date"
+                                                class="form-control  date-picker custom-input mb-3  bg-white custom-input mt-2"
+                                                pattern="^(?!\s*$).+" style="margin-left: -30px;" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <button class="btn-primary btn-sm text-black" (click)="onSearchClick(2)"
+                                                style="height:33px; margin-left: -30px;">
+                                                Search
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <button class="btn-primary btn-sm text-black" (click)="onrefreshclick()"
+                                                style="height:33px; margin-left: -130px;">
+                                                Refresh
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row m-6 mt-4 flex-wrap">
+                                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                                        <div class="table-responsive">
+                                            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                                <table id="OutputTaxSummary_List"
+                                                    class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                                    <thead>
+                                                        <tr
+                                                            class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                                                            <th>
+                                                                <input type="checkbox" id="checkAll"
+                                                                    (change)="$event ? masterToggle1() : null"
+                                                                    [checked]="selection1.hasValue() && isAllSelected1()"
+                                                                    [indeterminate]="selection1.hasValue() && !isAllSelected1()" />
+                                                                <!-- <span style="font-size: 11px;">All</span> -->
+                                                            </th>
+                                                            <th style="width: 20%;">Invoice</th>
+                                                            <!-- <th style="font-size: 11px;">Invoice Ref No </th>
+                                                            <th style="font-size: 11px;">Invoice Date</th> -->
+                                                            <th style="width: 40%;">Customer</th>
+                                                            <!-- <th style="width: 10%;">GST No</th> -->
+                                                            <!-- <th style="text-align: right;">CGST</th>
+                                                            <th style="text-align: right;">SGST</th>
+                                                            <th style="text-align: right;">IGST</th>
+                                                            <th style="text-align: right;">Tax Total</th>
+                                                            <th style="text-align: right;">Total</th> -->
+                                                            <th style="text-align: right;">SGST 0%</th>
+                                                            <th style="text-align: right;">SGST 2.5%</th>
+                                                            <th style="text-align: right;">SGST 6%</th>
+                                                            <th style="text-align: right;">SGST 9%</th>
+                                                            <th style="text-align: right;">SGST 14%</th>
+                                                            <th style="text-align: right;">CGST 0%</th>
+                                                            <th style="text-align: right;">CGST 2.5%</th>
+                                                            <th style="text-align: right;">CGST 6% </th>
+                                                            <th style="text-align: right;">CGST 9%</th>
+                                                            <th style="text-align: right;">CGST 14%</th>
+                                                            <th style="text-align: right;">IGST 0%</th>
+                                                            <th style="text-align: right;">IGST 5%</th>
+                                                            <th style="text-align: right;">IGST 12%</th>
+                                                            <th style="text-align: right;">IGST 18%</th>
+                                                            <th style="text-align: right;">IGST 28%</th>
+                                                            <th style="text-align: right;">Taxable Amount</th>
+                                                            <th style="text-align: right;">Tax Total</th>
+                                                            <th style="text-align: right;">Total</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr class="text-nowrap"
+                                                            *ngFor="let data of OutputTaxSummary_List; let i=index;">
+                                                            <td><input type="checkbox"
+                                                                    (click)="$event.stopPropagation()"
+                                                                    (change)="$event ? selection1.toggle(data) : null"
+                                                                    [checked]="selection1.isSelected(data)" /></td>
+                                                            <td style="width: 20%;">{{data.invoice_date}} ||
+                                                                {{data.invoice_refno}}</td>
+                                                            <!-- <td>{{data.invoice_refno}}</td>
+                                                            <td>{{data.invoice_date}}</td> -->
+                                                            <td style="width: 40%;">{{data.customer_name}} ||
+                                                                {{data.gst_number}}</td>
+                                                            <!-- <td style="width: 10%;" [ngStyle]="{ color: data.gst_number ===' ' ? 'red' : 'black'}">{{data.gst_number}}</td> -->
+                                                            <!-- <td style="text-align: right;" [ngStyle]="{ color: data.cgst ==='0.00' ? 'red' : 'black'}">{{data.cgst}}</td>
+                                                            <td style="text-align: right;" [ngStyle]="{ color: data.sgst ==='0.00' ? 'red' : 'black'}">{{data.sgst}}</td>
+                                                            <td style="text-align: right;" [ngStyle]="{ color: data.igst ==='0.00' ? 'red' : 'black'}">{{data.igst}}</td>
+                                                            <td style="text-align: right;" [ngStyle]="{ color: data.total_tax ==='0.00' ? 'red' : 'black'}">{{data.total_tax}}</td>
+                                                            <td style="text-align: right;" [ngStyle]="{ color: data.invoice_amount ==='0.00' ? 'red' : 'black'}">{{data.invoice_amount}}</td> -->
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.SGST_0 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.SGST_0}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.SGST_2point5 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.SGST_2point5}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.SGST_6 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.SGST_6}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.SGST_9 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.SGST_9}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.SGST_14 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.SGST_14}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.CGST_0 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.CGST_0}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.CGST_2point5 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.CGST_2point5}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.CGST_6 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.CGST_6}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.CGST_9 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.CGST_9}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.CGST_14 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.CGST_14}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.IGST_0 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.IGST_0}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.IGST_5 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.IGST_5}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.IGST_12 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.IGST_12}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.IGST_18 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.IGST_18}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.IGST_28 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.IGST_28}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.Non_Taxable_Amount === '0.00' ? 'red' : 'black' }">
+                                                                {{data.Non_Taxable_Amount}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.Taxable_Amount === '0.00' ? 'red' : 'black' }">
+                                                                {{data.Taxable_Amount}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.invoice_amount === '0.00' ? 'red' : 'black' }">
+                                                                {{data.invoice_amount}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-8 col-md-8 col-sm-8">
+
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-2">
+
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-2">
+                                                <p style="font-size: 12px;"><b>Total Tax Amount : </b>
+                                                    <span
+                                                        [ngStyle]="{color: calculateSelectedTaxAmount1()=== '0.00' ? 'red' : 'black'}">
+                                                        {{ calculateSelectedTaxAmount1() }}</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="text-center mt-4">
+                                    <button type="submit" class="btn-success text-white" (click)="outputtax_submit()">
+                                        <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                                        Submit
+                                    </button> &nbsp;
+                                    <button class="btn-primary btn-sm text-white me-4" (click)="back()">
+                                        <i class="fas fa-arrow-left text-white"></i> &nbsp; Back
+                                    </button>
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show" id="kt_tab_pane_13" role="tabpanel">
+                                <div class="d-flex flex-row flex-wrap">
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <label class="font-bold required mt-3 ms-6">Invoice From Date</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <!-- <input type="date" placeholder="DD-MM-YYYY" formControlName="from_date" class="form-control date-picker custom-input mb-3 bg-white custom-input mt-2" pattern="^(?!\s*$).+" style="margin-left: -30px;"/> -->
+                                            <input type="date" placeholder="DD-MM-YYYY" formControlName="from_date"
+                                                class="form-control  date-picker custom-input mb-3  bg-white custom-input mt-2"
+                                                pattern="^(?!\s*$).+" style="margin-left: -30px;" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <label class="font-bold required mt-3 ms-6">Invoice To Date</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <!-- <input type="date" placeholder="DD-MM-YYYY" formControlName="to_date" class="form-control  date-picker custom-input mb-3  bg-white custom-input mt-2" pattern="^(?!\s*$).+" style="margin-left: -30px;"/> -->
+
+                                            <input type="date" placeholder="" placeholder="DD-MM-YYYY"
+                                                formControlName="to_date"
+                                                class="form-control  date-picker custom-input mb-3  bg-white custom-input mt-2"
+                                                pattern="^(?!\s*$).+" style="margin-left: -30px;" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <button class="btn-primary btn-sm text-black" (click)="onSearchClick(3)"
+                                                style="height:33px; margin-left: -30px;">
+                                                Search
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <button class="btn-primary btn-sm text-black" (click)="onrefreshclick()"
+                                                style="height:33px; margin-left: -130px;">
+                                                Refresh
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                
+                                <div class="d-flex flex-row m-6 mt-4 flex-wrap">
+                                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                                        <div class="table-responsive">
+                                            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                                <table id="CreditNoteTaxSummary_List"
+                                                    class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                                    <thead>
+                                                        <tr
+                                                            class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                                                            <th>
+                                                                <input type="checkbox" id="checkAll"
+                                                                    (change)="$event ? masterToggle2() : null"
+                                                                    [checked]="selection2.hasValue() && isAllSelected2()"
+                                                                    [indeterminate]="selection2.hasValue() && !isAllSelected2()" />
+                                                                <!-- <span style="font-size: 11px;">All</span> -->
+                                                            </th>
+                                                            <th style="width: 25%;">Invoice</th>
+                                                            <!-- <th style="font-size: 11px;">Reference Number</th>
+                                                            <th style="font-size: 11px;">Credit Date</th> -->
+                                                            <th style="width: 40%;">Customer</th>
+                                                            <!-- <th style="width: 10%;">GST No</th> -->
+                                                            <!-- <th style="text-align: right;">CGST</th>
+                                                            <th style="text-align: right;">SGST</th>
+                                                            <th style="text-align: right;">IGST</th> -->
+                                                            <th style="text-align: right;">SGST 0%</th>
+                                                            <th style="text-align: right;">SGST 2.5%</th>
+                                                            <th style="text-align: right;">SGST 6%</th>
+                                                            <th style="text-align: right;">SGST 9%</th>
+                                                            <th style="text-align: right;">SGST 14%</th>
+                                                            <th style="text-align: right;">CGST 0%</th>
+                                                            <th style="text-align: right;">CGST 2.5%</th>
+                                                            <th style="text-align: right;">CGST 6% </th>
+                                                            <th style="text-align: right;">CGST 9%</th>
+                                                            <th style="text-align: right;">CGST 14%</th>
+                                                            <th style="text-align: right;">IGST 0%</th>
+                                                            <th style="text-align: right;">IGST 5%</th>
+                                                            <th style="text-align: right;">IGST 12%</th>
+                                                            <th style="text-align: right;">IGST 18%</th>
+                                                            <th style="text-align: right;">IGST 28%</th>
+                                                            <th style="text-align: right;">Tax Total</th>
+                                                            <th style="text-align: right;">Total</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr class="text-nowrap"
+                                                            *ngFor="let data of CreditNoteTaxSummary_List; let i=index;">
+                                                            <td><input type="checkbox"
+                                                                    (click)="$event.stopPropagation()"
+                                                                    (change)="$event ? selection2.toggle(data) : null"
+                                                                    [checked]="selection2.isSelected(data)" /></td>
+                                                            <td style="width: 25%;">{{data.credit_date}} ||
+                                                                {{data.invoice_refno}}</td>
+                                                            <!-- <td>{{data.invoice_refno}}</td>
+                                                            <td>{{data.credit_date}}</td> -->
+                                                            <td style="width: 40%;">{{data.customer_name}} ||
+                                                                {{data.gst_number}}</td>
+                                                            <!-- <td style="width: 10%;" [ngStyle]="{color: data.gst_number === '0.00' ? 'red' : 'black'}">{{data.gst_number}}</td>
+                                                            <td style="text-align: right;" [ngStyle]="{color: data.cgst === '0.00' ? 'red' : 'black'}">{{data.cgst}}</td>
+                                                            <td style="text-align: right;" [ngStyle]="{color: data.sgst === '0.00' ? 'red' : 'black'}">{{data.sgst}}</td>
+                                                            <td style="text-align: right;" [ngStyle]="{color: data.igst === '0.00' ? 'red' : 'black'}">{{data.igst}}</td> -->
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.SGST_0 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.SGST_0}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.SGST_2point5 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.SGST_2point5}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.SGST_6 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.SGST_6}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.SGST_9 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.SGST_9}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.SGST_14 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.SGST_14}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.CGST_0 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.CGST_0}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.CGST_2point5 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.CGST_2point5}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.CGST_6 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.CGST_6}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.CGST_9 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.CGST_9}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.CGST_14 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.CGST_14}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.IGST_0 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.IGST_0}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.IGST_5 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.IGST_5}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.IGST_12 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.IGST_12}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.IGST_18 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.IGST_18}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.IGST_28 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.IGST_28}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{color: data.Taxable_Amount === '0.00' ? 'red' : 'black'}">
+                                                                {{data.Taxable_Amount}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{color: data.invoice_amount === '0.00' ? 'red' : 'black'}">
+                                                                {{data.invoice_amount}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-8 col-md-8 col-sm-8">
+
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-2">
+
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-2">
+                                                <p style="font-size: 12px;"><b>Total Tax Amount : </b>
+                                                    <span
+                                                        [ngStyle]="{color: calculateSelectedTaxAmount2() === '0.00' ? 'red' : 'black'}">{{
+                                                        calculateSelectedTaxAmount2() }}</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="text-center mt-4">
+                                    <button type="submit" class="btn-success text-white"
+                                        (click)="creditnotetax_submit()">
+                                        <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                                        Submit
+                                    </button> &nbsp;
+                                    <button class="btn-primary btn-sm text-white me-4" (click)="back()">
+                                        <i class="fas fa-arrow-left text-white"></i> &nbsp; Back
+                                    </button>
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show" id="kt_tab_pane_14" role="tabpanel">
+                                <div class="d-flex flex-row flex-wrap">
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <label class="font-bold required mt-3 ms-6">Invoice From Date</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <!-- <input type="date" placeholder="DD-MM-YYYY" formControlName="from_date" class="form-control date-picker custom-input mb-3 bg-white custom-input mt-2" pattern="^(?!\s*$).+" style="margin-left: -30px;"/> -->
+                                            <input type="date" placeholder="DD-MM-YYYY" formControlName="from_date"
+                                                class="form-control  date-picker custom-input mb-3  bg-white custom-input mt-2"
+                                                pattern="^(?!\s*$).+" style="margin-left: -30px;" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <label class="font-bold required mt-3 ms-6">Invoice To Date</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <!-- <input type="date" placeholder="DD-MM-YYYY" formControlName="to_date" class="form-control  date-picker custom-input mb-3  bg-white custom-input mt-2" pattern="^(?!\s*$).+" style="margin-left: -30px;"/> -->
+
+                                            <input type="date" placeholder="" placeholder="DD-MM-YYYY"
+                                                formControlName="to_date"
+                                                class="form-control  date-picker custom-input mb-3  bg-white custom-input mt-2"
+                                                pattern="^(?!\s*$).+" style="margin-left: -30px;" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <button class="btn-primary btn-sm text-black" (click)="onSearchClick(4)"
+                                                style="height:33px; margin-left: -30px;">
+                                                Search
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                            <button class="btn-primary btn-sm text-black" (click)="onrefreshclick()"
+                                                style="height:33px; margin-left: -130px;">
+                                                Refresh
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row m-6 mt-4 flex-wrap">
+                                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                                        <div class="table-responsive">
+                                            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                                <table id="DebitNoteTaxSummary_List"
+                                                    class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                                    <thead>
+                                                        <tr
+                                                            class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                                                            <th>
+                                                                <input type="checkbox" id="checkAll"
+                                                                    (change)="$event ? masterToggle3() : null"
+                                                                    [checked]="selection3.hasValue() && isAllSelected3()"
+                                                                    [indeterminate]="selection3.hasValue() && !isAllSelected3()" />
+                                                                <!-- <span style="font-size: 11px;">All</span> -->
+                                                            </th>
+                                                            <th style="width: 15%;">Invoice</th>
+                                                            <!-- <th style="font-size: 11px;">Reference Number </th>
+                                                            <th style="font-size: 11px;">Debit Date</th> -->
+                                                            <th style="width: 40%;">Vendor</th>
+                                                            <!-- <th style="width: 10%;">GST No</th>
+                                                            <th style="text-align: right;">CGST</th>
+                                                            <th style="text-align: right;">SGST</th>
+                                                            <th style="text-align: right;">IGST</th> -->
+                                                            <th style="text-align: right;">SGST 0%</th>
+                                                            <th style="text-align: right;">SGST 2.5%</th>
+                                                            <th style="text-align: right;">SGST 6%</th>
+                                                            <th style="text-align: right;">SGST 9%</th>
+                                                            <th style="text-align: right;">SGST 14%</th>
+                                                            <th style="text-align: right;">CGST 0%</th>
+                                                            <th style="text-align: right;">CGST 2.5%</th>
+                                                            <th style="text-align: right;">CGST 6% </th>
+                                                            <th style="text-align: right;">CGST 9%</th>
+                                                            <th style="text-align: right;">CGST 14%</th>
+                                                            <th style="text-align: right;">IGST 0%</th>
+                                                            <th style="text-align: right;">IGST 5%</th>
+                                                            <th style="text-align: right;">IGST 12%</th>
+                                                            <th style="text-align: right;">IGST 18%</th>
+                                                            <th style="text-align: right;">IGST 28%</th>
+                                                            <th style="text-align: right;">Tax Total</th>
+                                                            <th style="text-align: right;">Total</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr class="text-nowrap"
+                                                            *ngFor="let data of DebitNoteTaxSummary_List; let i=index;">
+                                                            <td><input type="checkbox"
+                                                                    (click)="$event.stopPropagation()"
+                                                                    (change)="$event ? selection3.toggle(data) : null"
+                                                                    [checked]="selection3.isSelected(data)" /></td>
+                                                            <td style="width: 15%;">{{data.debit_date}} ||
+                                                                {{data.invoice_refno}}</td>
+                                                            <!-- <td>{{data.invoice_refno}}</td>
+                                                            <td>{{data.debit_date}}</td> -->
+                                                            <td style="width: 40%;">{{data.vendor_name}} ||
+                                                                {{data.gst_number}}</td>
+                                                            <!-- <td style="width: 10%;" [ngStyle]="{color: data.gst_number === '0.00' ? 'red' : 'black'}">{{data.gst_number}}</td>
+                                                            <td style="text-align: right;" [ngStyle]="{color: data.cgst === '0.00' ? 'red' : 'black'}">{{data.cgst}}</td>
+                                                            <td style="text-align: right;" [ngStyle]="{color: data.sgst === '0.00' ? 'red' : 'black'}">{{data.sgst}}</td>
+                                                            <td style="text-align: right;" [ngStyle]="{color: data.igst === '0.00' ? 'red' : 'black'}">{{data.igst}}</td> -->
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.SGST_0 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.SGST_0}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.SGST_2point5 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.SGST_2point5}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.SGST_6 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.SGST_6}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.SGST_9 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.SGST_9}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.SGST_14 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.SGST_14}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.CGST_0 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.CGST_0}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.CGST_2point5 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.CGST_2point5}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.CGST_6 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.CGST_6}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.CGST_9 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.CGST_9}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.CGST_14 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.CGST_14}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.IGST_0 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.IGST_0}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.IGST_5 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.IGST_5}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.IGST_12 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.IGST_12}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.IGST_18 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.IGST_18}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{ color: data.IGST_28 === '0.00' ? 'red' : 'black' }">
+                                                                {{data.IGST_28}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{color: data.Taxable_Amount === '0.00' ? 'red' : 'black'}">
+                                                                {{data.Taxable_Amount}}</td>
+                                                            <td style="text-align: right;"
+                                                                [ngStyle]="{color: data.invoice_amount === '0.00' ? 'red' : 'black'}">
+                                                                {{data.invoice_amount}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-8 col-md-8 col-sm-8">
+
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-2">
+
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-2">
+                                                <p style="font-size: 12px;"><b>Total Tax Amount : </b>
+                                                    <span
+                                                        [ngStyle]="{color: calculateSelectedTaxAmount3() === '0.00' ? 'red' : 'black'}">{{
+                                                        calculateSelectedTaxAmount3() }}</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="text-center mt-4">
+                                    <button type="submit" class="btn-success text-white"
+                                        (click)="debitnotetax_submit()">
+                                        <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                                        Submit
+                                    </button> &nbsp;
+                                    <button class="btn-primary btn-sm text-white me-4" (click)="back()">
+                                        <i class="fas fa-arrow-left text-white"></i> &nbsp; Back
+                                    </button>
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show" id="kt_tab_pane_15" role="tabpanel">
+                                <div class="m-0 me-1 d-flex flex-wrap mb-0 mt-0 ">
+                                    <div class="col-12 col-lg-12 row ">
+                                        <div class="col-12 col-lg-12 pe-0">
+                                            <div class="m-3 me-0 card shadow-lg p-3 rounded"
+                                                style="border-top:2px solid rgb(8, 8, 146);">
+                                                <h4 style="color:rgb(8, 8, 146);"><u>Input Tax</u></h4>
+                                                <div class="d-flex flex-row m-6 mt-4 flex-wrap">
+                                                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="table-responsive">
+                                                            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                                                <table id="CompileInputTax_List"
+                                                                    class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                                                    <thead>
+                                                                        <tr
+                                                                            class="fw-bold fs-7 bg-lightblue text-blue align-middle">
+                                                                            <th style="font-size: 11px;width:4%">S.No
+                                                                            </th>
+                                                                            <th style="font-size: 11px; width: 10%;">
+                                                                                Invoice Date</th>
+                                                                            <th style="width:50%">Vendor</th>
+                                                                            <th style="font-size: 11px;">GST No</th>
+                                                                            <th
+                                                                                style="font-size: 11px; width:12%; text-align: right;">
+                                                                                Invoice Amount</th>
+                                                                            <th
+                                                                                style="font-size: 11px; width:12%; text-align: right;">
+                                                                                Taxable Amount</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr
+                                                                            *ngFor="let data of CompileInputTax_List; let i=index;">
+                                                                            <td style="width:4%">{{i+1}}</td>
+                                                                            <td style="width:10%">{{data.invoice_date}}
+                                                                            </td>
+                                                                            <td style="width:50%">{{data.vendor_name}}
+                                                                            </td>
+                                                                            <td>{{data.gst_no}}</td>
+                                                                            <td style="text-align: right;width:12%"
+                                                                                [ngStyle]="{color: data.invoice_amount === '0.00' ? 'red' : 'black'}">
+                                                                                {{data.invoice_amount}}</td>
+                                                                            <td style="text-align: right;width:12%"
+                                                                                [ngStyle]="{color: data.taxable_amount === '0.00' ? 'red' : 'black'}">
+                                                                                {{data.taxable_amount}}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="m-0 me-1 d-flex flex-wrap mb-0 mt-0 ">
+                                    <div class="col-12 col-lg-12 row ">
+                                        <div class="col-12 col-lg-12 pe-0">
+                                            <div class="m-3 me-0 card shadow-lg p-3 rounded"
+                                                style="border-top:2px solid rgb(8, 8, 146);">
+                                                <h4 style="color:rgb(8, 8, 146);"><u>Output Tax</u></h4>
+                                                <div class="d-flex flex-row m-6 mt-4 flex-wrap">
+                                                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="table-responsive">
+                                                            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                                                <table id="CompileOutputTax_List"
+                                                                    class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                                                    <thead>
+                                                                        <tr
+                                                                            class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                                                                            <th style="font-size: 11px; width:4%">S.No
+                                                                            </th>
+                                                                            <th style="font-size: 11px; width:10%">
+                                                                                Invoice Date</th>
+                                                                            <th style="font-size: 11px; width:50%">
+                                                                                Customer</th>
+                                                                            <th style="font-size: 11px;">GST No</th>
+                                                                            <th
+                                                                                style="font-size: 11px;width:12%; text-align: right;">
+                                                                                Invoice Amount</th>
+                                                                            <th
+                                                                                style="font-size: 11px;width:12%; text-align: right;">
+                                                                                Taxable Amount</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr
+                                                                            *ngFor="let data of CompileOutputTax_List; let i=index;">
+                                                                            <td style="width:4%">{{i+1}}</td>
+                                                                            <td style="width:10%">{{data.invoice_date}}
+                                                                            </td>
+                                                                            <td style="width:50%">{{data.customer_name}}
+                                                                            </td>
+                                                                            <td>{{data.gst_no}}</td>
+                                                                            <td style="text-align: right;width:12%"
+                                                                                [ngStyle]="{color: data.invoice_amount === '0.00' ? 'red' : 'black'}">
+                                                                                {{data.invoice_amount}}</td>
+                                                                            <td style="text-align: right;width:12%"
+                                                                                [ngStyle]="{color: data.taxable_amount === '0.00' ? 'red' : 'black'}">
+                                                                                {{data.taxable_amount}}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="m-0 me-1 d-flex flex-wrap mb-0 mt-0 ">
+                                    <div class="col-12 col-lg-12 row ">
+                                        <div class="col-12 col-lg-12 pe-0">
+                                            <div class="m-3 me-0 card shadow-lg p-3 rounded"
+                                                style="border-top:2px solid rgb(8, 8, 146);">
+                                                <h4 style="color:rgb(8, 8, 146);"><u>Credit Note</u></h4>
+                                                <div class="d-flex flex-row m-6 mt-4 flex-wrap">
+                                                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="table-responsive">
+                                                            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                                                <table id="CompileCreditTax_List"
+                                                                    class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                                                    <thead>
+                                                                        <tr
+                                                                            class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                                                                            <th style="font-size: 11px; width:4%">S.No
+                                                                            </th>
+                                                                            <th style="font-size: 11px; width:10%">
+                                                                                Invoice Date</th>
+                                                                            <th style="font-size: 11px; width:50%">
+                                                                                Customer</th>
+                                                                            <th style="font-size: 11px;">GST No</th>
+                                                                            <th
+                                                                                style="font-size: 11px;width:12%; text-align: right;">
+                                                                                Invoice Amount</th>
+                                                                            <th
+                                                                                style="font-size: 11px;width:12%; text-align: right;">
+                                                                                Taxable Amount</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr
+                                                                            *ngFor="let data of CompileCreditTax_List; let i=index;">
+                                                                            <td style="width:4%">{{i+1}}</td>
+                                                                            <td style="width:10%">{{data.invoice_date}}
+                                                                            </td>
+                                                                            <td style="width:50%">{{data.customer_name}}
+                                                                            </td>
+                                                                            <td>{{data.gst_no}}</td>
+                                                                            <td style="text-align: right;width:12%"
+                                                                                [ngStyle]="{color: data.invoice_amount === '0.00' ? 'red' : 'black'}">
+                                                                                {{data.invoice_amount}}</td>
+                                                                            <td style="text-align: right;width:12%"
+                                                                                [ngStyle]="{color: data.taxable_amount === '0.00' ? 'red' : 'black'}">
+                                                                                {{data.taxable_amount}}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="m-0 me-1 d-flex flex-wrap mb-0 mt-0 ">
+                                    <div class="col-12 col-lg-12 row ">
+                                        <div class="col-12 col-lg-12 pe-0">
+                                            <div class="m-3 me-0 card shadow-lg p-3 rounded"
+                                                style="border-top:2px solid rgb(8, 8, 146);">
+                                                <h4 style="color:rgb(8, 8, 146);"><u>Debit Note</u></h4>
+                                                <div class="d-flex flex-row m-6 mt-4 flex-wrap">
+                                                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="table-responsive">
+                                                            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                                                <table id="CompileDebitTax_List"
+                                                                    class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                                                    <thead>
+                                                                        <tr
+                                                                            class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                                                                            <th style="font-size: 11px; width:4%">S.No
+                                                                            </th>
+                                                                            <th style="font-size: 11px; width:10%">
+                                                                                Invoice Date</th>
+                                                                            <th style="font-size: 11px; width:50%">
+                                                                                Vendor</th>
+                                                                            <th
+                                                                                style="font-size: 11px; text-align: right;">
+                                                                                GST No</th>
+                                                                            <th
+                                                                                style="font-size: 11px;width:12%; text-align: right;">
+                                                                                Invoice Amount </th>
+                                                                            <th
+                                                                                style="font-size: 11px;width:12%; text-align: right;">
+                                                                                Taxable Amount</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr
+                                                                            *ngFor="let data of CompileDebitTax_List; let i=index;">
+                                                                            <td style="width:4%">{{i+1}}</td>
+                                                                            <td style="width:10%">{{data.debit_date}}
+                                                                            </td>
+                                                                            <td style="width:50%">{{data.vendor_name}}
+                                                                            </td>
+                                                                            <td>{{data.gst_no}}</td>
+                                                                            <td style="text-align: right;width:12%"
+                                                                                [ngStyle]="{color: data.invoice_amount === '0.00' ? 'red' : 'black'}">
+                                                                                {{data.invoice_amount}}</td>
+                                                                            <td style="text-align: right;width:12%"
+                                                                                [ngStyle]="{color: data.taxable_amount === '0.00' ? 'red' : 'black'}">
+                                                                                {{data.taxable_amount}}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <form [formGroup]="reactiveform1">
+                                    <div class="d-flex flex-row flex-wrap">
+                                        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                                            <div class="d-flex flex-row flex-wrap">
+                                                <div class="col-12 col-lg-6 col-md-6 col-sm-12"
+                                                    style="text-align: right;">
+                                                    <label style="font-size: 12px;"><b>Total Output Tax:</b></label>
+                                                </div>
+                                                <div class="col-12 col-lg-6 col-md-6 col-sm-12"
+                                                    *ngFor="let data of TaxCalculation_List">
+                                                    <p class="ms-5"
+                                                        [ngStyle]="{color: data.output_tax === '0.00' ? 'red' : 'black'}">
+                                                        {{data.output_tax}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row flex-wrap mt-3">
+                                                <div class="col-12 col-lg-6 col-md-6 col-sm-12"
+                                                    style="text-align: right;">
+                                                    <label style="font-size: 12px;"><b>Total Credit Tax:</b></label>
+                                                </div>
+                                                <div class="col-12 col-lg-6 col-md-6 col-sm-12"
+                                                    *ngFor="let data of TaxCalculation_List">
+                                                    <p class="ms-5"
+                                                        [ngStyle]="{color: data.credit_tax === '0.00' ? 'red' : 'black'}">
+                                                        {{data.credit_tax}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row flex-wrap mt-3">
+                                                <div class="col-12 col-lg-6 col-md-6 col-sm-12"
+                                                    style="text-align: right;">
+                                                    <label style="font-size: 12px;"><b>Total Output With Credit
+                                                            Tax:</b></label>
+                                                </div>
+                                                <div class="col-12 col-lg-6 col-md-6 col-sm-12"
+                                                    *ngFor="let data of TaxCalculation_List">
+                                                    <p class="ms-5"
+                                                        [ngStyle]="{color: data.totaloutputcredit_tax === '0.00' ? 'red' : 'black'}">
+                                                        {{data.totaloutputcredit_tax}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                                            <div class="d-flex flex-row flex-wrap">
+                                                <div class="col-12 col-lg-6 col-md-6 col-sm-12"
+                                                    style="text-align: right;">
+                                                    <label style="font-size: 12px;"><b>Total Debit Tax:</b></label>
+                                                </div>
+                                                <div class="col-12 col-lg-6 col-md-6 col-sm-12"
+                                                    *ngFor="let data of TaxCalculation_List">
+                                                    <p class="ms-5"
+                                                        [ngStyle]="{color: data.debit_tax === '0.00' ? 'red' : 'black'}">
+                                                        {{data.debit_tax}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row flex-wrap mt-3">
+                                                <div class="col-12 col-lg-6 col-md-6 col-sm-12"
+                                                    style="text-align: right;">
+                                                    <label style="font-size: 12px;"><b>Less Input Tax:</b></label>
+                                                </div>
+                                                <div class="col-12 col-lg-6 col-md-6 col-sm-12"
+                                                    *ngFor="let data of TaxCalculation_List">
+                                                    <p class="ms-5"
+                                                        [ngStyle]="{color: data.input_tax === '0.00' ? 'red' : 'black'}">
+                                                        {{data.input_tax}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row flex-wrap mt-3">
+                                                <div class="col-12 col-lg-6 col-md-6 col-sm-12"
+                                                    style="text-align: right;">
+                                                    <label style="font-size: 12px;"><b>Total Input With Debit
+                                                            Tax:</b></label>
+                                                </div>
+                                                <div class="col-12 col-lg-6 col-md-6 col-sm-12"
+                                                    *ngFor="let data of TaxCalculation_List">
+                                                    <p class="ms-5"
+                                                        [ngStyle]="{color: data.totalinputdebit_tax === '0.00' ? 'red' : 'black'}">
+                                                        {{data.totalinputdebit_tax}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                                            <div class="d-flex flex-row flex-wrap">
+                                                <div class="col-12 col-lg-6 col-md-6 col-sm-12"
+                                                    style="text-align: right;">
+                                                    <label style="font-size: 12px;"><b>Tax Payable:</b></label>
+                                                </div>
+                                                <div class="col-12 col-lg-6 col-md-6 col-sm-12"
+                                                    *ngFor="let data of TaxCalculation_List">
+                                                    <p class="ms-5"
+                                                        [ngStyle]="{color: data.output_tax === '0.00' ? 'red' : 'black'}">
+                                                        {{data.tax_payable}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row flex-wrap mt-3">
+                                                <div class="col-12 col-lg-6 col-md-6 col-sm-12"
+                                                    style="text-align: right;">
+                                                    <label style="font-size: 12px;"><b>Interest Charges
+                                                            Payable:</b></label>
+                                                </div>
+                                                <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                                    <input type="text" class="form-control"
+                                                        formControlName="interestcharge_payable"
+                                                        class="form-control form-control-lg custom-input mb-3 mb-lg-0 custom-input ms-4"
+                                                        style="width: 100px; margin-top: -5px; height:8px" />
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row flex-wrap mt-3">
+                                                <div class="col-12 col-lg-6 col-md-6 col-sm-12"
+                                                    style="text-align: right;">
+                                                    <label style="font-size: 12px;"><b>Penalty Payable:</b></label>
+                                                </div>
+                                                <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                                    <input type="text" class="form-control"
+                                                        formControlName="penality_payable"
+                                                        class="form-control form-control-lg custom-input mb-3 mb-lg-0 custom-input ms-4"
+                                                        style="width: 100px;" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row flex-wrap">
+                                        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+
+                                        </div>
+                                        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+
+                                        </div>
+                                        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                                            <div class="d-flex flex-row flex-wrap">
+                                                <div class="col-12 col-lg-6 col-md-6 col-sm-12"
+                                                    style="text-align: right;">
+                                                    <label style="font-size: 12px;"><b>Total Tax Payable:</b></label>
+                                                </div>
+                                                <div class="col-12 col-lg-6 col-md-6 col-sm-12"
+                                                    *ngFor="let data of TaxCalculation_List">
+                                                    <p class="ms-5"
+                                                        [ngStyle]="{color: data.totaltax === '0.00' ? 'red' : 'black'}">
+                                                        {{data.totaltax}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="m-0 me-1 d-flex flex-wrap mb-0 mt-0 ">
+                                        <!-- <div class="col-12 col-lg-12 row">
+                                            <div class="col-12 col-lg-9 col-md-12 col-sm-12">
+                                            </div>
+                                            <div class="col-12 col-lg-2 col-md-12 col-sm-12" style="text-align: right;">
+                                                <label style="font-size: 12px;"><b>Total Output Tax : </b> </label>
+                                            </div>
+                                            <div class="col-12 col-lg-1 col-md-12 col-sm-12"
+                                                *ngFor="let data of TaxCalculation_List">
+                                                <p style="text-align: right;">{{data.output_tax}}</p>
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="col-12 col-lg-12 row">
+                                            <div class="col-12 col-lg-9 col-md-12 col-sm-12">
+                                            </div>
+                                            <div class="col-12 col-lg-2 col-md-12 col-sm-12" style="text-align: right;">
+                                                <label style="font-size: 12px;"><b>Total Credit Tax : </b></label>
+                                            </div>
+                                            <div class="col-12 col-lg-1 col-md-12 col-sm-12"
+                                                *ngFor="let data of TaxCalculation_List">
+                                                <p style="text-align: right;">{{data.credit_tax}}</p>
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="col-12 col-lg-12 row">
+                                            <div class="col-12 col-lg-9 col-md-12 col-sm-12">
+                                            </div>
+                                            <div class="col-12 col-lg-2 col-md-12 col-sm-12" style="text-align: right;">
+                                                <label style="font-size: 12px;"><b>Total Output With Credit Tax :
+                                                    </b></label>
+                                            </div>
+                                            <div class="col-12 col-lg-1 col-md-12 col-sm-12"
+                                                *ngFor="let data of TaxCalculation_List">
+                                                <p style="text-align: right;">{{data.totaloutputcredit_tax}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-12 row">
+                                            <div class="col-12 col-lg-9 col-md-12 col-sm-12">
+                                            </div>
+                                            <div class="col-12 col-lg-2 col-md-12 col-sm-12" style="text-align: right;">
+                                                <label style="font-size: 12px;"><b>Total Debit Tax : </b></label>
+                                            </div>
+                                            <div class="col-12 col-lg-1 col-md-12 col-sm-12"
+                                                *ngFor="let data of TaxCalculation_List">
+                                                <p style="text-align: right;">{{data.debit_tax}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-12 row">
+                                            <div class="col-12 col-lg-9 col-md-12 col-sm-12">
+                                            </div>
+                                            <div class="col-12 col-lg-2 col-md-12 col-sm-12" style="text-align: right;">
+                                                <label style="font-size: 12px;"><b>Less Input Tax : </b></label>
+                                            </div>
+                                            <div class="col-12 col-lg-1 col-md-12 col-sm-12"
+                                                *ngFor="let data of TaxCalculation_List">
+                                                <p style="text-align: right;">{{data.input_tax}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-12 row">
+                                            <div class="col-12 col-lg-9 col-md-12 col-sm-12">
+                                            </div>
+                                            <div class="col-12 col-lg-2 col-md-12 col-sm-12" style="text-align: right;">
+                                                <label style="font-size: 12px;"><b>Total Input With Debit Tax :
+                                                    </b></label>
+                                            </div>
+                                            <div class="col-12 col-lg-1 col-md-12 col-sm-12"
+                                                *ngFor="let data of TaxCalculation_List">
+                                                <p style="text-align: right;">{{data.totalinputdebit_tax}}</p>
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="col-12 col-lg-12 row">
+                                            <div class="col-12 col-lg-9 col-md-12 col-sm-12">
+                                            </div>
+                                            <div class="col-12 col-lg-2 col-md-12 col-sm-12" style="text-align: right;">
+                                                <label style="font-size: 12px;"><b>Tax Payable : </b></label>
+                                            </div>
+                                            <div class="col-12 col-lg-1 col-md-12 col-sm-12"
+                                                *ngFor="let data of TaxCalculation_List">
+                                                <p style="text-align: right;">{{data.tax_payable}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-12 row">
+                                            <div class="col-12 col-lg-9 col-md-12 col-sm-12">
+                                            </div>
+                                            <div class="col-12 col-lg-2 col-md-12 col-sm-12" style="text-align: right;">
+                                                <br />
+                                                <label style="font-size: 12px;"><b>Interest Charges Payable :
+                                                    </b></label>
+                                            </div>
+                                            <div class="col-12 col-lg-1 col-md-12 col-sm-12">
+                                                <input type="text" class="form-control"
+                                                    formControlName="interestcharge_payable"
+                                                    class="form-control form-control-lg custom-input mb-3 mb-lg-0 custom-input mt-2" />
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-12 row">
+                                            <div class="col-12 col-lg-9 col-md-12 col-sm-12">
+                                            </div>
+                                            <div class="col-12 col-lg-2 col-md-12 col-sm-12" style="text-align: right;">
+                                                <br />
+                                                <label style="font-size: 12px;"><b>Penalty Payable : </b></label>
+                                            </div>
+                                            <div class="col-12 col-lg-1 col-md-12 col-sm-12">
+                                                <input type="text" class="form-control"
+                                                    formControlName="penality_payable"
+                                                    class="form-control form-control-lg custom-input mb-3 mb-lg-0 custom-input mt-2" />
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-12 row">
+                                            <div class="col-12 col-lg-9 col-md-12 col-sm-12">
+                                            </div>
+                                            <div class="col-12 col-lg-2 col-md-12 col-sm-12" style="text-align: right;">
+                                                <br />
+                                                <label style="font-size: 12px;"><b>Total Tax Payable : </b></label>
+                                            </div>
+                                            <div class="col-12 col-lg-1 col-md-12 col-sm-12"
+                                                *ngFor="let data of TaxCalculation_List">
+                                                <br />
+                                                <p style="text-align: right;">{{data.totaltax}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-12 row">
+                                            <div class="col-12 col-lg-9 col-md-12 col-sm-12">
+                                            </div>
+                                            <div class="col-12 col-lg-2 col-md-12 col-sm-12" style="text-align: right;">
+                                                <label style="font-size: 12px;"><b>Previous Carry Forward : </b></label>
+                                            </div>
+                                            <div class="col-12 col-lg-1 col-md-12 col-sm-12"
+                                                *ngFor="let data of TaxCalculation_List">
+                                                <p style="text-align: right;">0.00</p>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </form>
+                                <br />
+                                <div class="text-center mt-4">
+                                    <button type="submit" class="btn-success text-white" (click)="Overall_submit()">
+                                        <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                                        Submit
+                                    </button> &nbsp;
+                                    <button class="btn-primary btn-sm text-white me-4" (click)="back()">
+                                        <i class="fas fa-arrow-left text-white"></i> &nbsp; Back
+                                    </button>
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>

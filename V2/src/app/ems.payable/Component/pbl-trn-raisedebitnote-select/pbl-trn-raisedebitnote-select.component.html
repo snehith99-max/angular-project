@@ -1,0 +1,57 @@
+<div class="card rounded-top- mt-4">
+    <div class="card-title p-5 pb-3 pt-3 rounded-top bg-primary d-flex justify-content-between align-items-center">
+        <h3 class="fw-bolder text-white"><i class="fas fa-plus fw-bolder fs-3"></i>&nbsp;&nbsp; Invoice Add Select</h3>
+        
+        <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer " title="Back"
+          routerLink="/payable/PblTrnDebitNote"><i class="fa-solid fa-arrow-left-long fs-1 fw-bold"></i></button>
+    </div>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pb-0 pt-0 bg-white rounded">
+            <table id="Getraisedebitnote_list" class="table table-stripped table-row-bordered border-bottom gs-7">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th>S.No</th>
+                        <th>Invoice Ref.No</th>
+                        <th>Company Name</th>
+                        <th>Contact Details</th>
+                        <th>Invoice Status</th>
+                        <th>Invoice Amount</th>
+                        <th>Paid Amount</th>
+                        <!-- <th>Debited Amount</th> -->
+                        <th>Outstanding Amount</th>
+                        <th class="text-center">Action</th>
+                    </tr>                    
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of Getraisedebitnote_list; let i=index;" class="align-middle">
+                        <td>{{i+1}}</td>
+                        <td>{{data.invoice_refno}}</td>                    
+                        <td>{{data.vendor_companyname}}</td>  
+                        <td>{{data.contact}}</td>                      
+                        <td >{{data.invoice_status}}</td>                     
+                        <td style="text-align:right;">{{data.invoice_amount}}</td>                     
+                        <td style="text-align:right;">{{data.payment_amount}}</td>                     
+                        <!-- <td>{{data.debit_note}}</td>                      -->
+                        <td style="text-align:right;">{{data.outstanding}}</td>                              
+                        <td class="text-nowrap text-center">
+                            <button title="Raise Debit Note" type="Raise Debit Note" class="btn-lg btn-primary"
+                                    (click)="raisedebitnote(data.invoice_gid)"
+                                    style="height: 20px; display: flex; align-items: center; justify-content: center;">
+                                    Raise Debit Note
+                                </button>
+                        </td>          
+                    </tr>
+                </tbody>
+               
+            </table>
+            <div class="text-center my-4 mt-5">
+                <button class="btn-primary btn-sm text-white me-4" routerLink="/payable/PblTrnDebitNote">
+                    <i class="fas fa-arrow-left me-3"></i>Back
+                </button>
+            </div>
+            
+        </div>
+        
+    </div>
+    
+</div>

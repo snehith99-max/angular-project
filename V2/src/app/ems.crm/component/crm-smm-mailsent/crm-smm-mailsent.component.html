@@ -1,0 +1,157 @@
+<div class="container-fluid mt-1">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <h5 style="font-weight: bold; margin: 0; color: white;">Sent Items</h5>
+                </div>
+                <br>
+                <div class="card-body bg-white"style="height:460px">
+                    <div class="d-flex justify-content-between align-items-center mb-3" style="margin-top: -15px;">
+                        <div class="d-flex align-items-center">
+                            <div  class="form-group text-nowrap me-3" style="margin-left: 10px;">
+                                <select  id="itemsPerPageSelect" class="form-control" [(ngModel)]="itemsPerPage"
+                                  (ngModelChange)="onItemsPerPageChange()" style="width: 43px;height: 30px;">
+                                  <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+                                </select>
+                              </div>
+                            <div class="search-container" style="margin-left: -4px;">
+                                <div class="search-wrapper">
+                                  <i class="search-icon fas fa-search"></i>
+                                  <input type="text" class="search-input" placeholder="Search mail" 
+                                         [(ngModel)]="searchTerm" (input)="searchEmails()">
+                                </div>
+                              </div>
+</div>
+</div>
+                    <ng-container *ngIf="listvalue">
+                        <div class="text-center " style="margin-top: 160px;">
+                            <span style="font-size: 28px;">No Conversations Here</span>
+                            <br> <br> <br> <br> <br> <br> <br> <br> <br>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="!listvalue">
+                        <ul class="ms-0 mt-2 list-group">
+                            <div style="height:390px;overflow-y: scroll;">
+                                <li class="list-group-item " *ngFor="let email of gmailsenditemsummary_list"
+                                (click)="selectEmail(email)" [class.active]="selectedEmail === email"
+                                (mouseenter)="email.isHovered = true" (mouseleave)="email.isHovered = false">
+                                <div class="email-item  d-flex align-items-center">
+                                    <!-- <input type="checkbox"
+                                    (click)="$event.stopPropagation(); showOptions = false; toggleCheck(email, $event)"
+                                    [(ngModel)]="email.checked"
+                                    style="margin-right: 10px;"
+                                    *ngIf="email.isHovered || email.checked"> --> 
+                                     <!-- [class.hidden]="email.isHovered || email.checked" -->
+                                      
+                                    <i class="fas fa-envelope" style="font-size: 20px;"></i>
+                                    <div class="email-details"  style="flex: 1;">
+                                        <ng-container *ngIf="email.sent_date && email.sent_date.trim() !== ''; else noDate">
+                                            <div>
+                                               
+                                              <small>
+                                              
+                                                {{ email.to_mailaddress.length > 30 ? email.to_mailaddress.substring(0, 30) + '...' : email.to_mailaddress }}
+                                                - </small>
+                                              <br *ngIf="email.sent_date">
+                                              <small *ngIf="email.sent_date">
+                                                {{ email.sent_date }}</small>
+                                            </div>
+                                            
+                                          </ng-container>
+                                          <ng-template #noDate>
+                                            <div>
+                                            <small>{{ email.to_mailaddress }}</small>
+                                          </div>
+                                          </ng-template>
+                                          <label  style="font-size: 10px">
+                                            {{ email.mail_subject.length > 30 ? email.mail_subject.substring(0, 30) + '...' : email.mail_subject }}
+                                          </label>
+                                    </div>
+                                </div>
+                            </li>	
+                            </div>
+                        </ul>
+                        <pagination class="text-nowrap" style="float: left;" [boundaryLinks]="false" [maxSize]="8"
+                        [totalItems]="filteredEmails.length" [itemsPerPage]="itemsPerPage" [(ngModel)]="currentPage"
+                        (pageChanged)="pageChanged($event)" [directionLinks]="true" previousText="Previous" nextText="Next">
+                      </pagination>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card ">
+                <div class="card-header bg-primary text-white"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center;">
+                        <div class="sender-initial" *ngIf="selectedEmail">{{mailtoaddressinitial}}</div>
+                        <h5 style="font-weight: bold; margin: 0; color: white;" *ngIf="selectedEmail">{{mailtoaddress}}
+                        </h5>
+                    </div>
+                    <div class="d-flex justify-content-end align-items-start mt-n2">
+                        <i class="fas fa-arrow-left fs-1 ms-3 mt-4 circular-icon text-black" title="Back" (click)="onbacks()" style="cursor: pointer;"></i>
+                    </div>
+                </div>
+                <div class="card-body" style="height:460px">
+                    <div *ngIf="selectedEmail; else noEmailSelected">
+                        <div  style="padding: 15px;border: 1px solid #ddd; border-radius: 5px;height:440px">
+                            <div>
+                                <div class="text-end">
+                                    <span>{{ mailtime}}</span> &nbsp; &nbsp;&nbsp;&nbsp;
+                                </div>
+                                <div>
+                                    <span class="label">From:</span> {{ from_mailaddress }}
+                                </div>
+                                <div>
+                                    <span class="label">To:</span> {{ mailtoaddress }}
+                                </div>
+                                <div>
+                                    <span class="label">Date:</span> {{maildate}}
+                                </div>
+                                <div>
+                                    <span class="label">Subject:</span> {{ mailsubject }}
+                                </div>
+                            
+                            </div>
+                            <div style="height:280px;overflow-y: auto;" class="mt-3">
+                                <div  class="attachment-container  mt-4">
+                                    <div class="text-center"
+                                        *ngFor="let attachment of allattchement_list; let i = index"
+                                        class="attachment" (mouseover)="onMouseOver(attachment, i)"
+                                        (mouseleave)="onMouseLeave()">
+    
+                                        <div class="attachment-thumbnail text-center">
+                                            <i [class]="getIconClass(attachment.document_name)"
+                                                style="font-size: 18px;text-align: center;"></i>
+                                        </div>
+                                        <div class="attachment-info-wrapper">
+                                            <div class="attachment-info">
+                                                <span class="text-nowrap">{{ attachment.document_name }}</span>
+                                            </div>
+                                        </div>
+                                        <button *ngIf="hoveredAttachment === attachment"
+                                            (click)="downloadAttachment(attachment)" class="download-button">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div style="text-align: left;" class="mt-2">
+                                    <span [innerHTML]="mailbody"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-template #noEmailSelected>
+                        <div class="text-center" style="margin-top: 160px;">
+                            <span style="font-size: 28px;">No Open Conversations Here</span>
+                            <p style="font-size: 18px;">You're all caught up.</p>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

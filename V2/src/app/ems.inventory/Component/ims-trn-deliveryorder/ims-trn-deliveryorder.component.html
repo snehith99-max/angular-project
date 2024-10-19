@@ -1,0 +1,192 @@
+<div class="card">
+  <div class="row ms-3 mt-3 d-flex align-items-center">
+    <div class="col">
+      <h3 class="card-title fw-bold">Delivery Order Summary</h3>
+  </div>
+    <div class="col me-5">
+      <button type="button" class="btn-primary btn-sm text-white me-4 mt-2 float-end" data-bs-toggle="modal"
+        data-bs-target="#myModaladd" routerLink="/ims/ImsTrnAddDeliveryorder">
+        <i class="fas fa-plus fw-bolder fs-3"></i>&nbsp;
+        Raise Delivery Order
+      </button>
+    </div>
+  </div>
+
+  <div class="card mt-3 mb-3 m-5 border borderc-secondary">
+    <div class="row m-5">
+      <!-- Chart Column -->
+      <div class="col-lg-9 col-md-12 mb-3 ">
+        <ng-container *ngIf="flag">
+          <div class="d-flex flex-column border rounded" id="chart">
+            <apx-chart [series]="chartOptions?.series"
+                       [chart]="chartOptions?.chart"
+                       [xaxis]="chartOptions?.xaxis"
+                       [yaxis]="chartOptions?.yaxis"
+                       [labels]="chartOptions?.labels"
+                       [title]="chartOptions?.title"
+                       [subtitle]="chartOptions?.subtitle"
+                       [dataLabels]="chartOptions?.dataLabels"
+                       [stroke]="chartOptions?.stroke"
+                       [legend]="chartOptions?.legend">
+            </apx-chart>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="!flag">
+          <div class="d-flex justify-content-center">
+            <span>
+              <img src=".\assets\media\images\No_data_found.png" class="h-78px w-300px">
+            </span>
+          </div>
+        </ng-container>
+      </div>
+      
+      <!-- Info Panel Column -->
+      <div class="col-lg-3 col-md-12 mb-3 mt-8">
+        <div class="card border border-secondary  rounded-3 bg-light " style="width: 100%;">
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h6 class="text-uppercase text-muted text-center mb-3">Delivered</h6>
+                <div>
+                  <h2 class="text-dark display-6 text-center">{{ordertoinvoicecount}}</h2>
+                </div>
+              </div>
+              <div class="widgets-icons-2 bg-primary text-white p-3 rounded-circle" style="margin-left: -10px;">
+                <i class="fa-solid fa-file-invoice" style="font-size: 1.5rem;"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="card border border-secondary  rounded-3 bg-light" style="width: 100%;">
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h6 class="text-uppercase text-muted text-center mb-3">Order Raised</h6>
+                <div>
+                  <h2 class="text-dark display-6 text-center">{{ordercount}}</h2>
+                </div>
+              </div>
+              <div class="widgets-icons-2 bg-primary text-white p-3 rounded-circle" style="margin-left: -10px;">
+                <i class="fa-solid fa-thumbs-up" style="font-size: 1.5rem;"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive mt-3 me-5">
+    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded ">
+      <!-- <input type="hidden" formControlName="directorder_gid"> -->
+      <table id="deliveryorder_list" class="table table-striped table-row-bordered gy-5 gs-7 align-middle">
+        <thead>
+          <tr class="fw-bolder  fs-5 text-nowrap bg-lightblue text-blue align-middle">
+            <th style="width: 1%;">S.No</th>
+            <th style="width: 1%;">Date</th>
+            <th style="width: 1%;">Ref.No</th>
+            <th style="width: 5%;">SO Ref.No</th>
+            <th>Delivery No</th>
+            <th>Customer</th>
+            <th>Contact</th>
+            <th style="width: 5%;">Details</th> 
+            <th style="width: 3%;">Despatch Mode</th>
+            <th style="width: 3%;">Status</th>
+            <th class="text-center bg-lightblue ">Action</th> 
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of deliveryorders_list; let i=index;">
+            <td>{{i+1}}</td>
+            <td class="text-nowrap">{{data.directorder_date}}</td>
+            <td class="text-nowrap">{{data.directorder_refno}}</td>
+            <td class="text-nowrap">{{data.so_referenceno1}}</td>
+            <td class="text-nowrap">{{data.dc_no}}</td>
+            <td class="ellipsis" style="width: 50%;">{{data.customerdetails}}</td>
+            <td class="ellipsis" style="width: 30%;">{{data.contact}}</td>
+            <td class="text-center">   <label title="Product Details" data-bs-toggle="modal" data-bs-target="#myModalcustomerdetail"
+              (click)="Getproduct(data.directorder_refno)">
+              <i class="fas fa-question-circle fa-5x text-primary fs-2" style="cursor: pointer;"></i>
+            </label></td>
+            <td style="width: 1%;">{{data.mode_of_despatch}}</td>
+            <td  class="text-nowrap">{{data.delivery_status}}</td>
+
+            <!-- <td class="text-center text-nowrap">
+              <span (click)="toggleOptions(data.directorder_gid)">
+                <button class="btn me-2 p-1 "><span class="fa-solid fa-ellipsis-vertical fs-1 "
+                    style="color: #4d4d4d;"></span></button>
+                <div *ngIf="showOptionsDivId === data.directorder_gid"
+                  class="pb-0 rounded bg-white cursor-pointer icon_menu" style="margin-right:-15px; margin-top: -15px;">
+                  <div class="d-flex p-3 pb-3 Icon_hover" (click)="onview(data.directorder_gid)"
+                    *ngIf="data.has_child != 'N'">
+                    <span><i class="fa-solid fa-eye  fs-3 me-4"></i></span>
+                    <span>View</span>
+                  </div>
+                  <div class="d-flex p-3 pb-3 Icon_hover" *ngIf="data.has_child != 'N'"
+                    (click)="PrintPDF(data.directorder_gid)">
+                    <span><i class="fa-solid fa-file-pdf fs-3 me-4"></i></span>
+                    <span>Pdf</span>
+                  </div>
+                </div>
+              </span>
+
+            </td> -->
+            <td class="text-center text-nowrap">
+            <button title="View" type="button" class="btn btn-icon btn-sm bg-primary me-2" (click)="onview(data.directorder_gid)">  <span
+              class="fa-solid fa-eye text-white  fs-6" style="background: radial-gradient(circle, #47acbe 0%, #4aa5b9 100%);"></span></button>   
+              
+       <button title="Pdf" type="button" data-bs-toggle="modal" data-bs-target="#myModalPdf"
+         class="btn btn-icon btn-sm background-color6 me-2 "
+         style="background: radial-gradient(circle, #47acbe 0%, #4aa5b9 100%);"><span
+         class="fa-solid fa-file-pdf fs-6" (click)="PrintPDF(data.directorder_gid)"></span>
+       </button> 
+        </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="myModalcustomerdetail" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content d-flex justify-content-center">
+      <div class="card-header p-1 pb-1 pt-1 rounded-top bg-primary"
+         style="display: flex; align-items: center; height: 40px;">
+         <h3 style="margin-top: 10px; color: white; font-weight: bold" class="mt-8">
+          &nbsp;&nbsp;Product Details
+        </h3>
+     </div>
+     <div class="modal-body">
+      <table id="materialindentlist" class="table table-striped table-bordered text-blue border-bottom gs-7 align-middle ">
+        <thead>
+            <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                <th  class="text-blue text-center" style="width:2%">S.No</th>
+                <th  class="text-blue text-center" style="width: 20%;">Product</th>
+                <th  class="text-blue text-center" style="width: 5%;">Order Qty</th> 
+                <th  class="text-blue text-center" style="width: 5%;">Delivery Qty</th>  
+                <th  class="text-blue text-center" style="width: 5%;">Return Qty</th> 
+                <th  class="text-blue text-center" style="width: 5%;">Actual Delivered</th> 
+            </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of productsummary_list;let i = index;">
+          <td>{{i+1}}</td>
+          <td>{{data.product_code}}/{{data.product_name}}</td>
+          <td>{{data.product_qty}} {{data.productuom_name}}</td>
+          <td>{{data.product_qtydelivered}} {{data.productuom_name}}</td>
+          <td>{{data.qty_returned}} {{data.productuom_name}}</td>
+          <td>{{data.actual}} {{data.productuom_name}}</td>
+        </tr>
+      </tbody>
+        </table>
+      <div class="text-center my-4">
+        <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+          <i class="fas fa-close text-white"></i> &nbsp;Close
+        </button>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

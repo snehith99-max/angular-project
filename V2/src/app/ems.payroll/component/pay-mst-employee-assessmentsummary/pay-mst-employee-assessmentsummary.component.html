@@ -1,0 +1,38 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Financial Year</h3>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded mt-2">
+            <table id="financial_list" class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th>S.No</th>
+                        <th>Financial Year</th>
+                        <th>Status</th>
+                        <th class="text-center bg-lightblue ">Action</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="align-middle" *ngFor="let data of employeeassessmentsummarylist; let i=index;">
+                        <td title="S.No">{{i+1}}</td>
+                        <td title="Financial Year">{{data.fin_duration}}</td>
+                        <td title="Status">{{data.status}}</td>
+                        <td title="Action" class="text-center text-nowrap">
+                            <button title="Fill Form" type="button" class="btn btn-icon btn-sm bg-primary me-2" (click)="fillform(data.assessment_gid)">
+                                <span class="fa-solid fa-file-waveform fs-6 text-white" ></span>
+                            </button>
+                            <!-- <button title="PDF" type="button" (click)="PrintPDF(data.assessment_gid,data.employee_gid)"  
+                                style="background-color: #e44646; border: none; border-radius: 8px; padding: 10px;" >
+                                <span class="fa-solid fa-file-pdf fs-6" style="color: white; font-size: 12px;" ></span>
+                            </button> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

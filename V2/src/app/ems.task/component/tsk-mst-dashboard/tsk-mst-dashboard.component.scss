@@ -1,0 +1,213 @@
+.card8 {
+    border-bottom: 4px solid rgb(72 81 175 / 26%) !important;
+    border-radius: 10px;
+    height: 350px;
+    background: white;
+    box-shadow: #d0d2ea 2px 0px 4px inset, rgb(208 210 234) -2px 0px 4px inset;
+
+    .card-heading {
+        border-top: 40px solid rgb(72 81 175 / 26%) !important;
+        border-radius: 10px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        text-align: center;
+
+        h4 {
+            margin-top: -26px;
+        }
+    }
+
+}
+.selected-row {
+    background-color: #e7f4ff;
+  }
+  .selectable-name {
+    cursor: pointer;
+  }
+  .selectable-name:hover{
+    background-color: #d0d2ea;
+  
+  }
+  .hover-list {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #d0d2ea;
+    padding: 10px;
+    z-index: 1000;
+    border-radius: 10px;
+    box-shadow: #d0d2ea 2px 0px 4px inset, rgb(208 210 234) -2px 0px 4px inset;
+    max-height: 200px; /* Maximum height to enable scroll */
+    overflow-y: auto; /* Enable scroll within hover list */
+    white-space: nowrap;
+  }
+  .card3 {
+    border-bottom: 4px solid #ebebd7 !important;
+    border-radius: 10px;
+    height: 100px;
+    background: white;
+    box-shadow: #ebebd7 2px 0px 4px inset, #ebebd7 -2px 0px 4px inset;
+
+    .card-heading {
+        border-top: 40px solid #ebebd7 !important;
+        border-radius: 10px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        text-align: center;
+
+        h4 {
+            margin-top: -26px;
+        }
+    }
+}
+.card4 {
+    border-bottom: 4px solid #eddde9 !important;
+    border-radius: 10px;
+    height: 100px;
+    background: white;
+    box-shadow: #eddde9 2px 0px 4px inset, #eddde9 -2px 0px 4px inset;
+
+    .card-heading {
+        border-top: 40px solid #eddde9 !important;
+        border-radius: 10px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        text-align: center;
+
+        h4 {
+            margin-top: -26px;
+        }
+    }
+}
+.card5 {
+    border-bottom: 4px solid #d0d2ea !important;
+    border-radius: 10px;
+    height: 100px;
+    background: white;
+    box-shadow: #d0d2ea 2px 0px 4px inset, rgb(208 210 234) -2px 0px 4px inset;
+
+    .card-heading {
+        border-top: 40px solid #d0d2ea !important;
+        border-radius: 10px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        text-align: center;
+
+        h4 {
+            margin-top: -26px;
+        }
+    }
+}
+.card6 {
+    border-bottom: 4px solid #e3d8ef !important;
+    border-radius: 10px;
+    height: 100px;
+    background: white;
+    box-shadow: #e3d8ef 2px 0px 4px inset, #e3d8ef -2px 0px 4px inset;
+
+    .card-heading {
+        border-top: 40px solid #e3d8ef !important;
+        border-radius: 10px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        text-align: center;
+
+        h4 {
+            margin-top: -26px;
+        }
+    }
+}
+  .is {
+    font-size: 3rem;
+    opacity: 0.2;
+    color: #0a1fff;
+    z-index: 0;
+  }
+  .is1 {
+    font-size: 3rem;
+    opacity: 0.2;
+    color: #969545;
+    z-index: 0;
+  }
+  .is2 {
+    font-size: 3rem;
+    opacity: 0.2;
+    color: #96457e;
+    z-index: 0;
+  }
+  .is3 {
+    font-size: 3rem;
+    opacity: 0.2;
+    color: #7a00ff;
+    z-index: 0;
+  }
+.indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+    background-color: #000; /* Default color */
+}
+
+/* Colors for different statuses */
+.new {
+    background-color: #868bc7db; /* Red for New */
+}
+.badge-info.badge-outline {
+    border: 1px solid #3c45b294;
+    color: #000000;
+    background-color: transparent;
+}
+.badge-man.badge-outline {
+    border: 1px solid #a61d846e;
+    color: #000000;
+    background-color: transparent;
+}
+.badge-nice.badge-outline {
+    border: 1px solid #7a1e63;
+    color: #000000;
+    background-color: transparent;
+}
+.badge-show.badge-outline {
+    border: 1px solid #bdbd2b;
+    color: #000000;
+    background-color: transparent;
+}
+
+.card7 {
+    border-bottom: 4px solid #d0d2ea !important;
+    border-radius: 10px;
+    height: 350px;
+    background: white;
+    box-shadow: #d0d2ea 2px 0px 4px inset, rgb(208 210 234) -2px 0px 4px inset;
+}
+.live{
+    border-bottom: 4px solid #d1ebea !important;
+    border-radius: 10px;
+    height: 350px;
+    background: white;
+    box-shadow: #d1ebea 2px 0px 4px inset, #d1ebea -2px 0px 4px inset;
+}
+.Task{
+    background-color: #d0d2ea; 
+    border-radius: 10px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.liveTask{
+    background-color: #d1ebea; 
+    border-radius: 10px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.titletask{
+    -webkit-text-fill-color: transparent;
+    background: linear-gradient(to right, #ce2f2f, #303091);
+    -webkit-background-clip: text;
+}
+.module-info div {
+    display: flex;
+    justify-content: flex-start;
+    min-width: 90px; /* Ensure all labels have the same width */
+}

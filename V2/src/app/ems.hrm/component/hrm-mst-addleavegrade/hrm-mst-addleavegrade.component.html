@@ -1,0 +1,158 @@
+<form [formGroup]="reactiveFormadd" #form="ngForm">
+    <div class="card rounded-top">
+        <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+            <h3 class="fw-bolder text-white">
+                <span class="fa-solid fa-plus text-white fs-6 fw-bold"></span>&nbsp;Add Leave Grade
+            </h3>
+        </div>
+
+        <div class="d-flex flex-row m-6 flex-wrap" style="width: 80%;">
+            <div class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="font-bold">Code Generation</span>
+                <div class="d-flex justify-content-start ms-4 mt-4">
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm"
+                        style="margin-left: -10px;">
+                        <input type="radio" name="Code_Generation" value="Y" formControlName="Code_Generation"
+                            [(ngModel)]="Code_Generation" (change)="toggleInputField()">
+
+                        <label class="form-check-label text-gray-700 text-nowrap"
+                            for="kt_builder_header_content_menu">Automatic</label>
+                    </div>
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-8">
+                        <input type="radio" name="Code_Generation" value="N" formControlName="Code_Generation"
+                            [(ngModel)]="Code_Generation" (change)="toggleInputField()">
+                        <label class="form-check-label text-gray-700 text-nowrap"
+                            for="kt_builder_header_content_menu">Manual</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-3 col-md-3 col-sm-12" *ngIf="Code_Generation === 'Y'"><span
+                    class="font-bold">Leave Grade Code</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary"
+                        [style.background-color]="Code_Generation === 'N' ? 'white' : 'rgb(255, 255, 255)'"
+                        formControlName="leavegrade_code_auto" name="leavegrade_code_auto" readonly />
+                </div>
+            </div>
+            <div class="col-12 col-lg-3 col-md-3 col-sm-12" *ngIf="Code_Generation === 'N'"><span
+                    class="font-bold required">Leave Grade Code</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white"
+                        [ngStyle]="{'border-color': leavegrade_code_manual.invalid && leavegrade_code_manual.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                        [style.background-color]="Code_Generation === 'N' ? 'white' : 'rgb(255, 255, 255)'"
+                        placeholder="Enter Leave Grade Code" formControlName="leavegrade_code_manual"
+                        name="leavegrade_code_manual" *ngIf="Code_Generation === 'N'" />
+                    <div
+                        *ngIf="leavegrade_code_manual.invalid && (leavegrade_code_manual.dirty || leavegrade_code_manual.touched)">
+                        <div *ngIf="leavegrade_code_manual.errors?.['required']">
+                            <span class="text-red">Leave Grade Code is required.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+            <b>Leave Grade Code<span style="color:red">*</span></b>
+            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input type="text"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                    [ngStyle]="{'border-color': leavegrade_code.invalid && leavegrade_code.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                    placeholder="Enter Leave Grade Code" formControlName="leavegrade_code"/>
+            </div>
+            <div *ngIf="leavegrade_code.invalid && (leavegrade_code.dirty || leavegrade_code.touched)">
+                <div *ngIf="leavegrade_code.errors?.['required']">
+                  <span style="color:red;">Leave Grade Code is required.</span>
+                </div>
+              </div>
+        </div> -->
+
+            <!-- <div class="col-12 col-lg-3 col-md-3 col-sm-12" style="margin-left: 50px;">
+         <span class="font-bold required"> Leave Grade Name</span>
+            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input type="text"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0  bg-white custom-input"
+                    [ngStyle]="{'border-color': leavegrade_name.invalid && leavegrade_name.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                    placeholder="Enter Leave Grade Name" formControlName="leavegrade_name" />
+            </div>
+            <div *ngIf="leavegrade_name.invalid && (leavegrade_name.dirty || leavegrade_name.touched)">
+                <div *ngIf="leavegrade_name.errors?.['required']">
+                  <span style="color:red;">Leave Grade Name is required.</span>
+                </div>
+              </div>
+        </div>        -->
+            <div class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="font-bold required"> Leave Grade Name</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input formControlName="leavegrade_name" type="text"
+                        [ngStyle]="{ 'border-color': reactiveFormadd.get('leavegrade_name')?.hasError('required') && reactiveFormadd.get('leavegrade_name')?.touched || reactiveFormadd.get('leavegrade_name')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 ms-2"
+                        placeholder="Enter Leave Grade Name" />
+                    <div *ngIf="reactiveFormadd.get('leavegrade_name')?.hasError('required') && reactiveFormadd.get('leavegrade_name')?.touched"
+                        class="text-red ms-2"> Leave Grade Name is required.</div>
+                    <div *ngIf="reactiveFormadd.get('leavegrade_name')?.hasError('pattern')" class="text-red ms-2">Space
+                        at the beginning is not allowed.</div>
+                </div>
+            </div>
+        </div>
+
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="" class="table border-bottom gs-7">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th style="width: 2px;">
+                            <input type="checkbox" id="checkAll" (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()" />
+                        </th>
+                        <th rowspan="2">Leavetype Code</th>
+                        <th rowspan="2">Leave Type</th>
+                        <th rowspan="2">Total</th>
+                        <th rowspan="2">Available</th>
+                        <th rowspan="2">Limit Per Month</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of leavegradecode_list; let i=index;" class="align-middle">
+                        <td> <input type="checkbox" (change)="$event ? selection.toggle(data) : null"
+                                [checked]="selection.isSelected(data)" /></td>
+                        <td>{{data.leavetype_code}}</td>
+                        <td>{{data.leavetype_name}}</td>
+
+                        <td>
+                            <input type="text" [(ngModel)]="data.total_leavecount"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                formControlName="Total" placeholder="0.00" style="width: 100px;" />
+                        </td>
+                        <td>
+                            <input type="text" [(ngModel)]="data.available_leavecount"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                formControlName="available" placeholder="0.00" style="width: 100px;" />
+                        </td>
+                        <td>
+                            <input type="text" [(ngModel)]="data.leave_limit"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                formControlName="limitper_month" placeholder="0.00" style="width: 100px;" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="text-center mb-10">
+        <button *ngIf="Code_Generation === 'N'" type="submit" class="btn-success text-white" (click)="submit()" [disabled]="reactiveFormadd.invalid" data-bs-dismiss="modal">
+            <i class="fas fa-check text-white fs-5"></i>
+            &nbsp; &nbsp;Submit
+        </button> &nbsp; &nbsp;
+        <button *ngIf="Code_Generation === 'Y'" type="submit" class="btn-success text-white" (click)="submit()" [disabled]="reactiveFormadd.get('leavegrade_name')?.invalid" data-bs-dismiss="modal">
+            <i class="fas fa-check text-white fs-5"></i>
+            &nbsp; &nbsp;Submit
+        </button> &nbsp; &nbsp;
+        <button type="button" class="btn-primary text-white" data-bs-dismiss="modal" routerLink="/hrm/HrmMstLeaveGrade">
+            <i class="fas fa-arrow-left me-3"></i>
+            Back
+        </button>
+    </div>
+</div>
+</form>

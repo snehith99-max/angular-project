@@ -1,0 +1,49 @@
+.clickable-text {
+    color: initial; /* Set the initial text color */
+    cursor: pointer; /* Change the cursor to a pointer on hover */
+    transition: color 0.2s; /* Add a smooth transition for color change */
+}
+
+.clickable-text:hover {
+    color: blue; /* Change the text color to blue when hovered */
+}
+
+
+.del_modal-dialog {
+    margin-top: 200px;
+    
+    .del_modal-content{
+        height: 200px;
+        width: 350px;
+
+        h2 {
+            margin-top: 20px;
+        }
+        
+        p {
+            margin-top: 20px;
+        }
+
+        button {
+            margin-top: 15px;
+        }
+    }
+}
+.Icon_hover:hover{
+    background-color: #f6f8fc;
+    font-weight: 600;
+    border-radius: 6px 6px 6px 6px;
+    color: black;
+  }
+  
+  .icon_menu {
+    position: absolute;
+    width: auto;
+    right: 40px;
+    box-shadow: 4px 4px 7px rgba(174, 174, 192, .8);
+    color: #636363;
+    max-height: 123px;
+    overflow-y: auto;
+    scrollbar-color: rgb(223, 247, 255) #ffffff;
+    z-index: 2;
+  }

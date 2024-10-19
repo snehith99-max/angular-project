@@ -1,0 +1,36 @@
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.bg-success {
+    background-color: rgb(13, 224, 83);
+    color: white;
+}
+
+.bg-danger {
+    background-color: red;
+    color: white;
+}
+
+.bg-warning {
+    background-color: rgb(255, 174, 0);
+    color: white;
+}
+.account-tree ul {
+    list-style-type: none;
+    padding-left: 20px;
+  }
+  
+  .account-tree li {
+    padding: 5px 0;
+  }
+  
+  .account-tree li:before {
+    content: "•";
+    padding-right: 5px;
+  }
+  

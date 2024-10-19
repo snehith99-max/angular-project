@@ -1,0 +1,1641 @@
+<div class="card shadow-lg rounded-top">
+    <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+        <h3 class="fw-bolder text-white">Annual Form</h3>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-20x mb-8 fs-6">
+                    <li class="nav-item ms-9">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#kt_tab_pane_1"
+                            style="color: #009EF7"><b>Master Details</b></a>
+                    </li>
+                    <li class="nav-item ms-9">
+                        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_2" style="color: #009EF7"><b>Workers
+                                Compensation</b></a>
+                    </li>
+                    <li class="nav-item ms-9">
+                        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_3"
+                            style="color: #009EF7"><b>Products</b></a>
+                    </li>
+                    <li class="nav-item ms-9">
+                        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_4"
+                            style="color: #009EF7"><b>Leavewage</b></a>
+                    </li>
+                    <li class="nav-item ms-9">
+                        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_5"
+                            style="color: #009EF7"><b>Employeement</b></a>
+                    </li>
+                    <li class="nav-item ms-9">
+                        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_6"
+                            style="color: #009EF7"><b>Deductions</b></a>
+                    </li>
+                    <li class="nav-item ms-9">
+                        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_7"
+                            style="color: #009EF7"><b>Concessions</b></a>
+                    </li>
+                </ul>
+
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active ms-5" id="kt_tab_pane_1" role="tabpane1">
+                        <form [formGroup]="reactivemasterForm">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="modal-body">
+                                        <div id="kt_app_content" class="app-content  flex-column-fluid">
+                                            <div class="d-flex flex-row m-6 flex-wrap">
+
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4">
+                                                    <span class="font-bold">Registration Number</span>
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                        <input type="text" formControlName="companyregistrtion_number"
+                                                            class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                            name="companyregistrtion_number"
+                                                            placeholder="Enter Your registration number" />
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span
+                                                        class="font-bold">Company Name</span>
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                        <input type="text" formControlName="company_name"
+                                                            class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                            name="company_name" placeholder="Company Name" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span
+                                                        class="font-bold">Company Address</span>
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                        <textarea
+                                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input mt-2"
+                                                            formControlName="company_address" rows="4" cols="18"
+                                                            placeholder="Company Address" style="width:99%"
+                                                            name="company_address"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex flex-row m-6 flex-wrap">
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span
+                                                        class="font-bold">Occupier's Name</span>
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                        <input type="text" name="occupier_name"
+                                                            class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                            formControlName="occupier_name"
+                                                            placeholder="Occupier Name" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span
+                                                        class="font-bold">Occupier's Address</span>
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                        <input type="text" formControlName="occupier_address"
+                                                            class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                            name="occupier_address" placeholder="Occupier Address" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span
+                                                        class="font-bold">Phone Number</span>
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                        <input type="text" formControlName="company_phone"
+                                                            class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                            name="company_phone" placeholder="Enter your Phone Number" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex flex-row m-6 flex-wrap">
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span
+                                                        class="font-bold">Nature of industry</span>
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                        <input type="text"
+                                                            class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                            formControlName="natureof_industry" name="natureof_industry"
+                                                            placeholder="Nature of Industry" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-center my-4">
+                                                <button class="btn-success text-white me-4" (click)="mastersubmit()">
+                                                    <i class="fas fa-check text-white fs-5 me-4"></i>Update
+                                                </button>
+                                                <button class="btn-primary btn-sm text-white" (click)="onback()">
+                                                    <i class="fas fa-arrow-left me-4"></i>Back
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="row tab-pane fade show ms-5" id="kt_tab_pane_2" role="tabpane2">
+                        <form [formGroup]="reactiveworkForm">
+                            <div class=" mb-2">
+                                <h3>Safety And Health Officers</h3>
+                            </div>
+                            <div class="table-responsive">
+                                <div class="mx-3 p-3 mt-8 pt-0 pb-0 bg-white rounded  table-responsive">
+                                    <table id="product_list" class="table  table-striped table-row-bordered gy-5 gs-7 ">
+                                        <thead>
+                                            <tr class=" text-white fw-bold fs-7 bg-lightblue text-blue align-middle">
+                                                <th>Number of of officers required to be appointed</th>
+                                                <th>Actually Appointed</th>
+                                                <th>Reason for Not Appointed</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>Safety Officers</td>
+                                                <td><input type="text" formControlName="safetyappointed"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:40%" /></td>
+                                                <td><input type="text" formControlName="safetynotappointed"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:40%" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Welfare Officers</td>
+                                                <td><input type="text" formControlName="welfareappointed"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:40%" /></td>
+                                                <td><input type="text" formControlName="welfarenotappointed"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:40%" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Medical Officers</td>
+                                                <td><input type="text" formControlName="medicalappointed"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:40%" /></td>
+                                                <td><input type="text" formControlName="medicalnotappointed"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:40%" /></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div style="border-bottom: 1px solid #ccc;"></div>
+                            <br>
+                            <div class=" mb-2">
+                                <h3>Provided Welfare Measures</h3>
+                            </div>
+                            <br>
+                            <div class="align-items-center">
+                                <div class="d-flex flex-row m-6 flex-wrap justify-content-center">
+                                    <div class="col-2 col-lg-2 col-md-2 col-sm-2"><span class="font-bold"
+                                            style="font-size: 10px;">Ambulance Room as per sub-section(A) of section45
+                                            of the Factories Act,1948</span>
+                                    </div>
+                                    <div
+                                        class="col-6 col-lg-6 col-md-6 col-sm-6 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="pwminput1" style="width:25%" name="bonus_amount"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row m-6 flex-wrap justify-content-center">
+                                    <div class="col-2 col-lg-2 col-md-2 col-sm-2"><span class="font-bold"
+                                            style="font-size: 10px;">Canteen as per sub-section(1) of section46 of the
+                                            Faactories Act,1948</span>
+                                    </div>
+                                    <div
+                                        class="col-6 col-lg-6 col-md-6 col-sm-6 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="pwminput2" style="width:25%" name="bonus_amount"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row m-6 flex-wrap justify-content-center">
+                                    <div class="col-2 col-lg-2 col-md-2 col-sm-2"><span class="font-bold"
+                                            style="font-size: 10px;">Whether the canteen is run directly by the
+                                            management or through contractor or common canteen</span>
+                                    </div>
+                                    <div
+                                        class="col-6 col-lg-6 col-md-6 col-sm-6 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="pwminput3" style="width:25%" name="bonus_amount"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row m-6 flex-wrap justify-content-center">
+                                    <div class="col-2 col-lg-2 col-md-2 col-sm-2"><span class="font-bold"
+                                            style="font-size: 10px;">The nature of provision of creche such as
+                                            separate/common of the Group/commmon of the Employer's Associations as per
+                                            sub-section(1)48 of the Factories Act,1948</span>
+                                    </div>
+                                    <div
+                                        class="col-6 col-lg-6 col-md-6 col-sm-6 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="pwninput4" style="width:25%" name="bonus_amount"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row m-6 flex-wrap justify-content-center">
+                                    <div class="col-2 col-lg-2 col-md-2 col-sm-2"><span class="font-bold"
+                                            style="font-size: 10px;">Shelters,Rest Rooms and Lunch rooms as per
+                                            sub-section(1) of section47 of the Factories Act,1948 ?</span>
+                                    </div>
+                                    <div
+                                        class="col-6 col-lg-6 col-md-6 col-sm-6 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="pwminput5" style="width:25%" name="bonus_amount"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row m-6 flex-wrap justify-content-center">
+                                    <div class="col-2 col-lg-2 col-md-2 col-sm-2"><span class="font-bold"
+                                            style="font-size: 10px;">Occupational health center as per Rule 62-O</span>
+                                    </div>
+                                    <div
+                                        class="col-6 col-lg-6 col-md-6 col-sm-6 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="pwminput6" style="width:25%" name="bonus_amount"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="border-bottom: 1px solid #ccc;"></div>
+                            <br>
+                            <div class=" mb-2">
+                                <h3>Particulars of Accidents,ddddd Lost and others</h3>
+                            </div>
+                            <br>
+                            <div class="align-items-center">
+                                <div class="d-flex flex-row m-6 flex-wrap justify-content-center">
+                                    <div class="col-2 col-lg-2 col-md-2 col-sm-2"><span class="font-bold"
+                                            style="font-size: 10px;">Total Number of fatal/non-fatal Accidents taken
+                                            place in the year</span>
+                                    </div>
+                                    <div
+                                        class="col-6 col-lg-6 col-md-6 col-sm-6 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="amloinput1" style="width:25%" name="bonus_amount"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row m-6 flex-wrap justify-content-center">
+                                    <div class="col-2 col-lg-2 col-md-2 col-sm-2"><span class="font-bold"
+                                            style="font-size: 10px;">Number of employees involved in such
+                                            fatal/non-fatal accidents</span>
+                                    </div>
+                                    <div
+                                        class="col-6 col-lg-6 col-md-6 col-sm-6 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="amloinput2" style="width:25%" name="bonus_amount"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row m-6 flex-wrap justify-content-center">
+                                    <div class="col-2 col-lg-2 col-md-2 col-sm-2"><span class="font-bold"
+                                            style="font-size: 10px;">Total number of mandays lost in such
+                                            accidents</span>
+                                    </div>
+                                    <div
+                                        class="col-6 col-lg-6 col-md-6 col-sm-6 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="amloinput3" style="width:25%" name="bonus_amount"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row m-6 flex-wrap justify-content-center">
+                                    <div class="col-2 col-lg-2 col-md-2 col-sm-2"><span class="font-bold"
+                                            style="font-size: 10px;">Number of employees returned to work after 21 days
+                                            of such accidents -without permanent/partial/disablement<br>-with
+                                            permanent/partial/disablement</span>
+                                    </div>
+                                    <div
+                                        class="col-6 col-lg-6 col-md-6 col-sm-6 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="amloinput4" style="width:25%" name="bonus_amount"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="border-bottom: 1px solid #ccc;"></div>
+                            <br>
+                            <div class=" mb-2">
+                                <h3>Factory Carry Outs</h3>
+                            </div>
+                            <br>
+                            <div class="align-items-center">
+                                <div class="d-flex flex-row m-6 flex-wrap justify-content-center">
+                                    <div class="col-2 col-lg-2 col-md-2 col-sm-2"><span class="font-bold"
+                                            style="font-size: 10px;">Any process or operation declared Dangerous
+                                            under section87 of the Factories Act,1948</span>
+                                    </div>
+                                    <div
+                                        class="col-6 col-lg-6 col-md-6 col-sm-6 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="fcoinput1" style="width:25%" name="bonus_amount"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row m-6 flex-wrap justify-content-center">
+                                    <div class="col-2 col-lg-2 col-md-2 col-sm-2"><span class="font-bold"
+                                            style="font-size: 10px;">Any Hazardous processes under section2(cb) of the
+                                            Factories Act 1948</span>
+                                    </div>
+                                    <div
+                                        class="col-6 col-lg-6 col-md-6 col-sm-6 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="fcoinput2" style="width:25%" name="bonus_amount"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row m-6 flex-wrap justify-content-center">
+                                    <div class="col-2 col-lg-2 col-md-2 col-sm-2"><span class="font-bold"
+                                            style="font-size: 10px;">Whether the canteen is run directly by the
+                                            management or through contractor or common canteen</span>
+                                    </div>
+                                    <div
+                                        class="col-6 col-lg-6 col-md-6 col-sm-6 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="fcoinput3" style="width:25%" name="bonus_amount"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row m-6 flex-wrap justify-content-center">
+                                    <div class="col-2 col-lg-2 col-md-2 col-sm-2"><span class="font-bold"
+                                            style="font-size: 10px;">Name of the dangerous processes or
+                                            operations/hazardous processes carried on
+                                            average number of persons employeed daily in each of the process or
+                                            operations</span>
+                                    </div>
+                                    <div
+                                        class="col-6 col-lg-6 col-md-6 col-sm-6 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="fcoinput4" style="width:25%" name="bonus_amount"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row m-6 flex-wrap justify-content-center">
+                                    <div class="col-2 col-lg-2 col-md-2 col-sm-2"><span class="font-bold"
+                                            style="font-size: 10px;">Number of employees returned to work after 21 days
+                                            of such accidents
+                                            -without permanent/partial/disablement
+                                            -with permanent/partial/disablement</span>
+                                    </div>
+                                    <div
+                                        class="col-6 col-lg-6 col-md-6 col-sm-6 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="fcoinput5" style="width:25%" name="bonus_amount"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="border-bottom: 1px solid #ccc;"></div>
+                            <br>
+                            <div class=" mb-2">
+                                <h3>Particulars of Maternity Benefits</h3>
+                            </div>
+                            <br>
+                            <div class="table-responsive">
+                                <div class="mx-3 p-3 mt-8 pt-0 pb-0 bg-white rounded  table-responsive">
+                                    <table id="product_list" class="table  table-striped table-row-bordered gy-5 gs-7 ">
+                                        <thead>
+                                            <tr class=" text-white fw-bold fs-7 bg-lightblue text-blue align-middle">
+                                                <th>Type of Benefits</th>
+                                                <th>Number of Employees Received</th>
+                                                <th>Total Amount Paid</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>Miscarriage</td>
+                                                <td><input type="text" formControlName="misscarriageinput1"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:70%" /></td>
+                                                <td><input type="text" formControlName="misscarriageinput2"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:70%" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Confinement</td>
+                                                <td><input type="text" formControlName="Confinementinput1"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:70%" /></td>
+                                                <td><input type="text" formControlName="Confinementinput2"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:70%" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Illness</td>
+                                                <td><input type="text" formControlName="illnessinput1"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:70%" /></td>
+                                                <td><input type="text" formControlName="illnessinput2"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:70%" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Medical Bonus</td>
+                                                <td><input type="text" formControlName="medicalbonusinput1"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:70%" /></td>
+                                                <td><input type="text" formControlName="medicalbonusinput2"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:70%" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Number of women who gave notice under section 6 of the Maternity
+                                                    Benefits Act,1961</td>
+                                                <td><input type="text" formControlName="pombinput5"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:100%" /></td>
+                                                <td></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Number of women who were granted permission to absent on receipt of
+                                                    notice of confinement</td>
+                                                <td><input type="text" formControlName="pombinput6"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:100%" /></td>
+                                                <td></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Claims for maternity benefit rejected</td>
+                                                <td><input type="text" formControlName="pombinput7"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:100%" /></td>
+                                                <td></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Claims for Medical bonus rejected</td>
+                                                <td><input type="text" formControlName="pombinput8"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:100%" /></td>
+                                                <td></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Cases in which leave for miscarriage was applied for but was
+                                                    rejected</td>
+                                                <td><input type="text" formControlName="pombinput9"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:100%" /></td>
+                                                <td></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Cases in which additional leave for illness under section 10 was
+                                                    applied for but was rejected</td>
+                                                <td><input type="text" formControlName="pombinput10"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:100%" /></td>
+                                                <td></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Cases in which payment was made to persons other the women concerned
+                                                </td>
+                                                <td><input type="text" formControlName="pombinput11"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:100%" /></td>
+                                                <td></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>women deprived of maternity benefit and/or medical bonus under
+                                                    provision to sub-section(2) of section21 of the Maternity Benefit
+                                                    Act,1961</td>
+                                                <td><input type="text" formControlName="pombinput12"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:100%" /></td>
+                                                <td></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Cases in which payment was made on the order of the Appellate
+                                                    Authority or Inspector</td>
+                                                <td><input type="text" formControlName="pombinput13"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:100%" /></td>
+                                                <td></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Number of cases where prental confinement and postnatal care was
+                                                    provided by the management free of charge under section 8 of the
+                                                    Maternity Benefits Act,1961</td>
+                                                <td><input type="text" formControlName="pombinput14"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:100%" /></td>
+                                                <td></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="text-center my-4">
+                                    <button class="btn-success text-white me-4" (click)="workerssubmit()">
+                                        <i class="fas fa-check text-white fs-5 me-4"></i>Submit
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <div class="row tab-pane fade show ms-5" id="kt_tab_pane_3" role="tabpane3">
+
+                        <div class="col ms-8">
+                            <button type="button" class="btn-primary btn-sm text-white me-4 " data-bs-toggle="modal"
+                                data-bs-target="#myProductadd" (click)="onproductadd()">
+                                <i class="fas fa-plus"></i>&nbsp; Add Product
+                            </button>
+                        </div>
+                        <br>
+                       
+                            <div class="table-responsive">
+                                <div class="mx-3 p-3 mt-8 pt-0 pb-0 bg-white rounded  table-responsive">
+                                    <table id="producttitle_list" class="table  table-striped table-row-bordered gy-5 gs-7 ">
+                                        <thead>
+                                            <tr class=" text-white fw-bold fs-7 bg-lightblue text-blue align-middle">
+                                                <th>S.No</th>
+                                                <th>Product Name</th>
+                                                <th>Product Capacity</th>
+                                                <th>Product Quantity</th>
+                                                <th>Product Values</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr *ngFor="let data of producttitle_list; let i=index;"
+                                                style="white-space: nowrap;">
+                                                <td>{{i+1}}</td>
+                                                <td>{{data.product_name}}</td>
+                                                <td>{{data.capacity}}</td>
+                                                <td>{{data.quantity}}</td>
+                                                <td>{{data.product_value}}</td>
+                                                <td class="text-center text-nowrap">
+                                                    <button title="Delete" type="button" class="btn btn-icon btn-sm bg-danger me-2" data-bs-toggle="modal" data-bs-target="#myModaldelete" (click)="openModaldelete(data.productdetails_gid)">
+                                                        <span class="fa-solid fa-trash fs-6" style="color: #ffffff;"></span>
+                                                      </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                       
+                    </div>
+
+                    <div class="row tab-pane fade show ms-5" id="kt_tab_pane_4" role="tabpane4">
+                        <form [formGroup]="reactiveleavewageForm">
+                            <div class="table-responsive">
+                                <div class="mx-3 p-3 mt-8 pt-0 pb-0 bg-white rounded  table-responsive">
+                                    <table id="product_list" class="table  table-striped table-row-bordered gy-5 gs-7 ">
+                                        <thead>
+                                            <tr class=" text-white fw-bold fs-7 bg-lightblue text-blue align-middle">
+                                                <th></th>
+                                                <th>Total Number Of Persons Employed</th>
+                                                <th>Number of employee eligible for earned leave</th>
+                                                <th>Number of employee availed/granted leave</th>
+                                                <th>Number of employee discharged/
+                                                    dismissed/
+                                                    terminated/
+                                                    resigned/
+                                                    retired/
+                                                    died during the year</th>
+                                                <th>Number of employee paid wages salary lieu of earned leave</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>Men</td>
+                                                <td><input type="text" formControlName="mentotalnoofemp"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="menearnedleave"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="mengrantedleave"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="mendischarged"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="mennoofempwages"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Women</td>
+                                                <td><input type="text" formControlName="womentotalnoofemp"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="womenearnedleave"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="womengrantedleave"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="womendischarged"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="woemennoofempwages"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Adolescents</td>
+                                                <td><input type="text" formControlName="adolescentstotalnoofemp"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="adloscentsearnedleave"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="adloscentsgrantedleave"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="adloescentsdischarged"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="adolescentsnoofempwages"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div class="text-center my-4">
+                                <button class="btn-success text-white me-4" (click)="leavewagesubmit()">
+                                    <i class="fas fa-check text-white fs-5 me-4"></i>Submit
+                                </button>
+                                <button class="btn-primary text-white me-4" (click)="onleavewageback()">
+                                    <i class="fas fa fa-arrow-left fs-5 me-4"></i>Back
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="row tab-pane fade show ms-5" id="kt_tab_pane_5" role="tabpane5">
+                        <form [formGroup]="reactiveemploymentForm">
+                            <div class="table-responsive">
+                                <div class="mx-3 p-3 mt-8 pt-0 pb-0 bg-white rounded  table-responsive">
+                                    <table id="product_list" class="table  table-striped table-row-bordered gy-5 gs-7 ">
+                                        <thead>
+                                            <tr class=" text-white fw-bold fs-7 bg-lightblue text-blue align-middle">
+                                                <th></th>
+                                                <th>Number of persons on Roll as
+                                                    Staring date of Year</th>
+                                                <th>Number of persons on Roll as
+                                                    Ending date of Year</th>
+                                                <th>Number of Days Factory Worked</th>
+                                                <th>Number of Man-days worked during the year<br>
+                                                    &nbsp;&nbsp;NORMAL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OT
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    TOTAL
+                                                </th>
+                                                <th>Average Number of hours worked per week</th>
+
+                                                <th>Total amount salary/wage include allowance</th>
+                                            </tr>
+
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>Men</td>
+                                                <td><input type="text" formControlName="menrollstartdate"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="menrollenddate"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="menfactoryworked"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <input type="text" formControlName="menworkedyearnormal"
+                                                            class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                            placeholder="NIL" />
+                                                        &nbsp;
+                                                        <input type="text" formControlName="menworkedyearot"
+                                                            class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                            placeholder="NIL" />
+                                                        &nbsp;
+                                                        <input type="text" formControlName="menworkedyeartotal"
+                                                            class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                            placeholder="NIL" />
+                                                    </div>
+                                                </td>
+
+                                                <td><input type="text" formControlName="menworkperweek"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="mentotalamount"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Women</td>
+                                                <td><input type="text" formControlName="womenrollstartdate"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="womenrollenddate"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="womenfactoryworked"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <input type="text" formControlName="womenworkedyearnormal"
+                                                            class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                            placeholder="NIL" />
+                                                        &nbsp;
+                                                        <input type="text" formControlName="womenworkedyearot"
+                                                            class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                            placeholder="NIL" />
+                                                        &nbsp;
+                                                        <input type="text" formControlName="womenworkedyeartotal"
+                                                            class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                            placeholder="NIL" />
+                                                    </div>
+                                                </td>
+
+                                                <td><input type="text" formControlName="womenworkperweek"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="womentotalamount"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Adolescents</td>
+                                                <td><input type="text" formControlName="adloscentrollstartdate"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="adloscentrollenddate"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="adloscentfactoryworked"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <input type="text" formControlName="adloscentworkedyearnormal"
+                                                            class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                            placeholder="NIL" />
+                                                        &nbsp;
+                                                        <input type="text" formControlName="adloscentworkedyearot"
+                                                            class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                            placeholder="NIL" />
+                                                        &nbsp;
+                                                        <input type="text" formControlName="adloscentworkedyeartotal"
+                                                            class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                            placeholder="NIL" />
+                                                    </div>
+                                                </td>
+
+                                                <td><input type="text" formControlName="adloscentworkperweek"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="adloscenttotalamount"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Adloscents Men</td>
+                                                <td><input type="text" formControlName="adloscentmenrollstartdate"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="adloscentmenrollenddate"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="adloscentmenfactoryworked"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <input type="text"
+                                                            formControlName="adloscentmenworkedyearnormal"
+                                                            class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                            placeholder="NIL" />
+                                                        &nbsp;
+                                                        <input type="text" formControlName="adloscentmenworkedyearot"
+                                                            class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                            placeholder="NIL" />
+                                                        &nbsp;
+                                                        <input type="text" formControlName="adloscentmenworkedyeartotal"
+                                                            class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                            placeholder="NIL" />
+                                                    </div>
+                                                </td>
+
+                                                <td><input type="text" formControlName="adloscentmenworkperweek"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+
+                                                <td><input type="text" formControlName="adloscentwomenworkedyeartotal"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Adloscents Women</td>
+                                                <td><input type="text" formControlName="adloscentwomenrollstartdate"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="adloscentwomenrollenddate"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="adloscentwomenfactoryworked"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <input type="text"
+                                                            formControlName="adloscentwomenworkedyearnormal"
+                                                            class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                            placeholder="NIL" />
+                                                        &nbsp;
+                                                        <input type="text" formControlName="adloscentwomenworkedyearot"
+                                                            class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                            placeholder="NIL" />
+                                                        &nbsp;
+                                                        <input type="text"
+                                                            formControlName="adloscentwomenworkyeartotal"
+                                                            class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                            placeholder="NIL" />
+                                                    </div>
+                                                </td>
+
+                                                <td><input type="text" formControlName="adloscentwomenworkperweek"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                                <td><input type="text" formControlName="adloscentwomentotalamount"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div>
+                                <div class="d-flex flex-row m-6 flex-wrap">
+                                    <div class="col-3 col-lg-3 col-md-3 col-sm-3"><span class="font-bold"
+                                            style="font-size: 10px;">Average Number of persons employed during the
+                                            year</span>
+                                    </div>
+                                    <div
+                                        class="col-8 col-lg-8 col-md-8 col-sm-8 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="bonus_amountfield" style="width:25%" name="bonus_amountfield"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row m-6 flex-wrap">
+                                    <div class="col-3 col-lg-3 col-md-3 col-sm-3"><span class="font-bold"
+                                            style="font-size: 10px;">Mens</span>
+                                    </div>
+                                    <div
+                                        class="col-8 col-lg-8 col-md-8 col-sm-8 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="bonus_amountmen" style="width:25%" name="bonus_amountmen"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row m-6 flex-wrap">
+                                    <div class="col-3 col-lg-3 col-md-3 col-sm-3"><span class="font-bold"
+                                            style="font-size: 10px;">Womens</span>
+                                    </div>
+                                    <div
+                                        class="col-8 col-lg-8 col-md-8 col-sm-8 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="bonus_amountwomen" style="width:25%" name="bonus_amountwomen"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row m-6 flex-wrap">
+                                    <div class="col-3 col-lg-3 col-md-3 col-sm-3"><span class="font-bold"
+                                            style="font-size: 10px;">Adolescent Men</span>
+                                    </div>
+                                    <div
+                                        class="col-8 col-lg-8 col-md-8 col-sm-8 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="bonus_amountadomen" style="width:25%" name="bonus_amountadomen"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row m-6 flex-wrap">
+                                    <div class="col-3 col-lg-3 col-md-3 col-sm-3"><span class="font-bold"
+                                            style="font-size: 10px;">Adolescent Womens</span>
+                                    </div>
+                                    <div
+                                        class="col-8 col-lg-8 col-md-8 col-sm-8 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="bonus_amountadowomen" style="width:25%" name="bonus_amountadowomen"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center my-4">
+                                <button (click)="onemployeesubmit()" class="btn-success text-white me-4"
+                                    data-bs-dismiss="modal">
+                                    <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+                                </button>
+                            </div>
+                            <div style="border-bottom: 1px solid #ccc;"></div>
+                            <br>
+                            <div class=" mb-2">
+                                <h3>Contract Labour</h3>
+                            </div>
+                            <br>
+                            <div class="col ms-8">
+                                <button type="button" class="btn-primary btn-sm text-white me-4" data-bs-toggle="modal"
+                                    data-bs-target="#mycontractadd" (click)="oncontractadd()">
+                                    <i class="fas fa-plus"></i>&nbsp; Add Contractor
+                                </button>
+                            </div>
+                            <div class="table-responsive">
+                                <div class="mx-3 p-3 mt-8 pt-0 pb-0 bg-white rounded  table-responsive">
+                                    <table id="product_list" class="table  table-striped table-row-bordered gy-5 gs-7 ">
+                                        <thead>
+                                            <tr class=" text-white fw-bold fs-7 bg-lightblue text-blue align-middle">
+                                                <th>Contract Name And Address</th>
+                                                <th>Contract Period</th>
+                                                <th>Nature Of Work</th>
+                                                <th>Number of Days Worked</th>
+                                                <th>Number of Man-Days Worked</th>
+                                                <th>Maximun Number of Employees to Each Contractor</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr *ngFor="let data of contract_list; let i=index;"
+                                                style="white-space: nowrap;">
+                                                <td>1</td>
+                                                <td>2</td>
+                                                <td>3</td>
+                                                <td>4</td>
+                                                <td>5</td>
+                                                <td>6</td>
+                                                <td class="text-center text-nowrap">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <div class="row tab-pane fade show ms-5" id="kt_tab_pane_6" role="tabpane6">
+                        <form [formGroup]="reactivedeductionForm">
+                            <div class="text-center mb-2">
+                                <h4>Pariculars Of Deductions made from Salary</h4>
+                            </div>
+                            <div class="text-center mb-2">
+                                <h4 style="color:red;">(in respect of persons whose wages are less than Rs.1600/- per
+                                    month)</h4>
+                            </div>
+                            <div class="table-responsive">
+                                <div class="mx-3 p-3 mt-8 pt-0 pb-0 bg-white rounded  table-responsive">
+                                    <table id="product_list" class="table  table-striped table-row-bordered gy-5 gs-7 ">
+                                        <thead>
+                                            <tr class=" text-white fw-bold fs-7 bg-lightblue text-blue align-middle">
+                                                <th>Type</th>
+                                                <th>Number Of Employees Involved</th>
+                                                <th>Total Amount of Deduction made</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>Fines</td>
+                                                <td><input type="text" formControlName="finesnoofemp"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:40%" /></td>
+                                                <td><input type="text" formControlName="finesdeduction"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:40%" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Damages/Loss</td>
+                                                <td><input type="text" formControlName="damagenofemp"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:40%" /></td>
+                                                <td><input type="text" formControlName="damagededuction"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:40%" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Breach of Contracts</td>
+                                                <td><input type="text" formControlName="breachnoofemp"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:40%" /></td>
+                                                <td><input type="text" formControlName="breachdeduction"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:40%" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Others</td>
+                                                <td><input type="text" formControlName="othersnoofemp"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:40%" /></td>
+                                                <td><input type="text" formControlName="othersdeduction"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:40%" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div style="border-bottom: 1px solid #ccc;"></div>
+                            <br>
+                            <div class="text-center mb-2">
+                                <h4>Details of Number Of Persons Earning less than Rs.1,600/-per month</h4>
+                            </div>
+                            <div class="align-items-center">
+                                <div class="d-flex flex-row m-6 flex-wrap justify-content-center">
+                                    <div class="col-2 col-lg-2 col-md-2 col-sm-2"><span class="font-bold"
+                                            style="font-size: 10px;">Men</span>
+                                    </div>
+                                    <div
+                                        class="col-6 col-lg-6 col-md-6 col-sm-6 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="lessthanmen" style="width:25%" name="bonus_amount"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row m-6 flex-wrap justify-content-center">
+                                    <div class="col-2 col-lg-2 col-md-2 col-sm-2"><span class="font-bold"
+                                            style="font-size: 10px;">Female</span>
+                                    </div>
+                                    <div
+                                        class="col-6 col-lg-6 col-md-6 col-sm-6 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="lessthanwomen" style="width:25%" name="bonus_amount"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row m-6 flex-wrap justify-content-center">
+                                    <div class="col-2 col-lg-2 col-md-2 col-sm-2"><span class="font-bold"
+                                            style="font-size: 10px;">Adloscent</span>
+                                    </div>
+                                    <div
+                                        class="col-6 col-lg-6 col-md-6 col-sm-6 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="lessthanadloscent" style="width:25%" name="bonus_amount"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row m-6 flex-wrap justify-content-center">
+                                    <div class="col-2 col-lg-2 col-md-2 col-sm-2"><span class="font-bold"
+                                            style="font-size: 10px;">Details of money value Concession paid(in
+                                            Rupees)</span>
+                                    </div>
+                                    <div
+                                        class="col-6 col-lg-6 col-md-6 col-sm-6 d-flex flex-row justify-content-center">
+                                        <input
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                            formControlName="detail_ofmoneyvalue" style="width:25%" name="bonus_amount"
+                                            placeholder="NIL" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="border-bottom: 1px solid #ccc;"></div>
+                            <br>
+                            <div class="text-center mb-2">
+                                <h4>Total wages including deduction unde sub-section(2) of section7 of the payment of
+                                    Wages Act,1936</h4>
+                            </div>
+                            <div class="table-responsive">
+                                <div class="mx-3 p-3 mt-8 pt-0 pb-0 bg-white rounded  table-responsive">
+                                    <table id="product_list" class="table  table-striped table-row-bordered gy-5 gs-7 ">
+                                        <thead>
+                                            <tr class=" text-white fw-bold fs-7 bg-lightblue text-blue align-middle">
+                                                <th>Basic wages</th>
+                                                <th>Dearness Allowance</th>
+                                                <th>Overtime</th>
+                                                <th>Non Profit sharing bonus</th>
+                                                <th>Other allowances in cash</th>
+                                                <th>Arrears of pay in respect of
+                                                    previous year paid during the year</th>
+                                                <th>Overall Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="text" formControlName="basic_wages"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:50%" /></td>
+                                                <td><input type="text" formControlName="dearness_allowance"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:50%" /></td>
+                                                <td><input type="text" formControlName="overtime"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:50%" /></td>
+                                                <td><input type="text" formControlName="non_profit"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:50%" /></td>
+                                                <td><input type="text" formControlName="other_allowance"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:50%" /></td>
+                                                <td><input type="text" formControlName="arrears"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:50%" /></td>
+                                                <td>overall total</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+                            <div style="border-bottom: 1px solid #ccc;"></div>
+                            <br>
+                            <div class="text-center mb-2">
+                                <h4>Details of the remittances of Fines collected towards Tamilnadu Labour Welfare fund
+                                </h4>
+                            </div>
+                            <div class="table-responsive">
+                                <div class="mx-3 p-3 mt-8 pt-0 pb-0 bg-white rounded  table-responsive">
+                                    <table id="product_list" class="table  table-striped table-row-bordered gy-5 gs-7 ">
+                                        <thead>
+                                            <tr class=" text-white fw-bold fs-7 bg-lightblue text-blue align-middle">
+                                                <th></th>
+                                                <th>D.D.No.</th>
+                                                <th>Date</th>
+                                                <th>Bank</th>
+                                                <th>Amount(in Rupees)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1st Quarter</td>
+                                                <td><input type="text" formControlName="firstddno"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:50%" /></td>
+                                                <td> <input formControlName="firstdate" type="date"
+                                                        class="form-control form-control-lg form-control-solid  borderc-secondary date-picker custom-input mb-3 mb-lg-0 bg-white date-picker custom-input"
+                                                        name="bonus_date" style="width:50%" placeholder="DD-MM-YYYY" />
+                                                </td>
+                                                <td><input type="text" formControlName="firstbank"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:50%" /></td>
+                                                <td><input type="text" formControlName="firstamount"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:50%" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2nd Quarter</td>
+                                                <td><input type="text" formControlName="secondddno"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:50%" /></td>
+                                                <td> <input formControlName="seconddate" type="date"
+                                                        class="form-control form-control-lg form-control-solid  borderc-secondary date-picker custom-input mb-3 mb-lg-0 bg-white date-picker custom-input"
+                                                        name="bonus_date" style="width:50%" placeholder="DD-MM-YYYY" />
+                                                </td>
+                                                <td><input type="text" formControlName="secondbank"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:50%" /></td>
+                                                <td><input type="text" formControlName="secondamount"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:50%" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>3rd Quarter</td>
+                                                <td><input type="text" formControlName="thirdddno"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:50%" /></td>
+                                                <td> <input formControlName="thirddate" type="date"
+                                                        class="form-control form-control-lg form-control-solid  borderc-secondary date-picker custom-input mb-3 mb-lg-0 bg-white date-picker custom-input"
+                                                        name="bonus_date" style="width:50%" placeholder="DD-MM-YYYY" />
+                                                </td>
+                                                <td><input type="text" formControlName="thirdbank"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:50%" /></td>
+                                                <td><input type="text" formControlName="thirdamount"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:50%" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>4th Quarter</td>
+                                                <td><input type="text" formControlName="fourthddno"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:50%" /></td>
+                                                <td> <input formControlName="fourthdate" type="date"
+                                                        class="form-control form-control-lg form-control-solid  borderc-secondary date-picker custom-input mb-3 mb-lg-0 bg-white date-picker custom-input"
+                                                        name="bonus_date" style="width:50%" placeholder="DD-MM-YYYY" />
+                                                </td>
+                                                <td><input type="text" formControlName="fourthbank"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:50%" /></td>
+                                                <td><input type="text" formControlName="fourthamount"
+                                                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                                                        placeholder="NIL" style="width:50%" /></td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                    <div class="d-flex flex-row m-6 flex-wrap align-items-center float-end">
+                                        <div class="col-6 col-lg-6 col-md-6 col-sm-6">
+                                            <h6>Total cash value of the wages paid in kind</h6>
+                                        </div>
+                                        <div
+                                            class="col-6 col-lg-6 col-md-6 col-sm-6 d-flex flex-row justify-content-center">
+                                            <input
+                                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                                formControlName="total_cash_value" style="width:45%"
+                                                name="total_cash_value" placeholder="NIL" />
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="text-center my-4">
+                                <button class="btn-success text-white me-4" (click)="deductionsubmit()">
+                                    <i class="fas fa-check text-white fs-5 me-4"></i>Submit
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <div class="row tab-pane fade show ms-5" id="kt_tab_pane_7" role="tabpane7">
+                        <form [formGroup]="reactiveconcessionsForm">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="modal-body">
+                                        <div id="kt_app_content" class="app-content flex-column-fluid">
+                                            <div class="text-center mb-2">
+                                                <h2>Payment Bonus Paid during the Year</h2>
+                                            </div>
+                                            <br>
+                                            <div class="d-flex flex-row m-3 flex-wrap">
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span
+                                                        class="font-bold">Number Of Employees Eligible For Bonus</span>
+                                                    <input
+                                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input mt-2"
+                                                        formControlName="empbonus_number" rows="4" cols="18" placeholder="Number Of Employees Eligible For Bonus"
+                                                        style="width:90%" name="empbonus_number">
+                                                </div>
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span
+                                                        class="font-bold">Percentage of Bonus Declared</span>
+                                                    <input
+                                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input mt-2"
+                                                        formControlName="bonus_declared" rows="4" cols="18" placeholder="Percentage of Bonus Declared"
+                                                        style="width:90%" name="bonus_declared">
+                                                </div>
+                                            </div>
+
+                                            <div style="border-bottom: 1px solid #ccc;"></div>
+                                            <br>
+                                            <div class="text-center mb-2">
+                                                <h2>Total Amount of Bonus Paid</h2>
+                                            </div>
+                                            <br>
+                                            <div class="d-flex flex-row m-6 flex-wrap">
+                                                <div class="col-3 col-lg-3 col-md-3 col-sm-3"><span class="font-bold"
+                                                        style="font-size: 12px;">Bonus amount and date</span>
+                                                </div>
+                                                <div
+                                                    class="col-8 col-lg-8 col-md-8 col-sm-8 d-flex flex-row justify-content-center">
+                                                    <input
+                                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                                        formControlName="bonus_amount" style="width:45%"
+                                                        name="bonus_amount" placeholder="NIL" />
+                                                    <div class="mx-2"></div>
+                                                    <input formControlName="bonus_date" type="date"
+                                                        class="form-control form-control-lg form-control-solid  borderc-secondary date-picker custom-input mb-3 mb-lg-0 bg-white date-picker custom-input"
+                                                        name="bonus_date" style="width:45%" placeholder="DD-MM-YYYY" />
+
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex flex-row m-6 flex-wrap">
+                                                <div class="col-3 col-lg-3 col-md-3 col-sm-3"><span class="font-bold"
+                                                        style="font-size: 12px;">Exgratia amount and date</span>
+                                                </div>
+                                                <div
+                                                    class="col-8 col-lg-8 col-md-8 col-sm-8 d-flex flex-row justify-content-center">
+                                                    <input
+                                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                                        formControlName="exgratia_amount" style="width:45%"
+                                                        name="exgratia_amount" placeholder="NIL" />
+                                                    <div class="mx-2"></div>
+                                                    <input formControlName="exgratia_date" type="date"
+                                                        class="form-control form-control-lg form-control-solid  borderc-secondary date-picker custom-input mb-3 mb-lg-0 bg-white date-picker custom-input"
+                                                        name="exgratia_date" style="width:45%"
+                                                        placeholder="DD-MM-YYYY" />
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex flex-row m-6 flex-wrap">
+                                                <div class="col-3 col-lg-3 col-md-3 col-sm-3"><span class="font-bold"
+                                                        style="font-size: 12px;">Incentive amount and date</span>
+                                                </div>
+                                                <div
+                                                    class="col-8 col-lg-8 col-md-8 col-sm-8 d-flex flex-row justify-content-center">
+                                                    <input
+                                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                                        formControlName="incentive_amount" style="width:45%"
+                                                        name="incentive_amount" placeholder="NIL" />
+                                                    <div class="mx-2"></div>
+                                                    <input formControlName="incentive_date" type="date"
+                                                        class="form-control form-control-lg form-control-solid  borderc-secondary date-picker custom-input mb-3 mb-lg-0 bg-white date-picker custom-input"
+                                                        name="incentive_date" style="width:45%"
+                                                        placeholder="DD-MM-YYYY" />
+                                                </div>
+
+                                            </div>
+
+                                            <div class="text-center my-4">
+                                                <button class="btn-success text-white me-4"
+                                                    (click)="Concessionssubmit()">
+                                                    <i class="fas fa-check text-white fs-5 me-4"></i>Submit
+                                                </button>
+                                                <button class="btn-primary btn-sm text-white" (click)="ondataback()">
+                                                    <i class="fas fa-arrow-left me-4"></i>Back
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <form [formGroup]="addproductForm" #form="ngForm">
+                    <div class="modal" id="myProductadd" data-bs-backdrop="static" data-bs-keyboard="false">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="card-header pb-3 pt-6  rounded-top bg-primary">
+                                    <div>
+                                        <h3 class="fw-bolder text-white">&nbsp; <i
+                                                class="fas fa-plus"></i>&nbsp;&nbsp;Add Product</h3>
+                                    </div>
+                                </div>
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <span class="fw-bold">Product Name<span class="ms-1 text-red">*</span></span>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                                            <input formControlName="product_name" type="text" class="form-control form-control-lg form-control-solid borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                            [ngStyle]="{'border-color': product_name.invalid && product_name.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                             placeholder="Enter Product Name" pattern="^(?!.*\s{2})[A-Za-z0-9]+(?:\s[A-Za-z0-9]+)*$"
+                                             name="product_name" required style="height:40px;" />
+                                             <div *ngIf="product_name.invalid && (product_name.dirty || product_name.touched)">
+                                                <div *ngIf="product_name.errors?.['required']">
+                                                  <span class="text-red">Product Name is required</span>
+                                                </div>
+                                              </div>
+                                        </div>
+                                       
+                                        </div>
+                                        
+                                    
+                                    <br>
+                                    <div class="d-flex flex-row flex-wrap">
+                                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><b>Capacity(in relevant terms)</b><span style="color:red"> *</span>
+                                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input formControlName="capacity" type="text" class="form-control form-control-lg form-control-solid borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input" 
+                                            [ngStyle]="{'border-color': capacity.invalid && capacity.touched ? 'red' : 'rgb(209, 209, 209)'}" placeholder="Enter Capacity "
+                                            pattern="^(?!.*\s{2})[A-Za-z0-9]+(?:\s[A-Za-z0-9]+)*$" name="capacity"
+                                            required style="height:40px;" />
+                                            <div *ngIf="capacity.invalid && (capacity.dirty || capacity.touched)">
+                                                <div *ngIf="capacity.errors?.['required']">
+                                                  <span class="text-red">Capacity is required</span>
+                                                </div>
+                                              </div>
+                                        </div>
+                                        </div>
+                                    
+                                    <br>
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12"><b>Quantity Manufactured(in relevant terms)</b><span style="color:red"> *</span>
+                                       <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                                            <input formControlName="quantity" type="text" class="form-control form-control-lg form-control-solid borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input" 
+                                            [ngStyle]="{'border-color': quantity.invalid && quantity.touched ? 'red' : 'rgb(209, 209, 209)'}" placeholder="Enter Quantity "
+                                                pattern="^(?!.*\s{2})[A-Za-z0-9]+(?:\s[A-Za-z0-9]+)*$" name="quantity"
+                                                required style="height:40px;" />
+                                                <div *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)">
+                                                    <div *ngIf="quantity.errors?.['required']">
+                                                      <span class="text-red">Quantity Manufactured is required</span>
+                                                    </div>
+                                                  </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <br>
+                                    <div class="row">
+                                        <span class="fw-bold">Values(in Indian Rupees)<span class="ms-1 text-red">*</span></span>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                                            <input formControlName="product_value" type="text" class="form-control form-control-lg form-control-solid borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                            [ngStyle]="{'border-color': product_value.invalid && product_value.touched ? 'red' : 'rgb(209, 209, 209)'}" placeholder="Enter Values "
+                                                pattern="^(?!.*\s{2})[A-Za-z0-9]+(?:\s[A-Za-z0-9]+)*$" name="product_value"
+                                                required style="height:40px;" />
+                                                <div *ngIf="product_value.invalid && (product_value.dirty || product_value.touched)">
+                                                    <div *ngIf="product_value.errors?.['required']">
+                                                      <span class="text-red">Value is required</span>
+                                                    </div>
+                                                  </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- Modal footer -->
+                                <div class="text-center my-4">
+                                    <button (click)="onproductsubmit()"
+                                    class="btn-success text-white me-4" data-bs-dismiss="modal">
+                                        <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+                                    </button> &nbsp;&nbsp;
+                                    <button class="btn-danger btn-sm text-white me-4" (click)="onclose()"
+                                        data-bs-dismiss="modal">
+                                        <i class="fas fa-close text-white"></i> &nbsp;Close
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+                <form [formGroup]="addcontractForm" #form="ngForm">
+                    <div class="modal" id="mycontractadd" data-bs-backdrop="static" data-bs-keyboard="false">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="card-header pb-3 pt-6  rounded-top bg-primary">
+                                    <div>
+                                        <h3 class="fw-bolder text-white">&nbsp; <i
+                                                class="fas fa-plus"></i>&nbsp;&nbsp;Add Contractor</h3>
+                                    </div>
+                                </div>
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <span class="fw-bold">Contractor Name & Address<span
+                                                class="ms-1 text-red">*</span></span>
+                                        <div class="col-lg-12  col-md-12 col-sm-12 fv-row mt-2">
+                                            <input formControlName="contractor_name_address" type="text"
+                                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                                placeholder="Enter Name and Address" required style="height:40px;" />
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <span class="fw-bold">Period Of Contractor<span
+                                                class="ms-1 text-red">*</span></span>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                                            <input formControlName="period_contractor" type="text" class="form-control form-control-lg form-control-solid 
+                                custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                                placeholder="Enter Period of Contractor"
+                                                pattern="^(?!.*\s{2})[A-Za-z0-9]+(?:\s[A-Za-z0-9]+)*$" required
+                                                style="height:40px;" />
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <span class="fw-bold">Nature of Work<span class="ms-1 text-red">*</span></span>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                                            <input formControlName="Nature_of_work" type="text" class="form-control form-control-lg form-control-solid 
+                                custom-input mb-3 mb-lg-0 bg-white custom-input" placeholder="Enter Nature Of Work "
+                                                pattern="^(?!.*\s{2})[A-Za-z0-9]+(?:\s[A-Za-z0-9]+)*$" required
+                                                style="height:40px;" />
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <span class="fw-bold">Number of Days Worked<span
+                                                class="ms-1 text-red">*</span></span>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                                            <input formControlName="No_of_worked" type="text" class="form-control form-control-lg form-control-solid 
+                                custom-input mb-3 mb-lg-0 bg-white custom-input" placeholder="Enter No of Days Worked "
+                                                pattern="^(?!.*\s{2})[A-Za-z0-9]+(?:\s[A-Za-z0-9]+)*$" required
+                                                style="height:40px;" />
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <span class="fw-bold">Number of Man-Days Worked<span
+                                                class="ms-1 text-red">*</span></span>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                                            <input formControlName="no_of_manworked" type="text" class="form-control form-control-lg form-control-solid 
+                                custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                                placeholder="Enter No of Man-Days Wokred "
+                                                pattern="^(?!.*\s{2})[A-Za-z0-9]+(?:\s[A-Za-z0-9]+)*$" required
+                                                style="height:40px;" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <span class="fw-bold">Maximum Number of Workers Employed by each Contractor<span
+                                                class="ms-1 text-red">*</span></span>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                                            <input formControlName="maxnoofwokeremp" type="text" class="form-control form-control-lg form-control-solid 
+                                  custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                                placeholder="Enter number of Workers "
+                                                pattern="^(?!.*\s{2})[A-Za-z0-9]+(?:\s[A-Za-z0-9]+)*$" required
+                                                style="height:40px;" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- Modal footer -->
+                                <div class="text-center my-4">
+                                    <button (click)="oncontractsubmit()" class="btn-success text-white me-4"
+                                        [disabled]="addcontractForm.invalid"
+                                        [ngClass]="{'primary-button': !addcontractForm.invalid,'secondary-button': addcontractForm.invalid}"
+                                        data-bs-dismiss="modal">
+                                        <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+                                    </button> &nbsp;&nbsp;
+                                    <button class="btn-danger btn-sm text-white me-4" (click)="onclose()"
+                                        data-bs-dismiss="modal">
+                                        <i class="fas fa-close text-white"></i> &nbsp;Close
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- The Modal Delete -->
+<div class="modal " id="myModaldelete" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog del_modal-dialog">
+      <div class="modal-content del_modal-content">
+        <div class="text-center my-4">
+          <h2><b>Are you sure?</b></h2>
+          <p style="display: block;">Do You Want To Delete the Record ?</p>
+          <div class="text-center my-4">
+            <button class="btn-danger btn-sm text-white me-4" (click)="ondelete()" data-bs-dismiss="modal">
+              <i class="bi bi-trash-fill text-white fs-5 me-2"></i>Delete
+            </button>
+            <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+              <i class="fas fa-close text-white me-2"></i>Close
+            </button>          
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

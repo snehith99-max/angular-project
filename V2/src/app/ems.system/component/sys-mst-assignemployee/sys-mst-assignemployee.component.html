@@ -1,0 +1,169 @@
+<div class="col-lg-12 col-md-12 col-sm-12">
+  <div class="card me-lg-3 me-0">
+    <div class="col">
+      <div class="card-title p-2 rounded-top bg-primary d-flex justify-content-between align-items-center">
+        <h1 class="fw-bolder text-white">
+          <span class="fa-solid fa-users fs-1"></span>&nbsp; Assign Employee
+        </h1>
+        <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer me-3" 
+        routerLink="/system/SysMstModuleManager"><i class="fa-solid fa-arrow-left text-blue mb-1"></i><span class="tooltips">Back</span></button>
+      </div>
+    </div>
+    <br>
+    <div class="card-body col-12 col-lg-12 col-md-12 col-sm-12 fv-row mt-2" style="padding: 0rem 1rem;">
+      <form [formGroup]="assignempform">
+        <div class="row">
+          <div class="col-lg-3 col-md-4 col-sm-3">
+            <span class="font-bold">Employee <span style="color:red;">*</span></span>
+            <!-- <ng-select [items]="employeelist" class="mt-2" [multiple]="true" [selectableGroup]="true"
+              [closeOnSelect]="false" bindLabel="employee_name" bindValue="employee_gid" placeholder="Select an option"
+              [(ngModel)]="cboselectedEmployee"
+              [ngClass]="{'invalid-border':assignempform.get('employee_name')?.invalid && assignempform.get('employee_name')?.touched}"
+              [ngStyle]="{ 'border-color': assignempform.get('employee_name')?.hasError('required') && assignempform.get('employee_name')?.touched || assignempform.get('employee_name')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+              formControlName="employee_name">
+              <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;
+                {{item.employee_name}}
+              </ng-template>
+            </ng-select> -->
+
+            <!-- <ng-select [items]="employeelist" class="mt-2"[multiple]="true" [selectableGroup]="true" formControlName="employee_name"
+                        [closeOnSelect]="false" bindLabel="employee_name" bindValue="employee_gid"
+                        placeholder="Select an option" [(ngModel)]="cboselectedEmployee">
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;
+                            {{item.employee_name}}
+                        </ng-template>
+                    </ng-select> -->
+
+            <ng-select [items]="employeelist" class="mt-2" [multiple]="true" [selectableGroup]="true"
+              formControlName="employee_name" [closeOnSelect]="false" bindLabel="employee_name" bindValue="employee_gid"
+              placeholder="Select an option" [(ngModel)]="cboselectedEmployee" >
+                            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index" ><input id="item-{{index}}" style="z-index: -1;"
+                  type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp; {{item.employee_name}} </ng-template>
+            </ng-select>
+            <div
+              *ngIf="assignempform.get('employee_name')?.hasError('required') && assignempform.get('employee_name')?.touched || assignempform.get('employee_name')?.hasError('pattern')"
+              class="text-red">Employee is required.</div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-3"><span class="font-bold">Reporting To <span style="color:red;">*</span></span>
+            <ng-select [items]="ModuleHierarchy" [(ngModel)]="cboassignhierarchy" bindValue="employee_gid" class="mt-2"
+              bindLabel="user_name" formControlName="hierarchy" placeholder="Select an option"></ng-select>
+              <div
+              *ngIf="assignempform.get('hierarchy')?.hasError('required') && assignempform.get('hierarchy')?.touched || assignempform.get('hierarchy')?.hasError('pattern')"
+              class="text-red">Reporting to employee is required.
+            </div>
+          </div>
+          <!-- <div class="col-lg-3 col-md-4 col-sm-3"><span class="font-bold">User Group Template</span>
+            <ng-select [items]="usergrouptemplist" [(ngModel)]="cbousergrouptemp" bindValue="usergrouptemplate_gid"
+              class="mt-2" bindLabel="usergrouptemplate_name" formControlName="usergrouptemp"
+              placeholder="Select an option"></ng-select>
+          </div> -->
+
+          <div class="col-lg-1 col-md-1 col-sm-2">
+            <button title="Assign" type="button" [disabled]="!cboselectedEmployee || !cboassignhierarchy "
+              (click)="addmoduleuser()" class="btn btn-icon btn-sm bg-primary mt-8"><span
+                class="fa-solid fa-plus text-white fs-6"></span></button>
+          </div>
+        </div>
+      </form>
+      <div class="row mt-12">
+        <div class="col-lg-12 col-sm-12 col-md-12">
+          <!-- <div class="row">
+            <div class="col-lg-12 col-sm-12 col-md-12">
+              <label for="exampleFormControlInput1" class="fw-bold mb-1" style="font-size:1.15rem;">Assigned
+                Employee</label>
+              <p class="float-end"><span class="me-3"
+                  style="background-color: #f30a0a;width: 3px;height: 2px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Color
+                Indicates User has no
+                privileges</p>
+            </div>
+          </div> -->
+          <table id="assignemployeetable" class="table table-striped table-row-bordered gy-5 gs-5 mt-4">
+            <thead>
+              <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                <th>S.No</th>
+                <th>User Code</th>
+                <th>User Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of ModuleAssignedemployeeinfo; let i=index;">
+                <td>{{i+1}}</td>
+                <td>{{data.user_code}}</td>
+                <td>{{data.user_name}}</td>
+                <td [ngClass]="{'no-menu-access': data.menuaccess === '0'}"><a
+                    style="text-decoration: underline;cursor: pointer;" data-bs-toggle="modal"
+                    data-bs-target="#userrolemodal"
+                    (click)="UserRoleClick(data.user_gid,data.user_code,data.user_name)" >User Role</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="text-center my-4">
+        <button class="btn-primary btn-sm text-white me-4" (click)="backbutton()">
+          <i class="fas fa-arrow-left"></i> &nbsp;
+          Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal top fade" id="userrolemodal" tabindex="-1" aria-labelledby="kt_modal_1" aria-hidden="true"
+  data-bs-backdrop='static' data-mdb-keyboard="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class=" bg-primary rounded-top">
+        <h1 class="fw-bolder p-3 pt-4 text-white ">   
+          <i class="fa-solid fa-plus fs-1"></i>&nbsp;&nbsp;&nbsp;User Role</h1>
+      </div>
+
+      <div id="scroll-container" class="scroll m-4 overflow-auto mt-0" style="height: 400px;">
+        <div class="text-end align-middle mt-3" style="margin-right: 55px;">
+          <input type="checkbox" id="checkAll" (change)="masterToggle()" [checked]="checkAllState" />&nbsp; <span class="align-middle">Check
+            all</span>
+<!-- 
+            <input type="checkbox" id="checkAll" (change)="$event ? masterToggle() : null"
+            [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()" /> -->
+        </div>
+        <br>
+        <ng-container *ngFor="let data of userRoleMenulist">
+          <div class="row">
+            <div class="col-12">
+              <div class="column" *ngFor="let j of data.submenu;">
+                <div class="col">
+                  <h4 class="text-blue bg-lightblue p-3 rounded mt-2 text-center">{{ j.text }}</h4>
+                  <ul class="list-group ps-0">
+                    <li *ngFor="let k of j.sub1menu" class="list-group-item list-group-item-action striped-list">
+                      <div class="row">
+                        <div class="col-10">{{ k.text }}</div>
+                        <div class="col-2">
+                          <input type="checkbox" 
+                                 (change)="onItemSelect(k)" 
+                                 [checked]="selection.isSelected(k)" />
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="text-center mb-3">
+        <button type="submit" class="btn-success text-white" data-bs-dismiss="modal" (click)="UserRoleselected()">
+          <i class="fas fa-check text-white fs-5"></i>&nbsp;
+          Confirm
+        </button> &nbsp;
+        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+          <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

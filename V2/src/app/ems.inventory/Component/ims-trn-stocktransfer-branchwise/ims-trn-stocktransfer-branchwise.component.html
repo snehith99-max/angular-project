@@ -1,0 +1,161 @@
+<div class="card m-5">
+  <div class="card-title p-5 pb-3 pt-3 rounded-top bg-primary d-flex justify-content-between align-items-center">
+    <h1 class="fw-bolder text-white"><i class="fa fa-plus fs-2" aria-hidden="true"></i>&nbsp;&nbsp;Stock Transfer To Branch
+    </h1>
+    <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer " title="back"
+      routerLink="/ims/ImsTrnStockTransfer"><i class="fa-solid fa-arrow-left-long fs-1 fw-bold"></i></button>
+  </div>
+  <div class="card mt-1 m-3 mb-0">
+    <div class="card-header d-flex align-items-center mb-3 cursor-pointer no-arrow" style="background-color: #def0ff;">
+      <div>
+        <p class="card-title fw-bold fs-3 no-arrow" style="color: #2599ff;">
+          <i class="fa-solid fa-clipboard fs-1"></i> &nbsp;&nbsp;Stock Transfer Details
+        </p>
+      </div>
+
+    </div>
+  </div>
+  <div>
+    <form [formGroup]="StockForm">
+      <div class="d-flex flex-row m-6 flex-wrap">
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+          <span class="font-bold">Branch Name</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input type="text" [ngStyle]="{ 'border-color': 'rgb(209, 209, 209)'}" formControlName="branch_name1"
+              readonly class="form-control form-control-lg form-control-solid
+                        mb-3 mb-lg-0 bg-white borderc-secondary" />
+          </div>
+
+        </div>
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+          <span class="font-bold required"
+            [ngClass]="{'error_input_field': branch_name.invalid && branch_name.touched}">Branch To</span>
+          <ng-select [items]="branch_list" class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+            [ngClass]="{'invalid-border': branch_name.invalid && branch_name.touched}" bindLabel="branch_name"
+            bindvalue="branch_gid" (change)="GetOnChangeLocation()" (clear)="onClearlocation()"
+            [(ngModel)]="mdlBranchName" formControlName="branch_name" placeholder="Select an option"></ng-select>
+        </div>
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+          <span class="font-bold required"
+            [ngClass]="{'error_input_field': location_name.invalid && location_name.touched}">Location To</span>
+          <div class="col-lg-12 col-15 col-md-13 col-sm-13 fv-row mt-2">
+            <ng-select [items]="location_list" class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+              [ngClass]="{'invalid-border': location_name.invalid && location_name.touched}" bindLabel="location_name"
+              bindvalue="location_gid" [(ngModel)]="mdllocationName" formControlName="location_name"
+              placeholder="Select an option"></ng-select>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-row m-6 flex-wrap">
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+          <span class="font-bold">Product Group</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input type="text" [ngStyle]="{ 'border-color': 'rgb(209, 209, 209)'}" formControlName="productgroup_name"
+              readonly class="form-control form-control-lg form-control-solid
+                    mb-3 mb-lg-0 bg-white borderc-secondary" />
+          </div>
+        </div>
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+
+          <span class="font-bold">Product Code</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input type="text" [ngStyle]="{ 'border-color': 'rgb(209, 209, 209)'}" formControlName="product_code"
+              readonly class="form-control form-control-lg form-control-solid
+                mb-3 mb-lg-0 bg-white borderc-secondary" />
+          </div>
+        </div>
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+          <span class="font-bold">Product Name</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input type="text" [ngStyle]="{ 'border-color': 'rgb(209, 209, 209)'}" formControlName="product_name"
+              readonly class="form-control form-control-lg form-control-solid
+                        mb-3 mb-lg-0 bg-white borderc-secondary" />
+          </div>
+        </div>
+
+
+
+
+
+
+      </div>
+      <div class="d-flex flex-row m-6 flex-wrap">
+
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+          <span class="font-bold">Product Unit</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input type="text" [ngStyle]="{ 'border-color': 'rgb(209, 209, 209)'}" formControlName="productuom_name"
+              readonly class="form-control form-control-lg form-control-solid
+                    mb-3 mb-lg-0 bg-white borderc-secondary" />
+          </div>
+        </div>
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+          <span class="font-bold">Description</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+            <textarea type="text" readonly pattern="^(?!\s*$).+" formControlName="product_desc"
+              [ngStyle]="{ 'border-color': 'rgb(209, 209, 209)'}" class="form-control form-control-lg form-control-solid
+                mb-3 mb-lg-0 bg-white borderc-secondary" rows="3"></textarea>
+          </div>
+        </div>
+
+
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+          <span class="font-bold">Stock Balance</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input type="number" formControlName="stock_balance" placeholder="Enter Stock Transfer Qty" readonly
+              class="form-control form-control-lg form-control-solid  borderc-secondary inputfield custom-input mb-3 mb-lg-0 bg-white custom-input  mt-2" />
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-row m-6 flex-wrap">
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+          <span class="font-bold required">Stock transfer Qty</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+            <input type="number" formControlName="transfer_stock" placeholder="Enter Stock Transfer Qty" maxlength="8"
+              pattern="^(?!\s*$).+"
+              class="form-control form-control-lg form-control-solid  borderc-secondary inputfield custom-input mb-3 mb-lg-0 bg-white custom-input  mt-2" />
+          </div>
+        </div>
+        <!-- <div class="col-12 col-lg-8 col-md-8 col-sm-12"><span class="font-bold">Remarks</span>
+          <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <textarea type="text" style="width: 96%;"
+              [ngStyle]="{ 'border-color': StockForm.get('remarks')?.hasError('required') && StockForm.get('remarks')?.touched ? 'red' : 'rgb(209, 209, 209)' }"
+              pattern="^(?!\s*$).+" formControlName="remarks" placeholder="Enter Remarks"
+              class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input mt-2"
+              rows="3"></textarea>
+          </div>
+        </div> -->
+        <div class="col-12 col-lg-8 col-md-8 col-sm-12"><span class="font-bold">Remarks</span>
+          <div class="col-lg-12 col-12 col-md-4 col-sm-11 fv-row mt-2">
+            <textarea style="width: 96%;" type="text" class="
+              form-control form-control-lg form-control-solid custom-input
+              mb-3 mb-lg-0  borderc-secondary bg-white custom-input" formControlName="remarks"
+              placeholder="Enter Remarks" class="form-control" rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="text-center my-4">
+        <button type="submit" (click)="update()" class="btn-success btn-sm text-white me-2"
+          [disabled]="StockForm.invalid" [ngClass]="{
+                'primary-button': !StockForm.invalid,
+                'secondary-button': StockForm.invalid
+              }">
+          <i class="fas fa-check text-white fs-5"></i> &nbsp; Update
+        </button>
+
+      </div>
+
+
+    </form>
+
+
+  </div>
+
+</div>

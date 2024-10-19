@@ -1,0 +1,148 @@
+<div class="card rounded-top">
+    <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+        <h3 class="fw-bolder text-white">
+            <i class="fas fa-plus fw-bolder fs-3 me-4"></i>Attendance Configuration
+        </h3>
+    </div>
+    <form #form="ngForm" [formGroup]="attendaceconfigform">
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Total Hours per Shift</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row d-flex mt-2">
+                     <!-- <input type="time" formControlName="totalshifthours" class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 border-secondary"/> -->
+                     <!-- <input [ngxTimepicker]="picker" placeholder="Select time" readonly>
+                    <ngx-material-timepicker #picker defaultTime="defaultTime" [hoursOnly]="true"
+                        [format]="24"></ngx-material-timepicker> --> 
+                        <input type="time" formControlName="totalshifthours"
+                        class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 border-secondary" />
+                </div>
+            </div>  
+            <!-- <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                <span class="font-bold">Total Hours per Shift</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row d-flex mt-2">
+                    <input type="time" formControlName="totalshifthours" class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 border-secondary"/>
+                </div>
+            </div> -->
+            <!-- <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                <span class="font-bold">Total Hours per Shift</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row d-flex mt-2">
+                  <select formControlName="totalshifthours" class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 border-secondary">
+                    <option value="">Select Hours</option>
+                    <option *ngFor="let hour of hoursList" [value]="hour">{{ hour }}</option>
+                  </select>
+                </div>
+              </div> -->
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Minimum Eligible Hours for
+                    Half-day</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row d-flex mt-2">
+                    <input type="time" formControlName="halfmineligiblehours"
+                    class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 border-secondary" />
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Minimum Eligible Hours for
+                    Full-day</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row d-flex mt-2">
+                    <input type="time" formControlName="halfmaxeligiblehours"
+                    class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 border-secondary" />
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Weekoff Salary</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row d-flex mt-2">
+                    <input type="text" formControlName="weekoff_salary" placeholder="Enter Weekoff Salary"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input borderc-secondary  mb-3 mb-lg-0"
+                    style="text-align: right;" />
+                    <span class="font-bold ms-2 mt-4">days</span>
+                </div>
+               
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Holiday Salary</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row d-flex mt-2">
+                    <input type="text" formControlName="holiday_salary" placeholder="Enter Holiday Salary"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input borderc-secondary  mb-3 mb-lg-0"
+                        style="text-align: right;"/>
+                    <span class="font-bold ms-2 mt-4">days</span>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Total Permission Allowed</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row d-flex mt-2">
+                    <input type="time" formControlName="totalpermissionallowed"
+                    class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 border-secondary" />
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">OT Availed</span>
+                <div class="d-flex justify-content-start mt-4">
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                        <input type="radio" name="active_flag" value="Y" formControlName="otavailed"
+                            (change)="showTextBox($event)">
+                        <label class="form-check-label text-gray-700 text-nowrap"
+                            for="kt_builder_header_content_menu">Yes</label>
+                    </div>
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+                        <input type="radio" name="active_flag" value="N" formControlName="otavailed"
+                            (change)="showTextBox($event)">
+                        <label class="form-check-label text-gray-700 text-nowrap"
+                            for="kt_builder_header_content_menu">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12" *ngIf="showInputs"><span class="font-bold">Minimum
+                    Eligible Hours for OT</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row d-flex mt-2">
+                    <input type="time" formControlName="otminhours"
+                        class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 border-secondary" />
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12" *ngIf="showInputs"><span class="font-bold">Maximum Eligible
+                    Hours for OT</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row d-flex mt-2">
+                    <input type="time" formControlName="otmaxhours"
+                        class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 border-secondary" />
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Attendance Allowance</span>
+                <div class="d-flex justify-content-start mt-4">
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                        <input type="radio" name="active_flag1" value="Y" formControlName="attendance_allowance_flag"
+                            (change)="showTextBox1($event)">
+                        <label class="form-check-label text-gray-700 text-nowrap"
+                            for="kt_builder_header_content_menu">Yes</label>
+                    </div>
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+                        <input type="radio" name="active_flag1" value="N" formControlName="attendance_allowance_flag"
+                            (change)="showTextBox1($event)">
+                        <label class="form-check-label text-gray-700 text-nowrap"
+                            for="kt_builder_header_content_menu">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12" *ngIf="showInputs1"><span class="font-bold">Allowed
+                    Leave</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row d-flex mt-2">
+                    <input type="text" formControlName="allowed_leave" placeholder="0.00"
+                        class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 border-secondary" />
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12" *ngIf="showInputs1"><span class="font-bold">Attendance
+                    Allowance</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row d-flex mt-2">
+                    <input type="text" formControlName="allowance_amount" placeholder="0.00"
+                        class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 border-secondary"
+                        style="text-align: right;" />
+                </div>
+            </div>
+        </div>
+        <div class="text-center my-4">
+            <button class="btn-success btn-sm text-white me-2" (click)="submit()">
+                <i class="fas fa-check text-white fs-5 me-3"></i>Submit
+            </button>
+            <button class="btn-primary btn-sm text-white me-4" (click)="redirecttolist()">
+                <i class="fas fa-arrow-left me-3"></i>Back
+            </button>
+        </div>
+    </form>
+</div>

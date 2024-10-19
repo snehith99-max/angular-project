@@ -1,0 +1,183 @@
+<div class="card">
+  <div class="card-header  d-flex bg-primary m-3 p-4">
+      <h3 class="card-title"  style="color: rgb(255, 255, 255);"> <span class=" fa-solid fa-hand-holding-dollar fs-3"></span>&nbsp;<b>Map Tax Segment</b></h3>
+        <div class="align">
+          <div class="col-12 col-lg-12 col-md-6 col-sm-12">
+            <div class="d-flex align-items-center" style="margin-top: -3px;">
+             <span class="font-bold text-black fs-5" style="margin-left: 10px;"><b>Product Name :</b></span>
+            <b><p class="mt-4 fs-5" style="color: rgb(255, 255, 255); margin-left: 15px;">{{this.product_name}}</p></b>
+           
+            </div>
+          </div>
+          <div class="col-12 col-lg-12 col-md-6 col-sm-12 " style="margin-top: -15px;">
+            <div class="d-flex align-items-center">
+              <span class="font-bold fs-5" style="margin-left: 10px;"><b>Product Price  :</b></span>
+               <b><p class="mt-4 fs-5" style="color: rgb(255, 255, 255); margin-left: 15px;">{{this.mrp_price}}</p></b>
+             
+            </div>
+          </div>
+        </div>
+
+  <div class="time">
+      <h3 style="color:#ffffff;margin-top: 3px; font-style: bold;font-weight: 700;">{{toDate}} &nbsp; {{currentDayName}}</h3>
+      <h3 style="color:#ffffff; "> {{ rxTime | date: 'hh:mm:ss a' }} </h3> 
+  </div>
+</div>
+<form [formGroup]="cusprodForm">
+  
+    <div class="m-4 mt-4 border card">
+        <div class="d-flex flex-row m-6 flex-wrap">
+       
+    <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+        <span class="font-bold">Tax Segment<span class="ms-1 text-red">*</span></span>
+        <ng-select formControlName="taxsegment_name" [items]="taxsegment_list"  class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+        [class.is-invalid]="taxsegment_name.invalid && (taxsegment_name.dirty || taxsegment_name.touched)"
+        [ngClass]="{'invalid-border': taxsegment_name.invalid && taxsegment_name.touched}" 
+        bindLabel="taxsegment_name" bindValue="taxsegment_gid" placeholder="Select a Tax Segment" required>
+        </ng-select>
+        
+        <div *ngIf="taxsegment_name.invalid && (taxsegment_name.dirty || taxsegment_name.touched)" class="invalid-feedback">
+            <div *ngIf="taxsegment_name.errors?.['required']">
+                Tax Segment is required.
+            </div>
+        </div>
+      </div> 
+      <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+        <span class="font-bold">Tax<span class="ms-1 text-red required"></span></span>
+        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <ng-select [items]="tax4_list" class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+            bindLabel="tax" bindValue="tax_gid" formControlName="tax_name4"
+            [class.is-invalid]="tax_name4.invalid && (tax_name4.dirty || tax_name4.touched)"
+            [ngClass]="{'invalid-border': tax_name4.invalid && tax_name4.touched}" 
+            placeholder="Select Tax" [(ngModel)]="mdlTaxName4" required ></ng-select>
+        </div>
+        <div *ngIf="tax_name4.invalid && (tax_name4.dirty || tax_name4.touched)" class="invalid-feedback">
+          <div *ngIf="tax_name4.errors?.['required']">
+              Tax is required.
+          </div>
+      </div>
+      </div>
+      <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+        <br>
+        
+       <button title="Add" type="button" class="btn btn-icon btn-sm bg-success me-1" [disabled]="cusprodForm.invalid" (click)="onSubmit()"  >
+          <span Class="fa-solid fa-plus text-white  fs-6"></span></button>&nbsp;                
+       
+      </div>
+        </div>
+    </div>
+      
+  
+
+
+    <div class="table-responsive">
+      <div class="mx-3 p-3 pt-0 pb-0 mt-5 bg-white rounded">
+        <table id="taxsegment2prod_list" class="table table-striped table-row-bordered gy-5 gs-7 ">
+          <thead>
+            <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+              <th>S.No</th>
+              <th>Tax Segment</th>
+              <th>Tax</th>
+              <th class="text-end">Tax Percentage</th>
+              <th class="text-end">MRP</th> 
+              <th class="text-end">Tax Amount</th>          
+              <!-- <th>Created Date</th> -->
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of taxsegment2prod_list; let i=index;" style="white-space: nowrap;">
+                <td>{{i+1}}</td>
+                <td>{{data.taxsegment_name}}</td>
+                <td>{{data.tax_name}}</td>
+                <td class="text-end">{{data.tax_percentage}}</td>
+                <td class="text-end">{{data.mrp_price}}</td>
+                <td class="text-end"> {{data.tax_amount}}</td>
+                <td class="text-center">
+                    <button title="Delete" type="button" (click)="openModaldelete(data.taxsegment2product_gid)" data-bs-toggle="modal"
+                    data-bs-target="#myModaldelete" class="btn btn-icon btn-sm bg-danger me-2"><span
+                      class="fa-solid fa-trash text-white  fs-6"></span></button>
+                </td>
+                </tr>
+            <!-- <tr>
+                <td>1</td>
+                <td>Within State</td>
+                <td>CGST</td>
+                <td class="text-end">5%</td>
+                <td class="text-end">100.00</td>
+                <td class="text-end">105.00</td>
+                <td class="text-center">
+                    <button title="Delete" type="button" 
+                   class="btn btn-icon btn-sm bg-danger me-2"><span
+                      class="fa-solid fa-trash text-white  fs-6"></span></button>
+                </td>
+            </tr>
+                <tr>
+                <td>2</td>
+                <td>Within State</td>
+                <td>SGST</td>
+                <td class="text-end">5%</td>
+                <td class="text-end">100.00</td>
+                <td class="text-end">105.00</td>
+                <td class="text-center">
+                    <button title="Delete" type="button" 
+                   class="btn btn-icon btn-sm bg-danger me-2"><span
+                      class="fa-solid fa-trash text-white  fs-6"></span></button>
+                </td>
+                </tr>
+                
+                <tr>
+                    <td>3</td>
+                    <td>Inter State</td>
+                    <td>IGST</td>
+                    <td class="text-end">18%</td>
+                    <td class="text-end">100.00</td>
+                    <td class="text-end">118.00</td>
+                    <td class="text-center">
+                        <button title="Delete" type="button" 
+                       class="btn btn-icon btn-sm bg-danger me-2"><span
+                          class="fa-solid fa-trash text-white  fs-6"></span></button>
+                    </td>
+                </tr> -->
+                   
+                
+          
+        
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    <div class="text-center my-4">
+      <!-- <button class="btn-success btn-sm text-white me-4" data-bs-dismiss="modal" (click)="onSubmit()">  
+        <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+      </button> &nbsp;&nbsp; -->
+      <button class="btn-primary btn-sm text-white me-4" (click)="close()" data-bs-dismiss="modal">
+        <i class="fas fa-arrow-left text-white"></i> &nbsp;Back
+      </button>
+    </div>
+
+    <div class="modal" id="myModaldelete" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="text-center my-4">
+              <h2><b>Are you sure?</b></h2>
+              <br>
+              <p style="display: block;">Do You Want To Delete the Record ?</p>
+              <div class="text-center my-4">
+                <button class="btn-danger btn-sm text-white me-4" (click)="ondelete()" data-bs-dismiss="modal">
+                  <i class="fas fa-trash text-white fs-5 "></i> &nbsp;Delete
+                </button>&nbsp;
+                <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+                  <i class="fas fa-close text-white"></i> &nbsp;Close
+                </button>
+      
+      
+      
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </form>
+  </div>

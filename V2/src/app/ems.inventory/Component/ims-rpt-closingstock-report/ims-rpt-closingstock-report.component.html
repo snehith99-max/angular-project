@@ -1,0 +1,94 @@
+<div class="card mt-4">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title fw-bold"><b>Closing Stock Report</b></h3>
+        </div>
+
+        <div class="col me-2">
+        </div>
+    </div>
+    <form [formGroup]="closingstock">
+        <div class="d-flex flex-row ms-6 justify-content-center">
+
+
+
+            <div class="col-12 col-lg-2 col-md-6 col-sm-10"> <span class="font-bold">Location</span>
+                <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <ng-select formControlName="location_name" [items]="location_list" 
+                        class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="location_name"
+                        bindValue="location_gid" placeholder="Select an option" [(ngModel)]="mdlBranchName">
+                    </ng-select>
+
+                </div>
+            </div>
+
+
+
+            <div class="col-12 col-lg-2 col-md-2 col-12 mt-8">
+                <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                    <!-- <button title="Search" type="button" (click)="OnChangeFinancialYear()" style="height: 35px !important;"
+                        [disabled]="closingstock.invalid" class="btn-success btn-sm text-black me-1" >Search
+                    </button>
+                    <button title="Search" type="button" (click)="onrefreshclick()" style="height: 35px !important;"
+                        [disabled]="closingstock.invalid" class="btn-warning btn-sm text-black ms-1" >Refresh
+                    </button> -->
+                    
+                        <button title="search" class="btn btn-icon btn-sm bg-success me-1" style="height: 2px !important;" (click)="OnChangeFinancialYear()"><i class="fa-solid fa-magnifying-glass text-white" ></i></button>
+                        <button title="refresh" class="btn btn-icon btn-sm bg-warning me-1" style="height: 2px !important;" (click)="onrefreshclick()"><i class="fa-solid fa-rotate-right text-white"></i></button>
+                      
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="GetSaleLedger_list" class="table table-striped table-row-bordered gy-5 gs-7 ">
+                <thead>
+                    <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue  align-middle">
+                        <th>S.No </th>
+                        <th>Branch</th>
+                        <th>Location</th>
+                        <th>Product</th>
+                        <th>Product Unit</th>
+                        <th class="text-center">Stock</th>
+                        <th class="text-center">Issued</th>
+                        <th class="text-center">Amended</th>
+                        <th class="text-center">Damaged</th>
+                        <th class="text-center">Adjust</th>
+                        <th class="text-center">Transfer</th>
+                        <th class="text-center">Available</th>
+
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of GetSaleLedger_list;let i=index;">
+                        <td style="width: 5%;">{{i+1}}</td>
+                        <td style="width: 20%;">{{data.branch_name}}</td>
+                        <td style="width: 15%;">{{data.location_name}}</td>
+                        <td style="width: 15%;">{{data.product_name}}</td>
+                        <td>{{data.productuom_name}}</td>
+                        <td class="text-center">{{data.total_Stock_Quantity}} </td>
+                        <td class="text-center">{{data.issued_Quantity}}</td>
+                        <td class="text-center">{{data.amended_Quantity}}</td>
+                        <td class="text-center">{{data.damaged_qty}}</td>
+                        <td class="text-center">{{data.adjusted_qty}}</td>
+                        <td class="text-center">{{data.transfer_qty}}</td>
+                        <td class="text-center">{{data.available_quantity}}</td>
+                    </tr>
+                </tbody>
+                <tfoot *ngIf="GetSaleLedger_list && GetSaleLedger_list.length > 0">
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <td colspan="5" class="text-end">Total</td>
+                        <td class="text-center">{{ Stock }}</td>
+                        <td class="text-center">{{ Issue }}</td>
+                        <td class="text-center">{{ Amend }}</td>
+                        <td class="text-center">{{ Damage }}</td>
+                        <td class="text-center">{{ Adjust }}</td>
+                        <td class="text-center">{{ transfer }}</td>
+                        <td class="text-center">{{ Available }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

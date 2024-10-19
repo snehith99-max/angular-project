@@ -1,0 +1,355 @@
+<div class="card card-bordered" style="background-color: #ffffff;">
+    <div class="card-header d-flex align-items-center" style="background-color: #2e3192;">
+        <div>
+            <h1 class="card-title fw-bold fs-1" style="color: white;">All Contacts- {{unique_query_count}}</h1>
+
+        </div>
+        <div>
+            <i class="fas fa-info-circle fs-2" data-bs-toggle="modal" title="Sync Details" data-bs-target="#syncdetails"
+                style="color: #eeeeee;"></i>
+            <i class="fas fa-sync-alt fs-2 ms-6" title="Refresh Summary" (click)="summaryrefresh()"
+                style="color: #eeeeee;"></i>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-lg-3" style="overflow-y:auto;max-height: 430px;">
+
+            <form class="position-relative" autocomplete="off">
+
+                <div style="position: fixed;width: 22%;" class="p-3 bg-white width-custom">
+                    <input type="text" class="form-control" name="search" [(ngModel)]="searchText"
+                        placeholder="Search or Start a New Chat"
+                        style="border: 2px solid #a2a6ad; padding-left: 30px;border-radius: 80px;" />
+                    <span style="position: absolute; top: 51%; left: 12px; transform: translateY(-50%);">
+                        <i class="fa fa-search fs-3 ms-1" aria-hidden="true"></i>
+                    </span>
+
+                </div>
+
+                <br><br>
+
+
+            </form>
+
+
+            <div *ngFor="let data of indiamartsummarylist; let i=index;"
+                (click)="showResponsiveOutput(data.unique_query_id)" [hidden]="!matchesSearch(data)"
+                style="background-color: #fcfbfd;border-right: 1px solid #eeeeee;">
+                <ul class="nav flex-column fs-4 fw-semibold mt-3 mb-3 custom-text">
+                    <li data-bs-toggle="tab" aria-current="page"
+                        [ngClass]="{'nav-item p-4 align-items-center mt-3 cursor-pointer sample': true, 'selected': selectedIndex === i}"
+                        (click)="highlightItem(i)" class="nav-item p-4 align-items-center mt-3 cursor-pointer sample">
+
+                        <div class="symbol-label bg-light-danger text-danger fs-5 ms-15 ">
+                            <b>{{data.sender_name}}</b><span class="fs-6 float-end">({{data.query_time}})</span>
+                        </div>
+                        <div class="symbol-label bg-light-danger text-danger fs-6 ms-5 ">
+                            <i class="fas fa-user fs-1 me-4"></i> <span
+                                class="fs-6 ms-1">{{data.sender_mobile}}</span><span
+                                class="fs-6 float-end badge badge-primary rounded-pill text-white "
+                                *ngIf="data.read_flag ==='N'">1</span>
+                        </div>
+                        <div class="symbol-label bg-light-danger text-danger fs-6 ms-15 ">
+                            <span>{{data.sender_city}},{{data.sender_state}}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="col-lg-9" style="overflow-y: auto;max-height: 430px;">
+            <div class="flex-lg-row-fluid ms-lg-7 ms-xl-5 d-flex align-items-center justify-content-center"
+                *ngIf="chatWindow==='Default'">
+                <div>
+                    <h3>Kindly select a chat to display messages</h3>
+                </div>
+            </div>
+            <div *ngIf="chatWindow==='Chat'">
+                <div class="detail-header d-flex align-items-center">
+                    <h1 class="ms-4">Overview</h1>
+                    <div class="float-left">
+                        <button class="head-menu-item-btn m-5" (click)="markasunread()" title="Mark as Unread">
+                            <i class="fa-solid fa-envelope fs-1"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="user-profile-2" class="user-profile" style="background-color: rgba(169, 159, 159, 0.233);">
+
+                    <div class="tab-content no-border padding-24">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-3 center">
+                                <span class="profile-picture">
+                                    <img class="editable img-responsive" alt=" Avatar" id="avatar2"
+                                        src="assets\media\patterns\user-image.jpg" style="width: 150px;height: 150px;">
+                                </span>
+
+                                <div class="space space-4"></div>
+                                <br>
+                                <ng-container *ngIf="leadbank_gid ===''">
+                                    <button class="btn btn-sm text-white me-4" title="Add to LeadBank"
+                                        style="background-color: #2e3192;" data-bs-toggle="modal"
+                                        data-bs-target="#myModaladd">
+                                        <span class="fa-solid fa-user-plus text-white fs-6"></span>
+                                        &nbsp;Add to Opportunity</button>
+                                </ng-container>
+                                <ng-container *ngIf="leadbank_gid !==''">
+                                    <span class="fs-4" style="color: green;"><i
+                                            class="fa fa-check-circle fs-3"></i>&nbsp;&nbsp;Already added in Opportunity</span>
+                                </ng-container>
+
+                            </div><!-- /.col -->
+
+                            <div class="col-xs-12 col-sm-9">
+
+
+                                <div class="profile-user-info">
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> Name </div>
+
+                                        <div class="profile-info-value">
+                                            <span class="fs-5 fw-bold">{{sender_name}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name">Number
+                                        </div>
+
+                                        <div class="profile-info-value">
+                                            <span class="fs-5 fw-bold">{{sender_mobile}}</span>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> Email </div>
+
+                                        <div class="profile-info-value">
+                                            <span class="fs-5 fw-bold">{{sender_email}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> Company </div>
+
+                                        <div class="profile-info-value">
+                                            <span class="fs-5 fw-bold">{{sender_company}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> Address</div>
+
+                                        <div class="profile-info-value">
+                                            <span class="fs-5 fw-bold">{{sender_address}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> Alternative Number</div>
+
+                                        <div class="profile-info-value">
+                                            <span class="fs-5 fw-bold">{{sender_mobile_alt}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name">Product Name</div>
+
+                                        <div class="profile-info-value">
+                                            <span class="fs-5 fw-bold">{{query_product_name}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> Message</div>
+
+                                        <div class="profile-info-value">
+                                            <span class="fs-5 fw-bold" [innerHTML]="query_message"></span>
+                                        </div>
+                                    </div>
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name">MCAT Name</div>
+
+                                        <div class="profile-info-value">
+                                            <span class="fs-5 fw-bold">{{query_mcat_name}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name">Call Duration</div>
+
+                                        <div class="profile-info-value">
+                                            <span class="fs-5 fw-bold">{{call_duration}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name">Receiver Mobile</div>
+
+                                        <div class="profile-info-value">
+                                            <span class="fs-5 fw-bold">{{receiver_mobile}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name">Lead Type </div>
+                                        <span class="profile-info-value fs-5 fw-bold" *ngIf="query_type == 'W'">Direct &
+                                            ASTBUY Enquiries</span>
+                                        <span class="profile-info-value fs-5 fw-bold"
+                                            *ngIf="query_type == 'BL'">Buy-Leads</span>
+                                        <span class="profile-info-value fs-5 fw-bold"
+                                            *ngIf="query_type == 'V / BIZ'">Catalog-view Leads</span>
+                                        <span class="profile-info-value fs-5 fw-bold" *ngIf="query_type == 'P'">PNS
+                                            Calls</span>
+                                        <span class="profile-info-value fs-5 fw-bold"
+                                            *ngIf="query_type == 'WA'">WhatsApp
+                                            Enquiries</span>
+                                    </div>
+                                </div>
+
+                                <div class="hr hr-8 dotted"></div>
+
+
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+
+                        <div class="space-20"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!----------------Sync Detaisl Modal start----------------------->
+    <form>
+        <div class="modal" id="syncdetails" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+
+                    <div class="card-head p-1 pb-2 pt-1 rounded-top bg-primary">
+                        <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                                class="fas fa-sync fs-3"></i>
+                            &nbsp;&nbsp;Details</h2>
+
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <input class="form-control form-control-lg" hidden pattern="^(?!\s*$).+" type="text"
+                            aria-label=".form-control-lg example" autocomplete="off" />
+
+
+                        <div class="mb-3">
+                            <table>
+                                <tr>
+                                    <td class="fw-bolder fs-2">
+                                        Last Sync At
+                                    </td>
+                                    <td class="fw-bold fs-3 " style="color:#f5c045;">
+
+                                        : {{last_sync_at}}
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="fw-bolder fs-2">
+                                        Next sync At
+                                    </td>
+                                    <td class="fw-bold fs-3" style="color:#f5c045;">
+                                        : {{nextsync_at}}
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="fw-bolder fs-2">
+                                        Synced till
+                                    </td>
+                                    <td class="fw-bold fs-3" style="color:#f5c045;">
+                                        : {{contactsync_till}}
+                                    </td>
+
+                                </tr>
+                            </table>
+                            <!-- <label for="remarks" class="form-label fs-1"><b>Last Sync At: </b></label><span class="fw-bolder ms-2 fs-2" style="color: #009EF7;">{{last_sync_at}}</span><br>
+                            <label for="remarks" class="form-label fs-1"><b>Next sync At: </b></label><span class="fw-bolder ms-2 fs-2" style="color: #f5c045;">{{nextsync_at}}</span><br>
+                            <label for="remarks" class="form-label fs-1"><b> Synced till: </b></label><span class="fw-bolder ms-2 fs-2" style="color: #f5c045;">{{contactsync_till}}</span><br> -->
+
+                        </div>
+                        <br>
+
+
+                        <!-- Modal footer -->
+                        <div class="text-center my-4">
+                            <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+                                <i class="fas fa-close text-white"></i> &nbsp;Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!----------------Sync Detaisl Modal end----------------------->
+    <form [formGroup]="reactiveForm" #form="ngForm">
+        <div class="modal" id="myModaladd" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="card-header p-1 pb-2 pt-1 rounded-top" style="background-color: #2e3192;">
+                        <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;Add To Opportunity</h2>
+                    </div>
+                    <br>
+                    <!-- Modal body -->
+                    <div class="row"><span class="font-bold ms-3"><b>Lead title</b><span
+                                class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-11 col-md-12 col-sm-12 fv-row mt-2 d-flex ms-3">
+                            <textarea lass="form-control form-control-lg form-control-solid custom-input
+                   mb-3 mb-lg-0 custom-input
+                 " class="form-control " style="height:45px;" formControlName="lead_title">
+                   </textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row"><span class="font-bold ms-3"><b>Appointment</b><span
+                                class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-11 col-md-12 col-sm-12 fv-row mt-2 d-flex ms-3">
+                            <input formControlName="appointment_timing" style="border-color: rgb(209, 209, 209);" type="date" class="
+                            form-control form-control-lg form-control-solid
+                            custom-input
+                            mb-3 mb-lg-0
+                            bg-white
+                            custom-input date-picker
+                            " pattern="^(?!\s*$).+" name="appointment_timing" required />
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row"><span class="font-bold ms-3"><b>Bussines Vertical</b><span
+                                class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-11 col-md-12 col-sm-12 fv-row mt-0 d-flex ms-3">
+                            <ng-select formControlName="bussiness_verticle" [items]="Getbussinessverticledropdown_list"
+                                bindLabel="business_vertical" bindValue="businessvertical_gid"
+                                placeholder="Select Bussines Verticle"
+                                class="custom col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-2">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <br><br>
+                    <!-- Modal footer -->
+                    <div class="text-center my-4">
+                        <button title="Submit" (click)="addtoleadbank()" [ngClass]="{
+                    'primary-button': !reactiveForm.invalid,
+                    'secondary-button': reactiveForm.invalid
+                  }" data-bs-dismiss="modal" class="btn-send">
+                            <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+                        </button> &nbsp;&nbsp;
+                        <button title="Close" class="btn-danger btn-sm text-white me-2" data-bs-dismiss="modal"
+                            (click)="onclose()">
+                            <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>

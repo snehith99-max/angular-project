@@ -1,0 +1,718 @@
+<div class="card">
+    <div class="row mt-5">
+        <div class="col-lg-3 mt-3">
+            <h3 class="card-title" style="margin-left: 8px;">Opening Balance</h3>
+        </div>
+        <div class="col-lg-3">
+            <ng-select [items]="Branchdtl_list" placeholder="Select an option" [(ngModel)]="branch_name1"
+                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="branch_name"
+                bindValue="branch_gid" (change)="OnChangeFinancialYear()">
+            </ng-select>
+        </div>
+        <div class="col-lg-2">
+            <ng-select [items]="FinancialYear_List" placeholder="Select an option" [(ngModel)]="finyear"
+                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="finyear" 
+                bindValue="finyear" (change)="OnChangeFinancialYear()">
+            </ng-select>
+        </div>
+        <div class="col-lg-1 d-flex align-items-end">
+            <!-- <button title="Search" type="button" (click)="OnChangeFinancialYear()"
+                class="btn btn-icon btn-sm bg-success cursor-pointer"><span
+                    class="fa-solid fa-magnifying-glass text-white  fs-5"></span>
+
+            </button> -->
+        </div>
+        <div class="col-lg-3">
+            <button title="Add Opening Balance" class="btn-primary btn-sm text-white mt-1 me-4 float-end"
+            data-bs-toggle="modal" data-bs-target="#openingbalanceadd">Add Opening Balance</button>
+        </div>
+
+    </div>
+
+    <ul class="m-3 nav nav-twotabs nav-line-tabs nav-line-tabs-20x mb-3 fs-6 border-bottom text-center mt-2 ms-6 me-6"
+        id="myTab" role="tablist">
+        <li class="border border-secondary active justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"
+            data-bs-toggle="tab"
+            style="color: #ffffff !important;  background: -webkit-linear-gradient(45deg, #45abe6, #3fe8d4);" (click)="showTab('Liability')"
+            [ngClass]="{'active-custom-tab': currentTab === 'Liability'}"
+            href="#kt_tab_pane_1">
+            <a>
+                <i class="fa-solid fa-money-bill-1-wave fs-4 me-4"></i>Liability
+                <span class="badge badge-pill badge-light text-black"></span>
+            </a>
+        </li>
+
+        <li class="border border-secondary justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"
+            data-bs-toggle="tab"
+            style="color: #ffffff !important;  background: -webkit-linear-gradient(45deg, #aedaf3, #399C91);" (click)="showTab('Asset')"
+            [ngClass]="{'active-custom-tab': currentTab === 'Asset'}"
+            href="#kt_tab_pane_2">
+            <a>
+                <i class="fa-solid fa-laptop-medical fs-4 me-4"></i>Asset
+                <span class="badge badge-pill badge-light text-black "></span>
+            </a>
+        </li>
+
+        <li class="border border-secondary justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"
+            data-bs-toggle="tab"
+            style="color: #ffffff !important;  background: -webkit-linear-gradient(45deg, #aedaf3, #399C91);" (click)="showTab('Consolidated')"
+            [ngClass]="{'active-custom-tab': currentTab === 'Consolidated'}"
+            href="#kt_tab_pane_3">
+            <a>
+                <i class="fa-solid fa-laptop-medical fs-4 me-4"></i>Consolidated
+                <span class="badge badge-pill badge-light text-black "></span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane show active" id="kt_tab_pane_1" role="tabpanel">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="m-3 me-0 p-3 rounded">
+                        <div class="table-responsive">
+                            <div class="card card-body m-0 p-0 mb-0 bg-white rounded table-responsive">
+                                <!-- <p class="ms-3"
+                                    style="font-size: 14px;color: rgb(8, 8, 146);text-underline-offset: 6px;">
+                                    <u><b>Liability</b></u>
+                                </p> -->
+                                <div id="kt_chat_contacts_body1" class="bg-white" style="max-height: 355px; overflow-y: auto;">
+                                    <table id="Openingbalance_lists"
+                                        class="table table-row-bordered border-bottom gs-7 align-middle "
+                                        style="border-bottom: 1px solid rgb(245, 244, 244);">
+                                        <thead>
+                                            <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue"
+                                                style="text-align: center;">
+                                                <th>Account Group</th>
+                                                <th>Sub-Group</th>
+                                                <th>Ledger</th>
+                                                <th>Credit</th>
+                                                <th>Balance</th>
+                                                <th class="text-center"> Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let data of processedOpeningbalanceLists; let i=index;">
+                                                <td class="border border-secondary"
+                                                    *ngIf="i === 0 || processedOpeningbalanceLists[i-1].MainGroup_name !== data.MainGroup_name"
+                                                    [attr.rowspan]="data.mainGroupSpan" style="vertical-align: top;">
+                                                    {{data.MainGroup_name}}
+                                                </td>
+                                                <td class="border border-secondary"
+                                                    *ngIf="i === 0 || processedOpeningbalanceLists[i-1].subgroup_name !== data.subgroup_name"
+                                                    [attr.rowspan]="data.subGroupSpan" style="vertical-align: top;">
+                                                    {{data.subgroup_name}}
+                                                </td>
+                                                <td class="border border-secondary" style="max-width: 300px;word-wrap: break-word;">
+                                                    {{data.account_code}} - {{data.account_name}}</td>
+                                                <td class="border border-secondary" style="text-align: right;">
+                                                    {{data.credit_amount}}</td>
+                                                <td class="border border-secondary"
+                                                    style="text-align: right; vertical-align: top; font-weight: bold;"
+                                                    *ngIf="i === 0 || processedOpeningbalanceLists[i-1].MainGroup_name !== data.MainGroup_name"
+                                                    [attr.rowspan]="data.mainGroupSpan">{{data.sum_of_maingroup}}</td>
+                                                    <td class="text-nowrap" style="text-align: center;">
+                                                        <button title="Edit" type="button" (click)="edit(data)"
+                                                         class="btn btn-icon btn-sm bg-success me-2" data-bs-toggle="modal"
+                                                         data-bs-target="#openingbalanceedit"><span
+                                                         class="fa-solid fa-pencil text-white  fs-6"></span>
+                                                        </button>
+                                                    </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="m-3">
+                <div class="d-flex justify-content-center">
+                    <h3 class="fw-bolder text-blue ">Total Credit Amount :<span
+                            class="text-black ms-3">{{totalCredit}}</span></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane show" id="kt_tab_pane_2" role="tabpanel">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="m-3 me-0 p-3 rounded">
+                        <div class="table-responsive">
+                            <div class="card card-body m-0 p-0 mb-0 bg-white rounded table-responsive">
+                                <!-- <p class="ms-3"
+                                    style="font-size: 14px;color: rgb(8, 8, 146);text-underline-offset: 6px;">
+                                    <u><b>Asset</b></u>
+                                </p> -->
+                                <div id="kt_chat_contacts_body1" class="bg-white" style="max-height: 355px; overflow-y: auto;">
+                                    <table id="Openingbalance_listss"
+                                        class="table table-row-bordered border-bottom gs-7 align-middle"
+                                        style="border-bottom: 1px solid rgb(245, 244, 244);">
+                                        <thead>
+                                            <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue" style="text-align: center;">
+                                                <th>Account Group</th>
+                                                <th>Sub-Group</th>
+                                                <th>Ledger</th>
+                                                <th>Debit</th>
+                                                <th>Balance</th>
+                                                <th class="text-center"> Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let data of processedOpeningbalanceList; let i=index;">
+                                                <td class="border border-secondary"
+                                                    *ngIf="i === 0 || processedOpeningbalanceList[i-1].MainGroup_name !== data.MainGroup_name"
+                                                    [attr.rowspan]="data.mainGroupSpan" style="vertical-align: top;">
+                                                    {{data.MainGroup_name}}
+                                                </td>
+                                                <td class="border border-secondary"
+                                                    *ngIf="i === 0 || processedOpeningbalanceList[i-1].subgroup_name !== data.subgroup_name"
+                                                    [attr.rowspan]="data.subGroupSpan" style="vertical-align: top;">
+                                                    {{data.subgroup_name}}
+                                                </td>
+
+                                                <td class="border border-secondary">
+                                                    {{data.account_code}} - {{data.account_name}}</td>
+                                                <td class="border border-secondary" style="text-align: right;">
+                                                    {{data.debit_amount}}</td>
+                                                <td class="border border-secondary"
+                                                    style="text-align: right; vertical-align: top; font-weight: bold;"
+                                                    *ngIf="i === 0 || processedOpeningbalanceList[i-1].MainGroup_name !== data.MainGroup_name"
+                                                    [attr.rowspan]="data.mainGroupSpan">{{data.sum_of_maingroup}}</td>
+                                                    <td class="text-nowrap" style="text-align: center;">
+                                                        <button title="Edit" type="button" (click)="edit_asset(data)" class="btn btn-icon btn-sm bg-success me-2"
+                                                         data-bs-toggle="modal" data-bs-target="#openingbalanceeditasset"><span class="fa-solid fa-pencil text-white  fs-6"></span>
+                                                        </button>
+                                                    </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="m-3">
+                <div class="d-flex justify-content-center">
+                    <h3 class="fw-bolder text-blue ms-20">Total Debit Amount : <span
+                            class="text-black ms-3">{{totalDebit}}</span> </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane show" id="kt_tab_pane_3" role="tabpanel">
+            <div class="m-0 me-1 d-flex flex-wrap mb-0 mt-0 " style="margin-top: 10px;">
+                <div class="col-12 col-lg-12 row">
+                    <div class="col-12 col-lg-6 pe-0">
+                        <div class="m-3 me-0 card   rounded" style="border-top:2px solid rgb(8, 8, 146);">
+                            <div class="table-responsive">
+                                <div class="card card-body m-0 p-0 mb-0 bg-white rounded table-responsive">
+                                    <p class="ms-3"
+                                        style="font-size: 14px;color: rgb(8, 8, 146);text-underline-offset: 6px;">
+                                        <u><b>Liability</b></u>
+                                    </p>
+                                    <div id="kt_chat_contacts_body1" class="bg-white" style="max-height: 355px; overflow-y: auto;">
+                                        
+                                        <table id="Openingbalance_lists"
+                                            class="table table-row-bordered border-bottom gs-7 align-middle "
+                                            style="border-bottom: 1px solid rgb(245, 244, 244);">
+                                            <thead>
+                                                <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue" style="text-align: center;">
+                                                    <th>Account Group</th>
+                                                    <th>Sub-Group</th>
+                                                    <th>Ledger</th>
+                                                    <th>Credit</th>
+                                                    <th>Balance</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let data of processedOpeningbalanceLists; let i=index;">
+                                                    <td class="border border-secondary" 
+                                                        *ngIf="i === 0 || processedOpeningbalanceLists[i-1].MainGroup_name !== data.MainGroup_name"
+                                                        [attr.rowspan]="data.mainGroupSpan"
+                                                        style="vertical-align: top;">
+                                                        {{data.MainGroup_name}}
+                                                    </td>
+                                                    <td class="border border-secondary"
+                                                        *ngIf="i === 0 || processedOpeningbalanceLists[i-1].subgroup_name !== data.subgroup_name"
+                                                        [attr.rowspan]="data.subGroupSpan" style="vertical-align: top;">
+                                                        {{data.subgroup_name}}
+                                                    </td>
+                                                    <td class="border border-secondary">
+                                                        {{data.account_code}} - {{data.account_name}}</td>
+                                                    
+                                                    <td class="border border-secondary" style="text-align: right;">
+                                                        {{data.credit_amount}}</td>
+                                                    <td class="border border-secondary"
+                                                        style="text-align: right; vertical-align: top; font-weight: bold;"
+                                                        *ngIf="i === 0 || processedOpeningbalanceLists[i-1].MainGroup_name !== data.MainGroup_name"
+                                                        [attr.rowspan]="data.mainGroupSpan">{{data.sum_of_maingroup}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 pe-0">
+                        <div class="m-3 me-0 card  rounded" style="border-top:2px solid rgb(8, 8, 146);">
+                            <div class="table-responsive">
+                                <div class="card card-body m-0 p-0 mb-0 bg-white rounded table-responsive">
+                                    <p class="ms-3"
+                                        style="font-size: 14px;color: rgb(8, 8, 146);text-underline-offset: 6px;">
+                                        <u><b>Asset</b></u>
+                                    </p>
+                                    <div id="kt_chat_contacts_body1" class="bg-white" style="max-height: 355px; overflow-y: auto;">
+                                        
+                                        <table id="Openingbalance_listss"
+                                            class="table table-row-bordered border-bottom gs-7 align-middle"
+                                            style="border-bottom: 1px solid rgb(245, 244, 244);">
+                                            <thead>
+                                                <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue" style="text-align: center;">
+                                                    <th>Account Group</th>
+                                                    <th>Sub-Group</th>
+                                                    <th>Ledger</th>
+                                                    <th>Debit</th>
+                                                    <th>Balance</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let data of processedOpeningbalanceList; let i=index;">
+                                                    <td class="border border-secondary"
+                                                        *ngIf="i === 0 || processedOpeningbalanceList[i-1].MainGroup_name !== data.MainGroup_name"
+                                                        [attr.rowspan]="data.mainGroupSpan"
+                                                        style="vertical-align: top;">
+                                                        {{data.MainGroup_name}}
+                                                    </td>
+                                                    <td class="border border-secondary"
+                                                        *ngIf="i === 0 || processedOpeningbalanceList[i-1].subgroup_name !== data.subgroup_name"
+                                                        [attr.rowspan]="data.subGroupSpan" style="vertical-align: top;">
+                                                        {{data.subgroup_name}}
+                                                    </td>
+
+                                                    <td class="border border-secondary">
+                                                        {{data.account_code}} - {{data.account_name}}</td>
+                                                    
+                                                    <td class="border border-secondary" style="text-align: right;">
+                                                        {{data.debit_amount}}</td>
+                                                    <td class="border border-secondary"
+                                                        style="text-align: right; vertical-align: top; font-weight: bold;"
+                                                        *ngIf="i === 0 || processedOpeningbalanceList[i-1].MainGroup_name !== data.MainGroup_name"
+                                                        [attr.rowspan]="data.mainGroupSpan">{{data.sum_of_maingroup}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-lg-6 col-md-6 col-sm-12 float-end">
+                    <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                        <h3 class="fw-bolder text-blue float-end" style="margin-right: -30px;">Total :<span
+                                class="text-black ms-3">{{totalCredit}}</span></h3>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 col-md-2 col-sm-12">
+                    <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                        <h3 class="fw-bolder text-red" style="margin-left: 40px;">Difference :<span
+                                class="text-black ms-3">{{difference_value}}</span></h3>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 col-md-4 col-sm-12">
+                    <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                        <h3 class="fw-bolder text-blue float-end" style="margin-right: -15px;">Total : <span
+                                class="text-black ms-3">{{totalDebit}}</span> </h3>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="d-flex flex-row">
+                <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                    <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                        <h3 class="fw-bolder text-blue ms-20">Total Credit Amount :<span
+                                class="text-black ms-3">{{totalCredit}}</span></h3>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                    <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                        <h3 class="fw-bolder text-blue ms-20">Total Debit Amount : <span
+                                class="text-black ms-3">{{totalDebit}}</span> </h3>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="m-5">
+                <div class="d-flex justify-content-center">
+                    <h3 class="fw-bolder text-blue ms-20">Difference : <span
+                            class="text-black ms-3">{{difference_value}}</span> </h3>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<!-- Liability Openging balance Add -->
+<div class="modal top fade" id="openingbalanceadd" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog  modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white">Add Opening Balance
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="OpeningBalanceForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-4 col-md-11 col-sm-11">
+                           
+                            <span class="font-bold required">Branch</span>
+                            <ng-select [items]="Branchdtl_list" placeholder="Select an option"
+                                formControlName="branch_name"
+                                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="branch_name"
+                                bindValue="branch_gid"
+                                [ngClass]="{'invalid-border': branch_name.invalid && (branch_name.dirty || branch_name.touched)}"
+                                ></ng-select>
+                                <div *ngIf="branch_name.invalid && (branch_name.dirty || branch_name.touched)">
+                                    <div *ngIf="branch_name.errors?.['required']">
+                                        <span style="color:red;">Branch is required.</span>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="col-12 col-lg-4 col-md-12 col-sm-12">
+                            <span class="font-bold">Financial Year</span>
+                            <ng-select [items]="FinancialYear_List" placeholder="Select an option"
+                                formControlName="finyear"
+                                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="finyear"
+                                bindValue="finyear"></ng-select>
+                        </div>
+                        
+                        <div class="col-12 col-lg-4 col-md-6 col-sm-12 mb-4">
+                            <span class="font-bold required">Balance Type</span>
+                            <br />
+                            <div class="d-flex justify-content-start mt-4 ">
+                                <div
+                                    class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                                    <input type="radio" name="rdbbalancetype" value="Liability"
+                                        (change)="OnChangeBalanceType()" formControlName="balance_type">
+                                    <label class="form-check-label text-gray-700 text-nowrap"
+                                        for="kt_builder_header_content_menu">Liability</label>
+                                </div>
+                                <div
+                                    class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+                                    <input type="radio" name="rdbbalancetype" value="Asset"
+                                        (change)="OnChangeBalanceType()" formControlName="balance_type">
+                                    <label class="form-check-label text-gray-700 text-nowrap"
+                                        for="kt_builder_header_content_page-title">Asset</label>
+                                </div>
+                            </div>
+                            <div *ngIf="balance_type.invalid && (balance_type.dirty || balance_type.touched)">
+                                <div *ngIf="balance_type.errors?.['required']">
+                                    <span style="color:red;">Balance Type is required.</span>
+                                </div>
+                            </div>
+                            <div *ngIf="balance_type.invalid && (balance_type.dirty || balance_type.touched)">
+                                <div *ngIf="balance_type.errors?.['pattern']">
+                                    <span style="color:red;">Invalid Format.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <ng-container *ngIf="showparentname">
+                            <div class="col-12 col-lg-6 col-md-12 col-sm-12">
+                                <span class="font-bold required">Account Name</span>
+                                <ng-select [items]="liabilityacct_List" placeholder="Select an option"
+                                    formControlName="liabilityaact_name"
+                                    class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                                    bindLabel="account_name" bindValue="account_gid"
+                                    [ngClass]="{'invalid-border': liabilityaact_name.invalid && (liabilityaact_name.dirty || liabilityaact_name.touched)}"
+                                    ></ng-select>
+                                    <div *ngIf="liabilityaact_name.invalid && (liabilityaact_name.dirty || liabilityaact_name.touched)">
+                                        <div *ngIf="liabilityaact_name.errors?.['required']">
+                                            <span style="color:red;">Account Name is required.</span>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                                <span class="font-bold required">Credit Amount</span>
+                                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                    <input type="text" style="text-align:right;"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                                        placeholder="0.00" formControlName="amount_value"
+                                        (input)="formatCurrency($event)" 
+                                        (keypress)="validateNumericInput($event)"
+                                        [ngClass]="{'invalid-border': amount_value.invalid && (amount_value.dirty || amount_value.touched)}" />
+                                </div>
+                                <div *ngIf="amount_value.invalid && (amount_value.dirty || amount_value.touched)">
+                                    <div *ngIf="amount_value.errors?.['required']">
+                                        <span style="color:red;">Credit Amount is required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3 col-md-12 col-sm-12">
+                                <span class="font-bold">Account Ref.No</span>
+                                <input type="text" formControlName="acctref_no"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary custom-input mt-2"
+                                    placeholder="Enter Account Ref.No" />
+                            </div>
+
+                        </ng-container>
+                    </div>
+
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <ng-container *ngIf="disabledparentname">
+                            <div class="col-12 col-lg-6 col-md-12 col-sm-12">
+                                <span class="font-bold required">Account Name</span>
+                                <ng-select [items]="assetacct_List" placeholder="Select an option"
+                                    formControlName="liabilityaact_name"
+                                    class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                                    bindLabel="account_name" bindValue="account_gid" 
+                                    [ngClass]="{'invalid-border': liabilityaact_name.invalid && (liabilityaact_name.dirty || liabilityaact_name.touched)}"
+                                    ></ng-select>
+                                    <div *ngIf="liabilityaact_name.invalid && (liabilityaact_name.dirty || liabilityaact_name.touched)">
+                                        <div *ngIf="liabilityaact_name.errors?.['required']">
+                                            <span style="color:red;">Account Name is required.</span>
+                                        </div>
+                                    </div>
+                            </div>
+                            
+                            <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                                <span class="font-bold required">Debit Amount</span>
+                                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                    <input type="text" style="text-align:right;"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                                        placeholder="0.00" formControlName="amount_value"
+                                        (input)="formatCurrency($event)" 
+                                        (keypress)="validateNumericInput($event)"
+                                        [ngClass]="{'invalid-border': amount_value.invalid && (amount_value.dirty || amount_value.touched)}" />
+                                </div>
+                                <div *ngIf="amount_value.invalid && (amount_value.dirty || amount_value.touched)">
+                                    <div *ngIf="amount_value.errors?.['required']">
+                                        <span style="color:red;">Debit Amount is required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3 col-md-12 col-sm-12">
+                                <span class="font-bold">Account Ref.No</span>
+                                <input type="text" formControlName="acctref_no"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary custom-input mt-2"
+                                    placeholder="Enter Account Ref.No" />
+                            </div>
+                        </ng-container>
+                    </div>
+                    <br />
+                    
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" (click)="submit()"
+                            [disabled]="OpeningBalanceForm.invalid"
+                            [ngStyle]="{ 'cursor': OpeningBalanceForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !OpeningBalanceForm.invalid,
+                        'btn-secondary text-white': OpeningBalanceForm.invalid }" data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Submit
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " (click)="onclose()" data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Liability Openging balance Edit -->
+<div class="modal top fade" id="openingbalanceedit" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white">
+                    <i class="fa-solid fa-pen-to-square fs-5 ms-3 me-3"></i>Edit Opening Balance
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="OpeningBalanceEditForm">
+                    <div class="d-flex flex-row flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-12 col-lg-11 col-md-11 col-sm-12 fv-row">
+                                <span class="font-bold">Branch</span>
+                                <p>{{branchview}}</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row">
+                                <span class="font-bold">Financial Year</span>
+                                <p>{{financialyearview}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-12 col-lg-11 col-md-11 col-sm-12 fv-row">
+                                <span class="font-bold">Account Group Name</span>
+                                <p>{{acctgroupnameview}}</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-12 col-lg-11 col-md-11 col-sm-12 fv-row">
+                                <span class="font-bold">Account Name</span>
+                                <p>{{accountnameview}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-12 col-lg-11 col-md-11 col-sm-12 fv-row">
+                                <span class="font-bold required">Amount</span>
+                                <input type="text" style="text-align:right;"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                                    placeholder="0.00" formControlName="editamount_value"
+                                    (input)="formatCurrency($event)" 
+                                    (keypress)="validateNumericInput($event)"
+                                    [ngClass]="{'invalid-border': editamount_value.invalid && (editamount_value.dirty || editamount_value.touched)}" />
+                            </div>
+                            <div
+                                *ngIf="editamount_value.invalid && (editamount_value.dirty || editamount_value.touched)">
+                                <div *ngIf="editamount_value.errors?.['required']">
+                                    <span style="color:red;">Amount is required.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <!-- <div class="col-12 col-lg-11 col-md-11 col-sm-12 fv-row">
+                                <span class="font-bold">Remarks</span>
+                                <textarea class="form-control bg-white borderc-secondary" rows="3"
+                                    formControlName="editremarks" style="border-radius: 5px;"
+                                    placeholder="Enter Remarks.."></textarea>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" (click)="update()"
+                        [disabled]="OpeningBalanceEditForm.invalid"
+                            [ngStyle]="{ 'cursor': OpeningBalanceEditForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !OpeningBalanceEditForm.invalid,
+                        'btn-secondary text-white': OpeningBalanceEditForm.invalid }"
+                         data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5 me-3"></i>Update
+                        </button>
+                        <button type="button" class="btn-danger ms-5" data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center me-3"></i>Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Asset Openging balance Edit -->
+<div class="modal top fade" id="openingbalanceeditasset" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white">
+                    <i class="fa-solid fa-pen-to-square fs-5 ms-3 me-3"></i>Edit Opening Balance
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="OpeningBalanceAssetEditForm">
+                    <div class="d-flex flex-row flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-12 col-lg-11 col-md-11 col-sm-12 fv-row">
+                                <span class="font-bold">Branch</span>
+                                <p>{{assetbranchview}}</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-12 col-lg-11 col-md-11 col-sm-12 fv-row">
+                                <span class="font-bold">Financial Year</span>
+                                <p>{{assetfinancialyearview}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-12 col-lg-11 col-md-11 col-sm-12 fv-row">
+                                <span class="font-bold">Account Group Name</span>
+                                <p>{{assetacctgroupnameview}}</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-12 col-lg-11 col-md-11 col-sm-12 fv-row">
+                                <span class="font-bold">Account Name</span>
+                                <p>{{assetaccountnameview}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-12 col-lg-11 col-md-11 col-sm-12 fv-row">
+                                <span class="font-bold">Amount</span>
+                                <input type="text" style="text-align:right;"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                                    placeholder="0.00" formControlName="editassetamount_value"
+                                    (input)="formatCurrency($event)" 
+                                    (keypress)="validateNumericInput($event)"
+                                    [ngClass]="{'invalid-border': editassetamount_value.invalid && (editassetamount_value.dirty || editassetamount_value.touched)}" />
+                            </div>
+                            <div
+                                *ngIf="editassetamount_value.invalid && (editassetamount_value.dirty || editassetamount_value.touched)">
+                                <div *ngIf="editassetamount_value.errors?.['required']">
+                                    <span style="color:red;">Amount is required.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <!-- <div class="col-12 col-lg-11 col-md-11 col-sm-12 fv-row">
+                                <span class="font-bold">Remarks</span>
+                                <textarea class="form-control bg-white borderc-secondary" rows="2"
+                                    formControlName="editassetremarks" style="border-radius: 5px;"
+                                    placeholder="Enter Remarks.."></textarea>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button type="submit" (click)="asset_update()" class="btn-success text-white"
+                        [disabled]="OpeningBalanceAssetEditForm.invalid"
+                            [ngStyle]="{ 'cursor': OpeningBalanceAssetEditForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !OpeningBalanceAssetEditForm.invalid,
+                        'btn-secondary text-white': OpeningBalanceAssetEditForm.invalid }"   
+                        data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Update
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,95 @@
+<div class="card rounded-top mt-4">
+    <div class="card-title p-5 pb-3 pt-3 rounded-top bg-primary d-flex justify-content-between 
+    align-items-center">
+        <h2 class="fw-bolder text-white"><i class="fas fa-plus fw-bolder fs-3"></i>&nbsp;&nbsp; Sales Return Add
+        </h2>
+        <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer " title="back"
+      routerLink="/ims/ImsTrnSalesReturnSummary"><i class="fa-solid fa-arrow-left-long fs-1 fw-bold"></i></button>
+
+    </div>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="GetSalesReturnAdd_list" class="table table-stripped table-row-bordered border-bottom gs-7">
+                <thead>
+                    <tr class="fw-bolder fs-7 text-nowrap bg-lightblue text-blue algin-middle">
+                        <th style="width: 5%;">S.No</th>
+                        <th style="width: 8%;">DO Date</th>
+                        <th style="width: 10%;">DO Ref No</th>
+                        <th style="width: 25%;">Company</th>
+                        <th style="width: 25%;">Contact Details</th>
+                        <th style="width: 5%;">Details</th>
+                        <th style="width: 10%;">Status</th>
+                        <th class="text-center bg-lightblue ">Action</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of GetSalesReturnAdd_list; let i=index;">
+                        <td>{{i+1}}</td>
+                        <td>{{data.directorder_date}}</td>
+                        <td>{{data.directorder_gid}}</td>
+                        <td>{{data.customer_name}}</td>
+                        <td>{{data.contact}}</td>
+                        <td class="text-center">   <label title="Customer Details" data-bs-toggle="modal" data-bs-target="#myModalcustomerdetail"
+                            (click)="Getproduct(data.directorder_gid)">
+                            <i class="fas fa-question-circle fa-5x text-primary fs-2" style="cursor: pointer;"></i>
+                          </label></td>
+                        <td>{{data.delivery_status}}</td>
+                        <td style="display: flex; align-items: center; justify-content: center;">
+                          <button title="Select" type="button" class="btn-lg btn-primary"
+                          (click)="addsalesreturn(data.directorder_gid)"
+                          style="height: 20px; display: flex; align-items: center; justify-content: center;">
+                          Select
+                      </button>
+                      </td>
+                      
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModalcustomerdetail" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content d-flex justify-content-center">
+        <div class="card-header p-1 pb-1 pt-1 rounded-top bg-primary"
+           style="display: flex; align-items: center; height: 40px;">
+           <h3 style="margin-top: 10px; color: white; font-weight: bold" class="mt-8">
+            &nbsp;&nbsp;Product Details
+          </h3>
+       </div>
+       <div class="modal-body">
+        <table class="table table-striped table-bordered text-blue border-bottom gs-7 align-middle ">
+          <thead>
+              <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                  <th  class="text-blue text-center" style="width:2%">S.No</th>
+                  <th  class="text-blue text-center" style="width: 10%;">Product Group</th>
+                  <th  class="text-blue text-center" style="width: 20%;">Product</th>
+                  <th  class="text-blue text-center" style="width: 20%;">Description</th>
+                  <th  class="text-blue text-center" style="width: 5%;">Ordered</th>
+                  <th  class="text-blue text-center" style="width: 5%;">Delivered</th> 
+                  <th  class="text-blue text-center" style="width: 5%;">Returned</th> 
+                  <th  class="text-blue text-center" style="width: 5%;">Actual Delivered</th>
+              </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of GetViewreturnProduct_list;let i = index;">
+            <td>{{i+1}}</td>
+            <td>{{data.productgroup_name}}</td>
+            <td>{{data.product_name}}</td>
+            <td>{{data.product_desc}}</td>
+            <td>{{data.product_qty}} {{data.productuom_name}}</td>
+            <td>{{data.product_qtydelivered}} {{data.productuom_name}}</td>
+            <td>{{data.qty_returned}} {{data.productuom_name}}</td>
+            <td>{{data.actual}} {{data.productuom_name}}</td>
+          </tr>
+        </tbody>
+          </table>
+        <div class="text-center my-4">
+          <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white"></i> &nbsp;Close
+          </button>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>

@@ -1,0 +1,155 @@
+<div class="card m-3">
+    <div class="card-header bg-primary card-height55">
+        <div class="card-title m-0">
+            <h4 class="fw-bolder text-white">Company Details</h4>
+        </div>
+    </div>
+    <form [formGroup]="companyform" #ngform>
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="fw-bold">Company Code</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary custom-input" placeholder="Company Code" formControlName="company_code" readonly/>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="fw-bold required">Company Name</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" [ngStyle]="{'border-color': CompanyNameControl.invalid && CompanyNameControl.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input" placeholder="Company Name" formControlName="company_name"/>
+                    <div *ngIf="CompanyNameControl.invalid && CompanyNameControl.touched">
+                        <div *ngIf="CompanyNameControl.hasError('required')" class="text-red"> Company name is required.</div>
+                    </div>
+                    <div *ngIf="companyform.get('company_name')?.hasError('pattern')"
+                    class="text-red">Space at the
+                    beginning is not allowed.</div>
+                </div>
+                
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="fw-bold required">Company Website</span>
+
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text"  [ngStyle]="{'border-color': CompanyWebsiteControl.invalid && CompanyWebsiteControl.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                    placeholder="Company Website" formControlName="company_website" />
+                </div>
+                <div *ngIf="CompanyWebsiteControl.invalid && CompanyWebsiteControl.touched">
+                    <div *ngIf="CompanyWebsiteControl.hasError('required')" class="text-red">Company website is required.</div>
+                    <div *ngIf="CompanyWebsiteControl.hasError('pattern')" class="text-red">Please enter a valid website URL.</div>
+                    <div *ngIf="CompanyWebsiteControl.hasError('email')" class="text-red">Email addresses are not allowed.</div>
+                    <div *ngIf="CompanyWebsiteControl.hasError('phoneNumber')" class="text-red">Phone numbers are not allowed.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="fw-bold required">Contact Person</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" [ngStyle]="{'border-color': ContactPersonControl.invalid && ContactPersonControl.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                    placeholder="Contact Person" formControlName="contact_person" />
+                </div>
+                <div *ngIf="ContactPersonControl.invalid && ContactPersonControl.touched">
+                    <div *ngIf="ContactPersonControl.hasError('required')" class="text-red"> Contact person is required.</div>
+                </div>
+                <div *ngIf="companyform.get('contact_person')?.hasError('pattern')"
+                class="text-red">Space at the
+                beginning is not allowed.</div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="fw-bold required">Authorized Mobile</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" [ngStyle]="{'border-color': CompanyPhonecontrol.invalid && CompanyPhonecontrol.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                    placeholder="Contact Number" maxlength="12"minlength="10" formControlName="company_phone" 
+                    (keypress)="validateNumberInput($event)" />
+                </div>
+                <div *ngIf="CompanyPhonecontrol.invalid && CompanyPhonecontrol.touched">
+                    <div *ngIf="CompanyPhonecontrol.hasError('required')" class="text-red">Mobile number is required.</div>
+                </div>
+                <div *ngIf="CompanyPhonecontrol.errors?.['pattern']">
+                    <span class="text-red">Space not allowed and accepts 12 digits</span>
+                  </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12 "><span class="fw-bold required">Authorized Email</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text"  [ngStyle]="{'border-color': CompanyMailcontrol.invalid && CompanyMailcontrol.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                    placeholder="Company Mail" formControlName="company_mail" />
+                </div>
+                <div *ngIf="CompanyMailcontrol.invalid && (CompanyMailcontrol.dirty || CompanyMailcontrol.touched)">
+                    <div *ngIf="CompanyMailcontrol.errors?.['pattern']"
+                      style="color: red; width: 200px; margin-top: 1px; margin-left: 8px; font-size: 11px;">*
+                      Invalid Email..!!!</div>
+                  </div>
+                <div *ngIf="CompanyMailcontrol.invalid && CompanyMailcontrol.touched">
+                    <div *ngIf="CompanyMailcontrol.hasError('required')" class="text-red"> Email address is required.</div>
+                </div>
+                <!-- <div *ngIf="companyform.get('company_mail')?.hasError('pattern')"
+                class="text-red">Space at the
+                beginning is not allowed.</div> -->
+            </div> 
+        </div>
+
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="fw-bold required">Company Address</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <textarea type="text" [ngStyle]="{'border-color': Addresscontrol.invalid && Addresscontrol.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input textarea-resize-none"
+                        class="form-control" placeholder="Company Address" formControlName="company_address" rows="3" maxlength="1000"  style="resize: none;"></textarea>
+                </div>
+                <div *ngIf="Addresscontrol.invalid && Addresscontrol.touched">
+                    <div *ngIf="Addresscontrol.hasError('required')" class="text-red"> Company Address is required.</div>
+                </div>
+                <div *ngIf="companyform.get('company_address')?.hasError('pattern')" class="text-red">
+                    Space at the beginning is not allowed.</div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                    <div class="d-flex flex-row m-0 flex-wrap">
+                        <div class="col-6 col-lg-6 col-md-6 col-sm-6"><b>Country</b>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <ng-select class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                                    formControlName="country_name" bindLabel="country_name" bindValue="country_name"
+                                    [items]="country_list" placeholder="Select an option"></ng-select>
+
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-6 col-md-6 col-sm-6"><span class="fw-bold">Currency</span>                            
+                                <ng-select class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                                    formControlName="currency_code" bindLabel="currency_code"
+                                    bindValue="currencyexchange_gid" [items]="currency_list"
+                                    placeholder="Select an option"></ng-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="fw-bold">Authorized Signatory</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input accept="image/*" (change)="onChange($event)" type="file" #fileInput formControlName="authorised_sign"
+                    class="form-control form-control-lg form-control-solid custom-input borderc-secondary mb-3 mb-lg-0 bg-white  custom-input"
+                    name="fName" />
+                    <div *ngIf="invalidFileFormat" 
+                    class="text-red">
+                    Invalid file. Accept image format.
+                  </div>
+                        <!-- <p *ngIf="file_name">Selected File: {{ file_name }}</p> -->
+                        <!-- <p>Selected File: {{file_name_1}}</p> -->
+                        <span *ngIf="!file_name">Selected File: {{ getFileName(companyform.get('authorised_sign').value) }}</span>
+                        <!-- <img src="{{sample}}"> -->
+
+                </div>
+                
+            </div>
+            
+        </div>
+
+        <div class="text-center my-4">
+            <button type="update" class="btn-success btn-sm text-white me-2" (click)="validate()" [disabled]="invalidFileFormat || companyform.invalid" >
+                <i class="fas fa-check text-white fs-5"></i>
+                <span class="ms-3">Update</span>
+            </button>
+            <button type="back" class="btn-primary btn-sm text-white me-4"(click)="back()">
+                <i class="fas fa-arrow-left"></i>
+                <span class="ms-3">Back</span>
+            </button>
+        </div>
+    </form>
+</div>

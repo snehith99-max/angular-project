@@ -1,0 +1,185 @@
+<form [formGroup]="InseEditForm" novalidate="novalidate" (ngSubmit)="validate()">
+  <div class="card -lg rounded-top pb-12 mt-6">
+    <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+      <h3 class="fw-bolder text-white"><i class="fas fa-pencil fw-bolder fs-3"></i> &nbsp;&nbsp;&nbsp;Edit Institute</h3>
+    </div>
+    <div class="card border m-3 mb-0 shadow-sm">
+      <div class="card-header bg-lightblue card-height55">
+        <div class="card-title m-0 ">
+          <h4 class="fw-bolder text-blue">Institute Details</h4>
+        </div>
+      </div>
+      <div class="d-flex flex-row m-6 flex-wrap">
+
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Institute Prefix</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input type="text" [(ngModel)]="institute_prefix"
+              class="form-control form-control-lg form-control-solid custom-input inputfield mb-3 mb-lg-0 bg-white custom-input borderc-secondary"
+              required formControlName="institute_prefix" />
+          </div>
+
+        </div>
+
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Institute Login Code</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input type="text" [(ngModel)]="institute_code"
+              class="form-control form-control-lg form-control-solid custom-input inputfield mb-3 mb-lg-0 bg-white custom-input borderc-secondary"
+              required formControlName="institute_code" />
+          </div>
+        </div>
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Institute<span
+              class="ms-1 text-red">*</span></span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input type="text"
+              [ngStyle]="{ 'border-color': InseEditForm.get('institute_name')?.hasError('required') && InseEditForm.get('institute_name')?.touched ? 'red' : 'rgb(209, 209, 209)','height': '42px' }"
+              class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+              placeholder="Institute" required formControlName="institute_name" />
+          </div>
+          <div
+            *ngIf="InseEditForm.get('institute_name')?.hasError('required') && InseEditForm.get('institute_name')?.touched"
+            class="text-red">
+            Institute is required.
+          </div>
+          <div class="text-red" *ngIf="InseEditForm.get('institute_name')?.hasError('pattern')">
+            Space doesn't accepted
+          </div>
+
+        </div>
+      </div>
+
+      <div class="d-flex flex-row m-6 mt-0 mb-11 flex-wrap">
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Contact Person<span
+          class="ms-1 text-red">*</span></span>
+      <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+        <input type="text"
+          [ngStyle]="{ 'border-color': InseEditForm.get('contact_person')?.hasError('required') && InseEditForm.get('contact_person')?.touched ? 'red' : 'rgb(209, 209, 209)','height': '42px' }"
+          class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+          placeholder="Contact Person" required formControlName="contact_person" />
+      </div>
+      <div
+        *ngIf="InseEditForm.get('contact_person')?.hasError('required') && InseEditForm.get('contact_person')?.touched"
+        class="text-red">
+        Contact Person is required.
+      </div>
+      <div class="text-red" *ngIf="InseEditForm.get('contact_person')?.hasError('pattern')">
+        Space doesn't accepted
+      </div>
+
+    </div>
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Official Email Address</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input [(ngModel)]="institutemail_id" type="text"
+              [ngStyle]="{ 'border-color': InseEditForm.get('institutemail_id')?.hasError('required') && InseEditForm.get('institutemail_id')?.touched ? 'red' : 'rgb(209, 209, 209)','height': '42px' }"
+              class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 "
+              placeholder="Email Address" name="fName" formControlName="institutemail_id" />
+            <div class="text-red"
+              *ngIf="InseEditForm.get('institutemail_id')?.hasError('required') && InseEditForm.get('institutemail_id')?.touched">
+              Email Address is required
+            </div>
+            <div class="text-red"
+              *ngIf="InseEditForm.get('institutemail_id')?.hasError('pattern') && InseEditForm.get('institutemail_id')?.touched">
+              Enter a valid Email ID
+            </div>
+
+          </div>
+        </div>
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Official Mobile Number<span
+              class="ms-1 text-red">*</span></span>
+          <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-2">
+            <ngx-intl-tel-input [cssClass]="'form-control custom-width'" [preferredCountries]="[CountryISO.India]"
+              [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
+              [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+              [selectedCountryISO]="CountryISO.India" [phoneValidation]="true" name="mobile" [maxLength]="10"
+              [ngStyle]="{ 'border-color': InseEditForm.get('mobile')?.hasError('required') && InseEditForm.get('mobile')?.touched ? 'red' : 'rgb(209, 209, 209)' }"
+              formControlName="mobile" style="height:90px;"></ngx-intl-tel-input>
+          </div>
+          <div *ngIf="InseEditForm.get('mobile')?.hasError('required') && InseEditForm.get('mobile')?.touched"
+            class="text-red">
+            Mobile Number is required.
+          </div>
+          <div *ngIf="InseEditForm.get('mobile').errors?.minlength" class="text-red">
+            Mobile Number not exceed 10 numeric digits.
+          </div>
+        </div>
+        <input formControlName="institutegid" hidden placeholder="Address Line 1" type="text"
+        class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary"
+        name="institutegid" />
+      </div>
+
+    </div>
+    <div class="card border m-3 mb-0 shadow-sm">
+      <div class="card-header bg-lightblue card-height55">
+        <div class="card-title m-0 ">
+          <h4 class="fw-bolder text-blue">Address</h4>
+        </div>
+      </div>
+      <div class="d-flex flex-row m-lg-6 mt-lg-4 m-6 mt-4">
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12 "><span class="font-bold">Address Line 1</span>
+          <div class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input [ngStyle]="{'height': '42px'}" type="text" class="
+                               form-control form-control-lg form-control-solid bg-white custom-input
+                               mb-3 mb-lg-0 borderc-secondary" placeholder="Address Line 1"
+              formControlName="ins_address1" />
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12 "><span class="font-bold">Address Line 2</span>
+          <div class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input [ngStyle]="{'height': '42px'}" type="text" class="
+                               form-control form-control-lg form-control-solid bg-white custom-input
+                               mb-3 mb-lg-0 borderc-secondary" placeholder="Address Line 2"
+              formControlName="ins_address2" />
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12  "><span class="font-bold">Postal Code</span>
+          <div class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="ins_pincode" type="text" class=" mt-2
+                               form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input
+                               mb-3 mb-lg-0" placeholder="Postal Code" maxlength="6" formControlName="ins_pincode"
+              style="height: 42px;" />
+          </div>
+          <div class="text-red" *ngIf="InseEditForm.get('ins_pincode')?.hasError('pattern')">
+            PinCode containing only numeric digits.
+          </div>
+
+          <div *ngIf="InseEditForm.get('ins_pincode').errors?.minlength" class="text-red">
+            Pin Code not exceed 6 numeric digits.
+          </div>
+        </div>
+
+      </div>
+      <div class="d-flex flex-row m-lg-6 mt-lg-4 m-6 mt-4">
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12 "><span class="font-bold">City</span>
+          <div class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="ins_city" type="text" class="mt-2
+                               form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input
+                               mb-3 mb-lg-0" placeholder="City" style="height: 42px;" />
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12 "><span class="font-bold">State</span>
+          <div class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="ins_state" type="text" class="
+                               form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input
+                               mb-3 mb-lg-0" placeholder="State" style="height: 42px;" />
+          </div>
+        </div>
+
+
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Country</span>
+          <ng-select formControlName="ins_country" [items]="country_list"
+            class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="country_name"
+            bindValue="country_gid" placeholder="Select an Country"></ng-select>
+        </div>
+
+      </div>
+      <div class="text-center my-4">
+        <button class="btn-success btn-sm text-white me-2" [disabled]="InseEditForm.invalid">
+          <i class="fas fa-check text-white fs-5 "></i> &nbsp;Update</button>
+  
+        <button class="btn-primary btn-sm text-white me-4" (click)="backbutton()">
+          <i class="fas fa-arrow-left"></i> &nbsp;
+          Back</button>
+  
+      </div>

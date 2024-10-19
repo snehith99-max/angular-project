@@ -1,0 +1,2591 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">GL Code</h3>
+        </div>
+    </div>
+    <br />
+    <form [formGroup]="reactiveform1">
+        <div class="m-0 me-1 d-flex flex-wrap mb-0 mt-0 ">
+            <div class="col-12 col-lg-12 row ">
+                <div class="col-12 col-lg-12 pe-0">
+                    <div class="m-3 me-0 card shadow-lg p-3 rounded">
+                        <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-20x mb-3 fs-6 border-bottom">
+                            <li class="nav-item">
+                                <a class="nav-link active  btn btn-flex btn-active-light-primary" data-bs-toggle="tab"
+                                    href="#kt_tab_pane_11"> Sundry Debtors </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  btn btn-flex btn-active-light-primary" data-bs-toggle="tab"
+                                    href="#kt_tab_pane_12"> Sundry Creditors
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  btn btn-flex btn-active-light-primary" data-bs-toggle="tab"
+                                    href="#kt_tab_pane_13"> Tax
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  btn btn-flex btn-active-light-primary" data-bs-toggle="tab"
+                                    href="#kt_tab_pane_14"> Asset
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  btn btn-flex btn-active-light-primary" data-bs-toggle="tab"
+                                    href="#kt_tab_pane_15"> Sales Type
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  btn btn-flex btn-active-light-primary" data-bs-toggle="tab"
+                                    href="#kt_tab_pane_16"> Purchase Type
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  btn btn-flex btn-active-light-primary" data-bs-toggle="tab"
+                                    href="#kt_tab_pane_17"> Department
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  btn btn-flex btn-active-light-primary" data-bs-toggle="tab"
+                                    href="#kt_tab_pane_18"> Account Mapping
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  btn btn-flex btn-active-light-primary" data-bs-toggle="tab"
+                                    href="#kt_tab_pane_19"> Expense Group
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  btn btn-flex btn-active-light-primary" data-bs-toggle="tab"
+                                    href="#kt_tab_pane_20"> Tax Segment
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  btn btn-flex btn-active-light-primary" data-bs-toggle="tab"
+                                    href="#kt_tab_pane_21"> Salary
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show  active" id="kt_tab_pane_11" role="tabpanel">
+                                <div class="row ms-3 mt-3 d-flex align-items-center">
+                                    <div class="col">
+                                        <button type="button" class="btn-primary btn-sm text-white me-4"
+                                            routerLink="/finance/AccTrnGLCodeDebitorAdd">
+                                            &nbsp;&nbsp; Add Debtor
+                                        </button>
+                                    </div>
+                                    <div class="col me-5">
+
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="table-responsive">
+                                    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                        <table id="DebtorSummary_List"
+                                            class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                            <thead>
+                                                <tr
+                                                    class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                                    <th style="width:2%">S.No</th>
+                                                    <th>Customer Ref. No</th>
+                                                    <th>Customer Name</th>
+                                                    <th>Contact Details</th>
+                                                    <th>Region</th>
+                                                    <th>Website</th>
+                                                    <th>GL Code</th>
+                                                    <th>External GL Code</th>
+                                                    <th>GL Status</th>
+                                                    <th class="text-center">Action </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let data of DebtorSummary_List; let i=index;">
+                                                    <td>{{i+1}}</td>
+                                                    <td>{{data.customerref_no}}</td>
+                                                    <td>{{data.customer_name}}</td>
+                                                    <td>{{data.contact_details}}</td>
+                                                    <td>{{data.region_name}}</td>
+                                                    <td>{{data.website}}</td>
+                                                    <td>{{data.gl_code}}</td>
+                                                    <td>{{data.external_gl_code}}</td>
+                                                    <td>{{data.gl_code_flag}}</td>
+                                                    <td class="text-center text-nowrap">
+                                                        <!-- <div (click)="toggleOptions(data)" style="cursor: pointer;">
+                                                            <button class="btn me-2 p-1 "><span
+                                                                    class="fa-solid fa-ellipsis-vertical fs-1"
+                                                                    style="color: #4d4d4d;"></span></button>
+                                                            <div *ngIf="showOptionsDivId === data"
+                                                                class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                                                                Add Icons
+                                                                <div class="d-flex p-3 pb-3 Icon_hover"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#debtorexternalcode"
+                                                                    (click)="Debitor_GLCode(data)">
+                                                                    <span><i
+                                                                            class="fa-solid fa-clipboard fs-3 me-5"></i></span>
+                                                                    <span>External GL Code</span>
+                                                                </div>
+                                                                Add Icons
+                                                            </div>
+                                                        </div> -->
+                                                        <button title="External GL Code" type="button"
+                                                            data-bs-toggle="modal" data-bs-target="#debtorexternalcode"
+                                                            (click)="Debitor_GLCode(data)"
+                                                            class="btn btn-icon btn-sm bg-info me-2">
+                                                            <span class="fa fa-clipboard text-white fs-6"></span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show" id="kt_tab_pane_12" role="tabpanel">
+                                <div class="row ms-3 mt-3 d-flex align-items-center">
+                                    <div class="col">
+                                        <button type="button" class="btn-primary btn-sm text-white me-4"
+                                            routerLink="/finance/AccTrnGLCodeCreditorAdd">
+                                            &nbsp;&nbsp; Add Creditor
+                                        </button>
+                                    </div>
+                                    <div class="col me-5">
+
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="table-responsive">
+                                    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                        <table id="CreditorSummary_List"
+                                            class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                            <thead>
+                                                <tr
+                                                    class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                                    <th style="width:2%">S.No</th>
+                                                    <th>Vendor Code</th>
+                                                    <th>Vendor Company Name</th>
+                                                    <th>Contact Person Name</th>
+                                                    <th>Contact Number</th>
+                                                    <th>GL Code</th>
+                                                    <th>External GL Code</th>
+                                                    <th>GL Status</th>
+                                                    <th class="text-center">Action </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let data of CreditorSummary_List; let i=index;">
+                                                    <td>{{i+1}}</td>
+                                                    <td>{{data.vendor_code}}</td>
+                                                    <td>{{data.vendor_companyname}}</td>
+                                                    <td>{{data.contactperson_name}}</td>
+                                                    <td>{{data.contact_telephonenumber}}</td>
+                                                    <td>{{data.gl_code}}</td>
+                                                    <td>{{data.external_gl_code}}</td>
+                                                    <td>{{data.gl_code_flag}}</td>
+                                                    <td class="text-center text-nowrap">
+                                                        <!-- <div (click)="toggleOptions(data)" style="cursor: pointer;">
+                                                            <button class="btn me-2 p-1 "><span
+                                                                    class="fa-solid fa-ellipsis-vertical fs-1"
+                                                                    style="color: #4d4d4d;"></span></button>
+                                                            <div *ngIf="showOptionsDivId === data"
+                                                                class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                                                                Add Icons
+                                                                <div class="d-flex p-3 pb-3 Icon_hover"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#creditorexternalcode"
+                                                                    (click)="Creditor_GLCode(data)">
+                                                                    <span><i
+                                                                            class="fa-solid fa-clipboard fs-3 me-5"></i></span>
+                                                                    <span>External GL Code</span>
+                                                                </div>
+                                                                Add Icons
+                                                            </div>
+                                                        </div> -->
+                                                        <button title="External GL Code" type="button"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#creditorexternalcode"
+                                                            (click)="Creditor_GLCode(data)"
+                                                            class="btn btn-icon btn-sm bg-info me-2">
+                                                            <span class="fa fa-clipboard text-white fs-6"></span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show" id="kt_tab_pane_13" role="tabpanel">
+                                <!-- <div class="row ms-3 mt-3 d-flex align-items-center">
+                                    <div class="col">
+                                        <button type="button" class="btn-primary btn-sm text-white me-4"
+                                            data-bs-toggle="modal" data-bs-target="#taxadd">
+                                            &nbsp;&nbsp; Add Tax
+                                        </button>
+                                    </div>
+                                    <div class="col me-5">
+
+                                    </div>
+                                </div> -->
+                                <br />
+                                <div class="table-responsive">
+                                    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                        <table id="region_list"
+                                            class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                            <thead>
+                                                <tr
+                                                    class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                                    <th style="width:2%">S.No</th>
+                                                    <th>Tax Name</th>
+                                                    <th>Reference</th>
+                                                    <th>Account Mapping To</th>
+                                                    <!-- <th>GL Status</th> -->
+                                                    <th class="text-center">Action </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let data of TaxPayableSummary_List; let i=index;">
+                                                    <td>{{i+1}}</td>
+                                                    <td>{{data.tax_name}}</td>
+                                                    <td>{{data.reference_type}}</td>
+                                                    <td>{{data.gl_code}}</td>
+                                                    <!-- <td>{{data.external_gl_code}}</td> -->
+                                                    <!-- <td>{{data.gl_code_flag}}</td> -->
+                                                    <td class="text-center text-nowrap">
+                                                        <!-- <div (click)="toggleOptions(data)" style="cursor: pointer;">
+                                                            <button class="btn me-2 p-1 "><span
+                                                                    class="fa-solid fa-ellipsis-vertical fs-1"
+                                                                    style="color: #4d4d4d;"></span></button>
+                                                            <div *ngIf="showOptionsDivId === data"
+                                                                class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                                                                Add Icons
+                                                                <div class="d-flex p-3 pb-3 Icon_hover"
+                                                                    data-bs-toggle="modal" data-bs-target="#taxedit"
+                                                                    (click)="Edit_Tax(data)">
+                                                                    <span><i
+                                                                            class="fa-solid fa-pencil fs-3 me-5"></i></span>
+                                                                    <span>Edit</span>
+                                                                </div>
+                                                                <div class="d-flex p-3 pb-3 Icon_hover"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#taxenternalglcodeupdate"
+                                                                    (click)="ExternalGLCode_Tax(data)">
+                                                                    <span><i
+                                                                            class="fa-solid fa-clipboard fs-3 me-5"></i></span>
+                                                                    <span>External GL Code</span>
+                                                                </div>
+                                                                Add Icons
+                                                            </div>
+                                                        </div> -->
+
+                                                        <button title="Edit" type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#taxedit" (click)="Edit_Tax(data)"
+                                                            class="btn btn-icon btn-sm bg-success me-2"><span
+                                                                class="fa-solid fa-pencil text-white  fs-6"></span>
+                                                        </button>
+                                                        <button title="Set External GLs Code" type="button"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#taxenternalglcodeupdate"
+                                                            (click)="ExternalGLCode_Tax(data)"
+                                                            class="btn btn-icon btn-sm bg-info me-2">
+                                                            <span class="fa fa-clipboard text-white fs-6"></span>
+                                                        </button>
+                                                        <button title="Map Account" type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#TaxAccountMapping"
+                                                            (click)="TaxAccountMapping(data)"
+                                                            class="btn btn-icon btn-sm bg-warning me-2">
+                                                            <span class="fa fa-random text-white fs-6"></span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show" id="kt_tab_pane_14" role="tabpanel">
+                                <br />
+                                <div class="table-responsive">
+                                    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                        <table id="region_list"
+                                            class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                            <thead>
+                                                <tr
+                                                    class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                                    <th style="width:2%">S.No</th>
+                                                    <th>Asset Name</th>
+                                                    <th>Asset Status</th>
+                                                    <th>GL Code</th>
+                                                    <th>External GL Code</th>
+                                                    <th>GL Status</th>
+                                                    <th class="text-center">Action </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let data of AssetDtlsSummary_List; let i=index;">
+                                                    <td>{{i+1}}</td>
+                                                    <td>{{data.product_name}}</td>
+                                                    <td>{{data.asset_status}}</td>
+                                                    <td>{{data.assetgl_code}}</td>
+                                                    <td>{{data.external_gl_code}}</td>
+                                                    <td>{{data.gl_code_flag}}</td>
+                                                    <td class="text-center text-nowrap">
+                                                        <!-- <div (click)="toggleOptions(data)" style="cursor: pointer;">
+                                                            <button class="btn me-2 p-1 "><span
+                                                                    class="fa-solid fa-ellipsis-vertical fs-1"
+                                                                    style="color: #4d4d4d;"></span></button>
+                                                            <div *ngIf="showOptionsDivId === data"
+                                                                class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                                                                Add Icons
+                                                                <div class="d-flex p-3 pb-3 Icon_hover"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#Assetenternalglcodeupdate"
+                                                                    (click)="ExternalGLCode_Asset(data)">
+                                                                    <span><i
+                                                                            class="fa-solid fa-clipboard fs-3 me-5"></i></span>
+                                                                    <span>External GL Code</span>
+                                                                </div>
+                                                                Add Icons
+                                                            </div>
+                                                        </div> -->
+                                                        <button title="External GL Code" type="button"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#Assetenternalglcodeupdate"
+                                                            (click)="ExternalGLCode_Asset(data)"
+                                                            class="btn btn-icon btn-sm bg-info me-2">
+                                                            <span class="fa fa-clipboard text-white fs-6"></span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show" id="kt_tab_pane_15" role="tabpanel">
+                                <div class="row ms-3 mt-3 d-flex align-items-center">
+                                    <div class="col">
+                                        <button type="button" class="btn-primary btn-sm text-white me-4"
+                                            data-bs-toggle="modal" data-bs-target="#salestypeadd">
+                                            &nbsp;&nbsp; Add Sales Type
+                                        </button>
+                                    </div>
+                                    <div class="col me-5">
+
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="table-responsive">
+                                    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                        <table id="SalesTypeSummary_List"
+                                            class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                            <thead>
+                                                <tr
+                                                    class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                                    <th style="width:2%">S.No</th>
+                                                    <th>Sales Type Code</th>
+                                                    <th>Sales Type Name</th>
+                                                    <th>Account Mapping To</th>
+                                                    <th class="text-center">Action </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let data of SalesTypeSummary_List; let i=index;">
+                                                    <td>{{i+1}}</td>
+                                                    <td>{{data.salestype_code}}</td>
+                                                    <td>{{data.salestype_name}}</td>
+                                                    <td>{{data.account_name}}</td>
+                                                    <td class="text-center text-nowrap">
+                                                        <!-- <div (click)="toggleOptions(data)" style="cursor: pointer;">
+                                                            <button class="btn me-2 p-1 "><span
+                                                                    class="fa-solid fa-ellipsis-vertical fs-1"
+                                                                    style="color: #4d4d4d;"></span></button>
+                                                            <div *ngIf="showOptionsDivId === data"
+                                                                class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                                                                Add Icons
+                                                                <div class="d-flex p-3 pb-3 Icon_hover"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#salestypeview"
+                                                                    (click)="View_Salestype(data)">
+                                                                    <span><i
+                                                                            class="fa-solid fa-eye fs-3 me-5"></i></span>
+                                                                    <span>View</span>
+                                                                </div>
+                                                                <div class="d-flex p-3 pb-3 Icon_hover"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#salestypeedit"
+                                                                    (click)="Edit_Salestype(data)">
+                                                                    <span><i
+                                                                            class="fa-solid fa-pencil fs-3 me-5"></i></span>
+                                                                    <span>Edit</span>
+                                                                </div>
+                                                                <div class="d-flex p-3 pb-3 Icon_hover"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#salestypemapping"
+                                                                    (click)="Sales_Mapping(data)">
+                                                                    <span><i
+                                                                            class="fa-solid fa-random fs-3 me-5"></i></span>
+                                                                    <span>Map Account</span>
+                                                                </div>
+                                                                Add Icons
+                                                            </div>
+                                                        </div> -->
+                                                        <button title="View" type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#salestypeview"
+                                                            (click)="View_Salestype(data)"
+                                                            class="btn btn-icon btn-sm bg-primary me-2"><span
+                                                                class="fa-solid fa-eye text-white  fs-6"></span>
+                                                        </button>
+                                                        <button title="Edit" type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#salestypeedit"
+                                                            (click)="Edit_Salestype(data)"
+                                                            class="btn btn-icon btn-sm bg-success me-2"><span
+                                                                class="fa-solid fa-pencil text-white  fs-6"></span>
+                                                        </button>
+                                                        <button title="Map Account" type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#salestypemapping"
+                                                            (click)="Sales_Mapping(data)"
+                                                            class="btn btn-icon btn-sm bg-warning me-2">
+                                                            <span class="fa fa-random text-white fs-6"></span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show" id="kt_tab_pane_16" role="tabpanel">
+                                <div class="row ms-3 mt-3 d-flex align-items-center">
+                                    <div class="col">
+                                        <button type="button" class="btn-primary btn-sm text-white me-4"
+                                            data-bs-toggle="modal" data-bs-target="#purchasetypeadd">
+                                            &nbsp;&nbsp; Add Purchase Type
+                                        </button>
+                                    </div>
+                                    <div class="col me-5">
+
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="table-responsive">
+                                    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                        <table id="PurchaseTypeSummary_List"
+                                            class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                            <thead>
+                                                <tr
+                                                    class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                                    <th style="width:2%">S.No</th>
+                                                    <th>Purchase Type Code</th>
+                                                    <th>Purchase Type Name</th>
+                                                    <th>Account Mapping To</th>
+                                                    <th class="text-center">Action </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let data of PurchaseTypeSummary_List; let i=index;">
+                                                    <td>{{i+1}}</td>
+                                                    <td>{{data.purchasetype_code}}</td>
+                                                    <td>{{data.purchasetype_name}}</td>
+                                                    <td>{{data.account_name}}</td>
+                                                    <td class="text-center text-nowrap">
+                                                        <!-- <div (click)="toggleOptions(data)" style="cursor: pointer;">
+                                                            <button class="btn me-2 p-1 "><span
+                                                                    class="fa-solid fa-ellipsis-vertical fs-1"
+                                                                    style="color: #4d4d4d;"></span></button>
+                                                            <div *ngIf="showOptionsDivId === data"
+                                                                class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                                                                Add Icons
+                                                                <div class="d-flex p-3 pb-3 Icon_hover"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#purchasetypeview"
+                                                                    (click)="View_Purchasetype(data)">
+                                                                    <span><i
+                                                                            class="fa-solid fa-eye fs-3 me-5"></i></span>
+                                                                    <span>View</span>
+                                                                </div>
+                                                                <div class="d-flex p-3 pb-3 Icon_hover"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#purchasetypeedit"
+                                                                    (click)="Edit_Purchasetype(data)">
+                                                                    <span><i
+                                                                            class="fa-solid fa-pencil fs-3 me-5"></i></span>
+                                                                    <span>Edit</span>
+                                                                </div>
+                                                                <div class="d-flex p-3 pb-3 Icon_hover"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#purchasetypemapping"
+                                                                    (click)="Purchase_Mapping(data)">
+                                                                    <span><i
+                                                                            class="fa-solid fa-random fs-3 me-5"></i></span>
+                                                                    <span>Map Account</span>
+                                                                </div>
+                                                                Add Icons
+                                                            </div>
+                                                        </div> -->
+                                                        <button title="View" type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#purchasetypeview"
+                                                            (click)="View_Purchasetype(data)"
+                                                            class="btn btn-icon btn-sm bg-primary me-2"><span
+                                                                class="fa-solid fa-eye text-white  fs-6"></span>
+                                                        </button>
+                                                        <button title="Edit" type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#purchasetypeedit"
+                                                            (click)="Edit_Purchasetype(data)"
+                                                            class="btn btn-icon btn-sm bg-success me-2"><span
+                                                                class="fa-solid fa-pencil text-white  fs-6"></span>
+                                                        </button>
+                                                        <button title="Map Account" type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#purchasetypemapping"
+                                                            (click)="Purchase_Mapping(data)"
+                                                            class="btn btn-icon btn-sm bg-warning me-2">
+                                                            <span class="fa fa-random text-white fs-6"></span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show" id="kt_tab_pane_17" role="tabpanel">
+                                <br />
+                                <div class="table-responsive">
+                                    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                        <table id="DepartmentSummary_List"
+                                            class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                            <thead>
+                                                <tr
+                                                    class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                                    <th style="width:2%">S.No</th>
+                                                    <th>Prefix</th>
+                                                    <th>Department</th>
+                                                    <th>Account Mapping To</th>
+                                                    <th class="text-center">Action </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let data of DepartmentSummary_List; let i=index;">
+                                                    <td>{{i+1}}</td>
+                                                    <td>{{data.department_prefix}}</td>
+                                                    <td>{{data.department_code}} / {{data.department_name}}</td>
+                                                    <td>{{data.account_name}}</td>
+                                                    <td class="text-center text-nowrap">
+                                                        <button title="Map Account" type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#Departmentaccountmap"
+                                                            (click)="Department_Mapping(data)"
+                                                            class="btn btn-icon btn-sm bg-warning me-2">
+                                                            <span class="fa fa-random text-white fs-6"></span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show" id="kt_tab_pane_18" role="tabpanel">
+                                <div class="row ms-3 mt-3 d-flex align-items-center">
+                                    <div class="col">
+                                        <button type="button" class="btn-primary btn-sm text-white me-4"
+                                            data-bs-toggle="modal" data-bs-target="#accountmappingadd">
+                                            &nbsp;&nbsp; Map Accounts
+                                        </button>
+                                    </div>
+                                    <div class="col me-5">
+
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="table-responsive">
+                                    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                        <table id="AcctMappingSummary_List"
+                                            class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                            <thead>
+                                                <tr
+                                                    class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                                    <th style="width:2%">S.No</th>
+                                                    <th>Module Name</th>
+                                                    <th>Screen Name</th>
+                                                    <th>Field Name</th>
+                                                    <th>Mapping Account</th>
+                                                    <th class="text-center">Action </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let data of AcctMappingSummary_List; let i=index;">
+                                                    <td>{{i+1}}</td>
+                                                    <td>{{data.module}}</td>
+                                                    <td>{{data.screen}}</td>
+                                                    <td>{{data.field}}</td>
+                                                    <td>{{data.account_name}}</td>
+                                                    <td class="text-center text-nowrap">
+                                                        <!-- <div (click)="toggleOptions(data)" style="cursor: pointer;">
+                                                            <button class="btn me-2 p-1 "><span
+                                                                    class="fa-solid fa-ellipsis-vertical fs-1"
+                                                                    style="color: #4d4d4d;"></span></button>
+                                                            <div *ngIf="showOptionsDivId === data"
+                                                                class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                                                                Add Icons
+                                                                <div class="d-flex p-3 pb-3 Icon_hover"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#accountmappingedit"
+                                                                    (click)="Edit_AcctMapping(data)">
+                                                                    <span><i
+                                                                            class="fa-solid fa-pencil fs-3 me-5"></i></span>
+                                                                    <span>Edit</span>
+                                                                </div>
+                                                                Add Icons
+                                                            </div>
+                                                        </div> -->
+                                                        <button title="Edit" type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#accountmappingedit"
+                                                            (click)="Edit_AcctMapping(data)"
+                                                            class="btn btn-icon btn-sm bg-success me-2"><span
+                                                                class="fa-solid fa-pencil text-white  fs-6"></span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show" id="kt_tab_pane_19" role="tabpanel">
+                                <br />
+                                <div class="table-responsive">
+                                    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                        <table id="ExpenseGroupSummary_List"
+                                            class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                            <thead>
+                                                <tr
+                                                    class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                                    <th style="width:2%">S.No</th>
+                                                    <th>Expense Type Code</th>
+                                                    <th>Expense Type Name</th>
+                                                    <th>Account Mapped To</th>
+                                                    <th class="text-center">Action </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let data of ExpenseGroupSummary_List; let i=index;">
+                                                    <td>{{i+1}}</td>
+                                                    <td>{{data.producttype_code}}</td>
+                                                    <td>{{data.producttype_name}}</td>
+                                                    <td>{{data.account_name}}</td>
+                                                    <td class="text-center text-nowrap">
+                                                        <!-- <div (click)="toggleOptions(data)" style="cursor: pointer;">
+                                                            <button class="btn me-2 p-1 "><span
+                                                                    class="fa-solid fa-ellipsis-vertical fs-1"
+                                                                    style="color: #4d4d4d;"></span></button>
+                                                            <div *ngIf="showOptionsDivId === data"
+                                                                class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                                                                Add Icons
+                                                                <div class="d-flex p-3 pb-3 Icon_hover"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#expensegroupmap"
+                                                                    (click)="ExpenseGroup_Mapping(data)">
+                                                                    <span><i
+                                                                            class="fa-solid fa-random fs-3 me-5"></i></span>
+                                                                    <span>Map Account</span>
+                                                                </div>
+                                                                Add Icons
+                                                            </div>
+                                                        </div> -->
+                                                        <button title="Map Account" type="button"
+                                                            class="btn btn-icon btn-sm bg-info me-2"
+                                                            data-bs-toggle="modal" data-bs-target="#expensegroupmap"
+                                                            (click)="ExpenseGroup_Mapping(data)">
+                                                            <span class="fa fa-clipboard text-white fs-6"></span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show" id="kt_tab_pane_20" role="tabpanel">
+                                <!-- <div class="row ms-3 mt-3 d-flex align-items-center">
+                                    <div class="col">
+                                        <button type="button" class="btn-primary btn-sm text-white me-4 ms-2" data-bs-toggle="modal" data-bs-target="#taxsegmentadd">
+                                            Add Tax Segment
+                                        </button>
+                                    </div>
+                                    <div class="col me-5">
+                                    </div>
+                                </div>
+                                <br /> -->
+                                <div class="table-responsive mt-4">
+                                    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                        <table id="taxsegmentsummary_list"
+                                            class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                            <thead>
+                                                <tr
+                                                    class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                                    <th style="width:2%">S.No</th>
+                                                    <th>Tax Segment Name</th>
+                                                    <th>Reference Type</th>
+                                                    <th>Account Mapping To</th>
+                                                    <th class="text-center">Action </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                <tr *ngFor="let data of taxsegmentmappinglist; let i=index;">
+                                                    <td>{{i+1}}</td>
+                                                    <td>{{data.taxsegment_name}}</td>
+                                                    <td>{{data.reference_type}}</td>
+                                                    <td>{{data.account_name}}</td>
+                                                    <td class="text-center text-nowrap">
+                                                        <button title="View" type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#taxsegmentview"
+                                                            (click)="View_Taxsegment(data)"
+                                                            class="btn btn-icon btn-sm bg-primary me-2"><span
+                                                                class="fa-solid fa-eye text-white  fs-6"></span>
+                                                        </button>
+                                                        <!-- <button title="Edit" type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#taxsegmentedit"
+                                                            (click)="Edit_Taxsegment(data)"
+                                                            class="btn btn-icon btn-sm bg-success me-2"><span
+                                                                class="fa-solid fa-pencil text-white  fs-6"></span>
+                                                        </button> -->
+                                                        <button title="Map Account" type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#taxsegmentmapping"
+                                                            (click)="TaxSegment_Mapping(data)"
+                                                            class="btn btn-icon btn-sm bg-warning me-2">
+                                                            <span class="fa fa-random text-white fs-6"></span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show" id="kt_tab_pane_21" role="tabpanel">
+                                <div class="table-responsive mt-4">
+                                    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                        <table id="GetSalaryComponentSummary_list"
+                                            class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                            <thead>
+                                                <tr
+                                                    class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                                    <th style="width:2%">S.No</th>
+                                                    <th>Component Group</th>
+                                                    <th>Component Code</th>
+                                                    <th>Component Name</th>
+                                                    <th>Account Mapping To</th>
+                                                    <th class="text-center">Action </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let data of GetSalaryComponentSummary_list; let i=index;">
+                                                    <td>{{i+1}}</td>
+                                                    <td>{{data.componentgroup_name}}</td>
+                                                    <td>{{data.component_code}}</td>
+                                                    <td>{{data.component_name}}</td>
+                                                    <td>{{data.account_name}}</td>
+                                                    <td class="text-center text-nowrap">
+                                                        <button title="Map Account" type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#SalaryCompAccountMapping"
+                                                            (click)="SalaryComponentMapping(data)"
+                                                            class="btn btn-icon btn-sm bg-warning me-2">
+                                                            <span class="fa fa-random text-white fs-6"></span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+    </form>
+</div>
+
+
+
+<div class="modal top fade" id="taxadd" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white">&nbsp; Add Tax
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="TaxAddForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Tax Name</span>
+                            <input formControlName="tax_name" type="text"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                                [ngStyle]="{'border-color': tax_name.invalid && tax_name.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                placeholder="Tax Name" name="tax_name" required />
+
+                            <div *ngIf="tax_name.invalid && (tax_name.dirty || tax_name.touched)">
+                                <div *ngIf="tax_name.errors?.['required']"><span class="text-red">Tax Name is
+                                        required.</span></div>
+                            </div>
+                            <div *ngIf="TaxAddForm.get('tax_name')?.hasError('pattern')" class="text-red ms-2">
+                                Space at
+                                the beginning is not allowed.</div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Tax Percentage</span>
+
+                            <input formControlName="tax_percentage" type="text"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                                [ngStyle]="{'border-color': tax_percentage.invalid && tax_percentage.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                placeholder="Tax Percentage" name="tax_percentage" required />
+
+                            <div *ngIf="tax_percentage.invalid && (tax_percentage.dirty || tax_percentage.touched)">
+                                <div *ngIf="tax_percentage.errors?.['required']"><span class="text-red">Tax Percentage
+                                        is
+                                        required.</span></div>
+                            </div>
+
+                            <div *ngIf="TaxAddForm.get('tax_percentage')?.hasError('pattern')" class="text-red ms-2">
+                                Space at
+                                the beginning is not allowed.</div>
+
+                            <!-- <input type="text" formControlName="tax_percentage" required
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary custom-input mt-2"
+                                placeholder="" />
+                        </div>
+                        <div *ngIf="tax_percentage.invalid && (tax_percentage.dirty || tax_percentage.touched)">
+                            <div *ngIf="tax_percentage.errors?.['required']">
+                                <span style="color:red;">Tax Percentage is required.</span>
+                            </div>
+                        </div>
+                        <div *ngIf="tax_percentage.invalid && (tax_percentage.dirty || tax_percentage.touched)">
+                            <div *ngIf="tax_percentage.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div> -->
+                        </div>
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" [disabled]="TaxAddForm.invalid"
+                            [ngStyle]="{ 'cursor': TaxAddForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !TaxAddForm.invalid,
+                        'btn-secondary text-white': TaxAddForm.invalid }" (click)="Submit_Tax()"
+                            data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Submit
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal top fade" id="taxedit" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white"> <i class="fa fa-pen-to-square fs-5"></i>&nbsp; Edit Tax
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="EditTaxForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Tax Name</span>
+                            <!-- <input type="text" formControlName="edittax_name" required
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary custom-input mt-2"
+                                placeholder="" /> -->
+                            <input formControlName="edittax_name" type="text"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                                [ngStyle]="{'border-color': edittax_name.invalid && edittax_name.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                placeholder="Tax Name" name="edittax_name" required />
+
+                            <div *ngIf="edittax_name.invalid && (edittax_name.dirty || edittax_name.touched)">
+                                <div *ngIf="edittax_name.errors?.['required']"><span class="text-red">Tax Name is
+                                        required.</span></div>
+                            </div>
+
+                            <div *ngIf="EditTaxForm.get('edittax_name')?.hasError('pattern')" class="text-red ms-2">
+                                Space at
+                                the beginning is not allowed.</div>
+                        </div>
+                        <!-- <div *ngIf="edittax_name.invalid && (edittax_name.dirty || edittax_name.touched)">
+                            <div *ngIf="edittax_name.errors?.['required']">
+                                <span style="color:red;">Tax Name is required.</span>
+                            </div>
+                        </div>
+                        <div *ngIf="edittax_name.invalid && (edittax_name.dirty || edittax_name.touched)">
+                            <div *ngIf="edittax_name.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div> -->
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Tax Percentage</span>
+                            <!-- <input type="text" formControlName="edittax_percentage" required
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary custom-input mt-2"
+                                placeholder="" /> -->
+                            <input formControlName="edittax_percentage" type="text"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                                [ngStyle]="{'border-color': edittax_percentage.invalid && edittax_percentage.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                placeholder="Tax Percentage" name="edittax_percentage" required />
+
+                            <div
+                                *ngIf="edittax_percentage.invalid && (edittax_percentage.dirty || edittax_percentage.touched)">
+                                <div *ngIf="edittax_percentage.errors?.['required']"><span class="text-red">Tax
+                                        Percentage is
+                                        required.</span></div>
+                            </div>
+                            <div *ngIf="EditTaxForm.get('edittax_percentage')?.hasError('pattern')"
+                                class="text-red ms-2">
+                                Space at
+                                the beginning is not allowed.</div>
+                        </div>
+                        <!-- <div
+                            *ngIf="edittax_percentage.invalid && (edittax_percentage.dirty || edittax_percentage.touched)">
+                            <div *ngIf="edittax_percentage.errors?.['required']">
+                                <span style="color:red;">Tax Percentage is required.</span>
+                            </div>
+                        </div>
+                        <div
+                            *ngIf="edittax_percentage.invalid && (edittax_percentage.dirty || edittax_percentage.touched)">
+                            <div *ngIf="edittax_percentage.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div> -->
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" [disabled]="EditTaxForm.invalid"
+                            [ngStyle]="{ 'cursor': EditTaxForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !EditTaxForm.invalid,
+                        'btn-secondary text-white': EditTaxForm.invalid }" (click)="Update_Tax()"
+                            data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Update
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal top fade" id="taxenternalglcodeupdate" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white">Set GL Code
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="TaxExternalGLCodeEdit">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Account Name</span>
+                            <p>{{externalassetacct_name}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">GL Code</span>
+                            <p>{{taxgl_code}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">External GL Code</span>
+                            <!-- <input type="text" formControlName="externalgl_code" required
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary custom-input mt-2"
+                                placeholder="" /> -->
+                            <input formControlName="externalgl_code" type="text"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                                [ngStyle]="{'border-color': externalgl_code.invalid && externalgl_code.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                placeholder="External GL Code" name="externalgl_code" required />
+
+                            <div *ngIf="externalgl_code.invalid && (externalgl_code.dirty || externalgl_code.touched)">
+                                <div *ngIf="externalgl_code.errors?.['required']"><span class="text-red">External GL
+                                        Code is
+                                        required.</span></div>
+                            </div>
+                        </div>
+                        <!-- <div *ngIf="externalgl_code.invalid && (externalgl_code.dirty || externalgl_code.touched)">
+                            <div *ngIf="externalgl_code.errors?.['required']">
+                                <span style="color:red;">External GL Code is required.</span>
+                            </div>
+                        </div>
+                        <div *ngIf="externalgl_code.invalid && (externalgl_code.dirty || externalgl_code.touched)">
+                            <div *ngIf="externalgl_code.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div> -->
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" [disabled]="TaxExternalGLCodeEdit.invalid"
+                            [ngStyle]="{ 'cursor': TaxExternalGLCodeEdit.invalid ? 'not-allowed' : 'pointer'}"
+                            [ngClass]="{ 'btn-success': !TaxExternalGLCodeEdit.invalid,
+                        'btn-secondary text-white': TaxExternalGLCodeEdit.invalid }" (click)="update_Taxexterglcode()"
+                            data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Submit
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal top fade" id="Assetenternalglcodeupdate" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white">&nbsp; Set GL Code
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="AssetExternalGLCodeEdit">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Account Name</span>
+                            <p>{{asset_name}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">GL Code</span>
+                            <p>{{assetgl_code}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">External GL Code</span>
+                            <input type="text" formControlName="assetexternalgl_code" required
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary custom-input mt-2"
+                                placeholder="" />
+                        </div>
+                        <div
+                            *ngIf="assetexternalgl_code.invalid && (assetexternalgl_code.dirty || assetexternalgl_code.touched)">
+                            <div *ngIf="assetexternalgl_code.errors?.['required']">
+                                <span style="color:red;">External GL Code is required.</span>
+                            </div>
+                        </div>
+                        <div
+                            *ngIf="assetexternalgl_code.invalid && (assetexternalgl_code.dirty || assetexternalgl_code.touched)">
+                            <div *ngIf="assetexternalgl_code.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white"
+                            [disabled]="AssetExternalGLCodeEdit.invalid"
+                            [ngStyle]="{ 'cursor': AssetExternalGLCodeEdit.invalid ? 'not-allowed' : 'pointer'}"
+                            [ngClass]="{ 'btn-success': !AssetExternalGLCodeEdit.invalid,
+                        'btn-secondary text-white': AssetExternalGLCodeEdit.invalid }"
+                            (click)="update_Assetexterglcode()" data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Submit
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal top fade" id="salestypeadd" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white">&nbsp; Add Sales Type
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="salesaddForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Sales Type Code</span>
+                            <!-- <input type="text" formControlName="salestype_code" required
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary custom-input mt-2"
+                                placeholder="" /> -->
+
+                            <input formControlName="salestype_code" type="text"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                                [ngStyle]="{'border-color': salestype_code.invalid && salestype_code.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                placeholder="Sales Type Code" name="salestype_code" required />
+
+                            <div *ngIf="salestype_code.invalid && (salestype_code.dirty || salestype_code.touched)">
+                                <div *ngIf="salestype_code.errors?.['required']"><span class="text-red">Sales Type Code
+                                        is
+                                        required.</span></div>
+                            </div>
+
+                            <div *ngIf="salesaddForm.get('salestype_code')?.hasError('pattern')" class="text-red ms-2">
+                                Space at
+                                the beginning is not allowed.</div>
+                        </div>
+                        <!-- <div *ngIf="salestype_code.invalid && (salestype_code.dirty || salestype_code.touched)">
+                            <div *ngIf="salestype_code.errors?.['required']">
+                                <span style="color:red;">Sales Type Code is required.</span>
+                            </div>
+                        </div>
+                        <div *ngIf="salestype_code.invalid && (salestype_code.dirty || salestype_code.touched)">
+                            <div *ngIf="salestype_code.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div> -->
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Sales Type Name</span>
+                            <!-- <input type="text" formControlName="salestype_name" required
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary custom-input mt-2"
+                                placeholder="" /> -->
+                            <input formControlName="salestype_name" type="text"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                                [ngStyle]="{'border-color': salestype_name.invalid && salestype_name.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                placeholder="Sales Type" name="salestype_name" required />
+
+                            <div *ngIf="salestype_name.invalid && (salestype_name.dirty || salestype_name.touched)">
+                                <div *ngIf="salestype_name.errors?.['required']"><span class="text-red">Sales Type Name
+                                        is
+                                        required.</span></div>
+                            </div>
+
+                            <div *ngIf="salesaddForm.get('salestype_name')?.hasError('pattern')" class="text-red ms-2">
+                                Space at
+                                the beginning is not allowed.</div>
+                        </div>
+                        <!-- <div *ngIf="salestype_name.invalid && (salestype_name.dirty || salestype_name.touched)">
+                            <div *ngIf="salestype_name.errors?.['required']">
+                                <span style="color:red;">Sales Type Name is required.</span>
+                            </div>
+                        </div>
+                        <div *ngIf="salestype_name.invalid && (salestype_name.dirty || salestype_name.touched)">
+                            <div *ngIf="salestype_name.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div> -->
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" [disabled]="salesaddForm.invalid"
+                            [ngStyle]="{ 'cursor': salesaddForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !salesaddForm.invalid,
+                        'btn-secondary text-white': salesaddForm.invalid }" (click)="Submit_Salestype()"
+                            data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Submit
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal top fade" id="salestypeview" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white"> <i class="fa fa-eye fs-5"></i>&nbsp; View Sales Type
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="SalesTypeViewForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Sales Type Code</span>
+                            <p>{{viewsalestype_code}}</p>
+                        </div>
+
+                        <br />
+
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Sales Type Name</span>
+                            <p>{{viewsalestype_name}}</p>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal top fade" id="salestypeedit" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white"> <i class="fa fa-pen-to-square fs-5"></i>&nbsp; Edit Sales Type
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="SalesTypeEditForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Sales Type Code</span>
+                            <p>{{salestype_codeview}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Sales Type Name</span>
+                            <!-- <input type="text" formControlName="editsalestype_name" required
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary custom-input mt-2"
+                                placeholder="" /> -->
+                            <input formControlName="editsalestype_name" type="text"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                                [ngStyle]="{'border-color': editsalestype_name.invalid && editsalestype_name.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                placeholder="Sales Type Name" name="editsalestype_name" required />
+
+                            <div
+                                *ngIf="editsalestype_name.invalid && (editsalestype_name.dirty || editsalestype_name.touched)">
+                                <div *ngIf="editsalestype_name.errors?.['required']"><span class="text-red">Sales type
+                                        name is
+                                        required.</span></div>
+                            </div>
+
+                            <div *ngIf="SalesTypeEditForm.get('editsalestype_name')?.hasError('pattern')"
+                                class="text-red ms-2">
+                                Space at
+                                the beginning is not allowed.</div>
+                        </div>
+                        <!-- <div
+                            *ngIf="editsalestype_name.invalid && (editsalestype_name.dirty || editsalestype_name.touched)">
+                            <div *ngIf="editsalestype_name.errors?.['required']">
+                                <span style="color:red;">Sales Type Code is required.</span>
+                            </div>
+                        </div>
+                        <div
+                            *ngIf="editsalestype_name.invalid && (editsalestype_name.dirty || editsalestype_name.touched)">
+                            <div *ngIf="editsalestype_name.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div> -->
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" [disabled]="SalesTypeEditForm.invalid"
+                            [ngStyle]="{ 'cursor': SalesTypeEditForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !SalesTypeEditForm.invalid,
+                        'btn-secondary text-white': SalesTypeEditForm.invalid }" (click)="Update_Salestype()"
+                            data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Update
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal top fade" id="salestypemapping" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white"> <i class="fa fa-random fs-5"></i>&nbsp; Map Sales Type
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="SalesTypeMappingForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Sales Type Code</span>
+                            <p>{{mappingsalestype_code}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Sales Type Name</span>
+                            <p>{{mappingsalestype_name}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Mapping Account To</span>
+                            <!-- <ng-select [items]="MappingAcctTo_List" placeholder="Select an option" required
+                                formControlName="account_name"
+                                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="account_name"
+                                bindValue="account_gid"></ng-select> -->
+                            <ng-select [items]="MappingAcctTo_List" placeholder="Select an option" required
+                                formControlName="account_name"
+                                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row" bindLabel="account_name"
+                                bindValue="account_gid"
+                                [class.is-invalid]="SalesTypeMappingForm.get('account_name')?.invalid && (SalesTypeMappingForm.get('account_name')?.dirty || SalesTypeMappingForm.get('account_name')?.touched)"
+                                [ngClass]="{'invalid-border': SalesTypeMappingForm.get('account_name')?.invalid && SalesTypeMappingForm.get('account_name')?.touched}">
+                            </ng-select>
+                        </div>
+                        <div *ngIf="account_name.invalid && (account_name.dirty || account_name.touched)">
+                            <div *ngIf="account_name.errors?.['required']">
+                                <span style="color:red;">Mapping Account To is required.</span>
+                            </div>
+                        </div>
+                        <div *ngIf="account_name.invalid && (account_name.dirty || account_name.touched)">
+                            <div *ngIf="account_name.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" [disabled]="SalesTypeMappingForm.invalid"
+                            [ngStyle]="{ 'cursor': SalesTypeMappingForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !SalesTypeMappingForm.invalid,
+                    'btn-secondary text-white': SalesTypeMappingForm.invalid }" (click)="Update_SalestypeMapping()"
+                            data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Update
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal top fade" id="purchasetypeadd" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white">&nbsp; Add Purchase Type
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="PurchaseAddForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Purchase Type Code</span>
+                            <!-- <input type="text" formControlName="purchasetype_code" required
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary custom-input mt-2"
+                                placeholder="" /> -->
+                            <input formControlName="purchasetype_code" type="text"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                                [ngStyle]="{'border-color': purchasetype_code.invalid && purchasetype_code.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                placeholder="Purchase Type Code" name="purchasetype_code" required />
+
+                            <div
+                                *ngIf="purchasetype_code.invalid && (purchasetype_code.dirty || purchasetype_code.touched)">
+                                <div *ngIf="purchasetype_code.errors?.['required']"><span class="text-red">Purchase type
+                                        code is
+                                        required.</span></div>
+                            </div>
+
+                            <div *ngIf="PurchaseAddForm.get('purchasetype_code')?.hasError('pattern')"
+                                class="text-red ms-2">
+                                Space at
+                                the beginning is not allowed.</div>
+                        </div>
+                        <!-- <div
+                            *ngIf="purchasetype_code.invalid && (purchasetype_code.dirty || purchasetype_code.touched)">
+                            <div *ngIf="purchasetype_code.errors?.['required']">
+                                <span style="color:red;">Purchase Type Code is required.</span>
+                            </div>
+                        </div>
+                        <div
+                            *ngIf="purchasetype_code.invalid && (purchasetype_code.dirty || purchasetype_code.touched)">
+                            <div *ngIf="purchasetype_code.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div> -->
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Purchase Type Name</span>
+                            <!-- <input type="text" formControlName="purchasetype_name" required
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary custom-input mt-2"
+                                placeholder="" /> -->
+                            <input formControlName="purchasetype_name" type="text"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                                [ngStyle]="{'border-color': purchasetype_name.invalid && purchasetype_name.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                placeholder="Purchase Type Name" name="purchasetype_name" required />
+
+                            <div
+                                *ngIf="purchasetype_name.invalid && (purchasetype_name.dirty || purchasetype_name.touched)">
+                                <div *ngIf="purchasetype_name.errors?.['required']"><span class="text-red">Purchase type
+                                        name is
+                                        required.</span></div>
+                            </div>
+
+                            <div *ngIf="PurchaseAddForm.get('purchasetype_name')?.hasError('pattern')"
+                                class="text-red ms-2">
+                                Space at
+                                the beginning is not allowed.</div>
+                        </div>
+                        <!-- <div
+                            *ngIf="purchasetype_name.invalid && (purchasetype_name.dirty || purchasetype_name.touched)">
+                            <div *ngIf="purchasetype_name.errors?.['required']">
+                                <span style="color:red;">Purchase Type Code is required.</span>
+                            </div>
+                        </div>
+                        <div
+                            *ngIf="purchasetype_name.invalid && (purchasetype_name.dirty || purchasetype_name.touched)">
+                            <div *ngIf="purchasetype_name.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div> -->
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" [disabled]="PurchaseAddForm.invalid"
+                            [ngStyle]="{ 'cursor': PurchaseAddForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !PurchaseAddForm.invalid,
+                        'btn-secondary text-white': PurchaseAddForm.invalid }" (click)="Submit_Purchasetype()"
+                            data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Submit
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal top fade" id="purchasetypeview" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white"> <i class="fa fa-eye fs-5"></i>&nbsp; View Purchase Type
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="PurchaseTypeViewForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold ">Purchase Type Code</span>
+                            <p>{{viewpurchasetype_code}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold ">Purchase Type Name</span>
+                            <p>{{viewpurchasetype_name}}</p>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal top fade" id="purchasetypeedit" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white"> <i class="fa fa-pen-to-square fs-5"></i>&nbsp; Edit Purchase Type
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="PurchaseEditForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Purchase Type Code</span>
+                            <p>{{purchasetype_codeview}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Purchase Type Name</span>
+                            <!-- <input type="text" formControlName="editpurchasetype_name" required
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary custom-input mt-2"
+                                placeholder="" /> -->
+                            <input formControlName="editpurchasetype_name" type="text"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                                [ngStyle]="{'border-color': editpurchasetype_name.invalid && editpurchasetype_name.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                placeholder="Purchase Type Name" name="editpurchasetype_name" required />
+
+                            <div
+                                *ngIf="editpurchasetype_name.invalid && (editpurchasetype_name.dirty || editpurchasetype_name.touched)">
+                                <div *ngIf="editpurchasetype_name.errors?.['required']"><span class="text-red">Purchase
+                                        Type Name is
+                                        required.</span></div>
+                            </div>
+
+                            <div *ngIf="PurchaseEditForm.get('editpurchasetype_name')?.hasError('pattern')"
+                                class="text-red ms-2">
+                                Space at
+                                the beginning is not allowed.</div>
+                        </div>
+                        <!-- <div
+                            *ngIf="editpurchasetype_name.invalid && (editpurchasetype_name.dirty || editpurchasetype_name.touched)">
+                            <div *ngIf="editpurchasetype_name.errors?.['required']">
+                                <span style="color:red;">Purchase Type Code is required.</span>
+                            </div>
+                        </div>
+                        <div
+                            *ngIf="editpurchasetype_name.invalid && (editpurchasetype_name.dirty || editpurchasetype_name.touched)">
+                            <div *ngIf="editpurchasetype_name.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div> -->
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" [disabled]="PurchaseEditForm.invalid"
+                            [ngStyle]="{ 'cursor': PurchaseEditForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !PurchaseEditForm.invalid,
+                        'btn-secondary text-white': PurchaseEditForm.invalid }" (click)="Update_Purchasetype()"
+                            data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Update
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal top fade" id="purchasetypemapping" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white"> <i class="fa fa-random fs-5"></i>&nbsp; Map Purchase Type
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="PurchaseTypeMappingForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Purchase Type Code</span>
+                            <p>{{mappingpurchasetype_code}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Purchase Type Name</span>
+                            <p>{{mappingpurchasetype_name}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Mapping Account To</span>
+                            <!-- <ng-select [items]="PurchaseMappingAcctTo_List" required formControlName="account_name"
+                                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="account_name"
+                                bindValue="account_gid"></ng-select> -->
+                            <ng-select [items]="PurchaseMappingAcctTo_List" placeholder="Select an option" required
+                                formControlName="account_name"
+                                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row" bindLabel="account_name"
+                                bindValue="account_gid"
+                                [class.is-invalid]="PurchaseTypeMappingForm.get('account_name')?.invalid && (PurchaseTypeMappingForm.get('account_name')?.dirty || PurchaseTypeMappingForm.get('account_name')?.touched)"
+                                [ngClass]="{'invalid-border': PurchaseTypeMappingForm.get('account_name')?.invalid && PurchaseTypeMappingForm.get('account_name')?.touched}">
+                            </ng-select>
+                        </div>
+                        <div *ngIf="account_name.invalid && (account_name.dirty || account_name.touched)">
+                            <div *ngIf="account_name.errors?.['required']">
+                                <span style="color:red;">Mapping Account To is required.</span>
+                            </div>
+                        </div>
+                        <div *ngIf="account_name.invalid && (account_name.dirty || account_name.touched)">
+                            <div *ngIf="account_name.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white"
+                            [disabled]="PurchaseTypeMappingForm.invalid"
+                            [ngStyle]="{ 'cursor': PurchaseTypeMappingForm.invalid ? 'not-allowed' : 'pointer'}"
+                            [ngClass]="{ 'btn-success': !PurchaseTypeMappingForm.invalid,
+                    'btn-secondary text-white': PurchaseTypeMappingForm.invalid }"
+                            (click)="Update_PurchasetypeMapping()" data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Update
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal top fade" id="Departmentaccountmap" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white"> <i class="fa fa-plus fs-5"></i>&nbsp;Department Account Mapping
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="DepartmentMapForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Department Prefix</span>
+                            <p>{{department_prefix}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Department</span>
+                            <p>{{department_code}} / {{department_name}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Mapping Account To</span>
+                            <ng-select [items]="GetDepartmentAccountDropDown_list" placeholder="Select an option"
+                                required formControlName="Dept_mapping_account"
+                                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row" bindLabel="account_name"
+                                bindValue="account_gid">
+                            </ng-select>
+
+                            <div
+                                *ngIf="Dept_mapping_account.invalid && (Dept_mapping_account.dirty || Dept_mapping_account.touched)">
+                                <div *ngIf="Dept_mapping_account.errors?.['required']"><span class="text-red">Mapping
+                                        Account is Required.</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" [disabled]="DepartmentMapForm.invalid"
+                            [ngStyle]="{ 'cursor': DepartmentMapForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !DepartmentMapForm.invalid,
+                    'btn-secondary text-white': DepartmentMapForm.invalid }" (click)="Update_DeptAccount()"
+                            data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Submit
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal" (click)="onclose()">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal top fade" id="accountmappingadd" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white"> <i class="fa fa-random fs-5"></i>&nbsp; Map Account
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="AddMapAccountForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Module Name</span>
+                            <!-- <ng-select [items]="modulenamelist" required formControlName="module_name"
+                                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="module_name"
+                                bindValue="module_name" placeholder="Select an Option"></ng-select> -->
+
+                            <ng-select [items]="modulenamelist" placeholder="Select an option" required
+                                formControlName="module_name" class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row"
+                                bindLabel="module_name" bindValue="module_name"
+                                [class.is-invalid]="AddMapAccountForm.get('module_name')?.invalid && (AddMapAccountForm.get('module_name')?.dirty || AddMapAccountForm.get('module_name')?.touched)"
+                                [ngClass]="{'invalid-border': AddMapAccountForm.get('module_name')?.invalid && AddMapAccountForm.get('module_name')?.touched}">
+                            </ng-select>
+
+
+                        </div>
+                        <div *ngIf="module_name.invalid && (module_name.dirty || module_name.touched)">
+                            <div *ngIf="module_name.errors?.['required']">
+                                <span style="color:red;">Module Name is required.</span>
+                            </div>
+                        </div>
+                        <div *ngIf="module_name.invalid && (module_name.dirty || module_name.touched)">
+                            <div *ngIf="module_name.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Screen Name</span>
+                            <!-- <ng-select [items]="screennamelist" required formControlName="screen_name"
+                                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="screen_name"
+                                bindValue="screen_name" placeholder="Select an Option"></ng-select> -->
+                            <ng-select [items]="screennamelist" placeholder="Select an option" required
+                                formControlName="screen_name" class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row"
+                                bindLabel="screen_name" bindValue="screen_name"
+                                [class.is-invalid]="AddMapAccountForm.get('screen_name')?.invalid && (AddMapAccountForm.get('screen_name')?.dirty || AddMapAccountForm.get('screen_name')?.touched)"
+                                [ngClass]="{'invalid-border': AddMapAccountForm.get('screen_name')?.invalid && AddMapAccountForm.get('screen_name')?.touched}">
+                            </ng-select>
+                        </div>
+                        <div *ngIf="screen_name.invalid && (screen_name.dirty || screen_name.touched)">
+                            <div *ngIf="screen_name.errors?.['required']">
+                                <span style="color:red;">Screen Name is required.</span>
+                            </div>
+                        </div>
+                        <div *ngIf="screen_name.invalid && (screen_name.dirty || screen_name.touched)">
+                            <div *ngIf="screen_name.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Field Name</span>
+                            <!-- <ng-select [items]="fieldnamelist" required formControlName="field_name"
+                                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="field_name"
+                                bindValue="field_name" placeholder="Select an Option"></ng-select> -->
+                            <ng-select [items]="fieldnamelist" placeholder="Select an option" required
+                                formControlName="field_name" class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row"
+                                bindLabel="field_name" bindValue="field_name"
+                                [class.is-invalid]="AddMapAccountForm.get('field_name')?.invalid && (AddMapAccountForm.get('field_name')?.dirty || AddMapAccountForm.get('field_name')?.touched)"
+                                [ngClass]="{'invalid-border': AddMapAccountForm.get('field_name')?.invalid && AddMapAccountForm.get('field_name')?.touched}">
+                            </ng-select>
+                        </div>
+                        <div *ngIf="account_name.invalid && (account_name.dirty || account_name.touched)">
+                            <div *ngIf="account_name.errors?.['required']">
+                                <span style="color:red;">Field Name is required.</span>
+                            </div>
+                        </div>
+                        <div *ngIf="account_name.invalid && (account_name.dirty || account_name.touched)">
+                            <div *ngIf="account_name.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Mapping Account</span>
+                            <!-- <ng-select [items]="AccountMapping_List" required formControlName="mapping_account"
+                                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="account_name"
+                                bindValue="account_gid" placeholder="Select an Option"></ng-select> -->
+                            <ng-select [items]="AccountMapping_List" placeholder="Select an option" required
+                                formControlName="mapping_account"
+                                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row" bindLabel="account_name"
+                                bindValue="account_gid"
+                                [class.is-invalid]="AddMapAccountForm.get('mapping_account')?.invalid && (AddMapAccountForm.get('mapping_account')?.dirty || AddMapAccountForm.get('mapping_account')?.touched)"
+                                [ngClass]="{'invalid-border': AddMapAccountForm.get('mapping_account')?.invalid && AddMapAccountForm.get('mapping_account')?.touched}">
+                            </ng-select>
+                        </div>
+                        <div *ngIf="mapping_account.invalid && (mapping_account.dirty || mapping_account.touched)">
+                            <div *ngIf="mapping_account.errors?.['required']">
+                                <span style="color:red;">Mapping Account is required.</span>
+                            </div>
+                        </div>
+                        <div *ngIf="mapping_account.invalid && (mapping_account.dirty || mapping_account.touched)">
+                            <div *ngIf="mapping_account.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" [disabled]="AddMapAccountForm.invalid"
+                            [ngStyle]="{ 'cursor': AddMapAccountForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !AddMapAccountForm.invalid,
+                'btn-secondary text-white': AddMapAccountForm.invalid }" (click)="Submit_AccountMapping()"
+                            data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Submit
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal top fade" id="accountmappingedit" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white"> <i class="fa fa-pen-to-square fs-5"></i>&nbsp; Edit Map Account
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="EditMapAccountForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Module Name</span>
+                            <p>{{editmodule_name}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Screen Name</span>
+                            <p>{{editscreen_name}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Field Name</span>
+                            <p>{{editfield_name}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Mapping Account</span>
+                            <!-- <ng-select [items]="AccountMapping_List" required formControlName="editmapping_account"
+                                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="account_name"
+                                bindValue="account_gid"></ng-select> -->
+                            <ng-select [items]="AccountMapping_List" placeholder="Select an option" required
+                                formControlName="editmapping_account"
+                                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row" bindLabel="account_name"
+                                bindValue="account_gid"
+                                [class.is-invalid]="EditMapAccountForm.get('editmapping_account')?.invalid && (EditMapAccountForm.get('editmapping_account')?.dirty || EditMapAccountForm.get('editmapping_account')?.touched)"
+                                [ngClass]="{'invalid-border': EditMapAccountForm.get('editmapping_account')?.invalid && EditMapAccountForm.get('editmapping_account')?.touched}">
+                            </ng-select>
+                        </div>
+                        <!-- <div
+                            *ngIf="editmapping_account.invalid && (editmapping_account.dirty || editmapping_account.touched)">
+                            <div *ngIf="editmapping_account.errors?.['required']">
+                                <span style="color:red;">Mapping Account is required.</span>
+                            </div>
+                        </div>
+                        <div
+                            *ngIf="editmapping_account.invalid && (editmapping_account.dirty || editmapping_account.touched)">
+                            <div *ngIf="editmapping_account.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div> -->
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" [disabled]="EditMapAccountForm.invalid"
+                            [ngStyle]="{ 'cursor': EditMapAccountForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !EditMapAccountForm.invalid,
+                'btn-secondary text-white': EditMapAccountForm.invalid }" (click)="Update_AccountMapping()"
+                            data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Update
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal top fade" id="expensegroupmap" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white">&nbsp; Map Account
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="ExpenseGroupMapForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Expense Group Code</span>
+                            <p>{{expensegroup_code}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Expense Group Name</span>
+                            <p>{{expensegroup_name}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Account Name</span>
+                            <!-- <ng-select [items]="ExpenseMappingAcct_List" required formControlName="exaccount_name"
+                                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="account_name"
+                                bindValue="account_gid" placeholder="Select an Option"></ng-select> -->
+                            <ng-select [items]="ExpenseMappingAcct_List" placeholder="Select an option" required
+                                formControlName="exaccount_name"
+                                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row" bindLabel="account_name"
+                                bindValue="account_gid"
+                                [class.is-invalid]="ExpenseGroupMapForm.get('exaccount_name')?.invalid && (ExpenseGroupMapForm.get('exaccount_name')?.dirty || ExpenseGroupMapForm.get('exaccount_name')?.touched)"
+                                [ngClass]="{'invalid-border': ExpenseGroupMapForm.get('exaccount_name')?.invalid && ExpenseGroupMapForm.get('exaccount_name')?.touched}">
+                            </ng-select>
+                        </div>
+                        <div *ngIf="exaccount_name.invalid && (exaccount_name.dirty || exaccount_name.touched)">
+                            <div *ngIf="exaccount_name.errors?.['required']">
+                                <span style="color:red;">Account Name is required.</span>
+                            </div>
+                        </div>
+                        <div *ngIf="exaccount_name.invalid && (exaccount_name.dirty || exaccount_name.touched)">
+                            <div *ngIf="exaccount_name.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" [disabled]="ExpenseGroupMapForm.invalid"
+                            [ngStyle]="{ 'cursor': ExpenseGroupMapForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !ExpenseGroupMapForm.invalid,
+                    'btn-secondary text-white': ExpenseGroupMapForm.invalid }" (click)="UpdateExpenseGroup_Mapping()"
+                            data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Submit
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="debtorexternalcode" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white">&nbsp; Set GL Code
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="DebtorExternalCodeForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Account Code</span>
+                            <p>{{debtoracct_code}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Account Name</span>
+                            <p>{{debtoracct_name}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">GL Code</span>
+                            <p>{{debtorgl_code}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">External GL Code</span>
+                            <!-- <input type="text" required formControlName="debtorexternalgl_code"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary custom-input mt-2"
+                                placeholder="External GL Code" /> -->
+
+                            <input formControlName="debtorexternalgl_code" type="text"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                                [ngStyle]="{'border-color': debtorexternalgl_code.invalid && debtorexternalgl_code.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                placeholder="External GL Code" name="debtorexternalgl_code" required />
+
+                            <div
+                                *ngIf="debtorexternalgl_code.invalid && (debtorexternalgl_code.dirty || debtorexternalgl_code.touched)">
+                                <div *ngIf="debtorexternalgl_code.errors?.['required']"><span class="text-red">External
+                                        GL Code is
+                                        required.</span></div>
+                            </div>
+                        </div>
+                        <!-- <div
+                            *ngIf="debtorexternalgl_code.invalid && (debtorexternalgl_code.dirty || debtorexternalgl_code.touched)">
+                            <div *ngIf="debtorexternalgl_code.errors?.['required']">
+                                <span style="color:red;">External GL Code is required.</span>
+                            </div>
+                        </div>
+                        <div
+                            *ngIf="debtorexternalgl_code.invalid && (debtorexternalgl_code.dirty || debtorexternalgl_code.touched)">
+                            <div *ngIf="debtorexternalgl_code.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div> -->
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" [disabled]="DebtorExternalCodeForm.invalid"
+                            [ngStyle]="{ 'cursor': DebtorExternalCodeForm.invalid ? 'not-allowed' : 'pointer'}"
+                            [ngClass]="{ 'btn-success': !DebtorExternalCodeForm.invalid,
+                    'btn-secondary text-white': DebtorExternalCodeForm.invalid }" (click)="Update_DebtorExternalCode()"
+                            data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Submit
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal top fade" id="creditorexternalcode" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white">&nbsp; Set GL Code
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="CreditorExternalCodeForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Account Code</span>
+                            <p>{{creditorvendor_code}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Account Name</span>
+                            <p>{{creditorcompany_name}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">GL Code</span>
+                            <p>{{creditorgl_code}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">External GL Code</span>
+                            <!-- <input type="text" required formControlName="creditorexternalgl_code"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary custom-input mt-2"
+                                placeholder="" /> -->
+
+                            <input formControlName="creditorexternalgl_code" type="text"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                                [ngStyle]="{'border-color': creditorexternalgl_code.invalid && creditorexternalgl_code.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                placeholder="External GL Code " name="creditorexternalgl_code" required />
+
+                            <div
+                                *ngIf="creditorexternalgl_code.invalid && (creditorexternalgl_code.dirty || creditorexternalgl_code.touched)">
+                                <div *ngIf="creditorexternalgl_code.errors?.['required']"><span
+                                        class="text-red">External GL Code is
+                                        required.</span></div>
+                            </div>
+                        </div>
+                        <!-- <div
+                            *ngIf="creditorexternalgl_code.invalid && (creditorexternalgl_code.dirty || creditorexternalgl_code.touched)">
+                            <div *ngIf="creditorexternalgl_code.errors?.['required']">
+                                <span style="color:red;">External GL Code is required.</span>
+                            </div>
+                        </div>
+                        <div
+                            *ngIf="creditorexternalgl_code.invalid && (creditorexternalgl_code.dirty || creditorexternalgl_code.touched)">
+                            <div *ngIf="creditorexternalgl_code.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div> -->
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white"
+                            [disabled]="CreditorExternalCodeForm.invalid"
+                            [ngStyle]="{ 'cursor': CreditorExternalCodeForm.invalid ? 'not-allowed' : 'pointer'}"
+                            [ngClass]="{ 'btn-success': !CreditorExternalCodeForm.invalid,
+                    'btn-secondary text-white': CreditorExternalCodeForm.invalid }"
+                            (click)="Update_CreditorExternalCode()" data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Submit
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Tax Segment Add -->
+<div class="modal top fade" id="taxsegmentadd" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white ms-4">Add Tax Segment</h3>
+            </div>
+
+            <div class="modal-body">
+                <form [formGroup]="taxsegmentaddForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Tax Segment Code</span>
+                            <input formControlName="taxsegment_code" type="text"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                                [ngStyle]="{'border-color': taxsegment_code.invalid && taxsegment_code.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                placeholder="Tax Segment Code" name="taxsegment_code" required />
+
+                            <div *ngIf="taxsegment_code.invalid && (taxsegment_code.dirty || taxsegment_code.touched)">
+                                <div *ngIf="taxsegment_code.errors?.['required']"><span class="text-red">Tax Segment
+                                        Code is
+                                        required.</span></div>
+                            </div>
+                            <div *ngIf="taxsegmentaddForm.get('taxsegment_code')?.hasError('pattern')"
+                                class="text-red ms-2">Space at the
+                                beginning is not allowed.</div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Tax Segment Name</span>
+                            <input formControlName="taxsegment_name" type="text"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                                [ngStyle]="{'border-color': taxsegment_name.invalid && taxsegment_name.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                placeholder="Tax Segment Name" name="taxsegment_name" required />
+
+                            <div *ngIf="taxsegment_name.invalid && (taxsegment_name.dirty || taxsegment_name.touched)">
+                                <div *ngIf="taxsegment_name.errors?.['required']"><span class="text-red">Tax Segment
+                                        Name is
+                                        required.</span></div>
+                            </div>
+
+                            <div *ngIf="taxsegmentaddForm.get('taxsegment_name')?.hasError('pattern')"
+                                class="text-red ms-2">Space at the
+                                beginning is not allowed.</div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" [disabled]="taxsegmentaddForm.invalid"
+                            [ngStyle]="{ 'cursor': taxsegmentaddForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !taxsegmentaddForm.invalid,
+                        'btn-secondary text-white': taxsegmentaddForm.invalid }" (click)="Submit_Taxsegment()"
+                            data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5 me-2"></i>Submit
+                        </button>
+                        <button type="button" class="btn-danger ms-4" data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center me-2"></i>
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Tax Segment Add -->
+
+
+<!-- Tax Segment View -->
+<div class="modal top fade" id="taxsegmentview" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white"> <i class="fa fa-eye fs-5 me-4"></i>View Tax Segment</h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="taxsegmentViewForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Tax Segment Name</span>
+                            <p>{{viewtaxsegment_name}}</p>
+                        </div>
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Reference Type</span>
+                            <p>{{viewreference_type}}</p>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn-danger" data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center me-2"></i>Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Tax Segment View -->
+
+
+<!-- Tax Segment Edit -->
+<!-- <div class="modal top fade" id="taxsegmentedit" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white"> <i class="fa fa-pen-to-square fs-5 ms-4"></i>Edit Tax Segment
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="taxsegmentEditForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Tax Segment Code</span>
+                            <p></p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Tax Segment Name</span>
+                            <input formControlName="edittaxsegment_name" type="text"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                                [ngStyle]="{'border-color': edittaxsegment_name.invalid && edittaxsegment_name.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                placeholder="Tax Segment Name" name="edittaxsegment_name" required />
+
+                            <div *ngIf="edittaxsegment_name.invalid && (edittaxsegment_name.dirty || edittaxsegment_name.touched)">
+                                <div *ngIf="edittaxsegment_name.errors?.['required']"><span class="text-red">Tax Segment name is required.</span></div>
+                            </div>
+
+                            <div *ngIf="taxsegmentEditForm.get('edittaxsegment_name')?.hasError('pattern')" class="text-red ms-2">
+                                Space at the beginning is not allowed.
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" [disabled]="taxsegmentEditForm.invalid" [ngStyle]="{ 'cursor': taxsegmentEditForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !taxsegmentEditForm.invalid,
+                        'btn-secondary text-white': taxsegmentEditForm.invalid }" (click)="Update_Taxsegment()" data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5 me-2"></i>
+                            Update
+                        </button>
+                        <button type="button" class="btn-danger ms-4" data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center me-2"></i>Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!-- Tax Segment Edit -->
+
+
+<!-- Tax Segment Mapping -->
+<div class="modal top fade" id="taxsegmentmapping" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white">
+                    <i class="fa fa-random fs-5 me-2"></i>Map Tax Segment
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="taxsegmentMappingForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Tax Segment Name</span>
+                            <p>{{mappingtaxsegment_name}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Reference Type</span>
+                            <p>{{mappingtaxsegment_reftype}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Mapping Account To</span>
+                            <ng-select [items]="TaxSegmentAccountMappingTo_List" placeholder="Select an option" required
+                                formControlName="taxaccount_name"
+                                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row" bindLabel="account_name"
+                                bindValue="account_gid"
+                                [class.is-invalid]="taxsegmentMappingForm.get('taxaccount_name')?.invalid && (taxsegmentMappingForm.get('taxaccount_name')?.dirty || taxsegmentMappingForm.get('taxaccount_name')?.touched)"
+                                [ngClass]="{'invalid-border': taxsegmentMappingForm.get('taxaccount_name')?.invalid && taxsegmentMappingForm.get('taxaccount_name')?.touched}">
+                            </ng-select>
+                        </div>
+                        <div *ngIf="taxaccount_name.invalid && (taxaccount_name.dirty || taxaccount_name.touched)">
+                            <div *ngIf="taxaccount_name.errors?.['required']">
+                                <span style="color:red;">Mapping Account to is required.</span>
+                            </div>
+                        </div>
+                        <div *ngIf="taxaccount_name.invalid && (taxaccount_name.dirty || taxaccount_name.touched)">
+                            <div *ngIf="taxaccount_name.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" [disabled]="taxsegmentMappingForm.invalid"
+                            [ngStyle]="{ 'cursor': taxsegmentMappingForm.invalid ? 'not-allowed' : 'pointer'}"
+                            [ngClass]="{ 'btn-success': !taxsegmentMappingForm.invalid,
+                                            'btn-secondary text-white': taxsegmentMappingForm.invalid }"
+                            data-bs-dismiss="modal" (click)="Update_TaxSegmentMapping()">
+                            <i class="fas fa-check text-white fs-5 me-2"></i>
+                            Update
+                        </button>
+                        <button type="button" class="btn-danger ms-4" data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center me-2"></i>
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Tax Segment Mapping -->
+
+<!--Tax Account Mapping -->
+<div class="modal top fade" id="TaxAccountMapping" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white"> <i class="fa fa-random fs-5"></i>&nbsp; Map Tax Account
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="TaxAccountMapForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Tax Percentage</span>
+                            <p>{{taxpercentage}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Tax Name</span>
+                            <p>{{taxname}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Mapping Account To</span>
+                            <!-- <ng-select [items]="MappingAcctTo_List" placeholder="Select an option" required
+                                formControlName="account_name"
+                                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="account_name"
+                                bindValue="account_gid"></ng-select> -->
+                            <ng-select [items]="GetTaxAccountMappingTo_List" placeholder="Select an option" required
+                                formControlName="account_gid" class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row"
+                                bindLabel="account_name" bindValue="account_gid"
+                                [class.is-invalid]="TaxAccountMapForm.get('account_gid')?.invalid && (TaxAccountMapForm.get('account_gid')?.dirty || TaxAccountMapForm.get('account_gid')?.touched)"
+                                [ngClass]="{'invalid-border': TaxAccountMapForm.get('account_gid')?.invalid && TaxAccountMapForm.get('account_gid')?.touched}">
+                            </ng-select>
+                        </div>
+                        <div *ngIf="account_gid.invalid && (account_gid.dirty || account_gid.touched)">
+                            <div *ngIf="account_gid.errors?.['required']">
+                                <span style="color:red;">Mapping Account To is required.</span>
+                            </div>
+                        </div>
+                        <div *ngIf="account_gid.invalid && (account_gid.dirty || account_gid.touched)">
+                            <div *ngIf="account_gid.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" [disabled]="TaxAccountMapForm.invalid"
+                            [ngStyle]="{ 'cursor': TaxAccountMapForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !TaxAccountMapForm.invalid,
+                    'btn-secondary text-white': TaxAccountMapForm.invalid }" (click)="OnUpdateTaxMapping()"
+                            data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Update
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--\Tax Account Mapping -->
+
+<!-- Salary Component -->
+<div class="modal top fade" id="SalaryCompAccountMapping" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white"> <i class="fa fa-random fs-5"></i>&nbsp; Map Salary Component
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="SalaryCompMappingForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Component Group</span>
+                            <p>{{componentgroup_name}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Code</span>
+                            <p>{{component_code}}</p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold">Name</span>
+                            <p>{{component_name}}</p>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Mapping Account To</span>
+                            <ng-select [items]="GetSalaryCompMappingDropDown_list" placeholder="Select an option" required
+                                formControlName="salarycomponent_ledger_gid" class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row"
+                                bindLabel="account_name" bindValue="account_gid"
+                                [class.is-invalid]="SalaryCompMappingForm.get('salarycomponent_ledger_gid')?.invalid && (SalaryCompMappingForm.get('salarycomponent_ledger_gid')?.dirty || SalaryCompMappingForm.get('salarycomponent_ledger_gid')?.touched)"
+                                [ngClass]="{'invalid-border': SalaryCompMappingForm.get('salarycomponent_ledger_gid')?.invalid && SalaryCompMappingForm.get('salarycomponent_ledger_gid')?.touched}">
+                            </ng-select>
+                        </div>
+                        <div *ngIf="salarycomponent_ledger_gid.invalid && (salarycomponent_ledger_gid.dirty || salarycomponent_ledger_gid.touched)">
+                            <div *ngIf="salarycomponent_ledger_gid.errors?.['required']">
+                                <span style="color:red;">Mapping Account To is required.</span>
+                            </div>
+                        </div>
+                        <div *ngIf="salarycomponent_ledger_gid.invalid && (salarycomponent_ledger_gid.dirty || salarycomponent_ledger_gid.touched)">
+                            <div *ngIf="salarycomponent_ledger_gid.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" [disabled]="SalaryCompMappingForm.invalid"
+                            [ngStyle]="{ 'cursor': SalaryCompMappingForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !SalaryCompMappingForm.invalid,
+                    'btn-secondary text-white': SalaryCompMappingForm.invalid }" (click)="OnUpdateSalaryCompMapping()"
+                            data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Update
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal" (click)="onclose()">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- \salary Component -->

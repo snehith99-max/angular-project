@@ -1,0 +1,73 @@
+
+    <div class="card rounded-top mt-7">
+     <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary" >
+         <h3 class="fw-bolder text-white"><i class="fas fa-eye fw-bolder fs-3"></i> &nbsp;&nbsp;&nbsp;View Institute Details</h3>
+       </div>
+       <div class="m-5"  *ngFor="let InstituteList of InstituteList">
+     <div class="card  m-3 border mt-0 mb-0"> 
+     <div class="card-header bg-lightblue card-height55">
+     <div class="card-title m-0 ">
+       <h4 class="fw-bolder text-blue">Institute Details</h4>
+     </div>
+   </div>
+    <div class="d-flex flex-row m-4 p-3 pt-0 mb-0 flex-wrap " >
+
+      <div class="col-12 col-lg-2 col-md-6 col-sm-12"><span class="fw-bold">Institute Prefix</span>
+        <p class="mt-3">{{InstituteList.institute_prefix}}</p>
+       </div>
+
+      <div class="col-12 col-lg-2 col-md-6 col-sm-12"><span class="fw-bold">Institute </span>
+        <p class="mt-3">{{InstituteList.institute_name}}</p>
+       </div>
+     <div class="col-12 col-lg-2 col-md-6 col-sm-12 "><span class="fw-bold">Institute Login Code</span>
+      <p class="mt-3">{{InstituteList.institute_code}}</p>
+     </div>
+    
+     <div class="col-12 col-lg-2 col-md-6 col-sm-12"> <span class="fw-bold">Contact Person </span>
+      <p class="mt-3">{{InstituteList.contact_person}}</p>
+      </div> 
+     <div class="col-12 col-lg-2 col-md-6 col-sm-12"><span class="fw-bold">Official Mobile Number </span>
+      <p class="mt-3">{{InstituteList.mobile}}</p>
+     </div>
+    <div class="col-12 col-lg-2 col-md-6 col-sm-12"> <span class="fw-bold">Official Email Address</span>
+      <p class="mt-3">{{InstituteList.institutemail_id}}</p>
+    </div>
+    </div>
+</div>
+  
+  <div class="m-3 mt-5 border card  mb-0 mt-0">
+     <div class="card-header bg-lightblue card-height55">
+         <div class="card-title m-0 ">
+           <h5 class="fw-bolder text-blue" >Address</h5>
+         </div>
+     </div>
+     <div class="d-flex flex-row m-4 p-3 mt-2 flex-wrap mb-0">
+         <div class="col-12 col-lg-2 col-md-6 col-sm-12"><span class="fw-bold">Address Line 1</span>
+            <p class="mt-3">{{InstituteList.ins_address1}}</p> 
+         </div>
+         <div class="col-12 col-lg-2 col-md-6 col-sm-12"><span class="fw-bold">Address Line 2</span>
+            <p class="mt-3">{{InstituteList.ins_address2}}</p>
+         </div>
+         <div class="col-12 col-lg-2 col-md-6 col-sm-12"><span class="fw-bold">Postal Code</span>
+            <p class="mt-3">{{InstituteList.ins_pincode}}</p>
+         </div> 
+         <div class="col-12 col-lg-2 col-md-6 col-sm-12"><span class="fw-bold">City</span>
+          <p class="mt-3">{{InstituteList.ins_city}}</p>
+       </div> 
+
+       <div class="col-12 col-lg-2 col-md-6 col-sm-12"><span class="fw-bold">State</span>
+          <p class="mt-3">{{InstituteList.ins_state}}</p>
+       </div>
+       <div class="col-12 col-lg-2 col-md-6 col-sm-12"><span class="fw-bold">Country</span>
+        <p class="mt-3">{{InstituteList.country_name}}</p>
+     </div>
+     </div>
+  </div>
+  
+  <div class="text-center my-4">
+    <button class="btn-primary btn-sm text-white me-4" (click)="backbutton()">
+      <i class="fas fa-arrow-left"></i> &nbsp;
+      Back</button>
+   </div>
+ </div>
+  </div>

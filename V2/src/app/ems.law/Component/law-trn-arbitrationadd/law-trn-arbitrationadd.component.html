@@ -1,0 +1,56 @@
+
+<div class="m-12">
+    <form [formGroup]="reactiveForm" #form="ngForm">
+      <div class="card shadow-lg rounded-top">
+        <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+          <h3 class="fw-bolder" style="color: #ffffff;">
+            Add Arbitration
+          </h3>
+        </div>
+        <div class="card m-3">
+            <div class="card-header bg-lightblue card-height55">
+              <div class="card-title m-0">
+                <h4 class="fw-bolder text-blue">Arbitration Details</h4>
+              </div>
+            </div>
+
+            <div class="d-flex flex-row m-6 flex-wrap">
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                    <span class="font-bold"><b>Arbit No<span style="color:red"> *</span></b></span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                      <input formControlName="arbitration_no" type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                        [ngStyle]="{'border-color': arbitration_no.invalid && arbitration_no.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                        placeholder="Arbit No" name="arbitration_no" required />
+                      <div *ngIf="arbitration_no.invalid && (arbitration_no.dirty || arbitration_no.touched)">
+                        <div *ngIf="arbitration_no.errors?.['required']">
+                          <span class="text-red">Arbit No is required</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+      
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                    <span class="font-bold">PO Date<span class="ms-1 text-red">*</span></span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="date"   pattern="^(?!\s*$).+" [ngStyle]="{ 'border-color': reactiveForm.get('arbitration_date')?.hasError('required')
+                         && reactiveForm.get('arbitration_date')?.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                        formControlName="arbitration_date"
+                        class="form-control form-control-lg form-control-solid date-picker custom-input mb-3 mb-lg-0 bg-white
+                        custom-input date-picker "  placeholder="DD-MM-YYYY" style="height: 40px;"/>
+                    </div>
+                </div> 
+      
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><b>Type</b>
+                  <ng-select formControlName="arbit_type" [items]="arbitList"
+                    class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="arbit_type"
+                    bindValue="arbit_gid" placeholder="Select Arbit Type"></ng-select>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+</div>

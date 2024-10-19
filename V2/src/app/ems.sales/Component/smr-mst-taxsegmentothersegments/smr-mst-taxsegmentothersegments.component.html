@@ -1,0 +1,255 @@
+<div class="row" style="margin-top: 10px;">
+    <div class="col-lg-2 col-md-2 col-sm-2" style="cursor: not-allowed;">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-darkgreen"
+            style="background-color:#ffffff;">
+            <div class="card-body12"  routerLink="/smr/SmrMstTaxsegmenttotalcustomers">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Total</h5>
+                        <div *ngFor="let data of TaxSegmentCustomer_list">
+                            <h4 class="badge-green  badge-outline-green badge-secondary fs-4 mt-2">
+                                {{data.total_customer}}</h4>
+                        </div>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-darkgreens text-white ms-auto">
+                        <i class="fa-solid fa-asterisk"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2" style=" cursor: not-allowed;">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-orange"
+            style="background-color:#ffffff;">
+
+            <div class="card-body12" routerLink="/smr/SrmMstTaxSegmentWithinState">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Within State</h5>
+                        <div *ngFor="let data of TaxSegmentCustomer_list">
+                            <h4 class="badge-orange  badge-outline-orange fs-4 mt-2">
+                                {{data.within_customer}}</h4>
+                        </div>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-brown text-white ms-auto"><i
+                            class="fa-solid fas fa-user-tie"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2" style=" cursor: not-allowed;">
+        <div class="cardHead radius-10 border-start border-0 border-3  border-violet"
+            style="background-color:#ffffff;">
+            <div class="card-body12"  routerLink="/smr/SrmMstTaxSegmentInterState">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Interstate</h5>
+                        <div *ngFor="let data of TaxSegmentCustomer_list">
+                            <h4 class="badge-violet badge-outline-violet fs-4 mt-2">
+                                {{data.interstate_customer}}</h4>
+                        </div>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-violet text-white ms-auto"><i
+                            class="fas fa-person"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2" style=" cursor: not-allowed;">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-darkorange "
+            style="background-color:#ffffff;">
+            <div class="card-body12"  routerLink="/smr/SrmMstTaxSegmentOverSeas">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Overseas</h5>
+                        <div *ngFor="let data of TaxSegmentCustomer_list">
+                            <h4 class="badge1  badge-outline1 fs-4 mt-2 ">{{data.overseas_customer}}</h4>
+                        </div>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-purple text-white ms-auto"><i
+                            class="fa-solid fas fa-crown"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2" style=" cursor: not-allowed;">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-orange "
+        style="background-color: #ffead4;">
+            <div class="card-body12"   routerLink="/smr/SrmMstTaxSegmentOther" >
+              
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Other Segments</h5>
+                        <div *ngFor="let data of TaxSegmentCustomer_list">
+                            <h4 class="badge-orange badge-outline-orange fs-4 mt-2 ">{{data.other_customer}}</h4>
+                        </div>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-brown text-white ms-auto"><i
+                            class="fa-solid fas fa-layer-group"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2" style=" cursor: not-allowed;">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-pink "
+            style="background-color:#ffffff;">
+            <div class="card-body12"  routerLink="/smr/SrmMstTaxSegmentUnassign">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Unassigned</h5>
+                        <div *ngFor="let data of TaxSegmentCustomer_list">
+                            <h4 class="badge-violet  badge-outline-violet fs-4 mt-2 ">{{data.unassign_customer}}</h4>
+                        </div>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-violet text-white ms-auto"><i
+                            class="fas fa-times"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<form [formGroup]="taxsegmentform">
+<div class="card ">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title"> Other Segments</h3>
+        </div>
+
+        <!-- <div class="col me-5">
+            <button type="button" class="btn-primary btn-sm text-white me-4 float-end" data-bs-toggle="modal"
+                data-bs-target="#taxsegmentadd">
+                <i class="fas fa-plus"></i> &nbsp;&nbsp;&nbsp; Add Tax Segment
+            </button>
+        </div> -->
+    </div>
+    <div class="col me-5">
+        <button type="button" class=" btn-primary btn-sm bg-black text-white me-4 float-end"
+            routerLink="/smr/SmrMstTaxsegment">
+            <i class="fas fa-arrow-left text-white"></i>
+        </button>
+
+    </div>
+    <br>
+    <!-- <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="taxsegment_list" class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                <thead>
+
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th>
+
+                            <input type="checkbox" id="checkAll" />
+                            All
+                        </th>
+                        <th style="width:2%">S.No</th>
+                        <th>Customer</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        
+                        <th>State</th>
+                        <th>Country</th>
+                        <th>Tax Segment</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of GetotherSegment_list; let i=index;">
+                        <td> <input type="checkbox" />
+
+                        </td>
+                        <td>{{i+1}}</td>
+                        <td>{{data.customer_name}}</td>
+                        <td>{{data.customer_address}}</td>
+                        <td>{{data.customer_city}}</td>
+                        <td>{{data.customer_state}}</td>
+                        <td>{{data.customer_country}}</td>
+                        <td>{{data.taxsegment_name}}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div> -->
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 mt-5 bg-white rounded">
+          <table id="GetotherSegment_list" class="table table-striped table-row-bordered gy-5 gs-7 ">
+            <thead>
+              <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                <th style="width: 2%;">
+
+                    <input type="checkbox" id="checkAll"
+                        (change)="$event ? masterToggle1() : null"
+                        [checked]="selection1.hasValue() && isAllSelected1()"
+                        [indeterminate]="selection1.hasValue() && !isAllSelected1()" />
+                    All
+                </th>
+                <th >S.No</th>
+                <th>Customer</th>
+                <th>Address</th>
+                <th>City</th>                       
+                <th>State</th>
+                <th>Country</th>
+                <th>Tax Segment</th>   
+               
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of GetotherSegment_list; let i=index;" class="align-middle">
+                <td> <input
+                    
+                     type="checkbox"
+                    (click)="$event.stopPropagation()"
+                    (change)="$event ? selection1.toggle(data) : null"
+                    [checked]="selection1.isSelected(data)"
+                     />
+                <!-- <input
+                   
+                    type="checkbox"
+                    (click)="$event.stopPropagation()"
+                    (change)="$event ? selection1.toggle(data) : null"
+                    [checked]="selection1.isSelected(data)" /> -->
+            </td>
+            <td>{{i+1}}</td>
+            <td>{{data.customer_name}}</td>
+            <td>{{data.customer_address}}</td>
+            <td>{{data.customer_city}}</td>
+            <td>{{data.customer_state}}</td>
+            <td>{{data.customer_country}}</td>
+            <td>{{data.taxsegment_name}}</td>
+                <!-- <td style="text-align: end;">{{data.cost_price}}</td>
+            <td style="text-align: end;">{{data.mrp_price}}</td>
+              </tr> -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+  
+</div>
+<br>
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="row d-flex p-9 col-12 col-lg-12 justify-content-center">
+            <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                <span class="font-bold">Move On : </span>
+                <div class="row d-flex">
+                <ng-select formControlName="taxsegment_gid" [items]="GetTaxSegmentDropDown_list"
+                    class="custom col-lg-9 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="taxsegment_name"
+                    bindValue="taxsegment_gid" placeholder="Select Tax Segment" [(ngModel)]="mdltaxsegment"></ng-select>
+                    <button type="button" class="btn btn-icon btn-sm bg-primary mt-3" (click)="onSubmit()">
+                        <i class="fa fa-thin fa-sitemap"></i></button>
+                    </div>
+            </div>
+           
+                  
+                   
+            
+        </div>
+    </div>
+</div>
+</form>

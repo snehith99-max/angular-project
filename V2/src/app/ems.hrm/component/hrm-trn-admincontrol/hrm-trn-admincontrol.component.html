@@ -1,0 +1,656 @@
+<div class="card">
+  <div class="row ms-3 mt-3 d-flex align-items-center">
+    <div class="col">
+      <h3 class="card-title">Employee Summary</h3>
+      <button title="Form A Export Excel" type="button" class="btn btn-icon btn-sm bg-success mr-05 ms-2" style="height: 30px;" (click)="exportformAExcel()">
+        <i class="bi bi-file-earmark-arrow-up fs-3"></i>
+      </button>
+      <!-- <button title="Form A Pdf" type="button" class="btn btn-icon btn-sm bg-secondary me-1" style="background: radial-gradient(circle, #47acbe 0%, #4aa5b9 100%); margin-left: 8px;" (click)="formapdf(data.employee_gid)">
+        <span class="fa-solid fa-file-pdf text-white fs-6"></span>
+    </button> -->
+    </div>
+
+    <div class="col me-5">
+      <button title="Error Log" (click)="geterorrlog()" class="btn btn-icon btn-sm bg-warning mt-2 me-1 float-end"
+        data-bs-toggle="modal" data-bs-target="#myModalviewexcelimport">
+        <i class="bi bi-question-circle fs-2"></i>
+      </button>
+
+      <button title="Import Excel" type="button" class="btn btn-icon btn-sm bg-export mt-2 me-3 float-end"
+        data-bs-toggle="modal" data-bs-target="#myModalexcelimport">
+        <span class="bi bi-file-earmark-arrow-down fs-2"></span>
+      </button>
+
+      <button title="Add Employee" class="btn-primary btn-sm text-white mb-2 mt-2 me-3 float-end"
+        routerLink="/hrm/HrmMstEmployeeadd">
+        <span class="fa-solid fa-plus text-white fs-6 fw-bold"></span>&nbsp;Add Employee
+      </button>
+    </div>
+  </div>
+
+  <ul class="m-3 nav nav-twotabs nav-line-tabs nav-line-tabs-20x mb-3 fs-6 border-bottom text-center mt-2 ms-6 me-6"
+    id="myTab" role="tablist">
+    <li class="border border-secondary active justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"
+      data-bs-toggle="tab" style="color: #ffffff !important;  background: -webkit-linear-gradient(45deg, #45abe6, #3fe8d4)!important;" href="#kt_tab_pane_1">
+      <a>
+        <i class="fa-solid fa-users fs-4 me-4"></i>Active Users
+        <span class="badge badge-pill badge-light text-black"></span>
+      </a>
+    </li>
+
+    <li class="border border-secondary justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"
+      data-bs-toggle="tab" style="color: #ffffff !important;  background: -webkit-linear-gradient(45deg, #aedaf3, #399C91)!important;" href="#kt_tab_pane_2">
+      <i class="fa-solid fa-users-slash fs-4 me-4"></i>Inactive Users
+      <span class="badge badge-pill badge-light text-black "></span>
+    </li>
+
+    <li class="border border-secondary justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"
+      data-bs-toggle="tab" style="color: #ffffff !important;  background: linear-gradient(45deg, #7dc2bf, #05aa97)!important;" href="#kt_tab_pane_3">
+      <a>
+        <i class="fa-solid fa-users-viewfinder fs-2 me-4"></i>Total Users
+        <span class="badge badge-pill badge-light text-black "></span>
+      </a>
+    </li>
+  </ul>
+
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel">
+      <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded mt-2">
+          <table id="employee_list_active"
+          class="table table-striped table-row-bordered border-bottom gs-7">
+            <thead>
+              <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                <th>S.No</th>
+                <!-- <th>Entity</th> -->
+                <!-- <th>Employee Code</th> -->
+                <th>Employee</th>
+                <th>Department</th>
+                <th>Designation</th>
+                <th>Gender</th>
+                <th>Joining Date</th>
+                <th>Level</th>
+                <th class="text-center bg-lightblue ">Action</th> 
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let data of employee_list_active; let i=index;" class="align-middle">
+                <td title="S.No">{{i+1}}</td>
+                <!-- <td title="Entity">{{data.entity_name}}</td> -->
+                <!-- <td title="Employee Code">{{data.user_code}}</td> -->
+                <td title="Employee">{{data.user_name}}</td>
+                <td title="Department">{{data.department_name}}</td>
+                <td title="Designation">{{data.designation_name}}</td>
+                <td title="Gender">{{data.employee_gender}}</td>
+                <td title="Joining Date">{{data.employee_joiningdate}}</td>
+                <td title="employee_level">{{data.employee_level}}</td>
+                <td class="text-center text-nowrap">
+                  <button title="View" type="button" class="btn btn-icon btn-sm bg-primary me-2" (click)="onview(data.employee_gid)">
+                    <span class="fa fa-eye fs-6 text-white fs-6"></span>
+                  </button>
+                  <button title="Edit" type="button" class="btn btn-icon btn-sm bg-etdark me-2" (click)="onedit(data.employee_gid)">
+                  <span class="fa-solid fa-pencil fs-6" style="color: #ffffff;"></span>
+                  </button>
+                  <button title="Update User Code" type="button" class="btn btn-icon btn-sm bg-success me-2" data-bs-toggle="modal" 
+                  data-bs-target="#myModalUpdateusercode" (click)="openModalUpdateCode(data)">
+                    <span><i class="fa-solid bi bi-arrow-clockwise fs-6"></i></span>
+                 </button>
+                  <button title="Update User document" type="button" class="btn btn-icon btn-sm bg-primary me-2"  data-bs-toggle="modal"
+                  data-bs-target="#myModalUpdateuserdocument"
+                  style="background: radial-gradient(circle, #9360f2 0%, #9360f2 100%);" (click)="openModalUpdatedocument(data)">
+                  <span><i class="fa-solid fa-upload fs-6"></i></span>
+                  </button>
+                  <button title="Reset Password" type="button" class="btn btn-icon btn-sm bg-warning me-2" data-bs-toggle="modal" data-bs-target="#myModalRest"
+                  (click)="openModalReset(data)">
+                    <span><i class="fa-solid fa-unlock fs-6"></i></span>
+                 </button>
+                 <button title="User Deactivate" type="button" class="btn btn-icon btn-sm bg-danger me-2" data-bs-toggle="modal" data-bs-target="#myModaldeactive"
+                 (click)="openModaldeactive(data)">
+                 <span><i class="fa fa-thumbs-down fs-6"></i></span>
+                 </button>
+                 <!-- <button title="Pdf" type="button" class="btn btn-icon btn-sm bg-secondary me-2"
+                 style="background: radial-gradient(circle, #47acbe 0%, #4aa5b9 100%);" (click)="personaldatapdf(data.employee_gid)">
+                  <span><i class="fa-solid fa-file-pdf text-white"></i></span>
+                  </button> -->
+                  <button title="360 View" type="button" class="btn btn-icon btn-sm bg-warning me-2"
+                  (click)="onopen(data.employee_gid)" style="background: radial-gradient(circle, #2b20cbe0 0%, #2b20cbe0 100%);">
+                  <span><i class="fa-solid fa-arrows-spin fa-spin fs-3"></i></span>
+                 </button>
+                  <!-- <div (mouseleave)="showOptionsDivId = null" (mouseover)="showOptionsDivId = data.employee_gid"
+                    style="cursor: pointer;">
+                    <button class="btn me-2 p-1 "><span class="fa-solid fa-ellipsis-vertical fs-1"
+                        style="color: #4d4d4d;"></span></button>
+                    <div *ngIf="showOptionsDivId === data.employee_gid"
+                      class="pb-0 rounded bg-white cursor-pointer icon_menu" style="margin-right:-15px; margin-top: -15px;">
+                      <div class="d-flex p-3 pb-3 Icon_hover" (click)="onview(data.employee_gid)">
+                        <span><i class="fa-regular fa-eye fs-3 me-5"></i></span>
+                        <span>View</span>
+                      </div>
+                      <div class="d-flex p-3 pb-3 Icon_hover" (click)="onedit(data.employee_gid)"
+                        data-bs-toggle="modal">
+                        <span><i class="fa-regular fa-pen-to-square fs-3 me-5"></i></span>
+                        <span>Edit</span>
+                      </div>
+                      <div class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal"
+                        data-bs-target="#myModalUpdateusercode" (click)="openModalUpdateCode(data)">
+                        <span><i class="fa-solid bi bi-arrow-clockwise fs-3 me-5"></i></span>
+                        <span>Update User Code</span>
+                      </div>
+                      <div class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal"
+                        data-bs-target="#myModalUpdateuserdocument" (click)="openModalUpdatedocument(data)">
+                        <span><i class="fa-solid fa-upload fs-3 me-5"></i></span>
+                        <span>Update User document</span>
+                      </div>
+                      <div class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal" data-bs-target="#myModalRest"
+                        (click)="openModalReset(data)">
+                        <span><i class="fa-solid fa-unlock fs-3 me-5"></i></span>
+                        <span>Reset Password</span>
+                      </div>
+                      <div class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal" data-bs-target="#myModaldeactive"
+                        (click)="openModaldeactive(data)">
+                        <span><i class="fa-regular fa-thumbs-down fs-3 me-5"></i></span>
+                        <span>User Deactivate</span>
+                      </div>
+                      <div class="d-flex p-3 pb-3 Icon_hover" (click)="personaldatapdf(data.employee_gid)">
+                        <span><i class="fa-solid fa-file-pdf fs-3 me-5"></i></span>
+                        <span>Personal Data Pdf</span>
+                      </div>
+                      <div class="d-flex p-3 pb-3 Icon_hover" (click)="onopen(data.employee_gid)"
+                        data-bs-toggle="modal">
+                        <span><i class="fa-solid fa-arrows-spin fa-spin fs-3 me-5"></i></span>
+                        <span>360 View</span>
+                      </div>
+                      
+                    </div>
+                  </div> -->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show" id="kt_tab_pane_2" role="tabpanel">
+      <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded mt-2">
+          <table id="employee_list_inactive"
+          class="table table-striped table-row-bordered border-bottom gs-7">
+            <thead>
+              <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                <th>S.No</th>
+                <!-- <th>Entity</th> -->
+                <!-- <th>Employee Code</th> -->
+                <th>Employee</th>
+                <th>Department</th>
+                <th>Designation</th>
+                <th>Gender</th>
+                <th>Joining Date</th>
+                <th>Deactivated On</th>
+                <th>Level</th>
+                <th class="text-center">Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let data of employee_list_inactive; let i=index;" class="align-middle">
+                <td title="S.No">{{i+1}}</td>
+                <!-- <td title="Entity">{{data.entity_name}}</td> -->
+                <!-- <td title="Employee Code">{{data.user_code}}</td> -->
+                <td title="Employee">{{data.user_name}}</td>
+                <td title="Department">{{data.department_name}}</td>
+                <td title="Designation">{{data.designation_name}}</td>
+                <td title="Gender">{{data.employee_gender}}</td>
+                <td title="Joining Date">{{data.employee_joiningdate}}</td>
+                <td title="Deactivation Date">{{data.exit_date}}</td>
+                <td title="employee_level">{{data.employee_level}}</td>
+                <td class="text-center text-nowrap">
+                  <button title="View" type="button" class="btn btn-icon btn-sm bg-primary me-2"
+                    (click)="onview(data.employee_gid)">
+                    <span class="fa-solid fa-eye text-white fs-6"></span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show" id="kt_tab_pane_3" role="tabpanel">
+      <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded mt-2">
+          <table id="employee_list" class="table table-striped table-row-bordered border-bottom gs-7">
+            <thead>
+              <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                <th>S.No</th>
+                <!-- <th>Entity</th> -->
+                <!-- <th>Employee Code</th> -->
+                <th>Employee</th>
+                <th>Department</th>
+                <th>Designation</th>
+                <th>Gender</th>
+                <th>Joining Date</th>
+                <th>Deactivated On</th>
+                <th>Level</th>
+                <th>Status</th>
+                <th class="text-center">Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let data of employee_list; let i=index;" class="align-middle">
+                <td title="S.No">{{i+1}}</td>
+                <!-- <td title="Entity">{{data.entity_name}}</td> -->
+                <!-- <td title="Employee Code">{{data.user_code}}</td> -->
+                <td title="Employee">{{data.user_name}}</td>
+                <td title="Department">{{data.department_name}}</td>
+                <td title="Designation">{{data.designation_name}}</td>
+                <td title="Gender">{{data.employee_gender}}</td>
+                <td title="Joining Date">{{data.employee_joiningdate}}</td>
+                <td title="Deactivation Date">{{data.exit_date}}</td>
+                <td title="employee_level">{{data.employee_level}}</td>
+                <td [ngSwitch]="data.user_status">
+                  <label *ngSwitchCase="'Active'" class="badge bg-success text-white ">Active</label>
+                  <label *ngSwitchCase="'Inactive'" class="badge bg-danger text-white ">Inactive</label>
+                </td>
+                <td class="text-center text-nowrap">
+                  <button title="View" type="button" class="btn btn-icon btn-sm bg-primary me-2"
+                    (click)="onview(data.employee_gid)">
+                    <span class="fa-solid fa-eye text-white fs-6"></span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- The Import Excel-->
+<form [formGroup]="reactiveForm" #form="ngForm">
+  <div class="modal" id="myModalexcelimport" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+          <h2 style="margin-top:10px;color:white;font-weight: bold;">
+            <i class="fas fa-solid fa-upload fs-3 ms-5 me-5"></i>Employee Excel File Import
+          </h2>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <button type="submit" class="btn-danger btn-sm text-white me-2" (click)="downloadfileformat()"
+            style="margin-left: 290px;">
+            <i class="bi bi-cloud-download fs-5 me-3"></i>Download
+          </button>
+
+          <div class="col-12 col-lg-4 col-md-6 col-sm-12 mt-5">
+            <span class="fw-bolder">Select an Excel File to Import<span class="ms-1 text-red">*</span></span>
+            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+              <input (change)="onChange1($event)" accept=".xlsx, .xls" type="file" #fileInput
+                class="form-control form-control-lg form-control-solid bg-white mb-3 mb-lg-0 border-secondary custom-input"
+                name="fName" style="width: 300%;" />
+            </div>
+          </div>
+          <!-- Modal footer -->
+          <div class="text-center my-4">
+            <button type="submit" class="btn-success btn-sm text-white me-2" data-bs-dismiss="modal"
+              (click)="importexcel()">
+              <i class="fas fa-check text-white fs-5 me-2"></i>Upload
+            </button>
+            <button class="btn-primary btn-danger text-white ms-8 me-2 mt-5" data-bs-dismiss="modal">
+              <i class="fa fa-close fs-5 text-center me-2"></i>Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- The Modal Update User code-->
+<form [formGroup]="reactiveFormUpdateUserCode" #form="ngForm">
+  <div class="modal mt-3" id="myModalUpdateusercode" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+          <div>
+            <h2 class="fw-bolder ms-5 mt-4" style="color: #ffffff;">
+              <i class="fa-solid bi bi-arrow-clockwise fs-3"></i>&nbsp;Update Employee Code
+            </h2>
+          </div>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <input class="form-control form-control-lg" formControlName="employee_gid" hidden pattern="^(?!\s*$).+"
+            type="text" placeholder="Enter Entity" aria-label=".form-control-lg example" autocomplete="off" required>
+          <!-- <label><b>Employee Code</b>
+            <span class="ms-3" style="color:green">{{usercode}}</span>
+          </label> -->
+          <label><b>Employee</b>
+            <span class="ms-15" style="color:green">{{user_firstname}}</span>
+          </label>
+          <br><br>
+          <label><b>Branch</b>
+            <span class="ms-20" style="color:green">{{branch}}</span>
+          </label>
+          <br><br>
+          <label><b>Designation</b>
+            <span class="ms-11" style="color:green">{{designation}}</span>
+          </label>
+          <br><br>
+          <label><b>Department</b>
+            <span class="ms-11" style="color:green">{{department}}</span>
+          </label>
+
+          <div>
+            <label for="user_code" class="form-label mt-6"><b>New User Code<span style="color:red"> *</span></b></label>
+            <div class="input-group input-group-sm has-validation">
+              <input type="text" id="user_code" (change)="updateusercode(user_code)" formControlName="user_code"
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                [ngStyle]="{ 'border-color': reactiveFormUpdateUserCode.get('user_code')?.hasError('required') && reactiveFormUpdateUserCode.get('user_code')?.touched || reactiveFormUpdateUserCode.get('user_code')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                [class.is-invalid]="user_code.invalid && (user_code.dirty || user_code.touched)"
+                placeholder="New User Code" name="user_code" required />
+              <div *ngIf="user_code.invalid && (user_code.dirty || user_code.touched)" class="invalid-feedback">
+                <div *ngIf="user_code.errors?.['required']">
+                  <span style="color: red; width: 200px; margin-top: 1px; margin-left: 8px; font-size: 11px;">* New user
+                    code is required</span>
+                </div>
+                <div *ngIf="reactiveFormUpdateUserCode.get('user_code')?.hasError('pattern')" class="text-red ms-2">
+                  Space at the beginning is not allowed.</div>
+              </div>
+
+            </div>
+
+
+          </div>
+
+          <div class="mt-5">
+            <label for="exampleFormControlTextarea1" class="form-label"><b>Confirm User Code</b></label>
+            <input placeholder="Confirm User Code" type="text" readonly id="confirmusercode" name="confirmusercode"
+              style="width:100%;" formControlName="confirmusercode" class="form-control form-control-sd">
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="text-center my-4">
+          <button (click)="onupdateusercode()" [disabled]="reactiveFormUpdateUserCode.invalid"
+            [ngClass]="{'primary-button': !reactiveFormUpdateUserCode.invalid, 'secondary-button': reactiveFormUpdateUserCode.invalid }"
+            data-bs-dismiss="modal">
+            <i class="fas fa-check text-white fs-5 me-3"></i>Update
+          </button>
+          <button class="btn-danger btn-sm text-white ms-8 me-2" (click)="oncloseupdatecode()" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white me-3"></i>Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- The Modal Reset-->
+<form [formGroup]="reactiveFormReset" #form="ngForm">
+  <div class="modal mt-20" id="myModalRest" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+          <div>
+            <h2 class="fw-bolder ms-5 mt-4" style="color: #ffffff;">
+              <i class="fa-solid fa-unlock fs-3"></i>&nbsp;Reset Password
+            </h2>
+          </div>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <input class="form-control form-control-lg" formControlName="employee_gid" hidden pattern="^(?!\s*$).+"
+            type="text" placeholder="Enter Entity" aria-label=".form-control-lg example" autocomplete="off" required>
+          <!-- <label><b>Employee Code</b>
+            <span class="ms-10" style="color:green">{{usercode}}</span></label>
+          <br><br> -->
+          <label><b>Employee</b>
+            <span class="ms-10" style="color:green">{{user_firstname}}</span></label>
+          <div>
+            <label for="password" class="form-label mt-6"><b>Password<span style="color:red"> *</span></b></label>
+            <div class="input-group input-group-sm has-validation">
+              <input [type]="employee.showPassword ? 'text' : 'password'" id="password"
+                (change)="userpassword(password)" formControlName="password"
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                [ngStyle]="{'border-color': password.invalid && password.touched ? 'red': 'rgb(209, 209, 209)'}"
+                [class.is-invalid]="password.invalid && (password.dirty || password.touched)"
+                placeholder="Enter Password" name="password" required />
+              <button type="button" style="margin-left:0px;background-color: #008CBA;" class="btn btn-outline-secondary"
+                (click)="employee.showPassword = !employee.showPassword">
+                <i class="bi"
+                  [ngClass]="{'bi-eye-fill': !employee.showPassword, 'bi-eye-slash-fill': employee.showPassword}"
+                  style="color: #ffffff; font-size: 20px;"></i>
+              </button>
+              <div *ngIf="password.invalid && (password.dirty || password.touched)" class="invalid-feedback">
+                <div *ngIf="password.errors?.['required']">
+                  <span style="color: red; width: 200px; margin-top: 1px; margin-left: 8px; font-size: 11px;">* Password
+                    is required</span>
+                </div>
+                <div *ngIf="reactiveFormReset.get('password')?.hasError('pattern')" class="text-red ms-2">Space at the
+                  beginning is not allowed.</div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-5">
+            <label for="exampleFormControlTextarea1" class="form-label"><b>Confirm Password</b></label>
+            <input placeholder="Confirm Password" type="password" readonly id="confirmpassword" name="confirmpassword"
+              style="width:100%;" formControlName="confirmpassword" class="form-control form-control-sd">
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="text-center my-4">
+          <button (click)="onupdatereset()" [disabled]="reactiveFormReset.invalid"
+            [ngClass]="{'primary-button': !reactiveFormReset.invalid, 'secondary-button': reactiveFormReset.invalid }"
+            data-bs-dismiss="modal">
+            <i class="fas fa-check text-white fs-5 me-3"></i>Update
+          </button>
+          <button class="btn-danger btn-sm text-white ms-8 me-2" (click)="onclose()" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white me-3"></i>Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- update document -->
+<form [formGroup]="reactiveFormdocument" #form="ngForm">
+  <div class="modal mt-20" id="myModalUpdateuserdocument" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+          <div>
+            <h2 class="fw-bolder ms-5 mt-4" style="color: #ffffff;">
+              <i class="fa-solid fa-upload fs-3"></i>&nbsp;Upload Document
+            </h2>
+          </div>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <input class="form-control form-control-lg" formControlName="employee_gid" hidden>
+          <!-- <label><b>Employee Code</b>
+            <span class="ms-10" style="color:green">{{usercode}}</span></label>
+          <br><br> -->
+          <label><b>Employee</b>
+            <span class="ms-10" style="color:green">{{user_firstname}}</span></label>
+          <div>
+            <label for="Employee_profile" class="form-label mt-6"><b>Employee profile<span style="color:red">
+                  *</span></b></label>
+            <div class="input-group input-group-sm has-validation">
+              <input (change)="onChange11($event)" accept="image/*" type="file" #file1
+                class="form-control form-control-lg form-control-solid bg-white mb-3 mb-lg-0  borderc-secondary custom-input"
+                name="fName" />
+            </div>
+            <label for="Employee_signature" class="form-label mt-6"><b>Employee Signature<span style="color:red">
+                  *</span></b></label>
+            <div class="input-group input-group-sm has-validation">
+              <input (change)="onChange2($event)" accept="image/*" type="file" #file2
+                class="form-control form-control-lg form-control-solid bg-white mb-3 mb-lg-0  borderc-secondary custom-input"
+                name="fName" />
+            </div>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="text-center my-4">
+          <button (click)="onupdatedocument()" [disabled]="reactiveFormdocument.invalid"
+            [ngClass]="{'primary-button': !reactiveFormdocument.invalid, 'secondary-button': reactiveFormdocument.invalid }"
+            data-bs-dismiss="modal">
+            <i class="fas fa-check text-white fs-5 me-3"></i>Upload
+          </button>
+          <button class="btn-danger btn-sm text-white ms-8 me-2" (click)="onclosedocument()" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white me-3"></i>Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- The Modal Update User Deactivate-->
+<form [formGroup]="reactiveFormUserDeactivate" #form="ngForm">
+  <div class="modal" id="myModaldeactive" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+          <div>
+            <h2 class="fw-bolder ms-5 mt-4" style="color: #ffffff;">
+              <i class="fa fa-thumbs-down fs-3"></i>&nbsp;User Deactivate
+            </h2>
+          </div>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <input class="form-control form-control-lg" formControlName="employee_gid" hidden pattern="^(?!\s*$).+"
+            type="text" placeholder="Enter Entity" aria-label=".form-control-lg example" autocomplete="off" required>
+          <!-- <label><b>Employee Code</b>
+            <span class="ms-4" style="color:green">{{usercode}}</span>
+          </label>
+          <br><br> -->
+          <label><b>Employee</b>
+            <span class="ms-14" style="color:green">{{user_firstname}}</span>
+          </label>
+          <br><br>
+          <label><b>Branch</b>
+            <span class="ms-19" style="color:green">{{branch}}</span>
+          </label>
+          <br><br>
+          <label><b>Designation</b>
+            <span class="ms-10" style="color:green">{{designation}}</span>
+          </label>
+          <br><br>
+          <label><b>Department</b>
+            <span class="ms-10" style="color:green">{{department}}</span>
+          </label>
+          <br><br>
+          <label><b>Status</b>
+            <span class="ms-20" style="color:green">{{status}}</span>
+          </label>
+          <br><br>
+          <div>
+            <span class="font-bold"><b>Deactivate Date<span style="color:red"> *</span></b></span>
+            <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+              <input type="date"
+                class="form-control form-control-lg form-control-solid date-picker mb-3 mb-lg-0 bg-white custom-input"
+                placeholder="DD-MM-YYYY" formControlName="deactivation_date"
+                [ngStyle]="{'border-color': deactivation_date.invalid && deactivation_date.touched ? 'red' : 'rgb(209, 209, 209)'}" />
+              <div *ngIf="deactivation_date.invalid && (deactivation_date.dirty || deactivation_date.touched)">
+                <div *ngIf="deactivation_date.errors?.['required']">
+                  <span class="text-red">User Deactivate Date is required </span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <br>
+          <div class="mb-2">
+            <label for="exampleFormControlTextarea1" class="form-label"><b>Remarks</b></label>
+            <textarea
+              class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+              id="remarks" formControlName="remarks" rows="3">
+            </textarea>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="text-center my-4">
+          <button class="me-4 btn-success" (click)="onupdateuserdeactivate()"
+            [disabled]="reactiveFormUserDeactivate.invalid" [ngClass]="{
+                    'primary-button': !reactiveFormUserDeactivate.invalid,
+                    'secondary-button': reactiveFormUserDeactivate.invalid
+                  }" data-bs-dismiss="modal">
+            <i class="fas fa-check text-white fs-5 "></i>
+            <span class="ms-3">Update</span>
+          </button>
+          <button class="btn-danger btn-sm text-white me-4" (click)="oncloseuserdeactivate()" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white"></i>
+            <span class="ms-2">Close</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+<div class="modal" id="myModalviewexcelimport" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" style="width: 90%; max-width: 900px; height: 100%; max-height: 0vh;">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+
+      <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+        <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i class="fas fw-bolder fs-3"></i>
+          Employee Import Error Logs</h2>
+
+      </div>
+
+      <!-- Modal body -->
+      <div class="table-responsive">
+        <div class="card card-body m-1 shadow-lg p-3 mb-5 bg-white rounded">
+          <table id="" class="table table-striped table-row-bordered gy-5 gs-7">
+            <thead>
+              <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                <th style="font-size:11px;">S.No</th>
+                <th style="font-size:11px;">Employee Code</th>
+                <th style="font-size:11px;">Employee Name</th>
+                <th style="font-size:11px;">Remarks</th>
+                <th style="font-size:11px;"> Created By</th>
+                <th style="font-size: 11px;">Created Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of employeeerror_list; let i=index;">
+                <td style="font-size:11px;">{{i+1}}</td>
+                <td style="font-size:11px;">{{data.user_code}}</td>
+                <td style="font-size:11px;">{{data.user_name}}</td>
+                <td style="font-size:11px;">{{data.remarks}}</td>
+                <td style="font-size:11px;">{{data.created_by}}</td>
+                <td style="font-size:11px;">{{data.created_date}}</td>
+
+
+              </tr>
+            </tbody>
+          </table>
+          <div class="text-center my-4">
+            <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal" (click)="onclose()">
+              <i class="fas fa-close text-white"></i> &nbsp;Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

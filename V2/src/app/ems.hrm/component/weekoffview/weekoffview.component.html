@@ -1,0 +1,92 @@
+<div class="d-flex justify-content-center" *ngFor="let m of Weekoffview_list">
+  <div class="m-12">
+    <div class="card shadow-lg rounded-top">
+      <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+        <h3 class="fw-bolder text-white text-white"><i class="fa fa-eye fs-6 text-white me-4"></i>Week Off</h3>
+      </div>
+
+      <div class="d-flex justify-content-center mt-4">
+        <h1 class="card-title fw-bold fs-3 me-4">Employee:</h1>
+        <h1 class="card-title fw-bold fs-3" style="color: #800000">{{employee_name}}</h1>
+      </div>
+
+      <div class="d-flex flex-row flex-wrap justify-content-center" style="width: 550px;">
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+          <h3 class="mt-6">Created Date</h3>
+        </div>
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+          <p class="mt-5 fs-3">{{m.created_date}}</p>
+        </div>
+      </div>      
+
+      <div class="d-flex flex-row flex-wrap justify-content-center" style="width: 550px;">
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+          <h3 class="mt-4">Monday</h3>
+        </div>
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+          <p class="mt-3 fs-3">{{m.monday}}</p>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row flex-wrap justify-content-center" style="width: 550px;">
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+          <h3 class="mt-4">Tuesday</h3>
+        </div>
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+          <p class="mt-3 fs-3">{{m.tuesday}}</p>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row flex-wrap justify-content-center" style="width: 550px;">
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+          <h3 class="mt-4">Wednesday</h3>
+        </div>
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+          <p class="mt-3 fs-3">{{m.wednesday}}</p>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row flex-wrap justify-content-center" style="width: 550px;">
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+          <h3 class="mt-4">Thursday</h3>
+        </div>
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+          <p class="mt-3 fs-3">{{m.thursday}}</p>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row flex-wrap justify-content-center" style="width: 550px;">
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+          <h3 class="mt-4">Friday</h3>
+        </div>
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+          <p class="mt-3 fs-3">{{m.friday}}</p>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row flex-wrap justify-content-center" style="width: 550px;">
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+          <h3 class="mt-4">Saturday</h3>
+        </div>
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+          <p class="mt-3 fs-3">{{m.saturday}}</p>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row flex-wrap justify-content-center" style="width: 550px;">
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+          <h3 class="mt-4">Sunday</h3>
+        </div>
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+          <p class="mt-3 fs-3">{{m.sunday}}</p>
+        </div>
+      </div>
+
+      <div class="text-center my-4">
+        <button class="btn-primary btn-sm text-white me-4" [routerLink]="['/hrm/HrmMstWeekoffmanagement']">
+          <i class="fas fa-arrow-left me-3"></i>Back
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

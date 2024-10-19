@@ -1,0 +1,461 @@
+<div class="card rounded-top">
+    <div class="card-title p-5 pb-3 pt-3 rounded-top bg-primary d-flex justify-content-between align-items-center">
+        <h1 class="fw-bolder text-white"><i class="fa fa-plus fs-2" aria-hidden="true"></i>&nbsp;&nbsp;
+            Proforma Invoice Confirm</h1>
+        <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer " title="back"
+            routerLink="/einvoice/ProformaInvoice"><i
+                class="fa-solid fa-arrow-left-long fs-1 fw-bold"></i></button>
+    </div>
+
+    <form [formGroup]="proformainvoiceconfirmform" #form="ngForm">
+        <div>
+            <div class="d-flex flex-row m-4 mt-6 flex-wrap border-bottom">
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Invoice Ref No</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                            formControlName="proforma_invoice_refno" readonly placeholder="New Ref.No">
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"> <span class="font-bold required">Invoice Date</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="hidden" formControlName="proforma_salesorder_gid">
+                        <input type="date"
+                            class="form-control form-control-lg form-control-solid date-picker custom-input borderc-secondary mb-3 mb-lg-0 bg-white custom-input date-picker mt-2"
+                            placeholder="DD-MM-YYYY" formControlName="proforma_invoice_date" pattern="^(?!\s*$).+" />
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"> <span class="font-bold ">SO Reference No.</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-secondary custom-input"
+                            formControlName="proforma_so_ref_no" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row m-4 mt-6 flex-wrap border-bottom">
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">SO Date</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-secondary custom-input"
+                            formControlName="proforma_so_date" readonly>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Payment Term (In
+                        Days)</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+                        <ng-select class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2"
+                            formControlName="proforma_invoice_payterm" [(ngModel)]="mdlperformainvoice"
+                            placeholder="Select an option">
+                            <ng-option value="0">0 Days</ng-option>
+                            <ng-option value="7">7 Days</ng-option>
+                            <ng-option value="15">15 Days</ng-option>
+                            <ng-option value="30">30 Days</ng-option>
+                            <ng-option value="45">45 Days</ng-option>
+                            <ng-option value="60">60 Days</ng-option>
+                            <ng-option value="90">90 Days</ng-option>
+                            <ng-option value="120">120 Days</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Due Date</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+                        <input type="text"
+                            class="form-control form-control-lg form-control-solid date-picker mb-3 mb-lg-0 bg-white custom-input borderc-secondary"
+                            placeholder="DD-MM-YYYY" formControlName="proforma_invoice_due_date"
+                            pattern="^(?!\s*$).+" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row m-4 mt-6 flex-wrap border-bottom">
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Invoice Raised By</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-secondary custom-input"
+                            formControlName="proforma_invoice_raised_by" readonly>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Customer Reference No</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-secondary custom-input"
+                            formControlName="proforma_cust_ref_no" readonly />
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Customer Name</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-secondary custom-input"
+                            formControlName="proforma_customer_name" readonly />
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row m-4 mt-6 flex-wrap border-bottom">
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Branch</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-secondary custom-input"
+                            formControlName="proforma_branch">
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Contact Person</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-secondary custom-input"
+                            formControlName="proforma_contact_person" readonly />
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Contact Number</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-secondary custom-input"
+                            formControlName="proforma_contact_no" maxlength="15" readonly />
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row m-4 mt-6 flex-wrap border-bottom">
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Email Address</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-secondary custom-input"
+                            formControlName="proforma_email_address" readonly>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Address</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <textarea type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary custom-input"
+                            placeholder="" formControlName="proforma_address" class="form-control bg-secondary"
+                            rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Remarks</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <textarea type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                            placeholder="" formControlName="proforma_remarks" rows="5" readonly></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row m-4 mt-6 flex-wrap border-bottom">
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Sales Person</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-secondary custom-input"
+                            formControlName="proforma_sales_person" readonly>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Expected Start Date</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-secondary custom-input"
+                            formControlName="proforma_expected_start_date" readonly>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Estimated Arrival Time</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-secondary custom-input"
+                            formControlName="proforma_estimated_arrival_time" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row m-4 mt-6 flex-wrap border-bottom">
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Freight Terms</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-secondary custom-input"
+                            formControlName="proforma_freight_terms" readonly>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Payment Terms</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-secondary custom-input"
+                            formControlName="proforma_payment_terms" readonly>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Currency</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-secondary custom-input"
+                            formControlName="proforma_currency" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row m-4 mt-6 flex-wrap border-bottom">
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Exchange Rate</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary custom-input"
+                            formControlName="proforma_exchange_rate">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <div class="card card-body m-0 p-3 mb-5 bg-white rounded table-responsive">
+                <div>
+                    <table id="product" class="table table-striped table-row-bordered gy-4 gs-2">
+                        <thead>
+                            <tr class="text-white fw-bold fs-5 text-nowrap bg-lightblue text-blue">
+                                <th>S.No</th>
+                                <th>Product Group</th>
+                                <th>Customer Product Code</th>
+                                <th>Product & Description</th>
+                                <th>Unit</th>
+                                <th style="text-align: right;">Billed Quantity</th>
+                                <th style="text-align: center;">Discount</th>
+                                <th style="text-align: right;"> Unit Price</th>
+                                <th style="text-align: center; width: 120px;">Tax</th>
+                                <th style="text-align: centre;">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of proformainvoicelist1; let i=index;">
+                                <td>{{i+1}}</td>
+                                <td>{{data.productgroup_name}}</td>
+                                <td>{{data.customerproduct_code}}</td>
+                                <td>
+                                    <div> {{data.product_name}}</div>
+                                    <div> {{data.product_description}}</div>
+                                </td>
+                                <td>{{data.productuom_name}}</td>
+                                <td style="text-align: right;">{{data.qty_invoice}}</td>
+                                <td style="text-align: right;">
+                                    <div> {{data.margin_percentage}}</div>
+                                    <div> {{data.margin_amount}}</div>
+                                </td>
+                                <td style="text-align: center;">{{data.product_price}}</td>
+                                <td class="text-end">
+                                    <div class="text-center" *ngIf="data.taxSegments && data.taxSegments.length > 0">
+                                        <table>
+                                            <tr *ngFor="let taxSegment of data.taxSegments">
+                                                <td>{{ taxSegment.tax_name }} ({{ taxSegment.tax_percentage }}%):</td>
+                                                <td class="text-end">{{ (data.product_price * taxSegment.tax_percentage
+                                                    / 100).toFixed(2) }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-end"><span class="fw-bold">Total Tax:&nbsp;</span></td>
+                                                <td class="text-end">{{ po_tax_amount }}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div *ngIf="!data.taxSegments || data.taxSegments.length === 0">
+                                        <span class="text-center"
+                                            style="color: #ff0000; margin-bottom: 10px;font-size: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No
+                                            Tax Segment</span>
+                                    </div>
+                                </td>
+                                <td style="text-align: right;">{{data.total_amount}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="m-4 card">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="mt-4 card border">
+                                <div class="d-flex justify-content-between align-items-center rounded-top"
+                                    style="background-color: #def0ff;">
+                                    <div class="">
+                                        <h3 class="fw-bolder ms-3 mt-2" style="color: #2599ff;">Terms and Conditions
+                                        </h3>
+                                    </div>
+                                    <div class="col-4">
+                                        <ng-select class="custom col-lg-6 m-6 col-12 fv-row mt-5"
+                                            bindLabel="template_name" [(ngModel)]="mdlTerms"
+                                            formControlName="template_name" bindValue="template_gid"
+                                            placeholder="Select an option"></ng-select>
+                                    </div>
+                                </div>
+                                <div class="m-3">
+                                    <angular-editor [config]="config"
+                                        formControlName="termsandconditions"></angular-editor>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="mt-4 card border" style="background-color: #f9f9f99d;">
+                                <div class="row g-6 p-3">
+                                    <div class="col-lg-12">
+                                        <span class="font-bold">Net Amount</span>
+                                        <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                                            <input type="text" class="form-control fw-bold bg-secondary"
+                                                formControlName="proforma_net_amount" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <span class="font-bold">Overall Tax</span>
+                                        <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                                            <input type="text" class="form-control fw-bold bg-secondary"
+                                                formControlName="proforma_overall_tax" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <span class="font-bold">Total Amount with Tax</span>
+                                        <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                                            <input type="text" class="form-control fw-bold bg-secondary"
+                                                [(ngModel)]="Totalamountwithtax" (ngModelChange)="finaltotal()"
+                                                formControlName="proforma_total_amount_tax" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <span class="font-bold">Maximum Addon Amount</span>
+                                        <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                                            <input type="text" class="form-control fw-bold bg-secondary"
+                                                formControlName="proforma_maximum_addon_amount" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <span class="font-bold">Maximum Addon Discount</span>
+                                        <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                                            <input type="text" class="form-control fw-bold bg-secondary"
+                                                formControlName="proforma_maximum_addon_discount_amount" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <span class="font-bold">Freight Charges</span>
+                                        <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                                            <input type="text" class="form-control fw-bold "
+                                                [(ngModel)]="freightcharges" (ngModelChange)="finaltotal()"
+                                                formControlName="proforma_freight_charges">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <span class="font-bold">Buyback Charges</span>
+                                        <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                                            <input type="text" class="form-control fw-bold " [(ngModel)]="buybackscrap"
+                                                formControlName="proforma_buy_back_scrap_charges"
+                                                (ngModelChange)="finaltotal()">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <span class="font-bold">Packing Charges</span>
+                                        <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                                            <input type="text" class="form-control fw-bold "
+                                                [(ngModel)]="forwardingcharges"
+                                                formControlName="proforma_packing_forwarding_charges"
+                                                (ngModelChange)="finaltotal()">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <span class="font-bold">Insurance Charges</span>
+                                        <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                                            <input type="text" class="form-control fw-bold "
+                                                [(ngModel)]="insurancecharges"
+                                                formControlName="proforma_insurance_charges"
+                                                (ngModelChange)="finaltotal()">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <span class="font-bold">RoundOff</span>
+                                        <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                                            <input type="text" class="form-control fw-bold "
+                                                formControlName="proforma_roundoff" [(ngModel)]="roundoff"
+                                                (ngModelChange)="finaltotal()">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <span class="font-bold">Advance Roundoff</span>
+                                        <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                                            <input type="text" class="form-control fw-bold "
+                                                (ngModelChange)="overalltotal()" [(ngModel)]="proformaadvanceroundoff"
+                                                formControlName="proforma_advance_roundoff">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <span class="font-bold">Advance Amount</span>
+                                        <div class="row">
+                                            <div class="col-lg-5 col-12 col-md-11 col-sm-11 fv-row">
+                                                <input type="text" class="form-control fw-bold "
+                                                    (ngModelChange)="totalvalue()"
+                                                    formControlName="proforma_advance_percentage"
+                                                    [(ngModel)]="proformaadvancepercentage">
+                                            </div>
+                                            <div class="col-lg-1 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                <span class="fw-bold ms-3 text-black">%</span>
+                                            </div>
+                                            <div class="col-lg-5 col-12 col-md-11 col-sm-11 fv-row ms-3">
+                                                <input type="text" class="form-control fw-bold "
+                                                    (ngModelChange)="totalvalue()"
+                                                    formControlName="proforma_advance_amount"
+                                                    [(ngModel)]="proformaadvanceamount">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-lg-12">
+                                        <div>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 d-flex justify-content-between align-items-center">
+                                        <div class="fw-bold fs-1 ms-3">Grand Total :</div>
+                                        <div class="col-lg-4">
+                                            <input type="text" class="form-control fw-bold bg-secondary"
+                                                [(ngModel)]="Grandtotal" formControlName="proforma_grandtotal"
+                                                style="width:120px; text-align: right;" (ngModelChange)="finaltotal()"
+                                                readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center my-4">
+                        <button type="submit" class="btn-success btn-sm text-white me-4"
+                            (click)="proformainvoicesubmit()">
+                            <i class="bi bi-check-square fs-7 me-1"></i>
+                            Submit
+                        </button>
+                        <button class="btn-primary btn-sm text-white me-4" (click)="back()">
+                            <i class="bi bi-arrow-left-square fs-7 me-1"></i>
+                            Back
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

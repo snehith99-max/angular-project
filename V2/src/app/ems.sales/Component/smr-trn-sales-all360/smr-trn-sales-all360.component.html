@@ -1,0 +1,934 @@
+<div class="card card-borderd" style="background-color:white;">
+    <div class="card-header d-flex algin-items-center"
+        style="background:rgb(81,183,204);
+    background-color: linear-gardient(90deg,rgba(81,183,204,1)0%, rgba(173,221,211,1)35%,rgba(209,242,255,1) 100%);color:black;font-size: 14px;height:60px;padding-top: 12px;padding-left: 8px;">
+        <div>
+            <h1 class="card-title fw-bold fs-3"><i class=" fa-eye fs-2 fa-solid"></i>&nbsp;&nbsp; {{customername}}</h1>
+        </div>
+        <div class=" float-end me-4 ">
+            <button title="Back" type="button"
+                class="btn btn-sm btn-icon btn-outline-primary position-absolute top-0 end-0 bg-white mt-4 p-2 me-4"
+                (click)="onback()">
+                <i class="fa-solid fa-arrow-left text-blue mb-1"></i>
+            </button>
+        </div>
+    </div>
+    <br />
+    <div class="row m-1">
+        <!-- <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="row flex-nowrap">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="card border radius-10 ">
+                        <h3 class="font-bold m-3">Enquiry - {{enquiry_first_count}} / {{enquiry_first_amount}} </h3>
+                        <div class="card-body">
+                            <ng-container *ngIf="enquiry_flag">
+                                <div #chartRef class="d-flex flex-column mixed-widget-2-chart card-rounded-bottom mt-4">
+                                    <apx-chart [series]="enqiurymonthchart.series" [chart]="enqiurymonthchart.chart"
+                                        [title]="enqiurymonthchart.title" [yaxis]="enqiurymonthchart.yaxis"
+                                        [stroke]="enqiurymonthchart.stroke" [colors]="enqiurymonthchart.colors"
+                                        [title]="enqiurymonthchart.title" [subtitle]="enqiurymonthchart.subtitle"
+                                        [labels]="enqiurymonthchart.labels"
+                                        [plotOptions]="enqiurymonthchart.plotOptions">
+                                    </apx-chart>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="!enquiry_flag">
+                                <div class="d-flex justify-content-center">
+                                    <img src=".\assets\media\images\No_data_found.png" class=" no-data-image">
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="card border radius-10 ">
+                        <h3 class="font-bold m-3">Quotation - {{quotation_first_count}} / {{quotation_first_amount}}
+                        </h3>
+                        <div class="card-body">
+                            <ng-container *ngIf="quotation_flag">
+                                <div #chartRef class="d-flex flex-column mixed-widget-6-chart card-rounded-bottom mt-4">
+                                    <apx-chart [series]="quotationmonthchart.series" [chart]="quotationmonthchart.chart"
+                                        [title]="quotationmonthchart.title" [yaxis]="quotationmonthchart.yaxis"
+                                        [stroke]="quotationmonthchart.stroke" [colors]="quotationmonthchart.colors"
+                                        [fill]="quotationmonthchart.fill" [title]="quotationmonthchart.title"
+                                        [subtitle]="quotationmonthchart.subtitle" [labels]="quotationmonthchart.labels"
+                                        [plotOptions]="quotationmonthchart.plotOptions">
+                                    </apx-chart>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="!quotation_flag">
+                                <div class="d-flex justify-content-center">
+                                    <span>
+                                        <img src=".\assets\media\images\No_data_found.png" class="no-data-image">
+                                    </span>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="card border radius-10 ">
+                        <h3 class="font-bold m-3">Orders - {{order_first_count}} / {{order_first_amount}}</h3>
+                        <div class="card-body">
+                            <ng-container *ngIf="order_flag">
+                                <div #chartRef
+                                    class="d-flex flex-column flex-row mixed-widget-5-chart card-rounded-bottom mt-4">
+                                    <apx-chart [series]="ordermonthchart .series" [chart]="ordermonthchart .chart"
+                                        [title]="ordermonthchart .title" [yaxis]="ordermonthchart .yaxis"
+                                        [stroke]="ordermonthchart .stroke" [colors]="ordermonthchart .colors"
+                                        [title]="ordermonthchart .title" [subtitle]="ordermonthchart .subtitle"
+                                        [labels]="ordermonthchart .labels" [plotOptions]="ordermonthchart .plotOptions">
+                                    </apx-chart>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="!order_flag">
+                                <div class="d-flex justify-content-center">
+                                    <span>
+                                        <img src=".\assets\media\images\No_data_found.png" class="no-data-image">
+                                    </span>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="card border radius-10 ">
+                        <h3 class="font-bold m-3">Invoice - {{invoice_first_count}} / {{invoice_first_amount}}</h3>
+                        <div class="card-body">
+                            <ng-container *ngIf="invoice_flag">
+                                <div #chartRef
+                                    class="d-flex flex-column flex-row mixed-widget-5-chart card-rounded-bottom mt-4">
+                                    <apx-chart [series]="invoicemonthchart.series" [chart]="invoicemonthchart.chart"
+                                        [title]="invoicemonthchart.title" [yaxis]="invoicemonthchart.yaxis"
+                                        [stroke]="invoicemonthchart.stroke" [colors]="invoicemonthchart.colors"
+                                        [title]="invoicemonthchart.title" [subtitle]="invoicemonthchart.subtitle"
+                                        [labels]="invoicemonthchart.labels"
+                                        [plotOptions]="invoicemonthchart.plotOptions">
+                                    </apx-chart>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="!invoice_flag">
+                                <div class="d-flex justify-content-center">
+                                    <span>
+                                        <img src=".\assets\media\images\No_data_found.png" class="no-data-image">
+                                    </span>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="col-lg-8 col-md-8 col-sm-8 border radius-10 ">
+            <h2 class="m-1">Overall Performance</h2>
+            <div class="row flex-nowrap">
+                <ng-container *ngIf="flag2">
+                    <div class="d-flex flex-column mt-8">
+                        <apx-chart [series]="saleschart.series" [chart]="saleschart.chart" [xaxis]="saleschart.xaxis"
+                            [yaxis]="saleschart.yaxis" [dataLabels]="saleschart.dataLabels" [stroke]="saleschart.stroke"
+                            [legend]="saleschart.legend" [fill]="saleschart.fill" [states]="saleschart.states"
+                            [tooltip]="saleschart.tooltip" [colors]="saleschart.colors" [markers]="saleschart.markers"
+                            [plotOptions]="saleschart.plotOptions">
+                        </apx-chart>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="!flag2">
+                    <div class="d-flex justify-content-center">
+                        <span>
+                            <img src=".\assets\media\images\No_data_found.png" class="h-78px w-300px">
+                        </span>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <form [formGroup]="reactiveForm" #form="ngForm">
+                <div style="height:100%;"
+                    class="card shadow-sm p-3 user-profile-card radius-10  border-start border-0 border-3 border-blue1 me-3">
+                    <div class="d-flex row col-lg-12 col-md-12 col-sm-12">
+                        <ng-container *ngIf="leadstage_name === 'Decision' || leadstage_name === 'Purchase'">
+                            <div class="row" style="height: 100px">
+                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                    <span class="font-bold ms-5"><b>Potential Value</b></span>
+                                    <input formControlName="potential_value" type="text" class="
+                                        form-control form-control-lg form-control-solid
+                                        custom-input
+                                        mb-3 mb-lg-0 ms-5
+                                        bg-white
+                                        custom-input
+                                    " pattern="^(?!\s*$).+" style="border-color: rgb(182, 180, 180);"
+                                        name="call_response" required placeholder="Enter Potential Value" />
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4" style="height: 10px;">
+                                    <button class="btn-success btn-sm text-white " (click)="onaddpotentialvalue()"
+                                        data-bs-dismiss="modal">
+                                        <i class="fas fa-check text-white"></i> &nbsp;Update
+                                    </button>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <br>
+                    <div class="col-lg-12 col-md-6 col-sm-12 text-center symbol symbol-60px symbol-circle">
+                        <img src="assets\media\patterns\user-image.jpg" width="100%" height="100%">
+                    </div>
+                    <div *ngFor="let leadbasicdetailslist1 of leadbasicdetailslist">
+
+                        <p style="color: #009EF7;" class="d-flex align-items-center justify-content-center">
+                            <span class="font-bold ms-3" style="font-size: 14px; margin-top: 8px;">
+                                {{leadbasicdetailslist1.customercontact_name}} </span>
+                        </p>
+                        <div class="text-black-600 ms-3 d-flex align-items-center justify-content-center"
+                            style="color: #009EF7;font-size: 12px;">
+                            {{leadbasicdetailslist1.emailid}}</div>
+
+                        <div class="text-black-600 ms-3 d-flex align-items-center justify-content-center"
+                            style="font-size:12px;"><b> Active Since</b> -
+                            <br> <b> {{leadbasicdetailslist1.created_date}}</b>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="d-flex justify-content-center"
+                        *ngFor="let leadbasicdetailslist1 of leadbasicdetailslist">
+                        <button title="Edit" type="button"
+                            class="widgets-icons-2 rounded-circle bg-gradient-info1 text-white me-2"
+                            data-bs-toggle="modal" data-bs-target="#myModaleditcontact"
+                            (click)="openmodaleditcustomer(leadbasicdetailslist1.customer_gid)">
+                            <span class="fa-solid fa-pencil text-white fs-2"></span>
+                        </button>
+                        <!-- Pdf  -->
+                        <!-- <button title="PDF" type="button"
+                            class="widgets-icons-2 rounded-circle bg-etdark text-white me-2" (click)="CustomerPDF()">
+                            <span class="fa-solid fa-file-pdf fs-3" style="color: #ffffff;"></span>
+                        </button> -->
+
+
+                        <!-- <ng-container *ngIf="leadbasicdetailslist1.customer_gid !== '' ">
+                        <button title="Make As Customer" type="button"
+                            class="widgets-icons-2 rounded-circle bg-gradient-user text-white" data-bs-toggle="modal"
+                            data-bs-target="#myModalalreadycustomer">
+                            <span class="fa-solid fa-user-plus text-white fs-6"></span>
+                        </button>
+                    </ng-container> -->
+                        <!-- <ng-container *ngIf="leadbasicdetailslist1.customer_gid === '' ">
+
+                            <button title="Make As Customer" type="button"
+                                class="widgets-icons-2 rounded-circle bg-gradient-user text-white"
+                                data-bs-toggle="modal" data-bs-target="#myModaladdtocustomer"
+                                (click)="openModaladdtocustomer()">
+                                <span class="fa-solid fa-user-plus text-white fs-6"></span>
+                            </button>
+                        </ng-container>&nbsp;&nbsp; -->
+                        <!-- <button title="Call" type="button" data-bs-toggle="modal" data-bs-target="#myModalcall"
+                            class="widgets-icons-2 rounded-circle phone-button text-white"><span
+                                class="fa-solid fa-phone fs-3"></span></button>&nbsp;&nbsp;
+                        <button title="Move Stage" type="button" (click)="Getleadstadename()"
+                            class="widgets-icons-2 rounded-circle bg-gradient-darkoranges text-white me-2"
+                            data-bs-toggle="modal" data-bs-target="#mymovestage">
+                            <i class="fa-solid fa-stairs fs-4"></i>
+                        </button> -->
+                        <!-- <button (click)="openModallog5(leadbasicdetailslist1.leadbank_gid)" title="Move to Drop" *ngIf="leadstage_name != 'Drop' && leadstage_name != '' && lspage != 'My-teleProspect' &&
+                    lspage != 'My-teleNew' && lspage != 'My-teleNewpending'"
+                        type="button" data-bs-toggle="modal" data-bs-target="#myModaldelete1"
+                        class="widgets-icons-2 rounded-circle bg-gradient-purple text-white me-2"><i
+                            class="fa-solid fa-arrow-down"></i></button> -->
+                        <!-- <ng-container *ngIf="leadbasicdetailslist1.customer_gid === '' ">
+                            <button title="Price Segment" type="button"
+                                class="widgets-icons-2 rounded-circle bg-gradient-brown text-white"
+                                data-bs-toggle="modal" data-bs-target="#myModalpricesegmentmsg">
+                                <span class="fas fa-ticket text-white fs-3"></span>
+                            </button>
+                        </ng-container> -->
+
+                        <!-- <ng-container *ngIf="leadbasicdetailslist1.customer_gid !== '' ">
+
+                            <button title="Price Segment" type="button"
+                                class="widgets-icons-2 rounded-circle bg-gradient-brown text-white"
+                                data-bs-toggle="modal"
+                                (click)="openModalpricesegment(leadbasicdetailslist1.customer_gid)">
+                                <span class="fas fa-ticket text-white fs-3"></span>
+                            </button>
+                        </ng-container>&nbsp;&nbsp; -->
+
+
+                        <!-- <button title="Schedule Details" type="button"
+                    class="widgets-icons-2 rounded-circle bg-gradient-darkoranges text-white me-2"
+                    data-bs-toggle="modal" data-bs-target="#myscheduledetails">
+                    <span class="fa fa-clock text-white fs-6"></span>
+                </button> -->
+                        <!-- <button title="Edit" type="button"
+                        class="widgets-icons-2 rounded-circle bg-gradient-info1 text-white me-2" data-bs-toggle="modal"
+                        data-bs-target="#myModalphone"
+                        (click)="openmodaleditcustomer(leadbasicdetailslist1.leadbank_gid)">
+                        <span class="fa-solid fa-phone text-white fs-6"></span>
+                    </button> -->
+                    </div>
+
+                </div>
+            </form>
+            <br />
+            <!-- <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card border">
+                    <div class="card-header "
+                        style="background: rgb(81,183,204);
+                    background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px;">
+                        <b>Documents</b>
+                        <div class="d-flex ms-auto">
+                            <button type="button" class="btn btn-sm text-white me-4" data-bs-toggle="modal"
+                                style="background-color: #097495;" data-bs-target="#myModalUpdateimage"
+                                title="Upload image">
+                                <i class="fa-solid fa-upload"></i> &nbsp; <b>Upload</b>
+                            </button>
+                        </div>
+                        <button class="btn dropdown-toggle fs-1" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseseven" aria-expanded="true" aria-controls="collapseseven"></button>
+                    </div>
+                    <div id="collapseseven" class="collapse show" data-bs-parent="#accordionExample7"
+                        style="overflow-x: hidden;">
+                        <div class="row" style="height: 110px">
+                            <div class="table-responsive">
+                                <div class="card card-body m-3  p-3 mb-5 bg-white rounded "
+                                    style=" max-height: 270px; overflow-y: auto;overflow-x: hidden;">
+                                    <div *ngFor="let doctitlelist of leaddocumentdetail_list;">
+                                        <div>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-8 col-sm-8">
+                                                    <label><b>Document Title</b></label>
+                                                    <br />
+                                                    <div>
+                                                        <p>{{doctitlelist.document_title}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                                    <label><b>Uploaded Date</b></label>
+                                                    <br />
+                                                    <div>
+                                                        <p>{{doctitlelist.created_date}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-2 col-sm-2">
+                                                    <div class="row">
+                                                        <button title="View" type="button"
+                                                            class="btn btn-icon btn-sm bg-view me-2"
+                                                            (click)="ViewUploadDoc(doctitlelist.document_upload,doctitlelist.document_title)">
+                                                            <span
+                                                                class="fa-solid fa-eye text-white  fs-6"></span></button>
+                                                        &nbsp;
+                                                        <button title="Download" type="button"
+                                                            class="btn btn-icon btn-sm bg-views me-2"
+                                                            (click)="downloadFile(doctitlelist.document_upload,doctitlelist.document_title)">
+                                                            <span class="fa-solid fa-download text-white fs-4"></span>
+                                                        </button>&nbsp;
+                                                        <button title="Delete" type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#myModaldelete"
+                                                            (click)="openModaldelete(doctitlelist.document_gid)"
+                                                            class="btn btn-icon btn-sm bg-danger me-2"><span
+                                                                class="fa-solid fa-trash text-white  fs-6"></span></button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    <label><b>Remarks</b></label>
+                                                    <br />
+                                                    <div>
+                                                        <p>{{doctitlelist.remarks}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <hr />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    <br />
+    <div class="row m-1">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="card border">
+                <div class="card-header "
+                    style="background: rgb(81,183,204);
+        background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px;">
+                    <b>Notes</b>
+                    <button class="btn dropdown-toggle fs-1" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapsesix" aria-expanded="true" aria-controls="collapsesix"></button>
+                </div>
+                <div id="collapsesix" class="collapse show" data-bs-parent="#accordionExample6"
+                    style="overflow: hidden;">
+                    <div class="card notes" style="height: 300px ;">
+                        <div class="row m-2 d-flex justify-content-between align-items-center mb-0 mt-3">
+                            <input type="text" [(ngModel)]="searchTextnotes"
+                                class="form-control form-control-lg form-control-solid custom-input bg-white custom-input borderc-secondary"
+                                placeholder="Search Notes" />
+                        </div>
+                        <hr style="color: #5e5e5e;">
+                        <form [formGroup]="NotesreactiveForm" #form="ngForm">
+                            <div class="p-3 pt-0">
+                                <div class="card p-3 mt-2" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 2px;">
+                                    <div class="row">
+                                        <div class="col-lg-11"><span class="fs-2 fw-bold">Add Notes</span></div>
+                                        <div class="col-lg-1"><i class="fa-solid fa-check fs-1 ms-auto cursor-pointer"
+                                                (click)="Addnotes()" style="color: #00e91f;"></i>
+                                        </div>
+                                    </div>
+                                    <hr class="mt-0">
+                                    <textarea class="form-control angular-editor border-0 mt-1" rows="4"
+                                        formControlName="internalnotestext_area"
+                                        placeholder="Type Something..."></textarea>
+                                </div>
+                            </div>
+                        </form>
+                        <div style="overflow: auto;max-height: 250px;" class="p-3">
+                            <div class="card p-3 border mt-3" [hidden]="!matchesSearchnotes(data)"
+                                *ngFor="let data of internalnotes; let i = index">
+                                <div class="ms-auto d-flex">
+                                    <i class="fa-solid fa-pencil fs-3 cursor-pointer me-3" (click)="updatenotes(data)"
+                                        style="color: #636363;"></i>
+                                    <i class="fa-solid fa-trash fs-3 cursor-pointer ms-3" (click)="deletenotes(data)"
+                                        style="color: #636363;"></i>
+                                </div>
+                                <textarea class="form-control border-0 angular-editor"
+                                    style="background-color: transparent;overflow: hidden;"
+                                    [(ngModel)]="data.internal_notes" rows="3">
+                        </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="card border ">
+                <div class="card-header  "
+                    style="background: rgb(81,183,204);
+            background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px;">
+                    <b>Enquiry</b>
+
+                    <div class="d-flex ms-auto">
+                        <button type="button" class="btn btn-sm text-white me-4" style="background-color: #097495;"
+                            (click)="raiseenquiry()" title="Raise Enquiry">
+                            <span style="font-size: 11px;"><i class="fas fa-plus"></i> &nbsp;<b>Raise Enquiry</b></span>
+                        </button>
+                    </div>
+                    <button class="btn dropdown-toggle fs-1" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTen" aria-expanded="true" aria-controls="collapseTen   "></button>
+                </div>
+                <div id="collapseTen" data-bs-parent="#accordionExample10" style="overflow-x: hidden;">
+                    <div class="row" style="height: 300px">
+                        <div class="table-responsive">
+                            <div class="card card-body m-3  p-3 mb-5 bg-white rounded "
+                                style=" max-height: 270px; overflow-y: auto;overflow-x: hidden;">
+                                <div *ngFor="let data of Enquirylist;">
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label><b>Enquiry Date</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{data.enquiry_date}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label><b>Enquiry Ref.No</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{data.enquiry_refno}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label><b>Assigned To</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{data.user_firstname}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label><b>Enquiry Status</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{data.enquiry_status}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label><b>Contact Details</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{data.contact_details}}</p>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <h6 type="text" class="bg-white text-blue"
+                                                    (click)="raise_enquirytoquotation(data.enquiry_gid)"
+                                                    style="cursor: pointer;" title="Raise Quotation">
+                                                    Raise Quotation
+                                                </h6>
+                                            </div>
+                                            <!-- <div class="d-flex align-items-center"> -->
+                                                <div class="col-lg-6 col-md-6 col-sm-6 ">
+                                                    <h6 type="text" class="bg-white text-blue"
+                                                        (click)="viewenquiry(data.enquiry_gid)"
+                                                        style="cursor: pointer;">View
+                                                    </h6>
+                                                </div>
+                                            <!-- </div> -->
+                                        </div>
+                                    </div>
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 ">
+            <div class="card border">
+                <div class="card-header"
+                    style="background: rgb(81,183,204);
+    background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px;border: black;">
+                    <b>Quotation</b>
+                    <div class="d-flex ms-auto">
+                        <button type="button" class="btn btn-sm text-white me-4" style="background-color: #097495;"
+                            (click)="raisequotation()" title="Raise Quotation">
+                            <span style="font-size: 11px;"><i class="fas fa-plus"></i> &nbsp;<b>Raise
+                                    Quotation</b></span>
+                        </button>
+                    </div>
+                    <button class="btn dropdown-toggle fs-1" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive"></button>
+                </div>
+                <div id="collapseFive" class="collapse show" data-bs-parent="#accordionExample5"
+                    style="overflow-x: hidden;">
+                    <div class="row " style="height: 300px">
+                        <div class="table-responsive">
+                            <div class="card card-body m-3  p-3 mb-5 bg-white rounded "
+                                style="height: 270px; overflow-y: auto;overflow-x: hidden;">
+                                <div *ngFor="let data of leadquotationdetails_list;">
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label><b>Quotation Date</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{data.quotation_date}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label><b>Quotation Ref.No</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{data.quotation_referenceno1}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label><b>Quotation Status</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{data.quotation_status}}</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                                <label><b>Amount</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{data.Grandtotal}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+
+                                        </div>
+                                        &nbsp;&nbsp;
+                                        <div class="row d-flex align-items-center">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <h6 type="text" class="bg-white text-blue"
+                                                    (click)="onraiseorders(data.quotation_gid)"
+                                                    style="cursor: pointer;">
+                                                    Raise Order
+                                                </h6>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 ">
+                                                <div class="row d-flex align-items-center">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 ">
+                                                        <h6 type="text" class="bg-white text-blue"
+                                                            (click)="onviewquote(data.quotation_gid,data.customer_gid)"
+                                                            style="cursor: pointer;">
+                                                            &nbsp;&nbsp;&nbsp;View
+                                                        </h6>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                                        <button title="PDF" type="button"
+                                                            class="btn btn-icon btn-sm background-color6"
+                                                            (click)="PrintPDF(data.quotation_gid)">
+                                                            <span class="fa-solid fa-file-pdf fs-3"
+                                                                style="color: #ffffff;"></span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="card border">
+                <div class="card-header "
+                    style="background: rgb(81,183,204);
+        background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px;">
+                    <b>Order</b>
+
+                    <div class="d-flex ms-auto">
+                        <button type="button" class="btn btn-sm text-white me-4" style="background-color: #097495;"
+                            (click)="raiseorder()" title="Raise Order">
+                            <span style="font-size: 11px;"><i class="fas fa-plus"></i> &nbsp;<b>Raise Order</b></span>
+                        </button>
+                    </div>
+                    <button class="btn dropdown-toggle fs-1" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne   "></button>
+
+                </div>
+                <div id="collapseOne" class="collapse show" data-bs-parent="#accordionExample"
+                    style="overflow-x: hidden;">
+                    <div class="row" style="height: 300px">
+                        <div class="table-responsive">
+                            <div class="card card-body m-3  p-3 mb-5 bg-white rounded "
+                                style=" max-height: 270px; overflow-y: auto;overflow-x: hidden;">
+                                <div *ngFor="let data of leadorderdetails_list;">
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label><b>Raised On</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{data.salesorder_date}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label><b>Order Ref.No</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{data.so_referenceno1}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label><b>Order Status</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{data.salesorder_status}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                                <label><b>Amount</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{data.Grandtotal}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-lg-6 col-md-3 col-sm-3">
+                                                <h6 type="text" class="bg-white text-blue me-4"
+                                                    (click)="RaisetoOrder(data.salesorder_gid)"
+                                                    style="cursor: pointer;">
+                                                    Raise Invoice
+                                                </h6>
+                                            </div>
+                                            <div class="col-lg-6 col-md-3 col-sm-3">
+                                                <h6 type="text" class="bg-white text-blue"
+                                                    (click)="onview(data.salesorder_gid,data.customer_gid)"
+                                                    style="cursor: pointer;">
+                                                    &nbsp;&nbsp;&nbsp;View
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="card border">
+                <div class="card-header "
+                    style="background: rgb(81,183,204);
+    background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px;">
+                    <b>Invoice</b>
+
+                    <div class="d-flex ms-auto">
+                        <button type="button" class="btn btn-sm text-white me-4" (click)="raiseinvoice()"
+                            style="background-color: #097495;" title="Raise Invoice">
+                            <span style="font-size: 11px;"><i class="fas fa-plus"></i> &nbsp;<b>Raise Invoice</b></span>
+                        </button>
+                    </div>
+                    <button class="btn dropdown-toggle fs-1" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo   ">
+                    </button>
+                </div>
+                <div id="collapseTwo" class="collapse show" data-bs-parent="#accordionExample2"
+                    style="overflow-x: hidden;">
+                    <div class="row" style="height: 300px">
+                        <div class="table-responsive">
+                            <div class="card card-body m-3  p-3 mb-5 bg-white rounded "
+                                style=" max-height: 270px; overflow-y: auto;overflow-x: hidden;">
+                                <div *ngFor="let data of leadinvoicedetails_list;">
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label><b>SO Ref.No</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{data.so_referencenumber}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label><b>Invoice Date</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{data.invoice_date}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label><b>Invoice Ref.No</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{data.invoice_refno}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label><b>Invoice Status</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{data.invoice_status}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <label><b>Mail Status</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{data.mail_status}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                                <label><b>Invoice Amount</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{data.invoice_amount}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row d-flex align-items-center">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <h6 type="text" class="bg-white text-blue me-4"
+                                                    (click)="viewinvoice(data.invoice_gid)" style="cursor: pointer;">
+                                                    View
+                                                </h6>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <button title="PDF" type="button"
+                                                    class="btn btn-icon btn-sm background-color6 me-2 mb-2"
+                                                    (click)="PrintPDFINV(data.invoice_gid)">
+                                                    <span class="fa-solid fa-file-pdf fs-3"
+                                                        style="color: #ffffff;"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="card border">
+                <div class="card-header "
+                    style="background: rgb(81,183,204);
+                background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px;">
+                    <b>Documents</b>
+                    <div class="d-flex ms-auto">
+                        <button type="button" class="btn btn-sm text-white me-4" data-bs-toggle="modal"
+                            style="background-color: #097495;" data-bs-target="#myModalUpdateimage"
+                            title="Upload image">
+                            <i class="fa-solid fa-upload"></i> &nbsp; <b>Upload</b>
+                        </button>
+                    </div>
+                    <button class="btn dropdown-toggle fs-1" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseseven" aria-expanded="true" aria-controls="collapseseven"></button>
+                </div>
+                <div id="collapseseven" class="collapse show" data-bs-parent="#accordionExample7"
+                    style="overflow-x: hidden;">
+                    <div class="row" style="height: 300px">
+                        <div class="table-responsive">
+                            <div class="card card-body m-3  p-3 mb-5 bg-white rounded "
+                                style=" max-height: 270px; overflow-y: auto;overflow-x: hidden;">
+                                <div *ngFor="let doctitlelist of leaddocumentdetail_list;">
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-8 col-sm-8">
+                                                <label><b>Document Title</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{doctitlelist.document_title}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                                <label><b>Uploaded Date</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{doctitlelist.created_date}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-2 col-sm-2">
+                                                <div class="row">
+                                                    <button title="View" type="button"
+                                                        class="btn btn-icon btn-sm bg-view me-2"
+                                                        (click)="ViewUploadDoc(doctitlelist.document_upload,doctitlelist.document_title)">
+                                                        <span class="fa-solid fa-eye text-white  fs-6"></span></button>
+                                                    &nbsp;
+                                                    <button title="Download" type="button"
+                                                        class="btn btn-icon btn-sm bg-views me-2"
+                                                        (click)="downloadFile(doctitlelist.document_upload,doctitlelist.document_title)">
+                                                        <span class="fa-solid fa-download text-white fs-4"></span>
+                                                    </button>&nbsp;
+                                                    <button title="Delete" type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#myModaldelete"
+                                                        (click)="openModaldelete(doctitlelist.document_gid)"
+                                                        class="btn btn-icon btn-sm bg-danger me-2"><span
+                                                            class="fa-solid fa-trash text-white  fs-6"></span></button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <label><b>Remarks</b></label>
+                                                <br />
+                                                <div>
+                                                    <p>{{doctitlelist.remarks}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <hr />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<form [formGroup]="NotesreactiveForm" #form="ngForm">
+    <div class="modal" id="myModalUpdateimage" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                    <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                            class="fa-solid fa-upload fw-bolder fs-3"></i> &nbsp;&nbsp;Upload Document</h2>
+
+                </div>
+                <div class="modal-body">
+                    <div class="row"><span class="font-bold"><b>Document Title</b>
+                            <span class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-11 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                            <input formControlName="document_title" type="text" class="
+                 form-control form-control-lg form-control-solid
+                 custom-input
+                 mb-3 mb-lg-0
+                 bg-white
+                 custom-input
+               " [ngStyle]="{
+                 'border-color':
+                 document_title.invalid && document_title.touched
+                     ? 'red'
+                     : 'rgb(209, 209, 209)'
+               }" placeholder="" pattern="^(?!\s*$).+" name="document_title" required />
+                        </div>
+                    </div>
+                    <div *ngIf="document_title.invalid && (document_title.dirty || document_title.touched)">
+                        <div *ngIf="document_title.errors?.['required']">
+                            <span style="color:red;">Document title is required.</span>
+                        </div>
+                    </div>
+
+                    <div *ngIf="document_title.invalid && (document_title.dirty || document_title.touched)">
+                        <div *ngIf="document_title.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format</span>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-12 col-lg-12 col-md-6 col-sm-12">
+                            <span class="font-bold">Remarks</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <textarea class="form-control" formControlName="remarks" pattern="^(?!\s*$).+"
+                                    id="exampleFormControlTextarea1" rows="2" style="overflow-y: scroll;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                        <span class="font-bold"><b>Upload Document</b><span class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                            <input style="width: 300%;" (change)="ondocChange2($event)" type="file" #fileInput class="
+                          form-control form-control-lg form-control-solid bg-white
+                          mb-3 mb-lg-0  borderc-secondary custom-input
+                        " name="fName" />
+                        </div>
+                    </div>
+                    <br>
+                    <div class="text-center my-4">
+                        <button type="submit" class="btn-success btn-sm text-white me-2" data-bs-dismiss="modal"
+                            (click)="ondocumentsubmit()">
+                            <i class="fa-solid fa-upload fw-bolder fs-3"></i>&nbsp;&nbsp;Upload</button>
+                        <button class="btn-danger btn-sm text-white me-2" data-bs-dismiss="modal">
+                            <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

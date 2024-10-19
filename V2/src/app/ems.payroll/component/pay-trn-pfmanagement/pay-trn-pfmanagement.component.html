@@ -1,0 +1,161 @@
+<div class="card">
+  <div class="row ms-3 mt-3 d-flex align-items-center">
+    <div class="col">
+      <h3 class="card-title">PF Management Summary</h3>
+    </div>
+
+    <div class="col me-5">
+      <button title="Assign Employee to PF Management" class="btn-primary btn-sm text-white me-4 mb-2 mt-2 float-end"
+        (click)="employeeassign()">
+        <i class="fas fa-plus"></i> &nbsp;&nbsp;
+        Assign Employee</button>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+      <table id="employee_list" class="table table-striped table-row-bordered border-bottom gs-7">
+        <thead>
+          <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+            <th>S.No</th>
+            <th>Branch</th>
+            <th>Department</th>
+            <th>Designation</th>
+            <th>Employee Code</th>
+            <th>Employee Name</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of employee_list; let i=index;" class="align-middle">
+            <td>{{i+1}}</td>
+            <td>{{data.branch_name}}</td>
+            <td>{{data.department_name}}</td>
+            <td>{{data.designation_name}}</td>
+            <td>{{data.user_code}}</td>
+            <td>{{data.employee_name}}</td>
+            <td class="text-align: right">
+              <button title="Additional Component" type="button" (click)="addpfpopup(data.employee_gid)" data-bs-toggle="modal"
+                  data-bs-target="#myaddpfdetails" class="btn btn-icon btn-sm bg-primary me-2"><span
+                    class="fa fa-question-circle fs-6"></span></button>
+            </td>
+            <!-- <td [ngSwitch]="data.status">
+                <label *ngSwitchCase="'Y'" class="badge bg-success text-white ">Active</label>
+                <label *ngSwitchCase="'N'" class="badge bg-danger text-white ">Inactive</label>
+            </td>-->
+  
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- The Modal Add Pf Details -->
+<form [formGroup]="reactiveFormEdit" #form="ngForm">
+  <div class="modal" id="myaddpfdetails" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+
+        <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+          <h3 style="margin-top: 10px; color: white; font-weight: bold">
+            &nbsp;&nbsp;<i class="fa-solid fa-pen-to-square fs-2"></i>
+            &nbsp;&nbsp; ADD PF DETAILS
+          </h3>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <input class="form-control form-control-lg" formControlName="employee_gid" hidden pattern="^(?!\s*$).+"
+            type="text" placeholder="Enter Entity" aria-label=".form-control-lg example" autocomplete="off" required />
+
+          <div class="row">
+            <span class="fw-bold">PF Account Number<span class="ms-1 text-red">*</span></span>
+            <br>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+
+              <input formControlName="pf_no" type="text"
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input borderc-secondary"
+               placeholder="Enter PF Account Number" 
+                name="pf_no" required style="height:40px;" />
+            </div>
+          </div>
+
+          <div class="row">
+            <span class="fw-bold">Date of Join of PF<span class="ms-1 text-red">*</span></span>
+            <br>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+
+              <input type="date" pattern="^(?!\s*$).+"
+             formControlName="pf_doj"
+              class="form-control form-control-lg form-control-solid date-picker custom-input mb-3 mb-lg-0 bg-white custom-input date-picker mt-2 borderc-secondary"
+              placeholder="DD-MM-YYYY" />
+            </div>
+          </div>
+
+          <div class="row">
+            <span class="fw-bold">Experience</span>
+            <br>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+              <div class="form-check form-check-custom mb-3 mb-lg-0 form-check-success form-check-solid form-check-sm">
+                  <input class="form-check-input mb-3 mb-lg-0" type="radio" name="batchtracker" id="Y" formControlName="experience" value="Y">
+                  <label class="form-check-label text-gray-700 text-nowrap"
+                      for="Experienced">Experienced</label>
+              </div>
+              <div class="form-check form-check-custom mb-3 mb-lg-0 form-check-success form-check-solid form-check-sm ms-10">
+                  <input class="form-check-input mb-3 mb-lg-0" type="radio" name="batchtracker" formControlName="experience" value="N" id="N">
+                  <label class="form-check-label text-gray-700 text-nowrap"
+                      for="Fresher">Fresher</label>
+              </div>
+          </div>
+          </div>
+          <br>
+         
+
+          <div class="row">
+            <span class="fw-bold">Remarks</span>
+            <br>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+
+              <textarea type="text"
+              class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0  borderc-secondary bg-white custom-input"
+               formControlName="remarks" class="form-control" rows="3"></textarea>
+          
+            </div>
+          </div>
+         
+          <br />
+        </div>
+
+        <!-- Modal footer -->
+        <div class="text-center my-4">
+          <button (click)="onpfSubmit()" class="btn-success btn-sm text-white me-4" data-bs-dismiss="modal">
+            <i class="fas fa-check text-white fs-5"></i> &nbsp;Submit
+          </button>
+          &nbsp;&nbsp;
+          <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white"></i> &nbsp;Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- The Modal Delete -->
+<!-- <div class="modal" id="myModaldelete" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog del_modal-dialog">
+    <div class="modal-content del_modal-content">
+      <div class="text-center my-4">
+        <h2><b>Are you sure?</b></h2>
+        <p style="display: block;">Do You Want To Delete the Record ?</p>
+        <div class="text-center my-4">
+          <button class="btn-danger btn-sm text-white me-4" (click)="ondelete()" data-bs-dismiss="modal">
+            <i class="bi bi-trash-fill text-white fs-5 me-2"></i>Delete
+          </button>
+          <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white me-2"></i>Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

@@ -1,0 +1,133 @@
+@import "~@ng-select/ng-select/themes/default.theme.css";
+.auto-height-select .ng-dropdown-panel {
+  max-height: unset !important;
+  overflow-y: unset !important;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.table-row-bordered {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: white;
+}
+
+
+
+.fw-bold {
+  font-weight: bold;
+}
+
+.fs-5 {
+  font-size: 1.25rem;
+}
+
+
+.bg-lightblue {
+  background-color: #d1ecf1;
+}
+
+.text-blue {
+  color: #004085;
+}
+
+.nested-table {
+  margin-left: 60px;
+  /* Adjust the margin to align with the first grid */
+}
+
+@media (max-width: 767px) {
+  .nested-table {
+    margin-left: 0;
+    /* Reset the margin for small screens */
+  }
+}
+
+.table-row-bordered tbody {
+  max-height: 300px;
+  /* Adjust the height as needed */
+  overflow-y: auto;
+}
+
+/* Scrollbar styles for WebKit-based browsers (Chrome, Safari, Opera) */
+.table-row-bordered tbody::-webkit-scrollbar {
+  width: 12px;
+  /* Width of the scrollbar */
+}
+
+.table-row-bordered tbody::-webkit-scrollbar-track {
+  background-color: #f0f0f0;
+  /* Color of the scrollbar track */
+}
+
+.table-row-bordered tbody::-webkit-scrollbar-thumb {
+  background-color: #87ceeb;
+  /* Light sky blue color */
+  border-radius: 6px;
+  /* Rounded corners for the scrollbar thumb */
+}
+
+.table-row-bordered tbody::-webkit-scrollbar-thumb:hover {
+  background-color: #6495ed;
+  /* Darker shade of light sky blue on hover */
+}
+
+/* Scrollbar styles for Firefox */
+.table-row-bordered tbody {
+  scrollbar-color: #87ceeb #f0f0f0;
+  /* Light sky blue scrollbar color and track color */
+  scrollbar-width: thin;
+  /* Scrollbar width */
+}
+
+.income-header {
+  position: absolute;
+
+  color: maroon;
+}
+
+.mixed-widget-2-chart {
+  padding: 20px;
+}
+.card-rounded-bottom {
+  border-radius: 0 0 15px 15px;
+}
+#kt_chat_contacts_body1 {
+  // max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+   scrollbar-color: lightblue #e4e4e4;
+}
+ 
+ 
+#kt_chat_contacts_body1::-webkit-scrollbar {
+  width: 8px;
+  /* You can adjust the width to your preference */
+}
+ 
+#kt_chat_contacts_body1::-webkit-scrollbar-thumb {
+  background: #888;
+  /* You can set the color of the scrollbar thumb */
+  border-radius: 10px;
+  /* You can adjust the border radius to your preference */
+  height: 5px;
+}
+::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #add8e6; /* Light blue color for the thumb */
+  border-radius: 6px; /* Rounded corners for the thumb */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin; /* Thin scrollbar */
+  scrollbar-color: #add8e6; /* Light blue color for the thumb */
+}

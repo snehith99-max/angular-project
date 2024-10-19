@@ -1,0 +1,101 @@
+<div class="card m-3">
+    <div class="card-header bg-primary card-height55">
+        <div class="card-title m-0">
+            <h4 class="fw-bolder text-white">Script Management</h4>
+        </div>
+        <button style="margin-top: 20px; margin-left: 150px;" title="Export Excel" type="button"  (click)="exportExcel()"
+        class="btn btn-icon btn-sm bg-success mb-8">
+        <i class="fas fa-file-excel"></i>
+    </button>
+    </div>
+    <form [formGroup]="reactiveform" #ngform>
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-3 col-lg-3 col-md-3 col-sm-3"><span class="font-bold">Server Name</span>
+                <ng-select  (change)="onChangeserver($event)" class="mt-2"[(ngModel)]="mdlserver_name" formControlName="server_name" bindLabel="server_name"
+                    bindValue="server_gid" [items]="server_list" placeholder="Select an option"></ng-select>
+            </div>
+           
+            <div class="col-3 col-lg-3 col-md-3 col-sm-3"><span class="font-bold ms-5">Database Name</span>
+                <ng-select [items]="serverdb_list" class="mt-2 ms-5" [multiple]="true" [selectableGroup]="true"
+                    formControlName="company_code" [closeOnSelect]="false" bindLabel="company_code"
+                    bindValue="company_code" placeholder="Select an option" [(ngModel)]="cboselectedcompany">
+                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index"><input
+                            id="item-{{index}}" style="z-index: -1;" type="checkbox"/>&nbsp;&nbsp; {{item.company_code}}</ng-template>
+                </ng-select> 
+            </div>
+            <div class="col-3 col-lg-3 col-md-3 col-sm-3"><span class="font-bold required">File Name</span>
+                <div class="mt-2 ms-5">
+                  <ng-select placeholder="Select an option" formControlName="filename_status" [clearable]="false">
+                    <ng-container>
+                      <ng-option value="SP">SP</ng-option>
+                      <ng-option value="Table">Table</ng-option>
+                      <ng-option value="TableAlter">Alter</ng-option>
+                      <ng-option value="Update">Update</ng-option>
+                      <ng-option value="Delete">Delete</ng-option>
+                      <ng-option value="Metadata">Metadata</ng-option>
+                      <ng-option value="TableDrop">TableDrop</ng-option>
+                      <ng-option value="SPDrop">SPDrop</ng-option>
+                    </ng-container>
+                  </ng-select>
+                </div>
+            </div>
+            <div class="col-3 col-lg-3 col-md-3 col-sm-3">
+                <span class="font-bold ms-5">Upload file</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input (change)="onChange2($event)" accept=".sql" type="file" #fileInput
+                        class="form-control form-control-lg form-control-solid bg-white mb-3 ms-5 mb-lg-0 borderc-secondary custom-input"
+                        name="fName" formControlName="fName"/>
+                </div>
+            </div>           
+        </div>
+        <div class="text-center mb-10">
+            <button type="submit" class="btn-success text-white" data-bs-dismiss="modal" [disabled]="reactiveform.invalid"
+            (click)="onsubmit()">              
+                <i class="fas fa-check text-white fs-5"></i>
+                &nbsp;&nbsp;Submit
+            </button>
+        </div>
+
+    </form>
+    <div class="table-responsive ">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="hosting_list" class="table table-striped table-row-bordered border-bottom gs-7">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th>S.No</th>
+                        <th>Server Name</th>
+                        <th>Database Name</th>
+                        <th>Uploaded File</th>
+                        <th>Created by</th>
+                        <th>Created date</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of hosting_list; let i=index;" class="align-middle">
+                        <td >{{i+1}}</td>
+                        <td class="text-nowrap">{{data.server_name}}</td>
+                        <td class="text-nowrap">{{data.company_code}}</td>             
+                        <td class="text-nowrap">{{data.file_name}}</td>
+                        <td class="text-nowrap">{{data.created_by}}</td>
+                        <td class="text-nowrap">{{data.created_date}}</td>
+                        <td class="text-center text-nowrap">
+                            <button title="File Download" type="button" class="btn btn-icon
+                            btn-sm bg-warning me-2"(click)="filedownload(data.file_path,data.file_name)" >
+                              <span class="fa-solid fa-download fs-6"></span>                             
+                          </button> 
+                          <button title="View" type="button" class="btn btn-icon btn-sm bg-primary me-2" (click)="onview(data.dbscriptmanagementdocument_gid)">
+                            <span class="fa fa-eye fs-6"></span>
+                          </button>
+                          <button title="Error Log View" type="button" class="btn btn-icon btn-sm bg-warning" (click)="onexceptionview(data.dbscriptmanagementdocument_gid)">
+                            <span class="fa fa-triangle-exclamation fs-2"></span>
+                          </button>
+                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,101 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Delivery Cost Summary</h3>
+        </div>
+        <div class="col me-5">
+            <button title="Add Pincode" class="btn-primary btn-sm text-white me-4 mb-2 mt-2 float-end"
+                data-bs-toggle="modal" data-bs-target="#Modeladdpincode"><i class="fa-solid fa-plus me-2"></i>
+                  &nbsp; Add Delivery Cost
+            </button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="GetDeliverycost_list" class="table table-striped table-row-bordered border-bottom gs-7">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th>S.No</th>
+                        <th>Delivery Cost</th>
+                        <th>Created By</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of GetDeliverycost_list; let i=index;" class="align-middle">
+                        <td>{{i+1}}</td>
+                        <td>{{data.deliverybase_cost}}</td>
+                        <td>{{data.created_by}}</td>
+                        <td class="text-center text-nowrap">
+                            <div (click)="toggleOptions(data)" style="cursor: pointer;">
+                                <button class="btn me-2 p-1 "><span class="fa-solid fa-ellipsis-vertical fs-1"
+                                        style="color: #4d4d4d;"></span></button>
+                                <div *ngIf="showOptionsDivId === data"
+                                    class="pb-0 rounded bg-white cursor-pointer icon_menu" style="right: 159px;">
+                                    <div class="d-flex p-3 pb-3 Icon_hover"
+                                            (click)="modelassignpin(data.deliverycost_id)">
+                                            <span><i class="fa-solid  fa-users fs-3 me-5"></i></span>
+                                            <span>Assign Pincode</span>
+                                        </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="modal" id="Modeladdpincode" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+                    <div>
+                        <h2 class="fw-bolder ms-5 mt-4" style="color: #ffffff;">
+                            <i class="fa-solid fa-plus fs-3 me-5"></i> Add Delivery Cost</h2>
+                    </div>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <br>
+                    <div class="mb-2">
+                        <label for="exampleFormControlTextarea1" class="form-label"><b>Delivery Cost</b></label>
+                        <input placeholder="Base Cost" type="text" id="basecost" name="Base Cost" style="width:100%;"
+                            formControlName="deliverybase_cost" class="form-control form-control-sd">
+                    </div>                    
+                </div>
+                <!-- Modal footer -->
+                <div class="text-center my-4">
+                    <button class="me-4 btn-success" (click)="onupdatereset()" data-bs-dismiss="modal">
+                        <i class="fas fa-check text-white fs-5 me-3"></i>
+                        <span class="ms-3">Submit</span>
+                    </button>
+                    <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white"></i>
+                        <span class="ms-2">Close</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="modal" id="myModaldelete" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog ">
+        <div class="modal-content del_modal-content">
+            <div class="text-center my-4">
+                <h2><b>Are you sure?</b></h2>
+                <p style="display: block;">Do You Want To Delete the Record ?</p>
+                <div class="text-center my-4">
+                    <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal" (click)="ondelete()">
+                        <i class="bi bi-trash-fill text-white fs-5 me-2"></i>Delete
+                    </button>
+                    <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white me-2"></i>Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

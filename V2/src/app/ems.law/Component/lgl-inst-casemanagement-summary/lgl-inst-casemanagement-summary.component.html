@@ -1,0 +1,61 @@
+<div class="card">
+    <br>
+    <div class="row ms-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title"> Case Management </h3>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="GetCaseSummary_list" class="table table-striped table-row-bordered border-bottom gs-7">
+                <thead>
+                    <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                        <th class="text-center" (click)="sortColumn('sno')" >S.No<i class="fa ms-2" 
+                            [ngClass]="getSortIconClass('sno')"></i>
+                          </th>
+                          <th class="text-center"(click)="sortColumn('caseno')" > Case No<i class="fa ms-2" 
+                            [ngClass]="getSortIconClass('caseno')"></i>
+                          </th>   
+                          <th class="text-center"(click)="sortColumn('date')" > Date<i class="fa ms-2" 
+                            [ngClass]="getSortIconClass('date')"></i>
+                          </th>                     
+                          <th  class="text-center" (click)="sortColumn('institutename')" > Institute <i class="fa ms-2" 
+                            [ngClass]="getSortIconClass('institutename')"></i>
+                          </th>  
+                          <th class="text-center" (click)="sortColumn('clientname')" > Client Name <i class="fa ms-2" 
+                            [ngClass]="getSortIconClass('clientname')"></i>
+                          </th>  
+                          <th class="text-center" (click)="sortColumn('casetype')" >  Case Type  <i class="fa ms-2" 
+                            [ngClass]="getSortIconClass('casetype')"></i>
+                          </th>
+                        <th class="text-center"> Action </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of GetCaseSummary_list; let i = index;" class="align-middle">
+                        <td style="text-align: center;" >{{i + 1}}</td>
+                        <td style="text-align: center;">{{data.case_no}}</td>
+                        <td style="text-align: center;">{{data.case_date}}</td>
+                        <td style="text-align: center;">{{data.institute_name}}</td>
+                        <td style="text-align: center;">{{data.client_name}}</td>
+                        <td style="text-align: center;">{{data.casetype_name}}</td>
+                        <td style="text-align: center;">
+                          <button title="View 360" type="button" class="btn btn-icon btn-sm bg-primary me-2" (click)="onview(data.case_gid)" ><span class="fa-solid fa fa-retweet text-white  fs-6"></span></button>
+                            <!-- <button title="View" type="button" class="btn btn-icon btn-sm bg-primary me-2"
+                                (click)="onview(data.case_gid)">
+                                <span class="fa-0x">
+                                    <i class="fa-solid fa-arrows-spin fa-spin fs-3"></i>
+                                  </span>
+                            </button> -->
+                            <!-- <button title="Upload" type="button" class="btn btn-icon btn-sm bg-primary me-2"
+                                (click)="onUpload(data.case_gid)"> -->
+                                <!-- <span class="fa-solid fa-file-arrow-up" style="color: #ffffff;"></span>
+                            </button> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

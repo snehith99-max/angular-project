@@ -1,0 +1,82 @@
+<div class="card rounded-top mt-4">
+    <div class="card-title p-5 pb-3 pt-3 rounded-top bg-primary d-flex justify-content-between align-items-center">
+        <h1 class="fw-bolder text-white"><i class="fas fa-eye fw-bolder fs-3"></i>&nbsp;&nbsp; Sales Return View</h1>
+        <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer " title="back"
+            routerLink="/ims/ImsTrnSalesReturnSummary"><i
+                class="fa-solid fa-arrow-left-long fs-1 fw-bold"></i></button>
+    </div>
+    <div class="card mt-1 m-3 mb-0">
+        <div class="card-header d-flex align-items-center mb-3 cursor-pointer" style="background-color: #def0ff;">
+            <div>
+                <p class="card-title fw-bold fs-3 " style="color: #2599ff;">
+                    <i class="fa-solid fa-clipboard fs-1"></i> &nbsp; Sales Return Details
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div *ngFor="let data of GetSalesReturnView_list;">
+        <div class="d-flex flex-row ps-5 ms-8 me-8 flex-wrap border-bottom">
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold">SR Ref No</span>
+                <p class="mt-2">{{data.salesreturn_gid}}</p>
+            </div>
+            
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"> <span class="fw-bold">DO Ref No</span>
+                <p class="mt-2">{{data.directorder_gid}}</p>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold">SR Date / Do Date</span>
+                <p class="mt-2">{{data.salesreturn_date}} / {{data.deliveryorder_date}}</p>
+            </div>
+        </div>
+        <div class="d-flex flex-row ps-5 ms-8 me-8 flex-wrap border-bottom">
+            <div class="col-12 col-lg-4 col-md-6 mt-1 col-sm-12"><span class="fw-bold">Customer Name</span>
+                <p class="mt-2">{{data.customer_name}}<br>{{data.customer_contactperson}}<br>{{data.mobile}}</p>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 mt-1 col-sm-12"><span class="fw-bold">Address</span>
+                <p class="mt-2">{{data.customer_address}}</p>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 mt-1 col-sm-12"><span class="fw-bold">Return Type</span>
+                <p class="mt-2">{{data.return_type}}</p>
+            </div>
+           
+        </div>
+        <div class="d-flex flex-row ps-5 ms-8 me-8 flex-wrap border-bottom">
+            <div class="col-12 col-lg-12 col-md-6 mt-1 col-sm-12"><span class="fw-bold">Remarks</span>
+                <p class="mt-2">{{data.remarks}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-1 ms-4 me-4">
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="kt_tab_pane_2" role="tabpanel">
+                <div>
+                    <table class="table table-striped table-bordered text-blue border-bottom gs-7 align-middle">
+                        <thead>
+                            <tr class="fw-bold fs-6 text-nowrap bg-lightblue text-blue align-middle">
+                                <th class="text-blue text-center" style="width:10%">Product Group</th>
+                                <th class="text-blue text-center" style="width:15%">Product</th>
+                                <th class="text-blue text-center" style="width:15%">Description</th>
+                                <th class="text-blue text-center" style="width:5%">Delivered Qty</th>
+                                <th class="text-blue text-center" style="width:5%">Return Qty</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of GetSalesReturnViewDetails_list; let i=index;">
+                                <td>{{data.productgroup_name}}</td>
+                                <td>{{data.product_code}}/{{data.product_name}}</td>
+                                <td>{{data.product_desc}}</td>                               
+                                <td>{{data.product_qtydelivered}} {{data.productuom_name}}</td>
+                                <td>{{data.qty_returned}} {{data.productuom_name}}</td>
+                              
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center my-4">  
+    <button class="btn-primary btn-sm text-white me-4" routerLink="/ims/ImsTrnSalesReturnSummary">
+        <i class="fas fa-arrow-left"></i> &nbsp; Back
+      </button>
+    </div>
+</div>

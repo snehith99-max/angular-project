@@ -1,0 +1,364 @@
+<div class="card">
+    <!-- <div class="card-header">
+        <h3 class="card-title">Source Summary</h3>
+    </div>
+    <br>
+    <div> &nbsp; &nbsp;
+        <button type="button" class="btn-primary btn-sm text-white me-4" data-bs-toggle="modal"
+            data-bs-target="#myModaladd">
+            <i class="fas fa-plus"></i> &nbsp;&nbsp;&nbsp; Add Source
+        </button>
+    </div>
+<br/> -->
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Source Summary</h3>
+        </div>
+
+        <div class="col me-5">
+            <button title="Add Source" type="button" class="btn-primary btn-sm text-white me-4 float-end"
+                data-bs-toggle="modal" data-bs-target="#myModaladd">
+                <i class="fas fa-plus"></i> &nbsp;&nbsp;&nbsp; Add Source
+            </button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="source_list" class="table table-striped table-row-bordered border-bottom  gs-7 align-middle">
+                <thead>
+                    <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th style="width:2%">S.No</th>
+                        <th style="width:10%">Source Code </th>
+                        <th style="width:10%">Source</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th class="text-center">Action</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of source_list; let i=index;">
+                        <td style="width:2%">{{i+1}}</td>
+                        <td style="width:10%">{{data.source_code}}</td>
+                        <td style="width:10%">{{data.source_name}}</td>
+                        <td>{{data.source_description}}</td>
+                        <td [ngSwitch]="data.Status">
+                            <span *ngIf="data.Status === 'N'"><label class="ms-3"
+                                class="badge bg-warning text-white ">Inactive</label></span>
+                        <span *ngIf="data.Status == 'Y'"><label class="ms-3"
+                                class="badge bg-success text-white ">Active</label></span>
+                        </td>
+                        <td [ngSwitch]="data.Status" class="text-center text-nowrap">
+                               <!-- Edit -->
+
+                               <ng-container *ngIf="data.Status ==='Y'">
+                                <button   title="Edit" (click)="openModaledit(data)" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#myModaledit" class="btn btn-icon btn-sm bg-edit me-2"><span
+                                        class="fa-solid fa-pencil text-white  fs-6"></span></button>
+                                    </ng-container>
+                                    <ng-container *ngIf="data.Status ==='N'" >
+                                        <button [disabled]="data.source_gid !=='No'" title="Edit" (click)="openModaledit(data)" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#myModaledit" class="btn btn-icon btn-sm bg-edit me-2"><span
+                                        class="fa-solid fa-pencil text-white  fs-6"></span></button>
+                                    </ng-container>
+                                <!-- Statusupdate -->
+
+                                <ng-container [ngSwitch]="data.Status" class="text-center" style="width: 5%;">
+                                    <button *ngSwitchCase="'N'" title="Activate" type="button" (click)="statusvalue(data.Status,data.source_gid)"
+                                        class="btn btn-icon btn-sm bg-stssuccess me-2" data-bs-target="#statusupdate"
+                                        data-bs-toggle="modal" >
+                                        <span class="fas fa-thumbs-up fs-4" style="color: #ffffff;"></span>
+                                    </button>
+                                    <button  title="Deactivate" type="button" *ngSwitchCase="'Y'" (click)="statusvalue(data.Status,data.source_gid)"
+                                     class="btn btn-icon btn-sm bg-inactive me-2" data-bs-target="#statusupdate"
+                                        data-bs-toggle="modal" >
+                                        <span class="fas fa-thumbs-down fs-4" style="color: #ffffff;"></span>
+                                    </button>
+                                </ng-container>
+
+                                <!--Delete  -->
+                                
+                            <button title="Delete" type="button" (click)="openModaldelete(data.source_gid)"
+                                data-bs-toggle="modal" data-bs-target="#myModaldelete"
+                                class="btn btn-icon btn-sm bg-danger me-2"><span
+                                    class="fa-solid fa-trash text-white  fs-6"></span></button>
+                            <!-- <div style="cursor: pointer;">
+                                <button title="Options" class="btn me-2 p-1 "
+                                    (click)="toggleOptions(data.source_gid)"><span
+                                        class="fa-solid fa-ellipsis-vertical fs-1"
+                                        style="color: #4d4d4d;"></span></button>
+                                <div *ngIf="showOptionsDivId === data.source_gid"
+                                    class="pb-0 rounded bg-white cursor-pointer icon_menu" style="right: 128px;">
+                                    <div class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal"
+                                        data-bs-target="#myModaledit" (click)="openModaledit(data)">
+                                        <span><i class="fa-regular fa-pen-to-square fs-3 me-5"></i></span>
+                                        <span>Edit</span><span class="tooltip">Edit</span>
+                                    </div>
+                                    <div class="d-flex p-3 pb-3 Icon_hover" (click)="openModaldelete(data.source_gid)"
+                                        data-bs-toggle="modal" data-bs-target="#myModaldelete">
+                                        <span><i class="fa-regular fa-trash-can fs-3 me-5"></i></span>
+                                        <span>Delete</span>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- The Modal ADD -->
+<form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="modal" id="myModaladd" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+
+                <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                    <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                            class="fas fa-plus fw-bolder fs-3"></i> &nbsp;&nbsp;Add Source </h2>
+
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row">
+                        <span class="font-bold "><b>Source Code</b></span>
+                        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                            <label placeholder="Auto Generate">Auto Generate</label>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row"><span class="font-bold">
+                            <b>Source </b>
+                            <span class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                            <input formControlName="source_name" placeholder="Enter Source" type="text" class="
+                     form-control form-control-lg form-control-solid
+                     custom-input
+                     mb-3 mb-lg-0
+                     bg-white
+                     custom-input
+                   " [ngStyle]="{
+                     'border-color':
+                     source_name.invalid && source_name.touched
+                         ? 'red'
+                         : 'rgb(209, 209, 209)'
+                   }" name="source_name" required maxlength="45" />
+                        </div>
+
+                    </div>
+                    <div *ngIf="source_name.invalid && (source_name.dirty || source_name.touched)">
+                        <div *ngIf="source_name.errors?.['required']">
+                            <span style="color:red;">Source is required.</span>
+                        </div>
+                    </div>
+
+                    <div *ngIf="source_name.invalid && (source_name.dirty || source_name.touched)">
+                        <div *ngIf="source_name.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label"><b>Description</b></label>
+                        <textarea class="form-control" placeholder=" Enter Description(Maximum 1000 Characters)"
+                            formControlName="source_description" id="sourcedescription" rows="3"
+                            (ngModelChange)="updateRemainingCharsadd()" maxlength="1000"></textarea>
+                        <div class="text-muted fw-bold  mt-2">
+                            Remaining characters: {{ remainingChars }}/1000
+                        </div>
+                    </div>
+
+
+
+
+                    <!-- Modal footer -->
+                    <div class="text-center my-4">
+                        <button (click)="onsubmit()" [disabled]="reactiveForm.invalid"
+                            [ngStyle]="{ 'cursor': reactiveForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !reactiveForm.invalid,
+                                     'btn-secondary text-white': reactiveForm.invalid }" data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i> &nbsp;Submit
+                        </button>
+                        &nbsp;&nbsp;
+                        <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+                            <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- The Modal Edit -->
+<form [formGroup]="reactiveFormEdit" #form="ngForm">
+    <div class="modal" id="myModaledit" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+
+                <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                    <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                            class="fa-solid fa-pen-to-square fs-3"></i> &nbsp;&nbsp;Edit Source </h2>
+
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <input class="form-control form-control-lg" formControlName="source_gid" hidden
+                        pattern="^(?!\s*$).+" type="text" aria-label=".form-control-lg example" autocomplete="off"
+                        required pattern="^(?!\s*$).+" />
+                    <div class="row"><span class="font-bold"><b>Source Code</b><span
+                                class="ms-1 text-red"></span></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+
+                            <!-- <input class="form-control form-control-lg" formControlName="sourceedit_name" pattern="^(?!\s*$).+" type="text" placeholder="Enter Source" aria-label=".form-control-lg example" autocomplete="off" required  [class.is-invalid]="sourceedit_name.invalid && (sourceedit_name.dirty || sourceedit_name.touched)">  -->
+                            <input [readonly]="isReadOnly" formControlName="sourceedit_code" type="text" class="form-control form-control-lg form-control-solid
+                    custom-input
+                    mb-3 mb-lg-0
+                    bg-white
+                    custom-input
+                  " [ngStyle]="{
+                    'border-color':
+                    sourceedit_code.invalid && sourceedit_code.touched
+                        ? 'red'
+                        : 'rgb(209, 209, 209)'
+                  }" name="sourceedit_code" required />
+
+                        </div>
+
+                    </div>
+                    <div *ngIf="sourceedit_code.invalid && (sourceedit_code.dirty || sourceedit_code.touched)">
+                        <div *ngIf="sourceedit_code.errors?.['required']">
+                            <span style="color:red;">Source code is required.</span>
+                        </div>
+                    </div>
+                    <div *ngIf="sourceedit_code.invalid && (sourceedit_code.dirty || sourceedit_code.touched)">
+                        <div *ngIf="sourceedit_code.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format</span>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row"><span class="font-bold"><b>Source</b><span class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+
+                            <!-- <input class="form-control form-control-lg" formControlName="sourceedit_name" pattern="^(?!\s*$).+" type="text" placeholder="Enter Source" aria-label=".form-control-lg example" autocomplete="off" required  [class.is-invalid]="sourceedit_name.invalid && (sourceedit_name.dirty || sourceedit_name.touched)">  -->
+                            <input formControlName="sourceedit_name" placeholder="Enter Source" type="text" class="
+                        form-control form-control-lg form-control-solid
+                        custom-input
+                        mb-3 mb-lg-0
+                        bg-white
+                        custom-input
+                      " [ngStyle]="{
+                        'border-color':
+                        sourceedit_name.invalid && sourceedit_name.touched
+                            ? 'red'
+                            : 'rgb(209, 209, 209)'
+                      }" pattern="^(?!\s*$).+" name="sourceedit_name" required maxlength="45" />
+
+                        </div>
+
+                    </div>
+                    <div *ngIf="sourceedit_name.invalid && (sourceedit_name.dirty || sourceedit_name.touched)">
+                        <div *ngIf="sourceedit_name.errors?.['required']">
+                            <span style="color:red;">Source is required.</span>
+                        </div>
+                    </div>
+                    <div *ngIf="sourceedit_name.invalid && (sourceedit_name.dirty || sourceedit_name.touched)">
+                        <div *ngIf="sourceedit_name.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format</span>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label"><b>Description</b><span
+                                class="ms-1 text-red"></span></label>
+                        <textarea class="form-control" formControlName="sourceedit_description"
+                            placeholder="Enter Description(Maximum 1000 Characters)" pattern="^(?![\s\n]*$)[\s\S]+$" id="sourceeditdescription"
+                            rows="3"   (ngModelChange)="updateRemainingCharsedit()" maxlength="1000"></textarea>
+                            <div class="text-muted fw-bold  mt-2">
+                                Remaining characters: {{ remainingChars }}/1000
+                            </div>
+                    </div>
+                    <div
+                        *ngIf="sourceedit_description.invalid && (sourceedit_description.dirty || sourceedit_description.touched)">
+                        <div *ngIf="sourceedit_description.errors?.['required']">
+                            <span style="color:red;"> Description is required.</span>
+                            <div
+                                *ngIf="sourceedit_description.invalid && (sourceedit_description.dirty || sourceedit_description.touched)">
+                                <div *ngIf="sourceedit_description.errors?.['pattern']">
+                                    <span style="color:red;">Invalid Format</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="text-center my-4">
+                    <button (click)="onupdate()" [disabled]="reactiveFormEdit.invalid" [ngClass]="{
+                    'primary-button': !reactiveFormEdit.invalid,
+                    'secondary-button': reactiveFormEdit.invalid
+                  }" data-bs-dismiss="modal">
+                        <i class="fas fa-check text-white fs-5 "></i> &nbsp;Update
+                    </button> &nbsp;&nbsp;
+                    <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white"></i> &nbsp;Close
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+<div id="statusupdate" class="modal fade">
+    <div class="modal-dialog modal-confirm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="text-center  my-4">
+                <h2><b>Are you sure?</b></h2>
+                <br>
+                <p style="display: block;" *ngIf="status == 'N'"> Do You Want To Active the Region?</p>
+                <p style="display: block;" *ngIf="status == 'Y'"> Do You Want To Inactive the Region?</p>
+
+            </div>
+            <div class="modal-footer justify-content-center">
+                
+                <button type="button" class="btn-success btn-sm text-white me-4" data-bs-dismiss="modal"   (click)="onstatusupdate(source_gid,'Y')" *ngIf="status === 'N'"
+                    > <i class="fa fa-toggle-on fs-5 me-2 "></i> &nbsp;Active</button>
+                    <button type="button" class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal"   (click)="onstatusupdate(source_gid,'N')" *ngIf="status == 'Y'"
+                    > <i class="fa fa-toggle-on fs-5 me-2 "></i> &nbsp;Inactive</button>
+                    <button type="button" class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal"><i class="fas fa-close text-white me-2"></i> &nbsp;Close</button>&nbsp;
+            </div>
+        </div>
+    </div>
+</div>
+<!-- The Modal Delete -->
+<div class="modal" id="myModaldelete" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="text-center my-4">
+                <h2><b>Are you sure?</b></h2>
+                <br>
+                <p style="display: block;">Do You Want To Delete the Record ?</p>
+                <br>
+                <div class="text-center my-4">
+                    <button class="btn-danger btn-sm text-white me-4" (click)="ondelete()" data-bs-dismiss="modal">
+                        <i class="fas fa-trash text-white fs-5 "></i> &nbsp;Delete
+                    </button>
+                    <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white"></i> &nbsp;Close
+                    </button>&nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>

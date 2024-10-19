@@ -1,0 +1,47 @@
+.selected-row {
+    background-color: #e7f4ff; /* You can change this color as needed */
+}
+.bg-tableheaderblue{
+  background-color: #cad8e7 !important;
+
+}
+.selectable-name {
+  cursor: pointer;
+}
+.selectable-name:hover{
+  background-color: #e7f4ff;
+
+}
+.bg-darkblue {
+  background-color: #046eab !important;
+}
+
+.bg-darkblue:hover {
+  background-color: #03588a !important;
+}
+.table-container {
+  position: relative;
+}.table-header {
+  position: sticky;
+  top: 0;
+  background-color: #ffffff; /* Adjust as needed */
+  z-index: 1; /* Ensure header stays above table body */
+}
+.count:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+    z-index: 1;
+    transform: translate(-50%, 0) scaleY(1); 
+  }
+
+  .modal-lgss, .modal-xl {
+    --bs-modal-width: 850px;
+
+}
+.view_count {
+
+  padding: 3px 6px;
+  color: #ffffff;
+  background-color: #50cd89;
+  border-radius: 5px;
+}

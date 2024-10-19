@@ -1,0 +1,92 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+      <div class="col">
+        <h3 class="card-title">Enquiry Summary</h3>
+      </div>
+  
+      <div class="col me-5">
+        <button type="button" class="btn-primary btn-sm text-white me-4 float-end" data-bs-toggle="modal"
+          data-bs-target="#myModaladd" (click)="onadd()"><i class="fas fa-plus"></i>&nbsp;
+         Raise Enquiry
+        </button>
+      </div>
+    </div>
+      <div class="table-responsive ">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+          <table id="cusenquiry_list" class="table table-striped table-row-bordered gy-5 gs-7">
+            <thead>
+              <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                <th>S.No</th>
+                <th>Enquiry Date</th>
+                <th>Enquiry Ref. No</th>
+                <th>Branch</th>
+                <th>Vendor</th>               
+                <!-- <th>Contact Details</th>              -->
+                <th class="text-end">Potential Order Value</th>
+                <th>Status</th>
+                <th>Closure Date</th>               
+                <th>Created By</th>                
+                <th class="text-center bg-lightblue ">Action</th> 
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of cusenquiry_list;let i = index;">
+                <td>{{i+1}}</td>  
+                <td>{{data.enquiry_date}}</td>
+                <td>{{data.enquiry_gid}}</td>
+                <td>{{data.branch_name}}</td>
+                <td>{{data.vendor_name}}</td>                
+                <!-- <td>
+                  <ng-container *ngIf="data.contact_details && data.contact_details.length > 25">
+                    <div *ngFor="let line of splitIntoLines(data.contact_details, 25)">
+                      {{ line }}
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="!data.contact_details || data.contact_details.length <= 25">
+                    {{ data.vendor_address }}
+                  </ng-container>
+                </td> -->
+                <td class="text-end">{{data.potorder_value| number:'1.2-2'}}</td>
+                
+               <td>{{data.enquiry_status}}</td>
+                <td>{{data.closure_date}}</td> 
+                <td>{{data.created_by}}</td>                 
+                <td class="text-center">
+                  <span (click)="toggleOptions(data.enquiry_gid)" style="cursor: pointer;">
+                    <button class="btn me-2 p-1">
+                      <span class="fa-solid fa-ellipsis-vertical fs-1" style="color: #4d4d4d;"></span>
+                    </button>
+                    <div *ngIf="showOptionsDivId === data.enquiry_gid" class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                      <div class="d-flex p-3 pb-3 Icon_hover" (click)="onview(data.enquiry_gid)">
+                        <span><i class="fa-solid fa-eye  fs-3 me-4"></i></span>
+                        <span>View</span>
+                      </div>
+                    </div>
+                  </span>
+
+                  <!-- <button title="View" type="button" class="btn btn-icon btn-sm bg-primary me-2" (click)="onview(data.enquiry_gid)" >
+                    <span class="fa-solid fa-eye text-white  fs-6">
+                    </span></button> -->
+
+                  <!-- <button title="Edit" type="button" class="btn btn-icon btn-sm bg-success me-2"
+                    (click)="openModaledit()" data-bs-toggle="modal" data-bs-target="#myModaledit"><span
+                      class="fa-solid fa-pencil text-white  fs-6"></span></button> -->
+                  <!-- <button title="close" type="button" class="btn btn-icon btn-sm bg-danger me-2" (click)="openModalclose()"
+                    data-bs-toggle="modal" data-bs-target="#myModalclose"><span
+                      class="fa-solid fa-close text-white  fs-6"></span></button> -->
+                      <!-- <button title="close" type="button" class="btn btn-icon btn-sm bg-info me-2" (click)="openModal(data)"
+                      data-bs-toggle="modal" data-bs-target="#myModalassign"><span
+                        class="fa-solid fa-tasks text-white  fs-6"></span></button> -->
+  
+                        <!-- <button title="Raise Proposal" type="button" class="btn btn-icon btn-sm background-color1 me-2" (click)="openrequest(data.enquiry_gid)" ><span
+                        class="fa-solid fa-arrow-up-right-from-square fs-6"></span></button> -->
+  
+                        <!-- <button title="Raise Qoute" type="button" class="btn btn-icon btn-sm background-color2 me-2" (click)="openquote(data.enquiry_gid)" ><span
+                         class="fa-solid fa-up-long fs-6"></span></button> -->
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>

@@ -1,0 +1,79 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Creditor Report</h3>
+        </div>     
+        <div class="col me-5">
+            <button title="Export Excel" type="button"
+            class="btn btn-icon btn-sm bg-excel me-2 float-end"  (click)="exportExcel()" ><i
+                class="fa-regular fa-file-excel fs-2"></i>
+            </button>
+                
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="Creditorreport_List" class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th style="width:2%"class="text-center">S.No</th>
+                        <!-- <th>Vendor Code</th> -->
+                        <th style="width:40%"class="text-center">Vendor</th>
+                        <th class="text-center">Contact</th>
+                        <th style="width:12%; text-align: right;"class="text-center">Opening </th>
+                        <th style="width:12%; text-align: right;"class="text-center">Debit </th> 
+                        <th style="width:12%; text-align: right;"class="text-center">Credit </th>                                             
+                        <th style="width:12%; text-align: right;"class="text-center">Balance</th>
+                        <th class="text-center text-nowrap">Action </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of Creditorreport_List; let i=index;">
+                        <td>{{i+1}}</td>
+                        <!-- <td>{{data.vendor_code}}</td> -->
+                        <td class="text-nowrap">{{data.vendor_companyname}}</td>
+                        <td style="width:40%">{{data.contact_details}}</td>
+                        <td style="width:12%;text-align: right;">{{data.opening_amount}}</td>
+                        <td style="text-align: right;width:12%;">{{data.debit_amount}}</td>   
+                        <td style="text-align: right;width:12%;">{{data.credit_amount}}</td>                                            
+                        <td style="text-align: right;width:12%;">{{data.closing_amount}}</td>
+                        <td class="text-center text-nowrap">
+                            <!-- <div (click)="toggleOptions(data)" style="cursor: pointer;">
+                                <button class="btn me-2 p-1 "><span class="fa-solid fa-ellipsis-vertical fs-1"
+                                        style="color: #4d4d4d;"></span></button>
+                                <div *ngIf="showOptionsDivId === data"
+                                    class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                                    Add Icons
+                                    <div class="d-flex p-3 pb-3 Icon_hover" 
+                                        (click)="onclick(data.account_gid)">
+                                        <span><i class="fa-solid fa-eye fs-3 me-5"></i></span>
+                                        <span>View</span>
+                                    </div>
+                                    Add Icons
+                                </div>
+                            </div> -->
+                            <button title="View" type="button" class="btn btn-icon btn-sm bg-primary me-2" (click)="onclick(data.account_gid)">
+                                <span class="fa-solid fa-eye text-white fs-6"></span>
+                            </button>                                        
+                            <button title="360" type="button" class="btn btn-sm btn-icon bg-view me-2 mt-2 "
+                            (click)="vendor360(data.vendor_gid)">
+                            <i class="fa-solid fa fa-retweet fs-2"></i>
+                            </button>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+                <tr>
+                    <td></td>
+                    <td></td>                              
+                    <td style="color:maroon;font-weight: bolder;text-align: center;">Total</td>
+                    <td style="color:maroon;font-weight: bolder;text-align: right;">{{total_openingbalance}}</td>
+                    <td style="color:maroon;font-weight: bolder;text-align: right;">{{totalDebit}}</td>
+                    <td style="color:maroon;font-weight: bolder;text-align: right;">{{totalCredit}}</td>
+                    <td style="color:maroon;font-weight: bolder;text-align: right;">{{total_gross}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>    
+</div>
+

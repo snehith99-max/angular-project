@@ -1,0 +1,174 @@
+// .primary-button {
+//     background-color: #42ac72;
+//     color: #fff !important;
+//     font-size: 1.1rem !important;
+//     font-weight: 630 !important;
+//     padding: 9px 16px 9px 13px !important;
+//     border-radius: 3px;
+//     border: 0;
+// }
+
+// .secondary-button {
+//     background-color: #50cd89;
+//     color: #fff !important;
+//     font-size: 1.1rem !important;
+//     font-weight: 630 !important;
+//     padding: 9px 16px 9px 13px !important;
+//     border-radius: 3px;
+//     border: 0;
+// }
+
+// .del_modal-dialog {
+//     margin-top: 200px;
+
+//     .del_modal-content {
+//         height: 200px;
+//         width: 350px;
+
+//         h2 {
+//             margin-top: 20px;
+//         }
+
+//         p {
+//             margin-top: 20px;
+//         }
+
+//         button {
+//             margin-top: 15px;
+//         }
+//     }
+// }
+
+// .btn-success:hover {
+//     background-color: #42ac72 !important;
+// }
+
+// .btn-success:disabled {
+//     background-color: #cccccc !important;
+//     cursor: not-allowed !important;
+// }
+
+// .Icon_hover:hover {
+//     background-color: #f6f8fc;
+//     font-weight: 600;
+//     border-radius: 6px 6px 6px 6px;
+//     color: black;
+// }
+
+// .icon_menu {
+//     position: absolute;
+//     width: auto;
+//     right: 40px;
+//     box-shadow: 4px 4px 7px rgba(174, 174, 192, .8);
+//     color: #636363;
+//     max-height: 123px;
+//     overflow-y: auto;
+//     scrollbar-color: rgb(223, 247, 255) #ffffff;
+//     z-index: 2;
+// }
+
+
+
+// .primary-button {
+//     background-color: #42ac72;
+//     color: #fff !important;
+//     font-size: 1.1rem !important;
+//     font-weight: 630 !important;
+//     padding: 9px 16px 9px 13px !important;
+//     border-radius: 3px;
+//     border: 0;
+// }
+
+// .secondary-button {
+//     background-color: #50cd89;
+//     color: #fff !important;
+//     font-size: 1.1rem !important;
+//     font-weight: 630 !important;
+//     padding: 9px 16px 9px 13px !important;
+//     border-radius: 3px;
+//     border: 0;
+// }
+
+// .del_modal-dialog {
+//     margin-top: 200px;
+    
+//     .del_modal-content{
+//         height: 200px;
+//         width: 350px;
+
+//         h2 {
+//             margin-top: 20px;
+//         }
+        
+//         p {
+//             margin-top: 20px;
+//         }
+
+//         button {
+//             margin-top: 15px;
+//         }
+//     }
+// }
+// .btn-success:hover {
+//     background-color: #42ac72 !important;
+// }
+
+// .btn-success:disabled {
+//     background-color: #cccccc !important;
+//     cursor: not-allowed !important;
+// }
+// .Icon_hover:hover{
+//     background-color: #f6f8fc;
+//     font-weight: 600;
+//     border-radius: 6px 6px 6px 6px;
+//     color: black;
+//   }
+  
+//   .icon_menu {
+//     position: absolute;
+//     width: auto;
+//     right: 40px;
+//     box-shadow: 4px 4px 7px rgba(174, 174, 192, .8);
+//     color: #636363;
+//     max-height: 123px;
+//     overflow-y: auto;
+//     scrollbar-color: rgb(223, 247, 255) #ffffff;
+//     z-index: 2;
+//   }
+.custom-table-container {
+    max-height: 60vh; /* Adjust based on modal size */
+    overflow-y: auto;
+  }
+  
+  .modal-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .modal-table thead th {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1;
+  }
+  
+  .modal-table tbody {
+    display: block;
+    max-height: 400px; /* Adjust as needed */
+    overflow-y: auto;
+  }
+  
+  .modal-table tbody tr {
+    display: table;
+    width: 100%;
+  }
+  
+  .modal-table th, .modal-table td {
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .modal-table td {
+    font-size: 11px; /* Adjust as needed */
+  }
+  

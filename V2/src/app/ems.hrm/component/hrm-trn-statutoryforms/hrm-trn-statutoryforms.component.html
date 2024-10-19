@@ -1,0 +1,126 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+      <div class="col">
+        <h3 class="card-title">Year Return Summary</h3>
+      </div>
+
+      <div class="col me-5">
+        <button title="Add Department" class="btn-primary btn-sm text-white me-4 mb-2 mt-2 float-end" data-bs-toggle="modal" data-bs-target="#myModaladd">
+          <i class="fas fa-plus"></i> &nbsp;&nbsp;
+          Add Yearly Return</button>
+      </div>
+      </div>
+
+      <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+          <table id="yearreturn_list" class="table table-striped table-row-bordered border-bottom gs-7">
+            <thead>
+              <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                <th>S.No</th>
+                <th>Form</th>
+                <th>Year</th>
+                <th class="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of yearreturn_list; let i=index;" class="align-middle">
+                    <td>{{i+1}}</td>
+                    <td>{{data.form_name}}</td>
+                    <td>{{data.processed_year}}</td>
+                    <td class="text-center text-nowrap">
+                        <button title="Half-Yearly" type="button" class="btn btn-icon btn-sm bg-primary me-2" (click)="onhalfyear(data.form_gid,data.processed_year)" data-bs-toggle="modal">
+                            <span class="fa fa-file-text fs-6" style="color: #ffffff;"></span>
+                          </button>
+                          <button title="Annual" type="button" class="btn btn-icon btn-sm bg-success me-2" (click)="onannualyear(data.form_name,data.processed_year)" data-bs-toggle="modal">
+                            <span class="fa fa-file-text fs-6" style="color: #ffffff;"></span>
+                          </button>
+                      <button title="Delete" type="button" class="btn btn-icon btn-sm bg-danger me-2" data-bs-toggle="modal" data-bs-target="#myModaldelete" (click)="openModaldelete(data.form_gid)">
+                        <span class="fa-solid fa-trash fs-6" style="color: #ffffff;"></span>
+                      </button>
+                    </td>
+                  </tr>
+
+
+                </tbody>
+                </table>
+                </div>
+                </div>
+
+                <!-- The Modal ADD -->
+<form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="modal mt-20" id="myModaladd" data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+            <div>
+              <h2 class="fw-bolder ms-5 mt-4" style="color: #ffffff;">Add Year Return Details</h2>
+            </div>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="d-flex flex-row flex-wrap">
+                <div class="col-12 col-lg-12 col-md-12 col-sm-12"><span class="font-bold required">Form Name</span>
+                  <ng-select class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" formControlName="form_name" bindLabel="form_name" bindValue="sanctuaryform_gid"  
+                    [items]="formList" [class.is-invalid]="reactiveForm.get('form_name')?.invalid && (reactiveForm.get('form_name')?.dirty || reactiveForm.get('form_name')?.touched)" 
+                    [ngClass]="{'invalid-border': reactiveForm.get('form_name')?.invalid && reactiveForm.get('form_name')?.touched}" placeholder="Select an option"></ng-select>
+                    <div *ngIf="reactiveForm.get('form_name')?.hasError('required') && reactiveForm.get('form_name')?.touched || 
+                    reactiveForm.get('form_name')?.hasError('pattern')" class="text-red">Form Name is required.</div>
+                  </div>
+               </div>
+  
+            <div class="row mt-4">
+              <span class="font-bold">Year<span style="color:red"> *</span></span>
+              <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row">
+               <input formControlName="processed_year" type="text" 
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                [ngStyle]="{'border-color': processed_year.invalid && processed_year.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                placeholder="Enter Year" name="processed_year" required />
+                <div *ngIf="processed_year.invalid && (processed_year.dirty || processed_year.touched)">
+                  <div *ngIf="processed_year.errors?.['required']">
+                    <span class="text-red">Year is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="text-center my-4">
+              <button class="me-4 btn-success" (click)="onsubmit()" [disabled]="reactiveForm.invalid" [ngClass]="{'primary-button': !reactiveForm.invalid, 'secondary-button': reactiveForm.invalid}" data-bs-dismiss="modal">
+                <i class="bi bi-check-square fs-5"></i>
+                    <span class="ms-3">Submit</span>
+              </button>
+              <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+                <i class="fas fa-close text-white fs-5"></i>
+                <span class="ms-3">Close</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- The Modal Delete -->
+<div class="modal " id="myModaldelete" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog del_modal-dialog">
+    <div class="modal-content del_modal-content">
+      <div class="text-center my-4">
+        <h2><b>Are you sure?</b></h2>
+        <p style="display: block;">Do You Want To Delete the Record ?</p>
+        <div class="text-center my-4">
+          <button class="btn-danger btn-sm text-white me-4" (click)="ondelete()" data-bs-dismiss="modal">
+            <i class="bi bi-trash-fill text-white fs-5 me-2"></i>Delete
+          </button>
+          <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white me-2"></i>Close
+          </button>          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+    

@@ -1,0 +1,108 @@
+<div class="card">
+
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Salary Component</h3>
+        </div>
+
+        <div class="col me-5">
+            <button title="Add Salary Component" class="btn-primary btn-sm text-white me-4 mb-2 mt-2 float-end"
+                (click)="addsalary()">
+                &nbsp;&nbsp;Add Salary Component</button>
+        </div>
+    </div>
+    <br>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="salarycompoent_list" class="table table-striped table-row-bordered border-bottom gs-7">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th>S.No </th>
+                        <th>Component Group </th>
+                        <th>Component Code</th>
+                        <th>Component Name</th>
+                        <th>Employee Contribution</th>
+                        <th>Employer Contribution</th>
+                        <th>Contribution Type</th>
+                        <th>Component Type</th>
+                        <th>Affecting In</th>
+                        <th class="text-center bg-lightblue ">Action</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of salarycompoent_list; let i=index;" class="align-middle">
+                        <td>{{i+1}}</td>
+                        <td>{{ data.componentgroup_name }}</td>
+                        <td>{{ data.component_code }}</td>
+                        <td>{{ data.component_name}}</td>
+                        <td>{{ data.component }}</td>
+                        <td>{{ data.employer_component }}</td>
+                        <td>{{ data.contribution_type }}</td>
+                        <td>{{ data.component_type }}</td>
+                        <td>{{ data.affecting_in }}</td>
+                        <td class="text-center text-nowrap">
+                            <!-- <div (mouseleave)="showOptionsDivId = null" (mouseover)="showOptionsDivId = data.salarycomponent_gid" style="cursor: pointer;">
+                                <button class="btn me-2 p-1 "><span class="fa-solid fa-ellipsis-vertical fs-1" style="color: #4d4d4d;"></span></button>
+                                <div *ngIf="showOptionsDivId === data.salarycomponent_gid" class="pb-0 rounded bg-white cursor-pointer icon_menu" style="margin-right:-15px; margin-top: -15px;"> 
+                                     <div class="d-flex p-3 pb-3 Icon_hover" (click)="openview(data.salarycomponent_gid)" >
+                                        <span><i class="fa-regular fa-eye fs-3 me-5"></i></span>
+                                        <span>View</span>
+                                        </div>
+                            <div class="d-flex p-3 pb-3 Icon_hover" (click)="openedit(data.salarycomponent_gid)" >
+                            <span><i class="fa-regular fa-pen-to-square fs-3 me-5"></i></span>
+                            <span>Edit</span>
+                            </div>
+                            <div class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal" data-bs-target="#myModaldelete" 
+                            (click)="openModaldelete(data.salarycomponent_gid)" >
+                                <span><i class="fa-regular fa-trash-can fs-3 me-5"></i></span>
+                                <span>Delete</span>
+                                </div>
+                            </div>
+                            </div>  -->
+
+                            <button title="Edit" type="button" class="btn btn-icon btn-sm bg-etdark me-2"
+                                data-bs-toggle="modal" data-bs-target="#myModaledit" (click)="openedit(data.salarycomponent_gid)">
+                                <span class="fa-solid fa-pencil fs-6 text-white"></span>
+                            </button>
+
+                            <button title="View" type="button" class="btn btn-icon btn-sm bg-primary me-2"
+                                data-bs-toggle="modal" data-bs-target="#myModaledit" (click)="openview(data.salarycomponent_gid)">
+                                <span class="fa fa-eye fs-6"></span>
+                            </button>
+
+                            <button title="Delete" type="button" class="btn btn-icon btn-sm bg-danger me-2"
+                                data-bs-toggle="modal" data-bs-target="#myModaldelete" (click)="openModaldelete(data.salarycomponent_gid)">
+                                <span class="fa-solid fa-trash text-white fs-6"></span>
+                            </button>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- The Modal Delete -->
+
+
+<div id="myModaldelete" class="modal fade">
+    <div class="modal-dialog modal-confirm del_modal-dialog">
+        <div class="modal-content del_modal-content">
+            <div class="text-center my-4">
+                <h4 class="w-100  fw-bolder fs-1 mt-5">Are you sure ?</h4>
+                <p class="fw-bold fs-5 mt-4">Do You Want To Delete The Record ?</p>
+                <div class="text-center my-4">
+
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn-danger" data-bs-dismiss="modal"
+                            (click)="ondelete()">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

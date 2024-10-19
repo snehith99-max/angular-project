@@ -1,0 +1,404 @@
+import { NgModule, importProvidersFrom } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { SmrMstProductgroupComponent } from './Component/smr-mst-productgroup/smr-mst-productgroup.component';
+import { SmrMstTaxsummaryComponent } from './Component/smr-mst-taxsummary/smr-mst-taxsummary.component';
+import { SmrMstCurrencySummaryComponent } from './Component/smr-mst-currency-summary/smr-mst-currency-summary.component';
+import { SmrMstProductunitsSummaryComponent } from './Component/smr-mst-productunits-summary/smr-mst-productunits-summary.component';
+import { SmrMstProductSummaryComponent } from './Component/smr-mst-product-summary/smr-mst-product-summary.component';
+import { SmrTrnQuotationSummaryComponent } from './Component/smr-trn-quotation-summary/smr-trn-quotation-summary.component';
+import { SmrTrnSalesorderSummaryComponent } from './Component/smr-trn-salesorder-summary/smr-trn-salesorder-summary.component';
+import { SmrRptSalesorderReportComponent } from './Component/smr-rpt-salesorder-report/smr-rpt-salesorder-report.component';
+import { SmrRptEnquiryreportComponent } from './Component/smr-rpt-enquiryreport/smr-rpt-enquiryreport.component';
+import { SmrMstProductaddComponent } from './Component/smr-mst-productadd/smr-mst-productadd.component';
+import { SmrMstProducteditComponent } from './Component/smr-mst-productedit/smr-mst-productedit.component';
+import { SmrMstProductviewComponent } from './Component/smr-mst-productview/smr-mst-productview.component';
+import { SmrTrnCustomerenquiryeditComponent } from './Component/smr-trn-customerenquiryedit/smr-trn-customerenquiryedit.component';
+import { SmrTrnCustomerSummaryComponent } from './Component/smr-trn-customer-summary/smr-trn-customer-summary.component';
+import { SmrTrnCustomeraddComponent } from './Component/smr-trn-customeradd/smr-trn-customeradd.component';
+import { SmrTrnRaiseproposalComponent } from './Component/smr-trn-raiseproposal/smr-trn-raiseproposal.component';
+import { SmrTrnCustomerraiseenquiryComponent } from './Component/smr-trn-customerraiseenquiry/smr-trn-customerraiseenquiry.component';
+import { SmrTrnQuotationaddComponent } from './Component/smr-trn-quotationadd/smr-trn-quotationadd.component';
+import { SmrMstPricesegmentComponent } from './Component/smr-mst-pricesegment/smr-mst-pricesegment.component';
+import { SmrMstProductAssignComponent } from './Component/smr-mst-product-assign/smr-mst-product-assign.component';
+import { SmrTrnRaisesalesorderComponent } from './Component/smr-trn-raisesalesorder/smr-trn-raisesalesorder.component';
+import { SmrTrnMyenquiryComponent } from './Component/smr-trn-myenquiry/smr-trn-myenquiry.component';
+import { SmrTrnAllComponent } from './Component/smr-trn-all/smr-trn-all.component';
+import { SmrTrnCompletedComponent } from './Component/smr-trn-completed/smr-trn-completed.component';
+import { SmrTrnDropComponent } from './Component/smr-trn-drop/smr-trn-drop.component';
+import { SmrTrnNewComponent } from './Component/smr-trn-new/smr-trn-new.component';
+import { SmrTrnPotentialComponent } from './Component/smr-trn-potential/smr-trn-potential.component';
+import { SmrTrnProspectComponent } from './Component/smr-trn-prospect/smr-trn-prospect.component';
+import { SmrTrnAdddeliveryorderComponent } from './Component/smr-trn-adddeliveryorder/smr-trn-adddeliveryorder.component';
+import { SmrTrnDeliveryorderSummaryComponent } from './Component/smr-trn-deliveryorder-summary/smr-trn-deliveryorder-summary.component';
+import { SmrTrnRaisedeliveryorderComponent } from './Component/smr-trn-raisedeliveryorder/smr-trn-raisedeliveryorder.component';
+import { SmrTrnRaisequoteComponent } from './Component/smr-trn-raisequote/smr-trn-raisequote.component';
+import { SmrtrnquotetoorderComponent } from './Component/smrtrnquotetoorder/smrtrnquotetoorder.component';
+import { SmrMstSalesteamSummaryComponent } from './Component/smr-mst-salesteam-summary/smr-mst-salesteam-summary.component';
+import { DualListComponent } from './Component/smr-mst-pricesegment/dual-list/dual-list.component';
+import { SmrRptTodaySalesreportComponent } from './Component/smr-rpt-today-salesreport/smr-rpt-today-salesreport.component';
+import { SmrRptTodayDeliveryreportComponent } from './Component/smr-rpt-today-deliveryreport/smr-rpt-today-deliveryreport.component';
+import { SmrRptTodayInvoicereportComponent } from './Component/smr-rpt-today-invoicereport/smr-rpt-today-invoicereport.component';
+import { SmrRptTodayPaymentreportComponent } from './Component/smr-rpt-today-paymentreport/smr-rpt-today-paymentreport.component';
+import { SmrRptOrderreportComponent } from './Component/smr-rpt-orderreport/smr-rpt-orderreport.component';
+import { SmrRptSalesreportComponent } from './Component/smr-rpt-salesreport/smr-rpt-salesreport.component';
+import { SmrTrnCustomerDistributorComponent } from './Component/smr-trn-customer-distributor/smr-trn-customer-distributor.component';
+import { SmrTrnCustomerCorporateComponent } from './Component/smr-trn-customer-corporate/smr-trn-customer-corporate.component';
+import { SmrTrnCustomerRetailerComponent } from './Component/smr-trn-customer-retailer/smr-trn-customer-retailer.component';
+import { SmrDashboardComponent } from './Component/smr-dashboard/smr-dashboard.component';
+import { SrmTrnCustomerviewComponent } from './Component/srm-trn-customerview/srm-trn-customerview.component';
+import { SmrTrnCustomerenquirySummaryComponent } from './Component/smr-trn-customerenquiry-summary/smr-trn-customerenquiry-summary.component';
+import { SmrTrnSalesorderviewComponent } from './Component/smr-trn-salesorderview/smr-trn-salesorderview.component';
+import { SrmTrnNewquotationviewComponent } from './Component/srm-trn-newquotationview/srm-trn-newquotationview.component';
+import { SmrRptQuotationreportComponent } from './Component/smr-rpt-quotationreport/smr-rpt-quotationreport.component';
+import { SmrTrnCustomerProductPriceComponent } from './Component/smr-trn-customer-product-price/smr-trn-customer-product-price.component';
+import { SmtMstCustomerEditComponent } from './Component/smt-mst-customer-edit/smt-mst-customer-edit.component';
+import { SmrTrnSalesorderamendComponent } from './Component/smr-trn-salesorderamend/smr-trn-salesorderamend.component';
+import { SmrTrnQuotationmailComponent } from './Component/smr-trn-quotationmail/smr-trn-quotationmail.component';
+import { SmrTrnAmendQuotationComponent } from './Component/smr-trn-amend-quotation/smr-trn-amend-quotation.component';
+import { SmrTrnQuotationHistoryComponent } from './Component/smr-trn-quotation-history/smr-trn-quotation-history.component';
+import { SmrTrnCustomerbranchComponent } from './Component/smr-trn-customerbranch/smr-trn-customerbranch.component';
+import { SmrTrnSalesteampotentialsComponent } from './Component/smr-trn-salesteampotentials/smr-trn-salesteampotentials.component';
+import { SmrTrnSalesteamprospectComponent } from './Component/smr-trn-salesteamprospect/smr-trn-salesteamprospect.component';
+import { SmrTrnSalesManagerSummaryComponent } from './Component/smr-trn-sales-manager-summary/smr-trn-sales-manager-summary.component';
+import { SmrTrnSalesteamCompleteComponent } from './Component/smr-trn-salesteam-complete/smr-trn-salesteam-complete.component';
+import { SmrRptCustomerledgerreportComponent } from './Component/smr-rpt-customerledgerreport/smr-rpt-customerledgerreport.component';
+import { SmrRptSalesorderDetailedreportComponent } from './Component/smr-rpt-salesorder-detailedreport/smr-rpt-salesorder-detailedreport.component';
+import { SmrTrnSalesteamDropComponent } from './Component/smr-trn-salesteam-drop/smr-trn-salesteam-drop.component';
+import { SmrTrnCustomerCallComponent } from './Component/smr-trn-customer-call/smr-trn-customer-call.component';
+import { SmrRptCustomerledgerdetailComponent } from './Component/smr-rpt-customerledgerdetail/smr-rpt-customerledgerdetail.component';
+import { SmrRptCustomerledgerinvoiceComponent } from './Component/smr-rpt-customerledgerinvoice/smr-rpt-customerledgerinvoice.component';
+import { SmrRptCustomerledgerpaymentComponent } from './Component/smr-rpt-customerledgerpayment/smr-rpt-customerledgerpayment.component';
+import { SmrRptCustomerledgeroutstandingreportComponent } from './Component/smr-rpt-customerledgeroutstandingreport/smr-rpt-customerledgeroutstandingreport.component';
+import { SmrTrnSales360Component } from './Component/smr-trn-sales360/smr-trn-sales360.component';
+import { SmrTrnCommissionSettingComponent } from './Component/smr-trn-commission-setting/smr-trn-commission-setting.component';
+import { SmrTrnCommissionPayoutComponent } from './Component/smr-trn-commission-payout/smr-trn-commission-payout.component';
+import { SmrTrnCommissionPayoutAddComponent } from './Component/smr-trn-commission-payout-add/smr-trn-commission-payout-add.component';
+import { SmrMstConfigurationComponent } from './Component/smr-mst-configuration/smr-mst-configuration.component';
+import { SmrRptCommissionpayoutReportComponent } from './Component/smr-rpt-commissionpayout-report/smr-rpt-commissionpayout-report.component';
+import { SmrTrnEnquiryfrom360Component } from './Component/smr-trn-enquiryfrom360/smr-trn-enquiryfrom360.component';
+import { SmrTrnQuotationfrom360Component } from './Component/smr-trn-quotationfrom360/smr-trn-quotationfrom360.component';
+import { SmrTrnOrderfrom360Component } from './Component/smr-trn-orderfrom360/smr-trn-orderfrom360.component';
+import { SmrTrnInvoiceAdd360Component } from './Component/smr-trn-invoice-add360/smr-trn-invoice-add360.component';
+import { SmrRptemployeewiseReportComponent } from './Component/smr-rptemployeewise-report/smr-rptemployeewise-report.component';
+import { SmrMstTaxsegmentComponent } from './Component/smr-mst-taxsegment/smr-mst-taxsegment.component';
+import { SmrMstMaptaxsegment2productComponent } from './Component/smr-mst-maptaxsegment2product/smr-mst-maptaxsegment2product.component';
+import { SmrTrnTenquiryviewComponent } from './Component/smr-trn-tenquiryview/smr-trn-tenquiryview.component';
+import { CustomerAssignDualListComponent } from './Component/smr-mst-taxsegment/customer-assign-dual-list/customer-assign-dual-list.component';
+import { VendorAssignDualListComponent } from './Component/smr-mst-taxsegment/vendor-assign-dual-list/vendor-assign-dual-list.component';
+import { SmrTrnSalesorderhistoryComponent } from './Component/smr-trn-salesorderhistory/smr-trn-salesorderhistory.component';
+import { SmrMstMaptax2productComponent } from './Component/smr-mst-maptax2product/smr-mst-maptax2product.component';
+import { SmrRptInvoicereportComponent } from './Component/smr-rpt-invoicereport/smr-rpt-invoicereport.component';
+import { SmrTrnInvoiceaddComponent } from './Component/smr-trn-invoiceadd/smr-trn-invoiceadd.component';
+import { SmrTrnInvoiceeditComponent } from './Component/smr-trn-invoiceedit/smr-trn-invoiceedit.component';
+import { SmrTrnInvoiceraiseComponent } from './Component/smr-trn-invoiceraise/smr-trn-invoiceraise.component';
+import { SmrMstTaxsegmenttotalcustomersComponent } from './Component/smr-mst-taxsegmenttotalcustomers/smr-mst-taxsegmenttotalcustomers.component';
+import { SmrMstTaxsegmentothersegmentsComponent } from './Component/smr-mst-taxsegmentothersegments/smr-mst-taxsegmentothersegments.component';
+import { SmrMstTaxsegmentoverseascustomerComponent } from './Component/smr-mst-taxsegmentoverseascustomer/smr-mst-taxsegmentoverseascustomer.component';
+import { SmrMstTaxsegmentunassigncustomerComponent } from './Component/smr-mst-taxsegmentunassigncustomer/smr-mst-taxsegmentunassigncustomer.component';
+import { SmrMstTaxsegmentwithinstatecustomerComponent } from './Component/smr-mst-taxsegmentwithinstatecustomer/smr-mst-taxsegmentwithinstatecustomer.component';
+import { SmrMstTaxsegmentinterstatecustomerComponent } from './Component/smr-mst-taxsegmentinterstatecustomer/smr-mst-taxsegmentinterstatecustomer.component';
+import { SmrTrnQuotationaddNewComponent } from './Component/smr-trn-quotationadd-new/smr-trn-quotationadd-new.component';
+import { RblTrnDirectinvoiceComponent } from './Component/rbl-trn-directinvoice/rbl-trn-directinvoice.component';
+import { SmrTrnQuotationviewNewComponent } from './Component/smr-trn-quotationview-new/smr-trn-quotationview-new.component';
+import { SmrTrnRaiseSalesOrderComponent } from './Component/smr-trn-raise-sales-order/smr-trn-raise-sales-order.component';
+import { SmrTrnSalesorderviewNewComponent } from './Component/smr-trn-salesorderview-new/smr-trn-salesorderview-new.component';
+import { SmrTrnQuotationfrom360NewComponent } from './Component/smr-trn-quotationfrom360-new/smr-trn-quotationfrom360-new.component';
+import { SmrTrnOrderfrom360NewComponent } from './Component/smr-trn-orderfrom360-new/smr-trn-orderfrom360-new.component';
+import { SmrTrnSalesorderapprovalComponent } from './Component/smr-trn-salesorderapproval/smr-trn-salesorderapproval.component';
+import { SmrTrnInvoicemailComponent } from './Component/smr-trn-invoicemail/smr-trn-invoicemail.component';
+import { SmrTrnInvoiceaccountingaddconfirmComponent } from './Component/smr-trn-invoiceaccountingaddconfirm/smr-trn-invoiceaccountingaddconfirm.component';
+import { SmrMstAssigncustomerComponent } from './Component/smr-mst-assigncustomer/smr-mst-assigncustomer.component';
+import { SmrMstUnassigntax2productComponent } from './Component/smr-mst-unassigntax2product/smr-mst-unassigntax2product.component';
+import { SmrMstPriceassigncustomerComponent } from './Component/smr-mst-priceassigncustomer/smr-mst-priceassigncustomer.component';
+import { SmrMstPriceunassigncustomerComponent } from './Component/smr-mst-priceunassigncustomer/smr-mst-priceunassigncustomer.component';
+import { SmrMstPriceunassignproductComponent } from './Component/smr-mst-priceunassignproduct/smr-mst-priceunassignproduct.component';
+import { SmrTrnReceiptsummaryComponent } from './Component/smr-trn-receiptsummary/smr-trn-receiptsummary.component';
+import { SmrTrnAddreceiptComponent } from './Component/smr-trn-addreceipt/smr-trn-addreceipt.component';
+import { SmrTrnInvoiceviewComponent } from './Component/smr-trn-invoiceview/smr-trn-invoiceview.component';
+import { SmrMstCustomereportalpreviewmailComponent } from './Component/smr-mst-customereportalpreviewmail/smr-mst-customereportalpreviewmail.component';
+import { SmrTrnSalesordereditComponent } from './Component/smr-trn-salesorderedit/smr-trn-salesorderedit.component';
+import { RblTrnOrdertoinvoiceComponent } from './Component/rbl-trn-ordertoinvoice/rbl-trn-ordertoinvoice.component';
+import { SmrTrnInvoiceReceiptComponent } from './Component/smr-trn-invoice-receipt/smr-trn-invoice-receipt.component';
+import { SmrTrnRaisesalesorder2invoiceComponent } from './Component/smr-trn-raisesalesorder2invoice/smr-trn-raisesalesorder2invoice.component';
+import { SmrTrnShopifyordersComponent } from './Component/smr-trn-shopifyorders/smr-trn-shopifyorders.component';
+import { SmrTrnShopifyordersviewComponent } from './Component/smr-trn-shopifyordersview/smr-trn-shopifyordersview.component';
+import { SmrMstWhatsappproductsummaryComponent } from './Component/smr-mst-whatsappproductsummary/smr-mst-whatsappproductsummary.component';
+import { SmrMstWhatsappproducteditComponent } from './Component/smr-mst-whatsappproductedit/smr-mst-whatsappproductedit.component';
+import { SmrTrnShopifyproductComponent } from './Component/smr-trn-shopifyproduct/smr-trn-shopifyproduct.component';
+import { SmrTrnShopifycustomerComponent } from './Component/smr-trn-shopifycustomer/smr-trn-shopifycustomer.component';
+import { SmrTrnShopifypaymentComponent } from './Component/smr-trn-shopifypayment/smr-trn-shopifypayment.component';
+import { SmrTrnShopifyinventoryComponent } from './Component/smr-trn-shopifyinventory/smr-trn-shopifyinventory.component';
+import { SmrTrnPortalordersCustomerApprovalComponent } from './Component/smr-trn-portalorders-customer-approval/smr-trn-portalorders-customer-approval.component';
+import { SmrTrnPortalordersCustomerComponent } from './Component/smr-trn-portalorders-customer/smr-trn-portalorders-customer.component';
+import { SmrTrnQuoteeditnewComponent } from './Component/smr-trn-quoteeditnew/smr-trn-quoteeditnew.component';
+import { SmrTrnTcreditnnoteSummaryComponent } from './Component/smr-trn-tcreditnnote-summary/smr-trn-tcreditnnote-summary.component';
+import { SmrTrnTcreditnoteaddproceedComponent } from './Component/smr-trn-tcreditnoteaddproceed/smr-trn-tcreditnoteaddproceed.component';
+import { SmrTrnTcreditnoteaddselectComponent } from './Component/smr-trn-tcreditnoteaddselect/smr-trn-tcreditnoteaddselect.component';
+import { SmrTrnTcreditnoteviewComponent } from './Component/smr-trn-tcreditnoteview/smr-trn-tcreditnoteview.component';
+import { SmrTrnTcreditnotestockreturnComponent } from './Component/smr-trn-tcreditnotestockreturn/smr-trn-tcreditnotestockreturn.component';
+import { SmrTrnReceiptapprovalComponent } from './Component/smr-trn-receiptapproval/smr-trn-receiptapproval.component';
+import { SmrTrnRenewalmanagersummaryComponent } from './Component/smr-trn-renewalmanagersummary/smr-trn-renewalmanagersummary.component';
+import { SmrTrnRenewalteamsummaryComponent } from './Component/smr-trn-renewalteamsummary/smr-trn-renewalteamsummary.component';
+import { RenewalDualListComponent } from './Component/smr-trn-renewalteamsummary/renewal-dual-list/renewal-dual-list.component';
+import { RenewalManagerListComponent } from './Component/smr-trn-renewalteamsummary/renewal-manager-list/renewal-manager-list.component';
+import { SmrTrnSalesInvoiceSummaryComponent } from './Component/smr-trn-sales-invoice-summary/smr-trn-sales-invoice-summary.component';
+import { SmrTrnEinvoiceComponent } from './Component/smr-trn-einvoice/smr-trn-einvoice.component';
+import { SmrMstWhatsappproductpricemanagementComponent } from './Component/smr-mst-whatsappproductpricemanagement/smr-mst-whatsappproductpricemanagement.component';
+import { SmrMstWaassignproductComponent } from './Component/smr-mst-waassignproduct/smr-mst-waassignproduct.component';
+import { SmrMstWaproductpriceupdateComponent } from './Component/smr-mst-waproductpriceupdate/smr-mst-waproductpriceupdate.component';
+import { SmrMstBranchwhatsappproductsummaryComponent } from './Component/smr-mst-branchwhatsappproductsummary/smr-mst-branchwhatsappproductsummary.component';
+import { SmrTrnRenevalsummaryComponent } from './Component/smr-trn-renevalsummary/smr-trn-renevalsummary.component';
+import { SmrTrnRenewals360Component } from './Component/smr-trn-renewals360/smr-trn-renewals360.component';
+import { SmrTrnRenewalsalesorderselectComponent } from './Component/smr-trn-renewalsalesorderselect/smr-trn-renewalsalesorderselect.component';
+import { SmrTrnRenewalsummaryviewComponent } from './Component/smr-trn-renewalsummaryview/smr-trn-renewalsummaryview.component';
+import { SmrTrnRenewalInvoiceComponent } from './Component/smr-trn-renewal-invoice/smr-trn-renewal-invoice.component';
+import { SmrTrnRenewaladdComponent } from './Component/smr-trn-renewaladd/smr-trn-renewaladd.component';
+import { SmrRptAgeingreportComponent } from './Component/smr-rpt-ageingreport/smr-rpt-ageingreport.component';
+import { SmrTrnRenewaltoraisesoComponent } from './Component/smr-trn-renewaltoraiseso/smr-trn-renewaltoraiseso.component';
+import { SmrRptOuststandingamountReportComponent } from './Component/smr-rpt-ouststandingamount-report/smr-rpt-ouststandingamount-report.component';
+import { SmrMstSalestypeComponent } from './Component/smr-mst-salestype/smr-mst-salestype.component';
+import { SmrRptSalesinvoicereportComponent } from './Component/smr-rpt-salesinvoicereport/smr-rpt-salesinvoicereport.component';
+import { SmrRptRenewalreportComponent } from './Component/smr-rpt-renewalreport/smr-rpt-renewalreport.component';
+import { SmrTrnSalesledgerComponent } from './Component/smr-trn-salesledger/smr-trn-salesledger.component';
+import { SmrTrnCustomer360Component } from './Component/smr-trn-customer360/smr-trn-customer360.component';
+import { SmrTrnSalesledgerInvoiceviewComponent } from './Component/smr-trn-salesledger-invoiceview/smr-trn-salesledger-invoiceview.component';
+import { SmrTrnRenewalassignComponent } from './Component/smr-trn-renewalassign/smr-trn-renewalassign.component';
+import { SmrTrnRenewalemployeeComponent } from './Component/smr-trn-renewalemployee/smr-trn-renewalemployee.component';
+import { SmrBobateaDashboardComponent } from './Component/smr-bobatea-dashboard/smr-bobatea-dashboard.component';
+import { SmrTrnEnquiry360Component } from './Component/smr-trn-enquiry360/smr-trn-enquiry360.component';
+import { RblTrnDirectinvoice360Component } from './Component/rbl-trn-directinvoice360/rbl-trn-directinvoice360.component';
+import { SmrTrnRaisesalesordernew360Component } from './Component/smr-trn-raisesalesordernew360/smr-trn-raisesalesordernew360.component';
+import { SmrTrnQuotationaddNew360Component } from './Component/smr-trn-quotationadd-new360/smr-trn-quotationadd-new360.component';
+import { SmrMstProducthsncodeComponent } from './Component/smr-mst-producthsncode/smr-mst-producthsncode.component';
+import { SmrMstSequencecustomizerComponent } from './Component/smr-mst-sequencecustomizer/smr-mst-sequencecustomizer.component';
+import { SmrMstSequencecodeeditComponent } from './Component/smr-mst-sequencecodeedit/smr-mst-sequencecodeedit.component';
+import { SmrTrnLeadtocustomerComponent } from './Component/smr-trn-leadtocustomer/smr-trn-leadtocustomer.component';
+import { SmrTrnSalesAll360Component } from './Component/smr-trn-sales-all360/smr-trn-sales-all360.component';
+import { SmrTrnRaiseAgreementComponent } from './Component/smr-trn-raise-agreement/smr-trn-raise-agreement.component';
+import { SmrTrnAssignrenewalagreementComponent } from './Component/smr-trn-assignrenewalagreement/smr-trn-assignrenewalagreement.component';
+import { SmrTrnRenewaltoInvoiceComponent } from './Component/smr-trn-renewalto-invoice/smr-trn-renewalto-invoice.component';
+import { SmrRptSales360Component } from './Component/smr-rpt-sales360/smr-rpt-sales360.component';
+import { SmrRptCustomerreportComponent } from './Component/smr-rpt-customerreport/smr-rpt-customerreport.component';
+import { SmrRptCustomerreportViewComponent } from './Component/smr-rpt-customerreport-view/smr-rpt-customerreport-view.component';
+import { SmrRptSalesreportviewComponent } from './Component/smr-rpt-salesreportview/smr-rpt-salesreportview.component';
+import { SmrTrnRenewalEditComponent } from './Component/smr-trn-renewal-edit/smr-trn-renewal-edit.component';
+import { SmrRptReceiptreportComponent } from './Component/smr-rpt-receiptreport/smr-rpt-receiptreport.component';
+import { SmrTrnAgreementtoinvoicetagComponent } from './Component/smr-trn-agreementtoinvoicetag/smr-trn-agreementtoinvoicetag.component';
+import { SmrTrnReceiptviewComponent } from './Component/smr-trn-receiptview/smr-trn-receiptview.component';
+import { SmrRptProductsellingreportComponent } from './Component/smr-rpt-productsellingreport/smr-rpt-productsellingreport.component';
+import { SmrRptProductgroupreportComponent } from './Component/smr-rpt-productgroupreport/smr-rpt-productgroupreport.component';
+import { SmrRptProductconsumptioneportsComponent } from './Component/smr-rpt-productconsumptioneports/smr-rpt-productconsumptioneports.component';
+import { SmrTrnTproformainvoiceComponent } from './Component/smr-trn-tproformainvoice/smr-trn-tproformainvoice.component';
+import { SmrTrnRaiseorder2ProformainvoiceComponent } from './Component/smr-trn-raiseorder2-proformainvoice/smr-trn-raiseorder2-proformainvoice.component';
+import { SmrTrnOrdertoproformainvoiceComponent } from './Component/smr-trn-ordertoproformainvoice/smr-trn-ordertoproformainvoice.component';
+import { SmrTrnEditproformainvoiceComponent } from './Component/smr-trn-editproformainvoice/smr-trn-editproformainvoice.component';
+import { SmrTrnProformainvoiceviewComponent } from './Component/smr-trn-proformainvoiceview/smr-trn-proformainvoiceview.component';
+import { RblTrnDeliverytoinvoiceComponent } from './Component/rbl-trn-deliverytoinvoice/rbl-trn-deliverytoinvoice.component';
+import { SmrTrnRaisePurchaseorderComponent } from './Component/smr-trn-raise-purchaseorder/smr-trn-raise-purchaseorder.component';
+
+const routes: Routes = [
+  { path: 'SmrMstProductGroup', component: SmrMstProductgroupComponent },
+  { path: 'SmrMstTaxsummary', component: SmrMstTaxsummaryComponent },
+  { path: 'SmrMstCurrencySummary', component: SmrMstCurrencySummaryComponent },
+  { path: 'SmrMstProductunitsSummary', component: SmrMstProductunitsSummaryComponent },
+  { path: 'SmrMstProductSummary', component: SmrMstProductSummaryComponent },
+  { path: 'SmrTrnSalesorderSummary', component: SmrTrnSalesorderSummaryComponent },
+  { path: 'SmrRptSalesorderReport', component: SmrRptSalesorderReportComponent },
+  { path: 'SmrMstProductAdd', component: SmrMstProductaddComponent },
+  { path: 'SmrMstProductEdit/:product_gid', component: SmrMstProducteditComponent },
+  { path: 'SmrMstProductView/:product_gid', component: SmrMstProductviewComponent },
+  { path: 'SmrTrnEditCustomerEnquiry/:enquiry_gid', component: SmrTrnCustomerenquiryeditComponent },
+  { path: 'SmrTrnCustomerSummary', component: SmrTrnCustomerSummaryComponent },
+  { path: 'SmrTrnCustomeradd', component: SmrTrnCustomeraddComponent },
+  { path: 'SmrTrnRaiseproposal/:enquiry_gid', component: SmrTrnRaiseproposalComponent },
+  { path: 'SmrTrnQuotationSummary', component: SmrTrnQuotationSummaryComponent },
+  { path: 'SmrTrnCustomerraiseenquiry', component: SmrTrnCustomerraiseenquiryComponent },
+  { path: 'SmrTrnQuotationadd', component: SmrTrnQuotationaddComponent },
+  { path: 'SmrMstPricesegmentSummary', component: SmrMstPricesegmentComponent },
+  { path: 'SmrMstProductAssign/:pricesegment_gid', component: SmrMstProductAssignComponent },
+  { path: 'SmrTrnRaiseSalesOrderNew', component: SmrTrnRaisesalesorderComponent },
+  { path: 'SmrTrnMyenquiry', component: SmrTrnMyenquiryComponent },
+  { path: 'SmrTrnAll', component: SmrTrnAllComponent },
+  { path: 'SmrTrnCompleted', component: SmrTrnCompletedComponent },
+  { path: 'SmrTrnDrop', component: SmrTrnDropComponent },
+  { path: 'SmrTrnNew', component: SmrTrnNewComponent },
+  { path: 'SmrTrnPotential', component: SmrTrnPotentialComponent },
+  { path: 'SmrTrnProspect', component: SmrTrnProspectComponent },
+  { path: 'SmrTrnAdddeliveryorder', component: SmrTrnAdddeliveryorderComponent },
+  { path: 'SmrTrnDeliveryorderSummary', component: SmrTrnDeliveryorderSummaryComponent },
+  { path: 'SmrTrnRaisedeliveryorder', component: SmrTrnRaisedeliveryorderComponent },
+  { path: 'SmrTrnRaisequote/:enquiry_gid', component: SmrTrnRaisequoteComponent },
+  { path: 'SmrTrnQuoteToOrder/:quotation_gid', component: SmrtrnquotetoorderComponent },
+  { path: 'SmrTrnQuoteeditnew/:quotation_gid/:customer_gid/:lspage', component: SmrTrnQuoteeditnewComponent },
+  { path: 'SmrMstSalesteamSummary', component: SmrMstSalesteamSummaryComponent },
+  { path: 'DualList', component: DualListComponent },
+  { path: 'SmrRptTodaySalesreport', component: SmrRptTodaySalesreportComponent },
+  { path: 'SmrRptTodayDeliveryreport', component: SmrRptTodayDeliveryreportComponent },
+  { path: 'SmrRptTodayInvoicereport', component: SmrRptTodayInvoicereportComponent },
+  { path: 'SmrRptTodayPaymentreport', component: SmrRptTodayPaymentreportComponent },
+  { path: 'SmrRptOrderreport', component: SmrRptOrderreportComponent },
+  { path: 'SmrTrnCustomerDistributor', component: SmrTrnCustomerDistributorComponent },
+  { path: 'SmrTrnCustomerCorporate', component: SmrTrnCustomerCorporateComponent },
+  { path: 'SmrTrnCustomerRetailer', component: SmrTrnCustomerRetailerComponent },
+  { path: 'SmrRptSalesreport', component: SmrRptSalesreportComponent },
+  { path: 'SmrRptEnquiryreport', component: SmrRptEnquiryreportComponent },
+  { path: 'SmrDashboard', component: SmrDashboardComponent },
+  { path: 'SmrTrnCustomerenquirySummary', component: SmrTrnCustomerenquirySummaryComponent },
+  { path: 'SrmTrnCustomerview/:customer_gid/:lspage', component: SrmTrnCustomerviewComponent },
+  { path: 'SmrTrnSalesorderview/:salesorder_gid/:leadbank_gid/:lspage', component: SmrTrnSalesorderviewComponent },
+  { path: 'SrmTrnNewquotationview/:quotation_gid/:lspage', component: SrmTrnNewquotationviewComponent },
+  { path: 'SmrRptQuotationreport', component: SmrRptQuotationreportComponent },
+  { path: 'SmrTrnCustomerPriceSegment/:customer_gid/:lspage', component: SmrTrnCustomerProductPriceComponent },
+  { path: 'SmrMstCustomerEdit/:customer_gid/:lspage', component: SmtMstCustomerEditComponent },
+  { path: 'SmrTrnSalesorderamend/:salesorder_gid', component: SmrTrnSalesorderamendComponent },
+  { path: 'SmrTrnQuotationmail/:quotation_gid', component: SmrTrnQuotationmailComponent },
+  { path: 'SmrTrnAmendQuotation/:quotation_gid', component: SmrTrnAmendQuotationComponent },
+  { path: 'SmrTrnSalesOrderHistory/:salesorder_gid', component: SmrTrnSalesorderhistoryComponent },
+  { path: 'SmrTrnQuotationHistory/:quotation_gid/:customer_gid', component: SmrTrnQuotationHistoryComponent },
+  { path: 'SmrTrnCustomerbranch/:customer_gid/:lspage', component: SmrTrnCustomerbranchComponent },
+  { path: 'SmrTrnSalesTeamProspects', component: SmrTrnSalesteamprospectComponent },
+  { path: 'SmrTrnSalesTeamPotentials', component: SmrTrnSalesteampotentialsComponent },
+  { path: 'SmrTrnSalesManagerSummary', component: SmrTrnSalesManagerSummaryComponent },
+  { path: 'SmrTrnSalesTeamComplete', component: SmrTrnSalesteamCompleteComponent },
+  { path: 'SmrTrnSalesTeamDrop', component: SmrTrnSalesteamDropComponent },
+  { path: 'SmrRptCustomerledgerreport', component: SmrRptCustomerledgerreportComponent },
+  { path: 'SmrRptSalesorderDetailedreport', component: SmrRptSalesorderDetailedreportComponent },
+  { path: 'SmrTrnCustomerCall/:customer_gid/:lspage', component: SmrTrnCustomerCallComponent },
+  { path: 'SmrRptCustomerledgerdetail/:customer_gid', component: SmrRptCustomerledgerdetailComponent },
+  { path: 'SmrRptCustomerledgerinvoice/:customer_gid', component: SmrRptCustomerledgerinvoiceComponent },
+  { path: 'SmrRptCustomerledgerpayment/:customer_gid', component: SmrRptCustomerledgerpaymentComponent },
+  { path: 'SmrRptCustomerledgeroutstandingreport/:customer_gid', component: SmrRptCustomerledgeroutstandingreportComponent },
+  // { path: 'SmrTrnSales360/:leadbank_gid/:lead2campaign_gid/:leadbankcontact_gid/:lspage', component: SmrTrnSales360Component },
+  { path: 'SmrTrnSales360/:leadbank_gid/:lead2campaign_gid/:leadbankcontact_gid/:lspage', component: SmrTrnSalesAll360Component },
+  { path: 'SmrTrnCommissionSetting', component: SmrTrnCommissionSettingComponent },
+  { path: 'SmrTrnCommissionPayout', component: SmrTrnCommissionPayoutComponent },
+  { path: 'SmrTrnCommissionPayoutAdd', component: SmrTrnCommissionPayoutAddComponent },
+  { path: 'SalesConfiguration', component: SmrMstConfigurationComponent },
+  { path: 'SmrRptCommissionpayoutReport', component: SmrRptCommissionpayoutReportComponent },
+  { path: 'SmrRptEmployeewisereport', component: SmrRptemployeewiseReportComponent },
+  { path: 'SmrTrnEnquiry360/:leadbank_gid/:lead2campaign_gid/:leadbankcontact_gid/:lspage', component: SmrTrnEnquiryfrom360Component },
+  { path: 'SmrTrnQuotation360/:leadbank_gid/:lead2campaign_gid/:leadbankcontact_gid/:lspage', component: SmrTrnQuotationfrom360Component },
+  { path: 'SmrTrnOrder360/:leadbank_gid/:lead2campaign_gid/:leadbankcontact_gid/:lspage', component: SmrTrnOrderfrom360Component },
+  { path: 'SmrTrnInvoiceAdd360/:leadbank_gid/:lead2campaign_gid/:leadbankcontact_gid/:lspage', component: SmrTrnInvoiceAdd360Component },
+  { path: 'SmrRptEmployeewisereport', component: SmrRptemployeewiseReportComponent },
+  { path: 'SmrMstTaxsegment', component: SmrMstTaxsegmentComponent },
+  { path: 'SmrMstMapTaxSegment/:product_gid', component: SmrMstMaptaxsegment2productComponent },
+  { path: 'SmrTrnEnquiryView/:enquiry_gid', component: SmrTrnTenquiryviewComponent },
+  { path: 'CustomerAssignDualList', component: CustomerAssignDualListComponent },
+  { path: 'VendorAssignDualList', component: VendorAssignDualListComponent },
+  { path: 'SmrMstMapProduct2Tax/:tax_gid/:taxsegment_gid', component: SmrMstMaptax2productComponent },
+  { path: 'SmrTrnInvoiceSummary', component: SmrRptInvoicereportComponent },
+  { path: 'SmrTrnInvoiceraise', component: SmrTrnInvoiceraiseComponent },
+  { path: 'SmrTrnInvoiceedit/:invoice_gid', component: SmrTrnInvoiceeditComponent },
+  { path: 'SmrTrnInvoiceadd/:lspage', component: SmrTrnInvoiceaddComponent },
+  { path: 'SmrMstTaxsegmenttotalcustomers', component: SmrMstTaxsegmenttotalcustomersComponent },
+  { path: 'SrmMstTaxSegmentOther', component: SmrMstTaxsegmentothersegmentsComponent },
+  { path: 'SrmMstTaxSegmentOverSeas', component: SmrMstTaxsegmentoverseascustomerComponent },
+  { path: 'SmrMstAssignCustomer/:taxsegment_gid1', component: SmrMstTaxsegmentunassigncustomerComponent },
+  { path: 'SrmMstTaxSegmentWithinState', component: SmrMstTaxsegmentwithinstatecustomerComponent },
+  { path: 'SrmMstTaxSegmentInterState', component: SmrMstTaxsegmentinterstatecustomerComponent },
+  { path: 'SmrTrnQuotationaddNew', component: SmrTrnQuotationaddNewComponent },
+  { path: 'RblTrnDirectinvoice/:invoice', component: RblTrnDirectinvoiceComponent },
+  { path: 'SmrTrnquotationviewNew/:quotation_gid/:customer_gid/:lspage', component: SmrTrnQuotationviewNewComponent },
+  { path: 'SmrTrnRaiseSalesOrder', component: SmrTrnRaiseSalesOrderComponent },
+  { path: 'SmrTrnSalesorderviewNew/:salesorder_gid/:customer_gid/:leadbank_gid/:lspage', component: SmrTrnSalesorderviewNewComponent },
+  { path: 'SmrTrnQuotationfrom360New/:leadbank_gid/:lead2campaign_gid/:leadbankcontact_gid/:customer_gid/:lspage', component: SmrTrnQuotationfrom360NewComponent },
+  { path: 'SmrTrnOrderfrom360New/:leadbank_gid/:lead2campaign_gid/:leadbankcontact_gid/:lspage', component: SmrTrnOrderfrom360NewComponent },
+  { path: 'SmrTrnSalesOrderApproval/:salesorder_gid1', component: SmrTrnSalesorderapprovalComponent },
+  { path: 'SmrTrnInvoiceMail/:invoice_gid', component: SmrTrnInvoicemailComponent },
+  { path: 'Invoiceaccountingaddconfirm/:directorder_gid/:leadbank_gid/:lead2campaign_gid/:lspage', component: SmrTrnInvoiceaccountingaddconfirmComponent },
+  { path: 'SmrMstUnassigntax2product/:tax_gid/:taxsegment_gid', component: SmrMstUnassigntax2productComponent },
+  { path: 'SmrMstunAssignCustomer/:taxsegment_gid1', component: SmrMstAssigncustomerComponent },
+  { path: 'SmrMstpriceassigncustomer/:pricesegment_gid', component: SmrMstPriceassigncustomerComponent },
+  { path: 'SmrMstPriceunassigncustomer/:pricesegment_gid', component: SmrMstPriceunassigncustomerComponent },
+  { path: 'SmrMstProductunAssign/:pricesegment_gid', component: SmrMstPriceunassignproductComponent },
+  { path: 'SmrTrnReceiptsummary', component: SmrTrnReceiptsummaryComponent },
+  { path: 'SmrTrnAddReceipt', component: SmrTrnAddreceiptComponent },
+  { path: 'SmrTrnInvoiceview/:invoice_gid', component: SmrTrnInvoiceviewComponent },
+  { path: 'SmrTrnSalesOrderEdit/:salesorder_gid1', component: SmrTrnSalesordereditComponent },
+  { path: 'customereportalpreviewmail/:customer_gid/:eportalemail_id/:password', component: SmrMstCustomereportalpreviewmailComponent },
+  { path: 'SmrTrnOrderToInvoice/:salesordergid', component: RblTrnOrdertoinvoiceComponent },
+  { path: 'SmrTrndeliveryToInvoice/:salesordergid', component: RblTrnDeliverytoinvoiceComponent },
+  { path: 'SmrTrnRenewaltoInvoice/:renewal_gid', component: SmrTrnRenewaltoInvoiceComponent },
+  { path: 'SmrTrnAgreementtoinvoicetag/:renewal_gid', component: SmrTrnAgreementtoinvoicetagComponent },
+  { path: 'SmrTrnInvoiceReceipt/:customer_gid', component: SmrTrnInvoiceReceiptComponent },
+  { path: 'SmrTrnRaiseSalesorder2invoice', component: SmrTrnRaisesalesorder2invoiceComponent },
+  { path: 'SmrTrnShopifyorders', component: SmrTrnShopifyordersComponent },
+  { path: 'SmrMstWhatsappproductsummary', component: SmrMstWhatsappproductsummaryComponent },
+  { path: 'SmrMstWhatsappproductedit/:product_gid', component: SmrMstWhatsappproducteditComponent },
+  { path: 'SmrTrnShopifyordersview/:salesorder_gid', component: SmrTrnShopifyordersviewComponent },
+  { path: 'SmrTrnShopifyproduct', component: SmrTrnShopifyproductComponent },
+  { path: 'SmrTrnShopifycustomer', component: SmrTrnShopifycustomerComponent },
+  { path: 'SmrTrnShopifypayment', component: SmrTrnShopifypaymentComponent },
+  { path: 'SmrTrnShopifyinventory', component: SmrTrnShopifyinventoryComponent },
+  { path: 'SmrTrnPortalOrderSummary', component: SmrTrnPortalordersCustomerComponent },
+  { path: 'SmrTrnPortalOrderApproval/:salesordergid1/:customergid1', component: SmrTrnPortalordersCustomerApprovalComponent },
+  { path: 'SmrTrnCreditNoteSummary', component: SmrTrnTcreditnnoteSummaryComponent },
+  { path: 'SmrTrnTcreditnoteaddproceed', component: SmrTrnTcreditnoteaddproceedComponent },
+  { path: 'SmrTrnTcreditnoteaddselect/:invoice_gid', component: SmrTrnTcreditnoteaddselectComponent },
+  { path: 'SmrTrnTcreditnoteview/:invoice_gid', component: SmrTrnTcreditnoteviewComponent },
+  { path: 'SmrTrnStockReturn/:invoice_gid', component: SmrTrnTcreditnotestockreturnComponent },
+  { path: 'SmrTrnReceiptapproval', component: SmrTrnReceiptapprovalComponent },
+  { path: 'SmrTrnRenewalmanagersummary', component: SmrTrnRenewalmanagersummaryComponent },
+  { path: 'SmrTrnRenewalteamsummary', component: SmrTrnRenewalteamsummaryComponent },
+
+  { path: 'SmrTrnSalesInvoiceSummary', component: SmrTrnSalesInvoiceSummaryComponent },
+  { path: 'SmrTrnEinvoice/:invoice_gid', component: SmrTrnEinvoiceComponent },
+  { path: 'SmrMstWhatsappproductpricemanagement', component: SmrMstWhatsappproductpricemanagementComponent },
+  { path: 'SmrMstWaassignproduct/:branch_gid', component: SmrMstWaassignproductComponent },
+  { path: 'SmrMstWaproductpriceupdate/:branch_gid1', component: SmrMstWaproductpriceupdateComponent },
+  { path: 'SmrMstBranchwhatsappproductsummary/:branch_gid', component: SmrMstBranchwhatsappproductsummaryComponent },
+  { path: 'SmrTrnRenevalsummary', component: SmrTrnRenevalsummaryComponent },
+  { path: 'SmrTrnRenewals360', component: SmrTrnRenewals360Component },
+  { path: 'SmrTrnRenewalsalesorderselect', component: SmrTrnRenewalsalesorderselectComponent },
+  { path: 'SmrTrnRenewalsummaryview/:renewal_gid', component: SmrTrnRenewalsummaryviewComponent },
+  { path: 'SmrTrnRenewalInvoice', component: SmrTrnRenewalInvoiceComponent },
+  { path: 'SmrTrnRenewaladd/:salesorder_gid', component: SmrTrnRenewaladdComponent },
+  { path: 'SmrRptageingreport', component: SmrRptAgeingreportComponent },
+  { path: 'SmrRptoutstandingamountreport', component: SmrRptOuststandingamountReportComponent },
+  { path: 'SmrMstSalestype', component: SmrMstSalestypeComponent },
+  { path: 'SmrTrnRenewaltoraiseso/:salesorder_gid', component: SmrTrnRenewaltoraisesoComponent },
+  { path: 'SmrRptSalesinvoicereport', component: SmrRptSalesinvoicereportComponent },
+  { path: 'SmrRptRenewalreport', component: SmrRptRenewalreportComponent },
+  { path: 'SmrTrnSalesLedger', component: SmrTrnSalesledgerComponent },
+  { path: 'SmrTrnCustomer360/:leadbank_gid/:lead2campaign_gid/:leadbankcontact_gid/:lspage', component: SmrTrnCustomer360Component },
+  { path: 'SmrTrnSalesLedgerInvoiceView/:invoice_gid/:lspage', component: SmrTrnSalesledgerInvoiceviewComponent },
+  { path: 'SmrTrnRenewalassign/:campaign_gid1/:emploee_ygid1', component: SmrTrnRenewalassignComponent },
+  { path: 'SmrTrnRenewalemployee/:campaign_gid/:renewal_gid1', component: SmrTrnRenewalemployeeComponent },
+  { path: 'SmrTrnQuotationaddNew360/:customer_gid/:appointment_gid', component: SmrTrnQuotationaddNew360Component },
+  { path: 'SmrTrnRaisesalesordernew360/:customer_gid/:appointment_gid', component: SmrTrnRaisesalesordernew360Component },
+  { path: 'RblTrnDirectinvoice360/:customer_gid/:appointment_gid', component: RblTrnDirectinvoice360Component },
+  { path: 'SmrTrnEnquiry360/:customer_gid/:appointment_gid', component: SmrTrnEnquiry360Component },
+  { path: 'SmrBobateaDashboard', component: SmrBobateaDashboardComponent },
+  { path: 'SmrMstProducthsncode', component: SmrMstProducthsncodeComponent },
+  { path: 'SmrMstSequencecustomizer', component: SmrMstSequencecustomizerComponent },
+  { path: 'SmrMstSequencecodeedit/:sequencecodecustomizer_gid', component: SmrMstSequencecodeeditComponent },
+  { path: 'SmrTrnLeadtocustomer/:leadbank_gid', component: SmrTrnLeadtocustomerComponent },
+  { path: 'SmrTrnRaiseAgreement', component: SmrTrnRaiseAgreementComponent },
+  { path: 'SmrTrnAssignrenewalagreement/:renewal_gid', component: SmrTrnAssignrenewalagreementComponent },
+  { path: 'SmrRptSales360/:customer_gid/:lspage', component: SmrRptSales360Component },
+  { path: 'SmrRptCustomerreport', component: SmrRptCustomerreportComponent },
+  { path: 'SmrRptCustomerreportView/:customergid', component: SmrRptCustomerreportViewComponent },
+  { path: 'SmrRptSalesreportview/:invoice_gid', component: SmrRptSalesreportviewComponent },
+  { path: 'SmrRenewalEdit/:renewalgid', component: SmrTrnRenewalEditComponent },
+  { path: 'SmrRptReceiptreport', component: SmrRptReceiptreportComponent },
+  { path :'SmrTrnReceiptview/:payment_gid',component:SmrTrnReceiptviewComponent},
+   { path :'smrrptproductgroupreport',component:SmrRptProductgroupreportComponent},
+   { path :'smrrptproductsellingreport',component:SmrRptProductsellingreportComponent},
+  { path :'smrrptproductconsumptionreports',component:SmrRptProductconsumptioneportsComponent},
+ { path: 'SmrTrnproformainvoice',component:SmrTrnTproformainvoiceComponent},
+  { path: 'SmrTrnRaiseorder2Proformainvoice',component: SmrTrnRaiseorder2ProformainvoiceComponent},
+  { path: 'SmrTrnOrder2Proformainvoice/:salesorder_gid' , component:SmrTrnOrdertoproformainvoiceComponent},
+  { path: 'SmrTrnEditproformainvoice/:invoice_gid',component: SmrTrnEditproformainvoiceComponent},
+  { path:'SmrTrnProformainvoiceview/:invoice_gid',component:SmrTrnProformainvoiceviewComponent},
+  { path:'SmrTrnRaisePurchaseorder/:salesorder_gid',component:SmrTrnRaisePurchaseorderComponent},
+
+  
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+
+export class EmsSalesRoutingModule { }

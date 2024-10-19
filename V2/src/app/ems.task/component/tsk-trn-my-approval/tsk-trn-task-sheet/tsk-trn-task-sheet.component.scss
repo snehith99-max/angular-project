@@ -1,0 +1,44 @@
+.btn-current {
+  background-color: rgb(245, 242, 242) !important;
+  color: #030303 !important;
+  font-size: 1.1rem !important;
+  font-weight: 630 !important;
+  padding: 9px 16px 9px 13px !important;
+  border-radius: 3px;
+  border: 0;
+  z-index: 0 !important;
+}
+
+.btn-current:hover {
+  background-color:  rgba(209,242,255,1)!important;
+}
+
+
+.highlighted {
+  background-color:  rgba(209,242,255,1)!important;
+  z-index: 0 !important;
+
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  /* Centers the buttons as a group */
+}
+
+.btn-group .btn {
+  border-radius: 0;
+  /* Removes border radius for a tab-like appearance */
+}
+
+.btn-group .btn:first-child {
+  border-top-left-radius: 2rem;
+  /* Adds border radius to the first button */
+  border-bottom-left-radius: 2rem;
+}
+
+.btn-group .btn:last-child {
+  border-top-right-radius: 2rem;
+  /* Adds border radius to the last button */
+  border-bottom-right-radius: 2rem;
+}

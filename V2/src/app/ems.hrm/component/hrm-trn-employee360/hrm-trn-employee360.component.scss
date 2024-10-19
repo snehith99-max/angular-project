@@ -1,0 +1,46 @@
+.bg-text{
+    background-color: rgb(16, 169, 169);
+}
+
+//////user profile///////
+
+body {
+    margin-top: 20px;
+}
+
+.align-center,
+.center {
+    text-align: center !important;
+}
+
+.profile-user-info {
+    display: table;
+    width: 98%;
+    width: calc(100% - 24px);
+    margin: 0 auto
+}
+
+.profile-info-row {
+    display: table-row
+}
+
+.profile-info-name,
+.profile-info-value {
+    display: table-cell;
+    border-top: 1px dotted #D5E4F1
+}
+
+.profile-info-name {
+    text-align: left;
+    padding: 6px 10px 6px 4px;
+    font-weight: bolder;
+    color: #667E99;
+    font-size: 13px;
+    background-color: transparent;
+    width: 152px;
+    vertical-align: middle
+}
+
+.profile-info-value {
+    padding: 6px 4px 6px 6px
+}

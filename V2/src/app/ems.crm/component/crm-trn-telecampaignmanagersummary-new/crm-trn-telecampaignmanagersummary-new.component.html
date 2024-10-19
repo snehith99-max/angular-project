@@ -1,0 +1,878 @@
+<div class="card">
+    <div class="row" style="margin-top: 10px;">
+
+        <div class="col-lg-2 col-md-2 col-sm-2" routerLink="/crm/CrmTrnTelecampaignmanagersummary">
+            <div class="cardHead radius-10 border-start border-0 border-3 border-violet">
+                <div class="card-body12">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h5 class="mb-0 text-secondary">Total Leads</h5>
+                            <div *ngFor="let MyTodayTaskCount_List of totaltilecountdetails">
+                                <h4 class="badge-violet  badge-outline-violet fs-4 mt-2">
+                                    {{MyTodayTaskCount_List.assigned_leads}}</h4>
+
+                            </div>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-violet text-white ms-auto"><i
+                                class="fa-solid fa-list fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2" routerLink="/crm/CrmTrnTelecampaignmanagersummaryNew">
+            <div class="cardHead radius-10 border-start border-0 border-3 border-darkblue"
+                style="background-color: rgb(206, 251, 253);">
+                <div class="card-body12">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h5 class="mb-0 text-secondary">Awareness</h5>
+                            <div *ngFor="let MyNewTaskCount_List of totaltilecountdetails">
+                                <h4 class="badge-blue badge-outline-blue fs-4 mt-2">
+                                    {{MyNewTaskCount_List.total_newleads}}
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-darkblue text-white ms-auto"><i
+                                class="fa fa-bullhorn fs-3"></i>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-md-2 col-sm-2" routerLink="/crm/CrmTrnTelecampaignmanagersummaryPendingcalls">
+            <div class="cardHead radius-10 border-start border-0 border-3 border-pinkish">
+                <div class="card-body12">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h5 class="mb-0 text-secondary">Pending Calls</h5>
+                            <div *ngFor="let ProspectsCount_List of totaltilecountdetails">
+                                <h4 class="badge1 badge-outline1 fs-4 mt-2">{{ProspectsCount_List.total_prospect}}</h4>
+                            </div>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-purple text-white ms-auto"><i
+                                class="fa-solid fa-clock fs-3"></i>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2" routerLink="/crm/CrmTrnTelecampaignmanagersummaryFollowup">
+            <div class="cardHead radius-10 border-start border-0 border-3 border-orange">
+                <div class="card-body12">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h5 class="mb-0 text-secondary">Interest</h5>
+                            <div *ngFor="let PotentialsCount_List of totaltilecountdetails">
+                                <h4 class="badge-brown  badge-outline-brown fs-4 mt-2">
+                                    {{PotentialsCount_List.total_followup}}</h4>
+                            </div>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-darkgreen text-white ms-auto"><i
+                                class="fa fa-thumbs-up fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-2 col-md-2 col-sm-2" routerLink="/crm/CrmTrnTelecampaignmanagersummaryProspect">
+            <div class="cardHead radius-10 border-start border-0 border-3 border-darkgreen">
+                <div class="card-body12">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h5 class="mb-0 text-secondary">Consideration</h5>
+                            <div *ngFor="let CompletedCount_List of totaltilecountdetails">
+                                <h4 class="badge-green badge-outline-green fs-4 mt-2">
+                                    {{CompletedCount_List.total_potential}}
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-darkgreens text-white ms-auto"><i
+                                class="fas fa-star fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2" routerLink="/crm/CrmTrnTelecampaignmanagersummaryDrop">
+            <div class="cardHead radius-10 border-start border-0 border-3 border-purple">
+                <div class="card-body12">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h5 class="mb-0 text-secondary">Drop</h5>
+                            <div *ngFor="let DropCount_List of totaltilecountdetails">
+                                <h4 class="badge-orange badge-outline-orange fs-4 mt-2">
+                                    {{DropCount_List.total_dropstatus}}
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-darkoranges text-white ms-auto"><i
+                                class="fa-solid fa-circle-down fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="m-3 d-flex flex-wrap mb-0 mt-0 ">
+        <div class="col-12 col-lg-12 row">
+            <div class="col-12 col-lg-6 pe-0">
+                <div class="m-3 me-0 card  p-3 rounded" style="height:470px;border: 1px solid rgb(238, 236, 236);">
+                    <div class="card-header "
+                        style="background: rgb(42, 54, 56);
+            background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px;">
+                        <b>Team Report</b>
+                    </div>
+                    <ng-container *ngIf="chartflag">
+                        <div #chartRef class="d-flex flex-column mixed-widget-2-chart card-rounded-bottom">
+                            <apx-chart [series]="leadchartcount.series" [chart]="leadchartcount.chart"
+                                [xaxis]="leadchartcount.xaxis" [dataLabels]="leadchartcount.dataLabels"
+                                [title]="leadchartcount.title" [legend]="leadchartcount.legend">
+                            </apx-chart>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="!chartflag">
+                        <div class="d-flex justify-content-center">
+                            <span>
+                                <img src=".\assets\media\images\No_data_found.png" class="h-100 w-400px">
+                            </span>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 pe-0">
+                <div class="m-3 me-0 card  p-3 rounded" style="height:470px;border: 1px solid rgb(238, 236, 236);">
+                    <div class="card-header "
+                        style="background: rgb(42, 54, 56);
+        background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px;">
+                        <div class="card-title">
+                            <b>Team Performance</b>
+                        </div>
+                    </div>
+                    <ng-container *ngIf="chartflag1">
+                        <apx-chart [series]="WebsiteUserchart.series " [chart]="WebsiteUserchart.chart"
+                            [xaxis]="WebsiteUserchart.xaxis" [dataLabels]="WebsiteUserchart.dataLabels"
+                            [plotOptions]="WebsiteUserchart.plotOptions">
+                        </apx-chart>
+                    </ng-container>
+                    <ng-container *ngIf="!chartflag1">
+                        <div class="d-flex justify-content-center">
+                            <span>
+                                <img src=".\assets\media\images\No_data_found.png" class="h-100 w-400px">
+                            </span>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Marketing Team Insights-->
+    <div class="row m-2">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="card-header"
+                style="background: rgb(42, 54, 56);
+             background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px; ">
+                <b>Campaign Team Insights</b>
+                <button class="btn dropdown-toggle fs-1" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseeight" aria-expanded="true" aria-controls="collapseeight"></button>
+            </div>
+            <div id="collapseeight" class="accordion-collapse collapse show" data-bs-parent="#accordionExample8">
+                <div class="accordion-body m-8">
+                    <table class="table table-striped table-row-bordered gy-5 gs-7 table-responsive "
+                        style="max-height: 100px;overflow-y:50px ;">
+                        <thead>
+                            <tr class="fw-bold fs-7 text-nowrap bg-lightbluegray text-black">
+                                <th>S.No</th>
+                                <th>Team</th>
+                                <th routerLink="/crm/CrmTrnTelecampaignmanagersummary"
+                                    style="text-decoration: underline; cursor: pointer; text-align: center;">Total</th>
+                                <th routerLink="/crm/CrmTrnTelecampaignmanagersummaryNew"
+                                    style="text-decoration: underline; cursor: pointer; text-align: center;">Awareness
+                                </th>
+                                <th routerLink="/crm/CrmTrnTelecampaignmanagersummaryPendingcalls"
+                                    style="text-decoration: underline; cursor: pointer; text-align: center;">Pending
+                                    Calls</th>
+                                <th routerLink="/crm/CrmTrnTelecampaignmanagersummaryFollowup"
+                                    style="text-decoration: underline; cursor: pointer; text-align: center;">Interest
+                                </th>
+                                <th routerLink="/crm/CrmTrnTelecampaignmanagersummaryProspect"
+                                    style="text-decoration: underline; cursor: pointer;text-align: center;">
+                                    Consideration
+                                </th>
+                                <th routerLink="/crm/CrmTrnTelecampaignmanagersummaryDrop"
+                                    style="text-decoration: underline; cursor: pointer;text-align: center;">Drop</th>
+                                <th routerLink="/crm/CrmTrnTelecampaignmanagersummaryScheduled"
+                                    style="text-decoration: underline; cursor: pointer;text-align: center;">Scheduled
+                                </th>
+                                <th routerLink="/crm/CrmTrnTelecampaignmanagersummaryLapsedleads"
+                                    style="text-decoration: underline; cursor: pointer;text-align: center;">Lapsed Leads
+                                </th>
+                                <th routerLink="/crm/CrmTrnTelecampaignmanagersummaryLongestleads"
+                                    style="text-decoration: underline; cursor: pointer;text-align: center;">Longest
+                                    Leads</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of countlist; let i=index;" class="align-middle">
+                                <td>{{i+1}}</td>
+                                <td (click)="Onteamview(data.campaign_gid)"
+                                    style="text-decoration: underline; cursor: pointer;">{{data.team_prefix}}</td>
+                                <td style="text-align: center;">{{data.assigned_leads}}</td>
+                                <td style="text-align: center;">{{data.newleads}}</td>
+                                <td style="text-align: center;">{{data.NewPending}}</td>
+                                <td style="text-align: center;">{{data.followup}}</td>
+                                <!-- <td>{{data.prospect}}</td>
+                            <td>{{data.visit}}</td> -->
+                                <td style="text-align: center;">{{data.prospect}}</td>
+                                <td style="text-align: center;">{{data.drop_status}}</td>
+                                <td style="text-align: center;">{{data.Schedule_log}}</td>
+                                <!-- <td>{{data.mtd}}</td>
+                            <td>{{data.ytd}}</td> -->
+                                <td style="text-align: center;">{{data.lapsed_count}}</td>
+                                <td style="text-align: center;">{{data.longest_count}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="row ms-3 mt-3 d-flex align-items-center">
+            <div class="col">
+                <div class="d-flex ">
+                    <h3 class="card-title">Campaign Team Manager - Awareness
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <!--Summary-->
+        <div class="table-responsive">
+            <div class="card card-body  shadow-xl p-5 mb-8 bg-white rounded">
+                <table id="totallist" class="table table-striped table-row-bordered  table-responsive">
+                    <thead>
+                        <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                            <th>S.No</th>
+                            <th>Team</th>
+                            <th>Lead</th>
+                            <th>Contact</th>
+                            <!-- <th>Customer Type</th> -->
+                            <th class="text-center">Lead Notes</th>
+                            <th>Lead stage</th>
+                            <th>Assigned To</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of totallist; let i=index;" class="align-middle">
+                            <td>{{i+1}}</td>
+                            <td style="white-space: nowrap;">{{data.team_prefix}}</td>
+                            <td style="white-space: nowrap;">{{data.leadbank_name}}</td>
+                            <td>{{data.contact_details}}</td>
+                            <!-- <td>{{data.customer_type}}</td> -->
+
+                            <td class="text-center text-nowrap">
+                                <label title="Remarks" data-bs-toggle="modal" data-bs-target="#myModalUpdateimage"
+                                    (click)="popmodal(data.remarks,data.leadbank_name,data.leadbank_gid,data.notes_count)">
+                                    <i class="fas fa-question-circle fa-5x text-primary fs-2"></i>
+                                </label>
+                            </td>
+                            <td>{{data.leadstage_name}}</td>
+                            <td>{{data.assigned_to}}</td>
+                            <td class="text-center text-nowrap">
+                                <!-- <div style="cursor: pointer;">
+                                <button class="btn me-2 p-1 " (click)="toggleOptions(data.leadbank_gid)"><span
+                                        class="fa-solid fa-ellipsis-vertical fs-1"
+                                        style="color: #4d4d4d;"></span></button>
+                                <div *ngIf="showOptionsDivId === data.leadbank_gid"
+                                    class="pb-0 rounded bg-white cursor-pointer icon_menu" style="right: 60px;">
+
+                                    <div class="d-flex p-3 pb-3 Icon_hover" title="360 View"
+                                        (click)="Onopen(data.leadbank_gid,data.lead2campaign_gid,data.contact_details,data.appointment_gid)"
+                                        data-bs-toggle="modal" type="button"><span
+                                            class="fa-solid fa-arrows-spin fa-spin fs-3 me-2"></span><span>360
+                                            View</span>
+                                    </div>
+
+                                    <div class="d-flex p-3 pb-3 Icon_hover" title="Schedule"
+                                        (click)="openModallog3(data)" data-bs-toggle="modal" type="button"
+                                        data-bs-target="#myschedule"><span
+                                            class="fa-regular fa-clock fs-3 me-2"></span><span>Schedule</span>
+                                    </div>
+
+                                    <div class="d-flex p-3 pb-3 Icon_hover" title="Transfer"
+                                        (click)="openModallog4(data)" data-bs-toggle="modal" type="button"
+                                        data-bs-target="#myModaltransfer"><span
+                                            class="fa-solid fa-right-left fs-3 me-2"></span><span>Transfer</span>
+                                    </div>
+
+                                    <div class="d-flex p-3 pb-3 Icon_hover" title="Drop"
+                                        (click)="openModallog5(data.leadbank_gid)" data-bs-toggle="modal" type="button"
+                                        data-bs-target="#myModaldelete"><span
+                                            class="fa-solid fa-arrow-down fs-3 me-2"></span><span>Drop</span>
+                                    </div>
+
+                                </div>
+                            </div> -->
+                                <button title="360 View" type="button"
+                                    class="btn btn-icon btn-sm  me-2 bg-gradient-darkblue">
+                                    <i class="fa-solid fa-arrows-spin fa-spin"
+                                        style="font-size:14px;font-weight:bolder;"
+                                        (click)="Onopen(data.leadbank_gid,data.lead2campaign_gid,data.contact_details,data.appointment_gid)"></i></button>
+                                <button (click)="openModallog3(data)" title="Schedule" type="button"
+                                    class="btn btn-icon btn-sm bg-gradient-darkoranges me-2" data-bs-toggle="modal"
+                                    data-bs-target="#myschedule">
+                                    <i class="fa-regular fa-clock"></i>
+                                </button>
+                                <button (click)="openModallog4(data)" title="Transfer" type="button"
+                                    class="btn btn-icon btn-sm  bg-gradient-CancelOrder  me-2" data-bs-toggle="modal"
+                                    data-bs-target="#myModaltransfer"><i class="fa-solid fa-right-left"></i>
+                                </button>
+                                <button (click)="openModallog5(data.leadbank_gid)" title="Move to Drop" type="button"
+                                    data-bs-toggle="modal" data-bs-target="#myModaldelete"
+                                    class="btn btn-icon btn-sm  bg-gradient-purple me-2"><i
+                                        class="fa-solid fa-arrow-down"></i></button>
+                                <button title="Add To Opportunity" type="button"
+                                    [disabled]="data.appointment_gid !=='No'"
+                                    class="btn btn-icon btn-sm  me-2 bg-gradient-blue" data-bs-toggle="modal"
+                                    data-bs-target="#Addappointment">
+                                    <i class="fa-solid fa-user-check" style="font-size: 14px;font-weight:bolder;"
+                                        (click)="getleadbankgid(data.leadbank_gid)"></i>
+                                    </button>
+                                    <button (click)="viewcalllog(data.leadbank_gid,data.leadbank_name,data.dialed_number)"
+                                title="Call Log" data-bs-toggle="modal" type="button" data-bs-target="#viewmylog"
+                                class="btn btn-icon btn-sm bg-primary me-2"><span
+                                    class="bi bi-telephone-inbound-fill  text-white  fs-6"></span>
+                            </button>
+							
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal" id="myschedule" data-bs-backdrop="static" data-bs-keyboard="false" style="margin-top: 50px;">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary" [formGroup]="reactiveFormfollow">
+                        <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                                style="font-size:20px;" class="fa-solid fa-calendar-days"></i> &nbsp;&nbsp;Schedule Lead
+                            - {{leadbank_name}}</h2>
+                    </div>
+
+                    <div class="modal-body">
+                        <tabset>
+                            <tab heading="Schedule">
+                                <form [formGroup]="reactiveFormfollow" #form="ngForm">
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                                        <span class="font-bold"><b>Schedule Date</b><span
+                                                class="ms-1 text-red">*</span></span>
+                                        <div class="col-xl-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                                            <input formControlName="schedule_date" type="date" class="
+                                                 form-control form-control-lg form-control-solid
+                                                 custom-input
+                                                 mb-3 mb-lg-0
+                                                 bg-white
+                                                 custom-input
+                                               " [ngStyle]="{
+                                                 'border-color':
+                                                 schedule_date.invalid && schedule_date.touched
+                                                     ? 'red'
+                                                     : 'rgb(209, 209, 209)'
+                                               }" placeholder="" pattern="^(?!\s*$).+" name="schedule_date" required />
+                                        </div>
+
+                                        <div
+                                            *ngIf="schedule_date.invalid && (schedule_date.dirty || schedule_date.touched)">
+                                            <div *ngIf="schedule_date.errors?.['required']">
+                                                <span style="color:red;">Schedule Date is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                                        <span class="font-bold"><b>Schedule Time</b><span
+                                                class="ms-1 text-red">*</span></span>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                                            <input formControlName="schedule_time" type="time" class="
+                                         form-control form-control-lg form-control-solid
+                                         custom-input
+                                         mb-3 mb-lg-0
+                                         bg-white
+                                         custom-input
+                                       " [ngStyle]="{
+                                         'border-color':
+                                         schedule_time.invalid && schedule_time.touched
+                                             ? 'red'
+                                             : 'rgb(209, 209, 209)'
+                                       }" placeholder="" pattern="^(?!\s*$).+" name="schedule_time" required />
+                                        </div>
+
+                                        <div
+                                            *ngIf="schedule_time.invalid && (schedule_time.dirty || schedule_time.touched)">
+                                            <div *ngIf="schedule_time.errors?.['required']">
+                                                <span style="color:red;">Schedule Time is required.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <br>
+                                    <span class="font-bold"><b>Schedule Type</b><span
+                                            style="color: red;">*</span></span>
+                                    <div>
+                                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                                            <ng-select formControlName="schedule_type" style="width:99%;"
+                                                [items]="ScheduleType" required
+                                                class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                                                bindLabel="type" bindValue="type" [clearable]="false"
+                                                placeholder="--Select Type--"></ng-select>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                                        <label for="exampleFormControlTextarea1" class="form-label"><b>Schedule
+                                                Remarks</b></label>
+                                        <br>
+                                        <textarea style="resize: none;" class="form-control"
+                                            formControlName="schedule_remarks" pattern="^(?!\s*$).+"
+                                            placeholder="Enter Schedule Remarks" id="exampleFormControlTextarea1"
+                                            rows="3"></textarea>
+                                    </div>
+                                    <div class="text-center my-4">
+                                        <button (click)="onsubmitschedule()" [disabled]="reactiveFormfollow.invalid"
+                                            [ngClass]="{
+                                                            'primary-button': !reactiveFormfollow.invalid,
+                                                            'secondary-button': reactiveFormfollow.invalid
+                                                             }" data-bs-dismiss="modal">
+                                            <i class="fas fa-check text-white fs-5 "></i> &nbsp;Schedule
+                                        </button> &nbsp;&nbsp;
+                                        <button (click)="oncloseschedule()" class="btn-danger btn-sm text-white me-4"
+                                            data-bs-dismiss="modal">
+                                            <i class="fas fa-close text-white"></i> &nbsp;Cancel
+                                        </button>
+                                    </div>
+                                </form>
+                            </tab>
+                            <tab heading="Log Details">
+                                <div class="log-details-tab-content">
+                                    <div class="col-12 col-lg-3 col-md-6 col-lg-12">
+                                        <span class="fw-bold" style="font-size: small;"><b>Schedule Log Details
+                                            </b></span><br /><br />
+
+                                        <ng-container *ngFor="let schedule of schedulesummary_list1; let i = index">
+                                            <div style="margin-bottom: 5px; padding: 5px; overflow-y: auto; max-height: 300px;"
+                                                class="panel bg-white">
+                                                {{schedule.log_legend}}
+                                                <div style="margin-bottom: 3px; margin-top: 2px;">
+                                                    <div class="row">
+                                                        <div class="panel-body" style="font-size: x-small;">{{
+                                                            schedule.log_details }}</div>
+                                                    </div>
+                                                </div>
+                                                <!-- Add a horizontal line after each schedule log -->
+                                                <hr style="margin-top: 5px; margin-bottom: 5px;">
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+
+                                <div class="text-center my-4">
+                                    <button class="btn-danger btn-sm text-white me-2" data-bs-dismiss="modal"
+                                        style="background-color: red;">
+                                        <i class="fas fa-close text-white"></i> &nbsp;Close
+                                    </button>&nbsp;
+                                </div>
+                            </tab>
+                        </tabset>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- transfer popup -->
+
+        <form [formGroup]="reactiveFormTransfer" #form="ngForm">
+            <div class="modal" id="myModaltransfer" data-bs-backdrop="static" data-bs-keyboard="false"
+                style="margin-top: 160px;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                            <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                                    style="font-size:20px;" class="fa-solid fa-right-left"></i> &nbsp;&nbsp;Transfer
+                                Lead
+                                -{{leadbank_name}}</h2>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <span class="font-bold">Team Name<span style="color: red;">*</span></span>
+                            <div>
+                                <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                                    <ng-select formControlName="team_name" [items]="teamname_list" (change)="teamname()"
+                                        required class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                                        bindLabel="campaign_title" bindValue="campaign_gid" [clearable]="false"
+                                        placeholder="--Select Team--"></ng-select>
+                                </div>
+                            </div>
+                            <br>
+                            <span class="font-bold">Transfer To<span style="color: red;">*</span></span>
+                            <div>
+                                <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                                    <ng-select formControlName="team_member" [items]="employee_list" required
+                                        class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                                        bindLabel="user_name" bindValue="employee_gid" [clearable]="false"
+                                        placeholder="--Select option--"></ng-select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="text-center my-4">
+                            <button class="btn-success btn-sm text-white me-4" (click)="OnTransfer()"
+                                data-bs-dismiss="modal" [disabled]="reactiveFormTransfer.invalid">
+                                <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+                            </button> &nbsp;&nbsp;
+                            <button class="btn-danger btn-sm text-white me-4" (click)="onclosetransfer()"
+                                data-bs-dismiss="modal">
+                                <i class="fas fa-close text-white"></i> &nbsp;Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<form [formGroup]="reactiveFormdrop" #form="ngForm">
+    <div class="modal" id="myModaldelete" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="text-center my-4">
+                    <h2 style="display: block;">Do You Want Move To Drop ?</h2>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label"><b>Remarks</b></label>
+                        <textarea formControlName="drop_remarks" type="text" class="
+                         form-control form-control-lg form-control-solid
+                         custom-input
+                         mb-3 mb-lg-0
+                         bg-white
+                         custom-input
+                         " [ngStyle]="{
+                            'border-color':
+                            drop_remarks.invalid && drop_remarks.touched
+                                ? 'red'
+                                : 'rgb(209, 209, 209)'
+                          }" required placeholder="Drop a Reason" class="form-control" rows="3"></textarea>
+
+
+                    </div>
+                    <div *ngIf="drop_remarks.invalid && (drop_remarks.dirty || drop_remarks.touched)">
+                        <div *ngIf="drop_remarks.errors?.['required']">
+                            <span style="color:red;">Remarks is required.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="text-center my-4">
+
+                    <button (click)="OnBin()" class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-circle-down text-white fs-5 "></i> &nbsp;Drop
+                    </button>
+                    &nbsp;&nbsp;
+                    <button (click)="onclosedrop()" class="btn-primary btn-sm text-white me-4" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white"></i> &nbsp;Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!---Remarks popup-->
+<div class="modal fade" id="myModalUpdateimage" tabindex="-1" data-bs-backdrop='static'
+    aria-labelledby="editamlcategoryLabel" aria-hidden="true" data-bs-keyboard="false">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content">
+            <div class="card-header p-1 pb-1 pt-1 rounded-top bg-primary"
+                style="display: flex; align-items: center; height: 40px;">
+                <h3 style="color: white; font-weight: bold; text-align: left; width: 100%; margin-left: 10px;">
+                    {{leadbank_name}}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-lg-3 col-md-6 col-lg-12">
+                    <span class="fw-bold">Remarks: </span>
+                    <p class="mt-2 wrap-text" style="max-width: 100%; overflow: auto; max-height: 200px;">
+                        {{remarks}}</p>
+                </div>
+                <div class="card" *ngIf="GetLeadNoteDetails_list && GetLeadNoteDetails_list.length > 0">
+                    <div class="row ms-3 mt-3 d-flex">
+                        <div class="col">
+                            <div class="d-flex ">
+                                <span class="fw-bold" style="margin-left: -15px;">Note Details
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <div class="card card-body  shadow-xl p-5 mb-8 bg-white rounded">
+                            <table id="GetLeadNoteDetails_lists"
+                                class="table table-striped table-row-bordered  table-responsive"
+                                style="margin-left: -15px;">
+                                <thead>
+                                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                        <th>S.No</th>
+                                        <th>Note</th>
+                                        <!-- <th>Created By</th>
+                                   <th>Created Date</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let data of GetLeadNoteDetails_list; let i=index;" class="align-middle">
+                                        <td>{{i+1}}</td>
+                                        <td>
+                                            <p 
+                                                style="width: 100%;">{{data.internal_notes}}</p>
+                                        </td>
+
+                                        <!-- <td style="text-align: center;">{{data.created_by}}</td>
+                            <td style="text-align: center;">{{data.created_date}}</td> -->
+
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center my-4">
+                    <button class="btn-danger btn-sm text-white me-2" data-bs-dismiss="modal"
+                        style="background-color: red;">
+                        <i class="fas fa-close text-white"></i> &nbsp;Close
+                    </button>&nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form [formGroup]="reactiveFormappointment" #form="ngForm">
+    <div class="modal" id="Addappointment" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                    <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                            class="fas fa-plus fw-bolder fs-3"></i> &nbsp;&nbsp;Add to Opportunity </h2>
+                </div>
+                <div class="modal-body">
+                    <div class="row"><span class="font-bold"><b>Lead title</b><span
+                                class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                            <textarea lass="form-control form-control-lg form-control-solid custom-input
+                       mb-3 mb-lg-0 custom-input
+                     " class="form-control " style="height:45px;" formControlName="lead_title">
+                       </textarea>
+                        </div>
+                    </div>
+                    <div *ngIf="lead_title.invalid && (lead_title.dirty || lead_title.touched)">
+                        <div *ngIf="lead_title.errors?.['required']">
+                            <span style="color:red;">Lead Title is required.</span>
+                        </div>
+                    </div>
+                    <div *ngIf="lead_title.invalid && (lead_title.dirty ||lead_title .touched)">
+                        <div *ngIf="lead_title.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format.</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row"><span class="font-bold"><b>Opportunity</b><span
+                                class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                            <input formControlName="appointment_timing" type="date" 
+                            placeholder="Select Date" class="
+                        form-control form-control-lg form-control-solid
+                        custom-input
+                        mb-3 mb-lg-0
+                        bg-white
+                        custom-input date-picker
+                       " [ngStyle]="{
+                         'border-color':
+                         appointment_timing.invalid && appointment_timing.touched
+                             ? 'red'
+                             : 'rgb(209, 209, 209)'
+                       }" pattern="^(?!\s*$).+" name="appointment_timing" required />
+                        </div>
+                    </div>
+                    <div *ngIf="appointment_timing.invalid && (appointment_timing.dirty || appointment_timing.touched)">
+                        <div *ngIf="appointment_timing.errors?.['required']">
+                            <span style="color:red;">Opportunity time is required.</span>
+                        </div>
+                    </div>
+                    <div *ngIf="appointment_timing.invalid && (appointment_timing.dirty || appointment_timing.touched)">
+                        <div *ngIf="appointment_timing.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format.</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row"><span class="font-bold"><b>Bussines Vertical</b><span
+                                class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-0 d-flex ">
+                            <ng-select formControlName="bussiness_verticle" [items]="Getbussinessverticledropdown_list"
+                                bindLabel="business_vertical" bindValue="businessvertical_gid"
+                                placeholder="Select Bussines Verticle" [class.is-invalid]="
+                            bussiness_verticle.invalid && (bussiness_verticle.dirty || bussiness_verticle.touched) "
+                                class="custom col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-2">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div *ngIf="bussiness_verticle.invalid && (bussiness_verticle.dirty || bussiness_verticle.touched)">
+                        <div *ngIf="bussiness_verticle.errors?.['required']">
+                            <span style="color:red;"> |Bussines Verticle is required.</span>
+                        </div>
+                    </div>
+                    <div *ngIf="bussiness_verticle.invalid && (bussiness_verticle.dirty ||bussiness_verticle .touched)">
+                        <div *ngIf="bussiness_verticle.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format.</span>
+                        </div>
+                    </div>
+
+
+                    <br>
+                    <div class="text-center my-4">
+                        <button [disabled]="reactiveFormappointment.invalid" (click)="onaddopportunity()"
+                            [ngStyle]="{ 'cursor': reactiveFormappointment.invalid ? 'not-allowed' : 'pointer'}"
+                            [ngClass]="{ 'btn-success': !reactiveFormappointment.invalid,
+                    'btn-secondary text-white': reactiveFormappointment.invalid }" data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5 "></i> &nbsp;Add
+                        </button> &nbsp;&nbsp;
+                        <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal" (click)="onclose()">
+                            <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="modal  modal-lg" id="viewmylog" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+
+            <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+
+                <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                        class="bi bi-telephone-inbound-fill  fw-bolder fs-3"></i> &nbsp;&nbsp;Call Log</h2>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body ">
+                <div class="row" style="height: 180px">
+                    <div class="table-responsive">
+                        <div class="card card-body m-3  p-3 mb-5 bg-white rounded "
+                            style=" max-height: 200px; overflow-y: auto;overflow-x: hidden;">
+                            <div>
+                                <div *ngIf="GetCallLogLead_list && GetCallLogLead_list.length; else noCallLog">
+                                    <div *ngFor="let data of GetCallLogLead_list;">
+                                        <div class="d-flex flex-column position-relative email-card">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                                                    <label><b>Name</b></label>
+                                                    <br />
+                                                    <div>
+                                                        <p>{{leadbank_name}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                                                    <label><b>Dial Number</b></label>
+                                                    <br />
+                                                    <div>
+                                                        <p>{{data.mobile_number}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                                                    <label><b>Call Response</b></label>
+                                                    <br />
+                                                    <div>
+                                                        <p>{{data.call_response}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                                                    <label><b>Prospective Percentage(%) To</b></label>
+                                                    <br />
+                                                    <div>
+                                                        <p>{{data.prospective_percentage}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                                                    <label><b>Product Group</b></label>
+                                                    <br />
+                                                    <div>
+                                                        <p>{{data.productgroup_name}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                                                    <label><b>Product Name</b></label>
+                                                    <br />
+                                                    <div>
+                                                        <p>{{data.product_name}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                                                    <label><b>Created Date</b></label>
+                                                    <br />
+                                                    <div>
+                                                        <p>{{data.created_date}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                                                    <label><b>Call Feedback</b></label>
+                                                    <br />
+                                                    <div>
+                                                        <p>{{data.remarks ? data.remarks : '-'}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ng-template #noCallLog>
+                                    <h3 clas="text-center my-4" style="margin-top: 50px;margin-left: 290px;">No Call Log
+                                        Available</h3>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center my-4">
+                <button (click)="onclose()" class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+                    <i class="fas fa-close text-white"></i> &nbsp;Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

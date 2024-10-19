@@ -1,0 +1,21 @@
+.bg-stssuccess{
+    background-color: #268029 !important;
+  }
+  .bg-inactive{
+    background-color: #c53030 !important;
+  }
+  .bg-success {
+    background-color: #268029;
+    color: white;
+}
+
+.bg-danger {
+    background-color: #c53030;
+    color: white;
+}
+.status-badge {
+  display: inline-block;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-weight: bold;
+}

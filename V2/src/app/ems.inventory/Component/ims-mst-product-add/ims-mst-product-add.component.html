@@ -1,0 +1,233 @@
+
+
+<div class="card rounded-top">
+  <div class="card-title p-5 pb-3 pt-3 rounded-top bg-primary d-flex justify-content-between align-items-center">
+    <h1 class="fw-bolder text-white"><i class="fa fa-plus fs-2" aria-hidden="true"></i>&nbsp;&nbsp;Add Product
+    </h1>
+    <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer " title="back"
+    (click)="redirecttolist()"><i class="fa-solid fa-arrow-left-long fs-1 fw-bold"></i></button>
+  </div>
+
+  <form [formGroup]="productform" (ngSubmit)="onadd()">
+    <div class="d-flex flex-row m-6 flex-wrap">
+
+      <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold required" [ngClass]="{'error_input_field': productgroup_name.invalid && productgroup_name.touched}">Product Group</span>
+        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 ">                   
+            <ng-select formControlName="productgroup_name" [items]="productgroup_list" class="custom col-lg-11 col-14  fv-row mt-2"
+            [ngClass]="{'invalid-border': productgroup_name.invalid && productgroup_name.touched}"bindLabel="productgroup_name" bindValue="productgroup_gid" [(ngModel)]="mdlPrdName" placeholder="Select Product Group" >
+           </ng-select>
+            
+        </div>
+        <!-- <div *ngIf="productgroup_name.invalid && (productgroup_name.dirty || productgroup_name.touched)">
+            <div *ngIf="productgroup_name.errors?.['required']">
+                        <span style="color:red;">Product Group is Required</span>
+            </div>
+          </div> -->
+    </div>
+
+  
+  <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold" >Product Code</span>
+          <div class="col-lg-10 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <!-- <input type="text" class="form-control form-control-lg form-control-solid 
+                custom-input mb-3 mb-lg-0  borderc-secondary bg-white custom-input" placeholder="Product Code"
+              formControlName="product_code" class="form-control" pattern="^(?!\s*$).+"
+              style="height:40px;" /> -->
+
+              <input [readonly]="isReadOnly" [value]="defaultProductCode" type="text" class="
+                    form-control form-control-lg form-control-solid
+                    mb-3 mb-lg-0 borderc-secondary bg-white custom-input
+                " formControlName="product_code" 
+                 placeholder=" Product Code is Auto Generated" class="form-control form-control-lg  custom-input mb-3 mb-lg-0 bg-white custom-input" name="product_code"
+                            style="height: 40px;"
+                            />
+          </div>
+          
+          <!-- <div *ngIf="product_code.invalid && (product_code.dirty || product_code.touched)">
+            <div *ngIf="product_code.errors?.['required']">
+              <span style="color:red;">Product Code is Required </span>
+            </div>
+          </div>
+          <div *ngIf="product_code.invalid && (product_code.dirty || product_code.touched)">
+            <div *ngIf="product_code.errors?.['pattern']">
+              <span style="color:red;">Product Code is Required </span>
+            </div>
+          </div> -->
+     
+        </div>
+
+  <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold required" [ngClass]="{'error_input_field': sku.invalid && sku.touched}">SKU</span>
+      <div class="col-lg-10 col-12 col-md-11 col-sm-11 fv-row mt-2">
+          <input type="text"  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"  
+        placeholder="SKU" formControlName="sku" style="height:40px;" maxlength="12" [ngStyle]="{'border-color': sku.invalid && sku.touched ? 'red'
+        : 'rgb(209, 209, 209)'
+  }" style="height:40px;" />
+      </div>
+      <!-- <div *ngIf="sku.invalid && (sku.dirty || sku.touched)">
+        <div *ngIf="sku.errors?.['required']">
+                    <span style="color:red;">SKU is Required</span>
+        </div>    
+      </div> -->
+  </div>
+
+      </div>
+
+      
+      <div class="d-flex flex-row m-6 mt-0 flex-wrap">
+            
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold required" [ngClass]="{'error_input_field': product_name.invalid && product_name.touched}">Product</span>
+            <div class="col-lg-10 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input type="text" class="
+                form-control form-control-lg form-control-solid
+                mb-3 mb-lg-0 borderc-secondary bg-white custom-input
+              " placeholder="Product Name" formControlName="product_name"  class="form-control form-control-lg  custom-input mb-3 mb-lg-0 bg-white custom-input" 
+              [ngClass]="{'invalid-border': product_name.invalid && product_name.touched}"   style="height:40px;" />
+            </div>
+            <!-- <div *ngIf="product_name.invalid && (product_name.dirty || product_name.touched)">
+                <div *ngIf="product_name.errors?.['required']">
+                            <span style="color:red;">Product is Required</span>
+                </div>    
+             </div> -->
+          </div>
+
+  <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold">Description</span>
+    <div class="col-lg-10 col-12 col-md-11 col-sm-11 fv-row mt-2">
+        <textarea type="text" class="
+        form-control form-control-lg form-control-solid custom-input
+        mb-3 mb-lg-0  borderc-secondary bg-white custom-input
+      " placeholder="Product Description" formControlName="product_desc" class="form-control"  rows="1" ></textarea>
+    </div>
+</div>
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold required"[ngClass]="{'error_input_field': productuom_name.invalid && productuom_name.touched}">Unit</span>
+            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 ">
+              
+                <ng-select formControlName="productuom_name" [items]="productunit_list" class="custom col-lg-11 col-14  fv-row mt-2"
+                [ngClass]="{'invalid-border': productuom_name.invalid && productuom_name.touched}" bindLabel="productuom_name" [(ngModel)]="mdlPrdUnitC" bindValue="productuom_gid" placeholder="Select Product Unit" ></ng-select>
+
+            </div>
+            <!-- <div *ngIf="productuom_name.invalid && (productuom_name.dirty || productuom_name.touched)">
+                <div *ngIf="productuom_name.errors?.['required']">
+                            <span style="color:red;">Unit is Required</span>
+                </div>
+              </div> -->
+
+        </div>
+
+       
+</div>
+<div class="d-flex flex-row m-6 mt-0 flex-wrap">          
+
+  <div class="col-12 col-lg-4 col-md-6 col-sm-12"> <span class="fw-bold "[ngClass]="{'error_input_field': cost_price.invalid && cost_price.touched}">Cost Price <span class="ms-1 text-red">*</span></span>
+      <div class="col-lg-10 col-12 col-md-11 col-sm-11 fv-row mt-2">
+          <input type="text" class="
+          form-control form-control-lg form-control-solid
+          mb-3 mb-lg-0 borderc-secondary bg-white custom-input
+        "   [ngClass]="{'invalid-border': cost_price.invalid && cost_price.touched}"
+        placeholder="Cost Price " formControlName="cost_price" pattern='^[0-9!@#$%^&*()_+\-=\[\]{};:"\\|,.<>/?]+$' oninput="this.value = this.value.replace(/[^0-9.]/g, '')" class="form-control form-control-lg  custom-input mb-3 mb-lg-0 bg-white custom-input"  style="height:40px; text-align: left;" />
+      </div>
+      <!-- <div *ngIf="cost_price.invalid && (cost_price.dirty || cost_price.touched)">
+          <div *ngIf="cost_price.errors?.['required']">
+                      <span style="color:red;">Cost Price is Required</span>
+          </div>
+        </div>
+        <div *ngIf="cost_price.invalid && (cost_price.dirty || cost_price.touched)">
+          <div *ngIf="cost_price.errors?.['pattern']">
+                      <span style="color:red;">Invalid Pattern</span>
+          </div>
+        </div> -->
+     </div>
+
+  <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+    <span class="fw-bold required" [ngClass]="{'error_input_field': producttype_name.invalid && producttype_name.touched}">Product Type</span>
+    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+      <ng-select formControlName="producttype_name" [(ngModel)]="mdlproducttype" [class.is-invalid]="
+            producttype_name.invalid && (producttype_name.dirty || producttype_name.touched)
+              " [ngClass]="{'invalid-border': producttype_name.invalid && producttype_name.touched}"
+        [items]="producttype_list" required class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+        bindLabel="producttype_name" bindValue="producttype_gid" placeholder="Select an option"></ng-select>
+      <!-- <div *ngIf="
+            producttype_name.invalid && (producttype_name.dirty || producttype_name.touched)
+              " class="invalid-feedback">
+        <div *ngIf="producttype_name.errors?.['required']">
+          Product Types is required.
+        </div>
+      </div> -->
+
+    </div>
+  </div>
+
+
+  <!-- <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+    <span class="fw-bold required" [ngClass]="{'error_input_field': tax.invalid && tax.touched}">Tax1</span>
+    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+        <ng-select formControlName="tax"
+            [(ngModel)]="mdltax"
+            [class.is-invalid]="tax.invalid && (tax.dirty || tax.touched)"
+            [ngClass]="{'invalid-border': tax.invalid && tax.touched}"
+            [items]="tax_list"
+            required
+            class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+            bindLabel="tax_name"
+            bindValue="tax_gid"
+            placeholder="Select Tax">
+        </ng-select>
+    </div>
+    <div *ngIf="tax.invalid && (tax.dirty || tax.touched)" class="invalid-feedback">
+        <div *ngIf="tax.errors?.['required']">
+            Tax is required.
+        </div>
+    </div>
+</div> -->
+
+<div class="col-12 col-lg-4 col-md-6 col-sm-12"><span
+  class="fw-bold required" [ngClass]="{'error_input_field': tax.invalid && tax.touched}" >Taxes</span>
+  <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+<ng-select [items]="tax_list"  class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"  placeholder="Select Tax"
+  [multiple]="true" [selectableGroup]="true" formControlName="tax"
+  [class.is-invalid]="tax.invalid && (tax.dirty || tax.touched)"
+  [ngClass]="{'invalid-border': tax.invalid && tax.touched}" 
+  [closeOnSelect]="false" bindLabel="tax_name" bindValue="tax_gid"
+[(ngModel)]="cbotax">
+  <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+      <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;
+      {{item.tax_name}}
+  </ng-template>
+</ng-select>
+</div>
+</div>
+<div *ngIf="tax.invalid && (tax.dirty || tax.touched)" class="invalid-feedback">
+  <div *ngIf="tax.errors?.['required']">
+      Tax is required.
+  </div>
+</div>
+</div>
+<!-- <div class="d-flex flex-row m-6 mt-0 flex-wrap"> 
+
+  <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+    <span class="fw-bold">Tax2</span>
+    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+        <ng-select formControlName="tax1"
+            [(ngModel)]="mdltax1"
+            [items]="tax1_list"
+            class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+            bindLabel="tax_name"
+            bindValue="tax_gid"
+            placeholder="Select Tax">
+        </ng-select>
+    </div>
+   
+</div>
+</div> -->
+
+
+<div class="text-center my-4">
+  <button type="submit" class="btn-success btn-sm text-white me-2" [disabled]="productform.invalid"
+    [ngClass]="{'primary-button': !productform.invalid,'secondary-button': productform.invalid}">
+    <i class="fa fa-check fs-5"></i>&nbsp;Submit</button>
+
+  <button class="btn-primary btn-sm text-white me-4" (click)="redirecttolist()">
+    <i class="fas fa-arrow-left fs-5">
+      <i class="path1"></i>
+      <i class="path2"></i>
+    </i>&nbsp;Back</button>
+</div>
+  </form>

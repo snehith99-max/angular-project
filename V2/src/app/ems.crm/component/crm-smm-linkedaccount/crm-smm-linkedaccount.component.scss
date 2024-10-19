@@ -1,0 +1,92 @@
+.card-body12 {
+  // width: 160px;
+  height: 36px;  
+}
+.bg-linkedin
+{
+  background-color: #0077b5;
+}
+.bg-view{
+  background: #009ef7; 
+}
+
+.profile-user-info {
+  display: table;
+  width: 98%;
+  width: calc(100% - 24px);
+  margin: 0 auto
+}
+
+.profile-info-row {
+  display: table-row
+}
+
+.profile-info-name,
+.profile-info-value {
+  display: table-cell;
+  border-top: 1px dotted #D5E4F1
+}
+
+.profile-info-name {
+  text-align: left;
+  padding: 6px 10px 6px 4px;
+  font-weight: bolder;
+  color: #667E99;
+  font-size: 13px;
+  background-color: transparent;
+  width: 152px;
+}
+
+.profile-info-value {
+  padding: 6px 4px 6px 6px
+}
+
+.profile-info-value>span+span:before {
+  display: inline;
+  content: ",";
+  margin-left: 1px;
+  margin-right: 3px;
+  color: #d71e1e;
+  border-bottom: 1px solid #FFF
+}
+
+.profile-info-value>span+span.editable-container:before {
+  display: none
+}
+
+.profile-info-row:first-child .profile-info-name,
+.profile-info-row:first-child .profile-info-value {
+  border-top: none
+}
+
+.profile-user-info-striped {
+  border: 1px solid #DCEBF7
+}
+
+.profile-user-info-striped .profile-info-name {
+  color: #336199;
+  background-color: #EDF3F4;
+  border-top: 1px solid #F7FBFF
+}
+
+.profile-user-info-striped .profile-info-value {
+  border-top: 1px dotted #DCEBF7;
+  padding-left: 12px
+}
+
+
+.active-custom-style {
+  color: #fafafa !important;
+  
+  border-radius: 6px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 6px -6px, rgba(9, 30, 66, 0.08) 0px 0px 0px 0px;
+  font-weight: 600;
+  background-color:#0077b5;
+}
+.active-custom-style .hover{
+background-color:#0077b5;
+}
+.bg-upload
+{
+  background-color: #13728d;
+}

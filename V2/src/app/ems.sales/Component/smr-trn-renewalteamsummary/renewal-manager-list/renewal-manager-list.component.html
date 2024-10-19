@@ -1,0 +1,64 @@
+<div class="row d-flex justify-content-center">
+    <div class="col-lg-5">
+        <!-- Left listbox for unassigned managers -->
+        <div class="listbox shadow-sm p-3 m-8" [ngStyle]="{ 'order' :  direction() ? 1 : 2, 'margin-left' : direction() ? 0 : '10px' }"
+            style="border-top:2px solid #009ef7;">
+            <form *ngIf="filter1" class="filter">
+                <input class="form-control" name="filterSource" [(ngModel)]="available.picker" (ngModelChange)="onFilter(available)">
+            </form>
+            <div class="record-picker">
+                <ul [ngStyle]="{'max-height': height, 'min-height': height}" [ngClass]="{over:available.dragOver}" (drop)="drop($event, confirmed)"
+                    (dragover)="allowDrop($event, available)" (dragleave)="dragLeave()">
+                    <li class="fixed-label p-3"><label style="font-weight:bold;font-size:15px;">Unassigned Manager</label></li>
+                    <li *ngFor="let item of available.sift; let idx=index;" (click)="disabled1 ? null : selectItem(available.pick, item); shiftClick($event, idx, available, item)"
+                        [ngClass]="{selected: isItemSelected(available.pick, item), disabled1: disabled1}" [draggable]="!disabled1 && format1.draggable"
+                        (dragstart)="drag($event, item, available)" (dragend)="dragEnd(available)">
+                        <label>{{item._name}}</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-1 d-flex align-items-center">
+        <!-- Buttons for moving managers between lists -->
+        <div style="margin-left: 1rem !important;">
+            <button title="Unassigned" class="btn btn-icon bg-primary" (click)="moveToConfirmed()" [disabled]="!isAnySelected(available)">
+                <i class="fa-solid fa-arrow-right fs-5"></i>
+                &nbsp;
+            </button><br><br>
+            <button title="Assigned" class="btn btn-icon bg-primary" (click)="moveToAvailable()" [disabled]="!isAnySelected(confirmed)">
+                <i class="fa-solid fa-arrow-left fs-5"></i>&nbsp;
+            </button> &nbsp;
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <!-- Right listbox for assigned managers -->
+        <div class="listbox shadow-sm p-3 m-8" [ngStyle]="{ 'order' : direction() ? 2 : 1, 'margin-left' : direction() ? '10px' : 0 }"
+            style="border-top:2px solid #009ef7;">
+            <form *ngIf="filter1" class="filter">
+                <input class="form-control" name="filterDestination" [(ngModel)]="confirmed.picker" (ngModelChange)="onFilter(confirmed)">
+            </form>
+            <div class="record-picker">
+                <ul [ngStyle]="{'max-height': height, 'min-height': height}" [ngClass]="{over:confirmed.dragOver}" (drop)="drop($event, available)"
+                    (dragover)="allowDrop($event, confirmed)" (dragleave)="dragLeave()">
+                    <li class="fixed-label p-3"><label style="font-weight:bold;font-size:15px;">Assigned Manager</label></li>
+                    <li #itmConf *ngFor="let item of confirmed.sift; let idx=index;" (click)="disabled1 ? null : selectItem(confirmed.pick, item); shiftClick($event, idx, confirmed, item)"
+                        [ngClass]="{selected: isItemSelected(confirmed.pick, item), disabled1: disabled1}" [draggable]="!disabled1 && format1.draggable"
+                        (dragstart)="drag($event, item, confirmed)" (dragend)="dragEnd(confirmed)">
+                        <label>{{item._name}}</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-center my-4">
+    <!-- Buttons for update and close -->
+    <button title="Update" (click)="onUpdate()" data-bs-dismiss="modal" class="btn-success">
+        <i class="fas fa-check text-white fs-5 "></i> &nbsp;Update
+    </button> &nbsp;&nbsp;
+    <button title="Close" class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+        <i class="fas fa-close text-white"></i> &nbsp;Close
+    </button>&nbsp;
+</div>
+

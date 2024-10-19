@@ -1,0 +1,126 @@
+<div class="card">
+    <div class="row mt-5">
+        <div class="col-lg-3 mt-3">
+            <h3 class="card-title" style="margin-left: 8px;">Finance Regulation</h3>
+        </div>
+        <form #form="ngForm" [formGroup]="dateform" class="col-lg-3 d-flex justify-content-center">
+            <div class="col-lg-11 col-12 fv-row mt-2" *ngIf="currentTab !== 'Customer' && currentTab !== 'Vendor'">
+                <input type="date"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                    placeholder="Enter To Date " formControlName="todate" />
+            </div>
+        </form>
+    </div>
+
+    <ul class="m-3 nav nav-twotabs nav-line-tabs nav-line-tabs-20x mb-3 fs-6 border-bottom text-center mt-4 ms-6 me-6"
+        id="myTab" role="tablist">
+        <li class="border border-secondary active justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"
+            data-bs-toggle="tab"
+            style="color: #ffffff !important;  background: -webkit-linear-gradient(45deg, #45abe6, #3fe8d4);"
+            (click)="showTab('Customer')" [ngClass]="{'active-custom-tab': currentTab === 'Customer'}" href="#kt_tab_pane_1">
+            <a>
+                <i class="fa-solid fa-scale-balanced fs-4 me-4"></i>Create Debtor
+                <span class="badge badge-pill badge-light text-black"></span>
+            </a>
+        </li>
+        <li class="border border-secondary active justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"
+            data-bs-toggle="tab"
+            style="color: #ffffff !important;  background: -webkit-linear-gradient(45deg, #45abe6, #3fe8d4);"
+            (click)="showTab('Vendor')" [ngClass]="{'active-custom-tab': currentTab === 'Vendor'}" href="#kt_tab_pane_1">
+            <a>
+                <i class="fa-solid fa-indian-rupee-sign fs-4 me-4"></i>Create Creditor
+                <span class="badge badge-pill badge-light text-black"></span>
+            </a>
+        </li>
+        <li class="border border-secondary active justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"
+            data-bs-toggle="tab"
+            style="color: #ffffff !important;  background: -webkit-linear-gradient(45deg, #45abe6, #3fe8d4);"
+            (click)="showTab('Sales')" [ngClass]="{'active-custom-tab': currentTab === 'Sales'}" href="#kt_tab_pane_1">
+            <a>
+                <i class="fa-solid fa-people-carry-box fs-4 me-4"></i>Sales
+                <span class="badge badge-pill badge-light text-black"></span>
+            </a>
+        </li>
+
+        <li class="border border-secondary justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"
+            data-bs-toggle="tab"
+            style="color: #ffffff !important;  background: -webkit-linear-gradient(45deg, #aedaf3, #399C91);"
+            (click)="showTab('Receipt')" [ngClass]="{'active-custom-tab': currentTab === 'Receipt'}"
+            href="#kt_tab_pane_2">
+            <a>
+                <i class="fas fa-receipt fs-4 me-4"></i>Receipt
+                <span class="badge badge-pill badge-light text-black "></span>
+            </a>
+        </li>
+
+        <li class="border border-secondary justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"
+            data-bs-toggle="tab"
+            style="color: #ffffff !important;  background: -webkit-linear-gradient(45deg, #aedaf3, #399C91);"
+            (click)="showTab('Purchase')" [ngClass]="{'active-custom-tab': currentTab === 'Purchase'}"
+            href="#kt_tab_pane_3">
+            <a>
+                <i class="fa-solid fa-cart-plus fs-4 me-4"></i>Purchase
+                <span class="badge badge-pill badge-light text-black "></span>
+            </a>
+        </li>
+        <li class="border border-secondary justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"
+            data-bs-toggle="tab"
+            style="color: #ffffff !important;  background: -webkit-linear-gradient(45deg, #aedaf3, #399C91);"
+            (click)="showTab('Payables')" [ngClass]="{'active-custom-tab': currentTab === 'Payables'}"
+            href="#kt_tab_pane_4">
+            <a>
+                <i class="	fas fa-file-invoice-dollar fs-4 me-4"></i>Payables
+                <span class="badge badge-pill badge-light text-black "></span>
+            </a>
+        </li>
+
+        <li class="border border-secondary justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"
+            data-bs-toggle="tab"
+            style="color: #ffffff !important;  background: -webkit-linear-gradient(45deg, #aedaf3, #399C91);"
+            (click)="showTab('Salary')" [ngClass]="{'active-custom-tab': currentTab === 'Salary'}"
+            href="#kt_tab_pane_5">
+            <a>
+                <i class="fas fa-landmark fs-4 me-4"></i>Salary
+                <span class="badge badge-pill badge-light text-black "></span>
+            </a>
+        </li>
+        <li class="border border-secondary justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"
+            data-bs-toggle="tab"
+            style="color: #ffffff !important;  background: -webkit-linear-gradient(45deg, #aedaf3, #399C91);"
+            (click)="showTab('Payment')" [ngClass]="{'active-custom-tab': currentTab === 'Payment'}"
+            href="#kt_tab_pane_6">
+            <a>
+                <i class="fa-solid fa-money-bill-1-wave fs-4 me-4"></i>Payment
+                <span class="badge badge-pill badge-light text-black "></span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="text-center my-4">
+        <button *ngIf="currentTab === 'Customer'" class="btn-primary btn-sm text-white me-2" (click)="onPostdebtorClick()">
+            Create Debtor
+        </button>
+        <button *ngIf="currentTab === 'Vendor'" class="btn-primary btn-sm text-white me-2" (click)="onPostVendorClick()">
+            Create Creditor
+        </button>
+        <button *ngIf="currentTab === 'Sales'" class="btn-primary btn-sm text-white me-2" (click)="onPostClick()">
+            Post to sales
+        </button>
+        <button *ngIf="currentTab === 'Receipt'"  class="btn-primary btn-sm text-white me-2" (click)="onreceiptClick()">
+            Post to Receipt
+        </button>
+        <button *ngIf="currentTab === 'Purchase'"  class="btn-primary btn-sm text-white me-2" (click)="onpurchaseClick()">
+            Post to Purchase
+        </button>
+        <button *ngIf="currentTab === 'Payables'" class="btn-primary btn-sm text-white me-2" (click)="onpayablesClick()">
+            Post to Payables
+        </button>
+        <button *ngIf="currentTab === 'Salary'"  class="btn-primary btn-sm text-white me-2" (click)="onEmployeeClick()">
+            Post to Salary
+        </button>
+        <button *ngIf="currentTab === 'Payment'" class="btn-primary btn-sm text-white me-2" (click)="onEmployeePaymentClick()">
+            Post to Payment
+        </button>
+       
+    </div>
+</div>

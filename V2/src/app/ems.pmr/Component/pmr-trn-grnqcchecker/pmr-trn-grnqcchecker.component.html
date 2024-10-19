@@ -1,0 +1,166 @@
+<form [formGroup]="reactiveForm" novalidate="novalidate">
+    <div class="card rounded-top">
+        <div class="card-title p-5 pb-3 pt-3 rounded-top bg-primary d-flex justify-content-between align-items-center">
+          <h1 class="fw-bolder text-white"><i class="fa fa-plus fs-2" aria-hidden="true"></i>&nbsp;&nbsp;GRN QC Checker
+          </h1>
+          <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer " title="back"
+            routerLink="/pmr/PmrTrnGrncheckerSummary"><i class="fa-solid fa-arrow-left-long fs-1 fw-bold"></i></button>
+        </div>
+
+
+        <div class="card mt-1 m-3 mb-0">
+            <div
+              class="card-header d-flex align-items-center mb-3 cursor-pointer no-arrow" style="background-color: #def0ff;">
+              <div>
+                <p class="card-title fw-bold fs-3 no-arrow" style="color: #2599ff;">
+                  <i class="fa-solid fa-clipboard fs-1"></i> &nbsp;&nbsp;GRN Details
+                </p>
+              </div>
+            
+            </div>
+
+        <div  class="d-flex flex-row m-2 flex-wrap">
+            <!-- -------------- Entity ------------- -->
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+              <span class="font-bold">Branch </span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input type="text" formControlName="branch_name"
+                  class="form-control form-control-lg  custom-input mb-3 mb-lg-0 bg-white custom-input"
+                  placeholder="Branch Name" style="height:40px;" readonly />
+              </div>
+            </div>
+          <!-- --------------Delivery No  ------------- -->
+          <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+            <span class="font-bold">Delivery No</span>
+            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+              <input type="text" readonly formControlName="dc_no"  
+              class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input "
+              placeholder="Delivery No" style="height:40px;" pattern="^(?!\s*$).+" />
+            </div>
+          </div>
+            <!-- -------------- Date ------------- -->
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                <span class="font-bold">Delivery No</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                  <input type="text" readonly formControlName="grn_date"  
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input "
+                  placeholder="Delivery No" style="height:40px;" pattern="^(?!\s*$).+"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row m-2 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-3 col-sm-12">
+                 <!-- -------------- Vendor------------- -->
+              <span class="font-bold">Vendor</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">           
+                <input type="text" formControlName="vendor_companyname"  
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input "
+                placeholder="Vendor" style="height:40px;"  readonly />
+              </div>
+              <div class="col-11  fv-row mt-2 ">
+                <textarea type="text"
+                class=" mt-4 form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0  border-secondary custom-input"
+                placeholder="Vendor Details"  formControlName="vendor_details" class="form-control"
+                rows="5"></textarea>
+              </div>
+            </div>
+
+       
+         
+          <!-- -------------- Shipment To ------------- -->
+          <div class="col-12 col-lg-4 col-md-3 col-sm-12">
+            <span class="font-bold">Ship To</span>
+            <div class="col-11 fv-row mt-2">
+              <textarea type="text"
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary custom-input"
+                placeholder="Shipment To"  formControlName="address" class="form-control"
+                rows="7" readonly></textarea>
+            </div>
+          </div>   
+         
+         <div class="col-12 col-lg-4 col-md-3 col-sm-12">
+            <!-- -------------- Mode Of Despatch------------- -->
+            <span class="font-bold">Mode Of Despatch</span>
+        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">           
+          <input type="text" formControlName="dispatch_mode"  
+          class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input "
+          placeholder="Mode Of Despatch" style="height:40px;" readonly />
+        </div>
+        <div class="col-11  fv-row mt-2">
+          <input type="text" formControlName="deliverytracking_number"  
+          class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input "
+          placeholder="Delivery Tracking No" style="height:40px;" readonly />
+        </div>
+        <div class="col-11  fv-row mt-2">
+          <input type="text" formControlName="no_of_boxs"  
+          class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input "
+           placeholder="No of Boxes" style="height:40px;" readonly />
+        </div>
+           </div> 
+        </div>
+
+        <div class="d-flex flex-row m-2 flex-wrap">
+            <div class="col-12 col-lg-12 col-md-4 col-sm-11"><span class="font-bold">GRN Remarks</span>
+              <div class="col-lg-12 col-12 col-md-4 col-sm-11 fv-row mt-2">
+                <textarea style="width: 97%;" type="text" class="
+                  form-control form-control-lg form-control-solid custom-input
+                  mb-3 mb-lg-0  borderc-secondary bg-white custom-input" formControlName="grn_remarks"
+                  placeholder="GRN Remarks" class="form-control " rows="3"></textarea>
+              </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <div class="card card-body m-0 p-3 mb-5 bg-white rounded table-responsive">
+              <table  id="GetGrnQcChecker_lists"  class="table table-striped table-bordered text-blue border-bottom gs-7 align-middle" >
+                <thead class="table_head">
+                  <tr class="fw-bold fs-6 text-nowrap bg-lightblue text-blue align-middle">
+                    <th class="text-blue text-center" style="width: 10%;">Product Group</th>
+                    <th class="text-blue text-center" style="width: 20%">Product</th>
+                    <th class="text-blue text-center" style="width: 5%;">Inward Qty</th>
+                    <th class="text-blue text-center" style="width: 5%">Shortage Qty</th>
+                    <th class="text-blue text-center" style="width:5%;">Delivered Qty</th>
+                    <th class="text-blue text-center" style="width: 5%;">Rejected Qty</th>
+                    <th class="text-blue text-center" style="width: 15%;">QC Remarks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of GetGrnQcChecker_lists; let i=index;" class="fs-6 align-middle">
+                   
+                        <td>{{data.productgroup_name}}</td>
+                        <td>{{data.product_code}}/{{data.product_name}}</td>
+                        <td class="text-end">{{data.qty_delivered}} {{data.productuom_name}}</td>
+                        <td style="text-align: center;">
+                       <input type="text" style="text-align: right;height: 30px;" [(ngModel)]="data.qty_shortage" placeholder="0" 
+                            formControlName="qty_shortage_{{i}}" class="form-control text-end" />
+                        </td>
+                          <td>
+                            <input type="text"  style="text-align: right;height: 30px;"  
+                            [(ngModel)]="data.qty_delivered" placeholder="0" formControlName="qty_delivered_{{i}}" class="form-control  text-end" />
+                          </td>
+                          <td>
+                             <input type="text"  style="text-align: right;height: 30px;" 
+                             [(ngModel)]="data.rejected_qty"  placeholder="0" formControlName="rejected_qty_{{i}}" class="form-control  text-end"  />
+                          </td>
+                          <td>                       
+                            <textarea formControlName="display_field_{{i}}" [(ngModel)]="data.display_field" class="form-control"></textarea>
+                          </td>
+                        </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+    <div class="text-center my-4">
+        <button class="btn-success text-white me-2 bg-success" [disabled]="reactiveForm.invalid" [ngClass]="{
+            'primary-button': !reactiveForm.invalid,
+            'secondary-button': reactiveForm.invalid
+          }" (click)="validate()">
+          <i class="fas fa-check text-white fs-5"></i> &nbsp; Submit
+        </button>
+        <button class="btn-primary btn-sm text-white me-4 mt-3-center " routerLink="/pmr/PmrTrnGrncheckerSummary">
+            &nbsp; <i class="fas fa-arrow-left white fs-5"></i>  &nbsp;Back
+        </button>
+</div> 
+    </div>
+    </div>
+</form>

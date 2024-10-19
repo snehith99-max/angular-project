@@ -1,0 +1,35 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Exception View</h3>
+        </div>
+    </div>
+    <div class="table-responsive ">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="scripts_list" class="table table-striped table-row-bordered border-bottom gs-7">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th>S.No</th>
+                        <th>Company Code</th>
+                        <th>Server Name</th>
+                        <th>Script Name</th>
+                        <th>Execute Query</th>
+                        <th>Created by</th> 
+                        <th>Created date</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of scripts_list; let i=index;" class="align-middle">
+                        <td >{{i+1}}</td>
+                        <td class="text-nowrap">{{data.company_code}}</td>
+                        <td class="text-nowrap">{{data.server_name}}</td>             
+                        <td class="text-nowrap">{{data.script_name}}</td>
+                        <td class="text-nowrap">{{data.execute_query}}</td>
+                        <td class="text-nowrap">{{data.created_by}}</td>
+                        <td class="text-nowrap">{{data.created_date}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

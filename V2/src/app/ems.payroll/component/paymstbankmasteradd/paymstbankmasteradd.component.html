@@ -1,0 +1,190 @@
+<div class="card m-3">
+    <div class="card-header bg-primary card-height55">
+        <div class="card-title m-0 ">
+            <h5 class="fw-bolder text-white">Add Bank</h5>
+        </div>
+    </div>
+
+    <form [formGroup]="reactiveform" (ngSubmit)="onsubmit()">
+        <div class="d-flex flex-row m-6 flex-wrap">
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Bank Code</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input
+                    " placeholder="Enter Bank Code" formControlName="bank_code" class="form-control"
+                     [ngClass]="{'invalid-border': bank_code.invalid && bank_code.touched}"/>
+                </div>
+                <div *ngIf="bank_code.invalid && (bank_code.dirty || bank_code.touched)">
+                    <div *ngIf="bank_code.errors?.['required']">
+                        <span style="color:red;">Bank Code is required.</span>
+                    </div>
+                    <div *ngIf="reactiveform.get('bank_code')?.hasError('pattern')" class="text-red ms-2">Space at the
+                        beginning is not allowed.</div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Bank Name</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <ng-select
+                        class="form-select form-control-lg bg-white form-select-lg borderc-secondary custom-input select2"
+                        formControlName="bank_name"  required style="width:100%;"
+                        class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="bank_name"
+                        bindValue="bank_name" [items]="bank_list" [ngClass]="{'invalid-border': bank_name.invalid && bank_name.touched}" [(ngModel)]="mdlBankName"
+                        placeholder="Select an option"></ng-select>
+                </div>
+                <div *ngIf="bank_name.invalid && (bank_name.dirty || bank_name.touched)">
+                    <div *ngIf="bank_name.errors?.['required']">
+                        <span style="color:red;">Bank Name is required.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">A/C Type</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <ng-select
+                        class="form-select form-control-lg bg-white form-select-lg borderc-secondary custom-input select2"
+                        formControlName="account_type"  required style="width:100%;"
+                        class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="account_type"
+                        bindValue="account_type" [items]="accounttype_list" [ngClass]="{'invalid-border': account_type.invalid && account_type.touched}" [(ngModel)]="mdlAccountType"
+                        placeholder="Select an option"></ng-select>
+                </div>
+                <div *ngIf="account_type.invalid && (account_type.dirty || account_type.touched)">
+                    <div *ngIf="account_type.errors?.['required']">
+                        <span style="color:red;">Account Type is required.</span>
+                    </div>
+                </div>
+            </div>
+
+           
+        </div>
+        <div class="d-flex flex-row m-6 flex-wrap">
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">A/C No</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        placeholder="Enter A/C No" formControlName="account_no" [ngClass]="{'invalid-border': account_no.invalid && account_no.touched}" class="form-control" />
+                </div>
+                <div *ngIf="account_no.invalid && (account_no.dirty || account_no.touched)">
+                    <div *ngIf="account_no.errors?.['required']">
+                        <span style="color:red;">Account No is required.</span>
+                    </div>
+                    <div *ngIf="reactiveform.get('account_no')?.hasError('pattern')" class="text-red ms-2">Space at the
+                        beginning is not allowed.</div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">IFSC Code</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        placeholder="Enter IFSC Code" formControlName="ifsc_code"  class="form-control" />
+                        <div *ngIf="reactiveform.get('ifsc_code')?.hasError('pattern')" class="text-red ms-2">Space at the
+                            beginning is not allowed.</div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">NEFT Code</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        placeholder="Enter NEFT Code" formControlName="neft_code" class="form-control" />
+                        <div *ngIf="reactiveform.get('neft_code')?.hasError('pattern')" class="text-red ms-2">Space at the
+                            beginning is not allowed.</div>
+                </div>
+            </div>
+
+           
+        </div>
+        <div class="d-flex flex-row m-6 flex-wrap">
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Swift Code</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        placeholder="Enter Swift Code" formControlName="swift_code" class="form-control" />
+                        <div *ngIf="reactiveform.get('swift_code')?.hasError('pattern')" class="text-red ms-2">Space at the
+                            beginning is not allowed.</div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Account Group</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <ng-select
+                        class="form-select form-control-lg bg-white form-select-lg borderc-secondary custom-input select2"
+                        formControlName="accountgroup_name"  required style="width:100%;"
+                        class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="accountgroup_name" [ngClass]="{'invalid-border': accountgroup_name.invalid && accountgroup_name.touched}" [(ngModel)]="mdlAccountGroup"
+                        bindValue="accountgroup_gid" [items]="accountgroup_list" placeholder="Select an option"></ng-select>
+                </div>
+                <div *ngIf="accountgroup_name.invalid && (accountgroup_name.dirty || accountgroup_name.touched)">
+                    <div *ngIf="accountgroup_name.errors?.['required']">
+                        <span style="color:red;">Account Group is required.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Opening Balance</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        placeholder="Enter Opening Balance" formControlName="openning_balance" [ngClass]="{'invalid-border': openning_balance.invalid && openning_balance.touched}"  class="form-control" />
+                </div>
+                <div *ngIf="openning_balance.invalid && (openning_balance.dirty || openning_balance.touched)">
+                    <div *ngIf="openning_balance.errors?.['required']">
+                        <span style="color:red;">Opening Balance is required.</span>
+                    </div>
+                    <div *ngIf="reactiveform.get('openning_balance')?.hasError('pattern')" class="text-red ms-2">Space at the
+                        beginning is not allowed.</div>
+                </div>
+            </div>
+            </div>
+
+            
+
+            <div class="d-flex flex-row m-6 flex-wrap">
+
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Branch Name</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <ng-select
+                            class="form-select form-control-lg bg-white form-select-lg borderc-secondary custom-input select2"
+                            formControlName="branch_name"  required style="width:100%;" [ngClass]="{'invalid-border': branch_name.invalid && branch_name.touched}" 
+                            class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="branch_name" [(ngModel)]="mdlBranchName"
+                            bindValue="branch_gid" [items]="branchname_list" placeholder="Select an option"></ng-select>
+                    </div>
+                    <div *ngIf="branch_name.invalid && (branch_name.dirty || branch_name.touched)">
+                        <div *ngIf="branch_name.errors?.['required']">
+                            <span style="color:red;">Branch Name is required.</span>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Date</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text" formControlName="created_date" class="form-control form-control-lg
+            form-control-solid borderc-secondary date-picker custom-input mb-3 mb-lg-0 bg-white custom-input mb-3 mb-lg-0"
+             placeholder="DD-MM-YYYY" name="created_date"/>  
+                    </div>
+                    
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Remarks</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                       
+                        <textarea type="text" 
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0  borderc-secondary bg-white custom-input"
+                            placeholder="Enter Remarks" formControlName="remarks" class="form-control"></textarea>
+                            <div *ngIf="reactiveform.get('remarks')?.hasError('pattern')" class="text-red ms-2">Space at the
+                            beginning is not allowed.</div>
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="text-center my-4">
+            <button class="me-4 btn-success" type="submit" [disabled]="reactiveform.invalid" class="btn-success btn-sm text-white me-2" >
+                <i class="fas fa-check text-white fs-5"></i>
+                <span class="ms-3">Submit</span> </button>
+                <button class="btn-primary btn-sm text-white me-4" (click)="redirecttolist()" >
+                    <i class="fas fa-arrow-left me-3"></i>Back</button>           
+        </div>  
+    </form>

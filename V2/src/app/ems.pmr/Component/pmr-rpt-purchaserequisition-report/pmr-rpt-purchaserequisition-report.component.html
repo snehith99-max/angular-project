@@ -1,0 +1,83 @@
+<form [formGroup]="purchaserequisitionform">
+    <div class="card">
+        <div class="row ms-3 mt-3 d-flex align-items-center">
+            <div class="col">
+                <h3 class="card-title">Purchase Requisition Report</h3>
+            </div>
+    
+         
+        </div>
+        <div class="d-flex flex-row m-6  flex-wrap row">
+            
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                <span class="font-bold">Branch<span class="ms-1 text-red" >*</span></span>
+                 <ng-select [items]="branch_list"  class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                 [class.is-invalid]="
+                 branch_name.invalid && (branch_name.dirty || branch_name.touched)"
+                              [ngClass]="{'invalid-border': branch_name.invalid && branch_name.touched}"
+                 bindLabel="branch_name"  (change)="GetOnChangeLocation()" 
+                 [(ngModel)]="mdlBranchName"
+                 formControlName="branch_name"
+                 placeholder="Select an option"></ng-select>
+                 <div *ngIf="branch_name.invalid && (branch_name.dirty || branch_name.touched)">
+                  <div *ngIf="branch_name.errors?.['required']">
+                              <span style="color:red;">  Branch is Required </span>
+                  </div>
+                </div>
+                </div>
+                <button title="Export Excel" type="button" class="btn btn-icon btn-sm bg-export mt-9 me-2 float-end"
+                (click)="ProductexportExcel()"><i class="bi bi-file-earmark-arrow-down"></i></button>
+    
+        </div>
+    
+    
+      
+        <div class="table-responsive">
+            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                <input type="hidden" formControlName="purchaseorder_gid">
+                <table id="purchaserequisition_list" class="table table-striped table-row-bordered gy-5 gs-7">
+                    <thead>
+                        <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                            
+                            <th>S.No</th>
+                            <th>Date</th>
+                            <th>PO Ref.No</th>
+                            <!-- <th>Cost Center Name</th> -->
+                            <th>PR Raised By</th>
+                            <!-- <th>MI Raised By</th> -->
+                            <!-- <th>Details</th> -->
+                            <th>PR Reference</th>
+                            <th>Status</th>
+                            <!-- <th>PR Remarks</th> -->
+                            <!-- <th>PR Approved Date</th> -->
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of purchaserequisition_list; let i = index;">
+                       
+                            <td>{{i + 1}}</td>
+                            <td style="width: 10%;">{{data.purchaserequisition_date}}</td>
+                            <td>{{data.purchaserequisition_gid}}</td>
+                            <!-- <td>{{data.costcenter_name}}</td> -->
+                            <td>{{data.pr_raisedby}}</td>
+                            <!-- <td>{{data.mr_raisedby}}</td> -->
+                            <!-- <td></td> -->
+                            <td>{{data.purchaserequisition_referencenumber}}</td>
+                            <td>{{data.overall_status}}</td>
+                            <!-- <td>{{data.purchaserequisition_remarks}}</td> -->
+                            <!-- <td class="text-end">{{data.approved_date}}</td> -->
+                            <td class="text-center text-nowrap">
+                                <button title="View" type="button" (click)="onview(data.purchaserequisition_gid)" class="btn btn-icon btn-sm bg-primary me-2" >
+                                    <span class="fa-solid fa-eye text-white  fs-6"></span></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+   
+    
+        </div>
+        </form>

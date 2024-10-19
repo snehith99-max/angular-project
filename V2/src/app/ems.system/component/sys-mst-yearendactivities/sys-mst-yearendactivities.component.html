@@ -1,0 +1,60 @@
+<div class="card">
+    <br>
+    <div class="row ms-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title"> Financial Year </h3>
+        </div>
+    </div>
+    <div class="row p-3">
+        <div class="col-lg-12 col-sm-12 col-md-12">
+            <div class="bg-white table-responsive rounded" style="padding: 0rem 1rem">
+                <table id="yearendactivities_list" class="table table-striped table-row-bordered gy-5 gs-7">
+                    <thead>
+                        <tr class="fw-bold fs-6 text-nowrap bg-lightblue text-blue">
+                            <th style="width: 25%;"> S.No </th>
+                            <th style="width: 30%;"> Year Start </th>
+                            <th style="width: 10%;"> Year End </th>
+                            <th class="text-center"> Action </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of yearendactivities_list; let i=index;">
+                            <td>{{i + 1}}</td>
+                            <td>{{data.fyear_start}}</td>
+                            <td>{{data.fyear_end ? data.fyear_end : 'Not Closed'}}</td>
+                            <td class="text-center">
+                                <button type="button" data-bs-toggle="modal"
+                                data-bs-target="#myModalcnfm" class="btn-secondary" *ngIf="!data.fyear_end" (click)="yearend_close(data.finyear_gid, data.start_year)">
+                                    <i class="fa-solid fa-calendar-check"></i> &nbsp; Year End Close
+                                </button>
+                                <span *ngIf="data.fyear_end">-----</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModalcnfm" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="text-center my-4">
+          <h2><b>Are you sure?</b></h2>
+          <br>
+          <p style="display: block;">Do you want to update the year end activities?</p>
+          <div class="text-center my-4">
+            <button class="btn-success btn-sm text-white me-4" (click)="onok()" data-bs-dismiss="modal">
+                <i class="fa-solid fa-square-check"></i> &nbsp;Ok
+            </button>&nbsp;
+            <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+              <i class="fas fa-close text-white"></i> &nbsp;Cancel
+            </button>
+  
+  
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

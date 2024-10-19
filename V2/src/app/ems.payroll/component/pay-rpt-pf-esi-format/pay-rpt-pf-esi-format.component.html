@@ -1,0 +1,41 @@
+<div class="card">
+  <div class="row ms-3 mt-3 d-flex align-items-center">
+    <div class="col">
+      <h3 class="card-title">Payment Summary</h3>
+    </div>
+
+  </div>
+  <div class="table-responsive">
+    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+      <table id="pfformat_list" class="table table-striped table-row-bordered gy-5 gs-7 ">
+        <thead>
+          <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+            <th>S.No</th>
+            <th>Month</th>
+            <th>Year</th>
+            <th>No.Of. Employees</th>
+            <th>Total Salary</th>
+            <th>PF Amount</th>
+            <th class="text-center bg-lightblue ">Action</th> 
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of pfformat_list; let i=index;" class="align-middle">
+            <td>{{i+1}}</td>
+            <td>{{data.month}}</td>
+            <td>{{data.sal_year}}</td>
+            <td>{{data.no_of_employee}}</td>
+            <td>{{data.earnedbasic_salary}}</td>
+            <td>{{data.pf_amount}}</td>
+            <td class="text-center text-nowrap">
+              <button title="PF" type="button" class="btn btn-icon btn-sm bg-success me-2"
+                (click)="onpf(data.month,data.sal_year)"><span class="fa-solid fa-usd fs-6"></span></button>
+              <button title="ESI" type="button" class="btn btn-icon btn-sm bg-primary me-2"
+                (click)="onesi(data.month,data.sal_year)"><span class="fa-solid fa-sack-dollar fs-6"></span></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

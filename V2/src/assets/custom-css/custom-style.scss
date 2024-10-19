@@ -1,0 +1,744 @@
+/* border color custom */
+.borderc-secondary {
+  border-color: rgb(209, 209, 209) !important;
+}
+
+.text-red {
+  color: red !important;
+}
+
+.text-white {
+  color: #fff !important;
+}
+
+
+/* background color custom blue */
+.bg-lightblue {
+  background-color: rgb(222, 240, 255) !important;
+}
+
+.bg-etdark {
+  background-color: #009688 !important;
+
+}
+
+.bg-mint{
+  background-color: #5df8c7!important;
+}
+
+.bg-darkedblue {
+  background-color: #001174 !important;
+}
+
+.bg-stssuccess {
+  background-color: #4caf50 !important;
+}
+
+.bg-inactive {
+  background-color: #c53030 !important;
+}
+
+.card-height55 {
+  min-height: 55px !important;
+}
+
+/* text color custom blue */
+.text-blue {
+  color: #2599ff !important
+}
+
+.font-bold {
+  font-weight: 420;
+}
+
+/* inpu field placeholder color*/
+::placeholder {
+  font-size: 11px !important;
+}
+
+.custom-input {
+  font-size: 13px !important;
+  height: 20px !important;
+  border-radius: 0px !important;
+}
+
+.form-control {
+  border-radius: 0px !important;
+  padding-left: 3px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  font-weight: 400 !important;
+  color: #000000 !important;
+}
+
+.form-control-lg {
+  min-height: calc(1em + 1rem + 2px);
+}
+
+.iti {
+
+  width: 92% !important;
+}
+
+.btn-primary {
+  color: #fff !important;
+  background-color: #009ef7 !important;
+  font-size: 1.1rem !important;
+  font-weight: 630 !important;
+  padding: 9px 16px 9px 13px !important;
+  border-radius: 3px;
+  border: 0;
+  position: relative;
+}
+
+.btn-primary:hover {
+  background-color: #038fe0 !important;
+
+}
+
+.btn-secondary {
+  background-color: #e1e3ea !important;
+  font-size: 1.1rem !important;
+  font-weight: 630 !important;
+  padding: 9px 16px 9px 13px !important;
+  border-radius: 3px;
+  border: 0;
+}
+
+.btn-secondary:hover {
+  background-color: #c2c3ca !important;
+}
+
+
+.btn-success {
+  background-color: #7fc79f !important;
+  color: #fff !important;
+  font-size: 1.1rem !important;
+  font-weight: 630 !important;
+  padding: 9px 16px 9px 13px !important;
+  border-radius: 3px;
+  border: 0;
+}
+
+.btn-success:hover {
+  background-color: #57c387 !important;
+}
+
+.btn-danger {
+  background-color: #f1416c !important;
+  color: #fff !important;
+  font-size: 1.1rem !important;
+  font-weight: 630 !important;
+  padding: 9px 16px 9px 13px !important;
+  border-radius: 3px;
+  border: 0;
+}
+
+.btn-danger:hover {
+  background-color: #d3395f !important;
+}
+
+.btn-warning {
+  background-color: #c9cd50 !important;
+  color: #fff !important;
+  font-size: 1.1rem !important;
+  font-weight: 630 !important;
+  padding: 9px 16px 9px 13px !important;
+  border-radius: 3px;
+  border: 0;
+  position: relative;
+}
+
+.btn-return {
+  color: #fff !important;
+  background-color: #55f560 !important;
+  font-size: 1.1rem !important;
+  font-weight: 630 !important;
+  padding: 9px 16px 9px 13px !important;
+  border-radius: 3px;
+  border: 0;
+  position: relative;
+}
+
+.btn-return:hover {
+  background-color: #a48902b3 !important;
+}
+
+.btn-pdf {
+  color: #fff !important;
+  background-color: #989594c3 !important;
+  font-size: 1.1rem !important;
+  font-weight: 630 !important;
+  padding: 9px 16px 9px 13px !important;
+  border-radius: 3px;
+  border: 0;
+  position: relative;
+  }
+.btn.pdf:hover {
+  background-color: #c9bbbb !important;
+}
+.btn-warning:hover {
+  background-color: #aca342 !important;
+}
+
+.btn-info {
+  background-color: #7239ea !important;
+  color: #fff !important;
+  font-size: 1.1rem !important;
+  font-weight: 630 !important;
+  padding: calc(0.775rem + 1px) calc(1.5rem + 1px) !important;
+  border-radius: 3px;
+  border: 0;
+}
+
+.btn-info:hover {
+  background-color: #6533d1 !important;
+}
+
+.table-striped tr:nth-child(even) {
+  background-color: #d7f0fa54;
+}
+
+
+/* Password Toogle icon*/
+.input-group {
+  position: relative;
+}
+
+.password-toggle {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+}
+
+.input-group:not(.has-validation)> :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating),
+.input-group:not(.has-validation)>.dropdown-toggle:nth-last-child(n+3),
+.input-group:not(.has-validation)>.form-floating:not(:last-child)>.form-control,
+.input-group:not(.has-validation)>.form-floating:not(:last-child)>.form-select {
+  border-top-right-radius: 9px !important;
+  border-bottom-right-radius: 9px !important;
+}
+
+input::file-selector-button {
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  padding: 0.5em 12px;
+  border: thin solid dodgerblue;
+  background-color: #009ef7;
+  border-radius: 3px;
+}
+
+.invalid-border {
+  border: 1px solid rgb(255, 63, 63);
+  border-radius: 0px;
+}
+
+.bg-view {
+  background-color: #0bb1b9;
+
+}
+
+.bg-view:hover {
+  background-color: #0bb1b9;
+
+}
+
+.bg-plus {
+  background-color: #0ca682;
+
+}
+
+.bg-plus:hover {
+  background-color: #0ca682;
+
+}
+
+.btn-publish {
+  background-color: #f78137;
+
+}
+
+.btn-publish:hover {
+  background-color: #f78137;
+
+}
+
+.btn-attach {
+  background-color: #45454b;
+
+}
+
+.btn-attach:hover {
+  background-color: #45454b;
+
+}
+
+.bg-temp {
+  background-color: #0b5278;
+
+}
+
+.bg-temp:hover {
+  background-color: #0b5278;
+
+}
+
+
+.bg-excel {
+  background-color: #229954;
+}
+
+.bg-excel:hover {
+  background-color: #1f8047;
+
+}
+
+.bg-export {
+  background-color: #e67e22;
+}
+
+.bg-export:hover {
+  background-color: #ca7123;
+
+}
+
+.bg-edit {
+  background-color: #28b463;
+}
+
+.bg-edit:hover {
+  background-color: #289e59;
+}
+
+.bg-amend {
+  background-color: #0bb1b9;
+}
+.bg-amend:hover {
+  background-color: #0bb1b9;
+}
+
+.bg-question {
+  background-color: #ee68f5;
+}
+
+.bg-question:hover {
+  background-color: #d062d6 !important;
+
+}
+
+
+.table> :not(caption)>*>* {
+  padding: 0.40rem 0.75rem !important;
+}
+
+thead tr {
+  height: 27px !important;
+}
+
+thead tr th{
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+replace the latest changes scss styles in .btn-icon .btn-icon {
+  border-radius: 7px !important;
+  color: #fff !important;
+  font-size: 1.1rem !important;
+  font-weight: 630 !important;
+  height: 32px !important;
+  padding-bottom: 15px !important;
+  border-radius: 3px;
+  padding-top: 17px !important;
+  transition: 0.3s !important;
+  cursor: pointer;
+}
+
+.cardHeadLeads {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  padding: 18px;
+  background-clip: border-box;
+  border: 0px solid rgba(0, 0, 0, 0);
+  border-radius: .25rem;
+  margin-bottom: 1.0rem;
+  box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+  transition: all .3s ease-in-out;
+  background-color: white;
+}
+
+////-----------------------------------------tooltip-------------------------------------------------------------////
+// TOOL TIP FOR ICONS
+.tooltip {
+  visibility: hidden;
+  background: #00000070;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+
+  color: white;
+  text-align: left;
+  border-radius: 5px;
+  padding: 4px 8px;
+  position: absolute;
+  z-index: 1;
+  top: calc(100% + 5px);
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transform-origin: top;
+  opacity: 0;
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.tooltip::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent rgba(0, 0, 0, 0.8) transparent;
+}
+
+.btn-primary:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(-50%, 0) scaleY(1);
+}
+
+.btn:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(-50%, 0) scaleY(1);
+  position: relative;
+}
+
+@keyframes tooltipShow {
+  0% {
+    transform: translate(50%, -50%) scaleY(0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(50%, -50%) scaleY(1);
+    opacity: 1;
+  }
+}
+
+/* Apply the animation */
+.tooltip {
+  animation: tooltipShow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.cardCount {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 25px;
+  height: 65px;
+  word-wrap: break-word;
+  // padding: 20px;
+  background-clip: border-box;
+  border: 0px solid rgba(0, 0, 0, 0);
+  border-radius: .25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+  transition: all .3s ease-in-out;
+  background-color: white;
+
+}
+
+.cardCount:hover {
+  box-shadow: rgba(0, 0, 0, 0.22) 0px 19px 43px;
+  transform: translate3d(0px, -2px, 0px);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.tooltips {
+  visibility: hidden;
+  background: #00000070;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  font-size: 1rem;
+  font-family: var(--bs-font-sans-serif);
+  font-style: normal;
+  font-weight: 400;
+  color: white;
+  text-align: left;
+  border-radius: 5px;
+  padding: 4px 8px;
+  position: absolute;
+  z-index: 1;
+  top: calc(70% + 5px);
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transform-origin: top left;
+  opacity: 0;
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.tooltips::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent rgba(0, 0, 0, 0.8) transparent;
+}
+
+.btn-primary:hover .tooltips {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(-50%, 0) scaleY(1);
+}
+
+.btn:hover .tooltips {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(-50%, 0) scaleY(1);
+}
+
+.count:hover .tooltips {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(-50%, 0) scaleY(1);
+}
+
+
+
+.btn-icon {
+  border-radius: 7px !important;
+  color: #fff !important;
+  font-size: 9px !important;
+  font-weight: 630 !important;
+  height: 21px !important;
+  padding-bottom: 13px !important;
+  padding-top: 15px !important;
+  transition: 0.3s !important;
+  cursor: pointer;
+}
+
+.btn-icon:hover {
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.5) !important;
+  transform: translateY(-2px) !important;
+  cursor: pointer;
+}
+
+.count {
+  transition: 0.3s;
+  padding: 5px 10px;
+  color: #000000;
+  background-color: rgb(234 237 240);
+  border-radius: 5px;
+  position: relative;
+}
+
+.count:hover {
+  background-color: rgb(27, 193, 239);
+  transform: scale(1.05);
+}
+
+
+
+.btn-selecttopreoceed {
+  background-color: #4b93ecdd !important;
+  color: #fff !important;
+  font-size: 1.1rem !important;
+  font-weight: 630 !important;
+  padding: 9px 16px 9px 13px !important;
+  border-radius: 3px;
+  border: 0;
+}
+
+.tool {
+  visibility: hidden;
+  background: #00000070;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  font-size: 1rem;
+  font-family: var(--bs-font-sans-serif);
+  font-style: normal;
+  font-weight: 400;
+  color: white;
+  text-align: left;
+  border-radius: 5px;
+  padding: 4px 8px;
+  position: absolute;
+  z-index: 1;
+  top: calc(70% + 5px);
+  left: 30%;
+  transform: translate(-50%, -50%) scale(0);
+  transform-origin: top left;
+  opacity: 0;
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.tool::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent rgba(0, 0, 0, 0.8) transparent;
+}
+
+.btn:hover .tool {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(-50%, 0) scaleY(1);
+}
+
+.Icon_hover:hover {
+  background-color: #f6f8fc;
+  font-weight: 600;
+  border-radius: 6px 6px 6px 6px;
+  color: black;
+}
+
+.icon_menu {
+  position: absolute;
+  width: auto;
+  right: 40px;
+  box-shadow: 4px 4px 7px rgba(174, 174, 192, .8);
+  color: #636363;
+  max-height: 123px;
+  overflow-y: auto;
+  overflow-x: hidden; //important
+  scrollbar-color: rgb(223, 247, 255) #ffffff;
+  z-index: 2;
+}
+
+.error_input_field {
+  color: red;
+  font-weight: bolder;
+}
+
+.invalid-border {
+  border-color: red !important;
+}
+
+
+button[disabled] {
+  background-color: #cecece !important;
+  font-size: 1.1rem ;
+  font-weight: 630 ;
+  padding: 9px 16px 9px 13px ;
+  border-radius: 3px;
+  cursor: not-allowed;
+  border: 0;
+}
+
+button[disabled]:hover {
+  background-color: #cecece !important;
+
+}
+
+.invalid-border {
+  border: 1px solid rgb(255, 63, 63);
+  border-radius: 0px;
+}
+
+.error_input_field {
+  color: red;
+  font-weight: bolder;
+}
+
+.nav-twotabs .twotab.active,
+.nav-twotabs .nav-items.show {
+  color: #ffffff !important;
+  background-color: #009EF7;
+}
+
+.twotab:hover {
+  background-color: #009EF7;
+  color: #ffffff !important;
+}
+
+.back-icon {
+
+  i {
+    font-size: 30px;
+    color: #2c1a94;
+    cursor: pointer;
+  }
+}
+
+.custom-width {
+  height: 27px !important;
+}
+
+.no-arrow .ng-arrow-wrapper {
+  display: none !important;
+}
+
+.no-arrow .ng-select-container {
+  padding-right: 0 !important;
+}
+
+//code by nizar
+.primary-button {
+  background-color: #42ac72;
+  color: #fff !important;
+  font-size: 1.1rem !important;
+  font-weight: 630 !important;
+  padding: 9px 16px 9px 13px !important;
+  border-radius: 3px;
+  border: 0;
+}
+
+.secondary-button {
+  background-color: #50cd89;
+  color: #fff !important;
+  font-size: 1.1rem !important;
+  font-weight: 630 !important;
+  padding: 9px 16px 9px 13px !important;
+  border-radius: 3px;
+  border: 0;
+}
+
+.no-menu-access 
+{ 
+    background-color: #f8aeb5;  
+    color: white;      
+}   
+.no-privileges-button
+{ 
+    background-color: #f8aeb5;
+    border: 2px solid #ff0000;
+    border-radius: 5px;
+    padding: 10px 10px;
+    color: #fff;
+    font-weight: bold;
+    cursor: not-allowed;
+}
+
+// For Tab -- Table
+.sample1 {
+  cursor: pointer;
+}
+
+.ellipsis {
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px; /* Adjust as necessary */
+}
+
+.text-secondary{
+  color: #656565 !important;
+}

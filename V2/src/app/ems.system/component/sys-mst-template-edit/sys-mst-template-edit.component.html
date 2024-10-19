@@ -1,0 +1,66 @@
+<div class="card">
+    <div class="card-title p-2 rounded-top bg-primary d-flex justify-content-between align-items-center">
+        <h1 class="fw-bolder text-white"><i class="fas fa-pen-to-square fs-2 me-2"></i>
+            Edit Template
+        </h1>
+        <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer me-3" 
+        routerLink="/system/SysMstTemplate"><i class="fa-solid fa-arrow-left text-blue mb-1"></i><span class="tooltips">Back</span></button>
+            </div>
+    <div class="card m-3">
+        <form [formGroup]="templateformedit">
+            <input formControlName="template_gid_edit" hidden type="text" class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary" name="template_gid_edit" />
+
+            <div class="d-flex flex-row flex-wrap mt-6 ms-3">
+                <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Template Name</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                      <input formControlName="template_name_edit" type="text"
+                        [ngStyle]="{ 'border-color': templateformedit.get('template_name_edit')?.hasError('required') && templateformedit.get('template_name_edit')?.touched || templateformedit.get('template_name_edit')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"
+                        placeholder="Template Name" />
+                      <div
+                        *ngIf="templateformedit.get('template_name_edit')?.hasError('required') && templateformedit.get('template_name_edit')?.touched"
+                        class="text-red ms-2">Template Name is required.</div>
+                      <div *ngIf="templateformedit.get('template_name_edit')?.hasError('pattern')" class="text-red ms-2">Space at the beginning is not allowed.</div>
+                    </div>
+                  </div>
+                <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Template Type</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <ng-select class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                        [(ngModel)]="mdltemplatetype_gid" formControlName="templatetype_gid_edit" bindLabel="templatetype_name"
+                        bindValue="templatetype_gid" [items]="templatetypeedit_list"
+                        [ngClass]="{'invalid-border':templateformedit.get('templatetype_gid_edit')?.invalid && templateformedit.get('templatetype_gid_edit')?.touched}"
+                        [ngStyle]="templateformedit.get('template_name_edit')?.hasError('required')" placeholder="Select an option"></ng-select>
+                        <div *ngIf="templatetypeeditControl.invalid && templatetypeeditControl.touched">
+                            <div *ngIf="templatetypeeditControl.hasError('required')" class="text-red">Template type is required.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row flex-wrap mt-6 ms-3">
+                <div class="col-12 col-lg-12 col-md-12 col-sm-12"><span class="font-bold required">Template Content</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <angular-editor [config]="config" formControlName="template_content_edit"></angular-editor>
+                        <div *ngIf="templateformedit.get('template_content_edit')?.hasError('required') && templateformedit.get('template_content_edit')?.touched"
+                        class="text-red ms-2">Template Content is required.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-6">
+                <div class="text-center my-4">
+                    <button type="submit" class="btn-success btn-sm text-white me-4" [disabled]="templateformedit.invalid" 
+                    [ngClass]="{'primary-button': !templateformedit.invalid, 'secondary-button': templateformedit.invalid}" (click)="templateupdate()">   
+                    <i class="fas fa-check text-white fs-5 me-3"></i>
+                    Update
+                    </button>
+        
+                    <button class="btn-primary btn-sm text-white me-4" (click)="back()">
+                        <i class="fa fa-arrow-left fs-5 text-center me-2"></i>
+                        Back
+                    </button>
+                </div>
+            </div>
+        </form>        
+    </div>
+</div>

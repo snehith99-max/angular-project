@@ -1,0 +1,313 @@
+<form [formGroup]="reactiveFormadd" #form="ngForm">
+    <div class="card rounded-top">
+
+        <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+            <h3 class="fw-bolder text-white">
+                ADD SALARY GRADE TEMPLATE
+            </h3>
+        </div>
+
+        <div class="d-flex flex-row m-6 flex-wrap">
+
+            <div class="col-12 col-lg-2 col-md-3 col-sm-12 "><span class="font-bold ms-20">Select Salary Mode</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 ms-20">
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                        <input class="form-check-input" name="salary_name" type="radio" value="BASIC"
+                            formControlName="salary_name" />
+                        <label class="form-check-label text-gray-700 text-nowrap" for="taxconfirmedNew">Basic</label>
+
+                        <input class="form-check-input ms-6" name="salary_name" type="radio" value="GROSS"
+                            formControlName="salary_name" />
+                        <label class="form-check-label text-gray-700 text-nowrap" for="taxconfirmedOld">Gross</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-2 col-md-3 col-sm-12">
+                <span class="font-bold required">Salary Grade Template Name</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+                    <input type="text" formControlName="template_name"
+                        [ngStyle]="{ 'border-color': reactiveFormadd.get('template_name')?.hasError('required') && reactiveFormadd.get('template_name')?.touched ? 'red' : 'rgb(209, 209, 209)' }"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white mt-2"
+                        placeholder="Enter Template Name" required />
+
+                    <div *ngIf="reactiveFormadd.get('template_name')?.hasError('required') &&
+                   reactiveFormadd.get('template_name')?.touched " class="text-red">Template Name is required.
+                    </div>
+                    <div *ngIf="reactiveFormadd.get('template_name')?.hasError('pattern')" class="text-red ms-2">Space
+                        at the
+                        beginning is not allowed.</div>
+
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-2 col-md-4 col-sm-12">
+                <span class="font-bold required">Start Salary</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" formControlName="basic_salary"
+                        [ngStyle]="{ 'border-color': reactiveFormadd.get('basic_salary')?.hasError('required') && reactiveFormadd.get('basic_salary')?.touched ? 'red' : 'rgb(209, 209, 209)' }"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white mt-2"
+                        placeholder="Enter Start Salary" required (keypress)="onKeyPress($event)" />
+                    <div *ngIf="reactiveFormadd.get('basic_salary')?.hasError('required') && reactiveFormadd.get('basic_salary')?.touched "
+                        class="text-red">Start salary required.</div>
+                </div>
+            </div>
+
+
+            <button title="Go" type="button" class="btn btn-icon btn-sm bg-primary ms-2 me-2 mt-8"
+                (click)="fetchdetails1()">
+                <span class="fa-solid fa-arrow-right fs-6" style="color: #ffffff;"></span>
+            </button>
+
+            <script>
+                let buttonClicked = false;
+
+                function fetchdetails1() {
+                    if (!buttonClicked) {
+                        alert("Button clicked!");
+                        buttonClicked = true;
+                    }
+                }
+            </script>
+
+        </div>
+
+
+        <div class="card mt-4 summary" *ngIf="buttonClicked">
+            <div class="card-header">
+                <h3 class="card-title">Additional Component</h3>
+            </div>
+            <div class="table-responsive">
+                <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                    <table id="" class="table border-bottom gs-7">
+                        <thead>
+
+                            <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                <th rowspan="2">S.No</th>
+                                <th rowspan="2">Component Group</th>
+                                <th rowspan="2">Component Name</th>
+                                <th colspan="2" style="text-align: center;">Contribution</th>
+                            </tr>
+                            <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                <th style="text-align: center;">Employee</th>
+                                <th style="text-align: center;">Employer</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of addition_list; let i=index;" class="align-middle">
+
+                                <td>{{i+1}}</td>
+                                <td>{{data.componentgroup_name}}</td>
+                                <td>
+
+                                    <ng-select class="custom col-lg-11 col-06 col-md-06 col-sm-11 fv-row"
+                                        (focus)="getoptions(data.componentgroup_name, i)"
+                                        (ngModelChange)="calculateaddition1($event, i)" style="width: 200px;"
+                                        formControlName="component_name" bindLabel="component_name"
+                                        bindValue="salarycomponent_gid" [items]="componentOptionsadd[i]"
+                                        placeholder="Select a component" [appendTo]="'body'"
+                                        [(ngModel)]="groupname[i]"></ng-select>
+                                </td>
+
+                                <td style="text-align: center;">
+                                    <input type="text" [(ngModel)]="data.employee_contribution"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                        formControlName="employee_contribution_{{i}}" placeholder="0.00"
+                                        style="width: 100px; display: inline-block; text-align: right;"
+                                        (ngModelChange)="onBasicSalaryChange()" pattern="[0-9]*"
+                                        (keypress)="onKeyPress($event)" />
+                                </td>
+
+                                <td style="margin-left: -100; text-align: center;">
+                                    <input type="text" [(ngModel)]="data.employer_contribution"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                        formControlName="employer_contribution_{{i}}" placeholder="0.00"
+                                        style="width: 100px; display: inline-block; text-align: right;"
+                                        (ngModelChange)="onBasicSalaryChange()" pattern="[0-9]*"
+                                        (keypress)="onKeyPress($event)" />
+
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; margin-top: 10px;margin-bottom: 10px;"
+                *ngIf="buttonClicked">
+                <div>
+                    <span><span class="font-bold">Gross Salary</span></span>
+                    <input type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                        formControlName="gross_salary" placeholder="0.00"
+                        style="width: 100px; display: inline-block; text-align: right; margin-left: 10px;" readonly>
+                    <input type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                        formControlName="grand_salary" placeholder="0.00"
+                        style="width: 100px; display: inline-block; text-align: right; margin-left: 10px;margin-right: 80px;"
+                        readonly>
+                </div>
+            </div>
+
+
+            <div class="card-header">
+                <h3 class="card-title">Deduction Component</h3>
+            </div>
+            <div class="table-responsive">
+                <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                    <table id="" class="table border-bottom gs-7">
+                        <thead>
+                            <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                <th rowspan="2">S.No</th>
+                                <th rowspan="2">Component Group</th>
+                                <th rowspan="2">Component Name</th>
+                                <th colspan="2" style="text-align: center;">Contribution</th>
+                            </tr>
+                            <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                <th style="text-align: center;">Employee</th>
+                                <th style="text-align: center;">Employer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of deduction_list; let i=index;" class="align-middle">
+                                <td>{{i+1}}</td>
+                                <td>{{data.componentgroup_name}}</td>
+                                <td>
+
+                                    <ng-select class="custom col-lg-11 col-06 col-md-06 col-sm-11 fv-row"
+                                        (focus)="getdeduction(data.componentgroup_name,i)"
+                                        (ngModelChange)="calculatededuction($event, i)" style="width: 200px;"
+                                        formControlName="component_name" bindLabel="component_name"
+                                        bindValue="salarycomponent_gid" [items]="componentOptionsded[i]"
+                                        placeholder="Select a component" [appendTo]="'body'"
+                                        [(ngModel)]="group[i]"></ng-select>
+
+
+                                </td>
+
+                                <td style="text-align: center;">
+                                    <input type="text" [(ngModel)]="data.demployee_contribution"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                        formControlName="demployee_contribution_{{i}}" placeholder="0.00"
+                                        style="width: 100px; display: inline-block; text-align: right;"
+                                        (ngModelChange)="onBasicSalaryChange()" pattern="[0-9]*"
+                                        (keypress)="onKeyPress($event)" />
+                                </td>
+
+                                <td style="margin-left: -100; text-align: center;">
+                                    <input type="text" [(ngModel)]="data.demployer_contribution"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                        formControlName="demployer_contribution_{{i}}" placeholder="0.00"
+                                        style="width: 100px; display: inline-block; text-align: right;"
+                                        (ngModelChange)="onBasicSalaryChange()" pattern="[0-9]*"
+                                        (keypress)="onKeyPress($event)" />
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+            <div class="card-header">
+                <h3 class="card-title">Others Component</h3>
+            </div>
+            <div class="table-responsive">
+                <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                    <table id="" class="table border-bottom gs-7">
+                        <thead>
+                            <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                <th rowspan="2">S.No</th>
+                                <th rowspan="2">Component Group</th>
+                                <th rowspan="2">Component Name</th>
+                                <th colspan="2" style="text-align: center;">Contribution</th>
+                            </tr>
+                            <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                <th style="text-align: center;">Employee</th>
+                                <th style="text-align: center;">Employer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of others_list; let i=index;" class="align-middle">
+                                <td>{{i+1}}</td>
+                                <td>{{data.componentgroup_name}}</td>
+                                <td>
+
+                                    <ng-select (focus)="getotherscomponents(data.componentgroup_name,i)"
+                                        (ngModelChange)="calculateothers($event, i)" style="width: 200px;"
+                                        formControlName="component_name" bindLabel="component_name"
+                                        bindValue="salarycomponent_gid" [items]="componentOptionsothers[i]"
+                                        placeholder="Select a component" [appendTo]="'body'"
+                                        [(ngModel)]="groupothers[i]"></ng-select>
+
+
+                                </td>
+
+                                <td style="text-align: center;">
+                                    <input type="text" [(ngModel)]="data.oemployee_contribution"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                        formControlName="oemployee_contribution_{{i}}" placeholder="0.00"
+                                        style="width: 100px; display: inline-block; text-align: right;"
+                                        (ngModelChange)="onBasicSalaryChange()" pattern="[0-9]*"
+                                        (keypress)="onKeyPress($event)" />
+                                </td>
+
+                                <td style="margin-left: -100; text-align: center;">
+                                    <input type="text" [(ngModel)]="data.oemployer_contribution"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                        formControlName="oemployer_contribution_{{i}}" placeholder="0.00"
+                                        style="width: 100px; display: inline-block; text-align: right;"
+                                        (ngModelChange)="onBasicSalaryChange()" pattern="[0-9]*"
+                                        (keypress)="onKeyPress($event)" />
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+
+
+            <div style="display: flex; justify-content: flex-end; margin-top: 10px;margin-bottom: 10px;"
+                *ngIf="buttonClicked">
+                <div>
+                    <span><span class="font-bold">Net Salary</span></span>
+                    <input type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                        formControlName="net_salary" placeholder="0.00"
+                        style="width: 100px; display: inline-block; text-align: right; margin-left: 10px;">
+                </div>
+
+                <div>
+                    <span style=" margin-left: 20px;"><span class="font-bold">CTC</span></span>
+                    <input type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                        formControlName="ctc" placeholder="0.00"
+                        style="width: 100px; display: inline-block; text-align: right; margin-left: 10px;">
+                </div>
+            </div>
+
+
+
+            <div class="text-center my-4">
+                <button class="btn-success text-white" (click)="submit()">
+                    <i class="fas fa-check text-white fs-5"></i> &nbsp; Submit
+                </button>
+                <button style="margin-left: 10px;" class="btn-primary btn-sm text-white me-4"
+                    routerLink="/payroll/PayTrnSalaryGradeTemplate">
+                    <i class="fas fa-arrow-left"></i> &nbsp; Back
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+</form>

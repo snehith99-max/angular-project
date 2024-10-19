@@ -1,0 +1,296 @@
+<div class="m-5 me-1 d-flex flex-wrap mb-0 mt-0 ">
+    <div class="col-12 col-lg-12 row">
+        <div class="m-3 me-0 card border p-3 rounded" style="height:360px; border: 2px solid rgb(255, 254, 254);">
+            <div class="card-title p-5 rounded-top bg-primary d-flex justify-content-between align-items-center">
+                <h1 class="fw-bolder ms-2 text-white">Income & Expense</h1>
+            </div>
+
+            <div class="d-flex flex-column mixed-widget-2-chart card-rounded-bottom">
+                <ng-container *ngIf="overallchartflag">
+                    <apx-chart [series]="leadstagechart.series" [chart]="leadstagechart.chart"
+                        [xaxis]="leadstagechart.xaxis" [yaxis]="leadstagechart.yaxis"
+                        [dataLabels]="leadstagechart.dataLabels" [stroke]="leadstagechart.stroke"
+                        [legend]="leadstagechart.legend" [fill]="leadstagechart.fill" [states]="leadstagechart.states"
+                        [tooltip]="leadstagechart.tooltip" [colors]="leadstagechart.colors"
+                        [markers]="leadstagechart.markers" [plotOptions]="leadstagechart.plotOptions">
+                    </apx-chart>
+                </ng-container>
+
+                <ng-container *ngIf="!overallchartflag">
+                    <div class="d-flex justify-content-center">
+                        <span>
+                            <img src=".\assets\media\images\No_data_found.png" class="h-78px w-300px">
+                        </span>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card ms-5">
+    <div class="row mt-3 ms-3 d-flex algin-items-center">
+        <div class="col">
+            <h3 class="card-title">Income</h3>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded table-responsive" style="overflow: auto;max-height: 300px;">
+            <table id="IncomeSummary_list" class="table-striped table table-row-bordered border-bottom gs-7 align-bottom">
+                <thead>
+                    <tr class="fw-bolder fs-5 bg-lightblue text-blue align-bottom text-nowrap">
+                        <th>Account Group</th>
+                        <th>Account SubGroup</th>
+                        <th>Account Ledger</th>
+                        <th *ngFor="let month of incomeuniqueMonths" class="text-end">{{ month }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of groupedIncomeSummary; let i=index;" class="border border-secondary">
+                        <td *ngIf="i === 0 || groupedIncomeSummary[i-1].MainGroup_name !== data.MainGroup_name"
+                            [attr.rowspan]="getIncomeRowSpan(data.MainGroup_name)" style="vertical-align: top;">
+                            {{data.MainGroup_name}}
+                        </td>
+                        <td *ngIf="i === 0 || groupedIncomeSummary[i-1].subgroup_name !== data.subgroup_name"
+                            [attr.rowspan]="getIncomeRowSpanForSubgroup(data.subgroup_name)" style="vertical-align: top;">
+                            {{data.subgroup_name}}
+                        </td>
+                        <td style="max-width: 300px;word-wrap: break-word;">{{data.account_name}}</td>
+
+                        <td *ngFor="let month of incomeuniqueMonths" class="text-end">
+                            {{ data[month] }}
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="border border-secondary">
+                        <td colspan="3" style="color:maroon;font-weight: bolder;text-align: right;">Total</td>
+                        <td *ngFor="let month of incomeuniqueMonths" style="color:maroon;font-weight: bolder;"
+                            class="text-end">
+                            {{ totalincomeByMonth[month] | number:'1.2-2' }}
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="card ms-5 mt-3">
+    <div class="row mt-3 ms-3 d-flex algin-items-center">
+        <div class="col">
+            <h3 class="card-title">Expense</h3>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded table-responsive" style="overflow: auto;max-height: 300px;">
+            <table id="ExpenseSummary_list" class="table-striped table table-row-bordered border-bottom gs-7 align-bottom">
+                <thead>
+                    <tr class="fw-bolder fs-5 bg-lightblue text-blue align-bottom text-nowrap">
+                        <th>Account Group</th>
+                        <th>Account SubGroup</th>
+                        <th>Account Ledger</th>
+                        <th *ngFor="let month of expenseuniqueMonths" class="text-end">{{ month }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of ExpenseSummary_list; let i=index;" class="border border-secondary">
+                        <td *ngIf="i === 0 || ExpenseSummary_list[i-1].MainGroup_name !== data.MainGroup_name"
+                            [attr.rowspan]="data.mainGroupSpan" style="vertical-align: top;">
+                            {{data.MainGroup_name}}
+                        </td>
+                        <td *ngIf="i === 0 || ExpenseSummary_list[i-1].subgroup_name !== data.subgroup_name"
+                            [attr.rowspan]="data.subGroupSpan" style="vertical-align: top;">
+                            {{data.subgroup_name}}
+                        </td>
+                        <td style="max-width: 300px;word-wrap: break-word;">{{data.account_name}}</td>
+
+                        <td *ngFor="let month of expenseuniqueMonths" class="text-end">
+                            {{ getExpenseAmountForMonth(data.account_name, month) }}
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="border border-secondary">
+                        <td colspan="3" style="color:maroon;font-weight: bolder;text-align: right;">Total</td>
+                        <td *ngFor="let month of expenseuniqueMonths" style="color:maroon;font-weight: bolder;"
+                            class="text-end">
+                            {{ totalexpenseByMonth[month] | number:'1.2-2' }}
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="card ms-5">
+    <div class="row mt-3 ms-3 d-flex algin-items-center">
+        <div class="col">
+            <h3 class="card-title">Expense</h3>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded table-responsive" style="overflow: auto;max-height: 300px;">
+            <table id="ExpenseSummary_list"
+                class="table-striped table table-row-bordered border-bottom gs-7 align-bottom">
+                <thead>
+                    <tr class="fw-bolder fs-5 bg-lightblue text-blue align-bottom text-nowrap">
+                        <th>Account Group</th>
+                        <th>Account SubGroup</th>
+                        <th>Account Ledger</th>
+                        <th *ngFor="let month of expenseuniqueMonths" class="text-end">{{ month }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of groupedExpenseSummary; let i=index;" class="border border-secondary">
+                        <td *ngIf="i === 0 || groupedExpenseSummary[i-1].MainGroup_name !== data.MainGroup_name"
+                            [attr.rowspan]="getExpenseRowSpan(data.MainGroup_name)" style="vertical-align: top;">
+                            {{data.MainGroup_name}}
+                        </td>
+                        <td *ngIf="i === 0 || groupedExpenseSummary[i-1].subgroup_name !== data.subgroup_name"
+                            [attr.rowspan]="getExpenseRowSpanForSubgroup(data.subgroup_name)" style="vertical-align: top;">
+                            {{data.subgroup_name}}
+                        </td>
+                        <td style="max-width: 300px;word-wrap: break-word;">{{data.account_name}}</td>
+
+                        <td *ngFor="let month of expenseuniqueMonths" class="text-end">
+                            {{ data[month] }}
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="border border-secondary">
+                        <td colspan="3" style="color:maroon;font-weight: bolder;text-align: right;">Total</td>
+                        <td *ngFor="let month of expenseuniqueMonths" style="color:maroon;font-weight: bolder;"
+                            class="text-end">
+                            {{ totalexpenseByMonth[month] | number:'1.2-2' }}
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+<!-- <thead>
+    <tr class="fw-bolder fs-5 bg-lightblue text-blue align-bottom text-nowrap">
+        <th></th>
+        <th>Account Group</th>
+        <th>Account SubGroup</th>
+        <th>Account Ledger</th>
+        <th>Month</th>
+        <th>Amount</th>
+        <th class="text-end">August</th>
+        <th class="text-end">July</th>
+        <th class="text-end">June</th>
+        <th class="text-end">May</th>
+        <th class="text-end">April</th>
+        <th class="text-end">March</th>
+    </tr>
+</thead>
+<tbody>
+    <tr *ngFor="let data of IncomeSummary_list; let i=index;" class="border border-secondary">
+        <td class="cursor-pointer" (click)="toggleVisibility(data)">
+            <i class="fa-solid fa-minus fw-bold text-blue fs-3" ></i>
+            <i class="fa-solid fa-plus fw-bold text-blue fs-3" ></i>
+        </td>
+        <td *ngIf="i === 0 || IncomeSummary_list[i-1].MainGroup_name !== data.MainGroup_name" [attr.rowspan]="data.mainGroupSpan" style="vertical-align: top;">
+            {{data.MainGroup_name}}
+        </td>
+        <td *ngIf="i === 0 || IncomeSummary_list[i-1].subgroup_name !== data.subgroup_name" [attr.rowspan]="data.subGroupSpan" style="vertical-align: top;">
+            {{data.subgroup_name}}
+        </td>
+        <td style="max-width: 300px;word-wrap: break-word;">{{data.account_name}}</td>
+        <td class="text-end">{{data.transaction_year}}</td>
+        <td class="text-end">{{data.transaction_amount}}</td>
+        <td class="text-end">{{data.credit_august}}</td>
+        <td class="text-end">{{data.credit_july}}</td>
+        <td class="text-end">{{data.credit_june}}</td>
+        <td class="text-end">{{data.credit_may}}</td>
+        <td class="text-end">{{data.credit_april}}</td>
+        <td class="text-end">{{data.credit_march}}</td>
+    </tr>
+
+    <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="color:maroon;font-weight: bolder;text-align: right;">Total</td>
+                    <td style="color:maroon;font-weight: bolder;text-align: center;">{{august}}</td>
+                    <td style="color:maroon;font-weight: bolder;text-align: center;">{{july}}</td>
+                    <td style="color:maroon;font-weight: bolder;text-align: center;">{{june}}</td>
+                    <td style="color:maroon;font-weight: bolder;text-align: center;">{{may}}</td>
+                    <td style="color:maroon;font-weight: bolder;text-align: center;">{{april}}</td>
+                    <td style="color:maroon;font-weight: bolder;text-align: center;">{{march}}</td>
+                </tr>
+</tbody> -->
+
+
+
+<!-- <div class="card ms-5">
+    <div class="row mt-3 ms-3 d-flex algin-items-center">
+        <div class="col">
+            <h3 class="card-title">Expense</h3>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded table-responsive" style="overflow: auto;max-height: 300px;">
+            <table id="IncomeSummary_list"
+                class="table-striped table table-row-bordered border-bottom gs-7 align-bottom">
+                <thead>
+                    <tr class="fw-bolder fs-5 bg-lightblue text-blue align-bottom text-nowrap">
+                        <th>Account Group</th>
+                        <th>Account SubGroup</th>
+                        <th>Account Ledger</th>
+                        <th class="text-end">August</th>
+                        <th class="text-end">July</th>
+                        <th class="text-end">June</th>
+                        <th class="text-end">May</th>
+                        <th class="text-end">April</th>
+                        <th class="text-end">March</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of ExpenseSummary_list; let i=index;" class="border border-secondary">
+                        <td *ngIf="i === 0 || ExpenseSummary_list[i-1].MainGroup_name !== data.MainGroup_name" [attr.rowspan]="data.mainGroupSpan" style="vertical-align: top;">
+                            {{data.MainGroup_name}}
+                        </td>
+                        <td *ngIf="i === 0 || ExpenseSummary_list[i-1].subgroup_name !== data.subgroup_name" [attr.rowspan]="data.subGroupSpan" style="vertical-align: top;">
+                            {{data.subgroup_name}}
+                        </td>
+                        <td style="max-width: 300px;word-wrap: break-word;">{{data.account_name}}</td>
+                        <td class="text-end">{{data.credit_august}}</td>
+                        <td class="text-end">{{data.credit_july}}</td>
+                        <td class="text-end">{{data.credit_june}}</td>
+                        <td class="text-end">{{data.credit_may}}</td>
+                        <td class="text-end">{{data.credit_april}}</td>
+                        <td class="text-end">{{data.credit_march}}</td>
+                    </tr>
+                </tbody>
+                <tr>                    
+                    <td></td>
+                    <td></td>
+                    <td style="color:maroon;font-weight: bolder;text-align: right;">Total</td>
+                    <td style="color:maroon;font-weight: bolder;text-align: center;">{{purchase_august}}</td>
+                    <td style="color:maroon;font-weight: bolder;text-align: center;">{{purchase_july}}</td>
+                    <td style="color:maroon;font-weight: bolder;text-align: center;">{{purchase_june}}</td>
+                    <td style="color:maroon;font-weight: bolder;text-align: center;">{{purchase_may}}</td>
+                    <td style="color:maroon;font-weight: bolder;text-align: center;">{{purchase_april}}</td>
+                    <td style="color:maroon;font-weight: bolder;text-align: center;">{{purchase_march}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div> -->

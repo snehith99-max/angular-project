@@ -1,0 +1,163 @@
+.ellipsis {
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px; /* Adjust as necessary */
+}
+.primary-button {
+    background-color: #42ac72;
+    color: #fff !important;
+    font-size: 1.1rem !important;
+    font-weight: 630 !important;
+    padding: 9px 16px 9px 13px !important;
+    border-radius: 3px;
+    border: 0;
+}
+.bg-upload{
+  background-color: #F2AE30;
+}
+.card-body12 {
+    // width: 160px;
+    height: 36px;  
+  }
+  .border-violet {
+  
+    border-left: 5px solid  #4604fc !important;
+  
+  }
+  .radius-10 {
+    border-radius: 10px !important;
+  }
+
+  .badge-outline{
+    padding-top: 1px;
+    padding-bottom: 1px;
+  }
+  .widgets-icons-2 {
+  
+    width: 38px;
+  
+    height: 38px;
+  
+    display: flex;
+  
+    align-items: center;
+  
+    justify-content: center;
+  
+    background-color: #ededed;
+  
+    font-size: 27px;
+  
+    border-radius: 10px;
+  
+  }
+  
+  .cardHeads {
+  
+    position: relative;
+  
+    display: flex;
+  
+    flex-direction: column;
+  
+    min-width: 0;
+  
+    word-wrap: break-word;
+  
+    padding: 18px;
+  
+    background-clip: border-box;
+  
+    border: 0px solid rgba(0, 0, 0, 0);
+  
+    border-radius: .25rem;
+  
+    margin-bottom: 1.0rem;
+  
+    box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+  
+    transition: all .3s ease-in-out;
+  
+    background-color: white;
+  
+  }
+  
+  
+  .bg-gradient-violet {
+  
+    background: #9f89dd;
+  
+    background: -webkit-linear-gradient(45deg, #9f89dd, #4604fc)!important;
+  
+    background: linear-gradient(45deg, #9f89dd, #4604fc)!important;
+  
+  }
+.secondary-button {
+    background-color: #50cd89;
+    color: #fff !important;
+    font-size: 1.1rem !important;
+    font-weight: 630 !important;
+    padding: 9px 16px 9px 13px !important;
+    border-radius: 3px;
+    border: 0;
+}
+
+.invalid-border {
+
+    border: 1px solid rgb(255, 63, 63);
+    border-radius: 10px;
+
+}
+
+/* The Modal (background) */
+.modals {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 60px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modals-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modals-content {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {transform: scale(0)}
+  to {transform: scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}

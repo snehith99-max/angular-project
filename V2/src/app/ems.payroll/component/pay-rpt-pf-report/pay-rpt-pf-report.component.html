@@ -1,0 +1,69 @@
+<form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="card">
+        <div class="row ms-3 mt-3 d-flex align-items-center">
+            <div class="col">
+                <h3 class="card-title">PF Summary</h3>
+            </div>
+
+            <div class="col me-5">
+                <button title="Export PF Report" type="button" class="btn btn-icon btn-sm bg-etdark me-2 mt-2 float-end" (click)="pftxtfrmt()">
+                  <span class="fs-2 fa-solid fa-file-lines"></span>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="table-responsive">
+            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                <table id="pf_list" class="table table-striped table-row-bordered gy-5 gs-7 ">
+                    <thead>
+                        <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                            <th>S.No</th>
+                            <th>UAN</th>
+                            <th>ECR / UAN Repository</th>
+                            <th>Gross</th>
+                            <th>EPF</th>
+                            <th>EPS</th>
+                            <th>EDLI</th>
+                            <th>EE</th>
+                            <th>EPS</th>
+                            <th>ER</th>
+                            <th>NCP Days</th>
+                            <th>Refunds</th>
+                            <th>Pension Share</th>
+                            <th>ER PF Share</th>
+                            <th>EE Share</th>
+                            <th>Posting Location of the member</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of pf_list; let i=index;" class="align-middle">
+                            <td>{{i+1}}</td>
+                            <td>{{data.uan_no}}</td>
+                            <td>{{data.employee_name}}</td>
+                            <td>{{data.Gross}}</td>
+                            <td>{{data.EPF}}</td>
+                            <td>{{data.EPS}}</td>
+                            <td>{{data.EDLI}}</td>
+                            <td>{{data.EE}}</td>
+                            <td>{{data.EPS1}}</td>
+                            <td>{{data.ER}}</td>
+                            <td>{{data.lop_days}}</td>
+                            <td>{{data.Refunds}}</td>
+                            <td>{{data.Pension_Share}}</td>
+                            <td>{{data.ER_PF_Share}}</td>
+                            <td>{{data.EE_Share}}</td>
+                            <td>{{data.Posting_location_of_the_member}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="text-center my-4">
+            <button class="btn-primary btn-sm text-white me-4" routerLink="/payroll/PayRptPfEsiFormat">
+                <i class="fas fa-arrow-left me-3"></i>Back
+            </button>
+        </div>
+    </div>
+</form>

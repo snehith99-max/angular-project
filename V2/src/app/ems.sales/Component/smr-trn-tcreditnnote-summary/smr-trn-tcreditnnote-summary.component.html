@@ -1,0 +1,121 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Credit Note Summary</h3>
+        </div>
+
+        <div class="col me-5">
+            <button type="button" title="Raise Credit Note" class="btn-primary btn-sm text-white me-4 float-end"
+                routerLink="/smr/SmrTrnTcreditnoteaddproceed">
+                <i class="fas fa-plus"></i>&nbsp;Raise Credit Note
+            </button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="creditnotesummary_list" class="table table-striped table-row-bordered gy-5 gs-7 ">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th style="width: 1%;text-align: center;">S.No </th>
+                        <th style="text-align: center;">Credit Date</th>
+                        <th style="width: 2%;">Credit Note No.</th>
+                        <th style="text-align: center;">Invoice Date</th>
+                        <th style="text-align: center;">Invoice Ref. No.</th>
+                        <th style="text-align: center;">Company Name </th>
+                        <th style="text-align: center;">Invoice Amount</th>
+                        <th class="text-center">Credit Amount</th>
+                        <th style="display: none;"></th>
+                        <th style="width: 2%;" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of creditnotesummary_list; let i=index;">
+                        <td style="width: 1%;">{{i+1}}</td>
+                        <td style="text-align: center;">{{data.credit_date}}</td>
+                        <td class="text-nowrap" style="width: 2%;">{{data.creditnote_gid}}</td>
+                        <td style="width:5%;text-align: center;">{{data.invoice_date}}</td>
+                        <td class="text-nowrap">{{data.invoiceref_no}}</td>
+                        <td>{{data.customer_name}}</td>
+                        <td style="text-align: right;">{{data.invoice_amount}}</td>
+                        <td style="text-align:right;">{{data.credit_amount}}</td>
+                        <td style="display: none;">{{data.receipt_gid}}</td>
+
+                        <td class="text-center" >
+                            
+                            <button type="button" title="View" class="btn btn-icon btn-sm bg-primary me-2 "
+                            (click)="onview(data.invoice_gid)"><span
+                                    class="fa-solid fa-eye text-white fs-5"></span></button>
+
+                            <button  type="button" title="Stock Return" 
+                                class="btn btn-icon btn-sm btn-return me-2 "
+                                (click)="onStockReturn(data.invoice_gid)"><i
+                                    class="bi bi-arrow-return-left fs-5"></i></button>
+
+                                    <button title="Pdf" type="button" data-bs-toggle="modal" data-bs-target="#myModalPdf"
+                                     (click)="CreditPDF(data.creditnote_gid, data.invoice_gid)"
+                                    class="btn btn-icon btn-sm background-color6 me-2 "
+                                    style="background: radial-gradient(circle, #47acbe 0%, #4aa5b9 100%);"><span class="fa-solid fa-file-pdf fs-6"
+                                    ></span>
+                                </button>
+
+                                <button type="button" (click)="openModaldelete(data.creditnote_gid,data.receipt_gid)" data-bs-toggle="modal"
+                                        data-bs-target="#myModaldeleteQA" class="btn btn-icon btn-sm bg-danger me-1">
+                                        <i class="fa-solid fa-trash"></i>
+                                        </button>
+                    </td>
+                        <!-- <td class="text-center text-nowrap">
+                            <span (click)="toggleOptions(data)" style="cursor: pointer;">
+                                <button class="btn me-2 p-1 "><span class="fa-solid fa-ellipsis-vertical fs-1 "
+                                        style="color: #4d4d4d;"></span></button>
+                                <div *ngIf="showOptionsDivId === data"
+                                    class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                                    <div class="d-flex p-3 pb-3 Icon_hover" (click)="onview(data.invoice_gid)"
+                                        *ngIf="data.has_child != 'N'">
+                                        <span><i class="fa-solid fa-eye  fs-3 me-4"></i></span>
+                                        <span>View</span>
+                                    </div>
+                                    <div class="d-flex p-3 pb-3 Icon_hover"
+                                        (click)="ondelete(data.creditnote_no,data.receipt_gid)"
+                                        *ngIf="data.has_child != 'N'">
+                                        <span><i class="fa-solid fa-trash fs-3 me-4"></i></span>
+                                        <span>Delete</span>
+                                    </div>
+                                    <div class="d-flex p-3 pb-3 Icon_hover" (click)="onStockReturn(data.invoice_gid)"
+                                        *ngIf="data.has_child != 'N'">
+                                        <span><i class="fa-solid fa-repeat fs-3 me-4"></i></span>
+                                        <span>Stock Return</span>
+                                    </div>
+                                    <div class="d-flex p-3 pb-3 Icon_hover" (click)="CreditPDF(data.creditnote_gid, data.invoice_gid)"
+                                        *ngIf="data.has_child != 'N'">
+                                        <span><i class="fa-solid fa-repeat fs-3 me-4"></i></span>
+                                        <span>Pdf</span>
+                                    </div>
+                                </div>
+
+                            </span>
+                        </td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="myModaldeleteQA" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered ">
+      <div class="modal-content del_modal-content">
+        <div class="text-center my-4">
+          <h2><b>Are you sure?</b></h2>
+          <p style="display: block;">Do You Want To Delete the Record ?</p>
+          <div class="text-center my-4">
+            <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal" (click)="ondelete()">
+              <i class="bi bi-trash-fill text-white fs-5 me-2"></i>Delete
+            </button>
+            <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+              <i class="fas fa-close text-white me-2"></i>Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

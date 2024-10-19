@@ -1,0 +1,67 @@
+
+<div class="card mt-4">
+    <div class="row ms-3 mt-7 d-flex align-items-center">
+      <div class="col">
+          <h3 class="card-title fw-bold">Day Tracker Report</h3>
+      </div>
+
+      <br>
+      <div class="col me-5 ">
+        <button title="Export Excel" type="button" class="btn btn-icon btn-sm bg-export me-2 float-end"
+                (click)="reportexportExcel()"><i class="bi bi-file-earmark-arrow-down"></i></button>  
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <ul class="m-3 nav nav-twotabs nav-line-tabs nav-line-tabs-20x mb-3 fs-6 border-bottom text-center mt-2" id="myTab" role="tablist">
+  
+        <li class="border border-secondary justify-content-center col twotab sample1 border rounded-0 p-4 twotabs" (click)="OverallReportSummary('Pending')" data-bs-toggle="tab">
+            <i class="fa-solid fa-clock fs-4 me-3"></i>&nbsp;&nbsp;Pending<span class="badge badge-pill badge-light text-black "></span>
+        </li>
+        
+        <li class="border border-secondary active justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"(click)="OverallReportSummary('Approved')" data-bs-toggle="tab" >
+          <a>
+           <i class="fa-solid fas fa-check fs-4 me-3"></i>&nbsp;Approved <span class="badge badge-pill badge-light text-black "></span>
+          </a> 
+       </li>
+        <li class="border border-secondary justify-content-center col twotab sample1 border rounded-0 p-4 twotabs" (click)="OverallReportSummary('Completed')"  data-bs-toggle="tab">
+        <i class="fa-solid fa-thumbs-up fs-4 me-3"></i>&nbsp;&nbsp;Completed <span class="badge badge-pill badge-light text-black "></span>
+    </li>
+        <li class="border border-secondary justify-content-center col twotab sample1 border rounded-0 p-4 twotabs" (click)="OverallReportSummary('Rejected')" data-bs-toggle="tab" >
+       <a>
+        <i class="fa-solid fa-thumbs-down fs-2 me-3"></i>&nbsp;Rejected <span class="badge badge-pill badge-light text-black "></span>
+       </a> 
+    </li>
+    </ul>
+  <div class="table-responsive">
+    
+    <div class="card card-body m-3  bg-white rounded">
+      <table id="outlet_overall" class="table table-striped table-row-bordered gy-5 gs-7 ">
+        <thead>
+          <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue">
+            <th style="width: 10%;">Date</th>
+            <th >Outlet</th>
+            <th class="text-center">Revenue</th>
+            <th class="text-center">Expense</th>
+            <th>Created By</th>
+          </tr>
+        </thead>
+        <tbody>   
+          <tr *ngFor="let data of outlet_overall;">
+            <td style="width: 10%;">{{data.created_date}}</td>
+            <td style="width: 20%;">{{data.campaign_name}}</td>
+            <!-- <td>{{data.revenue_amount}}</td> -->
+            <td class="text-center" style="text-align: right;">
+              <div >{{data.revenue_amount}}</div>
+          </td>
+          <td class="text-center" style="text-align: right;">
+            <div >{{data.expense_amount}}</div>
+        </td>
+            <!-- <td>{{data.expense_amount}}</td> -->
+            <td  style="width: 15%;">{{data.created_by}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+

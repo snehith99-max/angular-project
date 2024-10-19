@@ -1,0 +1,85 @@
+.bg-gradient-darkblue {
+  
+    background: #0597F2;
+  
+    background: -webkit-linear-gradient(45deg, #0597F2, #0597F2) !important;
+  
+    background: linear-gradient(45deg, #0597F2, #0597F2) !important;
+  
+  }
+  .mail-button {
+    background-color: #ffffff !important;
+    font-size: 1.1rem !important;
+    font-weight: 630 !important;
+    padding: 9px 16px 9px 13px !important;
+    border-radius: 3px;
+    border: 0;
+}
+  /* Button Styles */
+  .paperplane-button {
+    background-color: #2ba85d;
+    /* Set the background color */
+    border: 1px solid #201d1d;
+    /* Add a border for visual separation */
+    color: #333;
+    /* Text color */
+  }
+  
+  /* Hover State */
+  .paperplane-button:hover {
+    background-color: #078037;
+    /* Change background color on hover */
+  }
+  
+  .eye-button {
+    background-color: #009ef7;
+    /* Set the background color */
+    border: 1px solid #201d1d;
+    /* Add a border for visual separation */
+    color: #333;
+    /* Text color */
+  }
+  
+  /* Hover State */
+  .eye-button:hover {
+    background-color: #0092e7;
+    /* Change background color on hover */
+  }
+  
+  .calendarcheck-button {
+    background-color: #af69ee;
+    /* Set the background color */
+    border: 1px solid #201d1d;
+    /* Add a border for visual separation */
+    color: #333;
+    /* Text color */
+  }
+  
+  /* Hover State */
+  .calendarcheck-button:hover {
+    background-color: #a03ff5;
+    /* Change background color on hover */
+  }
+    //////////////toggle switch////////////
+  
+  /* The slider (rounded box) */
+  .slider {
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 20px;
+    background-color: #e15555;
+    border-radius: 34px;
+  }
+   /* The circle (slider handle) */
+   .slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.2s;
+  }

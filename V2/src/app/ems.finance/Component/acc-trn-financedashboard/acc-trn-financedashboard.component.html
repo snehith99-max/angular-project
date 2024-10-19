@@ -1,0 +1,357 @@
+<div class="card">
+  <div class="card-bordered" style="background-color: white;">
+    <div class="card-header d-flex justify-content-center" style="background: rgb(81,183,204);background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);height:60px;">
+      <div class="card-title ">
+        <h1 class="card-title fw-bold fs-3" style="color:black;"><b>Finance Dashboard</b></h1>
+      </div>
+    </div>
+    <br>
+    <div class="row m-3">
+      <div class="col-lg-2 col-md-3 col-sm-3" routerLink="/finance/AccMstBankMasterSummary">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-skyblue">
+          <div class="card-body12">
+            <div class="d-flex align-items-center">
+              <div>
+                <h5 class="mb-0 text-secondary"> Banks</h5>
+                <div class="d-flex">
+                  <h4 class="badge-blue  badge-outline-blue fs-4 mt-2">{{bank_count}}</h4>
+                </div>
+              </div>
+              <div class="widgets-icons-2 rounded-circle bg-gradient-skyblue text-white ms-auto">
+                <i class="fa-solid fa-users"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-3" routerLink="/finance/AccMstCreditcardmasterSummary">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-brown">
+          <div class="card-body12">
+            <div class="d-flex align-items-center">
+              <div>
+                <h5 class="mb-0 text-secondary"> Credit Card</h5>
+                <div class="d-flex">
+                  <h4 class="badge-maroon badge-outline-maroon fs-4 mt-2">{{creditcard_count}}</h4>
+                </div>
+              </div>
+              <div class="widgets-icons-2 rounded-circle bg-gradient-brown text-white ms-auto">
+                <i class="fa-solid fa-calendar-plus"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-3" routerLink="/finance/AccTrnBankbooksummary">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-darkblue">
+          <div class="card-body12">
+            <div class="d-flex align-items-center">
+              <div>
+                <h5 class="mb-0 text-secondary">Bank Book</h5>
+                <div class="d-flex">
+                  <h4 class="badge-blue  badge-outline-blue fs-4 mt-2">{{bankbook_count}}</h4>
+                </div>
+              </div>
+              <div class="widgets-icons-2 rounded-circle bg-gradient-darkblue text-white ms-auto">
+                <i class="fa-solid fa-user-check"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-3" routerLink="/finance/AccTrnCashbooksummary">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-skyblue">
+          <div class="card-body12">
+            <div class="d-flex align-items-center">
+              <div>
+                <h5 class="mb-0 text-secondary">Cash Book</h5>
+                <div class="d-flex">
+                  <h4 class="badge-blue  badge-outline-blue fs-4 mt-2">{{cashbook_count}}</h4>
+                </div>
+              </div>
+              <div class="widgets-icons-2 rounded-circle bg-gradient-skyblue text-white ms-auto">
+                <i class="fa-solid fa-users"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-3" routerLink="/finance/AccTrnJournalentrySummary">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-violet">
+          <div class="card-body12">
+            <div class="d-flex align-items-center">
+              <div>
+                <h5 class="mb-0 text-secondary"> Journal Entry</h5>
+                <div class="d-flex">
+                  <h4 class="badge-violet  badge-outline-violet fs-4 mt-2">{{journalentry_count}}</h4>
+                </div>
+              </div>
+              <div class="widgets-icons-2 rounded-circle bg-gradient-violet text-white ms-auto">
+                <i class="fa-solid fa-calendar-days"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-3" routerLink="/finance/AccTrnTaxManagement">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-brown">
+          <div class="card-body12">
+            <div class="d-flex align-items-center">
+              <div>
+                <h5 class="mb-0 text-secondary"> Tax </h5>
+                <div>
+                  <h4 class="badge-maroon badge-outline-maroon fs-4 mt-2">{{tax_count}}
+                  </h4>
+                </div>
+              </div>
+              <div class="widgets-icons-2 rounded-circle bg-gradient-brown text-white ms-auto">
+                <i class="fa-solid fa-calendar-plus"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row m-3">
+      <div class="col-lg-2 col-md-3 col-sm-3" routerLink="/finance/AccRptDebtorReportSummary">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-darkblue">
+          <div class="card-body12">
+            <div class="d-flex align-items-center">
+              <div>
+                <h5 class="mb-0 text-secondary"> Debtor</h5>
+                <div class="d-flex">
+                  <h4 class="badge-blue  badge-outline-blue fs-4 mt-2">{{totaldebtor_count}}</h4>
+                </div>
+              </div>
+              <div class="widgets-icons-2 rounded-circle bg-gradient-darkblue text-white ms-auto">
+                <i class="fa-solid fa-user-check"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-3" routerLink="/finance/AccRptCreditorReport">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-skyblue">
+          <div class="card-body12">
+            <div class="d-flex align-items-center">
+              <div>
+                <h5 class="mb-0 text-secondary"> Creditor</h5>
+                <div class="d-flex">
+                  <h4 class="badge-blue  badge-outline-blue fs-4 mt-2">{{totalcreditor_count}}</h4>
+                </div>
+              </div>
+              <div class="widgets-icons-2 rounded-circle bg-gradient-skyblue text-white ms-auto">
+                <i class="fa-solid fa-users"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-3" routerLink="/finance/AccTrnFundTransferSummary">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-violet">
+          <div class="card-body12">
+            <div class="d-flex align-items-center">
+              <div>
+                <h5 class="mb-0 text-secondary">Fund Transfer</h5>
+                <div class="d-flex">
+                  <h4 class="badge-violet  badge-outline-violet fs-4 mt-2">{{fundtransfer_count}}</h4>
+                </div>
+              </div>
+              <div class="widgets-icons-2 rounded-circle bg-gradient-violet text-white ms-auto">
+                <i class="fa-solid fa-calendar-days"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-3" routerLink="/finance/AccTrnFundTransferApproval">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-brown">
+          <div class="card-body12">
+            <div class="d-flex align-items-center">
+              <div>
+                <h5 class="mb-0 text-secondary"> Pending Fund </h5>
+                <div class="d-flex">
+                  <h4 class="badge-maroon badge-outline-maroon fs-4 mt-2">{{fundpending_count}}
+                  </h4>
+                </div>
+              </div>
+              <div class="widgets-icons-2 rounded-circle bg-gradient-brown text-white ms-auto">
+                <i class="fa-solid fa-calendar-plus"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-3" routerLink="/finance/AccTrnFundTransferApproval">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-brown">
+          <div class="card-body12">
+            <div class="d-flex align-items-center">
+              <div>
+                <h5 class="mb-0 text-secondary"> Approved Fund </h5>
+                <div class="d-flex">
+                  <h4 class="badge-maroon badge-outline-maroon fs-4 mt-2">{{fundapproved_count}}
+                  </h4>
+                </div>
+              </div>
+              <div class="widgets-icons-2 rounded-circle bg-gradient-brown text-white ms-auto">
+                <i class="fa-solid fa-calendar-plus"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-3" routerLink="/finance/AccTrnFundTransferApproval">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-darkblue">
+          <div class="card-body12">
+            <div class="d-flex align-items-center">
+              <div>
+                <h5 class="mb-0 text-secondary">Rejected Fund</h5>
+                <div class="d-flex">
+                  <h4 class="badge-blue badge-outline-blue fs-4 mt-2">{{fundrejected_count}}</h4>
+                </div>
+              </div>
+              <div class="widgets-icons-2 rounded-circle bg-gradient-darkblue text-white ms-auto">
+                <i class="fa-solid fa-user-check"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="m-5 me-1 d-flex flex-wrap mb-0 mt-0 ">
+      <div class="col-12 col-lg-12 row">
+        <div class="col-12 col-lg-6 pe-0">
+          <div class="m-3 me-0 card border  p-3 rounded" style="height:420px;border: 2px solid rgb(255, 254, 254);">
+            <div class="me-0">
+              <div class="card-header" style="background: rgb(81,183,204); background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;">
+                <b style="padding-top: 12px;">Tax Details</b>
+              </div>
+            </div>
+            <div>
+              <ng-container *ngIf="regionflag">
+                <div #chartRef class="d-flex flex-column mixed-widget-2-chart card-rounded-bottom">
+                  <apx-chart [series]="crmregionchart.series" [chart]="crmregionchart.chart"
+                    [xaxis]="crmregionchart.xaxis" [yaxis]="crmregionchart.yaxis"
+                    [dataLabels]="crmregionchart.dataLabels" [stroke]="crmregionchart.stroke"
+                    [fill]="crmregionchart.fill" [states]="crmregionchart.states"
+                    [plotOptions]="crmregionchart.plotOptions">
+                  </apx-chart>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="!regionflag">
+                <div class="d-flex justify-content-center">
+                  <span>
+                    <img src=".\assets\media\images\No_data_found.png" class="h-78px w-300px">
+                  </span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6 pe-0">
+          <div class="m-3 me-0 card border  p-3 rounded" style="height:420px;border: 2px solid rgb(255, 254, 254);">
+            <div class="me-0">
+              <div class="card-header"
+                style="background: rgb(81,183,204);
+                background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;">
+                <b style="padding-top: 12px;">Income and Expense Details</b>
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="">
+                <h3 class="text-center align-self-center"><b>Transactions For The Last Six Months</b></h3>
+                <br>
+                <apx-chart [series]="crmleadchart.series" [chart]="crmleadchart.chart" [xaxis]="crmleadchart.xaxis"
+                  [yaxis]="crmleadchart.yaxis" [dataLabels]="crmleadchart.dataLabels" [stroke]="crmleadchart.stroke"
+                  [legend]="crmleadchart.legend" [fill]="crmleadchart.fill" [states]="crmleadchart.states"
+                  [tooltip]="crmleadchart.tooltip" [colors]="crmleadchart.colors" [markers]="crmleadchart.markers"
+                  [plotOptions]="crmleadchart.plotOptions">
+                </apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="m-5 me-1 d-flex flex-wrap mb-0 mt-0 ">
+      <div class="col-12 col-lg-12 row">
+        <div class="col-12 col-lg-6 pe-0">
+          <div class="m-3 me-0 card border  p-3 rounded" style="height:300px;border: 2px solid rgb(255, 254, 254);">
+            <div class="me-0">
+              <div class="card-header"
+                style="background: rgb(81,183,204);
+                background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;">
+                <b style="padding-top: 12px;">Bank Details</b>
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <br />
+              <div class="table-responsive">
+                <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                  <table id="bankbook_list"
+                    class="table table-striped table-row-bordered border-bottom  gs-7 align-middle">
+                    <thead>
+                      <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th style="font-size: 11px;">S.No</th>
+                        <th style="font-size: 11px;">Bank Code</th>
+                        <th style="font-size: 11px;">Bank Name</th>
+                        <th class="text-end" style="font-size: 11px;">Balance</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of bankbook_list; let i=index;">
+                        <td>{{i+1}}</td>
+                        <td>{{data.bank_code}}</td>
+                        <td>{{data.bank_name}}</td>
+                        <td class="text-end">{{data.closing_amount}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6 pe-0">
+          <div class="m-3 me-0 card border  p-3 rounded" style="height:300px;border: 2px solid rgb(255, 254, 254);">
+            <div class="me-0">
+              <div class="card-header"
+                style="background: rgb(81,183,204);
+                background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;">
+                <b style="padding-top: 12px;">Cash Book Details</b>
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <br />
+              <div class="table-responsive">
+                <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                  <table id="bankbook_list"
+                    class="table table-striped table-row-bordered border-bottom  gs-7 align-middle">
+                    <thead>
+                      <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th style="font-size: 11px;">S.No</th>
+                        <th style="font-size: 11px;">Branch Code</th>
+                        <th style="font-size: 11px;">Branch Name</th>
+                        <th class="text-end" style="font-size: 11px;">Balance</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of CashBook_list; let i=index;">
+                        <td>{{i+1}}</td>
+                        <td>{{data.branch_code}}</td>
+                        <td>{{data.branch_name}}</td>
+                        <td class="text-end">{{data.closing_amount}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

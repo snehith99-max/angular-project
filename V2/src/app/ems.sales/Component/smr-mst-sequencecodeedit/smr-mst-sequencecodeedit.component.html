@@ -1,0 +1,141 @@
+<div class="card rounded-top">
+    <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+        <h3 class="fw-bolder text-white">
+            <i class="fas fa-plus fw-bolder fs-3 me-4"></i>Sequence Code Edit
+        </h3>
+    </div>
+    <form #form="ngForm" [formGroup]="sequencecodeform">
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12" ><span class="font-bold">Sequence Code</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row d-flex mt-2">
+                    <p class="ms-2">{{sequence_code}}</p>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12" ><span class="font-bold">Sequence Name</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row d-flex mt-2">
+                   <p class="ms-2">{{sequence_name}}</p>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Company Code</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row d-flex mt-2">
+                    <input type="text" formControlName="company_code"
+                        class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 border-secondary" />
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Branch Prefix</span>
+                <div class="d-flex justify-content-start mt-4">
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                        <input type="radio" name="branchflag" value="Y" id="Y" formControlName="active_flag">
+                        <label class="form-check-label text-gray-700 text-nowrap" 
+                           >Yes</label>
+                    </div>
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+                        <input type="radio" name="branchflag" value="N" id="N" formControlName="active_flag">
+                        <label class="form-check-label text-gray-700 text-nowrap"
+                           >No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Business Unit Prefix</span>
+                <div class="d-flex justify-content-start mt-4">
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                        <input type="radio" name="businessunit_flag" value="Y" id="Y" formControlName="active_flag1">
+                        <label class="form-check-label text-gray-700 text-nowrap"
+                           >Yes</label>
+                    </div>
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+                        <input type="radio" name="businessunit_flag" value="N" id="N" formControlName="active_flag1">
+                        <label class="form-check-label text-gray-700 text-nowrap"
+                           >No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Department Prefix</span>
+                <div class="d-flex justify-content-start mt-4">
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                        <input type="radio" name="department_flag" value="Y" id="Y" formControlName="active_flag2">
+                        <label class="form-check-label text-gray-700 text-nowrap"
+                           >Yes</label>
+                    </div>
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+                        <input type="radio" name="department_flag" value="N" id="N" formControlName="active_flag2">
+                        <label class="form-check-label text-gray-700 text-nowrap"
+                           >No</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Location Prefix</span>
+                <div class="d-flex justify-content-start mt-4">
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                        <input type="radio" name="location_flag" value="Y" id="Y" formControlName="active_flag3">
+                        <label class="form-check-label text-gray-700 text-nowrap"
+                           >Yes</label>
+                    </div>
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+                        <input type="radio" name="location_flag" value="N" id="N" formControlName="active_flag3">
+                        <label class="form-check-label text-gray-700 text-nowrap"
+                           >No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Year</span>
+                <div class="d-flex justify-content-start mt-4">
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                        <input type="radio" name="year_flag" value="Y" id="Y" formControlName="active_flag4">
+                        <label class="form-check-label text-gray-700 text-nowrap"
+                           >Yes</label>
+                    </div>
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+                        <input type="radio" name="year_flag" value="N" id="N" formControlName="active_flag4">
+                        <label class="form-check-label text-gray-700 text-nowrap"
+                           >No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Month</span>
+                <div class="d-flex justify-content-start mt-4">
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                        <input type="radio" name="month_flag" value="Y" id="Y" formControlName="active_flag5">
+                        <label class="form-check-label text-gray-700 text-nowrap"
+                           >Yes</label>
+                    </div>
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+                        <input type="radio" name="month_flag" value="N" id="N" formControlName="active_flag5">
+                        <label class="form-check-label text-gray-700 text-nowrap"
+                           >No</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Runnning Number Prefix</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row d-flex mt-2">
+                    <input type="text" formControlName="runningno_prefix" 
+                        class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 border-secondary" />
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Sequence Curval</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row d-flex mt-2">
+                    <input type="text" formControlName="sequence_curval" 
+                        class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 border-secondary" />
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Delimiter</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row d-flex mt-2">
+                    <input type="text" formControlName="delimiter" 
+                        class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 border-secondary"/>
+                </div>
+            </div>
+
+        </div>
+        <div class="text-center my-4">
+            <button class="btn-success btn-sm text-white me-2" (click)="submit()">
+                <i class="fas fa-check text-white fs-5 me-3"></i>Submit
+            </button>
+        </div>
+    </form>
+</div>

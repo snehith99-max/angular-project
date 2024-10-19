@@ -1,0 +1,122 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Journal Entry Book</h3>
+        </div>
+        <!-- <div class="col-lg-2 col-md-3 col-sm-3" style="cursor: not-allowed;">
+            <div class="cardHeads radius-10 border-start border-0 border-3 border-brown">
+                <div class="card-body12">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h5 class="mb-0 text-secondary"><b style="color: rgb(25, 219, 74);">Debit Amount</b></h5>
+                            <div>
+                                <h4 class="badge badge-outline badge-success fs-4 mt-2"> {{totalDebit}}
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-brown text-white ms-auto">
+                            <i class="fas fa-money-check-alt fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-3" style="cursor: not-allowed;">
+            <div class="cardHeads radius-10 border-start border-0 border-3 border-violet">
+                <div class="card-body12">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h5 class="mb-0 text-secondary"><b style="color: #4604fc;">Credit Amount</b></h5>
+                            <div>
+                                <h4 class="badge badge-outline badge-info fs-4 mt-2">     {{totalCredit}}                 </h4>
+                            </div>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-violet text-white ms-auto">
+                            <i class="fa fa-usd fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="col me-5">
+            <!-- <button title="Export Excel" type="button" class="btn btn-icon btn-sm bg-excel me-2 float-end"
+                style="width: 8%;" (click)="exportExcel()"><i class="fa-regular fa-file-excel fs-2"></i>
+            </button> -->
+
+        </div>
+    </div>
+    <div class="d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+            <div class="form-group me-2">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label for="itemsPerPageSelect" class="me-1">Show</label>
+            </div>
+            <div class="form-group me-2">
+                <select id="itemsPerPageSelect" class="form-control d-inline-block" [(ngModel)]="itemsPerPage"
+                    (ngModelChange)="onItemsPerPageChange()">
+                    <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="itemsPerPageSelect" class="ms-1">entries</label>
+            </div>
+        </div>
+        <div class="d-flex align-items-center">
+            <div class="form-group me-2" style="margin-right: 10px;">
+                <label for="searchInput" class="ms-1" style="margin-left: -5px;">Search:</label>
+            </div>
+            <div class="form-group" style="margin-right: 10px;">
+                <input type="text" class="form-control" style="width:130px;" id="searchInput" (keyup)="search($event)"
+                    placeholder="" />
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pb-0 pt-0 bg-white rounded">
+            <table class="table table-striped table-row-bordered gy-5 gs-7 align-middle">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue text-center">
+                        <th (click)="sort('account_name')">S.No</th>
+                        <th (click)="sort('accountgroup_name')">Account Group</th>
+                        <th (click)="sort('account_subgroup')">Account SubGroup</th>
+                        <th (click)="sort('account_code')">Account Code</th>
+                        <th (click)="sort('account_name')">Account</th>
+                        <th>Opening</th>
+                        <th>Debit </th>
+                        <th>Credit </th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of page_list; let i=index;"> 
+                        <td>{{i+1}}</td>
+                        <td>{{data.accountgroup_name}}</td>                       
+                        <td>{{data.account_subgroup}}</td>                       
+                        <td>{{data.account_code}}</td>                       
+                        <td>{{data.account_name}}</td>
+                        <td class="text-end">{{data.opening_amount}}</td>                       
+                        <td class="text-end">{{data.debit_amount}}</td>                       
+                        <td class="text-end">{{data.credit_amount}}</td>                       
+                        <td class="text-end">{{data.closing_amount}}</td>                       
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="noResultsMessage" class="text-center">
+                {{ noResultsMessage }}
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="text-nowrap">
+                    Showing {{ startIndex + 1 }} to {{ endIndex }} of {{ total_list }} entries
+                </div>
+                <div class="pagination-container float-end">
+                    <div class="pagination-scroll-container" style="margin-left: 122px;">
+                        <pagination [boundaryLinks]="false" [maxSize]="8" [totalItems]="total_list"
+                            [itemsPerPage]="itemsPerPage" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"
+                            [directionLinks]="true" previousText="Previous" nextText="Next" class="pagination-controls">
+                        </pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

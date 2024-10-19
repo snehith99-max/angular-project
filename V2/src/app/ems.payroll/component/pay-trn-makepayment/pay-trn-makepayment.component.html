@@ -1,0 +1,256 @@
+<form [formGroup]="reactiveForm" #form="ngForm">
+  <input formControlName="employee_name" hidden placeholder="Address Line 1" type="text" class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary
+           " name="employee_gid" />
+
+  <div class="card">
+
+    <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+      <h3 class="fw-bolder text-white">
+        <i class="fas fw-bolder fs-3 me-4"></i>Make Payment
+
+
+        <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer float-end ms-2"
+          title="Back" routerLink="/payroll/PayTrnPaymentsummary"><i
+            class="fa-solid fa-arrow-left-long fs-1 fw-bold"></i></button>
+      </h3>
+
+    </div>
+
+    <div class="d-flex flex-row fv-row flex-wrap">
+      <div class="col-9 col-lg-3 col-md-3 col-sm-12">
+        <div class="col-lg-9 col-12 col-md-11 col-sm-11 fv-row mt-5 ms-5"><span class="font-bold">Mode Of
+            Payment</span>
+          <span style="color:red"> *</span>
+
+          <select formControlName="payment_mode" class="form-select form-select-solid bg-white
+                  form-select-lg borderc-secondary custom-input select" (change)="onPaymentModeChange($event)">
+            <option value="">--Select an option--</option>
+            <option value="Cash">Cash</option>
+            <option value="Cheque">Cheque</option>
+            <option value="NEFT">NEFT</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-9 col-lg-3 col-md-3 col-sm-12">
+        <div class="col-lg-9 col-12 col-md-11 col-sm-11 fv-row mt-5"><span class="font-bold">Payment Date</span>
+          <span style="color:red"> *</span>
+          <input type="text"
+            class="form-control form-control-lg form-control-solid date-picker mb-3 mb-lg-0 bg-white custom-input"
+            placeholder="DD-MM-YYYY" formControlName="payment_date"
+            [ngStyle]="{'border-color': payment_date.invalid && payment_date.touched ? 'red' : 'rgb(209, 209, 209)'}" />
+          <div *ngIf="payment_date.invalid && (payment_date.dirty || payment_date.touched)">
+            <div *ngIf="payment_date.errors?.['required']">
+              <span style="color:red;">Payment Date is Required</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="showInput">
+      <div class="d-flex flex-row fv-row flex-wrap">
+        <div class="col-9 col-lg-3 col-md-3 col-sm-12">
+          <div class="col-lg-9 col-12 col-md-11 col-sm-11 fv-row mt-5 ms-5"><span class="ms-0">Employee Bank</span>
+            <ng-select formControlName="bank_name" [items]="employeebanklist" bindLabel="bank_name"
+              bindValue="bank_name" placeholder="Select an Option" required>
+            </ng-select>
+
+          </div>
+        </div>
+
+
+        <div class="col-9 col-lg-3 col-md-3 col-sm-12">
+          <div class="col-lg-9 col-12 col-md-11 col-sm-11 fv-row mt-5">Bank Name(Pay From)
+            <ng-select formControlName="bankname_pay" [items]="banklist" bindLabel="bank_name" bindValue="bank_name"
+              placeholder="Select an Option" required>
+            </ng-select>
+
+          </div>
+        </div>
+
+
+        <div class="col-9 col-lg-3 col-md-3 col-sm-12">
+          <div class="col-lg-9 col-12 col-md-11 col-sm-11 fv-row mt-5 ms-4"><span class="ms-1">Bank Branch Name(Pay
+              From)</span>
+            <input formControlName="branch_name" type="text"
+              class="form-control form-control-lg form-control-solid  borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+              placeholder="Enter Branch Name" name="branch_name" required />
+
+          </div>
+        </div>
+
+        <div class="col-9 col-lg-3 col-md-3 col-sm-12">
+          <div class="col-lg-9 col-12 col-md-11 col-sm-11 fv-row mt-5 ms-4"><span class="ms-1">Account Number(Pay
+              From)</span>
+            <input formControlName="acct_number" type="text"
+              class="form-control form-control-lg form-control-solid  borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+              placeholder="Enter Account Number" name="acct_number" required />
+
+          </div>
+        </div>
+
+        <div class="col-9 col-lg-3 col-md-3 col-sm-12">
+          <div class="col-lg-9 col-12 col-md-11 col-sm-11 fv-row mt-5 ms-5"><span class="ms-1">Cheque Number (Pay
+              From)</span>
+            <input formControlName="cheq_number" type="text"
+              class="form-control form-control-lg form-control-solid  borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+              placeholder="Enter Cheque Number" name="cheq_number" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div *ngIf="showInput1">
+      <div class="d-flex flex-row fv-row flex-wrap">
+        <div class="col-9 col-lg-3 col-md-3 col-sm-12">
+          <div class="col-lg-9 col-12 col-md-11 col-sm-11 fv-row mt-5 ms-5"><span class="ms-0">Employee Bank</span>
+            <ng-select formControlName="bank_name" [items]="employeebanklist" bindLabel="bank_name"
+              bindValue="bank_name" placeholder="Select an Option" required>
+            </ng-select>
+
+          </div>
+        </div>
+
+
+        <div class="col-9 col-lg-3 col-md-3 col-sm-12">
+          <div class="col-lg-9 col-12 col-md-11 col-sm-11 fv-row mt-5 ms-5"><span class="ms-0">Bank Name(Pay
+              From)</span>
+            <ng-select formControlName="bankname_pay" [items]="banklist" bindLabel="bank_name" bindValue="bank_name"
+              placeholder="Select an Option" required>
+            </ng-select>
+
+          </div>
+        </div>
+
+
+        <div class="col-9 col-lg-3 col-md-3 col-sm-12">
+          <div class="col-lg-9 col-12 col-md-11 col-sm-11 fv-row mt-5 ms-4"><span class="ms-1">Bank Branch Name(Pay
+              From)</span>
+            <input formControlName="branch_name" type="text"
+              class="form-control form-control-lg form-control-solid  borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+              placeholder="Enter Branch Name" name="branch_name" required />
+
+          </div>
+
+        </div>
+
+        <div class="col-9 col-lg-3 col-md-3 col-sm-12">
+          <div class="col-lg-9 col-12 col-md-11 col-sm-11 fv-row mt-5 ms-4"><span class="ms-1">Account Number(Pay
+              From)</span>
+            <input formControlName="acct_number" type="text" style="width:78%;"
+              class="form-control form-control-lg form-control-solid  borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+              placeholder="Enter Account Number" name="acct_number" required />
+
+          </div>
+        </div>
+
+        <!-- <div class="col-9 col-lg-3 col-md-3 col-sm-12">
+            <div class="col-lg-9 col-12 col-md-11 col-sm-11 fv-row mt-5 ms-5"><span class="ms-1"><b>Cheque Number (Pay
+                  From)</b></span>
+              <input formControlName="cheq_number" type="text" style="width:80%;"
+                class="form-control form-control-lg form-control-solid  borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+                placeholder="Enter Cheque Number" name="cheq_number" />
+            </div>
+          </div> -->
+      </div>
+    </div>
+
+    <!-- <div class="card mt-5">
+      <div class="align">
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+          <div class="d-flex align-items-center">
+            <span class="font-bold" style="margin-left: 10px;">Month :</span>
+            <p class="mt-4" style="margin-left: 15px;">{{this.month}}</p>
+            <span class="font-bold" style="margin-left: 100px;">Year :</span>
+            <p class="mt-4" style="margin-left: 15px;">{{this.year}}</p>
+          </div>
+
+        </div>
+      </div>
+    </div> -->
+
+    <div class="mt-5">
+      <div class="align">
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+          <!-- <div class="d-flex align-items-center">
+            <span class="font-bold" style="margin-left: 10px;">Month :</span>
+            <p class="mt-4" style="margin-left: 15px;">{{ month }}</p>
+            <span class="font-bold" style="margin-left: 100px;">Year :</span>
+            <p class="mt-4" style="margin-left: 15px;">{{ year }}</p>
+          </div> -->
+
+          <div class="d-flex align-items-center mt-3 header">
+            <span class="ms-4">MAKE PAYMENT FOR -</span>
+            <p class="mt-4" style="margin-left: 4px;">{{ getPaymentLabel() }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="card m-3 border">
+      <div class="card-header bg-lightblue card-height55">
+        <div class="card-title m-0">
+          <h4 class="fw-bolder text-blue">Make Payment For Month</h4>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="table-responsive">
+      <div class="p-3 pt-0 pb-0 bg-white rounded">
+        <table id="makepayment_list" class="table table-striped table-row-bordered border-bottom gs-7">
+          <thead>
+            <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+              <th>
+                <input type="checkbox" id="checkAll" (change)="$event ? masterToggle() : null"
+                  [checked]="selection.hasValue() && isAllSelected()"
+                  [indeterminate]="selection.hasValue() && !isAllSelected()" />
+                Check All
+              </th>
+              <th>S.No</th>
+              <th>Branch</th>
+              <th>Employee Code</th>
+              <th>Employee Name</th>
+              <th>Department</th>
+              <th>Outstanding Payment</th>
+              <th>Month Payment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of makepayment_list; let i=index;">
+              <td> <input type="checkbox" (click)="$event.stopPropagation()"
+                  (change)="$event ? selection.toggle(data) : null" [checked]="selection.isSelected(data)" /></td>
+              <td>{{i+1}}</td>
+              <td>{{data.branch_name}}</td>
+              <td>{{data.user_code}}</td>
+              <td>{{data.employee_name}}</td>
+              <td>{{data.department_name}}</td>
+              <td style="font-size:11px; text-align: center;">{{data.outstanding_amount}}</td>
+              <td>
+                <input type="text" [(ngModel)]="data.earned_net_salary"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                  formControlName="earned_net_salary_{{i}}" placeholder="0.00"
+                  style="width: 100px; display: inline-block; text-align: right;" />
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <br><br>
+    <!-- Modal footer -->
+    <div class="text-center my-4">
+      <button class="me-4 btn-success" (click)="submit()">
+        <i class="fas fa-check text-white fs-5 "></i>
+        <span class="ms-3">Submit</span>
+      </button>
+      <button class="btn-primary btn-sm text-white me-2" (click)="onback()">
+        <i class="fas fa-arrow-left fs-5 me-2"></i>
+        <span class="ms-3">Back</span>
+      </button>
+    </div>
+
+  </div>
+</form>

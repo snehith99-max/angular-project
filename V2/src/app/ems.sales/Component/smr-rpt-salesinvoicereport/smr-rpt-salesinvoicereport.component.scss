@@ -1,0 +1,43 @@
+.even-row {
+    background-color: #f0f8ff; /* Light blue */
+  }
+  
+  .odd-row {
+    background-color: white; /* Default color */
+  }
+
+
+  .second-table-container {
+    overflow: hidden;
+  }
+
+  .custom-table .p-datatable-wrapper {
+    overflow-x: hidden;
+  }
+
+  .custom-table .p-datatable-tbody > tr > td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .custom-table .p-datatable-thead > tr > th {
+    white-space: nowrap;
+  }
+
+  .custom-table {
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .table thead th {
+    position: sticky;
+    top: 0;
+    background: #def0ff; /* Background color of the header */
+    z-index: 0;
+    border-bottom: 2px solid #ddd;
+  }
+
+//   .table > :not(caption) > * > * {
+//     padding: 1px !important;
+// }

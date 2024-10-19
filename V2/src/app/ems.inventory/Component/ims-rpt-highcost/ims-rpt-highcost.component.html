@@ -1,0 +1,60 @@
+<div class="card mt-4">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title fw-bold"><b>High Cost Report</b></h3>
+        </div>
+
+        <div class="col me-2">
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="highcost_list" class="table table-striped table-row-bordered gy-5 gs-7">
+                <thead>
+                    <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th>S.No </th>
+                        <th>Branch</th>
+                        <th>Location</th>
+                        <th>Product Group</th>
+                        <th>Product</th>
+                        <th class="text-center">Qty</th>
+                        <th class="text-center">Lowest Price</th>
+                        <th class="text-center">Highest Price</th>
+                        <th class="text-center">Price Variance(%)</th>
+                        <th class="text-center">Stock From</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of highcost_list; let i=index;">
+                        <td style="width: 5px;">{{i + 1}}</td>
+                        <td style="width: 20%;">{{data.branch_name}}</td>
+                        <td style="width: 10%;">{{data.location_name}}</td>
+                        <td style="width: 10%;">{{data.productgroup_name}}</td>
+                        <td style="width: 25%;">{{data.product_code}}/{{data.product_name}}</td>
+                        <td style="width: 10%;" class="text-center">{{data.stock_qty}} {{data.productuom_name}}</td>
+                        <td style="width: 10%;" class="text-end">{{data.min_price}}</td>
+                        <td style="width: 10%;" class="text-end">{{data.max_price}}</td>
+                        <td style="width: 10%;" class="text-center">
+                            <div  class="progress-container">
+                              <div class="progress-value">
+                                {{ data.price_variance }}%
+                              </div>
+                              <div class="progress-bar-container">
+                                <div class="progress-bar" 
+                                     [ngStyle]="{
+                                         'width': data.price_variance + '%',
+                                         'background-color': interpolateColors(data.price_variance)
+                                     }">
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          
+                        <td style="width: 10%;" class="text-center">{{data.remarks}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

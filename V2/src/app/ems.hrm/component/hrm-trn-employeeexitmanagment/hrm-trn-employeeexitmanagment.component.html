@@ -1,0 +1,51 @@
+<div class="card">
+    <br>
+    <div class="row ms-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title"> Exit Management </h3>
+        </div>
+    </div>
+    
+        <div class="table-responsive">
+            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+    
+                <table id="invoice_list" class="table table-striped table-row-bordered gy-5 gs-7 ">
+                    <thead>
+                        <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue">
+                            <th>S.No</th>
+                            <th>Apply Date</th>
+                            <th>Branch</th>
+                            <th>Department</th>
+                            <th>Employee code</th>
+                            <th>Employee Name</th>
+                            <th>Joining Date</th>
+                            <th>Designation </th>
+                            <th>Reason	</th>
+                            <th>Status</th>                                                
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of GetExitmanagament_list; let i=index;">
+                            <td>{{i+1}}</td>
+                            <td>{{data.created_date}}</td>
+                            <td>{{data.branch_name}}</td>
+                            <td>{{data.Department_name}}</td>
+                            <td>{{data.user_code}}</td>
+                            <td>{{data.employee_name}}</td>
+                            <td>{{data.joining_date}}</td>
+                            <td>{{data.Designation_name}}</td>
+                            <td>{{data.remarks}}</td>
+                            <td>{{data.overall_status}}</td>                                
+                            <td class="text-center text-nowrap">                         
+                        <button title="360 View" type="button"
+                        class="btn btn-icon btn-sm  me-2 bg-gradient-darkblue" (click)="Onview360(data.exitemployee_gid)">
+                        <i class="fa-solid fa-arrows-spin  fa-spin" style="font-size:14px;font-weight:bolder;"></i>
+                        </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

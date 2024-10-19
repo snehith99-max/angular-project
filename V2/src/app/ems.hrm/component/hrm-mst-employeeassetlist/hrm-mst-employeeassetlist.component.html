@@ -1,0 +1,326 @@
+<div class="card">
+  <div class="row ms-3 mt-3 d-flex align-items-center">
+    <div class="col">
+      <h3 class="card-title">Asset List Summary</h3>
+    </div>
+
+    <div class="col me-5">
+      <button title="Add Department" class="btn-primary btn-sm text-white me-4 mb-2 mt-2 float-end"
+        data-bs-toggle="modal" data-bs-target="#myModaladd">
+        <span class="fa-solid fa-plus text-white fs-6 fw-bold"></span>&nbsp;Add Asset</button>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+      <table id="assetlist" class="table table-striped table-row-bordered border-bottom gs-7">
+        <thead>
+          <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+            <th>S.No</th>
+            <th>Asset Ref No</th>
+            <th>Asset Name</th>
+            <th>Total</th>
+            <th>Assigned</th>
+            <th>Available</th>
+            <th>Created By</th>
+            <th>Created Date</th>
+            <!-- <th>Updated By</th>
+                <th>Updated Date</th>  -->
+            <th>Status</th>
+            <th class="text-center bg-lightblue ">Action</th> 
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of asset_list; let i=index;" class="align-middle">
+            <td>{{i+1}}</td>
+            <td>{{data.assetref_no}}</td>
+            <td>{{data.asset_name}}</td>
+            <td>{{data.asset_count}}</td>
+            <td>{{data.assigned_count}}</td>
+            <td>{{data.available_count}}</td>
+            <td>{{data.created_by}}</td>
+            <td>{{data.created_date}}</td>
+            <!-- <td>{{data.updated_by}}</td>
+                <td>{{data.updated_date}}</td> -->
+            <td [ngSwitch]="data.active_flag">
+              <label *ngSwitchCase="'Active'" class="badge bg-success text-white ">Active</label>
+              <label *ngSwitchCase="'Inactive'" class="badge bg-danger text-white ">Inactive</label>
+            </td>
+            <td class="text-center text-nowrap">
+              <button title="Edit" type="button" class="btn btn-icon btn-sm bg-etdark  me-2" data-bs-toggle="modal"
+              data-bs-target="#myModaledit" (click)="openModaledit(data)">
+              <span class="fa-solid fa-pencil fs-6 text-white"></span>
+            </button>
+            <!-- <button title="Delete" type="button" class="btn btn-icon btn-sm bg-danger me-2" data-bs-toggle="modal" data-bs-target="#myModaldelete" (click)="openModaldelete(data.asset_gid)">
+                  <span class="fa-solid fa-trash fs-6" style="color: #ffffff;"></span>
+                </button> -->
+              <!-- <div (mouseleave)="showOptionsDivId = null" (mouseover)="showOptionsDivId = data.asset_gid"
+                style="cursor: pointer;">
+                <button class="btn me-2 p-1 "><span class="fa-solid fa-ellipsis-vertical fs-1"
+                    style="color: #4d4d4d;"></span></button>
+                <div *ngIf="showOptionsDivId === data.asset_gid" class="pb-0 rounded bg-white cursor-pointer icon_menu" style="margin-right:-15px; margin-top: -15px;">
+                  <div class="d-flex p-3 pb-3 Icon_hover" (click)="openModaledit(data)" data-bs-toggle="modal"
+                    data-bs-target="#myModaledit">
+                    <span><i class="fa-regular fa-pen-to-square fs-3 me-5"></i></span>
+                    <span>Edit</span>
+                  </div>
+                </div>
+              </div> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal ADD -->
+<form [formGroup]="reactiveForm" #form="ngForm">
+  <div class="modal mt-20" id="myModaladd" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+          <div>
+            <h2 class="fw-bolder ms-5 mt-4 text-white">
+              <span class="fa-solid fa-plus text-white fs-6 fw-bold"></span>&nbsp;Add Asset List Details</h2>
+          </div>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="d-flex flex-row flex-wrap">
+            <!-- <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Asset Ref No</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="assetref_no" type="text"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                  [ngStyle]="{'border-color': assetref_no.invalid && assetref_no.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                  placeholder="Enter Asset Ref No" name="assetref_no" required style="width:218%;" />
+                <div *ngIf="assetref_no.invalid && (assetref_no.dirty || assetref_no.touched)">
+                  <div *ngIf="assetref_no.errors?.['required']">
+                    <span class="text-red">Asset Ref No is required</span>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            <div class="col-12 col-lg-12 col-md-12 col-sm-12"><span class="font-bold required">Asset Ref No</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="assetref_no" type="text"
+                  [ngStyle]="{ 'border-color': reactiveForm.get('assetref_no')?.hasError('required') && reactiveForm.get('assetref_no')?.touched || reactiveForm.get('assetref_no')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white"
+                  placeholder="Enter Asset Ref No" />
+                <div
+                  *ngIf="reactiveForm.get('assetref_no')?.hasError('required') && reactiveForm.get('assetref_no')?.touched"
+                  class="text-red ms-2">Asset Ref No is required.</div>
+                <div *ngIf="reactiveForm.get('assetref_no')?.hasError('pattern')" class="text-red ms-2">Space at the
+                  beginning is not allowed.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="row mt-4">
+            <span class="font-bold required"> Asset Name</span>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+              <input formControlName="asset_name" type="text"
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                [ngStyle]="{'border-color': asset_name.invalid && asset_name.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                placeholder="Enter Asset Name" name="asset_name" required />
+              <div *ngIf="asset_name.invalid && (asset_name.dirty || asset_name.touched)">
+                <div *ngIf="asset_name.errors?.['required']">
+                  <span class="text-red">Asset Name is required</span>
+                </div>
+              </div>
+            </div>
+
+          </div> -->
+
+          <div class="row mt-4">
+
+            <div class="col-12 col-lg-12 col-md-12 col-sm-12"><span class="font-bold required">Asset Name</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="asset_name" type="text"
+                  [ngStyle]="{ 'border-color': reactiveForm.get('asset_name')?.hasError('required') && reactiveForm.get('asset_name')?.touched || reactiveForm.get('asset_name')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white"
+                  placeholder="Enter Asset Ref No" />
+                <div
+                  *ngIf="reactiveForm.get('asset_name')?.hasError('required') && reactiveForm.get('asset_name')?.touched"
+                  class="text-red ms-2">Asset Name is required</div>
+                <div *ngIf="reactiveForm.get('asset_name')?.hasError('pattern')" class="text-red ms-2">Space at the
+                  beginning is not allowed.</div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <!-- <span class="font-bold required"> Asset Count</span>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+              <input formControlName="asset_count" type="text"
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                [ngStyle]="{'border-color': asset_count.invalid && asset_count.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                placeholder="Enter Asset Count" name="asset_count" required />
+              <div *ngIf="asset_count.invalid && (asset_count.dirty || asset_count.touched)">
+                <div *ngIf="asset_count.errors?.['required']">
+                  <span class="text-red">Asset Count is required</span>
+                </div>
+              </div>
+            </div> -->
+            <div class="col-12 col-lg-12 col-md-12 col-sm-12"><span class="font-bold required">Asset Count</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="asset_count" type="text"
+                  [ngStyle]="{ 'border-color': reactiveForm.get('asset_count')?.hasError('required') && reactiveForm.get('asset_count')?.touched || reactiveForm.get('asset_count')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white"
+                  placeholder="Enter Asset Ref No" />
+                <div
+                  *ngIf="reactiveForm.get('asset_count')?.hasError('required') && reactiveForm.get('asset_count')?.touched"
+                  class="text-red ms-2">Asset Count is required.</div>
+                <div *ngIf="reactiveForm.get('asset_count')?.hasError('pattern')" class="text-red ms-2">Space at the
+                  beginning is not allowed.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="text-center my-4">
+          <button class="me-4 btn-success" (click)="onsubmit()" [disabled]="reactiveForm.invalid"
+            [ngClass]="{'primary-button': !reactiveForm.invalid, 'secondary-button': reactiveForm.invalid}"
+            data-bs-dismiss="modal">
+            <i class="fas fa-check text-white fs-5"></i>
+            <span class="ms-3">Submit</span>
+          </button>
+          <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white fs-5"></i>
+            <span class="ms-3">Close</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>
+
+
+<!-- The Modal Edit -->
+
+<form [formGroup]="reactiveFormEdit" #form="ngForm">
+  <div class="modal mt-20" id="myModaledit" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+
+
+        <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+          <div>
+            <h2 class="fw-bolder ms-5 mt-4 text-white"><i class="fa-solid fa-pen-to-square fs-2 me-4"></i>Edit Asset
+              List Details
+            </h2>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex flex-row flex-wrap">
+
+            <div class="row mt-4"><span class="font-bold required"> Asset Ref No</span>
+              <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                <input formControlName="assetref_noedit" type="text"
+                  class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                  placeholder="Enter Asset Ref No" name="assetref_noedit"
+                  [ngStyle]="{'border-color': assetref_noedit.invalid && assetref_noedit.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                  style="width:170%;" required readonly />
+                <div *ngIf="assetref_noedit.invalid && (assetref_noedit.dirty || assetref_noedit.touched)">
+                  <div *ngIf="assetref_noedit.errors?.['required']">
+                    <span class="text-red">Asset Ref No is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-4"><span class="font-bold required"> Asset Name</span>
+              <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                <input formControlName="asset_nameedit" type="text"
+                  class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                  placeholder="Enter Asset Name" name="asset_nameedit"
+                  [ngStyle]="{'border-color': asset_nameedit.invalid && asset_nameedit.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                  style="width:172%;" required />
+                <div *ngIf="asset_nameedit.invalid && (asset_nameedit.dirty || asset_nameedit.touched)">
+                  <div *ngIf="asset_nameedit.errors?.['required']">
+                    <span class="text-red">Asset Name is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-4">
+              <span class="font-bold required">Asset Count</span>
+              <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                <input formControlName="asset_countedit" type="text"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                  [ngStyle]="{'border-color': asset_countedit.invalid && asset_countedit.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                  placeholder="Enter Asset Count" name="asset_countedit" style="width:172%;" required />
+                <div *ngIf="asset_countedit.invalid && (asset_countedit.dirty || asset_countedit.touched)">
+                  <div *ngIf="asset_countedit.errors?.['required']">
+                    <span class="text-red">Asset Count is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-4"><span class="font-bold">Active Flag</span>
+              <div class="d-flex justify-content-start mt-4 ms-2">
+                <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                  <input class="form-check-input" type="radio" name="active_flag" formControlName="active_flag"
+                    value="Active" for="Active" />
+                  <label class="form-check-label text-gray-700 text-nowrap">Yes</label>
+                </div>
+                <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+                  <input class="form-check-input" type="radio" name="active_flag" formControlName="active_flag"
+                    value="Inactive" for="Inactive" />
+                  <label class="form-check-label text-gray-700 text-nowrap">No</label>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+
+
+          <div class="text-center my-4">
+            <button class="me-4 btn-success" (click)="onupdate()"
+              [ngClass]="{'primary-button': !reactiveFormEdit.invalid, 'secondary-button': reactiveFormEdit.invalid}"
+              data-bs-dismiss="modal">
+              <i class="fas fa-check text-white fs-5"></i>
+              <span class="ms-3">Update</span>
+            </button>
+            <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+              <i class="fas fa-close text-white"></i>
+              <span class="ms-3">Close</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+
+
+<!-- The Modal Delete -->
+<!-- <div class="modal " id="myModaldelete" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog del_modal-dialog">
+    <div class="modal-content del_modal-content">
+      <div class="text-center my-4">
+        <h2><b>Are you sure?</b></h2>
+        <p style="display: block;">Do You Want To Delete the Record ?</p>
+        <div class="text-center my-4">
+          <button class="btn-danger btn-sm text-white me-4" (click)="ondelete()" data-bs-dismiss="modal">
+            <i class="bi bi-trash-fill text-white fs-5 me-2"></i>Delete
+          </button>
+          <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white me-2"></i>Close
+          </button>          
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

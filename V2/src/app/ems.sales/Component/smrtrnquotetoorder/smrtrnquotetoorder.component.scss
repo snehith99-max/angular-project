@@ -1,0 +1,245 @@
+.bg-stssuccess{
+    background-color: #4caf50 !important;
+  }
+button[enabled] {
+    background-color: #42ac72 !important;
+    font-size: 1.1rem !important;
+    font-weight: 630 !important;
+    padding: 9px 16px 9px 13px !important;
+    border-radius: 3px;
+    border: 0;
+}
+button[disabled] {
+    background-color: #cecece !important;
+    font-size: 1.1rem !important;
+    font-weight: 630 !important;
+    padding: 9px 16px 9px 13px !important;
+    border-radius: 3px;
+    cursor: not-allowed;
+    border: 0;
+}
+ 
+button[enabled]:hover {
+    background-color: #42ac72 !important;
+ 
+}
+ 
+.del_modal-dialog {
+    margin-top: 200px;
+ 
+    .del_modal-content {
+        height: 200px;
+        width: 350px;
+ 
+        h2 {
+            margin-top: 20px;
+        }
+ 
+        p {
+            margin-top: 20px;
+        }
+ 
+        button {
+            margin-top: 15px;
+        }
+    }
+
+    .readonly {
+
+
+
+        cursor: not-allowed; /* Optional: change cursor to not-allowed */
+        pointer-events: none; /* Make overlay transparent to pointer events */
+      }
+}
+#kt_chat_contacts_body1 {
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  #kt_chat_contacts_body1::-webkit-scrollbar {
+    width: 8px;
+    /* You can adjust the width to your preference */
+  }
+  
+  #kt_chat_contacts_body1::-webkit-scrollbar-thumb {
+    background: #888;
+    /* You can set the color of the scrollbar thumb */
+    border-radius: 10px;
+    /* You can adjust the border radius to your preference */
+    height: 5px;
+  }
+  .bg-stssuccess{
+    background-color: #4caf50 !important;
+  }
+  button[enabled] {
+    background-color: #42ac72 !important;
+    font-size: 1.1rem !important;
+    font-weight: 630 !important;
+    padding: 9px 16px 9px 13px !important;
+    border-radius: 3px;
+    border: 0;
+  }
+  button[disabled] {
+    background-color: #cecece !important;
+    font-size: 1.1rem !important;
+    font-weight: 630 !important;
+    padding: 9px 16px 9px 13px !important;
+    border-radius: 3px;
+    cursor: not-allowed;
+    border: 0;
+  }
+
+  button[enabled]:hover {
+    background-color: #42ac72 !important;
+
+  }
+
+  .del_modal-dialog {
+    margin-top: 200px;
+
+    .del_modal-content {
+        height: 200px;
+        width: 350px;
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+
+        button {
+            margin-top: 15px;
+        }
+    }
+  }
+  .tax-container {
+    width: 100%;
+  }
+
+  .tax-item {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+
+  .tax-name {
+    flex: 0;
+  }
+  .tax-header {
+    margin-bottom: 5px; /* Add line space below the header */
+  }
+  .total-amount {
+    margin-top: 2px; 
+  
+  }
+  .twotab:hover{
+    
+    background-color:#009EF7 ;
+    color: #ffffff !important;
+
+  }
+  .nav-tabs .nav-link.active,
+  .nav-tabs .nav-item.show .nav-link {
+    color: #009ef7 !important;
+  }
+
+  .twotabs {
+    transition: 0.3s;
+    padding: 5px 10px;
+    color: #000000;
+    // background-color: rgb(12, 176, 216);
+    border-radius: 5px;
+    cursor: pointer;
+  
+  }
+
+
+  .nav-twotabs .nav-link.active,
+  .nav-twotabs .nav-items.show .nav-link {
+    color: #ffffff !important;
+    background-color: #009EF7;
+  }
+
+  #dropdown-container {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 200px; /* Adjust as needed */
+    max-height: 300px;
+    overflow-y: auto;
+    display: none;
+    position: absolute;
+    z-index: 1000;
+  }
+
+  .ng-dropdown-panel {
+    max-height: 250px; /* Adjust as needed */
+    overflow-y: auto;
+  }
+
+  .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .fixed-width {
+    width: 100%;
+    max-width: 200px;
+    min-width: 200px; /* Ensure this matches the width of the <td> */
+  }
+
+  .ng-select .ng-select-container {
+    width: 100%;
+    padding-inline-start: 0%;
+  }
+  ::ng-deep .no-arrow .ng-arrow-wrapper {
+    display: none !important;
+  }
+
+  ::ng-deep .no-arrow .ng-select-container {
+    padding-right: 0 !important;
+  }
+
+  .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    padding: 0% ;
+}
+
+
+::ng-deep .no-arrow .ng-arrow-wrapper {
+  display: none !important;
+}
+
+::ng-deep .no-arrow .ng-select-container {
+  padding-right: 0 !important;
+}
+::ng-deep .custom-placeholder .ng-select-container .ng-placeholder {
+  text-align: left;
+}
+
+.padding_custom {
+  padding: 1px !important;
+}
+
+.custom_height {
+  height: 20px !important;
+}
+.error_input_field{
+  color: red;
+  font-weight: bolder;
+}
+.ng-select .ng-select-container{
+    height: 41px ;
+    border-radius: 9px !important;
+    border: 1px solid #d8d8d9;
+  }

@@ -1,0 +1,20 @@
+.back-icon {
+    text-align: right;
+    margin: 10px 35px 0 0;
+
+    i {
+        font-size: 30px;
+        color: #2c1a94;
+        cursor: pointer;
+    }
+}
+
+.btn-success:hover {
+    background-color: #42ac72 !important;
+}
+
+.btn-success:disabled {
+    background-color: #cccccc !important;
+    cursor: not-allowed !important;
+}
+

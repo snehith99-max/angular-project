@@ -1,0 +1,101 @@
+<div class="card rounded-top">
+    <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+      <h3 class="fw-bolder text-white"><i class="fas fa-plus fw-bolder fs-3"></i> &nbsp;&nbsp;&nbsp;Product Split Management
+      </h3>
+    </div>
+  
+    <form [formGroup]="reactiveForm" #form="ngForm">
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold">Product Group</span>
+                <div class="col-lg-10 col-12 col-md-11 col-sm-11 fv-row mt-2 ">    
+                    <input type="text" formControlName="stock_gid" hidden>  
+                    <input type="text" formContolName="branch_gid" hidden> 
+                    <input type="text" formContolName="reference_gid" hidden>  
+                    <input type="text" formControlName="product_gid" hidden> 
+                    <input type="text" formControlName="display_field" hidden> 
+                    <input type="text" formControlName="uom_gid" hidden>         
+                    <input type="text" [ngStyle]="{ 'border-color': 'rgb(209, 209, 209)','height': '42px'}" formControlName="product_group" class="form-control form-control-lg form-control-solid 
+                    custom-input mb-3 mb-lg-0  borderc-secondary bg-white custom-input" placeholder="Product Group"
+                         style="height: 40px;" readonly/>
+                </div>
+            </div>
+    
+      
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold">Product Code</span>
+                <div class="col-lg-10 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" [ngStyle]="{ 'border-color': 'rgb(209, 209, 209)','height': '42px'}" class="form-control form-control-lg form-control-solid 
+                        custom-input mb-3 mb-lg-0  borderc-secondary bg-white custom-input" placeholder="Product Code"
+                        formControlName="product_code"
+                        style="height:40px;" readonly />
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold">Product</span>
+                <div class="col-lg-10 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" [ngStyle]="{ 'border-color': 'rgb(209, 209, 209)','height': '42px'}" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                    placeholder="Product Name" formControlName="product_name"  class="form-control form-control-lg  custom-input mb-3 mb-lg-0 bg-white custom-input" 
+                    style="height:40px;" maxlength="32" readonly/>
+                </div>
+            </div>
+        </div>
+  
+        
+        <div class="d-flex flex-row m-6 mt-0 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold" >SKU</span>
+                <div class="col-lg-10 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input formControlName="sku" placeholder="SKU" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                    style="height:40px; text-align: left;" [ngStyle]="{ 'border-color': 'rgb(209, 209, 209)','height': '42px'}" readonly/>
+               
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold">Product Unit</span>
+                <div class="col-lg-10 col-12 col-md-11 col-sm-11 fv-row mt-2 ">
+                    <input formControlName="productuom_name" placeholder="" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                    style="height:40px; text-align: left;" [ngStyle]="{ 'border-color': 'rgb(209, 209, 209)','height': '42px'}" readonly/>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold"> Outstanding Quantity</span>
+                <div class="col-lg-10 col-12 col-md-11 col-sm-11 fv-row mt-2 ">
+                    <input formControlName="stock_balance" placeholder="Outstanding Quantity" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                    style="height:40px; text-align: left;" [ngStyle]="{ 'border-color': 'rgb(209, 209, 209)','height': '42px'}" readonly/>
+                </div>
+            </div>
+
+        </div>
+        <div class="d-flex flex-row m-6 mt-0 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold required">Split Quantity</span>
+                <div class="col-lg-10 col-12 col-md-11 col-sm-11 fv-row mt-2 ">
+                    <input type="number" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                    formControlName="split_quantity"
+                    style="height:40px; text-align: left;"/>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold required" >Incoming Quantity</span>
+                <div class="col-lg-10 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="number" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 borderc-secondary bg-white custom-input"  
+                       style="height:40px;" formControlName="incoming_quantity"
+                    style="height:40px; text-align: left;" />
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold">Unit</span>
+                <div class="col-lg-10 col-12 col-md-11 col-sm-11 fv-row mt-2 ">
+                   
+                    <ng-select [items]="product_unit_list" class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                  bindLabel="productuom_name" bindvalue="product_uom_gid" [(ngModel)]="mdlunitName"
+                  formControlName="product_unit_name" placeholder="Select an option"></ng-select>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="text-center my-4">
+            <button type="button" class="btn-success btn-sm text-white me-2"
+            (click)="validate_split()" >
+            <i class="fa fa-check fs-5"></i>&nbsp;Update</button>
+    
+            <button class="btn-primary btn-sm text-white me-4" routerLink="/ims/ImsTrnStocksummary">
+              <i class="fas fa-arrow-left"></i> &nbsp; Back
+            </button>
+        </div>
+    </form>
+</div>

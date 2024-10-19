@@ -1,0 +1,272 @@
+
+<div class="card">
+  <div class="row ms-3 mt-3 d-flex align-items-center">
+    <div class="col">
+    <h3 class="card-title m-3">Quotation Summary</h3>
+  </div>
+    <div class="col me-5">
+      <button type="button" title="Raise Quotation" class="btn-primary btn-sm text-white me-4 float-end"
+        data-bs-toggle="modal" data-bs-target="#myModaladd" routerLink="/smr/SmrTrnQuotationaddNew">
+        <i class="fas fa-plus"></i>&nbsp;Raise Quotation
+      </button>
+    </div>
+  </div>
+  
+  <div class="card mt-3 mb-3 m-5 border borderc-secondary">
+    <div class="row m-5">
+      <!-- Chart Column -->
+      <div class="col-lg-9 col-md-12 mb-3 ">
+        <ng-container *ngIf="flag">
+          <div class="d-flex flex-column border rounded" id="chart">
+            <apx-chart [series]="chartOptions?.series"
+                       [chart]="chartOptions?.chart"
+                       [xaxis]="chartOptions?.xaxis"
+                       [yaxis]="chartOptions?.yaxis"
+                       [labels]="chartOptions?.labels"
+                       [title]="chartOptions?.title"
+                       [subtitle]="chartOptions?.subtitle"
+                       [dataLabels]="chartOptions?.dataLabels"
+                       [stroke]="chartOptions?.stroke"
+                       [legend]="chartOptions?.legend">
+            </apx-chart>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="!flag">
+          <div class="d-flex justify-content-center">
+            <span>
+              <img src=".\assets\media\images\No_data_found.png" class="h-78px w-300px">
+            </span>
+          </div>
+        </ng-container>
+      </div>
+      
+      <!-- Info Panel Column -->
+      <div class="col-lg-3 col-md-12 mb-3 mt-8">
+        <div class="card border border-secondary  rounded-3 bg-light " style="width: 100%;">
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h6 class="text-uppercase text-muted text-center mb-3">Quotation Amended</h6>
+                <div>
+                  <h2 class="text-dark display-6 text-center">{{amendcount}}</h2>
+                </div>
+              </div>
+              <div class="icon-box bg-primary text-white p-3 rounded-circle" style="margin-left: -10px;">
+                <i class="fa-solid fa-file-signature" style="font-size: 1.5rem;"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="card border border-secondary  rounded-3 bg-light" style="width: 100%;">
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h6 class="text-uppercase text-muted text-center mb-3">Quotation Approved</h6>
+                <div>
+                  <h2 class="text-dark display-6 text-center">{{approvecount}}</h2>
+                </div>
+              </div>
+              <div class="icon-box bg-primary text-white p-3 rounded-circle" style="margin-left: -10px;">
+                <i class="fa-solid fa-thumbs-up" style="font-size: 1.5rem;"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="table-responsive">
+    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+      <input type="hidden" formControlName="quotation_gid">
+      <table id="quotation_list" class="table table-striped table-row-bordered gy-5 gs-7 ">
+        <thead>
+          <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+            <th style="width: 1%;">S.No </th>
+            <th style="width: 8%;">Date</th>
+            <th style="width: 5%;">Quote Ref.No</th>
+            <th style="width:40%">Customer</th>
+            <th style="width: 30%;">Contact</th>
+            <th style="text-align: right;">Quote Value </th>
+            <th>Status</th>
+            <th class="text-center bg-lightblue ">Action</th> 
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of quotation_list; let i=index;">
+            <td>{{i+1}}</td>
+            <td class="text-nowrap">{{data.quotation_date}}</td>
+            <td class="text-nowrap">{{data.quotation_referenceno1}}</td>
+            <td style="width:40%">{{data.customer_name}}</td>
+            <td style="width: 30%;">{{data.contact}}</td>
+            <td style="text-align: right;">{{data.Grandtotal}}</td>
+            <td>{{data.quotation_status}}</td>
+            <td class="text-center text-nowrap">
+              <button title="View" type="button" class="btn btn-icon
+                              btn-sm bg-primary me-2" (click)="onview(data.quotation_gid,data.customer_gid)">
+                                <span class="fa-solid fa-eye fs-6 text-white"></span>
+                            </button>
+                            <button title="Edit" type="button" class="btn btn-icon
+                              btn-sm bg-etdark me-2" (click)="onedit(data.quotation_gid,data.customer_gid)" 
+                              [disabled]="data.invoice_status === 'IRN Cancelled'">
+                                <span class="fa-solid fa-pencil fs-6 text-white"></span>
+                            </button>                            
+                            <button title="Pdf" type="button" data-bs-toggle="modal" data-bs-target="#myModalPdf"
+                                class="btn btn-icon btn-sm background-color6 me-2 "
+                                style="background: radial-gradient(circle, #47acbe 0%, #4aa5b9 100%);"><span class="fa-solid fa-file-pdf fs-6"
+                                    (click)="PrintPDF(data.quotation_gid)"></span>
+                            </button>
+                            <button title="Raise Order" type="button" data-bs-toggle="modal" data-bs-target="#myModalPdf"
+                                class="btn btn-icon btn-sm background-color6 me-2 "
+                                style="background: radial-gradient(circle, #9360f2 0%, #9360f2 100%);"><span class="fa-solid fa-arrow-up fs-6"
+                                    (click)="onadd(data.quotation_gid)"></span>
+                            </button>
+                            <button title="Mail" type="button" data-bs-toggle="modal" data-bs-target="#myModalPdf"
+                                class="btn btn-icon btn-sm background-color6 me-2 "
+                                style="background: radial-gradient(circle, #4b6fff 0%, #4b6fff 100%);"><span class="fa-solid fa-envelope fs-6"
+                                (click)="Mail(data.quotation_gid)"></span>
+                            </button>
+
+                            <!-- <span (click)="toggleOptions(data.quotation_gid)" style="cursor: pointer;">
+                              <button class="btn me-2 p-1 "><span class="fa-solid fa-ellipsis-vertical fs-1 "
+                                  style="color: #4d4d4d;"></span></button>
+                              <div *ngIf="showOptionsDivId === data.quotation_gid"
+                                class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                                <div class="d-flex p-3 pb-3 Icon_hover" (click)="onadd(data.quotation_gid)"
+                                  *ngIf="data.has_child != 'N'">
+                                  <span><i class="fa-solid fa-arrow-up  fs-3 me-4"></i></span>
+                                  <span>Raise Order</span>
+                                </div>
+                                <div class="d-flex p-3 pb-3 Icon_hover" (click)="Mail(data.quotation_gid)"
+                                  *ngIf="data.has_child != 'N'">
+                                  <span><i class="fa-solid fa-envelope  fs-3 me-4"></i></span>
+                                  <span>Mail</span>
+                                </div>
+                              </div>
+                            </span> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- details popup -->
+<div class="modal fade" id="myModalUpdateimage9" tabindex="-1" data-bs-backdrop='static'
+  aria-labelledby="editamlcategoryLabel" aria-hidden="true" data-bs-keyboard="false">
+  <div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content  d-flex justify-content-center">
+      <div class="card-header p-5 pb-1 pt-1 rounded-top bg-primary"
+        style="display: flex; align-items: center; height: 40px;">
+        <h3 style="margin-top: 10px; color: white; font-weight: bold" class="mt-8">
+          &nbsp;&nbsp;Product Details
+        </h3>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table class="table table-striped table-row-bordered gy-5 gs-7 ">
+              <thead>
+                <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                  <th>S.No </th>
+                  <th>Product Code </th>
+                  <th>Product Name </th>
+                  <th>Qty Requested </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of product_list; let i=index;" style="white-space: nowrap;">
+                  <td>{{i+1}}</td>
+                  <td>{{data.product_code}}</td>
+                  <td>{{data.product_name}}</td>
+                  <td>{{data.qty_quoted}}</td>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="text-center my-4">
+          <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal" style="background-color: red;">
+            <i class="fas fa-arrow-left text-white"></i> &nbsp;Back
+          </button>&nbsp;
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Quotation ref.no popup -->
+<form [formGroup]="quoteform">
+
+  <div class="modal fade" id="myModalQrefNo" tabindex="-1" data-bs-backdrop='static'
+    aria-labelledby="editamlcategoryLabel" aria-hidden="true" data-bs-keyboard="false">
+
+    <div class="modal-dialog w-200  modal-dialog-centered">
+      <div class="modal-content">
+        <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+          <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i class=""></i>Change Quotation Ref.No
+          </h2>
+
+        </div>
+
+        <div *ngFor="let data of quotrefnolist; let i=index;">
+          <div class="modal-body p-10">
+            <div class="row"><span class="font-bold"><b>Quotation Date</b><span class="ms-1 text-red">:</span></span>
+              <div class="col-lg-11 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                <p>{{data.quotation_date}}</p>
+
+
+
+                <!-- <input formControlName="team_name" type="text" class="
+                   form-control form-control-lg form-control-solid borderc-secondary
+                   custom-input
+                   mb-3 mb-lg-0
+                   bg-white
+                   custom-input
+                 "  placeholder="Enter Team " name="team_name" /> -->
+              </div>
+
+            </div>
+
+            <br>
+            <div class="col-12 col-lg-12 col-md-6 col-sm-12"><b>Customer</b> <span class="ms-1 text-red">:</span>
+              <p>{{data.customer_name}}</p>
+              <br>
+            </div>
+            <br>
+            <div class="col-12 col-lg-12 col-md-6 col-sm-12"><b>Quotation Ref.No</b> <span
+                class="ms-1 text-red">:</span>
+
+              <input formControlName="quotation_referenceno1" type="text" class="
+              form-control form-control-lg form-control-solid
+              borderc-secondary
+              bg-white
+              custom-input
+              mb-3 mb-lg-0
+            " required />
+
+              <br>
+            </div>
+
+
+            <br>
+            <div class="text-center my-4">
+              <button (click)="onupdate()" class="btn-success btn-sm text-white me-4" data-bs-dismiss="modal">
+                <i class="fas fa-check text-white fs-5 "></i> &nbsp;Update
+              </button> &nbsp;&nbsp;
+              <button (click)="onclose()" class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+                <i class="fas fa-close text-white"></i> &nbsp;Close
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</form>

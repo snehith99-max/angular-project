@@ -1,0 +1,111 @@
+<div class="card rounded-top">
+    <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+        <h3 class="fw-bolder text-white"><i class="fa-solid fa-pen-to-square fs-2"></i> &nbsp;&nbsp;&nbsp;Edit User
+        </h3>
+    </div>
+    <form [formGroup]="reactiveForm" #form="ngForm">
+        <div class="card m-3">
+          <div class="card-header bg-lightblue card-height55">
+            <div class="card-title m-0">
+              <h4 class="fw-bolder text-blue">User Details</h4>
+            </div>
+          </div>
+          <div class="d-flex flex-row m-6 flex-wrap">
+            <input formControlName="employee_gid" hidden placeholder="Address Line 1" type="text"
+              class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary"
+              name="employee_gid" />
+            <input formControlName="permanent_addressgid" hidden placeholder="Address Line 1" type="text"
+              class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary"
+              name="permanent_addressgid" />
+            <input formControlName="temporary_addressgid" hidden placeholder="Address Line 1" type="text"
+              class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary"
+              name="temporary_addressgid" />
+  
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Entity</span>
+              <ng-select formControlName="entityname" [(ngModel)]="selectedEntity" [items]="entity_list" required
+                [ngClass]="{'invalid-border':reactiveForm.get('entityname')?.invalid && reactiveForm.get('entityname')?.touched}"
+                class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="entity_name"
+                bindValue="entity_gid"></ng-select>
+              <div
+                *ngIf="reactiveForm.get('entityname')?.hasError('required') && reactiveForm.get('entityname')?.touched || reactiveForm.get('entityname')?.hasError('pattern')"
+                class="text-red"> Entity is required.</div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Branch</span>
+              <ng-select formControlName="branchname" [(ngModel)]="selectedBranch" [items]="branchList" required
+                [ngClass]="{'invalid-border':reactiveForm.get('branchname')?.invalid && reactiveForm.get('branchname')?.touched}"
+                class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="branch_name"
+                bindValue="branch_gid" placeholder="Select an option"></ng-select>
+              <div
+                *ngIf="reactiveForm.get('branchname')?.hasError('required') && reactiveForm.get('branchname')?.touched || reactiveForm.get('branchname')?.hasError('pattern')"
+                class="text-red"> Branch is required.</div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">User Name</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                  <input formControlName="first_name" type="text"
+                    [ngStyle]="{ 'border-color': reactiveForm.get('first_name')?.hasError('required') && reactiveForm.get('first_name')?.touched || reactiveForm.get('first_name')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"
+                    placeholder="User Name" />
+                  <div
+                    *ngIf="reactiveForm.get('first_name')?.hasError('required') && reactiveForm.get('first_name')?.touched"
+                    class="text-red ms-2">User Name is required.</div>
+                  <div *ngIf="reactiveForm.get('first_name')?.hasError('pattern')" class="text-red ms-2">Space at the
+                    beginning is not allowed.</div>
+                </div>
+            </div>
+          </div>
+          <div class="d-flex flex-row m-6 mt-0 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">User Code</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                  <input formControlName="user_code" type="text"
+                    [ngStyle]="{ 'border-color': reactiveForm.get('user_code')?.hasError('required') && reactiveForm.get('user_code')?.touched || reactiveForm.get('user_code')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0  custom-input  mb-3 mb-lg-0"
+                    placeholder="User Code"  />
+                  <div *ngIf="reactiveForm.get('user_code')?.hasError('required') && reactiveForm.get('user_code')?.touched"
+                    class="text-red ms-2">User Code is required.</div>
+                  <div *ngIf="reactiveForm.get('user_code')?.hasError('pattern')" class="text-red ms-2">Space at the
+                    beginning is not allowed.</div>
+                </div>
+             </div>
+             <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                <span class="font-bold required">Moboile Number</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                  <input type="text" id="mobile" name="mobile" formControlName="mobile"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                    [ngStyle]="{'border-color': mobile.invalid && mobile.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                    pattern="^[0-9]{10,15}$" placeholder="Personal Phone Number" minlength="10" maxlength="15"
+                    autocomplete="off" required>
+                  <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)">
+                    <div *ngIf="mobile.errors?.['required']">
+                      <span class="text-red">Phone number is required</span>
+                    </div>
+                    <div *ngIf="mobile.errors?.['pattern']">
+                      <span class="text-red">Space not allowed and accepts 12 digits</span>
+                    </div>
+                  </div>
+                </div>
+             </div>
+             <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required" >User Type</span>
+                <div class="col-12 col-lg-4 col-md-3 col-sm-12">
+                  <ng-select formControlName="user_type" pattern="^(?!\s*$).+"
+                          bindLabel="user_type"  placeholder="Select an option" style="width: 340px;" 
+                          [ngClass]="{'invalid-border': user_type.invalid && user_type.touched}">
+                          <ng-option value="Kitchen Manager">Kitchen Manager</ng-option>
+                          <ng-option value="Front Desk">Front Desk</ng-option>
+                          </ng-select>       
+               </div>
+              </div>  
+
+          </div>
+          <div class="text-center my-4">
+            <button class="me-4 btn-success" (click)="validate()" >
+              <i class="fas fa-check text-white fs-5 me-3"></i>
+              <span class="ms-1">Update</span> 
+            </button>
+            <button class="btn-primary btn-sm text-white me-4" routerLink="/system/SysMstUsermanagementSummary">
+              <i class="fas fa-arrow-left"></i>
+              <span class="ms-3">Back</span>
+            </button>
+          </div>
+        </div>
+    </form>
+  </div>

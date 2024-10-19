@@ -1,0 +1,95 @@
+.card-header {
+    background-image: linear-gradient(to right, #2429e0, #39ffff, #2429e0);
+    border-radius: 0px;
+}
+
+.back-icon {
+    text-align: right;
+    margin: 10px 35px 0 0;
+
+    i {
+        font-size: 30px;
+        color: #2c1a94;
+        cursor: pointer;
+    }
+}
+  .btn-success:disabled {
+    background-color: #cccccc !important;
+    cursor: not-allowed !important;
+}
+// 
+// 
+// 
+
+.calendar-container {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Customize the header */
+.fc .fc-toolbar {
+  background-color: #003366;
+  color: white;
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+}
+
+.fc-button {
+  background-color: #006699;
+  border: none;
+  color: white;
+}
+
+.fc-button:hover {
+  background-color: #004466;
+}
+
+.fc-button:focus {
+  box-shadow: none;
+}
+
+/* Customize the day grid */
+.fc-daygrid-day {
+  background-color: white;
+  border: 1px solid #ddd;
+}
+
+.fc-daygrid-day-number {
+  color: #003366;
+  font-weight: bold;
+}
+
+.fc-daygrid-event {
+  background-color: #006699;
+  color: white;
+  border: none;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+.custom-event {
+  background-color: #cc6600;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* Event hover effect */
+.fc-daygrid-event:hover {
+  background-color: #004466;
+}
+
+.custom-event-class {
+  background-color: #cc6600 !important;
+  color: white !important;
+  border-radius: 4px;
+  padding: 5px;
+  border: none;
+}

@@ -1,0 +1,154 @@
+<div class="card mt-2">
+  <div class="row ms-3 mt-3 d-flex align-items-center">
+    <div class="row mt-4">
+      <div class="col-lg-6 col-md-2 col-sm-2">
+        <div class="col ms-2">
+          <h2 class="card-title fw-bolder">Sales Order Summary</h2>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-2 col-sm-2">
+        <div style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer me-5 float-end"
+          (click)="back()">
+          <i class="fa-solid fa-arrow-left text-blue mb-1"></i>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <br>
+
+  <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-20x mb-3 fs-6 ">
+    <li class="nav-item ms-5">
+      <a class="nav-link active  btn btn-flex btn-active-light-primary fs-5" data-bs-toggle="tab"
+        href="#kt_tab_pane_2"><i class="bi bi-boxes fs-5"></i>&nbsp;Delivery Based Invoice</a>
+    </li>
+    <li class="nav-item ms-5">
+      <a class="nav-link   btn btn-flex btn-active-light-primary fs-5" data-bs-toggle="tab" href="#kt_tab_pane_3"><i
+          class="bi bi-boxes fs-5"></i>&nbsp;Service Based Invoice</a>
+    </li>
+
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active " id="kt_tab_pane_2" role="tabpanel">
+      <div class="table-responsive me-5">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded ">
+          <table id="salesorder_list" class="table table-row-bordered gy-5 gs-7 align-middle">
+            <thead>
+              <tr class="fw-bolder  fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                <th style="width: 1%;">S.No</th>
+                <th style="width: 1%;">Date</th>
+                <th style="width: 1%;">Order Ref.No</th>
+                <th>Customer</th>
+                <th>Contact</th>
+                <th style="text-align: right;" style="width: 1%;">Order Value</th>
+                <th style="width: 1%;">Status</th>
+                <th class="text-center bg-lightblue ">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of salesorder_list; let i=index;" class="align-middle" [ngClass]="{
+                'row-green': data.source_flag === 'W',
+                'row-blue': data.source_flag === 'S'
+              }">
+                <td>{{i+1}}</td>
+                <td class="text-nowrap">{{data.salesorder_date}}</td>
+                <td class="text-nowrap">{{data.so_referenceno1}}</td>
+                <!-- <td>{{data.customer_code}}</td> -->
+                <td style="width: 26%;">{{data.customerdetails}}</td>
+                <td style="width: 30%;">{{data.contact}}</td>
+                <td style="text-align: right;" class="text-nowrap">{{data.Grandtotal}}</td>
+                <td class="text-nowrap">{{data.salesorder_status}}</td>
+                <td class="text-center text-nowrap">
+                  <!-- <span (click)="toggleOptions(data.salesorder_gid)"
+                    style="cursor: pointer;">
+                    <button class="btn me-2 p-1 "><span class="fa-solid fa-ellipsis-vertical fs-1 "
+                        style="color: #4d4d4d;"></span></button>
+                    <div *ngIf="showOptionsDivId === data.salesorder_gid"
+                      class="pb-0 rounded bg-white cursor-pointer icon_menu"
+                      style="margin-right:-15px; margin-top: -15px;">
+                 
+                                
+                      <div class="d-flex p-3 pb-3 Icon_hover" *ngIf="data.has_child != 'N'" (click)="RaisetoOrder(data.salesorder_gid)">
+                        <span><i class="fas fa-file-invoice  fs-3 me-4"></i></span>
+                        <span>Raise Invoice</span>
+                      </div>
+                    
+                      
+                    </div>
+                  </span> -->
+
+                  <button title="Raise Invoice" type="button" class="btn btn-icon
+                              btn-sm bg-warning me-2" (click)="RaisetoOrder(data.salesorder_gid)">
+                    <span class="fas fa-file-invoice  fs-6"></span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade" id="kt_tab_pane_3" role="tabpanel">
+      <div class="table-responsive me-5">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded ">
+          <table id="SOService_list" class="table table-row-bordered gy-5 gs-7 align-middle">
+            <thead>
+              <tr class="fw-bolder  fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                <th style="width: 1%;">S.No</th>
+                <th style="width: 1%;">Date</th>
+                <th style="width: 1%;">Order Ref.No</th>
+                <th>Customer</th>
+                <th>Contact</th>
+                <th style="text-align: right;" style="width: 1%;">Order Value</th>
+                <th style="width: 1%;">Status</th>
+                <th class="text-center bg-lightblue ">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of SOService_list; let i=index;" class="align-middle" [ngClass]="{
+                'row-green': data.source_flag === 'W',
+                'row-blue': data.source_flag === 'S'
+              }">
+                <td>{{i+1}}</td>
+                <td class="text-nowrap">{{data.salesorder_date}}</td>
+                <td class="text-nowrap">{{data.so_referenceno1}}</td>
+                <!-- <td>{{data.customer_code}}</td> -->
+                <td style="width: 26%;">{{data.customerdetails}}</td>
+                <td style="width: 30%;">{{data.contact}}</td>
+                <td style="text-align: right;" class="text-nowrap">{{data.Grandtotal}}</td>
+                <td class="text-nowrap">{{data.salesorder_status}}</td>
+                <td class="text-center text-nowrap">
+                  <!-- <span (click)="toggleOptions(data.salesorder_gid)"
+                    style="cursor: pointer;">
+                    <button class="btn me-2 p-1 "><span class="fa-solid fa-ellipsis-vertical fs-1 "
+                        style="color: #4d4d4d;"></span></button>
+                    <div *ngIf="showOptionsDivId === data.salesorder_gid"
+                      class="pb-0 rounded bg-white cursor-pointer icon_menu"
+                      style="margin-right:-15px; margin-top: -15px;">
+                 
+                                
+                      <div class="d-flex p-3 pb-3 Icon_hover" *ngIf="data.has_child != 'N'" (click)="RaisetoOrder(data.salesorder_gid)">
+                        <span><i class="fas fa-file-invoice  fs-3 me-4"></i></span>
+                        <span>Raise Invoice</span>
+                      </div>
+                    
+                      
+                    </div>
+                  </span> -->
+
+                  <button title="Raise Invoice" type="button" class="btn btn-icon
+                              btn-sm bg-warning me-2" (click)="RaisetoOrder1(data.salesorder_gid)">
+                    <span class="fas fa-file-invoice  fs-6"></span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

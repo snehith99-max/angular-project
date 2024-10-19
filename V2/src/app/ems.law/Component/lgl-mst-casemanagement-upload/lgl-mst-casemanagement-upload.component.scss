@@ -1,0 +1,55 @@
+
+.btn-hover{
+    color: white;
+    background-color:#E52B50;
+}
+.upload-container {
+    padding: 0; /* Ensure no padding is affecting the alignment */
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    margin-right: auto; /* This will push everything else to the right */
+}
+
+.bi-arrow-left-square-fill {
+    /* Ensure no extra margin or padding is pushing the icon away from the edge */
+    margin-left: auto; /* This will push the icon to the far right */
+}
+
+
+.bi-upload {
+    margin-right: 5px;
+}
+.btn11{
+   
+        padding-right: 0;
+        padding-left: 0;
+    
+}
+.nav-twotabs .twotab.active, .nav-twotabs .nav-items.show  {
+    color: #ffffff !important;
+    background-color: #009EF7;   
+  }
+  .twotab:hover{
+    background-color:#009EF7 ;
+    color: #ffffff !important;
+  
+  }
+  
+  .modal-lgpopup{
+    --bs-modal-width: 570px;
+  }
+  .inputfield:disabled {
+    background-color: #eaedf0 !important;
+    cursor: not-allowed !important;
+  }
+  .btn-success:disabled {
+    background-color: #cccccc !important;
+    cursor: not-allowed !important;
+  }

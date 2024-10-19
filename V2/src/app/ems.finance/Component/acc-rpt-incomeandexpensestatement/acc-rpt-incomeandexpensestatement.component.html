@@ -1,0 +1,345 @@
+<div class="card">
+    <div class="row mt-5">
+        <div class="col-lg-5">
+            <h3 class="card-title" style="margin-left: 8px;">Income and Expense</h3>
+        </div>
+        <div class="col-lg-3">
+            <ng-select [items]="FinancialYear_List" placeholder="Select an option" [(ngModel)]="finyear"
+                class="custom col-lg-6 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="finyear" bindValue="finyear"
+                (change)="OnSearch()">
+            </ng-select>
+        </div>
+        <div class="col-lg-4">
+
+        </div>
+    </div>
+
+    <ul class="m-3 nav nav-twotabs nav-line-tabs nav-line-tabs-20x mb-3 fs-6 border-bottom text-center mt-2 ms-6 me-6"
+        id="myTab" role="tablist">
+        <li class="border border-secondary active justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"
+            data-bs-toggle="tab" (click)="showTab('Expense')"
+            [ngClass]="{'active-custom-tab': currentTab === 'Expense'}"
+            style="color: #ffffff !important;  background: -webkit-linear-gradient(45deg, #aedaf3, #399C91);"
+            href="#kt_tab_pane_1">
+            <a>
+                <i class="fa-solid fa-money-bill-1-wave fs-4 me-4"></i>Expense
+                <span class="badge badge-pill badge-light text-black"></span>
+            </a>
+        </li>
+
+        <li class="border border-secondary justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"
+            data-bs-toggle="tab" (click)="showTab('Income')" [ngClass]="{'active-custom-tab': currentTab === 'Income'}"
+            style="color: #ffffff !important;  background: -webkit-linear-gradient(45deg, #aedaf3, #399C91);"
+            href="#kt_tab_pane_2">
+
+            <a>
+                <i class="fa-solid fa-laptop-medical fs-4 me-4"></i>Income
+                <span class="badge badge-pill badge-light text-black "></span>
+            </a>
+        </li>
+
+        <li class="border border-secondary justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"
+            data-bs-toggle="tab"
+            style="color: #ffffff !important;  background: -webkit-linear-gradient(45deg, #aedaf3, #399C91);"
+            (click)="showTab('Consolidated')" [ngClass]="{'active-custom-tab': currentTab === 'Consolidated'}"
+            href="#kt_tab_pane_3">
+            <a>
+                <i class="fa-solid fa-laptop-medical fs-4 me-4"></i>Consolidated
+                <span class="badge badge-pill badge-light text-black "></span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane show active" id="kt_tab_pane_1" role="tabpanel">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="m-3 me-0 rounded">
+                        <div class="table-responsive">
+                            <div class="card card-body m-0 p-0 mb-0 bg-white rounded table-responsive">
+                                <!-- <p style="font-size: 14px;color: rgb(8, 8, 146);text-underline-offset: 6px;">
+                                    <u><b>Expense </b></u>
+                                </p> -->
+                                <div class="mx-3 pt-0 pb-0 bg-white rounded">
+                                    <div style="max-height: 355px; overflow-y: auto;">
+                                        <table id="Openingbalance_lists"
+                                            class="table table-row-bordered border-bottom gs-7 align-middle "
+                                            style="border-bottom: 1px solid rgb(245, 244, 244);">
+                                            <thead>
+                                                <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue"
+                                                    style="text-align: center;">
+                                                    <th>Account Group</th>
+                                                    <th>Sub-Group</th>
+                                                    <th>Ledger</th>
+                                                    <th>Debit</th>
+                                                    <th>Balance</th>
+                                                    <!-- <th class="text-center"> Action</th> -->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let data of processedExpense_List; let i=index;">
+                                                    <td class="border border-secondary"
+                                                        *ngIf="i === 0 || processedExpense_List[i-1].MainGroup_name !== data.MainGroup_name"
+                                                        [attr.rowspan]="data.mainGroupSpan"
+                                                        style="vertical-align: top;">
+                                                        {{data.MainGroup_name}}
+                                                    </td>
+                                                    <td class="border border-secondary"
+                                                        *ngIf="i === 0 || processedExpense_List[i-1].subgroup_name !== data.subgroup_name"
+                                                        [attr.rowspan]="data.subGroupSpan" style="vertical-align: top;">
+                                                        {{data.subgroup_name}}
+                                                    </td>
+
+                                                    <td class="border border-secondary">
+                                                        {{data.account_name}}</td>
+                                                    <td class="border border-secondary text-end">
+                                                        {{data.transaction_amount}}</td>
+                                                        <td class="border border-secondary text-end"
+                                                            *ngIf="i === 0 || processedExpense_List[i-1].MainGroup_name !== data.MainGroup_name"
+                                                            [attr.rowspan]="data.mainGroupSpan"
+                                                            style="vertical-align: top; font-weight: bold;">
+                                                            {{data.balance}}
+                                                        </td>
+                                                    <!-- <td class="border border-secondary"
+                                                        style="text-align: right; vertical-align: top; font-weight: bold;"
+                                                        *ngIf="i === 0 || processedExpense_List[i-1].MainGroup_name !== data.MainGroup_name"
+                                                        [attr.rowspan]="data.mainGroupSpan">{{data.closing_amount}}</td> -->
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-3">
+                <div class="d-flex justify-content-center">
+                    <h3 class="fw-bolder text-blue ">Total Amount :<span class="text-black ms-3">{{totalDebit}}</span>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane show" id="kt_tab_pane_2" role="tabpanel">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="m-3 me-0 rounded">
+                        <div class="table-responsive">
+                            <div class="card card-body m-0 p-0 mb-0 bg-white rounded table-responsive">
+                                <!-- <p style="font-size: 14px;color: rgb(8, 8, 146);text-underline-offset: 6px;">
+                                    <u><b>Income</b></u>
+                                </p> -->
+                                <div class="mx-3 pt-0 pb-0 bg-white rounded"
+                                    style="max-height: 355px; overflow-y: auto;">
+                                    <table id="Openingbalance_listss"
+                                        class="table table-row-bordered border-bottom gs-7 align-middle"
+                                        style="border-bottom: 1px solid rgb(245, 244, 244);">
+                                        <thead>
+                                            <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue"
+                                                style="text-align: center;">
+                                                <th>Account Group</th>
+                                                <th>Sub-Group</th>
+                                                <th>Ledger</th>
+                                                <th>Credit</th>
+                                                <th>Balance</th>
+                                                <!-- <th class="text-center"> Action</th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let data of processedIncome_List; let i=index;">
+                                                <td class="border border-secondary"
+                                                    *ngIf="i === 0 || processedIncome_List[i-1].MainGroup_name !== data.MainGroup_name"
+                                                    [attr.rowspan]="data.mainGroupSpan" style="vertical-align: top;">
+                                                    {{data.MainGroup_name}}
+                                                </td>
+                                                <td class="border border-secondary"
+                                                    *ngIf="i === 0 || processedIncome_List[i-1].subgroup_name !== data.subgroup_name"
+                                                    [attr.rowspan]="data.subGroupSpan" style="vertical-align: top;">
+                                                    {{data.subgroup_name}}
+                                                </td>
+
+                                                <td class="border border-secondary">
+                                                    {{data.account_name}}</td>
+                                                <td class="border border-secondary text-end">
+                                                    {{data.transaction_amount}}</td>
+                                                    <td class="border border-secondary text-end" 
+                                                    *ngIf="i === 0 || processedIncome_List[i-1].MainGroup_name !== data.MainGroup_name"
+                                                    [attr.rowspan]="data.mainGroupSpan"
+                                                    style="vertical-align: top; font-weight: bold;">
+                                                    {{data.balance}}
+                                                </td>
+                                                <!-- <td class="border border-secondary"
+                                                    style="text-align: right; vertical-align: top; font-weight: bold;"
+                                                    *ngIf="i === 0 || processedIncome_List[i-1].MainGroup_name !== data.MainGroup_name"
+                                                    [attr.rowspan]="data.mainGroupSpan">{{data.closing_amount}}</td> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-3">
+                <div class="d-flex justify-content-center">
+                    <h3 class="fw-bolder text-blue ms-20">Total Amount : <span
+                            class="text-black ms-3">{{totalCredit}}</span> </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane show" id="kt_tab_pane_3" role="tabpanel">
+            <div class="m-0 me-1 d-flex flex-wrap mb-0 mt-0 " style="margin-top: 10px;">
+                <div class="col-12 col-lg-12 row">
+                    <div class="col-12 col-lg-6 pe-0">
+                        <div class="m-3 me-0 card rounded" style="border-top:2px solid rgb(8, 8, 146);">
+                            <div class="table-responsive">
+                                <div class="card card-body m-0 p-0 mb-0 bg-white rounded table-responsive">
+                                    <p style="font-size: 14px;color: rgb(8, 8, 146);text-underline-offset: 6px;">
+                                        <u><b>Expense </b></u>
+                                    </p>
+                                    <div class="mx-3 pt-0 pb-0 bg-white rounded">
+                                        <div style="max-height: 355px; overflow-y: auto;">
+                                            <table id="Openingbalance_lists"
+                                                class="table table-row-bordered border-bottom gs-7 align-middle "
+                                                style="border-bottom: 1px solid rgb(245, 244, 244); ">
+                                                <thead>
+                                                    <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue"
+                                                        style="text-align: center;">
+                                                        <th>Account Group</th>
+                                                        <th>Sub-Group</th>
+                                                        <th>Ledger</th>
+                                                        <th>Debit</th>
+                                                        <th>Balance</th>
+                                                        <!-- <th class="text-center"> Action</th> -->
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let data of processedExpense_List; let i=index;">
+                                                        <td class="border border-secondary"
+                                                            *ngIf="i === 0 || processedExpense_List[i-1].MainGroup_name !== data.MainGroup_name"
+                                                            [attr.rowspan]="data.mainGroupSpan"
+                                                            style="vertical-align: top;">
+                                                            {{data.MainGroup_name}}
+                                                        </td>
+                                                        <td class="border border-secondary"
+                                                            *ngIf="i === 0 || processedExpense_List[i-1].subgroup_name !== data.subgroup_name"
+                                                            [attr.rowspan]="data.subGroupSpan"
+                                                            style="vertical-align: top;">
+                                                            {{data.subgroup_name}}
+                                                        </td>
+
+                                                        <td class="border border-secondary">
+                                                            {{data.account_name}}</td>
+                                                        <td class="border border-secondary text-end">
+                                                            {{data.transaction_amount}}</td>
+                                                        <td class="border border-secondary text-end"
+                                                            *ngIf="i === 0 || processedExpense_List[i-1].MainGroup_name !== data.MainGroup_name"
+                                                            [attr.rowspan]="data.mainGroupSpan"
+                                                            style="vertical-align: top; font-weight: bold;">
+                                                            {{data.balance}}
+                                                        </td>
+                                                        <!-- <td class="border border-secondary"
+                                                            style="text-align: right; vertical-align: top; font-weight: bold;"
+                                                            *ngIf="i === 0 || processedExpense_List[i-1].MainGroup_name !== data.MainGroup_name"
+                                                            [attr.rowspan]="data.mainGroupSpan">{{data.closing_amount}}</td> -->
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 pe-0">
+                        <div class="m-3 me-0 card rounded" style="border-top:2px solid rgb(8, 8, 146);">
+                            <div class="table-responsive">
+                                <div class="card card-body m-0 p-0 mb-0 bg-white rounded table-responsive">
+                                    <p style="font-size: 14px;color: rgb(8, 8, 146);text-underline-offset: 6px;">
+                                        <u><b>Income</b></u>
+                                    </p>
+                                    <div class="mx-3 pt-0 pb-0 bg-white rounded"
+                                        style="max-height: 355px; overflow-y: auto;">
+                                        <table id="Openingbalance_listss"
+                                            class="table table-row-bordered border-bottom gs-7 align-middle"
+                                            style="border-bottom: 1px solid rgb(245, 244, 244);">
+                                            <thead>
+                                                <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue"
+                                                    style="text-align: center;">
+                                                    <th>Account Group</th>
+                                                    <th>Sub-Group</th>
+                                                    <th>Ledger</th>
+                                                    <th>credit</th>
+                                                    <th>Balance</th>
+                                                    <!-- <th class="text-center"> Action</th> -->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let data of processedIncome_List; let i=index;">
+                                                    <td class="border border-secondary"
+                                                        *ngIf="i === 0 || processedIncome_List[i-1].MainGroup_name !== data.MainGroup_name"
+                                                        [attr.rowspan]="data.mainGroupSpan"
+                                                        style="vertical-align: top;">
+                                                        {{data.MainGroup_name}}
+                                                    </td>
+                                                    <td class="border border-secondary"
+                                                        *ngIf="i === 0 || processedIncome_List[i-1].subgroup_name !== data.subgroup_name"
+                                                        [attr.rowspan]="data.subGroupSpan" style="vertical-align: top;">
+                                                        {{data.subgroup_name}}
+                                                    </td>
+
+                                                    <td class="border border-secondary">
+                                                        {{data.account_name}}</td>
+                                                    <td class="border border-secondary  text-end">
+                                                        {{data.transaction_amount}}</td>
+                                                    <td class="border border-secondary text-end"
+                                                        *ngIf="i === 0 || processedIncome_List[i-1].MainGroup_name !== data.MainGroup_name"
+                                                        [attr.rowspan]="data.mainGroupSpan"
+                                                        style="vertical-align: top; font-weight: bold;">
+                                                        {{data.balance}}
+                                                    </td>
+                                                    <!-- <td class="border border-secondary"
+                                                        style="text-align: right; vertical-align: top; font-weight: bold;"
+                                                        *ngIf="i === 0 || processedIncome_List[i-1].MainGroup_name !== data.MainGroup_name"
+                                                        [attr.rowspan]="data.mainGroupSpan">{{data.closing_amount}}</td> -->
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-lg-6 col-md-6 col-sm-12 float-end">
+                    <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                        <h3 class="fw-bolder text-blue float-end" style="margin-right: -30px;">Total :<span
+                                class="text-black ms-3">{{totalDebit}}</span></h3>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 col-md-2 col-sm-12">
+                    <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                        <h3 class="fw-bolder text-red" style="margin-left: 40px;">Difference :<span
+                                class="text-black ms-3">{{difference_value}}</span></h3>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 col-md-4 col-sm-12">
+                    <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                        <h3 class="fw-bolder text-blue float-end" style="margin-right: -15px;">Total : <span
+                                class="text-black ms-3">{{totalCredit}}</span> </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

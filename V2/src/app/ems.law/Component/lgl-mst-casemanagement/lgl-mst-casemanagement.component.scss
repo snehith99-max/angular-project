@@ -1,0 +1,22 @@
+.p-fileupload {
+    background: #f9fafb;
+    padding: 1.25rem;
+    border: 1px solid #e5e7eb;
+    color: #374151;
+    border-bottom: 0 none;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+}
+
+.p-fileUpload {
+    margin: 0;
+    display: inline-flex;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    align-items: center;
+    vertical-align: bottom;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}

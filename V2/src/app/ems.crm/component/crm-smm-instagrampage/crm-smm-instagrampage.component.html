@@ -1,0 +1,249 @@
+<div class="card shadow-sm">
+
+    <div class="card-header" style="color: white;background-color: #385591;">
+
+        <h3 class="card-title"><i class="fab fa-instagram" style="font-size: 20px;"></i>&nbsp;&nbsp;{{username}}-Posts
+        </h3>
+        <div>
+            <button style="color: black !important;"
+                class="btn btn-icon btn-sm bg-secondary cursor-pointer ms-auto mt-2"
+                (click)="postviewrefresh(account_id)" title="Refresh Summary">
+                <i class="fa-solid fas fa-sync-alt fs-1 fw-bold"></i>
+            </button>&nbsp;
+            <button style="color: black !important;"
+                class="btn btn-icon btn-sm bg-secondary cursor-pointer ms-auto mt-2 " routerLink="/crm/CrmSmmInstagram"
+                title="back"><i class="fa-solid fa-arrow-left-long fs-1 fw-bold"></i></button>&nbsp;
+
+        </div>
+    </div>
+
+</div>
+<br>
+<br>
+<div class="row">
+    <div class="table-responsive">
+        <div class="card card-body m-3 shadow-xl p-3 mb-5 bg-white rounded">
+            <table id="instapostsummary_List" class="table table-striped table-row-bordered border-bottom gs-7">
+                <thead>
+                    <tr class=" text-white fw-bold fs-6 text-nowrap text-center" style="background-color: #385591;">
+                        <th>S.No</th>
+                        <th>Post</th>
+                        <th>Posted Type</th>
+                        <th style="width:50%;">Caption</th>
+                        <th>Likes</th>
+                        <th>Comments</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of instapostsummary_List ;let i=index;" class="align-middle">
+                        <td>{{i+1}}</td>
+                        <td>
+                            <ng-container *ngIf="data.post_type === 'IMAGE' || data.post_type === 'CAROUSEL_ALBUM'">
+                                <img src="{{ data.post_url }}" alt="" style="width:69%;height:55px;" draggable="false">
+                            </ng-container>
+                            <ng-container *ngIf="data.post_type === 'VIDEO'">
+                                <video controls style="width:69%;height:55px;">
+                                    <source [src]="data.post_url" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </ng-container>
+                            <span *ngIf="!data.post_url"></span>
+                        </td>
+                        <td style="white-space: nowrap;">&nbsp;&nbsp;&nbsp;{{data.post_type}}</td>
+                        <td [innerHTML]="data.caption"></td>
+
+                        <td>{{data.like_count}}</td>
+                        <td class="text-center">{{data.comments_count}}</td>
+                        <td class="text-center text-nowrap">
+                         
+                            <div style="cursor: pointer;">
+                                <button class="btn me-2 p-1 " title="Options"
+                                    (click)="toggleOptions(data.post_id)"><span
+                                        class="fa-solid fa-ellipsis-vertical fs-1"
+                                        style="color: #4d4d4d;"></span></button>
+                                <div *ngIf="showOptionsDivId === data.post_id"
+                                    class="pb-0 rounded bg-white cursor-pointer icon_menu" style="right: 45px;">
+                                    <div class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal"
+                                        (click)="onview(data.post_id)" data-bs-target="#commentview">
+                                        <span><i class="fas fa-comment fs-3 me-5"></i></span><span
+                                            class="tooltip">Comments</span>
+                                        <span>Comments</span>
+                                    </div>
+                                    <div class="d-flex p-3 pb-3 Icon_hover" [ngClass]="{'disabled': data.post_type == 'CAROUSEL_ALBUM'}" data-bs-toggle="modal" (click)="viewinsight(data.post_id)"
+                                    data-bs-target="#viewinsight" >
+                                    <span><i class="fa-solid fa-eye fs-3 me-5"></i></span>
+                                    <span>View Insights</span>
+                                </div>
+                                    <div class="d-flex p-3 pb-3 Icon_hover" (click)="downloadImage(data.post_url,data.post_type)">
+                                        <span><i class="fa-solid fa-download  fs-3 me-5"></i></span>
+                                        <span>Download</span><span class="tooltip">Download</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+<div class="modal modal-xl" id="commentview" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div>
+                <div class="d-flex flex-row ">
+                    <div class="col-lg-5" style="background-color: black;">
+                        <ng-container *ngIf="post_type === 'IMAGE' || post_type === 'CAROUSEL_ALBUM'">
+                            <img src="{{post_url}}"
+                                style="width: 100%;height: 83%;margin-top:2rem ;margin-bottom: 2rem;" alt="">
+                        </ng-container>
+                        <ng-container *ngIf="post_type === 'VIDEO'">
+                            <video class="frame__image" controls
+                                style="width: 100%;height: 83%;margin-top:2rem ;margin-bottom: 2rem;">
+                                <source [src]="post_url" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </ng-container>
+
+                    </div>
+                    <div class="col-lg-7 ">
+                        <div class="d-flex">
+
+
+                            <h1 class="ms-4"><i class="fa-brands fa-instagram fs-1 mt-2"></i> {{username}}</h1>
+                            <i class="fas fa-times fs-1 fw-bold ms-auto" data-bs-dismiss="modal"
+                                title="back"></i>&nbsp;&nbsp;
+                        </div>
+                        <hr style="color: red;">
+                        <div>
+                            <div class="d-flex">
+                                <span class="fs-1 ms-3 fw-bold">{{username}}<span class="fs-5 ms-2"
+                                        style="color:rgb(0, 98, 255);" [innerHTML]="caption">
+                                    </span></span>
+                            </div>
+                            <br>
+                            <div style="height: 350px; overflow-y: auto;">
+                                <div *ngFor="let data of instacomment_list; let i=index;"><i
+                                        class="fas fa-user profile-icon fs-3 ms-4 mt-2"></i>
+
+                                    <span class="fs-1 ms-3 fw-bold">{{data.user_name}} <span class="fs-5 ms-2"
+                                            [innerHTML]="data.comment_message"></span></span><br>
+                                    <span class="ms-12"><span title="{{data.comment_time}}">{{data.comment_days}}</span>
+                                        {{data.commentlike_count}} likes</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <hr style="color: red;">
+                        <div class="mt-2 d-flex">
+                            <span class="ms-3 fs-1 "><i class="fa-regular fa-heart fs-1 "></i>&nbsp; {{like_count}}
+                            </span>
+                            <span class="ms-3 fs-1 "><i class="fa-regular fa-comment fs-1 "></i>&nbsp;
+                                {{comments_count}} </span>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal modal-lg" id="viewinsight" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div>
+                <div class="d-flex flex-row ">
+                    <div class="col-lg-5" style="background-color: black;">
+                        <ng-container *ngIf="post_type === 'IMAGE' || post_type === 'CAROUSEL_ALBUM'">
+                            <img src="{{post_url}}"
+                                style="width: 100%;height: 83%;margin-top:2rem ;margin-bottom: 2rem;" alt="">
+                        </ng-container>
+                        <ng-container *ngIf="post_type === 'VIDEO'">
+                            <video class="frame__image" controls
+                                style="width: 100%;height: 83%;margin-top:2rem ;margin-bottom: 2rem;">
+                                <source [src]="post_url" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </ng-container>
+
+                    </div>
+                    <div class="col-lg-7 ">
+                        <div class="d-flex">
+
+
+                            <h1 class="ms-4"><i class="fa-brands fa-instagram fs-1 mt-2"></i> Post Insights</h1>
+                            <i class="fas fa-times fs-1 fw-bold ms-auto" data-bs-dismiss="modal"
+                                title="back"></i>&nbsp;&nbsp;
+                        </div>
+                        <hr style="color: red;">
+                        <div *ngFor="let data of viewinsights_list;let i=index;">
+                            <div class="ms-3">
+                                <h1 class="fw-bold fs-1"><u>Post interactions</u></h1>
+                                <table>
+                                    <tr>
+                                        <td class=" fs-2"> Likes</td>
+                                        <td class="fw-bolder fs-3 " style="color:#000000;">: {{data.likes}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class=" fs-2"> Comments</td>
+                                        <td class="fw-bolder fs-3 " style="color:#000000;">: {{data.comments}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class=" fs-2"> Shares</td>
+                                        <td class="fw-bolder fs-3 " style="color:#000000;">: {{data.shares}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class=" fs-2"> Saves</td>
+                                        <td class="fw-bolder fs-3 " style="color:#000000;">: {{data.saved}}</td>
+                                    </tr>
+                                </table>
+                            </div><br>
+                            <div class="ms-3">
+                                <h1 class="fw-bold fs-1"><u>Profile activity</u></h1>
+                                <table>
+                                    <tr>
+                                        <td class=" fs-2"> Total Post</td>
+                                        <td class="fw-bolder fs-3 " style="color:#000000;">: {{media_count}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class=" fs-2"> Follows</td>
+                                        <td class="fw-bolder fs-3 " style="color:#000000;">: {{follows_count}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class=" fs-2"> Followers</td>
+                                        <td class="fw-bolder fs-3 " style="color:#000000;">: {{followers_count}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="ms-3">
+                                <h1 class="fw-bold fs-1"><u>Overview</u></h1>
+                                <table>
+                                    <tr>
+                                        <td class=" fs-2"> Reach</td>
+                                        <td class="fw-bolder fs-3 " style="color:#000000;">: {{data.reach}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class=" fs-2"> Engagement</td>
+                                        <td class="fw-bolder fs-3 " style="color:#000000;">: {{data.engagement}}</td>
+                                    </tr>
+                                    <tr *ngIf="data.post_type === 'IMAGE'">
+                                        <td class="fs-2"> Impressions</td>
+                                        <td class="fw-bolder fs-3" style="color:#000000;">: {{data.impressions}}</td>
+                                    </tr>
+                                </table>
+                            </div><br>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="card">
+    <div class="card-header bg-gradient-darkblue">
+        <h3 class="card-title text-white"><i class="fa-regular fa-envelope text-white"
+                style="font-size: 20px;"></i>&nbsp;&nbsp;{{template_name}}</h3>
+        <div style="margin: 13px">
+            <button title="Back" class="mail-button btn-sm text-blue me-4 " (click)="onback()"> <i
+                    class="fas fa-arrow-left"></i>
+                Back</button>
+        </div>
+    </div>
+</div>
+<div class="card card-body m-3 shadow-xl p-3 mb-5 bg-white rounded">
+
+
+    <table id="outlooksentcampaign_list" class="table table-striped table-row-bordered border-bottom gs-7">
+        <thead>
+            <tr class="fw-bolder fs-5 text-nowrap bg-mail align-middle text-blue bg-lightblue">
+
+                <th>S.No</th>
+                <th>Date</th>
+                <th>Mail Address</th>
+                 <th>Source</th>
+                <th>Region</th>
+            </tr>
+        </thead>
+        <tbody id="Inbox" #Inbox>
+
+            <tr *ngFor="let data of outlooksentcampaign_list; let i=index;" class="text-nowrap">
+
+                <td>{{i+1}}</td>
+                <td class="">
+                    <span class="fw-semibold ">{{data.sent_date}}</span>
+                </td>
+
+                <td>
+                    <a class="d-flex align-items-center text-gray-900">
+
+                        <span class="fw-semibold ">{{data.email}}</span>
+                    </a>
+                </td>
+                <td>
+                    <a class="d-flex align-items-center text-gray-900">
+
+                        <span class="fw-semibold ">{{data.source_name}}</span>
+                    </a>
+                </td>
+                <td>
+                    <a class="d-flex align-items-center text-gray-900">
+
+                        <span class="fw-semibold ">{{data.leadbank_region}}</span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

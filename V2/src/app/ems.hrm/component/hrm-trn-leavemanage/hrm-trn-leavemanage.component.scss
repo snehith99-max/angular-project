@@ -1,0 +1,66 @@
+.btn-success:hover {
+    background-color: #42ac72 !important;
+}
+
+.btn-success:disabled {
+    background-color: #cccccc !important;
+    cursor: not-allowed !important;
+}
+
+.back-icon {
+    text-align: right;
+    margin: 10px 35px 0 0;
+
+    i {
+        font-size: 30px;
+        color: #2c1a94;
+        cursor: pointer;
+    }
+}
+.center-align {
+    text-align: center;
+}
+
+#leave_list {
+    width: 100%; /* Adjust the width as needed */
+    margin: 0 auto; /* Center the table */
+  }
+
+  .table-responsive1 {
+    width: 40%; /* Adjust the width as needed */
+    margin: 0 auto; /* Center the table */
+  }
+
+  .narrow-column {
+    width: 10px;
+}
+.narrow-column1 {
+    width: 100px;
+}
+.narrow-column2 {
+    width: 100px;
+}
+.narrow-column3 {
+    width: 200px;
+}
+.narrow-column4 {
+    width: 200px;
+}
+.narrow-column5 {
+    width: 200px;
+}
+.narrow-column6 {
+    width: 200px;
+}
+.narrow-column7 {
+    width: 100px;
+}
+.narrow-column8 {
+    width: 200px;
+}
+.narrow-column9 {
+    width: 200px;
+}
+.narrow-column10 {
+    width: 200px;
+}

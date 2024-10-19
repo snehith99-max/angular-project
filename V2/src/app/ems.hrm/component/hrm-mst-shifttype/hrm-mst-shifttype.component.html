@@ -1,0 +1,199 @@
+<div class="card">
+  <div class="row ms-3 mt-3 d-flex align-items-center">
+    <div class="col">
+      <h3 class="card-title">Shift Type</h3>
+    </div>
+
+    <div class="col me-5">
+      <button title="Add Shift" class="btn-primary btn-sm text-white me-4 mb-2 mt-2 float-end" (click)="Shifttypeadd()">
+        <span class="fa-solid fa-plus text-white fs-6 fw-bold"></span>&nbsp;Add Shift Type
+      </button>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+      <table id="shift_list" class="table table-striped table-row-bordered border-bottom gs-7">
+        <thead>
+          <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+            <th>S.No</th>
+            <th>Shift Type</th>
+            <th style="text-align:center">Shift Time</th>
+            <th>Status</th>
+            <th class="text-center bg-lightblue">Action</th> 
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of shift_list; let i=index;" class="align-middle">
+            <td>{{i+1}}</td>
+            <td>{{data.shifttype_name}}</td>
+            <td style="text-align: center">
+              <button title="Shift Time" type="button" (click)="ShiftTimepopup(data)" data-bs-toggle="modal"
+                data-bs-target="#myadditional" class="btn btn-icon btn-sm bg-primary me-2">
+                <span class="fa fa-question-circle fs-6"></span>
+              </button>
+            </td>
+            <td [ngSwitch]="data.Status">
+              <label *ngSwitchCase="'Y'" class="badge bg-success text-white ">Active</label>
+              <label *ngSwitchCase="'N'" class="badge bg-danger text-white ">Inactive</label>
+            </td>
+            <td class="text-center text-nowrap">
+              <button title="Assign"  type="button" class="btn btn-icon btn-sm bg-primary me-2"
+              (click)="Assign(data.shifttype_gid)" data-bs-toggle="modal" data-bs-target="#myModalunassignemployee">
+              <i class="fa-solid fas fa-users fs-6"></i>
+            </button>
+            <button title="Unassign"  type="button" class="btn btn-icon btn-sm bg-warning me-2"
+              (click)="UnAssign(data.shifttype_gid)" data-bs-toggle="modal" data-bs-target="#myModalunassignemployee">
+              <i class="fa-solid fa-users-slash fs-6"></i>
+            </button>
+               <button title="Edit"  type="button" (click)="edit(data.shifttype_gid)"
+               class="btn btn-icon btn-sm bg-etdark me-2">
+               <i class="fa-solid fa-pencil text-white fs-6"></i>
+               </button>
+              <button title="Delete" type="button" class="btn btn-icon btn-sm bg-danger me-2" data-bs-toggle="modal"
+                data-bs-target="#myModaldelete" (click)="openModaldelete(data.shifttype_gid)">
+                <i class="fa-solid fa-trash text-white fs-6"></i>
+              </button>
+              <button title="{{ data.Status === 'Y' ? 'Inactive' : 'Active' }}"  type="button"
+              class="btn btn-icon btn-sm {{ data.Status === 'Y' ? 'bg-danger' : 'bg-success' }} me-2"
+              (click)="toggleStatus(data.shifttype_gid)"
+              [attr.data-bs-target]="data.Status === 'Y' ? '#myModalinactive' : '#myModalactive'"
+              [attr.data-bs-toggle]="data.Status === 'Y' ? 'modal' : 'modal'">
+              <span
+                class="fa-solid fa-thumbs-{{ data.Status === 'Y' ? 'down' : 'up' }} text-white fs-6"></span>
+              </button>
+              <!-- <div (mouseleave)="showOptionsDivId = null" (mouseover)="showOptionsDivId = data.shifttype_gid" style="cursor: pointer;">
+                <button class="btn me-2 p-1 "><span class="fa-solid fa-ellipsis-vertical fs-1" style="color: #4d4d4d;"></span></button>
+                <div *ngIf="showOptionsDivId === data.shifttype_gid" class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                           
+        
+              <div class="d-flex p-3 pb-3 Icon_hover" (click)="edit(data.shifttype_gid)" >
+                <span><i class="fa-regular fa-pen-to-square fs-3 me-5"></i></span>
+                <span>Edit</span>
+              </div>
+              <div class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal"
+              data-bs-target="#myModalactive" (click)="openModalactive(data.shifttype_gid)" >
+                <span><i class="fa-regular bi-hand-thumbs-up-fill fs-3 me-5"></i></span>
+                <span>Active</span>
+              </div>
+              <div class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal"
+              data-bs-target="#myModalinactive" (click)="openModalinactive(data.shifttype_gid)" >
+                <span><i class="fa-regular bi-hand-thumbs-down-fill fs-3 me-5"></i></span>
+                <span>Inactive</span>
+              </div>
+              <div class="d-flex p-3 pb-3 Icon_hover" (click)="Assign(data.shifttype_gid)" data-bs-toggle="modal" 
+              data-bs-target="#myModalunassignemployee" >
+                <span><i class="fa fa-user-check fs-3 me-5"></i></span>
+                <span>Assign</span>
+              </div>
+              <div class="d-flex p-3 pb-3 Icon_hover" (click)="UnAssign(data.shifttype_gid)" data-bs-toggle="modal" 
+              data-bs-target="#myModalunassignemployee" >
+                <span><i class="fa fa-user-minus fs-3 me-5"></i></span>
+                <span>Unassign</span>
+              </div>
+              <div class="d-flex p-3 pb-3 Icon_hover" (click)="openModaldelete(data.shifttype_gid)" data-bs-toggle="modal" data-bs-target="#myModaldelete">
+                <span><i class="fa-regular fa-trash-can fs-3 me-5"></i></span>
+                <span>Delete</span>
+              </div>  
+              </div>
+        </div> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="myadditional" data-bs-backdrop="static" data-bs-keyboard="false" style="margin-top: 150px;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="table-responsive">
+        <div class="card card-body m-3 shadow-lg p-3 mb-5 bg-white rounded d-flex">
+          <table id="" class="table table-striped table-row-bordered gy-5 gs-7">
+            <thead>
+              <tr class="fw-bold fs-4 bg-lightblue text-blue align-middle">
+                <th>Day</th>
+                <th style="text-align: center;">From Time</th>
+                <th style="text-align: center;">To Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="fs-2 align-middle" *ngFor="let data of Shifttime_list; let i=index;">
+                <td>{{data.shifttypedtl_name}}</td>
+                <td style="text-align: center;">{{data.start_time}}</td>
+                <td style="text-align: center;">{{data.end_time}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="text-center">
+            <button class="btn-primary btn-sm text-white me-4" data-bs-dismiss="modal">
+              <i class="fa fa-arrow-left me-4"></i>Back
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal Active -->
+<div class="modal" id="myModalactive" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog del_modal-dialog">
+    <div class="modal-content del_modal-content">
+      <div class="text-center my-4">
+        <h2><b>Are you sure?</b></h2>
+        <p style="display: block;">Do You Want To Active the shift Type?</p>
+        <div class="text-center my-4">
+          <button class="btn-success btn-sm text-white me-4" (click)="onactive()" data-bs-dismiss="modal">
+            <i class="fa fa-toggle-on fs-5 me-2"></i>Active
+          </button>
+          <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white me-2"></i>Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- The Modal Inactive -->
+<div class="modal" id="myModalinactive" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog del_modal-dialog">
+    <div class="modal-content del_modal-content">
+      <div class="text-center my-4">
+        <h2><b>Are you sure?</b></h2>
+        <p style="display: block;">Do You Want To Inactive the shift Type?</p>
+        <div class="text-center my-4">
+          <button class="btn-danger btn-sm text-white me-4" (click)="oninactive()" data-bs-dismiss="modal">
+            <i class="fa fa-toggle-off fs-5 me-2"></i>Inactive
+          </button>
+          <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white me-2"></i>Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal Delete -->
+<div class="modal" id="myModaldelete" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog del_modal-dialog">
+    <div class="modal-content del_modal-content">
+      <div class="text-center my-4">
+        <h2><b>Are you sure?</b></h2>
+        <p style="display: block;">Do You Want To Delete the Record ?</p>
+        <div class="text-center my-4">
+          <button class="btn-danger btn-sm text-white me-4" (click)="ondelete()" data-bs-dismiss="modal">
+            <i class="bi bi-trash-fill text-white fs-5 me-2"></i>Delete
+          </button>
+          <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white me-2"></i>Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

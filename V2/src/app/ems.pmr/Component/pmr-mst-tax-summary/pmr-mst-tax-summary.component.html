@@ -1,0 +1,437 @@
+<div class="card mt-4">
+  <!-- <div class="card-header">
+    <h3 class="card-title">Tax Summary</h3>
+  </div>
+  <br>
+  <div> &nbsp; &nbsp;
+
+    <button type="button" class="btn-primary btn-sm text-white me-4" data-bs-toggle="modal"
+      data-bs-target="#myModaladd">
+      <i></i>  Add Tax
+    </button>
+  </div> -->
+  <div class="row ms-3 mt-3 d-flex align-items-center">
+    <div class="col">
+      <h3 class="card-title fw-bold">Tax Summary</h3>
+    </div>
+
+    <div class="col me-5">
+      <button type="button" class="btn-primary btn-sm text-white me-4 float-end" data-bs-toggle="modal"
+        data-bs-target="#myModaladd"><i class="fas fa-plus fw-bold"></i>
+         Add Tax
+      </button>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded" >
+      <table id="pmrtax_list" class="table table-striped table-row-bordered gy-5 gs-7 ">
+        <thead>
+          <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+            <th style="width: 1%;">S.No</th>
+            <th style="width: 14%;">Tax Segment</th>
+            <th style="width: 14%;">Tax Prefix Code</th>
+            <th style="width: 10%; text-align: right;">Tax Rate</th>
+            <th style="width: 18%;" class="text-center">Assigned Product</th>
+            <th class="text-center bg-lightblue ">Action</th> 
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of pmrtax_list; let i=index;" class="align-middle">
+            <td style="width: 1%;">{{i+1}}</td>
+            <td style="width: 14%;">{{data.taxsegment_name}}</td>
+            <td style="width: 14%;">{{data.tax_prefix}}</td>
+            <td style="width: 10%; text-align: right;">
+              {{data.percentage}}
+            </td>
+
+            <td class="text-center" style="width:18%;">
+              <a class="ms-6 count font-bold">{{data.count}}</a>
+            </td>
+               
+            <td class="align-middle" style="width: 10%;text-align: center;" class="text-center text-nowrap">
+              <button title="Edit" type="button" class="btn btn-icon btn-sm bg-etdark me-2"
+              (click)="openModaledit(data)" *ngIf="data.has_child != 'N'" data-bs-toggle="modal" data-bs-target="#myModaledit">
+              <span class="fa-solid fa-pencil text-white  fs-6"></span></button>
+
+                <button title="Assign Product" (click)="onMapProd(data.tax_gid,data.taxsegment_gid)" 
+                type="button"  class="btn btn-icon btn-sm  me-2" *ngIf="data.has_child != 'N'"
+                style="background: radial-gradient(circle, rgb(92, 89, 255) 0%, rgb(77, 88, 246) 100%);"><i class="fa-solid  fa-cart-plus fs-3"
+                    style="font-size:16px;"></i>
+                </button>
+                <button title="Unassign Product" (click)="openunassignproduct(data.tax_gid,data.taxsegment_gid)"
+                type="button"  class="btn btn-icon btn-sm  me-2" *ngIf="data.has_child != 'N'"
+                style="background: radial-gradient(circle, #47acbe 0%, #4aa5b9 100%);"><i class="fa-solid fa-cart-shopping fs-3"
+                    style="font-size:16px;"></i>
+              </button>
+
+               <button title="Delete" type="button" (click)="openModaldelete(data.tax_gid)" *ngIf="data.has_child != 'N'" data-bs-toggle="modal"
+              data-bs-target="#myModaldelete" class="btn btn-icon btn-sm bg-danger me-2"><span
+                class="fa-solid fa-trash text-white  fs-6"></span></button>               
+            </td> 
+            <!-- <td class="align-middle" style="width: 10%;text-align: center;" class="text-center text-nowrap">
+              <span (click)="toggleOptions(data.tax_gid)" style="cursor: pointer;">
+                <button class="btn me-2 p-1 "><span class="fa-solid fa-ellipsis-vertical fs-1" style="color: #4d4d4d;"></span></button>
+                <div *ngIf="showOptionsDivId === data.tax_gid"
+                  class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                  <div class="d-flex p-3 pb-3 Icon_hover" data-bs-target="#myModaledit" data-bs-toggle="modal"
+                    (click)="openModaledit(data)"
+                    *ngIf="data.has_child != 'N'">
+                    <span><i  class="fa-solid fa-pencil fs-3 me-4"></i></span>
+                    <span>Edit</span>
+                  </div>
+
+                  <div class="d-flex p-3 pb-3 Icon_hover"
+                    (click)="onMapProd(data.tax_gid,data.taxsegment_gid)"
+                    *ngIf="data.has_child != 'N'">
+                    <span><i  class="fa-solid  fa-cart-plus fs-3 me-4"></i></span>
+                    <span>Assign Product</span>
+                  </div>
+
+                  <div class="d-flex p-3 pb-3 Icon_hover"
+                    (click)="openunassignproduct(data.tax_gid,data.taxsegment_gid)"
+                    *ngIf="data.has_child != 'N'">
+                    <span><i  class="fa-solid fa-cart-shopping fs-3 me-4"></i></span>
+                    <span>Unassign Product</span>
+                  </div>
+
+                  <div class="d-flex p-3 pb-3 Icon_hover" data-bs-target="#myModaldelete" data-bs-toggle="modal"
+                    (click)="openModaldelete(data.tax_gid)"
+                    *ngIf="data.has_child != 'N'">
+                    <span><i  class="fa-solid fa-trash   fs-3 me-4"></i></span>
+                    <span>Delete</span>
+                  </div> 
+                  </div> 
+            </span>
+            </td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal ADD -->
+
+<form [formGroup]="reactiveForm" #form="ngForm">
+  <div class="modal" id="myModaladd" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class=" bg-primary rounded-top">
+          <h3 class="p-4 pt-5 text-white fw-bold "> <i class="fas fa-plus fs-5 fw-bold"></i>
+            Add Tax Details
+          </h3>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="row">
+            <span class="font-bold"[ngClass]="{'error_input_field': tax_segment.invalid && tax_segment.touched}"><b>Tax Segment</b><span class="ms-1 text-red">*</span></span>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+              <ng-select formControlName="tax_segment" [class.is-invalid]="tax_segment.invalid && (tax_segment.dirty || tax_segment.touched)"
+                [ngClass]="{'invalid-border': tax_segment.invalid && tax_segment.touched}" [items]="taxsegment_list"
+                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="taxsegment_name"
+                bindValue="taxsegment_gid" placeholder="Select tax segment">
+              </ng-select>
+            </div><br>
+          </div>
+          
+          <br>
+          <div class="row">
+            <span class="font-bold"[ngClass]="{'error_input_field': tax_prefix.invalid && tax_prefix.touched}"><b>Tax Prefix Code</b><span class="ms-1 text-red">*</span></span>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+              <input formControlName="tax_prefix" type="text" class="
+                         form-control form-control-lg form-control-solid
+                         custom-input
+                         mb-3 mb-lg-0
+                         bg-white
+                         custom-input
+                       " [ngStyle]="{
+                         'border-color':
+                         tax_prefix.invalid && tax_prefix.touched
+                             ? 'red'
+                             : 'rgb(209, 209, 209)'
+                       }" placeholder="Enter Tax Prefix" pattern="^(?!\s*$).+" name="tax_prefix" style="height:40px;"
+                required />
+            </div>
+
+          </div>
+          <!-- <div *ngIf="tax_prefix.invalid && (tax_prefix.dirty || tax_prefix.touched)">
+            <div *ngIf="tax_prefix.errors?.['required']">
+              <span style="color:red;">Tax Prefix Code is required.</span>
+            </div>
+          </div> -->
+            <!-- <div *ngIf="tax_prefix.errors?.['required']">
+              <span style="color: red;"> Only alphabetic characters are allowed.</span>
+            </div> -->
+          
+          <!-- <br>
+          <div class="row"><span class="font-bold"><b>Tax</b><span class="ms-1 text-red">*</span></span>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+              <input formControlName="tax_name" type="text" class="
+                         form-control form-control-lg form-control-solid
+                         custom-input
+                         mb-3 mb-lg-0
+                         bg-white
+                         custom-input
+                       " [ngStyle]="{
+                         'border-color':
+                         tax_name.invalid && tax_name.touched
+                             ? 'red'
+                             : 'rgb(209, 209, 209)'
+                       }" placeholder="Enter Tax Name" pattern="^(?!\s*$).+" name="tax_name" style="height:40px;"
+                required />
+            </div>
+
+          </div>
+          <div *ngIf="tax_name.invalid && (tax_name.dirty || tax_name.touched)">
+            <div *ngIf="tax_name.errors?.['required']">
+              <span style="color:red;">Tax Name is required.</span>
+            </div> -->
+            <!-- <div *ngIf="tax_name.errors?.['required']">
+              <span style="color: red;"> Only alphabetic characters are allowed.</span>
+            </div> -->
+          <!-- </div> -->
+          <br>
+
+          <!-- <div class="row"><span class="font-bold"><b>Percentage</b><span class="ms-1 text-red">*</span></span>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+
+
+              <input formControlName="percentage" type="text" class="
+                         form-control form-control-lg form-control-solid
+                         custom-input
+                         mb-3 mb-lg-0
+                         bg-white
+                         custom-input
+                       " [ngStyle]="{
+                         'border-color':
+                         percentage.invalid && percentage.touched
+                             ? 'red'
+                             : 'rgb(209, 209, 209)'
+                       }" placeholder="Enter Tax Percentage" style="height:40px;" pattern="^(?!\s*$)([1-9]\d*|[5-9])(\.\d{2})?$" name="tax_percentage" required />
+            </div>
+
+          </div>
+          <div *ngIf="percentage.invalid && (percentage.dirty || percentage.touched)">
+            <div *ngIf="percentage.errors?.['required']">
+              <span style="color:red;">Tax Percentage is required.</span>
+            </div>
+            <div *ngIf="percentage.errors?.['required']">
+              <span style="color: red;"> Only Number are allowed.</span>
+            </div>
+            <div *ngIf="percentage.errors?.['pattern']">
+              <span style="color: red;"> Decimal points allowed only up to two digits.</span>
+            </div>
+          </div> -->
+          <div class="row"><span class="fw-bold"[ngClass]="{'error_input_field': percentage.invalid && percentage.touched}">Tax Rate<span class="ms-1 text-red">*</span></span>
+            <div class="col-lg-12  col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+
+
+              <input formControlName="percentage" type="text" class="
+                         form-control form-control-lg form-control-solid
+                         custom-input
+                         mb-3 mb-lg-0
+                         bg-white
+                         custom-input
+                       " [ngStyle]="{
+                         'border-color':
+                         percentage.invalid && percentage.touched
+                             ? 'red'
+                             : 'rgb(209, 209, 209)'
+                       }" placeholder="Enter Tax Rate" pattern="^\d+(\.\d{1,2})?$" maxlength="5"
+                name="tax_percentage" required style="height:40px;" />
+            </div>
+
+          </div>
+          <br>
+          <!-- <div *ngIf="percentage.invalid && (percentage.dirty || percentage.touched)">
+            <div *ngIf="percentage.errors?.['required']">
+              <span style="color:red;">Tax Rate is required.</span>
+            </div>
+            <div *ngIf="percentage.errors?.['pattern']">
+              <span style="color: red;"> Only Numbers are allowed.</span>
+            </div>
+            <div *ngIf="percentage.errors?.['pattern']">
+              <span style="color: red;">Decimal points allowed only up to two digits.</span>
+            </div>
+          </div> -->
+          <br>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="text-center my-4">
+          <button (click)="onsubmit()" class="btn-success btn-sm text-white me-2" [disabled]="reactiveForm.invalid"
+            [ngClass]="{
+                    'primary-button': !reactiveForm.invalid,
+                    'secondary-button': reactiveForm.invalid
+                  }" data-bs-dismiss="modal">
+            <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+          </button> &nbsp;&nbsp;
+          <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white"></i> &nbsp;Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- The Modal Edit -->
+<form [formGroup]="reactiveFormEdit" #form="ngForm">
+  <div class="modal" id="myModaledit" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+
+        <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+          <h2 style="margin-top:10px;color:white;font-weight: bold;">
+            &nbsp;&nbsp;<i class="fa-solid fa-pen-to-square fs-2"></i>&nbsp;&nbsp;&nbsp;Edit Tax Details</h2>
+
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <input class="form-control form-control-lg" formControlName="tax_gid" hidden  type="text"
+            placeholder="Enter Tax" aria-label=".form-control-lg example" autocomplete="off" required>
+
+            <div class="row">
+              <!-- <span class="fw-bold">Tax Segment<span class="ms-1 text-red">*</span></span> -->
+              <span class="font-bold" [ngClass]="{'error_input_field': taxsegmentedit.invalid && taxsegmentedit.touched}"><b>Tax Segment </b><span class="ms-1 text-red">*</span></span>
+              <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                <ng-select formControlName="taxsegmentedit" [class.is-invalid]="
+                taxsegmentedit.invalid && (taxsegmentedit.dirty || taxsegmentedit.touched)
+            " [ngClass]="{'invalid-border': taxsegmentedit.invalid && taxsegmentedit.touched}" [items]="taxsegment_list"
+                                  class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="taxsegment_name"
+                                  bindValue="taxsegment_name" placeholder="Select tax segment">
+                              </ng-select>
+              </div>
+              <!-- <div *ngIf="taxsegmentedit.invalid && (taxsegmentedit.dirty || taxsegmentedit.touched)">
+                <div *ngIf="taxsegmentedit.errors?.['required']">
+                  <span style="color:red;">Tax Segment is required.</span>
+                </div>
+
+              </div> -->
+            </div>
+            <br>
+
+
+
+            <div class="row">
+              <span class="font-bold" [ngClass]="{'error_input_field': taxedit_prefix.invalid && taxedit_prefix.touched}"><b>Tax Prefix Code </b><span class="ms-1 text-red">*</span></span>
+              <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+                <input formControlName="taxedit_prefix" type="text" class="
+                  form-control form-control-lg form-control-solid
+                  custom-input
+                  mb-3 mb-lg-0
+                  bg-white
+                  custom-input
+                " [ngStyle]="{
+                  'border-color':
+                  taxedit_prefix.invalid && taxedit_prefix.touched
+                      ? 'red'
+                      : 'rgb(209, 209, 209)'
+                }" placeholder="Enter Tax Prefix Code" style="height:40px;" name="taxedit_prefix"  />
+              </div>
+            </div>
+            <!-- <div *ngIf="taxedit_prefix.invalid && (taxedit_prefix.dirty || taxedit_prefix.touched)">
+              <div *ngIf="taxedit_prefix.errors?.['required']">
+                <span style="color:red;">Tax Prefix Code required.</span>
+              </div>
+              </div> -->
+
+            <!-- <br>
+            <div class="row">
+              <span class="font-bold"><b>Tax</b><span class="ms-1 text-red">*</span></span>
+              <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+                <input formControlName="taxedit_name" type="text" class="
+                  form-control form-control-lg form-control-solid
+                  custom-input
+                  mb-3 mb-lg-0
+                  bg-white
+                  custom-input
+                " [ngStyle]="{
+                  'border-color':
+                  taxedit_name.invalid && taxedit_name.touched
+                      ? 'red'
+                      : 'rgb(209, 209, 209)'
+                }" placeholder="Enter Tax Name" style="height:40px;"  name="taxedit_name"  />
+              </div>
+            </div> -->
+
+
+          <br>
+          <div class="row"><span class="font-bold"[ngClass]="{'error_input_field': editpercentage.invalid && editpercentage.touched}"><b>Tax Rate</b><span class="ms-1 text-red">*</span></span>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+
+
+              <input formControlName="editpercentage" type="number" class="
+                    form-control form-control-lg form-control-solid
+                    custom-input
+                    mb-3 mb-lg-0
+                    bg-white
+                    custom-input
+                  " [ngStyle]="{
+                    'border-color':
+                    editpercentage.invalid && editpercentage.touched
+                        ? 'red'
+                        : 'rgb(209, 209, 209)'
+                  }" placeholder="Enter Tax Rate" style="height:40px;" pattern="^\d+(\.\d{1,2})?$" name="editpercentage" required />
+
+            </div>
+
+          </div>
+          <!-- <div *ngIf="editpercentage.invalid && (editpercentage.dirty || editpercentage.touched)">
+            <div *ngIf="editpercentage.errors?.['required']">
+              <span style="color:red;">Tax Rate is required.</span>
+            </div>
+            <div *ngIf="editpercentage.errors?.['required']">
+              <span style="color: red;"> Only Number are allowed.</span>
+            </div>
+            <div *ngIf="editpercentage.errors?.['pattern']">
+              <span style="color: red;">Decimal points allowed only up to two digits.</span>
+            </div>
+          </div> -->
+          <br>
+
+          <!-- Modal footer -->
+          <div class="text-center my-4">
+            <button (click)="onupdate()" class="btn-success btn-sm text-white me-2" [disabled]="reactiveFormEdit.invalid" [ngClass]="{
+                  'primary-button': !reactiveFormEdit.invalid,
+                  'secondary-button': reactiveFormEdit.invalid
+                }" data-bs-dismiss="modal">
+              <i class="fas fa-check text-white fs-5 "></i> &nbsp;Update
+            </button> &nbsp;&nbsp;
+            <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+              <i class="fas fa-close text-white"></i> &nbsp;Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- The Modal Delete -->
+<div class="modal" id="myModaldelete" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="text-center my-4">
+        <h2><b>Are you sure?</b></h2>
+        <br>
+        <p style="display: block;">Do You Want To Delete the Record ?</p>
+        <div class="text-center my-4">
+          <!-- <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white"></i> &nbsp;Close
+          </button>&nbsp; -->
+          <button class="btn-danger btn-sm text-white me-4" (click)="ondelete()" data-bs-dismiss="modal">
+            <i class="fas fa-trash text-white fs-5 "></i> &nbsp;Delete
+          </button>&nbsp;
+          <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white"></i> &nbsp;Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>

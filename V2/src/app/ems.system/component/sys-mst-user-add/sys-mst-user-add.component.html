@@ -1,0 +1,151 @@
+
+
+<div class="card rounded-top">
+    <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+      <h3 class="fw-bolder text-white"><i class="fas fa-plus fw-bolder fs-3"></i> &nbsp;&nbsp;&nbsp;Create User
+      </h3>
+    </div>
+    <div class="card m-3">
+      <div class="card-header bg-lightblue card-height55">
+        <div class="card-title m-0">
+          <h4 class="fw-bolder text-blue">User Details</h4>
+        </div>
+      </div>
+      <form [formGroup]="reactiveForm" #form="ngForm">
+      <div class="d-flex flex-row m-6 flex-wrap">
+        <div class="col-12 col-lg-4 col-md-12 col-sm-12"><span class="font-bold required">Entity</span>
+        <ng-select formControlName="entityname" [items]="entity_list"
+            class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="entity_name"
+            [ngClass]="{'invalid-border':reactiveForm.get('entityname')?.invalid && reactiveForm.get('entityname')?.touched}"
+            bindValue="entity_gid" placeholder="Select Entity"></ng-select>
+          <div
+            *ngIf="reactiveForm.get('entityname')?.hasError('required') && reactiveForm.get('entityname')?.touched || reactiveForm.get('entityname')?.hasError('pattern')"
+            class="text-red"> Entity is required.</div>
+        </div>
+
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Branch</span>
+
+          <ng-select formControlName="branchname" [items]="branchList"
+            class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="branch_name"
+            [ngClass]="{'invalid-border':reactiveForm.get('branchname')?.invalid && reactiveForm.get('branchname')?.touched}"
+            bindValue="branch_gid" placeholder="Select Branch"></ng-select>
+          <div
+            *ngIf="reactiveForm.get('branchname')?.hasError('required') && reactiveForm.get('branchname')?.touched || reactiveForm.get('branchname')?.hasError('pattern')"
+            class="text-red"> Branch Name is required.</div>
+        </div>
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">User Name</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="first_name" type="text"
+              [ngStyle]="{ 'border-color': reactiveForm.get('first_name')?.hasError('required') && reactiveForm.get('first_name')?.touched || reactiveForm.get('first_name')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+              class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"
+              placeholder="User Name" />
+            <div
+              *ngIf="reactiveForm.get('first_name')?.hasError('required') && reactiveForm.get('first_name')?.touched"
+              class="text-red ms-2">User Name is required.</div>
+            <div *ngIf="reactiveForm.get('first_name')?.hasError('pattern')" class="text-red ms-2">Space at the
+              beginning is not allowed.</div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-row m-6 mt-0 flex-wrap">
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">User Code</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="user_code" type="text"
+              [ngStyle]="{ 'border-color': reactiveForm.get('user_code')?.hasError('required') && reactiveForm.get('user_code')?.touched || reactiveForm.get('user_code')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+              class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"
+              placeholder="User Code" />
+            <div *ngIf="reactiveForm.get('user_code')?.hasError('required') && reactiveForm.get('user_code')?.touched"
+              class="text-red ms-2">User Code is required.</div>
+            <div *ngIf="reactiveForm.get('user_code')?.hasError('pattern')" class="text-red ms-2">Space at the
+              beginning is not allowed.</div>
+          </div>
+        </div>
+
+
+        
+        
+        <div class="col-11 col-lg-4 col-md-6 col-sm-11">
+          <label for="password" class="form-label"><span class="font-bold required">User Password</span></label>
+          <div class="input-group input-group-sm has-validation" style="width:92%">
+            <input [type]="employee.showPassword ? 'text' : 'password'" id="password"
+              (change)="userpassword(password)" formControlName="password"
+              class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+              [ngStyle]="{'border-color':password.invalid && password.touched ? 'red' : 'rgb(209, 209, 209)'}"
+              placeholder="User Password" name="password" required
+              maxlength="20"
+              [class.is-invalid]="password.invalid && (password.dirty || password.touched)" />
+            <button type="button" style="margin-left:0px;background-color: #008CBA;"
+              class="btn btn-sm btn-outline-secondary" (click)="employee.showPassword = !employee.showPassword">
+              <i class="bi"
+                [ngClass]="{'bi-eye-fill': !employee.showPassword, 'bi-eye-slash-fill': employee.showPassword}"
+                style="color: #ffffff;"></i>
+            </button>
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="invalid-feedback">
+              <div *ngIf="password.errors?.['required']">
+                <span style="color: red; width: 200px; margin-top: 1px; margin-left: 8px; font-size: 11px;">User
+                  password is required</span>
+              </div>
+             <div class="text-red" *ngIf="reactiveForm.get('password')?.hasError('pattern')">
+                Password should contain: "Atleast one upper case letter,
+                one lower case letter, one special character,
+                one number and minimum eight characters".
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+          <span class="font-bold">Confirm User Password</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="confirmpassword" readonly type="password"
+              class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-2 mb-lg-0"
+              name="confirmpassword" placeholder="Confirm User Password" />
+          </div>
+        </div>
+       </div>
+      <div class="d-flex flex-row m-6 mt-0 flex-wrap">
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+          <span class="font-bold required">Mobile Number</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="mobile" id="mobile" type="text" pattern="^[0-9]{10,15}$" 
+              class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+              [ngStyle]="{'border-color': mobile.invalid && mobile.touched ? 'red' : 'rgb(209, 209, 209)'}"
+              placeholder="Mobile Number" name="mobile" minlength="10"maxlength="15" autocomplete="off" />
+            <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)">
+              <div *ngIf="mobile.errors?.['required']">
+                <span class="text-red">Phone number is required</span>
+              </div>
+              <div *ngIf="mobile.errors?.['pattern']">
+                <span class="text-red">Space not allowed and accepts 12 digits</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required" >User Type</span>
+           <div class="col-12 col-lg-4 col-md-3 col-sm-12">
+          <ng-select formControlName="user_type"
+               [(ngModel)]="mdlBranchName" 
+                  bindLabel="user_type" pattern="^(?!\s*$).+" placeholder="Select UserType" style="width: 340px;" 
+                >
+                  <ng-option value="Kitchen Manager">Kitchen Manager</ng-option>
+                  <ng-option value="Front Desk">Front Desk</ng-option>
+                  </ng-select>       
+            </div>
+         </div>
+
+      </div>
+      <div class="text-center my-4">
+        <button class="me-4 btn-success" (click)="validate()" 
+          [ngClass]="{'primary-button': !reactiveForm.invalid, 'secondary-button': reactiveForm.invalid}"
+          data-bs-dismiss="modal">
+          <i class="fas fa-check text-white fs-5"></i>
+          <span class="ms-3">Submit</span>
+        </button>
+
+        <button class="btn-primary btn-sm text-white me-4" routerLink="/system/SysMstUsermanagementSummary">
+          <i class="fas fa-arrow-left"></i>
+          <span class="ms-3">Back</span>
+        </button>
+      </div>
+      </form>
+    </div>
+</div>

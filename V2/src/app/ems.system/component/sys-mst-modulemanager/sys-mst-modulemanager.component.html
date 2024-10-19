@@ -1,0 +1,152 @@
+<div class="card">
+    <br />
+    <div class="row ms-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Module Manager</h3>
+        </div>
+    </div>
+    <div class="row mt-6">
+        <div class="col-lg-12 col-sm-12 col-md-12">
+            <div class="bg-white table-responsive rounded" style="padding: 0rem 1rem">
+                <table id="ModuleManagertable" class="table table-striped table-row-bordered gy-5 gs-7 ">
+                    <thead>
+                        <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                            <th style="width: 2px">S.No</th>
+                            <th>Code</th>
+                            <th>Module</th>
+                            <th>Manager</th>
+                            <th class="align-center">Employee Count</th>
+                            <th class="text-center bg-lightblue ">Action</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of Module_list; let i=index;" class="align-middle">
+                            <td>{{i+1}}</td>
+                            <td>{{data.module_gid}}</td>
+                            <td>{{data.module_name}}</td>
+                            <td>{{data.module_manager}}</td>
+                            <td>
+                                <a class="ms-6 count font-bold align-center">{{data.employee_total}}</a>
+                            </td>
+                            <td class="text-center text-nowrap">
+
+                                <button title="Assign Manager" type="button" data-bs-target="#assignmanagermodal" data-bs-toggle="modal"
+                                    class="btn btn-icon btn-sm bg-primary me-2 mb-2"
+                                    (click)="assignmanagerclick(data.module_code,data.module_name)">
+                                    <i class="fa-solid fa-user-check fs-4"></i>
+                                </button>
+                                <button title="Assign Employee" type="button" data-bs-toggle="modal"
+                                    class="btn btn-icon btn-sm bg-etdark  me-2 mb-2"
+                                    (click)="assignemployeeclick(data.module_gid)">
+                                    <i class="fa-solid fa-users fs-3 "></i>
+                                </button>
+                                <button title="Hierarchy" type="button" data-bs-toggle="modal"
+                                class="btn btn-icon btn-sm bg-warning  me-2 mb-2"
+                                (click)="hierarchyclick(data.module_gid)">
+                                    <i class="fa fa-sitemap fs-2"></i>
+                                </button>
+                                <button title="Approval Hierarchy" type="button" data-bs-toggle="modal"
+                                class="btn btn-icon btn-sm bg-info  me-2 mb-2"
+                                    (click)="approvalclick(data.module_gid)">
+                                    <i class="fa-solid fa-person-circle-check fs-4"></i>
+                                </button>
+                                <!-- <button title="clear Hierarchy" type="button" data-bs-toggle="modal"
+                                class="btn btn-icon btn-sm bg-danger  me-2 mb-2"
+                                (click)="clearhierarchyclick()">
+                                <i class="fa-solid fa-person-circle-xmark fs-4"></i>
+                                </button> -->
+
+                                <!-- <div *ngIf="showOptionsDivId === data.module_gid"
+                                        class="pb-0 rounded bg-white cursor-pointer icon_menu">
+
+                                        
+                                        <div class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal"
+                                            data-bs-target="#assignmanagermodal"
+                                            (click)="assignmanagerclick(data.module_gid,data.module_name)">
+                                            <span><i class="fa-solid fa-user fs-3 me-5"></i></span>
+                                            <span>Assign Manager</span>
+                                        </div>
+                                        <div class="d-flex p-3 pb-3 Icon_hover"
+                                            (click)="assignemployeeclick(data.module_gid)">
+                                            <span><i class="fa-solid fa-users fs-3 me-5"></i></span>
+                                            <span>Assign Employee</span>
+                                        </div>
+                                        <div class="d-flex p-3 pb-3 Icon_hover"
+                                            (click)="hierarchyclick(data.module_gid)">
+                                            <span><i class="fa fa-sitemap fs-3 me-5"></i></span>
+                                            <span>Hierarchy</span>
+                                        </div>
+                                        <div class="d-flex p-3 pb-3 Icon_hover"
+                                            (click)="approvalclick(data.module_gid)">
+                                            <span><i class="fa fa-person-circle-check fs-3 me-5"></i></span>
+                                            <span>Approval Hierarchy</span>
+                                        </div>
+                                     
+                                    </div> -->
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal top fade" id="assignmanagermodal" tabindex="-1" aria-labelledby="kt_modal_1" aria-hidden="true"
+    data-bs-backdrop='static' data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered  ">
+        <div class="modal-content ">
+            <div class=" bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white mt-2"><i class="fas fa-user fs-5 me-3"></i>Assign Manager
+                    <button class="btn-secondary float-end mb-4" (click)="clearhierarchyclick()">Clear
+                        Hierarchy</button>
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="assignManagerSubmit()" [formGroup]="assignmanagerForm">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <label for="exampleFormControlInput1" class="font-bold mb-1">Module Code</label>
+                            <br />
+                            <p>{{module_code}}</p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <label for="exampleFormControlInput1" class="font-bold mb-1">Module Name</label>
+                            <br />
+                            <p>{{module_name}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12"><span class="font-bold required">Module
+                                Manager</span>
+                            <div class="mt-2">
+                                <ng-select class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                                    [(ngModel)]="mdlcbomodulemanager" formControlName="cbomodulemanager"
+                                    bindLabel="employee_name" bindValue="employee_gid"
+                                    [ngClass]="{'invalid-border':assignmanagerForm.get('cbomodulemanager')?.invalid && assignmanagerForm.get('cbomodulemanager')?.touched}"
+                                    [items]="employeelist" placeholder="Select an option"></ng-select>
+                                <div *ngIf="assignmanagerForm.get('cbomodulemanager')?.hasError('required') && assignmanagerForm.get('cbomodulemanager')?.touched || assignmanagerForm.get('cbomodulemanager')?.hasError('pattern')"
+                                    class="text-red">Module Manager is required.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <br />
+                        <button type="submit" class="btn-success text-white" [disabled]="assignmanagerForm.invalid"
+                            data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Submit
+                        </button>
+                        &nbsp;
+                        <button type="button" class="btn-danger" data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

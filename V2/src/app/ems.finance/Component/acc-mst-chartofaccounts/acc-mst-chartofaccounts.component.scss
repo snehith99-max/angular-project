@@ -1,0 +1,16 @@
+.table thead th {
+  position: sticky;
+  top: 0;
+  background: #def0ff;
+  /* Background color of the header */
+  z-index: 1;
+  border-bottom: 2px solid #ddd;
+}
+
+.active-custom-tab {
+  border-radius: 6px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 6px -6px, rgba(9, 30, 66, 0.08) 0px 0px 0px 0px;
+  font-weight: 600;
+  color: #000000 !important;
+  background: -webkit-linear-gradient(45deg, #009ef7, #a1d0ec, #009ef7)!important;
+}

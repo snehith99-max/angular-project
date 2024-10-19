@@ -1,0 +1,56 @@
+$secondary : #ffffff;
+$primary : rgb(87, 87, 87);
+
+.panel-wrap {
+    position: fixed;
+    top: 0;
+    bottom: 30px;
+    right: 0;
+    width: 42em;
+    animation-name: meetingPanelOpen;
+    animation-duration:
+      1s;
+  }
+   
+  .panel {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: $secondary;
+    color: $primary;
+    overflow: auto;
+    padding: 1em;
+  }
+   
+  @keyframes meetingPanelOpen {
+    0% {
+      transform: translatex(100%);
+    }
+   
+    100% {
+      transform: translatex(0);
+   
+    }
+  }
+
+
+  .circled-symbol {
+    margin: 6px;
+    background: rgb(0, 153, 255);
+    width: 30px ;
+    height: 30px ;
+    text-align: center;
+    border-radius: 50%;
+    color: white;
+    font-family: sans-serif;
+    
+    &.xs {
+      font-size: 150%;
+    }
+    
+    &.xl {
+      font-size: 200%;
+    }
+  }

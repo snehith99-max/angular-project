@@ -1,0 +1,536 @@
+<div class="card card-bordered" style="background-color: white;">
+    <div class="card-header d-flex align-items-center"
+        style="background: rgb(81,183,204);
+        background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;height:60px;padding-top: 12px;padding-left: 8px;">
+       <b class="ms-5"><i class="fa-solid fa-arrows-spin fa-spin fs-3"></i>&nbsp;360 View</b>
+
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-6">
+        <div class="col-lg-6 col-sm-3 text-center">
+            <span class="profile-picture">
+                <img class="editable img-responsive" alt=" Avatar" id="avatar2"
+                    src="assets\media\patterns\user-image.jpg" style="width: 150px;height: 150px;">
+            </span>
+        </div>
+    </div>
+    <div class="col-lg-6 col-sm-9">
+        <div class="profile-user-info">
+            <div class="profile-info-row">
+                <div class="profile-info-name"> Employee Branch</div>
+                <div class="profile-info-value">
+                    <span class="fs-5 fw-bold"> {{branch_name}}</span>
+                </div>
+            </div>
+
+            <div class="profile-info-row">
+                <div class="profile-info-name">Department
+                </div>
+                <div class="profile-info-value">
+                    <span class="fs-5 fw-bold">{{department_name}}</span>
+                </div>
+            </div>
+
+            <div class="profile-info-row">
+                <div class="profile-info-name"> Employee Code</div>
+                <div class="profile-info-value">
+                    <span class="fs-5 fw-bold">{{user_code}}</span>
+                </div>
+            </div>
+
+            <div class="profile-info-row">
+                <div class="profile-info-name"> Employee Name</div>
+                <div class="profile-info-value">
+                    <span class="fs-5 fw-bold">{{user_name}}</span>
+                </div>
+            </div>
+
+            <div class="profile-info-row">
+                <div class="profile-info-name">Designation</div>
+                <div class="profile-info-value">
+                    <span class="fs-5 fw-bold">{{designation_name}}</span>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div><!-- /.col -->
+</div>
+<br>
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <div class="card-header "
+            style="background: rgb(81,183,204);
+        background: linear-gradient(90deg, #51b7cc 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px;">
+            <b class="ms-5">Personal Info</b>
+            <button class="btn dropdown-toggle fs-1" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseTen" aria-expanded="true" aria-controls="collapseTen   "></button>
+
+        </div>
+        <div id="collapseTen" class="accordion-collapse collapse show" data-bs-parent="#accordionExample10">
+            <div class="accordion-body">
+                    <div class="profile-user-info">
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">Branch</div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{branch_name}}</span>
+                            </div>
+                        </div>   
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">Department
+                            </div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{department_name}}</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">Designation</div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{designation_name}}</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">Mobile No</div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{employee_mobileno}}</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">Qualification</div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{employee_qualification}}</span>
+                            </div>
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">Experience</div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{employee_experience}}</span>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <div class="card-header "
+            style="background: rgb(81,183,204);
+             background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px;">
+            <b class="ms-5">General Info</b>
+            <button class="btn dropdown-toggle fs-1" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapsenine" aria-expanded="true" aria-controls="collapsenine"></button>
+        </div>
+        <div id="collapsenine" class="accordion-collapse collapse show" data-bs-parent="#accordionExample6">
+            <div class="accordion-body">
+                    <div class="profile-user-info">
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">Father/Spouse Name</div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{father_name}}</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">Mother Name</div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{mother_name}}</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">Marital Status</div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{marital_status}}</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">Religion</div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{religion}}</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">Nationality</div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{nationality}}</span>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <div class="card-header "
+            style="background: rgb(81,183,204);
+             background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px;">
+            <b class="ms-5">Bank Info</b>
+            <button class="btn dropdown-toggle fs-1" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseeight" aria-expanded="true" aria-controls="collapseeight"></button>
+
+        </div>
+        <div id="collapseeight" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                    <div class="profile-user-info">
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">Quarter No</div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{quarter_no}}</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">LIC No
+                            </div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{lic_no}}</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">PF No</div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{pf_no}}</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">ESI No</div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{stateinsure_no}}</span>
+                            </div>
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">PF D.O.J</div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{pf_doj}}</span>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <div class="card-header "
+            style="background: rgb(81,183,204);
+            background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px;">
+            <b class="ms-5">Address</b>
+            <button class="btn dropdown-toggle fs-1" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseseven" aria-expanded="true" aria-controls="collapseseven"></button>
+
+        </div>
+        <div id="collapseseven" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                    <div class="profile-user-info">
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">Village</div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{employee_village}}</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">Taluk
+                            </div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{employee_taluk}}</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">Subdivision</div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{employee_subdivision}}</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">Post</div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{employee_po}}</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">District</div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{employee_district}}</span>
+                            </div>
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">State</div>
+                            <div class="profile-info-value">
+                                <span class="fs-5 fw-bold">{{employee_state}}</span>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-8 col-md-4 col-sm-4">
+        <div class="card-header "
+            style="background: rgb(81,183,204);
+         background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px;">
+            <b class="ms-5">Payments</b>
+            <button class="btn dropdown-toggle fs-1" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapsesix" aria-expanded="true" aria-controls="collapsesix   "></button>
+
+        </div>
+        <div id="collapsesix" class="accordion-collapse collapse show" data-bs-parent="#accordionExample10">
+            <div>
+                <br>
+                <table id="paymeny_details" class="table table-striped table-row-bordered  table-responsive ">
+                    <thead>
+                        <tr class="fw-bolder fs-5  bg-lightblue align-middle text-end">
+                            <th >Payment Date</th>
+                            <th>Month</th>
+                            <th>Year</th>
+                            <th>Net Salary</th>
+                            <th>Gross Salary</th>
+                            <th >Account No</th>
+                            <th>Bank Branch</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of paymeny_details; let i=index;" class="text-end">
+                            <td >{{data.payment_date}}</td>
+                            <td >{{data.payment_month}}</td>
+                            <td >{{data.payment_year}}</td>
+                            <td>{{data.net_salary}}</td>
+                            <td>{{data.earned_gross_salary}}</td>
+                            <td >{{data.account_no}}</td>
+                            <td >{{data.bank_branch}}</td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-4 col-sm-4">
+        <div class="card-header "
+            style="background: rgb(81,183,204);
+         background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px;">
+            <b class="ms-5">Loan Info</b>
+            <button class="btn dropdown-toggle fs-1" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapsefive" aria-expanded="true" aria-controls="collapsefive"></button>
+
+        </div>
+        <div id="collapsefive" class="accordion-collapse collapse show" data-bs-parent="#accordionExample10">
+            <div>
+                <br>
+                <table id="loan_details" class="table table-striped table-row-bordered  table-responsive ">
+                    <thead>
+                        <tr class="fw-bolder fs-5  bg-lightblue align-middle text-end ">
+                            <!-- <th>S.No</th> -->
+                            <th>Loan Applied Date</th>
+                            <th>Loan Ref.No.</th>
+                            <th>Loan Amount</th>
+                            <th>Net Salary</th>
+                            <th>Gross Salary</th>
+                            <th>Loan Type</th>
+                            <th>Grade Name</th>
+                            <th>Duration</th>
+                            <th>Remarks</th>
+                            <th>Repayment Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of loan_details; let i=index;" class="text-end">
+                            <td class="text-center">{{data.created_date}}</td>
+                            <td class="text-center">{{data.loan_refno}}</td>
+                            <td class="text-center">{{data.loan_amount}}</td>
+                            <td class="text-center">{{data.net_salary}}</td>
+                            <td class="text-center">{{data.earned_gross_salary}}</td>
+                            <td class="text-center">{{data.type}}</td>
+                            <td class="text-center">{{data.grade_name}}</td>
+                            <td class="text-center">{{data.loan_duration}}</td>
+                            <td class="text-center">{{data.loan_remarks}}</td>
+                            <td class="text-center">{{data.loan_repayment_startfrom}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-4 col-sm-4">
+        <div class="card-header "
+            style="background: rgb(81,183,204);
+         background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px;">
+            <b class="ms-5">EMPLOYEE ATTENDANCE DETAILS</b>
+            <button class="btn dropdown-toggle fs-1" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapsefour" aria-expanded="true" aria-controls="collapsefour"></button>
+
+        </div>
+        <div id="collapsefour" class="accordion-collapse collapse show" data-bs-parent="#accordionExample10">
+            <div>
+                <br>
+                <table id="attendance_details" class="table table-striped table-row-bordered  table-responsive ">
+                    <thead>
+                        <tr class="fw-bolder fs-5  bg-lightblue align-middle text-end ">
+                            <th class="text-center">Month</th>
+                            <th class="text-center">Year</th>
+                            <th class="text-center">Present Count</th>
+                            <th class="text-center">Absent Count</th>
+                            <th class="text-center">Leave Count</th>
+                            <th class="text-center">Weekoff Count</th>
+                            <th class="text-center">Holiday Count</th>
+                            <th class="text-center">Late Count</th>
+                            <th class="text-center">Early Check Out</th>
+                            <th class="text-center">Permission Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of attendance_details; let i=index;" class="text-end">
+                            <td class="text-center">{{data.Month}}</td>
+                            <td class="text-center">{{data.Year}}</td>
+                            <td class="text-center">{{data.present}}</td>
+                            <td class="text-center">{{data.absent}}</td>
+                            <td class="text-center">{{data.leave_count}}</td>
+                            <td class="text-center">{{data.weekoff}}</td>
+                            <td class="text-center">{{data.Holiday}}</td>
+                            <td class="text-center">{{data.late_count}}</td>
+                            <td class="text-center">{{data.earlyout_count}}</td>
+                            <td class="text-center">{{data.permission_count}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-4 col-sm-4">
+        <div class="card-header "
+            style="background: rgb(81,183,204);
+         background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px;">
+            <b class="ms-5">Statutory Details</b>
+            <button class="btn dropdown-toggle fs-1" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapsethree" aria-expanded="true" aria-controls="collapsethree"></button>
+
+        </div>
+        <div id="collapsethree" class="accordion-collapse collapse show" data-bs-parent="#accordionExample10">
+            <div>
+                <br>
+                <table id="statutory_details" class="table table-striped table-row-bordered  table-responsive ">
+                    <thead>
+                        <tr class="fw-bolder fs-5  bg-lightblue align-middle text-end ">
+                            <th class="text-center">Month</th>
+                            <th class="text-center">Year</th>
+                            <th class="text-center">Component</th>
+                            <th class="text-center">Eligible Employee Amount</th>
+                            <th class="text-center">Eligible Employer Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of statutory_details; let i=index;" class="text-end">
+                            <td class="text-center">{{data.month}}</td>
+                            <td class="text-center">{{data.year}}</td>
+                            <td class="text-center">{{data.salarycomponent_name}}</td>
+                            <td class="text-center">{{data.eligible_component}}</td>
+                            <td class="text-center">{{data.eligibleemployer_component}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-4 col-sm-4">
+        <div class="card-header "
+            style="background: rgb(81,183,204);
+         background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px;">
+            <b class="ms-5">Work Experience</b>
+            <button class="btn dropdown-toggle fs-1" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapsetwo" aria-expanded="true" aria-controls="collapsetwo"></button>
+
+        </div>
+        <div id="collapsetwo" class="accordion-collapse collapse show" data-bs-parent="#accordionExample10">
+            <div>
+                <br>
+                <table id="work_experience" class="table table-striped table-row-bordered  table-responsive ">
+                    <thead>
+                        <tr class="fw-bolder fs-5  bg-lightblue align-middle  text-end ">
+                            <th class="text-center">Previous Company Name</th>
+                            <th class="text-center">Previous Occupation</th>
+                            <th class="text-center">Date Of Joining</th>
+                            <th class="text-center">Date Of Releiving</th>
+                            <th class="text-center">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of work_experience; let i=index;" class="text-end">
+                            <td class="text-center">{{data.company_name}}</td>
+                            <td class="text-center">{{data.job_title}}</td>
+                            <td class="text-center">{{data.from_date}}</td>
+                            <td class="text-center">{{data.to_date}}</td>
+                            <td class="text-center">{{data.description}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-4 col-sm-4">
+        <div class="card-header "
+            style="background: rgb(81,183,204);
+         background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);color:black;font-size: 14px;align-items: center;margin: 2px;">
+            <b class="ms-5">Attachments</b>
+            <button class="btn dropdown-toggle fs-1" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapsefirst" aria-expanded="true" aria-controls="collapsefirst"></button>
+
+        </div>
+        <div id="collapsefirst" class="accordion-collapse collapse show" data-bs-parent="#accordionExample10">
+            <div>
+                <br>
+                <table id="document_details" class="table table-striped table-row-bordered  table-responsive ">
+                    <thead>
+                        <tr class="fw-bolder fs-5  bg-lightblue align-middle text-end ">
+                            <!-- <th>S.No</th> -->
+                            <th class="text-center">Date</th>
+                            <th class="text-center">Created By</th>
+                            <th class="text-center">File Name</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of document_details; let i=index;" class="text-end">
+                            <td class="text-center">{{data.created_date}}</td>
+                            <td class="text-center">{{data.created_by}}</td>
+                            <td class="text-center">{{data.document_name}}</td>
+                            <td class="text-center">{{data.document_location}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <!-- Modal footer -->
+ <div class="text-center my-4">
+    <button class="btn-danger btn-sm text-white ms-8 me-2" (click)="onback()" data-bs-dismiss="modal">
+        <i class="fas fa fa-arrow-left text-white me-3"></i>Back
+      </button>
+    </div>

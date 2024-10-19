@@ -1,0 +1,124 @@
+.sample {
+    width: 10px;
+}
+.orderhover:hover {
+    background-color: #caf1c0;
+}
+.custom-tbody {
+    overflow-y: auto;
+    height: 300px;
+}
+thead {
+    position: sticky;
+    top: 0;
+}
+.highlighted {
+    background-color:  rgb(18, 18, 19)!important; /* Or any other styling you prefer */
+  }
+.custom-tbody1 {
+    overflow-y: auto;
+    height: 290px;
+}
+.bg-whatsapp
+{
+  background-color: #075e54;
+}
+.bg-lightblues{
+    background-color: #4c755c;
+}
+mat-button-toggle-group {
+    margin-left: 12px;
+  }
+  .btn-outline-success {
+    background-color: transparent;
+    color: black;
+    border: 1px solid #28a745;
+  }
+
+
+.btn-group .btn {
+    border-radius: 0; /* Removes border radius for a tab-like appearance */
+}
+
+.btn-group .btn:first-child {
+    border-top-left-radius: 2rem; /* Adds border radius to the first button */
+    border-bottom-left-radius: 2rem;
+}
+
+.btn-group .btn:last-child {
+    border-top-right-radius: 2rem; /* Adds border radius to the last button */
+    border-bottom-right-radius: 2rem;
+}
+.btn-default1 {
+    background-color: #abaeaf; /* Default background color */
+    color: #f7f3f3; /* Default text color */
+    font-size: 1.1rem !important;
+
+}
+.btn-default2 {
+    background-color: #a8f5b5; /* Default background color */
+    color: #f5efef; /* Default text color */
+    font-size: 1.1rem !important;
+
+}
+.btn-default3 {
+    background-color: #a6d0f3; /* Default background color */
+    color: #f3eeee; /* Default text color */
+    font-size: 1.1rem !important;
+
+}
+.btn-current{
+    background-color: rgb(102, 102, 102) !important;
+    color: #fff !important;
+    font-size: 1.1rem !important;
+    font-weight: 630 !important;
+    padding: 9px 16px 9px 13px  !important;
+    border-radius: 3px ;
+    border: 0;
+    }
+    
+    .btn-current:hover {
+        background-color: rgb(88, 87, 87) !important;  
+      }
+      .btn-days{
+        background-color: rgb(64, 170, 108) !important;
+        color: #fff !important;
+        font-size: 1.1rem !important;
+        font-weight: 630 !important;
+        padding: 9px 16px 9px 13px  !important;
+        border-radius: 3px ;
+        border: 0;
+        }
+        
+        .btn-days:hover {
+            background-color: rgb(58, 153, 98)!important;  
+          }
+          .btn-month{
+            background-color: #207691 !important;
+            color: #fff !important;
+            font-size: 1.1rem !important;
+            font-weight: 630 !important;
+            padding: 9px 16px 9px 13px  !important;
+            border-radius: 3px ;
+            border: 0;
+            }
+            
+            .btn-month:hover {
+                background-color: #1f6377 !important;  
+              }
+                        
+              .btn-current {
+                background-color: #9b3392; /* Change this to the desired color */
+                color: #fff; /* Change this to the desired color */
+            }
+            
+            .btn-days {
+                background-color: #9b3392; /* Change this to the desired color */
+                color: #fff; /* Change this to the desired color */
+            }
+            
+            .btn-month {
+                background-color: #9b3392; /* Change this to the desired color */
+                color: #fff; /* Change this to the desired color */
+            }
+            

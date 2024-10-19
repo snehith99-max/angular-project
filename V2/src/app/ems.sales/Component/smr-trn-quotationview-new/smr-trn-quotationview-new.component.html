@@ -1,0 +1,603 @@
+<!-- <div class="card rounded-top">
+    <div class="card-title p-5 pb-3 pt-3 rounded-top bg-primary d-flex justify-content-between align-items-center">
+        <h1 class="fw-bolder text-white"><i class="fa fa-eye fs-2" aria-hidden="true"></i>&nbsp;&nbsp;
+            View Quotation</h1>
+        <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer " title="back"
+            routerLink="/smr/SmrTrnQuotationSummary"><i class="fa-solid fa-arrow-left-long fs-1 fw-bold"></i></button>
+    </div>
+    <form [formGroup]="quotationviewform" #form="ngForm">
+        <div *ngFor="let data of quotationsummary_list;">
+            <div class="d-flex flex-row m-4 mt-6 flex-wrap border-bottom">
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Quotation Ref. No.</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <p>{{data.quotation_gid}}</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"> <span class="font-bold">Quotation Date</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <p>{{data.quotation_date}}</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"> <span class="font-bold ">Branch</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <p>{{data.branch_name}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row m-4 mt-6 flex-wrap border-bottom">
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Customer</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <p hidden>{{data.customer_gid}}</p>
+                        <p>{{data.customer_name}}</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Contact Person</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <p>{{data.contact_person}}</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Contact Number</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <p>{{data.contact_no}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row m-4 mt-6 flex-wrap border-bottom">
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Customer Address</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <p>{{data.customer_address}}</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Email Address</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <p>{{data.contact_mail}}</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Sales Person</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <p>{{data.user_firstname}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row m-4 mt-6 flex-wrap border-bottom">
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Freight Terms</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <p>{{data.freight_terms}}</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Payment Terms</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <p>{{data.payment_terms}}</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Currency</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <p>{{data.currency_code}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row m-4 mt-6 flex-wrap border-bottom">
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Exchange Rate</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <p>{{data.exchange_rate}}</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Remarks</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <p>{{data.quotation_remarks}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="table-responsive">
+            <div class="card card-body m-0 p-3 mb-5 bg-white rounded table-responsive">
+                <div>
+                    <table id="employee_list" class="table table-striped table-row-bordered gy-5 gs-7 ">
+                        <thead>
+                            <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue">
+                                <th>S.No.</th>
+                                <th>Product</th>
+                                <th>Product Code</th>
+                                <th>Unit</th>
+                                <th>Quantity</th>
+                                <th>Discount(%)</th>
+                                <th>Unit Price</th>
+                                <th class="text-center">Tax</th>
+                                <th>Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let data of Viewquotationdetail_list; let i = index">
+                            <tr>
+                                <td>{{i+1}}</td>
+                                <td>{{data.product_name}}</td>
+                                <td>{{data.product_code}}</td>
+                                <td>{{data.productuom_name}}</td>
+                                <td>{{data.quantity}} &nbsp; &nbsp; {{data.productuom_name}}</td>
+                                <td>
+                                    <div class="container">
+                                        <div class="row">
+                                            {{data.discount_percentage}}
+                                        </div>
+                                        <div class="row">
+                                            {{data.discount_amount}}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{data.product_price}}</td>
+                                <td>
+                                    <div class="container">
+                                        <div class="row">
+                                            {{data.tax_name}}
+                                        </div>
+                                        <div class="row">
+                                            {{data.tax_amount}}
+                                        </div>
+                                    </div>               
+                                </td>
+                                <td class="text-center">
+                                    <div class="text-center" *ngIf="data.taxSegments && data.taxSegments.length > 0">
+                                        <div *ngFor="let taxSegment of data.taxSegments">
+                                                <span>{{ taxSegment.tax_name }} ({{ taxSegment.tax_percentage }}%):</span>&nbsp;&nbsp;
+                                                <span class="text-end">{{ (data.product_price * taxSegment.tax_percentage
+                                                    / 100).toFixed(2) }}
+                                                </span>
+                                                <br>
+                                                <span class="text-end"><span class="fw-bold">Total Tax:&nbsp;&nbsp;</span></span>
+                                                <span class="text-end">{{ taxSegment.tax_amount }}</span>
+                                                <br>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="!data.taxSegments || data.taxSegments.length === 0">
+                                        <span class="text-center"
+                                            style="color: #ff0000; margin-bottom: 10px;font-size: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No
+                                            Tax Segment</span>
+                                    </div>
+                                </td>
+                                <td>{{data.price}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="m-4 card">
+                    <div class="row" *ngFor="let data of quotationsummary_list;">
+                        <div class="col-lg-8">
+                            <div class="mt-4 card border">
+                                <div class="d-flex justify-content-between align-items-center rounded-top"
+                                    style="background-color: #def0ff;">
+                                    <div class="">
+                                        <h3 class="fw-bolder ms-3 mt-2" style="color: #2599ff;">Terms and Conditions
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="m-3" style="height: 447px;">
+                                    <p [innerHTML]="termsandconditions" class="fs-4"></p>
+                                </div>                                
+                            </div>
+                        </div>
+                        <div class="col-lg-4 p-8">
+                            <div class="card border" style="background-color: #f9f9f99d;">
+                                <div class="row g-6 p-8">
+                                    <div class="row col-lg-12">
+                                        <div class="col-lg-6 ">
+                                            <span class="font-bold">Net Amount : </span>
+                                        </div>
+                                        <div class="col-lg-6 ">
+                                            <span class="font-bold ms-4">{{data.total_amount}}</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-lg-6">
+                                        <span class="font-bold">Tax</span>
+                                        <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                                           
+                                            <span class="font-bold mt-3">{{data.tax_name}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <span class="font-bold">Total with Tax</span>
+                                        <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                                            
+                                            <span class="font-bold mt-3">{{data.total_price}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <span class="font-bold">Addon Charges</span>
+                                        <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                                           
+                                            <span class="font-bold mt-3">{{data.addon_charge}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <span class="font-bold">Additional Discount</span>
+                                        <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                                            
+                                            <span class="font-bold mt-3">{{data.additional_discount}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <span class="font-bold">Freight Charges</span>
+                                        <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                                            
+                                            <span class="font-bold mt-3">{{data.freight_charges}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <span class="font-bold">Buy/Back Charges</span>
+                                        <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                                       
+                                                <span class="font-bold mt-3">{{data.buyback_charges}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <span class="font-bold">Packing Charges</span>
+                                        <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                                           
+                                                <span class="font-bold mt-3">{{data.packing_charges}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <span class="font-bold">Insurance Charges</span>
+                                        <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                                         
+                                            <span class="font-bold mt-3">{{data.insurance_charges}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <span class="font-bold">Round Off</span>
+                                        <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                                            
+                                            <span class="font-bold mt-3">{{data.roundoff}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-2 p-8">
+                                    <div class="col-lg-12 p-8">
+                                        <div>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 d-flex justify-content-between align-items-center">
+                                        <div class="fw-bold fs-1 ms-3">Grand Total :</div>
+                                        <div class="col-lg-6">
+                                           
+                                            <span class="font-bold ms-16">{{data.Grandtotal}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center my-4">
+                        <button class="btn-primary btn-sm text-white me-4" routerLink="/smr/SmrTrnQuotationSummary">
+                            <i class="bi bi-arrow-left-square fs-7 me-1"></i>
+                            Back
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div> -->
+
+
+
+
+
+<div class="card rounded-top mt-4">
+    <div class="card-title p-5 pb-3 pt-3 rounded-top bg-primary d-flex justify-content-between align-items-center">
+        <h1 class="fw-bolder text-white"><i class="fas fa-eye fw-bolder fs-3"></i>&nbsp;&nbsp; View Quotation</h1>
+        <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer " title="back" (click)="onclickgoback()"
+            ><i class="fa-solid fa-arrow-left-long fs-1 fw-bold"></i></button>
+    </div>
+    <div class="card mt-1 m-3 mb-0">
+        <div class="card-header d-flex align-items-center mb-3 cursor-pointer" style="background-color: #def0ff;">
+            <div>
+                <p class="card-title fw-bold fs-3 " style="color: #2599ff;">
+                    <i class="fa-solid fa-clipboard fs-1"></i> &nbsp;Quotation Details
+                </p>
+            </div>
+        </div>
+
+        <div *ngFor="let m of quotationsummary_list;">
+            <div class="d-flex flex-row ps-5 ms-8 me-8 flex-wrap border-bottom">
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold">Branch</span>
+                    <p class="mt-2">{{m.branch_name}}</p>
+                </div>
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold">Quotation Ref. No</span>
+                    <p class="mt-2">{{m.quotation_gid}}</p>
+                </div>
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"> <span class="fw-bold">Quotation Date</span>
+                    <p class="mt-2">{{m.quotation_date}}</p>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row ps-5 ms-8 me-8 flex-wrap border-bottom">
+                <!-- <div class="col-12 col-lg-4 col-md-4 mt-1 col-sm-12"><span class="fw-bold">Customer 
+                </span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <p></p>
+                    </div>
+                    <div class="col-11 fv-row">
+                        <p>
+                            {{ m.customer_name }} 
+                        </p>
+
+                    </div>
+                </div> -->
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold">Customer Name</span>
+                    <p class="mt-2">{{m.customer_name}}</p>
+                </div>
+                <div class="col-12 col-lg-4 col-md-3 mt-1 col-sm-12"><span class="fw-bold">Contact Number</span>
+                    <div class="col-11 fv-row mt-2">
+                        <p class="mt-2">{{m.contact_no}}</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 col-md-3 mt-1 col-sm-12"> <span class="fw-bold">Email ID </span>
+                    <div class="col-11 fv-row mt-2">
+                        <p class="mt-2">{{m.contact_mail}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row ps-5 ms-8 me-8 flex-wrap border-bottom">
+                <div class="col-12 col-lg-4 col-md-6 mt-1 col-sm-12"><span class="fw-bold">Tax Number</span>
+                    <p class="mt-2">{{m.gst_number}}</p>
+                </div>
+                <div class="col-12 col-lg-4 col-md-6 mt-1 col-sm-12"><span class="fw-bold">Tax Segment</span>
+                    <p class="mt-2">{{m.taxsegment_name}}</p>
+                </div>
+                <div class="col-12 col-lg-4 col-md-6 mt-1 col-sm-12"> <span class="fw-bold">Price Segment</span>
+                    <p class="mt-2">{{m.pricesegment_name}}</p>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row ps-5 ms-8 me-8 flex-wrap border-bottom">
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold">AddressLine I</span>
+                    <p class="mt-2">{{m.address1}}</p>
+                </div>
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold">AddressLine II</span>
+                    <p class="mt-3">{{m.address2}}</p>
+                </div>
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"> <span class="fw-bold">City</span>
+                    <p class="mt-3">{{m.customer_city}}</p>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row ps-5 ms-8 me-8 flex-wrap border-bottom">
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold">PostalCode</span>
+                    <p class="mt-2">{{m.pincode}}</p>
+                </div>
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold">Country</span>
+                    <p class="mt-3">{{m.country_name}}</p>
+                </div>
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"> <span class="fw-bold">Region</span>
+                    <p class="mt-3">{{m.region_name}}</p>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row ps-5 ms-8 me-8 flex-wrap border-bottom">
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold">Sales Person</span>
+                    <p class="mt-2">{{m.salesperson_name}}</p>
+                </div>
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold">Delivery Terms</span>
+                    <p class="mt-3">{{m.delivery_days}}</p>
+                </div>
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"> <span class="fw-bold">Payment Terms</span>
+                    <p class="mt-3">{{m.payment_days}}</p>
+                </div>
+            </div>
+            <div class="d-flex flex-row ps-5 ms-8 me-8 flex-wrap border-bottom">
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold">Currency / Exchange Rate
+                </span>
+                <p class="mt-2">{{m.currency_code}}&nbsp;/&nbsp;{{m.exchange_rate}}</p>
+            </div>
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="fw-bold">Remarks</span>
+                    <p class="mt-3">{{m.quotation_remarks}}</p>
+                </div>
+               
+            </div>
+
+            <div class="card mt-1 ms-4 me-4">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="kt_tab_pane_2" role="tabpanel">
+                        <div>
+                            <table class="table table-striped table-bordered text-blue border-bottom gs-7 align-middle">
+                                <thead>
+                                    <tr class="fw-bold fs-6 text-nowrap bg-lightblue text-blue align-middle">
+                                        <th class="text-blue" style="width: 8%;">Product Group</th>
+                                        <th class="text-blue" style="width: 6%;">Product Code</th>
+                                        <th class="text-blue" style="width: 18%;">Product</th>
+                                        <th class="text-blue" style="width: 15%;">Description</th>
+                                        <th class="text-blue" style="width: 6%;">Quantity</th>
+                                        <th class="text-blue" style="width: 1%;">Price</th>
+                                        <th class="text-blue" style="width: 6%;" colspan="2">Discount</th>
+                                        <th class="text-blue" style="text-align:center;width: 5%;">Tax Rate</th>
+                                        <th class="text-blue" style="text-align:center;width: 1%;">Tax</th>
+                                        <th class="text-blue" style="width: 1%;">Total Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let data of Viewquotationdetail_list; let i=index;">
+                                        <td style="width: 6%;">{{data.productgroup_name}}</td>
+                                        <td style="width: 6%;">{{data.product_code}}</td>
+                                        <td style="text-align: left;">{{data.product_name}}</td>
+                                        <td>{{data.product_remarks}}</td>
+                                        <td style="text-align: right;">{{data.quantity}} {{data.productuom_name}}</td>
+                                        <td style="text-align: right;">{{data.product_price }}</td>
+                                        <td style="text-align: right;">{{data.discount_percentage}} %</td>
+                                        <td style="text-align: right;"> {{data.discount_amount}}</td>
+                                        <td class="text-center">{{data.tax_prefix1}}<br>
+                                            <span *ngIf="data.taxname2 === 0">---</span><span
+                                                *ngIf="data.taxname2 !== 0">{{
+                                                data.tax_prefix2 }}</span><br>
+                                             <span *ngIf="data.taxname3 === 0">---</span><span *ngIf="data.taxname3 !== 0">{{
+                                                data.tax_name3 }}</span> 
+                                        </td>
+                                        <td style="text-align: right;">
+                                            {{data.tax_amount}}
+                                            <span *ngIf="data.tax_amount2 === 0">---</span><span *ngIf="data.tax_amount2 !== 0">{{
+                                                data.tax_amount2 }}</span> 
+                                        </td>
+                                        <td style="text-align: right;">{{data.price}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ms-4 card me-4 mb-4">
+                <div class="row">
+                    <div class="col-lg-9 pe-9">
+                        <div class="mt-1 card border">
+                            <div class="d-flex justify-content-between align-items-center rounded-top"
+                                style="background-color: #def0ff;">
+                                <div class="">
+                                    <h3 class="fw-bolder ms-3 mt-3" style="color: #2599ff; height:23px;">Terms and
+                                        Conditions</h3>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 col-md-6 col-sm-12 ps-0">
+                                <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row">
+                                    <p [innerHTML]="termsandconditions" class="ms-6 mt-3"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="mt-1 card border" style="background-color: #ffffff9d;">
+                            <div class="row p-2 ps-2 ms-4 me-4">
+                                <div class="d-flex flex-row flex-wrap border-bottom">
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row ">
+                                            <label class="col-form-label font-bold">Net Amount :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12 ps-0">
+                                        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-4"
+                                            style="text-align: right;">
+                                            <p>{{m.total_price}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap border-bottom">
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row">
+                                            <label class="col-form-label font-bold">Add On Charges :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12 ">
+                                        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-4"
+                                            style="text-align: right;">
+                                            <p>{{m.addon_charge}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap border-bottom">
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                            <label class="col-form-label font-bold text-nowrap">Additional Discount
+                                                :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-4"
+                                            style="text-align: right;">
+                                            <p>{{m.additional_discount}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap border-bottom">
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                            <label class="col-form-label font-bold text-nowrap">Freight Charges</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-4"
+                                            style="text-align: right;">
+                                            <p>{{m.freight_charges}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap border-bottom">
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                        <div class="col-lg-8 col-12 col-md-11 col-sm-11 fv-row">
+                                            <label class="col-form-label font-bold text-nowrap">Additional Tax
+                                                :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-4">
+                                        <div class="d-flex">
+                                            <p style="width: 120%;">{{m.tax_nameno}}</p>
+                                            <p >{{m.tax_amount4}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row  flex-wrap border-bottom">
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                            <label class="col-form-label font-bold">Round Off :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-4"
+                                            style="text-align: right;">
+                                            <p>{{m.roundoff}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row  flex-wrap">
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                            <label class="col-form-label font-bold">Grand Total :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-4"
+                                            style="text-align: right;">
+                                            <p class="font-bold">{{m.Grandtotal}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        
+                    </div>
+                    <div class="text-center">
+                        <button (click)="onback()" type="submit" class="btn-primary btn-sm text-white me-2">
+                            <i class="fas fa-arrow-left fs-5"></i>
+                            <span class="ms-3">Back</span> </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

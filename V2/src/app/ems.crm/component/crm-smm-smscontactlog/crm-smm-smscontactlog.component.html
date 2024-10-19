@@ -1,0 +1,104 @@
+<div class="card shadow-sm">
+    <div class="card-header bg-sms" style="color: white;">
+        <h3 class="card-title"> <i class="fas fa-address-book fs-1"></i> &nbsp;
+            Contact List</h3>
+        <div style="margin: 13px">
+            <div class="col me-5">
+                <button title="Back" routerLink="/crm/CrmSmmSmscampaign"
+                    class="btn-secondary btn-sm text-black me-4 "><i class="ki-duotone ki-entrance-right fs-5">
+                        <i class="path1"></i>
+                        <i class="path2"></i>
+                    </i>&nbsp;Back</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- <button title="View" type="button" class="btn btn-icon btn-sm bg-primary me-2" ><span class="fa-solid fa-eye text-white  fs-6"></span></button> -->
+
+    <div class="table-responsive">
+        <div class="card card-body m-3 shadow-xl p-3 mb-5 bg-white rounded">
+            <table id="customerdetail_list" class="table table-striped table-row-bordered border-bottom gs-7">
+                <thead>
+                    <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue" style="text-align: center">
+                        <th>S.No</th>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Email</th>
+                        <!-- <th>Customer Type</th> -->
+                        <th>Send Count</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data1 of customerdetail_list; let i=index;" style="text-align:center">
+                        <td>{{i+1}}</td>
+                        <td>{{data1.names}}</td>
+                        <td>{{data1.default_phone}}</td>
+                        <td>{{data1.email}}</td>
+                        <!-- <td>{{data1.customer_type}}</td> -->
+                        <td>{{data1.status}}</td>
+                        <td><button title="Log" type="button" [disabled]="data1.default_phone == ''"
+                                data-bs-toggle="modal" data-bs-target="#callreport"
+                                (click)="getindividuallog(data1.default_phone)"
+                                class="btn btn-icon btn-sm bg-view bg-primary m-2">
+                                <span class="fa-solid fa-list-alt"></span>
+                            </button>
+
+
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal modal-sm" id="callreport" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background-color: rgba(236, 240, 240, 0);">
+                <!-- Modal Header -->
+                <div class="check m-2">
+                    <div class="calllog">
+
+                        <div class="content">
+
+                            <header class="logpage">
+                                <h1 class="logpage-title" style="color: aliceblue;">Phone Number:{{phone_number}} </h1>
+                            </header>
+
+
+                            <section class="summary" style="overflow-y:scroll;">
+                                <article>
+                                    <ul class="summary-list">
+                                        <li class="summary-list-item"
+                                            *ngFor="let data of individualsmslog; let i=index;">
+
+
+                                            <div class="summary-view summary-text">
+                                                <p class="test1">{{data.campagin_message}}</p>
+                                            </div>
+                                            <div class="summary-view summary-icon call">
+                                                <span><i class="fas fa-user"></i>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </article>
+                            </section>
+
+                        </div>
+                        <div class="text-center">
+                            <button class="btn-danger btn-sm text-white me-4 rounded-pill" data-bs-dismiss="modal">
+                                <i class="fas fa-times"></i> <!-- Add "x" symbol icon -->
+                                <span class="ms-2">Close</span> <!-- Add Close text -->
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>

@@ -1,0 +1,403 @@
+<div class="card shadow-lg rounded-top">
+    <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+        <h3 class="fw-bolder text-white">Half Yearly Form</h3>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-20x mb-8 fs-6">
+                    <li class="nav-item ms-9">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#kt_tab_pane_1" style="color: #009EF7"><b>Form2(Sub-Rule 3)</b></a>
+                    </li>
+                    <li class="nav-item ms-9">
+                        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_2" style="color: #009EF7"><b>Form4(Sub-Rule 4)</b></a>
+                    </li>                    
+                    <li class="nav-item ms-9">
+                        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_3" style="color: #009EF7"><b>Form21(Sub-Rule 1)</b></a>
+                    </li>
+                    </ul>
+
+                   
+                       <div class="tab-content" id="myTabContent">
+                       <div class="tab-pane fade show active ms-5" id="kt_tab_pane_1" role="tabpane1">
+                          <form [formGroup]="reactiveuserForm">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="modal-body">
+                                            <div id="kt_app_content" class="app-content  flex-column-fluid">
+                                                <div class="d-flex flex-row m-6 flex-wrap">
+                                                    <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Name and address of the establishment</span>
+                                                        <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row">
+                                                            <textarea
+                                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input mt-2"
+                                                        formControlName="company_address" rows="4" placeholder="Name and address of the establishment" 
+                                                        name="company_address"></textarea>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Nature of industry and date of commencement of business</span>
+                                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                            <input type="text" formControlName="typeof_industry" class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0" name="typeof_industry"
+                                                            placeholder="Nature of industry and date of commencement of business"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Total number of workmen in the establishment</span>
+                                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                            <input type="text" formControlName="numberof_workmen" class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0" name="numberof_workmen"
+                                                            placeholder="Total number of workmen in the establishment"/>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+
+                                                    <div class="d-flex flex-row m-6 flex-wrap">
+                                                        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Number of workmen shown in the Form 1</span>
+                                                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                <input type="text" name="numberofworkmen_form1" class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0" formControlName="numberofworkmen_form1"
+                                                                placeholder="Number of workmen shown in the Form 1"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Total number of working days in the year</span>
+                                                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                <input type="text" formControlName="totalworkdays_year" class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0" name="totalworkdays_year"
+                                                                placeholder="Total number of working days in the year"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Non-permanent workmen completed 480 days service year end 30th June</span>
+                                                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                <input type="text" formControlName="nonpermanent_count" class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0" name="nonpermanent_count"
+                                                                placeholder="Non-permanent workmen completed"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="d-flex flex-row m-6 flex-wrap">
+                                                        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Number of workmen made permanent during year end 30th June</span>
+                                                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                <input type="text" class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0" formControlName="permanent_count"
+                                                                name="permanent_count" placeholder="Number of workmen made permanent"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Number of workmen yet to be made permanent as on 1st July</span>
+                                                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                <input type="text" formControlName="permanentcount_firstjuly" class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0" name="permanentcount_firstjuly"
+                                                                placeholder="Number of workmen  yet to be made permanent"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Reasons for delay</span>
+                                                            <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row">
+                                                            <textarea
+                                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input mt-2"
+                                                            formControlName="reason_delay" rows="4" cols="18" placeholder="Enter Reason" 
+                                                            name="reason_delay" placeholder="Enter Reason"></textarea>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="d-flex flex-row m-6 flex-wrap">
+                                                        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Remarks, if any</span>
+                                                            <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row">
+                                                            <textarea
+                                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input mt-2"
+                                                            formControlName="remarks" rows="4" cols="18" placeholder="Enter Remarks" 
+                                                            name="remarks" placeholder="Enter Remarks"></textarea>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="text-center my-4">
+                                                        <button class="btn-success text-white me-4" (click)="form2subrule3submit()" >
+                                                            <i class="fas fa-check text-white fs-5 me-4"></i>Submit
+                                                        </button>
+                                                        <button class="btn-primary btn-sm text-white" (click)="onuserback()">
+                                                            <i class="fas fa-arrow-left me-4"></i>Back
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="row tab-pane fade show ms-5" id="kt_tab_pane_2" role="tabpane2">
+                                <form [formGroup]="reactivemasterForm">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="modal-body">
+                                                <div id="kt_app_content" class="app-content flex-column-fluid">
+                                                    <div class="d-flex flex-row m-6 flex-wrap">
+                                                        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Name of the establishment and postal address</span>
+                                                            <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row">
+                                                            <textarea
+                                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input mt-8"
+                                                            formControlName="postal_address" rows="4" cols="18" placeholder="Name of the establishment and postal address" 
+                                                            name="postal_address"></textarea>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Name and address employers including managing partner day offers establishment by body co-operative or association</span>
+                                                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                <input type="text" formControlName="nameaddress_employers" class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0" name="nameaddress_employers"
+                                                                placeholder="Name and address of the employers"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Serial Number</span>
+                                                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-8">
+                                                                <input type="text" formControlName="serial_number" class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0" name="serial_number"
+                                                                placeholder="Enter Serial Number"/>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+
+                                                        <div class="d-flex flex-row m-6 flex-wrap">
+                                                            <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Name and address of the employee kept under suspension</span>
+                                                                <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row">
+                                                                <input class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input mt-2"
+                                                                formControlName="nameaddressofemployee_suspension" rows="4" cols="18" placeholder="Name and address of the employee kept under suspension" 
+                                                                name="nameaddressofemployee_suspension">
+                                                            </div>
+                                                            </div>
+                                                            <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Monthly emolument(wages) paid to the employees</span>
+                                                                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                    <input type="text" formControlName="wagespaid_monthlyemployees" class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0" name="wagespaid_monthlyemployees"
+                                                                    placeholder="Monthly emolument(wages) paid to the employees"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Department in which employee working last and has designation</span>
+                                                                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                    <input type="text" formControlName="departmentanddesignation_last" class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0" name="departmentanddesignation_last"
+                                                                    placeholder="Enter Department"/>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+
+                                                            <div class="d-flex flex-row m-6 flex-wrap">
+                                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Nature of offence committed and date of offence</span>
+                                                                    <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row">
+                                                                    <input class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input mt-2"
+                                                                    formControlName="natureof_offence" rows="4" cols="18" placeholder="Nature of offence committed and date of offence" 
+                                                                    name="natureof_offence">
+                                                                </div>
+                                                                </div>
+                                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Date of suspension</span>
+                                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                        <input type="text" formControlName="suspension_date" class="form-control form-control-lg form-control-solid borderc-secondary date-picker mb-3 mb-lg-0 bg-white custom-input" name="suspension_date"
+                                                                        placeholder="DD-MM-YYYY"/>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Date of commencement of enquiry</span>
+                                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                        <input type="text" formControlName="commencementenquiry_date" class="form-control form-control-lg form-control-solid borderc-secondary date-picker mb-3 mb-lg-0 bg-white custom-input" name="commencementenquiry_date"
+                                                                        placeholder="DD-MM-YYYY"/>
+                                                                    </div>
+                                                                </div>
+                                                                </div>
+
+                                                                <div class="d-flex flex-row m-6 flex-wrap">
+                                                                    <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Date of completion of enquiry</span>
+                                                                        <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row">
+                                                                        <input class="form-control form-control-lg form-control-solid borderc-secondary date-picker mb-3 mb-lg-0 bg-white custom-input mt-2"
+                                                                        formControlName="completionenquiry_date" placeholder="DD-MM-YYYY" 
+                                                                        name="completionenquiry_date">
+                                                                    </div>
+                                                                    </div>
+                                                                    <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Date of revocation of suspension</span>
+                                                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                            <input type="text" formControlName="revocationsuspension_date" class="form-control form-control-lg form-control-solid borderc-secondary date-picker mb-3 mb-lg-0 bg-white custom-input" name="revocationsuspension_date"
+                                                                            placeholder="DD-MM-YYYY"/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Rate subsistence allowence calculated
+                                                                    period calculation made</span>
+                                                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                            <input type="text" formControlName="subsistenceallowence_rate" class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0" name="subsistenceallowence_rate"
+                                                                            placeholder="Enter Subsistence Allowence Calculated "/>
+                                                                        </div>
+                                                                    </div>
+                                                                    </div>
+
+                                                                    <div class="d-flex flex-row m-6 flex-wrap">
+                                                                        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Amount of subsistence allowence paid and the date of payment</span>
+                                                                            <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row">
+                                                                            <input class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input mt-2"
+                                                                            formControlName="subsistenceallowence_paid" rows="4" cols="18" placeholder="Date of Subsistence Allowence and Payment" 
+                                                                            name="subsistenceallowence_paid">
+                                                                        </div>
+                                                                        </div>
+                                                                        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Date of issue of final orders regarding the charge against employee</span>
+                                                                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                                <input type="text" formControlName="dateofissue_finalorder" class="form-control form-control-lg form-control-solid borderc-secondary date-picker mb-3 mb-lg-0 bg-white custom-input" name="dateofissue_finalorder"
+                                                                                placeholder="DD-MM-YYYY"/>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Whether employees has ex-one rated or awarded any punishment</span>
+                                                                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                                <input type="text" formControlName="employees_punishment" class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0" name="employees_punishment"
+                                                                                placeholder="Enter Employee rated or awarded punishment"/>
+                                                                            </div>
+                                                                        </div>
+                                                                        </div>
+
+                                                                        <div class="d-flex flex-row m-6 flex-wrap">
+                                                                            <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Remarks</span>
+                                                                                <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row">
+                                                                                <textarea
+                                                                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input mt-2"
+                                                                                formControlName="remarks_data" rows="4" cols="18" placeholder="Enter Remarks" 
+                                                                                name="remarks_data" placeholder="Enter Remarks"></textarea>
+                                                                            </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                           <div class="text-center my-4">
+                                                                            <button class="btn-success text-white me-4" (click)="form2subrule4submit()" >
+                                                                                <i class="fas fa-check text-white fs-5 me-4"></i>Submit
+                                                                            </button>
+                                                                            <button class="btn-primary btn-sm text-white" (click)="onmasterback()">
+                                                                                <i class="fas fa-arrow-left me-4"></i>Back
+                                                                            </button>
+                                                                         </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                                <div class="row tab-pane fade show ms-5" id="kt_tab_pane_3" role="tabpane3">
+                                                    <form [formGroup]="reactivedataForm">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="modal-body">
+                                                                    <div id="kt_app_content" class="app-content flex-column-fluid">
+                                                                        <div class="d-flex flex-row m-6 flex-wrap">
+                                                                            <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Registration Number of the Factory</span>
+                                                                                <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row">
+                                                                                <input
+                                                                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input mt-2"
+                                                                                formControlName="registration_number" rows="4" cols="18" placeholder="Registration Number of the Factory" 
+                                                                                name="registration_number">
+                                                                            </div>
+                                                                            </div>
+                                                                            <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Name and address of the Occupier</span>
+                                                                                <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row">
+                                                                                <textarea
+                                                                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input mt-2"
+                                                                                formControlName="occupier_address" rows="4" cols="18" placeholder="Name and address of the Occupier" 
+                                                                                name="occupier_address"></textarea>
+                                                                            </div>
+                                                                            </div>
+                                                                            <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Name and address of the Occupier</span>
+                                                                                <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row">
+                                                                                <textarea
+                                                                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input mt-2"
+                                                                                formControlName="managingpartner_address" rows="4" cols="18" placeholder="Name and address of the Occupier" 
+                                                                                name="managingpartner_address"></textarea>
+                                                                            </div>
+                                                                            </div>
+                                                                            </div>
+
+                                                                            <div class="d-flex flex-row m-6 flex-wrap">
+                                                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Name and address of the Occupier</span>
+                                                                                    <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row">
+                                                                                    <textarea
+                                                                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input mt-2"
+                                                                                    formControlName="managingpartner_address1" rows="4" cols="18" placeholder="Name of the establishment and postal address" 
+                                                                                    name="managingpartner_address1"></textarea>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Nature of Industry</span>
+                                                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                                        <input type="text" formControlName="natureof_industry" class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0" name="natureof_industry"
+                                                                                        placeholder="Nature of Industry"/>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Total number of days worked during the Half-year</span>
+                                                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                                        <input type="text" formControlName="numberofdaysworked_halfyear" class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0" name="numberofdaysworked_halfyear"
+                                                                                        placeholder="Total number of days worked during the Half-year"/>
+                                                                                    </div>
+                                                                                </div>
+                                                                                </div>
+
+                                                                                <div class="d-flex flex-row m-6 flex-wrap">
+                                                                                    <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Average number of workers employed daily</span>
+                                                                                        <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row">
+                                                                                        <input class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input mt-2"
+                                                                                        formControlName="averageofworkersemployeed_daily" placeholder="Average number of workers employed daily" 
+                                                                                        name="averageofworkersemployeed_daily">
+                                                                                    </div>
+                                                                                    </div>
+                                                                                    <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Adults(Male)</span>
+                                                                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                                            <input type="text" formControlName="adultsmale_count" class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0" name="adultsmale_count"
+                                                                                            placeholder="Enter Adults Male"/>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Adults(Female)</span>
+                                                                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                                            <input type="text" formControlName="adultsfemale_count" class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0" name="adultsfemale_count"
+                                                                                            placeholder="Enter Adults Female"/>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    </div>
+
+                                                                                    <div class="d-flex flex-row m-6 flex-wrap">
+                                                                                        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Adolescents(Male)</span>
+                                                                                            <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row">
+                                                                                            <input
+                                                                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input mt-2"
+                                                                                            formControlName="adolescentsmale_count" placeholder="Enter Adolescents Male" 
+                                                                                            name="adolescentsmale_count">
+                                                                                        </div>
+                                                                                        </div>
+                                                                                        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Adolescents(Female)</span>
+                                                                                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                                                <input type="text" formControlName="adolescentsfemale_count" class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0" name="adolescentsfemale_count"
+                                                                                                placeholder="Enter Adolescents Female"/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Children(Male)</span>
+                                                                                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                                                <input type="text" formControlName="childrenmale_count" class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0" name="childrenmale_count"
+                                                                                                placeholder="Enter Children Male"/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        </div>
+    
+
+                                                                                    <div class="d-flex flex-row m-6 flex-wrap">
+                                                                                        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Children(Female)</span>
+                                                                                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                                                <input type="text" formControlName="childrenfemale_count" class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0" name="childrenfemale_count"
+                                                                                                placeholder="Enter Children Female"/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Date of dispatch of return</span>
+                                                                                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                                                                <input type="text" formControlName="dispatch_date" class="form-control form-control-lg form-control-solid borderc-secondary date-picker mb-3 mb-lg-0 bg-white custom-input" name="dispatch_date"
+                                                                                                placeholder="DD-MM-YYYY"/>
+                                                                                            </div>
+                                                                                        </div>
+
+
+                                                                                    </div>
+
+                                                                                    <div class="text-center my-4">
+                                                                                        <button class="btn-success text-white me-4" (click)="form21subrule1submit()" >
+                                                                                            <i class="fas fa-check text-white fs-5 me-4"></i>Submit
+                                                                                        </button>
+                                                                                        <button class="btn-primary btn-sm text-white" (click)="ondataback()">
+                                                                                            <i class="fas fa-arrow-left me-4"></i>Back
+                                                                                        </button>
+                                                                                     </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                             </div>
+
+   
+  

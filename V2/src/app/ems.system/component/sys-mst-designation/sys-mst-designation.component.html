@@ -1,0 +1,451 @@
+<div class="card shadow-sm">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Designation Summary</h3>
+        </div>
+
+        <div class="col me-5">
+            <button title="Error Log" (click)="geterorrlog()"
+                class="btn btn-icon btn-sm bg-warning mt-2 me-1 float-end " data-bs-toggle="modal"
+                data-bs-target="#myModalviewexcelimport">
+                <span class="fa fa-triangle-exclamation fs-2"></span>
+            </button>
+            <button title="Import Excel" type="button" class="btn btn-icon btn-sm bg-success me-2 mt-2 float-end"
+                data-bs-toggle="modal" data-bs-target="#myModalexcelimport">
+                <span class="fs-2 fa-regular fa-file-excel"></span>
+            </button>
+            
+            <button title="Add Designation" class="btn-primary btn-sm text-white me-4 mb-2 mt-2 float-end"
+                data-bs-toggle="modal" data-bs-target="#myModaladd">
+                Add Designation
+            </button>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="Designation_list" class="table table-striped table-row-bordered border-bottom gs-7">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th>S.No</th>
+                        <th>Code </th>
+                        <th>Designation</th>
+                        <th>Created By</th>
+                        <th>Created Date</th>
+                        <th>Status</th>
+                        <th class="text-center bg-lightblue ">Action</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of Designation_list; let i=index;" class="align-middle">
+                        <td>{{i+1}}</td>
+                        <td>{{data.designation_code}}</td>
+                        <td>{{data.designation_name}}</td>
+                        <td>{{data.created_by}}</td>
+                        <td>{{data.created_date}}</td>
+                        <td [ngSwitch]="data.designationStatus" class="text-center" style="width: 5%;">
+                            <label *ngSwitchCase="'Active'" class="badge bg-success text-white ">Active</label>
+                            <label *ngSwitchCase="'InActive'" class="badge bg-warning text-white ">InActive</label>
+                         </td>
+
+                        <td class="text-center text-nowrap">
+                            <!-- <div (click)="toggleOptions(data.designation_gid)" style="cursor: pointer;">
+                                <button class="btn me-2 p-1 ">
+                                    <span class="fa-solid fa-ellipsis-vertical fs-1" style="color: #4d4d4d;"></span>
+                                </button>
+                                <div *ngIf="showOptionsDivId === data.designation_gid" class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                                    <div class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal" data-bs-target="#myModaledit" (click)="openModaledit(data)">
+                                        <span><i class="fa-regular fa-pen-to-square fs-3 me-5"></i></span>
+                                        <span>Edit</span>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <button title="Edit" type="button" data-bs-toggle="modal" data-bs-target="#myModaledit"
+                                class="btn btn-icon btn-sm bg-etdark me-2 mb-2" [disabled]="data.designationStatus=== 'InActive'" (click)="openModaledit(data)">
+                                <i class="fas fa-pencil text-white fs-6"></i>
+                            </button>
+                            <button title="{{ data.designationStatus === 'Active' ? 'InActive' : 'Active' }}" type="button"
+                            class="btn btn-icon btn-sm {{ data.designationStatus === 'Active' ? 'bg-warning' : 'bg-success' }} me-2"
+                            (click)="toggleStatus(data.designation_gid)"
+                            [attr.data-bs-target]="data.designationStatus === 'Active' ? '#myModalinactive' : '#myModalactive'"
+                            [attr.data-bs-toggle]="data.designationStatus === 'Active' ? 'modal' : 'modal'">
+                            <span class="fa-solid fa-thumbs-{{ data.designationStatus === 'Active' ? 'down' : 'up' }} text-white fs-6"></span>
+                          </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal Active -->
+<div class="modal" id="myModalactive" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog del_modal-dialog">
+      <div class="modal-content del_modal-content">
+        <div class="text-center my-4">
+          <h2><b>Are you sure?</b></h2>
+          <p style="display: block;">Do You Want To Active the Designation?</p>
+          <div class="text-center my-4">
+            <button class="btn-success btn-sm text-white me-4" (click)="onActivate()" data-bs-dismiss="modal">
+              <i class="fa fa-toggle-on fs-5 me-2"></i>Active
+            </button>
+            <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+              <i class="fas fa-close text-white me-2"></i>Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- The Modal Inactive -->
+  <div class="modal" id="myModalinactive" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog del_modal-dialog">
+      <div class="modal-content del_modal-content">
+        <div class="text-center my-4">
+          <h2><b>Are you sure?</b></h2>
+          <p style="display: block;">Do You Want To Inactive the Designation?</p>
+          <div class="text-center my-4">
+            <button class="btn-warning btn-sm text-white me-4" (click)="onInactivate()" data-bs-dismiss="modal">
+              <i class="fa fa-toggle-off fs-5 me-2"></i>Inactive
+            </button>
+            <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+              <i class="fas fa-close text-white me-2"></i>Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+<!-- The Modal ADD -->
+<form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="modal mt-20" id="myModaladd" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+                    <div>
+                        <h2 class="fw-bolder ms-5 mt-4 text-white">Add Designation</h2>
+                    </div>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="d-flex flex-row  flex-wrap">
+                        <!-- <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold">Code Generation</span>
+                            <div class="d-flex justify-content-start ms-4 mt-4">
+                                <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm"
+                                    style="margin-left: -10px;">
+                                    <input type="radio" name="Code_Generation" value="Y"
+                                        formControlName="Code_Generation" [(ngModel)]="Code_Generation"
+                                        (change)="toggleInputField()">
+                                    <label class="form-check-label text-gray-700 text-nowrap"
+                                        for="kt_builder_header_content_menu">Automatic</label>
+                                </div>
+                                <div
+                                    class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-8">
+                                    <input type="radio" name="Code_Generation" value="N"
+                                        formControlName="Code_Generation" [(ngModel)]="Code_Generation"
+                                        (change)="toggleInputField()">
+                                    <label class="form-check-label text-gray-700 text-nowrap"
+                                        for="kt_builder_header_content_menu">Manual</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12" *ngIf="Code_Generation === 'Y'"><span
+                                class="font-bold ">Designation Code</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input type="text"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary"
+                                    formControlName="designation_code" name="designation_code_auto" readonly />
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12" *ngIf="Code_Generation === 'N'"><span
+                                class="font-bold required">Designation Code</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                
+
+                                <input type="text" formControlName="designation_code"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white"
+                                    [ngStyle]="{ 'border-color': reactiveForm.get('designation_code')?.hasError('required') && reactiveForm.get('designation_code_manual')?.touched || reactiveForm.get('designation_code_manual')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                                    placeholder="Designation Code" name="designation_code_manual" >
+                                <div *ngIf="reactiveForm.get('designation_code')?.hasError('required') && reactiveForm.get('designation_code')?.touched"
+                                    class="text-red">Designation code is required.</div>
+                                <div *ngIf="reactiveForm.get('designation_code')?.hasError('pattern')"
+                                    class="text-red">Space at the beginning is not allowed.</div>
+                            </div>
+                        </div> -->
+
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Designation Code</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                              <input formControlName="designation_code" type="text"
+                                [ngStyle]="{ 'border-color': reactiveForm.get('designation_code')?.hasError('required') && reactiveForm.get('designation_code')?.touched || reactiveForm.get('designation_code')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"
+                                placeholder="Designation Code" />
+                              <div
+                                *ngIf="reactiveForm.get('designation_code')?.hasError('required') && reactiveForm.get('designation_code')?.touched"
+                                class="text-red ms-2">Designation Code is required.</div>
+                              <div *ngIf="reactiveForm.get('designation_code')?.hasError('pattern')" class="text-red ms-2">Space at the
+                                beginning is not allowed.</div>
+                            </div>
+                          </div>
+
+                  
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Designation
+                                Name</span>
+                            <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input formControlName="designation_name" type="text"
+                                    [ngStyle]="{ 'border-color': reactiveForm.get('designation_name')?.hasError('required') && reactiveForm.get('designation_name')?.touched || reactiveForm.get('designation_name')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"
+                                    placeholder="Designation Name" />
+                                <div *ngIf="reactiveForm.get('designation_name')?.hasError('required') && reactiveForm.get('designation_name')?.touched"
+                                    class="text-red">Designation Name is required.</div>
+                                <div *ngIf="reactiveForm.get('designation_name')?.hasError('pattern')"
+                                    class="text-red">Space at the beginning is not allowed.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="text-center my-4 mb-10">
+                    <button (click)="onsubmit()" class="btn-success btn-sm text-white me-4" data-bs-dismiss="modal"[disabled]="reactiveForm.invalid">
+                        <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+                    </button> &nbsp;&nbsp;
+                    <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white"></i> &nbsp;Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form [formGroup]="reactiveFormEdit" #form="ngForm">
+    <div class="modal mt-20" id="myModaledit" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+                    <div>
+                        <h2 class="fw-bolder ms-5 mt-4" style="color: #ffffff;">
+                            <i class="fas fa-pen-to-square fs-2 me-2"></i>
+                            Edit Designation
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <input class="form-control form-control-lg" formControlName="designation_gid" hidden type="text"
+                        placeholder="Enter Department" aria-label=".form-control-lg example" autocomplete="off">
+                    <div class="row"><span class="font-bold">Designation Code</span>
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                            <input formControlName="designation_code" type="text"
+                                class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-secondary custom-input mt-2"
+                                readonly />
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12"><span class="font-bold required">Designation
+                                Name</span>
+                            <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input formControlName="designation_name" type="text"
+                                    [ngStyle]="{ 'border-color': reactiveFormEdit.get('designation_name')?.hasError('required') && reactiveFormEdit.get('designation_name')?.touched || reactiveFormEdit.get('designation_name')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"
+                                    placeholder="Designation Name" />
+                                <div *ngIf="reactiveFormEdit.get('designation_name')?.hasError('required') && reactiveFormEdit.get('designation_name')?.touched"
+                                    class="text-red">Designation Name is required.</div>
+                                <div *ngIf="reactiveFormEdit.get('designation_name')?.hasError('pattern')"
+                                    class="text-red">Space at the beginning is not allowed.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center my-4 mt-10">
+                        <button (click)="onupdate()" class="btn-success btn-sm text-white me-4"
+                            [disabled]="reactiveFormEdit.invalid"
+                            [ngClass]="{'primary-button': !reactiveFormEdit.invalid,'secondary-button': reactiveFormEdit.invalid}"
+                            data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5 "></i> &nbsp;Update
+                        </button> &nbsp;&nbsp;
+                        <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+                            <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<form [formGroup]="reactiveFormEdit1" #form="ngForm">
+    <div class="modal mt-20" id="myModalactive" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+                    <div>
+                        <h2 class="fw-bolder ms-5 mt-4" style="color: #ffffff;">Designation Status</h2>
+                    </div>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row">
+
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="text-center my-4 mb-10">
+                    <button (click)="onsubmit1()" class="btn-success btn-sm text-white me-4"
+                        [disabled]="reactiveFormEdit1.invalid"
+                        [ngClass]="{'primary-button': !reactiveFormEdit1.invalid, 'secondary-button': reactiveFormEdit1.invalid }"
+                        data-bs-dismiss="modal">
+                        <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+                    </button> &nbsp;&nbsp;
+                    <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white"></i> &nbsp;Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form [formGroup]="reactiveFormimport" #form="ngForm">
+    <div class="modal" id="myModalexcelimport" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                    <h2 style="margin-top:10px;color:white;font-weight: bold;">
+                        <i class="fas fa-lock fw-bolder fs-3 ms-5 me-5"></i>Designation Excel File Import
+                    </h2>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <button type="submit" class="btn-danger btn-sm text-white me-2" (click)="downloadfileformat()"
+                        style="margin-left: 290px;">
+                        <i class="bi bi-cloud-download fs-5 me-3"></i>Download
+                    </button>
+
+                    <div class="col-12 col-lg-4 col-md-6 col-sm-12 mt-5">
+                        <span class="fw-bolder">Select an Excel File to Import<span
+                                class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                            <input (change)="onChange1($event)" accept=".xlsx, .xls" type="file" formControlName="designation_import" #fileInput
+                                class="form-control form-control-lg form-control-solid bg-white mb-3 mb-lg-0 border-secondary custom-input"
+                                name="fName" style="width: 300%;" />
+                                <div *ngIf="invalidFileFormat" 
+                                class="text-red">
+                                Invalid file. Accept excel.
+                              </div>
+                        </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="text-center my-4">
+                        <button type="submit" class="btn-success btn-sm text-white me-2" data-bs-dismiss="modal"
+                            (click)="importexcel()" [disabled]="invalidFileFormat || reactiveFormimport.invalid">
+                            <i class="fas fa-check text-white fs-5 me-3"></i>Upload
+                        </button>
+                        <button class="btn-danger btn-sm text-white ms-8 me-2 mt-5" (click)="onclose1()" data-bs-dismiss="modal">
+                            <i class="fas fa-close text-white me-2"></i>Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<form>
+    <div class="modal" id="myModalviewexcelimport" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered"
+            style="width: 90%; max-width: 900px; height: 100%; max-height: 0vh;">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+
+                <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary d-flex justify-content-between align-items-center">
+                    <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                            class="fas fw-bolder fs-3"></i> Designation Import Error Logs</h2>
+                            <i class="bi bi-x-square fs-1 me-2" data-bs-dismiss="modal" (click)="close()" style="cursor: pointer; color: white;"></i>
+                </div>
+
+                <!-- Modal body -->
+                <!-- <div class="table-responsive">
+                    <div class="card card-body m-1 shadow-lg p-3 mb-5 bg-white rounded">
+                        <table id="" class="table table-striped table-row-bordered gy-5 gs-7">
+                            <thead>
+                                <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                    <th style="font-size:11px;">S.No</th>
+                                    <th style="font-size:11px;">Code</th>
+                                    <th style="font-size:11px;">Name</th>
+                                    <th style="font-size:11px;">Remarks</th>
+                                    <th style="font-size:11px;">Created By</th>
+                                    <th style="font-size:11px;">Created Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of Designation_erorrlog; let i=index;">
+                                    <td style="font-size:11px;">{{i+1}}</td>
+                                    <td style="font-size:11px;">{{data.designation_code}}</td>
+                                    <td style="font-size:11px;">{{data.designation_name}}</td>
+                                    <td style="font-size:11px;">{{data.designation_remarks}}</td>
+                                    <td style="font-size:11px;">{{data.created_by}}</td>
+                                    <td style="font-size:11px;">{{data.created_date}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-center my-4">
+                            <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal"
+                                (click)="onclose()">
+                                <i class="fas fa-close text-white"></i> &nbsp;Close
+                            </button>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="table-responsive custom-table-container">
+                    <div class="card card-body shadow-lg p-3 mb-5 bg-white rounded">
+                      <table id="Designation_erorrlog" class="table table-striped table-row-bordered gs-7">
+                        <thead>
+                          <tr class="fw-bolder fs-5 bg-lightblue text-blue align-middle">
+                            <th style="position: sticky; top: 0; background-color: white; z-index: 1; font-size: 11px;">S.No</th>
+                            <th style="position: sticky; top: 0; background-color: white; z-index: 1; font-size: 11px;">Code</th>
+                            <th style="position: sticky; top: 0; background-color: white; z-index: 1; font-size: 11px;">Name</th>
+                            <th style="position: sticky; top: 0; background-color: white; z-index: 1; font-size: 11px;">Remarks</th>
+                            <th style="position: sticky; top: 0; background-color: white; z-index: 1; font-size: 11px;">Created By</th>
+                            <th style="position: sticky; top: 0; background-color: white; z-index: 1; font-size: 11px;">Created Date</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of Designation_erorrlog; let i=index;">
+                            <td style="font-size: 11px;">{{i+1}}</td>
+                            <td style="font-size: 11px;">{{data.designation_code}}</td>
+                            <td style="font-size: 11px;">{{data.designation_name}}</td>
+                            <td style="font-size: 11px;">{{data.designation_remarks}}</td>
+                            <td style="font-size: 11px;">{{data.created_by}}</td>
+                            <td style="font-size: 11px;">{{data.created_date}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div class="text-center my-4">
+                        <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal" (click)="onclose()">
+                          <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  
+
+            </div>
+
+        </div>
+    </div>
+</form>

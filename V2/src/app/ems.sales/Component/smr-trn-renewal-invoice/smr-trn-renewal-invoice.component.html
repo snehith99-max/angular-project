@@ -1,0 +1,344 @@
+<div class="row" style="margin-top: 10px;">
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-violet">
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Upcoming</h5>
+                        <div *ngFor="let data of RenewalCountList">
+                            <h4 class="badge-violet  badge-outline-violet fs-4 mt-2">{{data.open_count}}</h4>
+                        </div>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-violet text-white ms-auto"><i
+                        class="fa-solid fa-calendar-days fs-5"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-darkgreen">
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Completed</h5>
+                        <div *ngFor="let data of RenewalCountList">
+                            <h4 class="badge-green  badge-outline-green fs-4 mt-2">{{data.closed_count}}</h4>
+                        </div>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-darkgreens text-white ms-auto"><i
+                        class="fa-solid fa-check fs-5"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-2">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-brown">
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Dropped</h5>
+                        <div  *ngFor="let data of RenewalCountList">
+                            <h4 class="badge-maroon badge-outline-maroon fs-4 mt-2">{{data.dropped_count}}</h4>
+                        </div>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-brown text-white ms-auto"><i
+                        class="fa-solid fa-circle-down fs-5"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">My Renewals</h3>
+        </div>
+    </div>
+    <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-20x mb-3 fs-6 ">
+        <li class="nav-item ms-5">
+            <a class="nav-link active  btn btn-flex btn-active-light-primary fs-5" data-bs-toggle="tab"
+                href="#kt_tab_pane_2"><i class="bi bi-boxes fs-5"></i>&nbsp;Upcoming </a>
+        </li>
+        <li class="nav-item ms-5">
+            <a class="nav-link   btn btn-flex btn-active-light-primary fs-5" data-bs-toggle="tab"
+                href="#kt_tab_pane_3"><i class="bi bi-boxes fs-5"></i>&nbsp;Expiry Within 30 Days</a>
+        </li>
+        <li class="nav-item ms-5">
+            <a class="nav-link   btn btn-flex btn-active-light-primary fs-5" data-bs-toggle="tab"
+                href="#kt_tab_pane_4"><i class="bi bi-boxes fs-5"></i>&nbsp; Expired</a>
+        </li>
+        <li class="nav-item ms-5">
+            <a class="nav-link   btn btn-flex btn-active-light-primary fs-5" data-bs-toggle="tab"
+                href="#kt_tab_pane_5"><i class="bi bi-boxes fs-5"></i>&nbsp; Drop</a>
+        </li>
+        <li class="nav-item ms-5">
+            <a class="nav-link   btn btn-flex btn-active-light-primary fs-5" data-bs-toggle="tab"
+                href="#kt_tab_pane_6"><i class="bi bi-boxes fs-5"></i>&nbsp; All</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active " id="kt_tab_pane_2" role="tabpanel">
+            <div class="border rounded table-responsive m-5 mt-2    ">
+                <table id="getrenewalinvoice" class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                    <thead>
+                        <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                            <th style="width: 1%;">S.No</th>
+                            <th class="text-nowrap" > Renewal Date</th>
+                            <th class="text-nowrap" >Customer</th>
+                            <th  class="text-nowrap">Contact Details</th>
+                            <th class="text-nowrap">Renewal Type</th>
+                            <th style="text-align: right;">Order Value</th>
+                            <!-- <th  class="text-nowrap">Details</th>  -->
+                            <th  class="text-nowrap">Created Date</th>
+                            <th  class="text-nowrap">Duration</th>
+                            <th style="text-align: center; width: 3px;">Action</th>    
+                            <th hidden>renewal gid</th>    
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of getrenewalinvoice; let i=index;" class="align-middle">
+                            <td >{{i+1}}</td>
+                            <td class="text-nowrap">{{data.renewal_date}}</td>
+                            <td class="text-nowrap">{{data.customer_name}}</td>
+                            <td  class="text-nowrap">{{data.contact_details}}</td>
+                            <td class="text-nowrap" >{{data.renewal}}</td>
+                            <td style="text-align: right;">{{data.grandtotal}}</td>
+                            <td class="text-nowrap">{{data.salesorder_date}}</td>
+                            <td class="text-nowrap">{{data.duration}}</td>
+                            <td style="width:3px;" class="text-center text-nowrap">                           
+                                <button title="Drop" type="button" class="btn btn-icon btn-sm bg-danger me-2"
+                                data-bs-target="#myModalrenew"  (click)="openModalrenew(data.renewal_gid)"   
+                                data-bs-toggle="modal"><span class="fa-sharp fa-solid fa-ban fa-xl" ></span></button>      
+                                <button title="Raise Invoice" type="button" class="btn btn-icon
+                                btn-sm bg-warning me-2"(click)="RaisetoOrder(data.renewal_gid)" >
+                               <span class="fas fa-file-invoice  fs-6"></span>
+                           </button>
+                                
+
+                            </td>
+                            <td hidden>{{data.renewal_gid}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade  " id="kt_tab_pane_3" role="tabpanel">
+             <div class="border rounded table-responsive m-5 mt-2    ">
+                <table id="getrenewalinvoice2" class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                    <thead>
+                        <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                            <th style="width: 1%;">S.No</th>
+                            <th class="text-nowrap" > Renewal Date</th>
+                            <th class="text-nowrap" >Customer</th>
+                            <th  class="text-nowrap">Contact Details</th>
+                            <th class="text-nowrap">Renewal Type</th>
+                            <th style="text-align: right;">Order Value</th>
+                            <!-- <th  class="text-nowrap">Details</th>  -->
+                            <th  class="text-nowrap">Created Date</th>
+                            <th  class="text-nowrap">Duration</th>
+                            <th style="text-align: center; width: 3px;">Action</th>    
+                            <th hidden>renewal gid</th>    
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of getrenewalinvoice2; let i=index;" class="align-middle">
+                            <td >{{i+1}}</td>
+                            <td class="text-nowrap">{{data.renewal_date}}</td>
+                            <td class="text-nowrap">{{data.customer_name}}</td>
+                            <td  class="text-nowrap">{{data.contact_details}}</td>
+                            <td class="text-nowrap" >{{data.renewal}}</td>
+                            <td style="text-align: right;">{{data.grandtotal}}</td>
+                            <td class="text-nowrap">{{data.salesorder_date}}</td>
+                            <td class="text-nowrap">{{data.duration}}</td>
+                            <!-- <td style="width:4px;" class="text-center text-nowrap">
+                                <label title="Details" data-bs-toggle="modal" data-bs-target="#myModalDetails"
+                                (click)="GetViewrenewaldetails(data.renewal_gid)">
+                                  <i class="fas fa-question-circle fa-5x text-primary fs-2"></i>
+                                </label>
+                            </td> -->
+                            <td style="width:3px;" class="text-center text-nowrap">                           
+                                <button title="Drop" type="button" class="btn btn-icon btn-sm bg-danger me-2"
+                                data-bs-target="#myModalrenew"  (click)="openModalrenew(data.renewal_gid)"   
+                                data-bs-toggle="modal"><span class="fa-sharp fa-solid fa-ban fa-xl" ></span></button> 
+                                <button title="Raise Invoice" type="button" class="btn btn-icon
+                                btn-sm bg-warning me-2"(click)="RaisetoOrder(data.renewal_gid)" >
+                               <span class="fas fa-file-invoice  fs-6"></span>
+                           </button> 
+                                
+                            </td>
+                            <td hidden>{{data.renewal_gid}}</td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade  " id="kt_tab_pane_4" role="tabpanel">
+
+            <div class="border rounded table-responsive m-5 mt-2    ">
+                <table id="getrenewalinvoice3" class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                    <thead>
+                        <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                            <th style="width: 1%;">S.No</th>
+                            <th class="text-nowrap" > Renewal Date</th>
+                            <th class="text-nowrap" >Customer</th>
+                            <th  class="text-nowrap">Contact Details</th>
+                            <th class="text-nowrap">Renewal Type</th>
+                            <th style="text-align: right;">Order Value</th>
+                            <!-- <th  class="text-nowrap">Details</th>  -->
+                            <th  class="text-nowrap">Created Date</th>
+                            <th  class="text-nowrap">Duration</th>
+                            <th style="text-align: center; width: 3px;">Action</th>    
+
+                            <th hidden>renewal gid</th>    
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of getrenewalinvoice3; let i=index;" class="align-middle">
+                            <td >{{i+1}}</td>
+                            <td class="text-nowrap">{{data.renewal_date}}</td>
+                            <td class="text-nowrap">{{data.customer_name}}</td>
+                            <td  class="text-nowrap">{{data.contact_details}}</td>
+                            <td class="text-nowrap" >{{data.renewal}}</td>
+                            <td style="text-align: right;">{{data.grandtotal}}</td>
+                            <td class="text-nowrap">{{data.salesorder_date}}</td>
+                            <td class="text-nowrap">{{data.duration}}</td>
+                            <td style="width:4px;" class="text-center text-nowrap">
+                               
+                              <button title="Drop" type="button" class="btn btn-icon btn-sm bg-danger me-2"
+                              data-bs-target="#myModalrenew"  (click)="openModalrenew(data.renewal_gid)"   
+                              data-bs-toggle="modal"><span class="fa-sharp fa-solid fa-ban fa-xl" ></span></button> 
+                              <button title="Raise Invoice" type="button" class="btn btn-icon
+                              btn-sm bg-warning me-2"(click)="RaisetoOrder(data.renewal_gid)" >
+                             <span class="fas fa-file-invoice  fs-6"></span>
+                             </button> 
+
+
+
+                            </td>
+                            <td hidden>{{data.renewal_gid}}</td>
+                           
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade  " id="kt_tab_pane_5" role="tabpanel">
+
+            <div class="border rounded table-responsive m-5 mt-2    ">
+                <table id="getrenewalinvoice4" class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                    <thead>
+                        <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                            <th style="width: 1%;">S.No</th>
+                            <th class="text-nowrap" > Renewal Date</th>
+                            <th class="text-nowrap" >Customer</th>
+                            <th  class="text-nowrap">Contact Details</th>
+                            <th class="text-nowrap">Renewal Type</th>
+                            <th style="text-align: right;">Order Value</th>
+                            <!-- <th  class="text-nowrap">Details</th>  -->
+                            <th  class="text-nowrap">Created Date</th>
+                            <th  class="text-nowrap">Duration</th>
+                            <th hidden>renewal gid</th>    
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let data of getrenewalinvoice4; let i=index;" class="align-middle">
+                            <td >{{i+1}}</td>
+                            <td class="text-nowrap">{{data.renewal_date}}</td>
+                            <td class="text-nowrap">{{data.customer_name}}</td>
+                            <td  class="text-nowrap">{{data.contact_details}}</td>
+                            <td class="text-nowrap" >{{data.renewal}}</td>
+                            <td style="text-align: right;">{{data.grandtotal}}</td>
+                            <td class="text-nowrap">{{data.salesorder_date}}</td>
+                            <td class="text-nowrap">{{data.duration}}</td> 
+                            <!-- <td style="width:4px;" class="text-center text-nowrap">
+                                <label title="Details" data-bs-toggle="modal" data-bs-target="#myModalDetails"
+                                (click)="GetViewrenewaldetails(data.renewal_gid)">
+                                  <i class="fas fa-question-circle fa-5x text-primary fs-2"></i>
+                                </label>
+                            </td> -->
+                           <td hidden>{{data.renewal_gid}}</td>
+                          
+                   </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade  " id="kt_tab_pane_6" role="tabpanel">
+            <div class="border rounded table-responsive m-5 mt-2    ">
+                <table id="getrenewalinvoice5" class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                    <thead>
+                        <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                            <th style="width: 1%;">S.No</th>
+                            <th class="text-nowrap" > Renewal Date</th>
+                            <th class="text-nowrap" >Customer</th>
+                            <th  class="text-nowrap">Contact Details</th>
+                            <th class="text-nowrap">Renewal Type</th>
+                            <th style="text-align: right;">Order Value</th>
+                            <!-- <th  class="text-nowrap">Details</th>  -->
+                            <th  class="text-nowrap">Created Date</th>
+                            <th  class="text-nowrap">Duration</th>
+                            <th hidden>renewal gid</th>    
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of getrenewalinvoice5; let i=index;" class="align-middle">
+                            <td >{{i+1}}</td>
+                            <td class="text-nowrap">{{data.renewal_date}}</td>
+                            <td class="text-nowrap">{{data.customer_name}}</td>
+                            <td  class="text-nowrap">{{data.contact_details}}</td>
+                            <td class="text-nowrap" >{{data.renewal}}</td>
+                            <td style="text-align: right;">{{data.grandtotal}}</td>
+                            <td class="text-nowrap">{{data.salesorder_date}}</td>
+                            <td class="text-nowrap">{{data.duration}}</td>
+                            <!-- <td style="width:4px;" class="text-center text-nowrap">
+                                <label title="Details" data-bs-toggle="modal" data-bs-target="#myModalDetails"
+                                (click)="GetViewrenewaldetails(data.renewal_gid)">
+                                  <i class="fas fa-question-circle fa-5x text-primary fs-2"></i>
+                                </label>
+                            </td> -->
+                            <td hidden>{{data.renewal_gid}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+
+  
+</div>
+<div class="modal" id="myModalrenew" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="text-center my-4">
+            <h2><b>Are you sure?</b></h2>
+            <br>
+            <p style="display: block;">Do You Want to drop the Record ?</p>
+          <div class="text-center my-4">
+            <button class="btn-danger btn-sm text-white me-4" (click)="ondrop()" data-bs-dismiss="modal" >          
+                <i class="fa-solid fa-sharp fa-ban fa-xl text-white fs-5 "></i> &nbsp;Drop
+            </button>
+            <button class="btn-primary btn-sm text-white me-2"  data-bs-dismiss="modal">
+                <i class="fas fa-close text-white"></i> &nbsp;Close
+            </button>&nbsp;
+          </div>
+        </div>
+        </div>
+    </div>
+</div>

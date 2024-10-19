@@ -1,0 +1,537 @@
+<div class="card shadow-sm">
+    <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+        <h3 class="fw-bolder text-white">
+            Add Component
+        </h3>
+    </div>
+
+    <div class="mt-1">
+        <!-- ADD Function -->
+        <form [formGroup]="reactiveForm" #form="ngForm">
+            <div class="d-flex flex-row flex-wrap m-6">
+                <!-- <div class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="font-bold">Code Generation</span>
+                    <div class="d-flex justify-content-start ms-4 mt-4">
+                        <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm"
+                            style="margin-left: -10px;">
+                            <input type="radio" name="Code_Generation" value="Y" formControlName="Code_Generation"
+                                [(ngModel)]="Code_Generation" (change)="toggleInputField()">
+
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                                for="kt_builder_header_content_menu">Automatic</label>
+                        </div>
+                        <div
+                            class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-8">
+                            <input type="radio" name="Code_Generation" value="N" formControlName="Code_Generation"
+                                [(ngModel)]="Code_Generation" (change)="toggleInputField()">
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                                for="kt_builder_header_content_menu">Manual</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 col-md-3 col-sm-12" *ngIf="Code_Generation === 'Y'"><span
+                        class="font-bold">Component Code</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary"
+                            [style.background-color]="Code_Generation === 'N' ? 'white' : 'rgb(255, 255, 255)'"
+                            formControlName="component_code_auto" name="leave_code_auto" readonly />
+
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-lg-3 col-md-3 col-sm-12" *ngIf="Code_Generation === 'N'"><span
+                        class="font-bold required">Component Code</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white"
+                            [ngStyle]="{'border-color': component_code_manual.invalid && component_code_manual.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                            [style.background-color]="Code_Generation === 'N' ? 'white' : 'rgb(255, 255, 255)'"
+                            placeholder="Enter Component Code" formControlName="component_code_manual"
+                            name="component_code_manual" *ngIf="Code_Generation === 'N'" />
+
+                        <div
+                            *ngIf="component_code_manual.invalid && (component_code_manual.dirty || component_code_manual.touched)">
+                            <div *ngIf="component_code_manual.errors?.['required']">
+                                <span class="text-red">Component code is required</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                    <span class="fw-bold" [ngClass]="{'error_input_field': componentgroup_name.invalid && componentgroup_name.touched}">Component Group<span class="ms-1 text-red">*</span></span>
+             
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                        <ng-select class="mt-2" formControlName="componentgroup_name" bindLabel="componentgroup_name"
+                            bindValue="componentgroup_name" [items]="componentgrouplist"
+                            [class.is-invalid]="reactiveForm.get('componentgroup_name')?.invalid
+                    && (reactiveForm.get('componentgroup_name')?.dirty || reactiveForm.get('componentgroup_name')?.touched)"
+                            [ngClass]="{'invalid-border': reactiveForm.get('componentgroup_name')?.invalid && reactiveForm.get('componentgroup_name')?.touched}"
+                            placeholder="Select an option" [(ngModel)]="mdlcomponentgroup_name"></ng-select>
+
+                        <div
+                            *ngIf="componentgroup_name.invalid && (componentgroup_name.dirty || componentgroup_name.touched)">
+                            <div *ngIf="componentgroup_name.errors?.['required']">
+                                <span style="color:red;">Component Group is required</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                        <span class="font-bold required">Component Code</span>
+                        <input type="text" formControlName="component_code" [ngStyle]="{ 'border-color': reactiveForm.get('component_code')?.hasError('required')
+                 && reactiveForm.get('component_code')?.touched ? 'red' : 'rgb(209, 209, 209)' }" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 
+            bg-white" placeholder="Enter Component Code"/>
+                        <div *ngIf="reactiveForm.get('component_code')?.hasError('required') &&
+                 reactiveForm.get('component_code')?.touched " class="text-red">Component Code is required</div>
+
+                    </div>
+                </div> -->
+
+                <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+
+                    <span class="fw-bold" [ngClass]="{'error_input_field': component_code.invalid && component_code.touched}">Component Code<span class="ms-1 text-red">*</span></span>
+             
+
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+
+                        <input type="text" formControlName="component_code" [ngStyle]="{ 'border-color': reactiveForm.get('component_code')?.hasError('required')
+                         && reactiveForm.get('component_code')?.touched ? 'red' : 'rgb(209, 209, 209)' }" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 
+                         bg-white" placeholder="Enter Component Code" />
+
+                        <div *ngIf="component_code.invalid && (component_code.dirty || component_code.touched)">
+                            <div *ngIf="component_code.errors?.['required']">
+                                <span style="color:red;">Component Code is required</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+
+                    <span class="fw-bold" [ngClass]
+                    ="{'error_input_field': component_name.invalid && component_name.touched}">Component Name<span class="ms-1 text-red">*</span></span>
+                                       <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+
+                        <input type="text" formControlName="component_name" [ngStyle]="{ 'border-color': reactiveForm.get('component_name')?.hasError('required')
+                         && reactiveForm.get('component_name')?.touched ? 'red' : 'rgb(209, 209, 209)' }" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 
+                         bg-white" placeholder="Enter Component Name" />
+
+                        <div *ngIf="component_name.invalid && (component_name.dirty || component_name.touched)">
+                            <div *ngIf="component_name.errors?.['required']">
+                                <span style="color:red;">Component Name is required</span>
+                            </div>
+                        </div>
+                        <div *ngIf="reactiveForm.get('component_name')?.hasError('pattern')" class="text-red ms-2">Space at the beginning is not allowed.</div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="fw-bold">Contribution
+                        Type</span>
+                    <div class="d-flex justify-content-start ms-4 mt-4">
+                        <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm"
+                            style="margin-left: -10px;">
+                            <input type="radio" formControlName="contribution_type" value="EMPLOYEE ONLY"
+                                (change)="showTextBox0($event)" (change)="showTextBox1($event)"
+                                (change)="showTextBox($event)">
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                                for="kt_builder_header_content_menu">Employee</label>
+                        </div>
+                        <div
+                            class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-8">
+                            <input type="radio" formControlName="contribution_type" value="EMPLOYER ONLY"
+                                (change)="showTextBox0($event)" (change)="showTextBox1($event)"
+                                (change)="showTextBox($event)">
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                                for="kt_builder_header_content_menu">Employer</label>
+                        </div>
+                        <div
+                            class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-8">
+                            <input type="radio" formControlName="contribution_type" value="BOTH"
+                                (change)="showTextBox0($event)" (change)="showTextBox1($event)"
+                                (change)="showTextBox($event)" (change)="showTextBoxsta($event)">
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                                for="kt_builder_header_content_menu">Both</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="d-flex flex-row flex-wrap m-6">
+
+                <div class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="fw-bold">Component Type</span>
+                    <div class="d-flex justify-content-start ms-4 mt-4">
+                        <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm"
+                            style="margin-left: -10px;">
+                            <input type="radio" formControlName="component_type" value="Addition"
+                                (change)="showTextBox2($event)">
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                                for="kt_builder_header_content_menu">Addition</label>
+                        </div>
+                        <div
+                            class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-8">
+                            <input type="radio" formControlName="component_type" value="Deduction"
+                                (change)="showTextBox2($event)">
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                                for="kt_builder_header_content_menu">Deduction</label>
+                        </div>
+                        <div
+                            class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-8">
+                            <input type="radio" formControlName="component_type" value="Others"
+                                (change)="showTextBox2($event)">
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                                for="kt_builder_header_content_menu">Others</label>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="fw-bold">Affecting In</span>
+                    <div class="d-flex justify-content-start ms-4 mt-4">
+                        <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm"
+                            style="margin-left: -10px;">
+                            <input type="radio" formControlName="affect_in" value="Basic"
+                                (change)="showdropdown($event)">
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                                for="kt_builder_header_content_menu">Base</label>
+                        </div>
+                        <div
+                            class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-4">
+                            <input type="radio" formControlName="affect_in" value="Gross"
+                                (change)="showdropdown($event)">
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                                for="kt_builder_header_content_menu">Gross</label>
+                        </div>
+                        <div
+                            class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-4">
+                            <input type="radio" formControlName="affect_in" value="Customize"
+                                (change)="showdropdown($event)" (change)="showmultipledropdown($event)">
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                                for="kt_builder_header_content_menu">Customize</label>
+                        </div>
+                        <div
+                            class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-4">
+                            <input type="radio" formControlName="affect_in" value="Formula"
+                                (change)="showdropdown($event)" (change)="showmultipledropdown($event)">
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                                for="kt_builder_header_content_menu">Formula</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="fw-bold">Lop Deduction</span>
+                    <div class="d-flex justify-content-start ms-4 mt-4">
+                        <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm"
+                            style="margin-left: -10px;">
+                            <input type="radio" formControlName="lop_deduction" value="Y">
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                                for="kt_builder_header_content_menu">Yes</label>
+                        </div>
+                        <div
+                            class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-8">
+                            <input type="radio" formControlName="lop_deduction" value="N">
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                                for="kt_builder_header_content_menu">No</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="d-flex flex-row flex-wrap">
+
+
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12 ms-4 " *ngIf="showInputs"><span class="ms-2"><span
+                            class="fw-bold">Statutory Payment</span></span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 ms-0">
+                        <input type="radio" class="form-control-input ms-4 me-2" formControlName="statutory_pay"
+                            value="Y">
+                        <label><span class="font-bold">Yes</span></label>
+                        <input type="radio" class="form-control-input ms-4 me-2" formControlName="statutory_pay"
+                            value="N">
+                        <label><span class="font-bold">No</span></label>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="d-flex flex-row flex-wrap m-6">
+
+
+                <div class="col-12 col-lg-3 col-md-3 col-sm-12" *ngIf="showInput2"><span class="fw-bold">Other
+                        Component Type</span>
+                    <div class="d-flex justify-content-start ms-4 mt-4">
+                        <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm"
+                            style="margin-left: -10px;">
+                            <input type="radio" formControlName="other_componenttype" value="Addition">
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                                for="kt_builder_header_content_menu">Addition</label>
+                        </div>
+                        <div
+                            class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-8">
+                            <input type="radio" formControlName="other_componenttype" value="Deduction">
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                                for="kt_builder_header_content_menu">Deduction</label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-lg-3 col-md-3 col-sm-12" *ngIf="showcustomizedropdown0"><span
+                        class="fw-bold">Addition Component</span>
+                    <ng-select [items]="componentnamelist" class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                        [multiple]="true" [selectableGroup]="true" formControlName="customizecomponent"
+                        [closeOnSelect]="false" bindLabel="salarycomponent_name" bindValue="component_gid"
+                        placeholder="Select an option" [(ngModel)]="cboselectedComponent">
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;
+                            {{item.salarycomponent_name}}
+                        </ng-template>
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row flex-wrap m-6">
+
+
+                <!-- <div class="col-12 col-lg-3 col-md-3 col-sm-12" *ngIf="showformuladropdown">
+
+                    <span class="font-bold ms-6">Source Variable</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 ms-2">
+
+                        <input type="radio" class="form-control-input ms-6 me-2" formControlName="formulaaffect_in"
+                            value="Basic">
+                        <label><span class="font-bold">Basic</span></label>
+                        <input type="radio" class="form-control-input ms-4 me-2" formControlName="formulaaffect_in"
+                            value="Gross">
+                        <label><span class="font-bold">Gross</span></label>
+                    </div>
+                </div> -->
+
+                <div class="col-12 col-lg-3 col-md-3 col-sm-12" *ngIf="showformuladropdown"><span
+                        class="fw-bold">Source Variable</span>
+                    <div class="d-flex justify-content-start ms-4 mt-4">
+                        <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm"
+                            style="margin-left: -10px;">
+                            <input type="radio" formControlName="formulaaffect_in" value="Basic">
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                                for="kt_builder_header_content_menu">Basic</label>
+                        </div>
+                        <div
+                            class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-8">
+                            <input type="radio" formControlName="formulaaffect_in" value="Gross">
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                                for="kt_builder_header_content_menu">Gross</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-3 col-md-3 col-sm-12" *ngIf="showformuladropdown"><span
+                        class="fw-bold">Operator</span>
+                    <div class="d-flex justify-content-start ms-4 mt-4">
+                        <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm"
+                            style="margin-left: -10px;">
+                            <input type="radio" formControlName="operatoraffect_in" value="add">
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                                for="kt_builder_header_content_menu">Addn(+)</label>
+                        </div>
+                        <div
+                            class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-8">
+                            <input type="radio" formControlName="operatoraffect_in" value="sub">
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                                for="kt_builder_header_content_menu">Sub(-)</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 col-md-3 col-sm-12" *ngIf="showformuladropdown"><span
+                        class="fw-bold ms-3">Addition Variable</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 ms-2">
+
+                        <ng-select [items]="additionvariablelist"
+                            class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 ms-3" [multiple]="true"
+                            [selectableGroup]="true" formControlName="additionvariblecomponent" [closeOnSelect]="false"
+                            bindLabel="salarycomponent_name" bindValue="component_gid" placeholder="Select an option"
+                            [(ngModel)]="cboselectedComponent1">
+                            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" />&nbsp;&nbsp;
+                                {{item.salarycomponent_name}}
+                            </ng-template>
+                        </ng-select>
+                    </div>
+                </div>
+
+            </div>
+            <div *ngIf="showInput0">
+                <div class="card-header bg-lightblue">
+                    <h3 class="card-title"><span class="fw-bold">Employee Contribution</span></h3>
+                </div>
+                <div class="d-flex flex-row fv-row flex-wrap mt-6">
+                    <div class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="ms-7"><span class="font-bold">Is
+                                Percentage</span></span>
+                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 ms-2">
+                            <input type="radio" class="form-control-input ms-4 me-2" [(ngModel)]="is_percent"
+                                formControlName="is_percent" value="Y">
+                            <label><span class="font-bold">Yes</span></label>
+                            <input type="radio" class="form-control-input ms-4 me-2" [(ngModel)]="is_percent"
+                                formControlName="is_percent" value="N">
+                            <label><span class="font-bold">No</span></label>
+                        </div>
+                    </div>
+                    <div *ngIf="is_percent === 'Y' " class="col-12 col-lg-3 col-md-3 col-sm-12"><span
+                                class="fw-bold">Percentage</span>
+                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"><span class="ms-4">
+                            <input formControlName="employee_percent" type="text" style="width:70%;"
+                                class="form-control form-control-lg form-control-solid  borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                placeholder=" Enter Percentage" name="employee_percent" /></span>
+                        </div>
+                    
+                    </div>
+                    <div *ngIf="is_percent === 'N' " class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="ms-4"><span
+                                class="fw-bold">Amount</span></span>
+                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                            <input formControlName="employee_amount" type="text" style="width:70%;"
+                                class="form-control form-control-lg form-control-solid  borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                placeholder=" Enter Amount" name="employee_amount" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div *ngIf="showInput1">
+                <div class="card-header bg-lightblue">
+                    <h3 class="card-title"><span class="fw-bold">Employee Contribution</span></h3>
+                </div>
+                <div class="d-flex flex-row fv-row flex-wrap mt-6">
+                    <div class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="ms-7"><span class="fw-bold">Is
+                                Percentage</span></span>
+                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 ms-2">
+                            <input type="radio" class="form-control-input ms-4 me-2" [(ngModel)]="is_percent"
+                                formControlName="is_percent" value="Y">
+                            <label><span class="font-bold">Yes</span></label>
+                            <input type="radio" class="form-control-input ms-4 me-2" [(ngModel)]="is_percent"
+                                formControlName="is_percent" value="N">
+                            <label><span class="font-bold">No</span></label>
+                        </div>
+                    </div>
+                    <div *ngIf="is_percent === 'Y' " class="col-12 col-lg-3 col-md-3 col-sm-12"><span
+                            class="ms-4 fw-bold">Percentage</span>
+                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                            <input formControlName="employee_percent" type="text" style="width:70%;"
+                                class="form-control form-control-lg form-control-solid  borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                placeholder=" Enter Percentage" name="employee_percent" />
+
+                        </div>
+
+                    </div>
+
+                    <div *ngIf="is_percent === 'N' " class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="ms-4"><span
+                                class="fw-bold">Amount</span></span>
+                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                            <input formControlName="employee_amount" type="text" style="width:70%;"
+                                class="form-control form-control-lg form-control-solid  borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                placeholder=" Enter Amount" name="employee_amount" />
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <br><br>
+
+                <div class="card-header bg-lightblue">
+                    <h3 class="card-title"><span class="font-bold">Employer Contribution</span></h3>
+                </div>
+
+                <div class="d-flex flex-row fv-row flex-wrap mt-6">
+
+
+                    <div class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="ms-7"><span class="fw-bold">Is
+                                Percentage</span></span>
+                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 ms-2">
+                            <input type="radio" class="form-control-input ms-4 me-2" [(ngModel)]="is_percentage"
+                                formControlName="is_percentage" value="Y">
+                            <label><span class="font-bold">Yes</span></label>
+                            <input type="radio" class="form-control-input ms-4 me-2" [(ngModel)]="is_percentage"
+                                formControlName="is_percentage" value="N">
+                            <label><span class="font-bold">No</span></label>
+
+                        </div>
+                    </div>
+
+                    <div *ngIf="is_percentage === 'Y' " class="col-12 col-lg-3 col-md-3 col-sm-12"><span
+                            class="ms-4"><span class="fw-bold">Percentage</span></span>
+                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                            <input formControlName="employer_percentage" type="text" style="width:70%;"
+                                class="form-control form-control-lg form-control-solid  borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                placeholder=" Enter Percentage" name="employer_percentage" />
+                        </div>
+                    </div>
+                    <div *ngIf="is_percentage === 'N' " class="col-12 col-lg-3 col-md-3 col-sm-12"><span
+                            class="ms-4"><span class="fw-bold">Amount</span></span>
+                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                            <input formControlName="employer_amount" type="text" style="width:70%;"
+                                class="form-control form-control-lg form-control-solid  borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                placeholder=" Enter Amount" name="employer_amount" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="showInput">
+                <div class="card-header bg-lightblue">
+                    <h3 class="card-title"><span class="fw-bold">Employer Contribution</span></h3>
+                </div>
+                <div class="d-flex flex-row fv-row flex-wrap mt-6">
+                    <div class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="ms-7"><span class="fw-bold">Is
+                                Percentage</span></span>
+                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 ms-2">
+                            <input type="radio" class="form-control-input ms-4 me-2" [(ngModel)]="is_percentage"
+                                formControlName="is_percentage" value="Y">
+                            <label><span class="font-bold">Yes</span></label>
+                            <input type="radio" class="form-control-input ms-4 me-2" [(ngModel)]="is_percentage"
+                                formControlName="is_percentage" value="N">
+                            <label><span class="font-bold">No</span></label>
+                        </div>
+                    </div>
+                    <div *ngIf="is_percentage === 'Y' " class="col-12 col-lg-3 col-md-3 col-sm-12"><span
+                            class="ms-4"><span class="fw-bold">Percentage</span></span>
+                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                            <input formControlName="employer_percentage" type="text" style="width:70%;"
+                                class="form-control form-control-lg form-control-solid  borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                placeholder=" Enter Percentage" name="employer_percentage" />
+                        </div>
+                    </div>
+                    <div *ngIf="is_percentage === 'N' " class="col-12 col-lg-3 col-md-3 col-sm-12"><span
+                            class="ms-4"><span class="fw-bold">Amount</span></span>
+                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                            <input formControlName="employer_amount" type="text" style="width:70%;"
+                                class="form-control form-control-lg form-control-solid  borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                placeholder=" Enter Amount" name="employer_amount" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="text-center my-4">
+                <button id="mymodelAddBank" class="btn-success" (click)="onsubmit()" [disabled]="reactiveForm.invalid"
+                    [ngClass]="{
+            'primary-button': !reactiveForm.invalid,
+            'secondary-button': reactiveForm.invalid}" data-bs-dismiss="modal">
+                    <i class="fas fa-check text-white fs-5 me-2"></i> Submit
+                </button>
+                <button class="btn-primary btn-sm text-white ms-4" (click)="onback()">
+                    <i class="fa fa-arrow-left"></i>
+                    <span class="ms-3">Back</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

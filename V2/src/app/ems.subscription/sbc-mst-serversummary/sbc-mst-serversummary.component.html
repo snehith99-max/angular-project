@@ -1,0 +1,336 @@
+<div class="card">
+  <div class="row ms-3 mt-3 d-flex align-items-center">
+    <div class="col">
+      <h3 class="card-title">Server</h3>
+    </div>
+    <div class="col me-5">
+      <button title="Add Server" class="btn-primary btn-sm text-white me-4 mb-2 mt-2 float-end" data-bs-toggle="modal"
+        data-bs-target="#myModaladd">
+        Add Server
+      </button>
+    </div>
+    <br>
+
+    <div class="table-responsive">
+      <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+        <table id="subscription_list" class="table table-striped table-row-bordered gy-5 gs-7">
+          <thead>
+            <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+              <th style="width: 10%;">Server Name</th>
+              <th style="width: 10%;">Server IPAddress </th>
+              <th style="width: 10%;">Token Number</th>
+              <th style="width: 10%;">Hosting Details</th>
+              <th style="width: 10%;">Country</th>
+              <th style="width: 10%;">Count </th>
+              <th style="width: 10%;">Status </th>
+              <th class="text-center">Action</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of server_list; let i=index;">
+              <td style="width: 15%;">{{data.server_name}}</td>
+              <td style="width: 15%;">{{data.server_ipaddress}}</td>
+              <td style="width: 15%;">{{data.token_number }}</td>
+              <td style="width: 15%;">{{data.hosting_details}}</td>
+              <td style="width: 15%;">{{data.country_name}}</td>
+              <td style ="padding-top:5px;padding-bottom:5px;">{{data.total_count}}</td>
+              <td style="width: 15%;">{{data.server_status}}</td>
+              <td class="text-center text-nowrap">
+                <button type="button" class="btn btn-icon btn-sm bg-primary me-2" data-bs-toggle="modal"
+                  data-bs-target="#viewServer" (click)="view(data.server_gid)"><span
+                    class="fa-solid fa-eye text-white fs-6"></span> <span class="tooltip">View</span>
+                </button>
+                <button title="Edit" type="button" data-bs-toggle="modal" data-bs-target="#myModaledit"
+                  class="btn btn-icon btn-sm bg-etdark me-2 mb-2" (click)="openModaledit(data)">
+                  <i class="fas fa-pencil text-white fs-6"></i>
+                </button>
+              </tr>
+            </tbody> 
+        </table>
+    </div> 
+
+    </div>
+
+  </div>
+
+  <!-- The Modal ADD -->
+  <form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="modal modal-lg mt-20" id="myModaladd" data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+            <div>
+              <h2 class="fw-bolder ms-5 mt-4 text-white">Add Server</h2>
+            </div>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="d-flex flex-row flex-wrap">
+              <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Server Name</span>
+                <div class="mt-2 me-2">
+                  <input formControlName="server_name" type="text"
+                    [ngStyle]="{ 'border-color': reactiveForm.get('server_name')?.hasError('required') && reactiveForm.get('server_name')?.touched || reactiveForm.get('server_name')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"
+                    placeholder="Server Name" />
+                </div>
+                <br />
+              </div>
+              <br />
+              <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Server IP Address</span>
+                <div class="mt-2 me-2">
+                  <input formControlName="server_ipaddress" type="text"
+                    [ngStyle]="{ 'border-color': reactiveForm.get('server_ipaddress')?.hasError('required') && reactiveForm.get('server_ipaddress')?.touched || reactiveForm.get('server_ipaddress')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"
+                    placeholder="Server IPAddress" />
+                </div>
+                <br />
+              </div>
+              <br />
+              <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Token Number</span>
+                <div class="mt-2 me-2">
+                  <input formControlName="token_number" type="text"
+                    [ngStyle]="{ 'border-color': reactiveForm.get('token_number')?.hasError('required') && reactiveForm.get('token_number')?.touched || reactiveForm.get('token_number')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"
+                    placeholder="Token Number" />
+                </div>
+                <br />
+              </div>
+              <br />
+              <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Country</span>
+                <div class="mt-2 me-2">   
+               <ng-select formControlName="cbopermanent_country" 
+                  [items]="countryList" class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                  bindLabel="country_name" bindValue="country_name" placeholder="Select an option"></ng-select>
+              </div>
+              <br />
+            </div>
+            <br />
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Status</span>
+              <div class="mt-2 me-2">
+                <ng-select placeholder="Select an option" formControlName="server_status" [clearable]="false">
+                  <ng-container>
+                    <ng-option value="New">New</ng-option>
+                    <ng-option value="Open">Open</ng-option>
+                    <ng-option value="Closed">Closed</ng-option>
+                  </ng-container>
+                </ng-select>
+              </div>
+            </div>
+            <br />
+              <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Hosting Details</span>
+                <div class="mt-2">
+                  <!-- <input formControlName="hosting_details" type="text"
+                    [ngStyle]="{ 'border-color': reactiveForm.get('hosting_details')?.hasError('required') && reactiveForm.get('hosting_details')?.touched || reactiveForm.get('hosting_details')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"
+                    placeholder="Hosting Details" /> -->
+                    <textarea 
+                    rows="3" 
+                    (input)="autoGrow($event)"
+                    class="form-control form-control-lg " 
+                    formControlName="hosting_details" 
+                    placeholder="Hosting Details"
+                    [ngStyle]="{ 'border-color': reactiveForm.get('hosting_details')?.hasError('required') && reactiveForm.get('hosting_details')?.touched || reactiveForm.get('hosting_details')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                    ></textarea>
+                </div>
+                <br />
+              </div>
+              <br />
+
+            
+            </div>
+
+
+            <!-- Modal footer -->
+            <div class="text-center my-4">
+              <button class="me-4 btn-success" (click)="onsubmit()" [disabled]="reactiveForm.invalid" [ngClass]="{
+              'primary-button': !reactiveForm.invalid,
+              'secondary-button': reactiveForm.invalid
+            }" data-bs-dismiss="modal">
+                <i class="fas fa-check text-white fs-5"></i>
+                <span class="ms-3">Submit</span>
+              </button>
+              <button class="btn-danger btn-sm text-white me-4" (click)="oncloseadd()" data-bs-dismiss="modal">
+                <i class="fas fa-close text-white fs-5"></i>
+                <span class="ms-3">Close</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- modal edit -->
+  <form [formGroup]="reactiveFormEdit" #form="ngForm">
+    <div class="modal modal-lg" id="myModaledit" data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+            <div>
+              <h2 class="fw-bolder ms-5 mt-4" style="color: #ffffff;"><i class="fas fa-pen-to-square fs-2 me-2"></i>Edit
+                Server</h2>
+            </div>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="d-flex flex-row flex-wrap">
+              <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Server Name</span>
+                <div class="mt-2 me-2">
+                  <input formControlName="server_name" type="text"
+                    [ngStyle]="{ 'border-color': reactiveFormEdit.get('server_name')?.hasError('required') && reactiveFormEdit.get('server_name')?.touched || reactiveFormEdit.get('server_name')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"
+                    placeholder="Server Name" />
+                </div>
+                <br />
+              </div>
+              <br />
+              <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Server IP Address</span>
+                <div class="mt-2 me-2">
+                  <input formControlName="server_ipaddress" type="text"
+                    [ngStyle]="{ 'border-color': reactiveFormEdit.get('server_ipaddress')?.hasError('required') && reactiveFormEdit.get('server_ipaddress')?.touched || reactiveFormEdit.get('server_ipaddress')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"
+                    placeholder="Server IPAddress" />
+                </div>
+                <br />
+              </div>
+              <br />
+              <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Token Number</span>
+                <div class="mt-2 me-2">
+                  <input formControlName="token_number" type="text"
+                    [ngStyle]="{ 'border-color': reactiveFormEdit.get('token_number')?.hasError('required') && reactiveFormEdit.get('token_number')?.touched || reactiveFormEdit.get('token_number')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"
+                    placeholder="Token Number" />
+                </div>
+                <br />
+              </div>
+              <br />  
+              <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Country</span>
+                <div class="mt-2">   
+               <ng-select formControlName="cbopermanent_country" 
+                  [items]="countryList" class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                  bindLabel="country_name" bindValue="country_name" placeholder="Select an option"></ng-select>
+              </div>
+              <br />
+            </div>
+            <br />                                      
+              <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Status</span>
+                <div class="mt-2 me-2">
+                  <ng-select placeholder="Select an option" formControlName="server_status" [clearable]="false">
+                    <ng-container>
+                      <ng-option value="New">New</ng-option>
+                      <ng-option value="Open">Open</ng-option>
+                      <ng-option value="Closed">Closed</ng-option>
+                    </ng-container>
+                  </ng-select>
+                </div>
+                <br />
+              </div>
+              <br />
+              
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Hosting Details</span>
+              <div class="mt-2">
+                <div class="mt-2">
+                  <!-- <input formControlName="hosting_details" type="text"
+                    [ngStyle]="{ 'border-color': reactiveForm.get('hosting_details')?.hasError('required') && reactiveForm.get('hosting_details')?.touched || reactiveForm.get('hosting_details')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"
+                    placeholder="Hosting Details" /> -->
+                    <textarea 
+                    rows="3" 
+                    (input)="autoGrow($event)"
+                    class="form-control form-control-lg " 
+                    formControlName="hosting_details" 
+                    placeholder="Hosting Details"
+                    [ngStyle]="{ 'border-color': reactiveFormEdit.get('hosting_details')?.hasError('required') && reactiveFormEdit.get('hosting_details')?.touched || reactiveFormEdit.get('hosting_details')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                    ></textarea>
+                </div>
+              </div>
+              <br />
+            </div>
+            
+            </div>
+
+
+            <!-- Modal footer -->
+            <div class="text-center my-4 mt-8">
+              <button class="me-4 btn-success" (click)="onupdate()" [disabled]="reactiveFormEdit.invalid"
+                [ngClass]="{'primary-button': !reactiveFormEdit.invalid, 'secondary-button': reactiveFormEdit.invalid}"
+                data-bs-dismiss="modal">
+                <i class="fas fa-check text-white fs-5"></i>
+                <span class="ms-3">Update</span>
+              </button>
+              <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+                <i class="fas fa-close text-white fs-5"></i>
+                <span class="ms-3">Close</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="modal modal-lg fade" tabindex="-1" id="viewServer" data-bs-backdrop='static'>
+    <div class="modal-dialog modal-dialog-centered ">
+      <div class="modal-content ">
+        <div class="modal-header bg-primary mb-5">
+          <h3 class="modal-title text-white"><i class="fa-solid fa-eye"></i> &nbsp; View Server</h3>
+        </div>
+
+        <div class="row ms-2">
+          <div class="col"><b>Server Name</b>
+            <p>{{txtserver_name}}</p>
+          </div>
+          <div class="col"><b>Server IPAddress</b>
+            <p>{{txtserver_ipaddress}}</p>
+          </div>
+          
+        </div>
+        <div class="row ms-2">
+          <div class="col"><b>Token Number</b>
+            <p>{{txttoken_number}}</p>
+          </div>
+          <div class="col"><b>Country</b>
+            <p>{{txtcountry_name}}</p>
+          </div>
+        </div>
+        <div class="row ms-2">
+          <div class="col"><b>Status</b>
+            <p>{{txtserver_status}}</p>
+          </div>
+          <div class="col"><b>Hosting Details </b>
+            <p>{{txthosting_details}}</p>
+          </div>
+        </div>
+        <div class="p-5 table-container overflow-auto" style="max-height: 150px;">
+          <b>Consumer </b>
+          <table class="table table-striped table-bordered table-hover table-sm table-responsive mt-1">
+            <thead>
+              <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                <th style="width: 10%;">Company Code</th>
+                <th style="width: 10%;">Consumer URL</th>
+                <th style="width: 10%;">Subscription Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of consumer_list; let i=index;">
+                <td style="width: 15%;">{{data.company_code}}</td>
+                <td style="width: 15%;">{{data.consumer_url}}</td>
+                <td style="width: 15%;">{{data.subscription_details}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+        <div class="text-center mb-3 mt-2">
+          <button type="button" class="btn-danger text-white" data-bs-dismiss="modal">
+              <i class="fa fa-close fs-5 text-center"></i>
+              Close
+          </button>
+      </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,341 @@
+<div class="card">
+  <br>
+  <form [formGroup]="reactiveform">
+    <div class="row">
+
+      <div class="col-lg-3">
+        <h3 class="card-title fw-bolder" style="margin-left: 8px;">Opening Balance</h3>
+      </div>
+
+      <div class="col-lg-3">
+        <span class="font-bold text-nowrap" style="font-size: 12px; font-weight: bold;">Entity : &nbsp;</span>
+        <ng-select [items]="Entitydtl_list" placeholder="Select an option" formControlName="entity_name"
+          class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="entity_name"
+          bindValue="entity_gid"></ng-select>
+        <!-- <ng-select [items]="branchname_list" bindLabel="branch_name" formControlName="frombranch"
+          class="auto-height-select mt-2" bindValue="branch_gid" [(ngModel)]="defaultbranch">
+        </ng-select> -->
+      </div>
+      <div class="col-lg-3">
+        <span class="font-bold text-nowrap" style="font-size: 12px; font-weight: bold;">Financial Year : &nbsp;</span>
+        <ng-select [items]="FinancialYear_List" placeholder="Select an option" formControlName="finyear"
+          class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="finyear" 
+          bindValue="finyear">
+        </ng-select>
+      </div>
+      <!-- <div class="col-lg-3 ">
+        <span class="font-bold text-nowrap" style="font-size: 12px; font-weight: bold;">From:&nbsp;</span>
+        <input type="date" pattern="^(?!\s*$).+" formControlName="from_date"
+          class="form-control form-control-lg form-control-solid date-picker borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input date-picker mt-2"
+          placeholder="DD-MM-YYYY" />
+      </div>
+      <div class="col-lg-3 ">
+        <span class="font-bold text-nowrap" style="font-size: 12px; font-weight: bold;">To:&nbsp;</span>
+        <input type="date" pattern="^(?!\s*$).+" formControlName="to_date"
+          class="form-control form-control-lg form-control-solid date-picker borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input date-picker mt-2"
+          placeholder="DD-MM-YYYY" />
+      </div> -->
+      <div class="col-lg-1 d-flex align-items-end">
+        <button (click)="initializeDataFetching()" [disabled]="reactiveform.invalid" title="Search" type="button"
+          class="btn btn-icon btn-sm bg-success mb-2 cursor-pointer mt-4"><span
+            class="fa-solid fa-magnifying-glass text-white  fs-3"></span>
+
+        </button>
+      </div>
+
+    </div>
+  </form>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="m-3 me-0 shadow-lg p-3 rounded" style="border-top:2px solid rgb(8, 8, 146);">
+        <div class="d-flex align-items-center">
+          <div>
+            <p style="font-size: 14px;color: rgb(8, 8, 146);text-underline-offset: 6px;">
+              <u><b>Liability</b></u>
+            </p>
+          </div>
+
+        </div>
+        <div class="table-responsive" *ngIf="parentList">
+          <div style="max-height: 300px;overflow: auto;scrollbar-color: lightblue #ffffff;">
+            <table class="table table-striped table-row-bordered table-responsive mb-0 border rounded">
+              <thead>
+                <tr class="fw-bolder fs-5 bg-lightblue text-blue text-nowrap">
+                  <th></th>
+                  <th>Account Name</th>
+                  <th class="text-end">Credit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngTemplateOutlet="recursiveTable; context:{ $implicit: parentList }"></ng-container>
+              </tbody>
+            </table>
+          </div>
+
+          <hr>
+          <div class=" d-flex text-end fs-3 fw-bold">
+            <div class="col-lg-8 text-blue">Total :</div>
+            <div class="col-lg-4"><span class="me-2">{{Lib_total_amount}}</span></div>
+          </div>
+
+          <div class=" d-flex text-end fs-3 fw-bold mt-2">
+            <div class="col-lg-8 text-blue">Difference (Credit-debit) :</div>
+            <div class="col-lg-4"><span class="me-2">{{libartydiffer}}</span>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div *ngIf="!parentList" class="text-center fs-3">No Data Available in Table</div>
+
+        <!-- Parent Table Template -->
+        <ng-template #recursiveTable let-rows>
+          <ng-container *ngFor="let data of rows; let index = index">
+            <tr class="align-middle">
+              <td class="cursor-pointer" (click)="toggleVisibility(data)">
+                <i class="fa-solid fa-angle-right fw-bold text-blue fs-3"
+                  *ngIf="!data.visible && data.subfolders.length"></i>
+                <i class="fa-solid fa-angle-up fw-bold text-blue fs-3"
+                  *ngIf="data.visible && data.subfolders.length"></i>
+              </td>
+              <td>{{ data.account_name }}</td>
+              <td class="text-end">{{ data.sum_credit }}</td>
+            </tr>
+            <ng-container *ngIf="data.visible && data.subfolders && data.subfolders.length > 0">
+              <tr class="tr-detail">
+                <td style="width: 1%;"></td>
+                <td colspan="4" style="padding: 0px !important;">
+                  <div class="detail-content">
+                    <ul>
+                      <li class="m-0">
+                        <div class="detail"></div>
+                        <div class="detail detail-main">
+                          <fieldset>
+                            <table class="table table-row-bordered table-responsive mb-0 ms-0"
+                              style="background-color: rgb(255, 255, 255);border-left: 5px solid #91bcfd">
+                              <thead>
+                                <tr class="fw-bolder fs-5 bg-lightblue text-blue text-nowrap">
+                                  <th></th>
+                                  <th>Account Name</th>
+                                  <th class="text-end">Credit</th>
+                                  <th class="text-end">Debit</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <ng-container
+                                  *ngTemplateOutlet="subDataTemplate; context:{ $implicit: data.subfolders }">
+
+
+                                </ng-container>
+
+                              </tbody>
+                            </table>
+
+                          </fieldset>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </ng-template>
+
+        <!-- Sub-data Template -->
+        <ng-template #subDataTemplate let-subRows>
+          <ng-container *ngFor="let subData of subRows">
+            <tr class="align-middle ">
+              <td class="cursor-pointer" (click)="toggleVisibility(subData)">
+                <i class="fa-solid fa-angle-right fw-bold text-blue fs-3"
+                  *ngIf="!subData.visible && subData.subfolders.length"></i>
+                <i class="fa-solid fa-angle-up fw-bold text-blue fs-3"
+                  *ngIf="subData.visible && subData.subfolders.length"></i>
+              </td>
+              <td class="button-link" (click)="onroute(subData.account_gid)">{{ subData.account_name }}</td>
+              <td class="text-end">{{ subData.sum_credit }}</td>
+              <td class="text-end">{{ subData.sum_debit }}</td>
+            </tr>
+            <ng-container *ngIf="subData.visible && subData.subfolders && subData.subfolders.length > 0">
+              <tr class="tr-detail">
+                <td style="width: 1%;"></td>
+                <td colspan="4" style="padding: 0px !important;">
+                  <div class="detail-content">
+                    <ul>
+                      <li class="m-0">
+                        <div class="detail"></div>
+                        <div class="detail detail-main">
+                          <fieldset>
+                            <table class="table table-row-bordered table-responsive mb-0 ms-0"
+                              style="background-color: rgb(255, 255, 255);border-left: 5px solid #91bcfd">
+                              <thead>
+                                <tr class="fw-bolder fs-5 bg-lightblue text-blue text-nowrap">
+                                  <th></th>
+                                  <th>Account Name</th>
+                                  <th class="text-end">Credit</th>
+                                  <th class="text-end">Debit</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+
+                                <ng-container
+                                  *ngTemplateOutlet="subDataTemplate; context:{ $implicit: subData.subfolders }"></ng-container>
+                              </tbody>
+                            </table>
+                          </fieldset>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </ng-template>
+
+
+      </div>
+    </div>
+    <!--Asset-->
+
+    <div class="col-lg-6">
+      <div class="m-3 ms-0 me-2 shadow-lg p-3 rounded" style="border-top:2px solid rgb(8, 8, 146);">
+        <div class="d-flex align-items-center">
+          <div>
+            <p style="font-size: 14px;color: rgb(8, 8, 146);text-underline-offset: 6px;">
+              <u><b>Asset</b></u>
+            </p>
+          </div>
+        </div>
+        <div class="table-responsive" *ngIf="AssetList">
+          <div style="max-height: 300px;overflow: auto;scrollbar-color: lightblue #ffffff;">
+
+            <table class="table table-striped table-row-bordered table-responsive mb-0 border rounded">
+              <thead>
+                <tr class="fw-bolder fs-5 bg-lightblue text-blue text-nowrap">
+                  <th></th>
+                  <th>Account Name</th>
+                  <th class="text-end">Debit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngTemplateOutlet="recursiveAssetTable; context:{ $implicit: AssetList }"></ng-container>
+              </tbody>
+            </table>
+          </div>
+          <hr>
+          <div class=" d-flex text-end fs-3 fw-bold">
+            <div class="col-lg-8 text-blue">Total :</div>
+            <div class="col-lg-4 "><span class="me-2">{{Asset_total_amount}}</span></div>
+          </div>
+
+          <div class=" d-flex text-end fs-3 fw-bold mt-2">
+            <div class="col-lg-8 text-blue">Difference (Debit-Credit) :</div>
+            <div class="col-lg-4"><span class="me-2">{{ Assetdiffer }}</span></div>
+          </div>
+        </div>
+
+        <div *ngIf="!AssetList" class="text-center fs-3"> No Data Available in Table</div>
+
+        <ng-template #recursiveAssetTable let-rows>
+          <ng-container *ngFor="let data of rows; let index = index">
+            <tr class="align-middle">
+              <td class="cursor-pointer" (click)="toggleVisibility(data)">
+                <i class="fa-solid fa-angle-right fw-bold text-blue fs-3"
+                  *ngIf="!data.visible && data.subfolders.length"></i>
+                <i class="fa-solid fa-angle-up fw-bold text-blue fs-3"
+                  *ngIf="data.visible && data.subfolders.length"></i>
+              </td>
+              <td>{{ data.account_name }}</td>
+              <td class="text-end">{{ data.sum_debit }}</td>
+            </tr>
+            <ng-container *ngIf="data.visible && data.subfolders && data.subfolders.length > 0">
+              <tr class="tr-detail">
+                <td style="width: 1%;"></td>
+                <td colspan="4" style="padding: 0px !important;">
+                  <div class="detail-content">
+                    <ul>
+                      <li class="m-0">
+                        <div class="detail"></div>
+                        <div class="detail detail-main">
+                          <fieldset>
+                            <table class="table table-row-bordered table-responsive mb-0 ms-0"
+                              style="background-color: rgb(255, 255, 255);border-left: 5px solid #91bcfd">
+                              <thead>
+                                <tr class="fw-bolder fs-5 bg-lightblue text-blue text-nowrap">
+                                  <th></th>
+                                  <th>Account Name</th>
+                                  <th class="text-end">Credit</th>
+                                  <th class="text-end">Debit</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <ng-container
+                                  *ngTemplateOutlet="subDataAssetTemplate; context:{ $implicit: data.subfolders }"></ng-container>
+                              </tbody>
+                            </table>
+                          </fieldset>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </ng-template>
+
+        <!-- Sub-data Template -->
+        <ng-template #subDataAssetTemplate let-subRows>
+          <ng-container *ngFor="let subData of subRows">
+            <tr class="align-middle">
+              <td class="cursor-pointer" (click)="toggleVisibility(subData)">
+                <i class="fa-solid fa-angle-right fw-bold text-blue fs-3"
+                  *ngIf="!subData.visible && subData.subfolders.length"></i>
+                <i class="fa-solid fa-angle-up fw-bold text-blue fs-3"
+                  *ngIf="subData.visible && subData.subfolders.length"></i>
+              </td>
+              <td class="button-link" (click)="onroute(subData.account_gid)">{{ subData.account_name }}</td>
+              <td class="text-end">{{ subData.sum_credit }}</td>
+              <td class="text-end">{{ subData.sum_debit }}</td>
+            </tr>
+            <ng-container *ngIf="subData.visible && subData.subfolders && subData.subfolders.length > 0">
+              <tr class="tr-detail">
+                <td style="width: 1%;"></td>
+                <td colspan="4" style="padding: 0px !important;">
+                  <div class="detail-content">
+                    <ul>
+                      <li class="m-0">
+                        <div class="detail"></div>
+                        <div class="detail detail-main">
+                          <fieldset>
+                            <table class="table table-row-bordered table-responsive mb-0 ms-0"
+                              style="background-color: rgb(255, 255, 255);border-left: 5px solid #91bcfd">
+                              <thead>
+                                <tr class="fw-bolder fs-5 bg-lightblue text-blue text-nowrap">
+                                  <th></th>
+                                  <th>Account Name</th>
+                                  <th class="text-end">Credit</th>
+                                  <th class="text-end">Debit</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <ng-container
+                                  *ngTemplateOutlet="subDataTemplate; context:{ $implicit: subData.subfolders }"></ng-container>
+                              </tbody>
+                            </table>
+                          </fieldset>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,138 @@
+<div class="card">
+    <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+        <h3 class="fw-bolder text-white"><b>
+            <span class="fa-solid fa-plus text-white fs-6 fw-bold"></span>&nbsp;Add De-Promotion</b></h3>
+    </div>
+    <form [formGroup]="reactiveForm" #form="ngForm">
+        <div class="m-4 mt-4 border card ">
+            <!-- ADD Function -->
+            <div class="d-flex flex-row m-6 flex-wrap">
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Employee Name</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <ng-select formControlName="employeegid" style="width:100%;"
+                            [class.is-invalid]="employeegid.invalid && (employeegid.dirty || employeegid.touched)"
+                            [ngClass]="{'invalid-border': employeegid.invalid && employeegid.touched}" [items]="employeelist" (change)="employeedetail($event)"
+                            required class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                            [ngStyle]="{'border-color': employeegid.invalid && employeegid.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                            bindLabel="employee_name" bindValue="employee_gid" [(ngModel)]="employeedata" placeholder="Select an option">
+                        </ng-select>
+                        <div *ngIf="employeegid.invalid && (employeegid.dirty || employeegid.touched)">
+                            <div *ngIf="employeegid.errors?.['required']"><span class="text-red">Employee Name is
+                                    required.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Current Branch</span>
+                    <div  class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input *ngIf="showEmployeeDetail" formControlName="branch_name" type="text"
+                            class="form-control form-control-lg form-control-solid borderc-secondary bg-secondary custom-input mb-3 mb-lg-0"
+                            name="branch_name" readonly />
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Current Department</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input *ngIf="showEmployeeDetail" formControlName="department_name" type="text"
+                            class="form-control form-control-lg form-control-solid borderc-secondary bg-secondary custom-input mb-3 mb-lg-0"
+                            name="department_name" readonly />
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row m-6 flex-wrap">
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Current Designation</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input *ngIf="showEmployeeDetail" formControlName="designation_name" type="text"
+                            class="form-control form-control-lg form-control-solid borderc-secondary bg-secondary custom-input mb-3 mb-lg-0"
+                            name="designation_name" readonly />
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">De-Promoting To New Branch</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <ng-select formControlName="branch_detail" style="width:100%;"
+                            [class.is-invalid]="branch_detail.invalid && (branch_detail.dirty || branch_detail.touched)"
+                            [ngClass]="{'invalid-border': branch_detail.invalid && branch_detail.touched}"
+                            [items]="branchlist" required
+                            class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="branch_name"
+                            bindValue="branch_gid" placeholder="Select New Branch"></ng-select>
+                        <div *ngIf="branch_detail.invalid && (branch_detail.dirty || branch_detail.touched)">
+                            <div *ngIf="branch_detail.errors?.['required']"><span class="text-red">Branch Name is
+                                    required.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">De-Promoting To New Department</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <ng-select formControlName="department_detail" style="width:100%;"
+                            [class.is-invalid]="department_detail.invalid && (department_detail.dirty || department_detail.touched)"
+                            [ngClass]="{'invalid-border': department_detail.invalid && department_detail.touched}"
+                            [items]="departmentlist" required
+                            class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="department_name"
+                            bindValue="department_gid" placeholder="Select New Department"></ng-select>
+                        <div *ngIf="department_detail.invalid && (department_detail.dirty || department_detail.touched)">
+                            <div *ngIf="department_detail.errors?.['required']"><span class="text-red">Department Name is
+                                    required.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="d-flex flex-row m-6 flex-wrap">
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">De-Promoting To New Designation</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <ng-select formControlName="designation_detail" style="width:100%;"
+                            [class.is-invalid]="designation_detail.invalid && (designation_detail.dirty || designation_detail.touched)"
+                            [ngClass]="{'invalid-border': designation_detail.invalid && designation_detail.touched}"
+                            [items]="designationlist" required
+                            class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="designation_name"
+                            bindValue="designation_gid" placeholder="Select New Designation"></ng-select>
+                        <div *ngIf="designation_detail.invalid && (designation_detail.dirty || designation_detail.touched)">
+                            <div *ngIf="designation_detail.errors?.['required']"><span class="text-red">Promoting To is
+                                    required.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row"><span class="font-bold">Effective Date</span>
+                        <input formControlName="effective_date" type="text" style="width:135%;"
+                            class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-secondary custom-input mt-2"
+                            name="effective_date" readonly />
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row" style="margin-left:95px;"><span class="font-bold">Reason</span>
+                        <textarea formControlName="reason"
+                            class="form-control form-control-lg form-control-solid borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input mt-2"
+                            placeholder="Enter Reason" name="reason">
+                  </textarea>
+                  <div *ngIf="reactiveForm.get('reason')?.hasError('pattern')" class="text-red">Space
+                    at the beginning is not allowed.</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="text-center my-4">
+                <button class="me-4 btn-success" (click)="onconfirm()" [disabled]="reactiveForm.invalid"
+                    class="btn-success btn-sm text-white me-4">
+                    <i class="fas fa-check text-white fs-5"></i>
+                    <span class="ms-3">Submit</span>
+                </button>
+                <button class="btn-primary btn-sm text-white me-4" (click)="oncancel()">
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="ms-3">Back</span>
+                </button>
+            </div>
+        </div>
+    </form>
+
+
+  

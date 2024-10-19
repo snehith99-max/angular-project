@@ -1,0 +1,147 @@
+<div class="card mt-2">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="row mt-4">
+            <div class="col-lg-3 col-md-2 col-sm-2">
+                <div class="col ms-2">
+                    <h2 class="card-title fw-bolder">Receipt Approval</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive me-5">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded ">
+            <table id="receipt_list" class="table table-row-bordered gy-5 gs-7 align-middle">
+                <thead>
+                    <tr class="fw-bolder  fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th style="width: 1%;">S.NO</th>
+                        <th style="width: 1%;">Date</th>
+                        <th style="width: 1%;">Receipt Ref.No</th>
+                        <th>Customer</th>
+                        <th>Contact</th>
+                        <th>Details</th>
+                        <th style="width: 1%;">Mobile</th>
+                        <th style="width: 1%;">Amount</th>
+                        <th style="width: 1%;">Type</th>
+                        <th style="width: 1%;">Status</th>
+                        <th style="width: 3%;" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr *ngFor="let data of receipt_list; let i=index;" class="align-middle">
+                        <td>{{i+1}}</td>
+                        <td class="text-nowrap">{{data.payment_date}}</td>
+                        <td class="text-nowrap">{{data.payment_gid}}</td>
+                        <td style="width: 26%;">{{data.customer_name}}</td>
+                        <td style="width: 30%;">{{data.customercontact_name}}</td>
+                        <td style="width: 30%;" hidden>{{data.invoice_gid}}</td>
+                        <td style="width: 30%;" hidden>{{data.tds_amount}}</td>
+                        <td style="width: 30%;" hidden>{{data.exchange_gain}}</td>
+                        <td style="width: 30%;" hidden>{{data.exchange_loss}}</td>
+                        <td style="width: 30%;" hidden>{{data.bank_charge}}</td>
+                        <td style="width: 30%;" hidden>{{data.adjust_amount}}</td>
+                        <td style="width: 30%;" hidden>{{data.total_amount}}</td>
+                        <td style="width: 30%;" hidden>{{data.payment_remarks}}</td>
+                        <td style="width: 30%;" hidden>{{data.customer_gid}}</td>
+                        <td style="width: 30%;" hidden>{{data.dbank_gid}}</td>
+                        <td style="text-align: center;" class="text-nowrap">
+                            <label title="Product Details" data-bs-toggle="modal" data-bs-target="#myModalUpdateimage9"
+                                (click)="Details(data.invoice_gid)">
+                                <i class="fas fa-question-circle fa-5x text-center text-primary fs-2"></i>
+                            </label>
+                        </td>
+                        <td style="text-align: right;" class="text-nowrap">{{data.mobile}}</td>
+                        <td class="text-nowrap">{{data.amount}}</td>
+                        <td style="text-align: right;" class="text-nowrap">{{data.payment_type}}</td>
+                        <td style="text-align: right;" class="text-nowrap" hidden>{{data.payment_mode}}</td>
+                        <td class="text-nowrap">{{data.approval_status}}</td>
+                        <td class="text-center text-nowrap">
+                            <span (click)="toggleOptions(data)" style="cursor: pointer;">
+                                <button class="btn me-2 p-1 "><span class="fa-solid fa-ellipsis-vertical fs-1 "
+                                        style="color: #4d4d4d;"></span></button>
+                                <div *ngIf="showOptionsDivId === data"
+                                    class="pb-0 rounded bg-white cursor-pointer icon_menu"
+                                    style="margin-right:-15px; margin-top: -15px;">
+                                    <div class="d-flex p-3 pb-3 Icon_hover"
+                                        *ngIf="data.has_child != 'N'" data-bs-target="#myModalapprove"
+                                        data-bs-toggle="modal">
+                                        <span><i class="fa-solid fa-check  fs-3 me-4"></i></span>
+                                        <span>Approve</span>
+                                    </div>
+                                    <div class="d-flex p-3 pb-3 Icon_hover" *ngIf="data.has_child != 'N'">
+                                        <span><i class="fa-regular fas fa-ban fs-3 me-5"></i></span>
+                                        <span>Reject</span>
+                                    </div>
+                                </div>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModalUpdateimage9" tabindex="-1" data-bs-backdrop='static'
+    aria-labelledby="editamlcategoryLabel" aria-hidden="true" data-bs-keyboard="false">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content  d-flex justify-content-center">
+            <div class="card-header p-1 pb-1 pt-1 rounded-top bg-primary"
+                style="display: flex; align-items: center; height: 40px;">
+                <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;Details</h2>
+
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                        <table class="table table-striped table-row-bordered gy-5 gs-7 ">
+                            <thead>
+                                <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                                    <th>S.No</th>
+                                    <th>Invoice Ref.No.</th>
+                                    <th>Invoice Date</th>
+                                    <th>Invoice Amount</th>
+                                    <th>Payment Amount</th>
+                                    <th>Total Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of Product_list; let i=index;" style="white-space: nowrap;  overflow-y: hidden;">
+                                    <td>{{i+1}}</td>
+                                    <td>{{data.invoice_refno}}</td>
+                                    <td>{{data.invoice_date}}</td>
+                                    <td>{{data.invoice_amount}}</td>
+                                    <td>{{data.payment_amount}}</td>
+                                    <td>{{data.total_amount}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="text-center my-4">
+                    <button class="btn-danger btn-sm  text-white me-2" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white"></i> &nbsp;Close
+                    </button>&nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="myModalapprove" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog del_modal-dialog modal-dialog-centered">
+        <div class="modal-content del_modal-content">
+            <div class="text-center my-4">
+                <h2><b>Are you sure?</b></h2>
+                <p style="display: block;">Do you want to approve this customer's Payment?</p>
+                <div class="text-center my-4">
+                    <button class="btn-success btn-sm text-white me-4" (click)="onApprove()" data-bs-dismiss="modal">
+                        <i class="fa fa-check fs-6 me-2"></i>Approve
+                    </button>
+                    <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white me-2"></i>Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

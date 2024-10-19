@@ -1,0 +1,544 @@
+<div class="row" style="margin-top: 10px;">
+    <div class="col-lg-3 col-md-3 col-sm-3" style=" cursor: not-allowed;">
+        <div class="cardHeadLeads radius-10 border-start border-0 border-3 border-darkgreen"
+            style="background-color:#F5F5F5;">
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Total Opportunity</h5>
+                        <h4 class="badge-green  badge-outline-green badge-secondary fs-4 mt-2">{{total_appointment}}
+                        </h4>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-darkgreens text-white ms-auto">
+                        <i class="fa-solid fa-asterisk"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3" style=" cursor: not-allowed;">
+        <div class="cardHeadLeads radius-10 border-start border-0 border-3 border-brown"
+            style="background-color:#F5F5F5;">
+
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Assigned</h5>
+                        <h4 class="badge-orange  badge-outline-orange fs-4 mt-2">
+                            {{total_assigned}}</h4>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-brown text-white ms-auto"><i
+                            class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-3 col-sm-3" style=" cursor: not-allowed;">
+        <div class="cardHeadLeads radius-10 border-start border-0 border-3  border-violet"
+            style="background-color:#F5F5F5;">
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Unassigned</h5>
+                        <h4 class="badge-violet badge-outline-violet fs-4 mt-2">
+                            {{total_unassigned}}</h4>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-violet text-white ms-auto"><i
+                            class="fa fa-arrow-down"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3" style=" cursor: not-allowed;">
+        <div class="cardHeadLeads radius-10 border-start border-0 border-3 border-darkorange "
+            style="background-color:#F5F5F5;">
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Team Assigned</h5>
+                        <h4 class="badge1  badge-outline1 fs-4 mt-2 ">{{total_team}}</h4>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-purple text-white ms-auto"><i
+                            class="fa-solid fa-check-to-slot"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Opportunity Management</h3>
+        </div>
+        <div class="col me-5">
+            <button title="Add Appointment" class="btn-primary btn-sm text-white me-4 float-end" data-bs-toggle="modal"
+                data-bs-target="#Addappointment">
+                <i class="fas fa-plus fs-3"></i>&nbsp;&nbsp;
+                Create Opportunity</button>
+        </div>
+        <!-- <div class="col me-5">
+            <button title="Add Appointment" class="btn-primary btn-sm text-white me-4 float-end" data-bs-toggle="modal"
+            (click)="onadd1()">
+            <i class="fas fa-plus fs-3"></i>&nbsp;&nbsp;
+            Indiamart Enquiry</button>
+        </div> -->
+    </div>
+    <div class="table-responsive">
+        <div class="card card-body m-3 p-3 mb-5 bg-white rounded">
+            <table id="GetAppointmentsummary_list" class="table table-striped table-row-bordered border-bottom gs-7">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th style="width: 2px;">S.No</th>
+                        <!-- <th>Lead Title</th> -->
+                        <th style="width: 100px;">Lead</th>
+                        <th style="width: 200px;">Lead Contact</th>
+                        <th>Region/Source</th>
+                        <th>Vertical</th>
+                        <th>Appointment</th>
+                        <th>Assigned To</th>
+                        <th class="text-center ">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of GetAppointmentsummary_list; let i=index;" class="align-middle">
+                        <td style="width: 2px;">{{i+1}}</td>
+                        <!-- <td style="white-space: nowrap;"><textarea [(ngModel)]="data.lead_title"
+                                style="width: 70px;"></textarea></td> -->
+                        <td style="width: 100px;">{{data.leadbank_name}}</td>
+                        <td style="width: 200px;"><span *ngIf="data.leadbankbranch_name">{{data.leadbankbranch_name}} /
+                            </span>
+                            <span *ngIf="data.leadbankcontact_name">{{data.leadbankcontact_name}} / </span>
+                            <span *ngIf="data.email">{{data.email}} / </span>
+                            <span *ngIf="data.mobile">{{data.mobile}}</span>
+                        </td>
+                        <td>{{data.region_source}}</td>
+                        <td>
+                            {{data.bussiness_name}}
+                        </td>
+                        <td>
+                            <!-- {{data.appointment_date}} -->
+                            <label title="Remarks" data-bs-toggle="modal" data-bs-target="#myModalUpdateimage2"
+                                (click)="popmodal(data.lead_title,data.appointment_date,data.leadbank_name)">
+                                <i class="fas fa-question-circle fa-5x text-primary fs-2"></i>
+                            </label>
+                        </td>
+                        <td>
+                            <span *ngIf="data.assigned_employee === ''"><label class="ms-3"
+                                    class="badge bg-secondary text-black ">Not Assigned</label></span>
+                            <span *ngIf="data.assigned_employee !== ''"><label class="ms-3"
+                                    class="badge bg-success text-black ">{{data.assigned_employee}}</label></span>
+                        </td>
+                        <td class="text-center text-nowrap">
+                            <!-- <div style="cursor: pointer;">
+                                <button class="btn me-2 p-1 " (click)="toggleOptions(data.appointment_gid)"><span
+                                    class="fa-solid fa-ellipsis-vertical fs-1"
+                                    style="color: #4d4d4d;"></span></button>
+                                    <div *ngIf="showOptionsDivId === data.appointment_gid"
+                                    class="pb-0 rounded bg-white cursor-pointer icon_menu" style="right: 60px;">
+                                    
+                                    <div class="d-flex p-3 pb-3 Icon_hover"
+                                    title="Edit" (click)="editappointment(data.appointment_gid)" data-bs-toggle="modal" type="button"
+                                    data-bs-target="#Editappointment"><span
+                                        class="fa-solid fa-pencil fs-3 me-2"></span><span>Edit</span>
+                                    </div>
+                                    <div class="d-flex p-3 pb-3 Icon_hover"
+                                    title="Assign Employee" (click)="appointgid(data.appointment_gid)" data-bs-toggle="modal" type="button"
+                                    data-bs-target="#assignappointment"><span
+                                        class="fa-solid fa-user fs-3 me-2"></span><span>Assign Employee</span>
+                                    </div>
+                                  
+                                    </div>
+                            </div>
+                             -->
+                            <button title="Edit" type="button" data-bs-toggle="modal"
+                                (click)="editappointment(data.appointment_gid)" data-bs-target="#Editappointment"
+                                class="btn btn-icon btn-sm bg-edit me-2"><span
+                                    class="fa-solid fa-pencil text-white  fs-6"></span></button>
+                            <button title="Assign Employee" data-bs-toggle="modal" type="button"
+                                (click)="appointgid(data.appointment_gid)" data-bs-target="#assignappointment"
+                                class="btn btn-icon btn-sm bg-primary  me-2">
+                                <span class="fa fa-user text-white fs-6"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<!-- add appointment -->
+<form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="modal" id="Addappointment" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                    <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                            class="fas fa-plus fw-bolder fs-3"></i> &nbsp;&nbsp;Create Opportunity </h2>
+                </div>
+                <div class="modal-body">
+                    <div class="row"><span class="font-bold"><b>Lead title</b><span
+                                class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                            <textarea lass="form-control form-control-lg form-control-solid custom-input
+                           mb-3 mb-lg-0 custom-input
+                         " class="form-control " style="height:45px;" formControlName="lead_title">
+                           </textarea>
+                        </div>
+                    </div>
+                    <div *ngIf="lead_title.invalid && (lead_title.dirty || lead_title.touched)">
+                        <div *ngIf="lead_title.errors?.['required']">
+                            <span style="color:red;">Lead Title is required.</span>
+                        </div>
+                    </div>
+                    <div *ngIf="lead_title.invalid && (lead_title.dirty ||lead_title .touched)">
+                        <div *ngIf="lead_title.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format.</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row"><span class="font-bold"><b>Lead</b><span class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                            <ng-select formControlName="leadname_gid" [items]="GetLeaddropdown_list"
+                                bindLabel="leadbank_name" bindValue="leadbank_gid" placeholder="Select Lead"
+                                [class.is-invalid]="
+                            leadname_gid.invalid && (leadname_gid.dirty || leadname_gid.touched) "
+                                class="custom col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-2"
+                                (change)="lead_details()">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div *ngIf="leadname_gid.invalid && (leadname_gid.dirty || leadname_gid.touched)">
+                        <div *ngIf="leadname_gid.errors?.['required']">
+                            <span style="color:red;">lead is required.</span>
+                        </div>
+                    </div>
+                    <div *ngIf="leadname_gid.invalid && (leadname_gid.dirty ||leadname_gid .touched)">
+                        <div *ngIf="leadname_gid.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format.</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <span class="font-bold mb-1"><b>Contact Details</b></span>
+                            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                                <textarea class="form-control form-control-lg form-control-solid custom-input
+                                mb-3 mb-lg-0 bg-secondary custom-input
+                              " class="form-control bg-secondary" style="height:120px;" [value]="leadbank_details"
+                                    readonly>
+                                </textarea>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col-12 col-lg-6">
+                            <div class="row"><span class="font-bold"><b>Appointment</b><span
+                                        class="ms-1 text-red">*</span></span>
+                                <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                                    <input formControlName="appointment_timing" type="date" class="
+                            form-control form-control-lg form-control-solid
+                            custom-input
+                            mb-3 mb-lg-0
+                            bg-white
+                            custom-input date-picker
+                           " [ngStyle]="{
+                             'border-color':
+                             appointment_timing.invalid && appointment_timing.touched
+                                 ? 'red'
+                                 : 'rgb(209, 209, 209)'
+                           }" pattern="^(?!\s*$).+" name="appointment_timing" required />
+                                </div>
+                            </div>
+                            <div
+                                *ngIf="appointment_timing.invalid && (appointment_timing.dirty || appointment_timing.touched)">
+                                <div *ngIf="appointment_timing.errors?.['required']">
+                                    <span style="color:red;">Opportunity time is required.</span>
+                                </div>
+                            </div>
+                            <div
+                                *ngIf="appointment_timing.invalid && (appointment_timing.dirty || appointment_timing.touched)">
+                                <div *ngIf="appointment_timing.errors?.['pattern']">
+                                    <span style="color:red;">Invalid Format.</span>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row"><span class="font-bold"><b>Bussines Vertical</b><span
+                                        class="ms-1 text-red">*</span></span>
+                                <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-0 d-flex ">
+                                    <ng-select formControlName="bussiness_verticle"
+                                        [items]="Getbussinessverticledropdown_list" bindLabel="business_vertical"
+                                        bindValue="businessvertical_gid" placeholder="Select Bussines Verticle"
+                                        [class.is-invalid]="
+                                bussiness_verticle.invalid && (bussiness_verticle.dirty || bussiness_verticle.touched) "
+                                        class="custom col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-2">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div
+                                *ngIf="bussiness_verticle.invalid && (bussiness_verticle.dirty || bussiness_verticle.touched)">
+                                <div *ngIf="bussiness_verticle.errors?.['required']">
+                                    <span style="color:red;"> |Bussines Verticle is required.</span>
+                                </div>
+                            </div>
+                            <div
+                                *ngIf="bussiness_verticle.invalid && (bussiness_verticle.dirty ||bussiness_verticle .touched)">
+                                <div *ngIf="bussiness_verticle.errors?.['pattern']">
+                                    <span style="color:red;">Invalid Format.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="text-center my-4">
+                        <button [disabled]="reactiveForm.invalid" (click)="Onsubmit()"
+                            [ngStyle]="{ 'cursor': reactiveForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !reactiveForm.invalid,
+                        'btn-secondary text-white': reactiveForm.invalid }" data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5 "></i> &nbsp;Create
+                        </button> &nbsp;&nbsp;
+                        <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal" (click)="onclose()">
+                            <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<!-- Assigne Employe -->
+<form [formGroup]="AssignForm" #form="ngForm">
+    <div class="modal" id="assignappointment" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                    <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                            class="fas fa-plus fw-bolder fs-3"></i> &nbsp;&nbsp;Assign Opportunity </h2>
+                </div>
+                <div class="modal-body">
+                    <div class="row"><span class="font-bold"><b>Team Name</b><span class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                            <ng-select formControlName="teamname_gid" [items]="GetTeamdropdown_list"
+                                bindLabel="campaign_title" bindValue="campaign_gid" placeholder="Select Team"
+                                [class.is-invalid]="
+                                teamname_gid.invalid && (teamname_gid.dirty || teamname_gid.touched) "
+                                class="custom col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-2"
+                                (change)="marketingteam()">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div *ngIf="teamname_gid.invalid && (teamname_gid.dirty || teamname_gid.touched)">
+                        <div *ngIf="teamname_gid.errors?.['required']">
+                            <span style="color:red;">Team is required.</span>
+                        </div>
+                    </div>
+                    <div *ngIf="teamname_gid.invalid && (teamname_gid.dirty ||teamname_gid .touched)">
+                        <div *ngIf="teamname_gid.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format.</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-12 col-lg-12">
+                            <span class="font-bold mb-1"><b>Assign Employee</b></span>
+                            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                                <ng-select formControlName="employee_gid" [items]="executive_list" bindLabel="executive"
+                                    bindValue="employee_gid"
+                                    class="custom col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-2">
+                                </ng-select>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                <div class=" text-center my-4">
+                    <button [disabled]="AssignForm.invalid" (click)="onupdate()"
+                        [ngStyle]="{ 'cursor': AssignForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !AssignForm.invalid,
+                        'btn-secondary text-white': AssignForm.invalid }" data-bs-dismiss="modal">
+                        <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+                    </button> &nbsp;&nbsp;
+                    <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white"></i> &nbsp;Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- edit appointment -->
+<form [formGroup]="EditreactiveForm" #form="ngForm">
+    <div class="modal" id="Editappointment" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                    <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                            class="fas fa-plus fw-bolder fs-3"></i> &nbsp;&nbsp;Edit Opportunity</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="row"><span class="font-bold"><b>Lead title</b><span
+                                class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                            <textarea lass="form-control form-control-lg form-control-solid custom-input
+                           mb-3 mb-lg-0 custom-input
+                         " class="form-control " style="height:45px;" formControlName="editlead_title">
+                           </textarea>
+                        </div>
+                    </div>
+                    <div *ngIf="editlead_title.invalid && (editlead_title.dirty || editlead_title.touched)">
+                        <div *ngIf="editlead_title.errors?.['required']">
+                            <span style="color:red;">Lead Title is required.</span>
+                        </div>
+                    </div>
+                    <div *ngIf="editlead_title.invalid && (editlead_title.dirty ||editlead_title .touched)">
+                        <div *ngIf="editlead_title.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format.</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row"><span class="font-bold"><b>Lead</b><span class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                            <ng-select formControlName="editleadname_gid" [items]="GetLeaddropdown_list"
+                                bindLabel="leadbank_name" bindValue="leadbank_gid" placeholder="Select Lead"
+                                class="custom col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-2"  (change)="lead_details()">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <!-- <div *ngIf="editleadname_gid.invalid && (editleadname_gid.dirty || editleadname_gid.touched)">
+                        <div *ngIf="editleadname_gid.errors?.['required']">
+                            <span style="color:red;">lead is required.</span>
+                        </div>
+                    </div>
+                    <div *ngIf="editleadname_gid.invalid && (editleadname_gid.dirty ||editleadname_gid .touched)">
+                        <div *ngIf="editleadname_gid.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format.</span>
+                        </div>
+                    </div> -->
+                    <br>
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <span class="font-bold mb-1"><b>Contact Details</b></span>
+                            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                                <textarea class="form-control form-control-lg form-control-solid custom-input
+                                mb-3 mb-lg-0 bg-secondary custom-input
+                              " class="form-control bg-secondary" style="height:120px;" [value]="leadbank_details"
+                                    readonly>
+                                </textarea>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col-12 col-lg-6">
+                            <div class="row"><span class="font-bold"><b>Appointment</b><span
+                                        class="ms-1 text-red">*</span></span>
+                                <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                                    <input formControlName="editappointment_timing" type="date" class="
+                            form-control form-control-lg form-control-solid
+                            custom-input
+                            mb-3 mb-lg-0
+                            bg-white
+                            custom-input date-picker
+                           " [ngStyle]="{
+                             'border-color':
+                             editappointment_timing.invalid && editappointment_timing.touched
+                                 ? 'red'
+                                 : 'rgb(209, 209, 209)'
+                           }" pattern="^(?!\s*$).+" name="editappointment_timing" required />
+                                </div>
+                            </div>
+                            <div
+                                *ngIf="editappointment_timing.invalid && (editappointment_timing.dirty || editappointment_timing.touched)">
+                                <div *ngIf="editappointment_timing.errors?.['required']">
+                                    <span style="color:red;">Opportunity time is required.</span>
+                                </div>
+                            </div>
+                            <div
+                                *ngIf="editappointment_timing.invalid && (editappointment_timing.dirty || editappointment_timing.touched)">
+                                <div *ngIf="editappointment_timing.errors?.['pattern']">
+                                    <span style="color:red;">Invalid Format.</span>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row"><span class="font-bold"><b>Bussines Vertical</b><span
+                                        class="ms-1 text-red">*</span></span>
+                                <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-0 d-flex ">
+                                    <ng-select formControlName="editbussiness_verticle"
+                                        [items]="Getbussinessverticledropdown_list" bindLabel="business_vertical"
+                                        bindValue="businessvertical_gid" placeholder="Select Bussines Verticle"
+                                        [class.is-invalid]="
+                                        editbussiness_verticle.invalid && (editbussiness_verticle.dirty || editbussiness_verticle.touched) "
+                                        class="custom col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-2">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div
+                                *ngIf="editbussiness_verticle.invalid && (editbussiness_verticle.dirty || editbussiness_verticle.touched)">
+                                <div *ngIf="editbussiness_verticle.errors?.['required']">
+                                    <span style="color:red;"> |Bussines Verticle is required.</span>
+                                </div>
+                            </div>
+                            <div
+                                *ngIf="editbussiness_verticle.invalid && (editbussiness_verticle.dirty ||editbussiness_verticle .touched)">
+                                <div *ngIf="editbussiness_verticle.errors?.['pattern']">
+                                    <span style="color:red;">Invalid Format.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="text-center my-4">
+                        <button [disabled]="EditreactiveForm.invalid" (click)="editsubmit()"
+                            [ngStyle]="{ 'cursor': EditreactiveForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !EditreactiveForm.invalid,
+                        'btn-secondary text-white': EditreactiveForm.invalid }" data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5 "></i> &nbsp;Update
+                        </button> &nbsp;&nbsp;
+                        <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+                            <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!---Remarks New popup-->
+<div class="modal fade" id="myModalUpdateimage2" tabindex="-1" data-bs-backdrop='static'
+    aria-labelledby="editamlcategoryLabel" aria-hidden="true" data-bs-keyboard="false">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content">
+            <div class="card-header p-1 pb-1 pt-1 rounded-top bg-primary"
+                style="display: flex; align-items: center; height: 40px;">
+                <h3 style="color: white; font-weight: bold; text-align: left; width: 100%; margin-left: 10px;">
+                    {{leadbank_namepop}}</h3>
+            </div>
+
+
+            <div class="modal-body">
+                <div class="col-12 col-lg-3 col-md-6 col-lg-12">
+                    <div style="max-height: 300px;overflow-y: scroll;">
+                        <span class="fw-bold">Lead Title: </span>
+                        <p class="mt-2 wrap-text" style="max-width: 100%; overflow: auto; max-height: 200px;">
+                            {{lead_titlepop}}</p>
+                        <div class="col-12 col-lg-3 col-md-6 col-lg-12">
+                            <span class="fw-bold">Appointment: </span>
+                            <p class="mt-2 wrap-text" style="max-width: 100%; overflow: auto; max-height: 200px;">
+                                {{appointment_datepop}}</p>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="text-center my-4">
+                        <button class="btn-danger btn-sm text-white me-2" data-bs-dismiss="modal"
+                            style="background-color: red;">
+                            <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>&nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

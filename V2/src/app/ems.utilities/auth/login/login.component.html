@@ -1,0 +1,3552 @@
+<div *ngIf="companycode==='default';then default"></div>
+<div *ngIf="companycode==='boba';then bobalogin"></div>
+<div *ngIf="companycode==='manoj_bhavan';then manojbhavan"></div>
+<div *ngIf="companycode==='vcidex';then vcidex"></div>
+<div *ngIf="companycode==='noqu';then noqu"></div>
+<div *ngIf="companycode==='capwing';then capwing"></div>
+<div *ngIf="companycode==='saha';then saha"></div>
+<div *ngIf="companycode==='media';then media"></div>
+<div *ngIf="companycode==='techone';then techone"></div>
+<div *ngIf="companycode==='figurati';then figurati"></div>
+<div *ngIf="companycode==='narpavi';then narpavi"></div>
+<div *ngIf="companycode==='ionicpharma';then ionicpharma"></div>
+<div *ngIf="companycode==='boba_tea';then boba_tea"></div>
+<div *ngIf="companycode==='sangeetha';then sangeetha"></div>
+<div *ngIf="companycode==='aar_kay';then aar_kay"></div>
+<div *ngIf="companycode==='handpicked';then handpicked"></div>
+
+
+
+<ng-template #default>
+  <div class="d-flex flex-column flex-lg-row flex-column-fluid" style="background-image: url('./assets/media/logos/NewStoryboardLogo.png');background-size: cover; background-attachment: fixed; /* Cover the entire page */
+  background-position: center; /* Center the background image */
+  background-attachment: absolute; height: 100vh;">
+    <!-- sides order -->
+    <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-2">
+      <!-- Login outer -->
+      <div class="d-flex flex-column flex-lg-row-fluid align-items-end me-4">
+        <!--begin::Wrapper-->
+        <div class="<?php echo $params['wrapperClass']?> p-10">
+          <!--begin::Form-->
+          <!-- shadow -->
+
+          <div class="  w-lg-450px  bg-body rounded shadow-lg p-10 p-lg-30">
+            <!-- Form starts -->
+            <form class="form w-100" [formGroup]="loginForm" novalidate="novalidate" id="kt_login_signin_form"
+              (ngSubmit)="submit()">
+
+              <!-- Logo start -->
+              <div class="text-center ">
+                <span>
+                  <img src="./assets/media/logos/storyboardsystem_logos.png" class="h-75px w-280px"
+                    style="margin-top: -19px;" alt="Logo">
+                </span>
+              </div>
+              <!-- Logo end -->
+
+              <!-- Heading -->
+              <div class="text-center mb-3">
+                <h5 class="text-dark mx-5 ">LOGIN TO CONTINUE</h5>
+              </div>
+              <!-- Heading end -->
+              <div *ngIf="companycode;then companyblock; else userblock;"> </div>
+              <ng-template #companyblock>
+                <!-- Input fields start  with Company Code -->
+                <!-- Company code -->
+                <div class="fv-row mb-8 " style="padding-top:-10px; margin-bottom:0px">
+                  <div class="input-group mb-4 " style="padding-top:-20px;margin-bottom:1px !important;">
+                    <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-building text-black"></i></span>
+                    <div class="form-floating mb-0.5">
+                      <input class="form-control bg-transparent padding_custom" type="text" name="company_code"
+                        formControlName="company_code" [(ngModel)]="company_code" placeholder="Enter CompanyCode"
+                        autocomplete="off" [ngClass]="{'is-invalid': submitted  && loginForm.controls.company_code.errors ,
+                   'is-valid': submitted && loginForm.controls.company_code.valid }" />
+                      <label for="floatingInput" class="text-center">Company Code</label>
+                    </div>
+
+
+                  </div>
+
+                  <!-- Company code error message -->
+                  <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.company_code.errors "
+                    class="text-red">
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.company_code.errors.required">
+                      Company Code is required
+                    </div>
+
+                  </div>
+
+                </div>
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px;margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent padding_custom" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+           'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">User Code</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div class="input-group mb-4" *ngIf="submitted && loginForm.controls.user_code.errors "
+                      class="text-red">
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        User code is required
+                      </div>
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.pattern">
+                        Invalid User Code
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+          'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-red">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <ng-template #userblock>
+                <!-- Input fields star without Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px; margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+         'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">UserCode</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div *ngIf="submitted && loginForm.controls.user_code.errors " class="text-danger">
+                      <div *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        Usercode is required
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+        'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-danger">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <div class="d-grid mb-10;">
+                <button type="submit" id="kt_sign_in_submit" class="button " (click)="submitted=true">
+                  <span class="indicator-label">Login</span>
+
+                </button>
+              </div><br>
+              <a data-bs-toggle="modal" href="#" id="forgot" data-bs-target="#myModalforgotpassword">&nbsp;Forgot
+                Password</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;
+              <!-- <a data-bs-toggle="modal" href="#" id="forgot" style="margin-left:160px;"
+                data-bs-target="#myModalresetpassword">&nbsp;Reset Password</a> -->
+
+              <!-- Button -->
+
+              <!--begin::Separator-->
+              <div class="separator separator-content my-12" style="margin-top:80px">
+                <span class="w-250px text-gray-500 fw-semibold fs-6">or login with </span>
+              </div>
+              <!--end::Separator-->
+              <!-- lable and Link -->
+              <div class="text-gray-500 text-center fw-semibold fs-6" style="margin-top:2px">
+                <a routerLink="">
+                  <i class="fa fa-user-circle fs-2x text-primary"></i>
+                  &nbsp;
+                  <i class="fa-brands fa-x-twitter fs-2x"></i> &nbsp;
+
+                  <i class="fa-brands fa-facebook fs-2x text-primary"></i>
+                </a>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Background image -->
+
+    <!-- <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+
+        <img class="" src="./assets/media/logos/Storyboard_Systems.jpg" alt="image" class="responsive w-305 h-5 " />
+
+      </div>
+
+    </div> -->
+
+  </div>
+</ng-template>
+
+<ng-template #aar_kay>
+  <div class="d-flex flex-column flex-lg-row flex-column-fluid " style="background-image: url('./assets/media/logos/aar_kay login logo.jpg');background-size: cover; background-attachment: fixed; /* Cover the entire page */
+  background-position: center; /* Center the background image */ 
+  background-attachment: absolute; height: 100vh;">
+    <!-- sides order -->
+    <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-2">
+      <!-- Login outer -->
+      <div class="d-flex flex-column flex-lg-row-fluid align-items-end me-4">
+        <!--begin::Wrapper-->
+        <div class="<?php echo $params['wrapperClass']?> p-10">
+          <!--begin::Form-->
+          <!-- shadow -->
+
+          <div class="  w-lg-450px  bg-body rounded shadow-lg p-10 p-lg-30">
+            <!-- Form starts -->
+            <form class="form w-100" [formGroup]="loginForm" novalidate="novalidate" id="kt_login_signin_form"
+              (ngSubmit)="submit()">
+
+              <!-- Logo start -->
+              <div class="text-center mb-10 h-30px">
+                <span>
+                  <img src="./assets/media/logos/aarkaycompany.png" class="h-75px w-280px"
+                    style="margin-top: -19px;" alt="Logo">
+                </span>
+              </div>
+              <!-- Logo end -->
+
+              <!-- Heading -->
+              <div class="text-center mb-3 h-50px">
+                <br>
+                <h5 class="text-dark mb-2 ">LOGIN TO CONTINUE</h5>
+              </div>
+              <!-- Heading end -->
+              <div *ngIf="companycode;then companyblock; else userblock;"> </div>
+              <ng-template #companyblock>
+                <!-- Input fields start  with Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px;margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent padding_custom" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+           'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">User Code</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div class="input-group mb-4" *ngIf="submitted && loginForm.controls.user_code.errors "
+                      class="text-red">
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        User code is required
+                      </div>
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.pattern">
+                        Invalid User Code
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+          'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-red">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <ng-template #userblock>
+                <!-- Input fields star without Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px; margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+         'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">UserCode</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div *ngIf="submitted && loginForm.controls.user_code.errors " class="text-danger">
+                      <div *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        Usercode is required
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+        'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-danger">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <div class="d-grid mb-10;">
+                <button type="submit" id="kt_sign_in_submit" class="button " (click)="submitted=true">
+                  <span class="indicator-label">Login</span>
+
+                </button>
+              </div><br>
+              <a data-bs-toggle="modal" href="#" id="forgot" data-bs-target="#myModalforgotpassword">&nbsp;Forgot
+                Password</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;
+              <!-- <a data-bs-toggle="modal" href="#" id="forgot" style="margin-left:160px;"
+                data-bs-target="#myModalresetpassword">&nbsp;Reset Password</a> -->
+                <br> <br>
+
+              <!-- Button -->
+
+              <!--begin::Separator-->
+              <div class="separator separator-content my-12" style="margin-top:80px">
+                <span class="w-250px text-gray-500 fw-semibold fs-6">or login with </span>
+              </div>
+              <!--end::Separator-->
+              <!-- lable and Link -->
+              <div class="text-gray-500 text-center fw-semibold fs-6" style="margin-top:2px">
+                <a routerLink="">
+                  <i class="fa fa-user-circle fs-2x text-primary"></i>
+                  &nbsp;
+                  <i class="fa-brands fa-x-twitter fs-2x"></i> &nbsp;
+
+                  <i class="fa-brands fa-facebook fs-2x text-primary"></i>
+                </a>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- Background image -->
+    <!-- 
+    <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+
+        <img class="" src="./assets/media/logos/Storyboard_Systems.jpg" alt="image" class="responsive w-305 h-5 " />
+
+      </div>
+
+    </div> -->
+
+  </div>
+</ng-template>
+
+
+<ng-template #vcidex>
+  <div class="d-flex flex-column flex-lg-row flex-column-fluid " style="background-image: url('./assets/media/logos/NewStoryboardLogo.png');background-size: cover; background-attachment: fixed; /* Cover the entire page */
+  background-position: center; /* Center the background image */
+  background-attachment: absolute; height: 100vh;">
+    <!-- sides order -->
+    <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-2">
+      <!-- Login outer -->
+      <div class="d-flex flex-column flex-lg-row-fluid align-items-end me-4">
+        <!--begin::Wrapper-->
+        <div class="<?php echo $params['wrapperClass']?> p-10">
+          <!--begin::Form-->
+          <!-- shadow -->
+
+          <div class="  w-lg-450px  bg-body rounded shadow-lg p-10 p-lg-30">
+            <!-- Form starts -->
+            <form class="form w-100" [formGroup]="loginForm" novalidate="novalidate" id="kt_login_signin_form"
+              (ngSubmit)="submit()">
+
+              <!-- Logo start -->
+              <div class="text-center mb-10 h-30px">
+                <span>
+                  <img src="./assets/media/logos/storyboardsystem_logos.png" class="h-78px w-300px"
+                    style="margin-top: -17px;" alt="Logo">
+                </span>
+              </div>
+              <!-- Logo end -->
+
+              <!-- Heading -->
+              <div class="text-center mb-3 h-50px">
+                <br>
+                <h5 class="text-dark mb-2 ">LOGIN TO CONTINUE</h5>
+              </div>
+              <!-- Heading end -->
+              <div *ngIf="companycode;then companyblock; else userblock;"> </div>
+              <ng-template #companyblock>
+                <!-- Input fields start  with Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px;margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent padding_custom" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+           'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">User Code</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div class="input-group mb-4" *ngIf="submitted && loginForm.controls.user_code.errors "
+                      class="text-red">
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        User code is required
+                      </div>
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.pattern">
+                        Invalid User Code
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+          'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-red">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <ng-template #userblock>
+                <!-- Input fields star without Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px; margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+         'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">UserCode</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div *ngIf="submitted && loginForm.controls.user_code.errors " class="text-danger">
+                      <div *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        Usercode is required
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+        'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-danger">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <div class="d-grid mb-10;">
+                <button type="submit" id="kt_sign_in_submit" class="button " (click)="submitted=true">
+                  <span class="indicator-label">Login</span>
+
+                </button>
+              </div><br>
+              <a data-bs-toggle="modal" href="#" id="forgot" data-bs-target="#myModalforgotpassword">&nbsp;Forgot
+                Password</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;
+              <!-- <a data-bs-toggle="modal" href="#" id="forgot" style="margin-left:160px;"
+                data-bs-target="#myModalresetpassword">&nbsp;Reset Password</a> -->
+                <br> <br>
+
+              <!-- Button -->
+
+              <!--begin::Separator-->
+              <div class="separator separator-content my-12" style="margin-top:80px">
+                <span class="w-250px text-gray-500 fw-semibold fs-6">or login with </span>
+              </div>
+              <!--end::Separator-->
+              <!-- lable and Link -->
+              <div class="text-gray-500 text-center fw-semibold fs-6" style="margin-top:2px">
+                <a routerLink="">
+                  <i class="fa fa-user-circle fs-2x text-primary"></i>
+                  &nbsp;
+                  <i class="fa-brands fa-x-twitter fs-2x"></i> &nbsp;
+
+                  <i class="fa-brands fa-facebook fs-2x text-primary"></i>
+                </a>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- Background image -->
+    <!-- 
+    <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+
+        <img class="" src="./assets/media/logos/Storyboard_Systems.jpg" alt="image" class="responsive w-305 h-5 " />
+
+      </div>
+
+    </div> -->
+
+  </div>
+</ng-template>
+
+<ng-template #ionicpharma>
+  <div class="d-flex flex-column flex-lg-row flex-column-fluid " style="background-image: url('./assets/media/logos/ionicloginlogo.png');background-size: cover; background-attachment: fixed; /* Cover the entire page */
+  background-position: center; /* Center the background image */
+  background-attachment: absolute; height: 100vh;">
+    <!-- sides order -->
+    <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-2">
+      <!-- Login outer -->
+      <div class="d-flex flex-column flex-lg-row-fluid align-items-end me-4">
+        <!--begin::Wrapper-->
+        <div class="<?php echo $params['wrapperClass']?> p-10">
+          <!--begin::Form-->
+          <!-- shadow -->
+
+          <div class="  w-lg-450px  bg-body rounded shadow-lg p-10 p-lg-30">
+            <!-- Form starts -->
+            <form class="form w-100" [formGroup]="loginForm" novalidate="novalidate" id="kt_login_signin_form"
+              (ngSubmit)="submit()">
+
+              <!-- Logo start -->
+              <div class="text-center mb-10 h-30px">
+                <span>
+                  <img src="./assets/media/logos/iconicmainogo.png" class="h-48px w-200px" style="margin-top: -77px;"
+                    alt="Logo">
+                </span>
+              </div>
+              <!-- Logo end -->
+
+              <!-- Heading -->
+              <div class="text-center mb-3 h-50px">
+                <br>
+                <h5 class="text-dark mb-2 ">LOGIN TO CONTINUE</h5>
+              </div>
+              <!-- Heading end -->
+              <div *ngIf="companycode;then companyblock; else userblock;"> </div>
+              <ng-template #companyblock>
+                <!-- Input fields start  with Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px;margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent padding_custom" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+           'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">User Code</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div class="input-group mb-4" *ngIf="submitted && loginForm.controls.user_code.errors "
+                      class="text-red">
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        User code is required
+                      </div>
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.pattern">
+                        Invalid User Code
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+          'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-red">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <ng-template #userblock>
+                <!-- Input fields star without Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px; margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+         'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">UserCode</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div *ngIf="submitted && loginForm.controls.user_code.errors " class="text-danger">
+                      <div *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        Usercode is required
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+        'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-danger">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <div class="d-grid mb-10;">
+                <button type="submit" id="kt_sign_in_submit" class="button " (click)="submitted=true">
+                  <span class="indicator-label">Login</span>
+
+                </button>
+              </div><br>
+              <a data-bs-toggle="modal" href="#" id="forgot" data-bs-target="#myModalforgotpassword">&nbsp;Forgot
+                Password</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;
+              <!-- <a data-bs-toggle="modal" href="#" id="forgot" style="margin-left:160px;"
+                data-bs-target="#myModalresetpassword">&nbsp;Reset Password</a> -->
+                <br> <br>
+
+              <!-- Button -->
+
+              <!--begin::Separator-->
+              <div class="separator separator-content my-12" style="margin-top:80px">
+                <span class="w-250px text-gray-500 fw-semibold fs-6">or login with </span>
+              </div>
+              <!--end::Separator-->
+              <!-- lable and Link -->
+              <div class="text-gray-500 text-center fw-semibold fs-6" style="margin-top:2px">
+                <a routerLink="">
+                  <i class="fa fa-user-circle fs-2x text-primary"></i>
+                  &nbsp;
+                  <i class="fa-brands fa-x-twitter fs-2x"></i> &nbsp;
+
+                  <i class="fa-brands fa-facebook fs-2x text-primary"></i>
+                </a>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- Background image -->
+    <!-- 
+    <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+
+        <img class="" src="./assets/media/logos/Storyboard_Systems.jpg" alt="image" class="responsive w-305 h-5 " />
+
+      </div>
+
+    </div> -->
+
+  </div>
+</ng-template>
+
+<ng-template #techone>
+  <div class="d-flex flex-column flex-lg-row flex-column-fluid" style="background-image: url('./assets/media/logos/Techoneservices.png');background-size: cover; background-attachment: fixed; /* Cover the entire page */
+  background-position: center; /* Center the background image */
+  background-attachment: absolute; height: 100vh;">
+    <!-- sides order -->
+    <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-2">
+      <!-- Login outer -->
+      <div class="d-flex flex-column flex-lg-row-fluid align-items-end me-4">
+        <!--begin::Wrapper-->
+        <div class="<?php echo $params['wrapperClass']?> p-10">
+          <!--begin::Form-->
+          <!-- shadow -->
+
+          <div class="  w-lg-450px  bg-body rounded shadow-lg p-10 p-lg-30">
+            <!-- Form starts -->
+            <form class="form w-100" [formGroup]="loginForm" novalidate="novalidate" id="kt_login_signin_form"
+              (ngSubmit)="submit()">
+
+              <!-- Logo start -->
+              <div class="text-center mb-10 h-30px">
+                <span>
+                  <img src="./assets/media/logos/Techones.png" class="h-80px w-170px" style="margin-top: -17px;"
+                    alt="Logo">
+                </span>
+              </div>
+              <!-- Logo end -->
+
+              <!-- Heading -->
+              <div class="text-center mb-3 h-50px">
+                <br>
+                <h5 class="text-dark mb-2 ">LOGIN TO CONTINUE</h5>
+              </div>
+              <!-- Heading end -->
+              <div *ngIf="companycode;then companyblock; else userblock;"> </div>
+              <ng-template #companyblock>
+                <!-- Input fields start  with Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px;margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent padding_custom" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+           'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">User Code</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div class="input-group mb-4" *ngIf="submitted && loginForm.controls.user_code.errors "
+                      class="text-red">
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        User code is required
+                      </div>
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.pattern">
+                        Invalid User Code
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+          'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-red">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <ng-template #userblock>
+                <!-- Input fields star without Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px; margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+         'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">UserCode</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div *ngIf="submitted && loginForm.controls.user_code.errors " class="text-danger">
+                      <div *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        Usercode is required
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+        'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-danger">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <div class="d-grid mb-10;">
+                <button type="submit" id="kt_sign_in_submit" class="button " (click)="submitted=true">
+                  <span class="indicator-label">Login</span>
+
+                </button>
+              </div><br>
+              <a data-bs-toggle="modal" href="#" id="forgot" data-bs-target="#myModalforgotpassword">&nbsp;Forgot
+                Password</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;
+              <!-- <a data-bs-toggle="modal" href="#" id="forgot" style="margin-left:160px;"
+                data-bs-target="#myModalresetpassword">&nbsp;Reset Password</a> -->
+                <br> <br>
+
+              <!-- Button -->
+
+              <!--begin::Separator-->
+              <div class="separator separator-content my-12" style="margin-top:80px">
+                <span class="w-250px text-gray-500 fw-semibold fs-6">or login with </span>
+              </div>
+              <!--end::Separator-->
+              <!-- lable and Link -->
+              <div class="text-gray-500 text-center fw-semibold fs-6" style="margin-top:2px">
+                <a routerLink="">
+                  <i class="fa fa-user-circle fs-2x text-primary"></i>
+                  &nbsp;
+                  <i class="fa-brands fa-x-twitter fs-2x"></i> &nbsp;
+
+                  <i class="fa-brands fa-facebook fs-2x text-primary"></i>
+                </a>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Background image -->
+
+    <!-- <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+  
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+  
+        <img class=""
+        src="./assets/media/logos/manoj_bhavan.png" alt="image" class="responsive w-564 h-20 "
+          />
+  
+      </div>
+  
+    </div> -->
+    <!-- <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+    
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+  
+        <img class=""
+        src="./assets/media/logos/manoj_bhavan.png" alt="image" class="responsive w-75 h-10"
+          />
+  
+      </div>
+  
+    </div> -->
+  </div>
+</ng-template>
+
+<ng-template #figurati>
+  <div class="d-flex flex-column flex-lg-row flex-column-fluid" style="background-image: url('./assets/media/logos/NewStoryboardLogo.png');background-size: cover; background-attachment: fixed; /* Cover the entire page */
+  background-position: center; /* Center the background image */
+  background-attachment: absolute; height: 100vh;">
+    <!-- sides order -->
+    <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-2">
+      <!-- Login outer -->
+      <div class="d-flex flex-column flex-lg-row-fluid align-items-end me-4">
+        <!--begin::Wrapper-->
+        <div class="<?php echo $params['wrapperClass']?> p-10">
+          <!--begin::Form-->
+          <!-- shadow -->
+
+          <div class="  w-lg-450px  bg-body rounded shadow-lg p-10 p-lg-30">
+            <!-- Form starts -->
+            <form class="form w-100" [formGroup]="loginForm" novalidate="novalidate" id="kt_login_signin_form"
+              (ngSubmit)="submit()">
+
+              <!-- Logo start -->
+              <div class="text-center mb-10 h-30px">
+                <span>
+                  <img src="./assets/media/logos/storyboardsystem_logos.png" class="h-78px w-300px"
+                    style="margin-top: -17px;" alt="Logo">
+                </span>
+              </div>
+              <!-- Logo end -->
+
+              <!-- Heading -->
+              <div class="text-center mb-3 h-50px">
+                <br>
+                <h5 class="text-dark mb-2 ">LOGIN TO CONTINUE</h5>
+              </div>
+              <!-- Heading end -->
+              <div *ngIf="companycode;then companyblock; else userblock;"> </div>
+              <ng-template #companyblock>
+                <!-- Input fields start  with Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px;margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent padding_custom" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+           'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">User Code</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div class="input-group mb-4" *ngIf="submitted && loginForm.controls.user_code.errors "
+                      class="text-red">
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        User code is required
+                      </div>
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.pattern">
+                        Invalid User Code
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+          'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-red">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <ng-template #userblock>
+                <!-- Input fields star without Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px; margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+         'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">UserCode</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div *ngIf="submitted && loginForm.controls.user_code.errors " class="text-danger">
+                      <div *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        Usercode is required
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+        'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-danger">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <div class="d-grid mb-10;">
+                <button type="submit" id="kt_sign_in_submit" class="button " (click)="submitted=true">
+                  <span class="indicator-label">Login</span>
+
+                </button>
+              </div><br>
+              <a data-bs-toggle="modal" href="#" id="forgot" data-bs-target="#myModalforgotpassword">&nbsp;Forgot
+                Password</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;
+              <!-- <a data-bs-toggle="modal" href="#" id="forgot" style="margin-left:160px;"
+                data-bs-target="#myModalresetpassword">&nbsp;Reset Password</a> -->
+                <br> <br>
+
+              <!-- Button -->
+
+              <!--begin::Separator-->
+              <div class="separator separator-content my-12" style="margin-top:80px">
+                <span class="w-250px text-gray-500 fw-semibold fs-6">or login with </span>
+              </div>
+              <!--end::Separator-->
+              <!-- lable and Link -->
+              <div class="text-gray-500 text-center fw-semibold fs-6" style="margin-top:2px">
+                <a routerLink="">
+                  <i class="fa fa-user-circle fs-2x text-primary"></i>
+                  &nbsp;
+                  <i class="fa-brands fa-x-twitter fs-2x"></i> &nbsp;
+
+                  <i class="fa-brands fa-facebook fs-2x text-primary"></i>
+                </a>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Background image -->
+
+    <!-- <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+  
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+  
+        <img class=""
+        src="./assets/media/logos/manoj_bhavan.png" alt="image" class="responsive w-564 h-20 "
+          />
+  
+      </div>
+  
+    </div> -->
+    <!-- <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+    
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+  
+        <img class=""
+        src="./assets/media/logos/manoj_bhavan.png" alt="image" class="responsive w-75 h-10"
+          />
+  
+      </div>
+  
+    </div> -->
+  </div>
+</ng-template>
+
+<ng-template #narpavi>
+  <div class="d-flex flex-column flex-lg-row flex-column-fluid" style="background-image: url('./assets/media/logos/Narpavilogo.png');background-size: cover; background-attachment: fixed; /* Cover the entire page */
+  background-position: center; /* Center the background image */
+  background-attachment: absolute; height: 100vh;">
+    <!-- sides order -->
+    <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-2">
+      <!-- Login outer -->
+      <div class="d-flex flex-column flex-lg-row-fluid align-items-end me-4">
+        <!--begin::Wrapper-->
+        <div class="<?php echo $params['wrapperClass']?> p-10">
+          <!--begin::Form-->
+          <!-- shadow -->
+
+          <div class="  w-lg-450px  bg-body rounded shadow-lg p-10 p-lg-30">
+            <!-- Form starts -->
+            <form class="form w-100" [formGroup]="loginForm" novalidate="novalidate" id="kt_login_signin_form"
+              (ngSubmit)="submit()">
+
+              <!-- Logo start -->
+              <div class="text-center mb-10 h-30px">
+                <span>
+                  <img src="./assets/media/logos/Narpavilogos.png" class="h-78px w-300px" style="margin-top: -17px;"
+                    alt="Logo">
+                </span>
+              </div>
+              <!-- Logo end -->
+
+              <!-- Heading -->
+              <div class="text-center mb-3 h-50px">
+                <br>
+                <h5 class="text-dark mb-2 ">LOGIN TO CONTINUE</h5>
+              </div>
+              <!-- Heading end -->
+              <div *ngIf="companycode;then companyblock; else userblock;"> </div>
+              <ng-template #companyblock>
+                <!-- Input fields start  with Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px;margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent padding_custom" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+           'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">User Code</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div class="input-group mb-4" *ngIf="submitted && loginForm.controls.user_code.errors "
+                      class="text-red">
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        User code is required
+                      </div>
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.pattern">
+                        Invalid User Code
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+          'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-red">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <ng-template #userblock>
+                <!-- Input fields star without Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px; margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+         'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">UserCode</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div *ngIf="submitted && loginForm.controls.user_code.errors " class="text-danger">
+                      <div *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        Usercode is required
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+        'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-danger">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <div class="d-grid mb-10;">
+                <button type="submit" id="kt_sign_in_submit" class="button " (click)="submitted=true">
+                  <span class="indicator-label">Login</span>
+
+                </button>
+              </div><br>
+              <a data-bs-toggle="modal" href="#" id="forgot" data-bs-target="#myModalforgotpassword">&nbsp;Forgot
+                Password</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;
+              <!-- <a data-bs-toggle="modal" href="#" id="forgot" style="margin-left:160px;"
+                data-bs-target="#myModalresetpassword">&nbsp;Reset Password</a> -->
+                <br> <br>
+
+              <!-- Button -->
+
+              <!--begin::Separator-->
+              <div class="separator separator-content my-12" style="margin-top:80px">
+                <span class="w-250px text-gray-500 fw-semibold fs-6">or login with </span>
+              </div>
+              <!--end::Separator-->
+              <!-- lable and Link -->
+              <div class="text-gray-500 text-center fw-semibold fs-6" style="margin-top:2px">
+                <a routerLink="">
+                  <i class="fa fa-user-circle fs-2x text-primary"></i>
+                  &nbsp;
+                  <i class="fa-brands fa-x-twitter fs-2x"></i> &nbsp;
+
+                  <i class="fa-brands fa-facebook fs-2x text-primary"></i>
+                </a>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Background image -->
+
+    <!-- <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+  
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+  
+        <img class=""
+        src="./assets/media/logos/manoj_bhavan.png" alt="image" class="responsive w-564 h-20 "
+          />
+  
+      </div>
+  
+    </div> -->
+    <!-- <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+    
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+  
+        <img class=""
+        src="./assets/media/logos/manoj_bhavan.png" alt="image" class="responsive w-75 h-10"
+          />
+  
+      </div>
+  
+    </div> -->
+  </div>
+</ng-template>
+
+<ng-template #bobalogin>
+  <div class="d-flex flex-column flex-lg-row flex-column-fluid "
+    style="width: 100%; height: 100vh;background-color: #f7b39c;">
+    <!-- sides order -->
+    <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-2">
+      <!-- Login outer -->
+      <div class="d-flex flex-center flex-column flex-lg-row-fluid">
+        <!--begin::Wrapper-->
+        <div class="<?php echo $params['wrapperClass']?> p-10">
+          <!--begin::Form-->
+          <!-- shadow -->
+          <div class="w-lg-450px  bg-body rounded shadow-lg p-10 p-lg-30 ">
+            <!-- Form starts -->
+            <form class="form w-100" [formGroup]="loginForm" novalidate="novalidate" id="kt_login_signin_form"
+              (ngSubmit)="submit()">
+
+              <!-- Logo start -->
+              <div class="text-center mb-10 h-30px">
+                <span>
+                  <img src=".\assets\media\logos\Boba_Tea_Company.png" class="h-28px w-150px" style="margin-top: -25px;"
+                    alt="Logo">
+                </span>
+              </div>
+              <!-- Logo end -->
+
+              <!-- Heading -->
+              <div class="text-center mb-3 h-50px">
+                <br><br>
+                <h5 class="text-dark mb-2 ">LOGIN TO CONTINUE</h5>
+              </div>
+              <!-- Heading end -->
+              <!-- Input fields star without Company Code -->
+              <div class=" form-group fv-row mb-10 ">
+                <!-- UserCode -->
+                <div class="fv-row mb-8 ">
+                  <div class="input-group mb-4" style="padding-top:3px; margin-bottom: 0px !important;">
+
+                    <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                  border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                    <div class="form-floating mb-0.5">
+                      <input class="form-control bg-transparent" type="text" name="user_code"
+                        formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+       'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                      <label for="floatingInput" class="text-center">UserCode</label>
+                    </div>
+                  </div>
+                  <!-- User code error message -->
+                  <div *ngIf="submitted && loginForm.controls.user_code.errors " class="text-danger">
+                    <div *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                      Usercode is required
+                    </div>
+                  </div>
+                </div>
+                <!-- Password -->
+                <div class="fv-row mb-3">
+                  <div class="input-group mb-4;margin-bottom: 0px !important;">
+                    <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                  border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                    <div class="form-floating mb-0.5">
+                      <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                        name="user_password" placeholder="Enter Password" autocomplete="off"
+                        formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+      'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                      <label for="floatingInput" class="text-center">User Password</label>
+                    </div>
+                  </div>
+                  <!-- User password error message -->
+                  <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                    class="text-danger">
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                      Password is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Input fields end -->
+              <div class="d-grid mb-10;">
+                <button type="submit" title="Login to Continue" id="kt_sign_in_submit" class="button "
+                  (click)="submitted=true">
+                  <span class="indicator-label">Login</span>
+
+                </button>
+              </div><br>
+              <a data-bs-toggle="modal" href="#" id="forgot" data-bs-target="#myModalforgotpassword" style="color: black;">&nbsp;
+              Forgot Password</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;
+              <!-- <a data-bs-toggle="modal" href="#" id="forgot"
+                style="margin-left:160px;color: black;" data-bs-target="#myModalresetpassword">&nbsp;Reset
+                Password</a> -->
+                <br> <br>
+
+              <!-- Button -->
+
+              <!--begin::Separator-->
+              <div class="separator separator-content my-12" style="margin-top:80px">
+                <span class="w-250px text-gray-500 fw-semibold fs-6">or login with </span>
+              </div>
+              <!--end::Separator-->
+              <!-- lable and Link -->
+              <div class="text-gray-500 text-center fw-semibold fs-6" style="margin-top:2px">
+                <a routerLink="">
+                  <i class="fa fa-user-circle fs-2x" style="color: #6d6d6f;"></i>
+                  &nbsp;
+                  <i class="fa-brands fa-x-twitter fs-2x" style="color: #6d6d6f;"></i> &nbsp;
+
+                  <i class="fa-brands fa-facebook fs-2x" style="color: #6d6d6f;"></i>
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Background image -->
+
+    <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+
+        <img class="" src=".\assets\media\logos\BobaTea_Login.png" alt="image" class="responsive w-75 h-10" />
+
+      </div>
+
+    </div>
+
+  </div>
+</ng-template>
+
+<ng-template #boba_tea>
+  <div class="d-flex flex-column flex-lg-row flex-column-fluid "
+    style="width: 100%; height: 100vh;background-color: #f7b39c;">
+    <!-- sides order -->
+    <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-2">
+      <!-- Login outer -->
+      <div class="d-flex flex-center flex-column flex-lg-row-fluid">
+        <!--begin::Wrapper-->
+        <div class="<?php echo $params['wrapperClass']?> p-10">
+          <!--begin::Form-->
+          <!-- shadow -->
+          <div class="w-lg-450px  bg-body rounded shadow-lg p-10 p-lg-30 ">
+            <!-- Form starts -->
+            <form class="form w-100" [formGroup]="loginForm" novalidate="novalidate" id="kt_login_signin_form"
+              (ngSubmit)="submit()">
+
+              <!-- Logo start -->
+              <div class="text-center mb-10 h-30px">
+                <span>
+                  <img src=".\assets\media\logos\Boba_Tea_Company.png" class="h-28px w-150px" style="margin-top: -25px;"
+                    alt="Logo">
+                </span>
+              </div>
+              <!-- Logo end -->
+
+              <!-- Heading -->
+              <div class="text-center mb-3 h-50px">
+                <br><br>
+                <h5 class="text-dark mb-2 ">LOGIN TO CONTINUE</h5>
+              </div>
+              <!-- Heading end -->
+              <!-- Input fields star without Company Code -->
+              <div class=" form-group fv-row mb-10 ">
+                <!-- UserCode -->
+                <div class="fv-row mb-8 ">
+                  <div class="input-group mb-4" style="padding-top:3px; margin-bottom: 0px !important;">
+
+                    <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                  border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                    <div class="form-floating mb-0.5">
+                      <input class="form-control bg-transparent" type="text" name="user_code"
+                        formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+       'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                      <label for="floatingInput" class="text-center">UserCode</label>
+                    </div>
+                  </div>
+                  <!-- User code error message -->
+                  <div *ngIf="submitted && loginForm.controls.user_code.errors " class="text-danger">
+                    <div *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                      Usercode is required
+                    </div>
+                  </div>
+                </div>
+                <!-- Password -->
+                <div class="fv-row mb-3">
+                  <div class="input-group mb-4;margin-bottom: 0px !important;">
+                    <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                  border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                    <div class="form-floating mb-0.5">
+                      <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                        name="user_password" placeholder="Enter Password" autocomplete="off"
+                        formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+      'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                      <label for="floatingInput" class="text-center">User Password</label>
+                    </div>
+                  </div>
+                  <!-- User password error message -->
+                  <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                    class="text-danger">
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                      Password is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Input fields end -->
+              <div class="d-grid mb-10;">
+                <button type="submit" title="Login to Continue" id="kt_sign_in_submit" class="button "
+                  (click)="submitted=true">
+                  <span class="indicator-label">Login</span>
+
+                </button>
+              </div><br>
+              <a data-bs-toggle="modal" href="#" id="forgot" data-bs-target="#myModalforgotpassword" tyle="color: black;">&nbsp;Forgot 
+              Password</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;
+              <!-- <a data-bs-toggle="modal" href="#" id="forgot"
+                style="margin-left:160px;color: black;" data-bs-target="#myModalresetpassword">&nbsp;Reset
+                Password</a> -->
+                <br> <br>
+
+              <!-- Button -->
+
+              <!--begin::Separator-->
+              <div class="separator separator-content my-12" style="margin-top:80px">
+                <span class="w-250px text-gray-500 fw-semibold fs-6">or login with </span>
+              </div>
+              <!--end::Separator-->
+              <!-- lable and Link -->
+              <div class="text-gray-500 text-center fw-semibold fs-6" style="margin-top:2px">
+                <a routerLink="">
+                  <i class="fa fa-user-circle fs-2x" style="color: #6d6d6f;"></i>
+                  &nbsp;
+                  <i class="fa-brands fa-x-twitter fs-2x" style="color: #6d6d6f;"></i> &nbsp;
+
+                  <i class="fa-brands fa-facebook fs-2x" style="color: #6d6d6f;"></i>
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Background image -->
+
+    <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+
+        <img class="" src=".\assets\media\logos\BobaTea_Login.png" alt="image" class="responsive w-75 h-10" />
+
+      </div>
+
+    </div>
+
+  </div>
+</ng-template>
+
+<ng-template #manojbhavan>
+  <div class="d-flex flex-column flex-lg-row flex-column-fluid" style="background-image: url('./assets/media/logos/manoj_bhavan_mainLogo_2.png');background-size: cover; background-attachment: fixed; /* Cover the entire page */
+  background-position: center; /* Center the background image */
+  background-attachment: absolute; height: 100vh;">
+    <!-- sides order -->
+    <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-2">
+      <!-- Login outer -->
+      <div class="d-flex flex-column flex-lg-row-fluid align-items-end me-4">
+        <!--begin::Wrapper-->
+        <div class="<?php echo $params['wrapperClass']?> p-10">
+          <!--begin::Form-->
+          <!-- shadow -->
+
+          <div class="  w-lg-450px  bg-body rounded shadow-lg p-10 p-lg-30">
+            <!-- Form starts -->
+            <form class="form w-100" [formGroup]="loginForm" novalidate="novalidate" id="kt_login_signin_form"
+              (ngSubmit)="submit()">
+
+              <!-- Logo start -->
+              <div class="text-center mb-10 h-30px">
+                <span>
+                  <img src="./assets/media/logos/manoj_bhavan_login_logo.png" class="h-78px w-150px"
+                    style="margin-top: -17px;" alt="Logo">
+                </span>
+              </div>
+              <!-- Logo end -->
+
+              <!-- Heading -->
+              <div class="text-center mb-3 h-50px">
+                <br>
+                <h5 class="text-dark mb-2 ">LOGIN TO CONTINUE</h5>
+              </div>
+              <!-- Heading end -->
+              <div *ngIf="companycode;then companyblock; else userblock;"> </div>
+              <ng-template #companyblock>
+                <!-- Input fields start  with Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px;margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent padding_custom" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+           'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">User Code</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div class="input-group mb-4" *ngIf="submitted && loginForm.controls.user_code.errors "
+                      class="text-red">
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        User code is required
+                      </div>
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.pattern">
+                        Invalid User Code
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+          'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-red">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <ng-template #userblock>
+                <!-- Input fields star without Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px; margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+         'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">UserCode</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div *ngIf="submitted && loginForm.controls.user_code.errors " class="text-danger">
+                      <div *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        Usercode is required
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+        'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-danger">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <div class="d-grid mb-10;">
+                <button type="submit" id="kt_sign_in_submit" class="button " (click)="submitted=true">
+                  <span class="indicator-label">Login</span>
+
+                </button>
+              </div><br>
+              <a data-bs-toggle="modal" href="#" id="forgot" data-bs-target="#myModalforgotpassword">&nbsp;Forgot
+                Password</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;
+              <!-- <a data-bs-toggle="modal" href="#" id="forgot" style="margin-left:160px;"
+                data-bs-target="#myModalresetpassword">&nbsp;Reset Password</a> -->
+                <br> <br>
+
+              <!-- Button -->
+
+              <!--begin::Separator-->
+              <div class="separator separator-content my-12" style="margin-top:80px">
+                <span class="w-250px text-gray-500 fw-semibold fs-6">or login with </span>
+              </div>
+              <!--end::Separator-->
+              <!-- lable and Link -->
+              <div class="text-gray-500 text-center fw-semibold fs-6" style="margin-top:2px">
+                <a routerLink="">
+                  <i class="fa fa-user-circle fs-2x text-primary"></i>
+                  &nbsp;
+                  <i class="fa-brands fa-x-twitter fs-2x"></i> &nbsp;
+
+                  <i class="fa-brands fa-facebook fs-2x text-primary"></i>
+                </a>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Background image -->
+
+    <!-- <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+  
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+  
+        <img class=""
+        src="./assets/media/logos/manoj_bhavan.png" alt="image" class="responsive w-564 h-20 "
+          />
+  
+      </div>
+  
+    </div> -->
+    <!-- <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+    
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+  
+        <img class=""
+        src="./assets/media/logos/manoj_bhavan.png" alt="image" class="responsive w-75 h-10"
+          />
+  
+      </div>
+  
+    </div> -->
+  </div>
+</ng-template>
+
+<ng-template #saha>
+  <div class="d-flex flex-column flex-lg-row flex-column-fluid" style="background-image: url('./assets/media/logos/saha_login.png');background-size: cover; background-attachment: fixed; /* Cover the entire page */
+  background-position: center; /* Center the background image */
+  background-attachment: absolute; height: 100vh;">
+    <!-- sides order -->
+    <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-2">
+      <!-- Login outer -->
+      <div class="d-flex flex-column flex-lg-row-fluid align-items-end me-4">
+        <!--begin::Wrapper-->
+        <div class="<?php echo $params['wrapperClass']?> p-10">
+          <!--begin::Form-->
+          <!-- shadow -->
+
+          <div class="  w-lg-450px  bg-body rounded shadow-lg p-10 p-lg-30">
+            <!-- Form starts -->
+            <form class="form w-100" [formGroup]="loginForm" novalidate="novalidate" id="kt_login_signin_form"
+              (ngSubmit)="submit()">
+
+              <!-- Logo start -->
+              <div class="text-center mb-10 h-30px">
+                <span>
+                  <img src="./assets/media/logos/saha_toplogo.png" class="h-100px w-150px" style="margin-top: -17px;"
+                    alt="Logo">
+                </span>
+              </div>
+              <!-- Logo end -->
+
+              <!-- Heading -->
+              <div class="text-center mb-3 h-50px">
+                <br>
+                <h5 class="text-dark mb-2 ">LOGIN TO CONTINUE</h5>
+              </div>
+              <!-- Heading end -->
+              <div *ngIf="companycode;then companyblock; else userblock;"> </div>
+              <ng-template #companyblock>
+                <!-- Input fields start  with Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px;margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent padding_custom" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+           'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">User Code</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div class="input-group mb-4" *ngIf="submitted && loginForm.controls.user_code.errors "
+                      class="text-red">
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        User code is required
+                      </div>
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.pattern">
+                        Invalid User Code
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+          'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-red">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <ng-template #userblock>
+                <!-- Input fields star without Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px; margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+         'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">UserCode</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div *ngIf="submitted && loginForm.controls.user_code.errors " class="text-danger">
+                      <div *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        Usercode is required
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+        'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-danger">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <div class="d-grid mb-10;">
+                <button type="submit" id="kt_sign_in_submit" class="button " (click)="submitted=true">
+                  <span class="indicator-label">Login</span>
+                </button>
+              </div><br>
+              <a data-bs-toggle="modal" href="#" id="forgot" data-bs-target="#myModalforgotpassword">&nbsp;Forgot
+                Password</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;
+              <!-- <a data-bs-toggle="modal" href="#" id="forgot" style="margin-left:160px;"
+                data-bs-target="#myModalresetpassword">&nbsp;Reset Password</a> -->
+                <br> <br>
+              <!-- Button -->
+              <!--begin::Separator-->
+              <div class="separator separator-content my-12" style="margin-top:80px">
+                <span class="w-250px text-gray-500 fw-semibold fs-6">or login with </span>
+              </div>
+              <!--end::Separator-->
+              <!-- lable and Link -->
+              <div class="text-gray-500 text-center fw-semibold fs-6" style="margin-top:2px">
+                <a routerLink="">
+                  <i class="fa fa-user-circle fs-2x text-primary"></i>
+                  &nbsp;
+                  <i class="fa-brands fa-x-twitter fs-2x"></i> &nbsp;
+                  <i class="fa-brands fa-facebook fs-2x text-primary"></i>
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Background image -->
+
+    <!-- <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+  
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+  
+        <img class=""
+        src="./assets/media/logos/manoj_bhavan.png" alt="image" class="responsive w-564 h-20 "
+          />
+  
+      </div>
+  
+    </div> -->
+    <!-- <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+    
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+  
+        <img class=""
+        src="./assets/media/logos/manoj_bhavan.png" alt="image" class="responsive w-75 h-10"
+          />
+  
+      </div>
+  
+    </div> -->
+  </div>
+</ng-template>
+
+<ng-template #vcidex>
+  <div class="d-flex flex-column flex-lg-row flex-column-fluid " style="background-image: url('./assets/media/logos/NewStoryboardLogo.png');background-size: cover; background-attachment: fixed; /* Cover the entire page */
+  background-position: center; /* Center the background image */
+  background-attachment: absolute; height: 100vh;">
+    <!-- sides order -->
+    <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-2">
+      <!-- Login outer -->
+      <div class="d-flex flex-column flex-lg-row-fluid align-items-end me-4">
+        <!--begin::Wrapper-->
+        <div class="<?php echo $params['wrapperClass']?> p-10">
+          <!--begin::Form-->
+          <!-- shadow -->
+
+          <div class="  w-lg-450px  bg-body rounded shadow-lg p-10 p-lg-30">
+            <!-- Form starts -->
+            <form class="form w-100" [formGroup]="loginForm" novalidate="novalidate" id="kt_login_signin_form"
+              (ngSubmit)="submit()">
+
+              <!-- Logo start -->
+              <div class="text-center mb-10 h-30px">
+                <span>
+                  <img src="./assets/media/logos/storyboardsystem_logos.png" class="h-78px w-300px"
+                    style="margin-top: -17px;" alt="Logo">
+                </span>
+              </div>
+              <!-- Logo end -->
+
+              <!-- Heading -->
+              <div class="text-center mb-3 h-50px">
+                <br>
+                <h5 class="text-dark mb-2 ">LOGIN TO CONTINUE</h5>
+              </div>
+              <!-- Heading end -->
+              <div *ngIf="companycode;then companyblock; else userblock;"> </div>
+              <ng-template #companyblock>
+                <!-- Input fields start  with Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px;margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent padding_custom" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+           'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">User Code</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div class="input-group mb-4" *ngIf="submitted && loginForm.controls.user_code.errors "
+                      class="text-red">
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        User code is required
+                      </div>
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.pattern">
+                        Invalid User Code
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+          'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-red">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <ng-template #userblock>
+                <!-- Input fields star without Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px; margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+         'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">UserCode</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div *ngIf="submitted && loginForm.controls.user_code.errors " class="text-danger">
+                      <div *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        Usercode is required
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+        'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-danger">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <div class="d-grid mb-10;">
+                <button type="submit" id="kt_sign_in_submit" class="button " (click)="submitted=true">
+                  <span class="indicator-label">Login</span>
+
+                </button>
+              </div><br>
+              <a data-bs-toggle="modal" href="#" id="forgot" data-bs-target="#myModalforgotpassword">&nbsp;Forgot
+                Password</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;
+              <!-- <a data-bs-toggle="modal" href="#" id="forgot" style="margin-left:160px;"
+                data-bs-target="#myModalresetpassword">&nbsp;Reset Password</a> -->
+                <br> <br>
+
+              <!-- Button -->
+
+              <!--begin::Separator-->
+              <div class="separator separator-content my-12" style="margin-top:80px">
+                <span class="w-250px text-gray-500 fw-semibold fs-6">or login with </span>
+              </div>
+              <!--end::Separator-->
+              <!-- lable and Link -->
+              <div class="text-gray-500 text-center fw-semibold fs-6" style="margin-top:2px">
+                <a routerLink="">
+                  <i class="fa fa-user-circle fs-2x text-primary"></i>
+                  &nbsp;
+                  <i class="fa-brands fa-x-twitter fs-2x"></i> &nbsp;
+
+                  <i class="fa-brands fa-facebook fs-2x text-primary"></i>
+                </a>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- Background image -->
+    <!-- 
+    <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+
+        <img class="" src="./assets/media/logos/Storyboard_Systems.jpg" alt="image" class="responsive w-305 h-5 " />
+
+      </div>
+
+    </div> -->
+
+  </div>
+</ng-template>
+<ng-template #noqu>
+  <div class="d-flex flex-column flex-lg-row flex-column-fluid " style="width: 100%; height: 100vh;">
+    <!-- sides order -->
+    <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-2">
+      <!-- Login outer -->
+      <div class="d-flex flex-center flex-column flex-lg-row-fluid">
+        <!--begin::Wrapper-->
+        <div class="<?php echo $params['wrapperClass']?> p-10">
+          <!--begin::Form-->
+          <!-- shadow -->
+          <div class="w-lg-450px  bg-body rounded shadow-lg p-10 p-lg-30 ">
+            <!-- Form starts -->
+            <form class="form w-100" [formGroup]="loginForm" novalidate="novalidate" id="kt_login_signin_form"
+              (ngSubmit)="submit()">
+
+              <!-- Logo start -->
+              <div class="text-center mb-10 h-30px">
+                <span>
+                  <img src="./assets/media/logos/noqulogo.png" class="h-78px w-300px" style="margin-top: -17px;"
+                    alt="Logo">
+                </span>
+              </div>
+              <!-- Logo end -->
+
+              <!-- Heading -->
+              <div class="text-center mb-3 h-50px">
+                <br>
+              </div>
+              <!-- Heading end -->
+              <!-- Input fields start  with Company Code -->
+              <div class=" form-group fv-row mb-10 ">
+                <!-- Company code -->
+                <div class="fv-row mb-8 " style="padding-top:-10px; margin-bottom:0px">
+                  <div class="input-group mb-4 " style="padding-top:-20px;margin-bottom:1px !important;">
+                    <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-building text-black"></i></span>
+                    <div class="form-floating mb-0.5">
+                      <input class="form-control bg-transparent padding_custom" type="text" name="company_code"
+                        formControlName="company_code" [(ngModel)]="company_code" placeholder="Enter CompanyCode"
+                        autocomplete="off" [ngClass]="{'is-invalid': submitted  && loginForm.controls.company_code.errors ,
+                   'is-valid': submitted && loginForm.controls.company_code.valid }" />
+                      <label for="floatingInput" class="text-center">Company Code</label>
+                    </div>
+
+
+                  </div>
+
+                  <!-- Company code error message -->
+                  <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.company_code.errors "
+                    class="text-red">
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.company_code.errors.required">
+                      Company Code is required
+                    </div>
+
+                  </div>
+
+                </div>
+                <!-- UserCode -->
+                <div class="fv-row mb-8 ">
+                  <div class="input-group mb-4" style="padding-top:3px;margin-bottom: 0px !important;">
+
+                    <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                    <div class="form-floating mb-0.5">
+                      <input class="form-control bg-transparent padding_custom" type="text" name="user_code"
+                        formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+           'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                      <label for="floatingInput" class="text-center">User Code</label>
+                    </div>
+                  </div>
+                  <!-- User code error message -->
+                  <div class="input-group mb-4" *ngIf="submitted && loginForm.controls.user_code.errors "
+                    class="text-red">
+                    <div class="input-group mb-4 text-danger"
+                      *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                      User code is required
+                    </div>
+                    <div class="input-group mb-4 text-danger"
+                      *ngIf="submitted && loginForm.controls.user_code.errors.pattern">
+                      Invalid User Code
+                    </div>
+                  </div>
+                </div>
+                <!-- Password -->
+                <div class="fv-row mb-3">
+                  <div class="input-group mb-4;margin-bottom: 0px !important;">
+                    <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                    <div class="form-floating mb-0.5">
+                      <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                        name="user_password" placeholder="Enter Password" autocomplete="off"
+                        formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+          'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                      <label for="floatingInput" class="text-center">User Password</label>
+                    </div>
+                  </div>
+                  <!-- User password error message -->
+                  <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                    class="text-red">
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                      Password is required
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <!-- Input fields end -->
+              <div class="d-grid mb-10;">
+                <button type="submit" id="kt_sign_in_submit" class="button " (click)="submitted=true">
+                  <span class="indicator-label">Login</span>
+
+                </button>
+              </div><br>
+              <a data-bs-toggle="modal" href="#" id="forgot" data-bs-target="#myModalforgotpassword">&nbsp;Forgot
+                Password</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;
+              <!-- <a data-bs-toggle="modal" href="#" id="forgot" style="margin-left:160px;"
+                data-bs-target="#myModalresetpassword">&nbsp;Reset Password</a> -->
+                <br> <br>
+
+              <!-- Button -->
+
+              <!--begin::Separator-->
+              <div class="separator separator-content my-12" style="margin-top:80px">
+                <span class="w-250px text-gray-500 fw-semibold fs-6">or login with </span>
+              </div>
+              <!--end::Separator-->
+              <!-- lable and Link -->
+              <div class="text-gray-500 text-center fw-semibold fs-6" style="margin-top:2px">
+                <a routerLink="">
+                  <i class="fa fa-user-circle fs-2x text-primary"></i>
+                  &nbsp;
+                  <i class="fa-brands fa-x-twitter fs-2x"></i> &nbsp;
+
+                  <i class="fa-brands fa-facebook fs-2x text-primary"></i>
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Background image -->
+
+    <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+
+        <img class="" src="./assets/media/logos/NoQulogin.jpg" alt="image" class="responsive w-305 h-5 " />
+
+      </div>
+
+    </div>
+
+  </div>
+</ng-template>
+
+<ng-template #capwing>
+  <div class="d-flex flex-column flex-lg-row flex-column-fluid "
+    style="width: 100%; height: 100vh;background-image: url('./assets/media/logos/capwinglogin.png');background-size: cover; background-attachment: fixed; ">
+
+    <!-- sides order -->
+    <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-2">
+      <!-- Login outer -->
+      <div class="d-flex flex-end flex-column flex-lg-row-fluid me-20">
+        <!--begin::Wrapper-->
+        <div class="<?php echo $params['wrapperClass']?>">
+          <!--begin::Form-->
+          <!-- shadow -->
+          <div class="w-lg-450px  bg-body rounded shadow-lg p-10 p-lg-30 ">
+            <!-- Form starts -->
+            <form class="form w-100" [formGroup]="loginForm" novalidate="novalidate" id="kt_login_signin_form"
+              (ngSubmit)="submit()">
+
+              <!-- Logo start -->
+              <div class="text-center mb-10 h-30px">
+                <span>
+                  <img src="./assets/media/logos/capwing_logo.png" class="h-50px w-200px" style="margin-top: -12px;"
+                    alt="Logo">
+                </span>
+              </div>
+              <!-- Logo end -->
+
+              <!-- Heading -->
+              <div class="text-center mb-3 h-50px">
+                <br>
+                <h5 class="text-dark mb-2 ">LOGIN TO CONTINUE</h5>
+              </div>
+              <!-- Heading end -->
+              <!-- Input fields start  with Company Code -->
+              <div class=" form-group fv-row mb-10 ">
+                <!-- UserCode -->
+                <div class="fv-row mb-8 ">
+                  <div class="input-group mb-4" style="padding-top:3px;margin-bottom: 0px !important;">
+
+                    <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                    <div class="form-floating mb-0.5">
+                      <input class="form-control bg-transparent padding_custom" type="text" name="user_code"
+                        formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+           'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                      <label for="floatingInput" class="text-center">User Code</label>
+                    </div>
+                  </div>
+                  <!-- User code error message -->
+                  <div class="input-group mb-4" *ngIf="submitted && loginForm.controls.user_code.errors "
+                    class="text-red">
+                    <div class="input-group mb-4 text-danger"
+                      *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                      User code is required
+                    </div>
+                    <div class="input-group mb-4 text-danger"
+                      *ngIf="submitted && loginForm.controls.user_code.errors.pattern">
+                      Invalid User Code
+                    </div>
+                  </div>
+                </div>
+                <!-- Password -->
+                <div class="fv-row mb-3">
+                  <div class="input-group mb-4;margin-bottom: 0px !important;">
+                    <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                    <div class="form-floating mb-0.5">
+                      <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                        name="user_password" placeholder="Enter Password" autocomplete="off"
+                        formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+          'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                      <label for="floatingInput" class="text-center">User Password</label>
+                    </div>
+                  </div>
+                  <!-- User password error message -->
+                  <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                    class="text-red">
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                      Password is required
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <!-- Input fields end -->
+              <div class="d-grid mb-10;">
+                <button type="submit" id="kt_sign_in_submit" class="button " (click)="submitted=true">
+                  <span class="indicator-label">Login</span>
+
+                </button>
+              </div><br>
+              <a data-bs-toggle="modal" href="#" id="forgot" data-bs-target="#myModalforgotpassword">&nbsp;Forgot
+                Password</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;
+              <!-- <a data-bs-toggle="modal" href="#" id="forgot" style="margin-left:160px;"
+                data-bs-target="#myModalresetpassword">&nbsp;Reset Password</a> -->
+                <br> <br>
+
+              <!-- Button -->
+
+              <!--begin::Separator-->
+              <div class="separator separator-content my-12" style="margin-top:80px">
+                <span class="w-250px text-gray-500 fw-semibold fs-6">or login with </span>
+              </div>
+              <!--end::Separator-->
+              <!-- lable and Link -->
+              <div class="text-gray-500 text-center fw-semibold fs-6" style="margin-top:2px">
+                <a routerLink="">
+                  <i class="fa fa-user-circle fs-2x text-primary"></i>
+                  &nbsp;
+                  <i class="fa-brands fa-x-twitter fs-2x"></i> &nbsp;
+
+                  <i class="fa-brands fa-facebook fs-2x text-primary"></i>
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Background image -->
+
+    <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+
+        <!-- <img class="" src="./assets/media/logos/Storyboard_Systems.jpg" alt="image" class="responsive w-305 h-5 " /> -->
+
+      </div>
+
+    </div>
+
+  </div>
+</ng-template>
+
+<ng-template #media>
+  <div class="d-flex flex-column flex-lg-row flex-column-fluid " style="width: 100%; height: 100vh;">
+    <!-- sides order -->
+    <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-2">
+      <!-- Login outer -->
+      <div class="d-flex flex-center flex-column flex-lg-row-fluid">
+        <!--begin::Wrapper-->
+        <div class="<?php echo $params['wrapperClass']?> p-10">
+          <!--begin::Form-->
+          <!-- shadow -->
+          <div class="w-lg-450px  bg-body rounded shadow-lg p-10 p-lg-30 ">
+            <!-- Form starts -->
+            <form class="form w-100" [formGroup]="loginForm" novalidate="novalidate" id="kt_login_signin_form"
+              (ngSubmit)="submit()">
+
+              <!-- Logo start -->
+              <div class="text-center mb-10 h-30px">
+                <span>
+                  <img src="./assets/media/logos/MediaLink_Logo.png" class="h-65px w-200px" style="margin-top: -17px;"
+                    alt="Logo">
+                </span>
+              </div>
+              <!-- Logo end -->
+
+              <!-- Heading -->
+              <div class="text-center mb-3 h-50px">
+                <br>
+                <h5 class="text-dark mb-2 ">LOGIN TO CONTINUE</h5>
+              </div>
+              <!-- Heading end -->
+              <!-- Input fields start  with Company Code -->
+              <div class=" form-group fv-row mb-10 ">
+                <!-- UserCode -->
+                <div class="fv-row mb-8 ">
+                  <div class="input-group mb-4" style="padding-top:3px;margin-bottom: 0px !important;">
+
+                    <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                    <div class="form-floating mb-0.5">
+                      <input class="form-control bg-transparent padding_custom" type="text" name="user_code"
+                        formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+           'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                      <label for="floatingInput" class="text-center">User Code</label>
+                    </div>
+                  </div>
+                  <!-- User code error message -->
+                  <div class="input-group mb-4" *ngIf="submitted && loginForm.controls.user_code.errors "
+                    class="text-red">
+                    <div class="input-group mb-4 text-danger"
+                      *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                      User code is required
+                    </div>
+                    <div class="input-group mb-4 text-danger"
+                      *ngIf="submitted && loginForm.controls.user_code.errors.pattern">
+                      Invalid User Code
+                    </div>
+                  </div>
+                </div>
+                <!-- Password -->
+                <div class="fv-row mb-3">
+                  <div class="input-group mb-4;margin-bottom: 0px !important;">
+                    <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                    <div class="form-floating mb-0.5">
+                      <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                        name="user_password" placeholder="Enter Password" autocomplete="off"
+                        formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+          'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                      <label for="floatingInput" class="text-center">User Password</label>
+                    </div>
+                  </div>
+                  <!-- User password error message -->
+                  <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                    class="text-red">
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                      Password is required
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <!-- Input fields end -->
+              <div class="d-grid mb-10;">
+                <button type="submit" id="kt_sign_in_submit" class="button " (click)="submitted=true">
+                  <span class="indicator-label">Login</span>
+
+                </button>
+              </div><br>
+              <a data-bs-toggle="modal" href="#" id="forgot" data-bs-target="#myModalforgotpassword">&nbsp;Forgot
+                Password</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;
+              <!-- <a data-bs-toggle="modal" href="#" id="forgot" style="margin-left:160px;"
+                data-bs-target="#myModalresetpassword">&nbsp;Reset Password</a> -->
+                <br> <br>
+
+              <!-- Button -->
+
+              <!--begin::Separator-->
+              <div class="separator separator-content my-12" style="margin-top:80px">
+                <span class="w-250px text-gray-500 fw-semibold fs-6">or login with </span>
+              </div>
+              <!--end::Separator-->
+              <!-- lable and Link -->
+              <div class="text-gray-500 text-center fw-semibold fs-6" style="margin-top:2px">
+                <a routerLink="">
+                  <i class="fa fa-user-circle fs-2x text-primary"></i>
+                  &nbsp;
+                  <i class="fa-brands fa-x-twitter fs-2x"></i> &nbsp;
+
+                  <i class="fa-brands fa-facebook fs-2x text-primary"></i>
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Background image -->
+
+    <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+
+        <img class="" src="./assets/media/logos/Media Link.gif" alt="image" class="responsive w-305 h-5 " />
+
+      </div>
+
+    </div>
+
+  </div>
+</ng-template>
+
+<ng-template #sangeetha>
+  <div class="d-flex flex-column flex-lg-row flex-column-fluid" style="background-image: url('./assets/media/logos/sangeetha_mainlogo.png');background-size: cover; background-attachment: fixed; /* Cover the entire page */
+  background-position: center; /* Center the background image */
+  background-attachment: absolute; height: 100vh;">
+    <!-- sides order -->
+    <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-2">
+      <!-- Login outer -->
+      <div class="d-flex flex-column flex-lg-row-fluid align-items-end me-4">
+        <!--begin::Wrapper-->
+        <div class="<?php echo $params['wrapperClass']?> p-10">
+          <!--begin::Form-->
+          <!-- shadow -->
+
+          <div class="  w-lg-450px  bg-body rounded shadow-lg p-10 p-lg-30">
+            <!-- Form starts -->
+            <form class="form w-100" [formGroup]="loginForm" novalidate="novalidate" id="kt_login_signin_form"
+              (ngSubmit)="submit()">
+
+              <!-- Logo start -->
+              <div class="text-center mb-10 h-30px ">
+                <span>
+                  <img src="./assets/media/logos/sangeetha_mainlogo_2.png" class="h-78px w-150px mt-5"
+                    style="margin-top: -17px;" alt="Logo">
+                </span>
+              </div>
+              <!-- Logo end -->
+
+              <!-- Heading -->
+              <div class="text-center mb-3 h-50px">
+                <br>
+                <h5 class="text-dark mb-2 ">LOGIN TO CONTINUE</h5>
+              </div>
+              <!-- Heading end -->
+              <div *ngIf="companycode;then companyblock; else userblock;"> </div>
+              <ng-template #companyblock>
+                <!-- Input fields start  with Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px;margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent padding_custom" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+                          'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">User Code</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div class="input-group mb-4" *ngIf="submitted && loginForm.controls.user_code.errors "
+                      class="text-red">
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        User code is required
+                      </div>
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.pattern">
+                        Invalid User Code
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+                          'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-red">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <ng-template #userblock>
+                <!-- Input fields star without Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px; margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+                          'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">UserCode</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div *ngIf="submitted && loginForm.controls.user_code.errors " class="text-danger">
+                      <div *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        Usercode is required
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+        'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-danger">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <div class="d-grid mb-10;">
+                <button type="submit" id="kt_sign_in_submit" class="button " (click)="submitted=true">
+                  <span class="indicator-label">Login</span>
+
+                </button>
+              </div><br>
+              <a data-bs-toggle="modal" href="#" id="forgot" data-bs-target="#myModalforgotpassword">&nbsp;Forgot
+                Password</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;
+              <!-- <a data-bs-toggle="modal" href="#" id="forgot" style="margin-left:160px;"
+                data-bs-target="#myModalresetpassword">&nbsp;Reset Password</a> -->
+                <br> <br>
+
+              <!-- Button -->
+
+              <!--begin::Separator-->
+              <div class="separator separator-content my-12" style="margin-top:80px">
+                <span class="w-250px text-gray-500 fw-semibold fs-6">or login with </span>
+              </div>
+              <!--end::Separator-->
+              <!-- lable and Link -->
+              <div class="text-gray-500 text-center fw-semibold fs-6" style="margin-top:2px">
+                <a routerLink="">
+                  <i class="fa fa-user-circle fs-2x text-primary"></i>
+                  &nbsp;
+                  <i class="fa-brands fa-x-twitter fs-2x"></i> &nbsp;
+
+                  <i class="fa-brands fa-facebook fs-2x text-primary"></i>
+                </a>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Background image -->
+
+    <!-- <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+  
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+  
+        <img class=""
+        src="./assets/media/logos/manoj_bhavan.png" alt="image" class="responsive w-564 h-20 "
+          />
+  
+      </div>
+  
+    </div> -->
+    <!-- <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+    
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+  
+        <img class=""
+        src="./assets/media/logos/manoj_bhavan.png" alt="image" class="responsive w-75 h-10"
+          />
+  
+      </div>
+  
+    </div> -->
+  </div>
+</ng-template>
+<ng-template #handpicked>
+  <div class="d-flex flex-column flex-lg-row flex-column-fluid" style="background-image: url('./assets/media/logos/handpickedlogo.png');background-size: cover; background-attachment: fixed; /* Cover the entire page */
+  background-position: center; /* Center the background image */
+  background-attachment: absolute; height: 100vh;">
+    <!-- sides order -->
+    <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-2">
+      <!-- Login outer -->
+      <div class="d-flex flex-column flex-lg-row-fluid align-items-end me-4">
+        <!--begin::Wrapper-->
+        <div class="<?php echo $params['wrapperClass']?> p-10">
+          <!--begin::Form-->
+          <!-- shadow -->
+
+          <div class="  w-lg-450px  bg-body rounded shadow-lg p-10 p-lg-30">
+            <!-- Form starts -->
+            <form class="form w-100" [formGroup]="loginForm" novalidate="novalidate" id="kt_login_signin_form"
+              (ngSubmit)="submit()">
+
+              <!-- Logo start -->
+              <div class="text-center mb-10 h-30px ">
+                <span>
+                  <img src="./assets/media/logos/handpickedlogos.png" class="h-78px w-150px mt-5"
+                    style="margin-top: -17px;" alt="Logo">
+                </span>
+              </div>
+              <!-- Logo end -->
+
+              <!-- Heading -->
+              <br>
+              <div class="text-center mb-3 h-50px">
+                <br>
+                <h5 class="text-dark mb-2 ">LOGIN TO CONTINUE</h5>
+              </div>
+              <!-- Heading end -->
+              <div *ngIf="companycode;then companyblock; else userblock;"> </div>
+              <ng-template #companyblock>
+                <!-- Input fields start  with Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px;margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent padding_custom" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+                          'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">User Code</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div class="input-group mb-4" *ngIf="submitted && loginForm.controls.user_code.errors "
+                      class="text-red">
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        User code is required
+                      </div>
+                      <div class="input-group mb-4 text-danger"
+                        *ngIf="submitted && loginForm.controls.user_code.errors.pattern">
+                        Invalid User Code
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                      border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+                          'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-red">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <ng-template #userblock>
+                <!-- Input fields star without Company Code -->
+                <div class=" form-group fv-row mb-10 ">
+                  <!-- UserCode -->
+                  <div class="fv-row mb-8 ">
+                    <div class="input-group mb-4" style="padding-top:3px; margin-bottom: 0px !important;">
+
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-user icon text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent" type="text" name="user_code"
+                          formControlName="user_code" autocomplete="off" placeholder="Enter UserCode" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_code.errors ,
+                          'is-valid': submitted && loginForm.controls.user_code.valid }" />
+                        <label for="floatingInput" class="text-center">UserCode</label>
+                      </div>
+                    </div>
+                    <!-- User code error message -->
+                    <div *ngIf="submitted && loginForm.controls.user_code.errors " class="text-danger">
+                      <div *ngIf="submitted && loginForm.controls.user_code.errors.required">
+                        Usercode is required
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password -->
+                  <div class="fv-row mb-3">
+                    <div class="input-group mb-4;margin-bottom: 0px !important;">
+                      <span class="input-group-text" style="border-top-right-radius: 0px !important; 
+                    border-bottom-right-radius: 0px !important;"> <i class="fa fa-lock text-black"></i></span>
+                      <div class="form-floating mb-0.5">
+                        <input class="form-control bg-transparent ng-untouched padding_custom" type="password"
+                          name="user_password" placeholder="Enter Password" autocomplete="off"
+                          formControlName="user_password" [ngClass]="{'is-invalid': submitted && loginForm.controls.user_password.errors,
+        'is-valid': submitted && loginForm.controls.user_password.valid }" />
+                        <label for="floatingInput" class="text-center">User Password</label>
+                      </div>
+                    </div>
+                    <!-- User password error message -->
+                    <div class="input-group mb-2" *ngIf="submitted && loginForm.controls.user_password.errors "
+                      class="text-danger">
+                      <div class="input-group mb-2"
+                        *ngIf="submitted && loginForm.controls.user_password.errors.required">
+                        Password is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Input fields end -->
+              </ng-template>
+              <div class="d-grid mb-10;">
+                <button type="submit" id="kt_sign_in_submit" class="button " (click)="submitted=true">
+                  <span class="indicator-label">Login</span>
+
+                </button>
+              </div><br>
+              <a data-bs-toggle="modal" href="#" id="forgot" data-bs-target="#myModalforgotpassword">&nbsp;Forgot
+                Password</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;
+              <!-- <a data-bs-toggle="modal" href="#" id="forgot" style="margin-left:160px;"
+                data-bs-target="#myModalresetpassword">&nbsp;Reset Password</a> -->
+                <br> <br>
+
+              <!-- Button -->
+
+              <!--begin::Separator-->
+              <div class="separator separator-content my-12" style="margin-top:80px">
+                <span class="w-250px text-gray-500 fw-semibold fs-6">or login with </span>
+              </div>
+              <!--end::Separator-->
+              <!-- lable and Link -->
+              <div class="text-gray-500 text-center fw-semibold fs-6" style="margin-top:2px">
+                <a routerLink="">
+                  <i class="fa fa-user-circle fs-2x text-primary"></i>
+                  &nbsp;
+                  <i class="fa-brands fa-x-twitter fs-2x"></i> &nbsp;
+
+                  <i class="fa-brands fa-facebook fs-2x text-primary"></i>
+                </a>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Background image -->
+
+    <!-- <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+  
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+  
+        <img class=""
+        src="./assets/media/logos/manoj_bhavan.png" alt="image" class="responsive w-564 h-20 "
+          />
+  
+      </div>
+  
+    </div> -->
+    <!-- <div class="d-flex flex-lg-row-fluid h--20px w-lg-10 bgi-size-cover bgi-position-center order-1 order-lg-1 ms-1">
+    
+      <div class=" container d-flex flex-column flex-center py-0 px-10 px-md-0 w-800 h-5 " style="margin-top:10px">
+  
+        <img class=""
+        src="./assets/media/logos/manoj_bhavan.png" alt="image" class="responsive w-75 h-10"
+          />
+  
+      </div>
+  
+    </div> -->
+  </div>
+</ng-template>
+
+<!-- Modal Popup Forgot -->
+<form [formGroup]="reactiveFormforogot" #form="ngForm">
+  <div class="modal top fade" id="myModalforgotpassword" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered ">
+      <div class="modal-content">
+
+        <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+          <div class=" bg-primary rounded-top">
+            <h3 class="p-4 pt-5 text-white fs-2">
+              Forgot Password</h3>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="row" *ngIf="showpasswordemail" [hidden]="cc_flag"><span class="font-bold"><b>Company Code</b><span
+                class="ms-1 text-red">*</span></span>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+
+              <input formControlName="companyid" type="text" (input)="bind()"  class="
+                      form-control form-control-lg form-control-solid
+                      custom-input
+                      mb-3 mb-lg-0
+                      bg-white
+                      custom-input
+                    " [ngStyle]="{
+                      'border-color':
+                      companyid.invalid && companyid.touched
+                          ? 'red'
+                          : 'rgb(209, 209, 209)'
+                    }" placeholder="Enter Company Code" name="companyid" required *ngIf="!emailSent" />
+
+              <p *ngIf="emailSent">{{reactiveFormforogot.get('companyid')?.value}}</p>
+            </div>
+          </div>
+          <div *ngIf="companyid.invalid && (companyid.dirty || companyid.touched)">
+            <div *ngIf="companyid.errors?.['required']">
+              <span style="color:red;">Company Code is required.</span>
+            </div>
+            <div *ngIf="reactiveFormforogot.get('companyid')?.hasError('pattern')" class="text-red ms-2">Space at the
+              beginning is not allowed.</div>
+          </div>
+
+          <div class="row mt-2"><span class="font-bold"><b>User Code</b><span class="ms-1 text-red">*</span></span>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+
+              <input formControlName="usercode" type="text"(input)="codebind($event)" (input)="bind()" class="
+              form-control form-control-lg form-control-solid  
+              custom-input
+              mb-3 mb-lg-0
+              bg-white
+              custom-input
+            " [ngStyle]="{  
+              'border-color':
+              usercode.invalid && usercode.touched
+                  ? 'red'
+                  : 'rgb(209, 209, 209)'
+            }" placeholder="Enter user code" name="usercode" required *ngIf="!emailSent"  />
+            <p *ngIf="emailSent">{{reactiveFormforogot.get('usercode')?.value}}</p>
+            </div>
+            <div *ngIf="usercode.invalid && (usercode.dirty || usercode.touched)">
+              <div *ngIf="usercode.errors?.['required']">
+                <span style="color:red;">User Code is required.</span>
+              </div>
+              <div *ngIf="reactiveFormforogot.get('usercode')?.hasError('pattern')" class="text-red ms-2">Space at the
+                beginning is not allowed.</div>
+            </div>
+            <br>
+          </div>
+
+          <div *ngIf="showpasswordemail" class="col-lg-12 col-sm-12 col-md-12 mt-2">
+            <div class="row d-flex"><span class="font-bold"><b>E-mail</b><span class="ms-1 text-red">*</span></span>
+              <div class="col-lg-10 col-md-10 col-sm-10 mt-2">
+                <input formControlName="forgotportal_emailid" type="text" [(ngModel)]="email" class="
+                  form-control form-control-lg form-control-solid 
+                  custom-input
+                  mb-3 mb-lg-0
+                  bg-white
+                  custom-input
+                " [ngStyle]="{
+                  'border-color':
+                  forgotportal_emailid.invalid && forgotportal_emailid.touched
+                      ? 'red'
+                      : 'rgb(209, 209, 209)'
+                }" placeholder="Enter Email address" name="Email" readonly />
+
+              </div>
+              <div class="col-lg-2   d-flex justify-content-end align-items-center">
+                <button class="btn-success btn-sm text-white"(click)="send()"
+                  [disabled]="!email">
+                  <span class="text-white">Send</span></button>
+              </div>             
+              <div class="ms-1 text-red"
+                *ngIf="forgotportal_emailid.invalid && (forgotportal_emailid.dirty || forgotportal_emailid.touched)">
+                <div *ngIf="forgotportal_emailid.errors?.['required']">
+                  Email is required.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="showpasswordemail" class="col-lg-12 col-sm-12 col-md-12 mt-2">
+            <!-- Header Div -->
+            <div class="row mb-2">
+              <span class="font-bold">
+                <b>Enter One Time Password (OTP)</b>
+                <span class="ms-1 text-red">*</span>
+              </span>
+            </div>          
+            <!-- Input and Button Div -->
+            <div class="row d-flex align-items-center">
+              <div class="col-lg-10 col-md-10 col-sm-10 d-flex align-items-center">
+                
+                <input
+                type="{{ showPassword2 ? 'text' : 'password' }}"  [(ngModel)]="otpcode" 
+                 formControlName="code"
+                  class="form-control form-control-lg form-control-solid custom-input bg-white"
+                  [ngStyle]="{
+                    'border-color': code_forgot.invalid && code_forgot.touched ? 'red' : 'rgb(209, 209, 209)' }"
+                  placeholder="Enter 6 Digit OTP"
+                  name="Code"
+                  required
+                  [readonly]="verificationCompleted"
+                  maxlength="6"/>  
+
+                <button type="button" style="margin-left:0px;background-color: #008CBA;"
+                class="btn btn-sm btn-outline-secondary" (click)="togglePasswordVisibility3()">
+                  <i class="bi"
+                    [ngClass]="{'bi-eye-slash-fill': !showPassword2, 'bi-eye-fill': showPassword2}"
+                    style="color: #ffffff; font-size: 15px;"></i>
+                </button>
+              </div>
+                <div class="col-lg-2 d-flex justify-content-end align-items-center">
+                  <button class="btn-success btn-sm text-white"
+                    (click)="verify()"  [disabled]="!otpcode"> 
+                    <span class="text-white">Verify</span>
+                  </button>
+                </div>
+            </div>          
+            <!-- Error Message Div -->
+            <div class="ms-1 text-red mt-2" *ngIf="code_forgot.invalid && (code_forgot.dirty || code_forgot.touched)">
+              <div *ngIf="code_forgot.errors?.['required']">
+                OTP is required.
+              </div>
+              <div *ngIf="code_forgot.errors?.['minlength'] && !code_forgot.errors?.['required']" class="text-red">
+                OTP must be at least 6 digits long.
+              </div>
+            </div>
+          </div>
+          
+
+          <br>
+          <ng-container *ngIf="show">
+            <div>
+              <label for="forgot_pwd" class="form-label"><b>New Password<span style="color:red"> *</span></b></label>
+              <div class="input-group input-group-sm has-validation">
+                <input type="{{ showPassword1 ? 'text' : 'password' }}"
+                 id="forgot_pwd" formControlName="forgot_pwd"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white"
+                  [ngStyle]="{
+                    'border-color': forgot_pwd.invalid && forgot_pwd.touched ? 'red' : 'rgb(209, 209, 209)'
+                  }"
+                  placeholder="Enter Password" name="forgot_pwd" required maxlength="20" />               
+                 <button type="button" style="margin-left:0px;background-color: #008CBA;"
+                class="btn btn-sm btn-outline-secondary" (click)="togglePasswordVisibility2()">
+                  <i class="bi"
+                    [ngClass]="{'bi-eye-slash-fill': !showPassword1, 'bi-eye-fill': showPassword1}"
+                    style="color: #ffffff; font-size: 15px;"></i>
+                </button>
+              </div>
+              <div class="ms-1 text-red" *ngIf="forgot_pwd.invalid && (forgot_pwd.dirty || forgot_pwd.touched)">
+                <div *ngIf="forgot_pwd.errors?.['required']">
+                  Password is required.
+                </div>
+                <div *ngIf="forgot_pwd.errors?.['pattern'] && !forgot_pwd.errors?.['required'] && !forgot_pwd.errors?.['minlength']"
+                  class="text-red">
+                  Password should contain: At least one upper case letter, one lower case letter, one special character, one number, and a minimum of eight characters.
+                </div>
+              </div>
+            </div>
+            
+            <br>
+            <div>
+              <label for="exampleFormControlTextarea" class="form-label"><b>Confirm New Password</b></label>
+              <div class="input-group input-group-sm has-validation">
+                <input type="{{ showPassword ? 'text' : 'password' }}" id="confirmpassword_forgot"
+                  formControlName="confirmpassword_forgot" class="
+                      form-control form-control-lg form-control-solid
+                      custom-input
+                      mb-3 mb-lg-0
+                      bg-white
+                      custom-input border-secondary" placeholder="Confirm New Password" name="confirmpassword_forgot"
+                  maxlength="20" />               
+                <button type="button" style="margin-left:0px;background-color: #008CBA;"
+                class="btn btn-sm btn-outline-secondary" (click)="togglePasswordVisibility1()">
+                  <i class="bi"
+                    [ngClass]="{'bi-eye-slash-fill': !showPassword, 'bi-eye-fill': showPassword}"
+                    style="color: #ffffff; font-size: 15px;"></i>
+                </button>
+              </div>
+              <!-- Validation message for confirm password -->
+              <div class="ms-1 text-red" *ngIf="passwordMismatch && confirmpassword_forgot.dirty">
+                The new password and confirm password do not match.
+              </div>
+            </div>
+          </ng-container>
+        </div>
+
+
+        <div class="text-center my-4">
+          <button class="btn-success btn-sm text-white me-2" (click)="onforgot()"
+            [disabled]="reactiveFormforogot.invalid" [ngClass]="{
+                    'primary-button': !reactiveFormforogot.invalid,
+                    'secondary-button': reactiveFormforogot.invalid
+                  }" data-bs-dismiss="modal">
+            <i class="fas fa-check text-white fs-5 "></i> &nbsp;Update
+          </button>
+          <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white"></i> &nbsp;Close
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>
+
+
+
+
+
+<!-- Modal Popup Reset -->
+<form [formGroup]="reactiveFormreset" #form="ngForm">
+  <div class="modal top fade" id="myModalresetpassword" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+          <div class=" bg-primary rounded-top">
+            <h3 class="p-4 pt-5 text-white fs-2">
+              Reset Password</h3>
+          </div>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+
+          <div *ngIf="!otpresetbutton" class="row" [hidden]="cc_flag"><span class="font-bold"><b>Company Code</b><span
+                class="ms-1 text-red">*</span></span>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+
+              <input formControlName="companyid_reset" type="text" class="
+                      form-control form-control-lg form-control-solid
+                      custom-input
+                      mb-3 mb-lg-0
+                      bg-white
+                      custom-input
+                    " [ngStyle]="{
+                      'border-color':
+                      companyid_reset.invalid && companyid_reset.touched
+                          ? 'red'
+                          : 'rgb(209, 209, 209)'
+                    }" placeholder="Enter Company Code" name="companyid_reset" required />
+
+            </div>
+
+          </div>
+          <div *ngIf="companyid_reset.invalid && (companyid_reset.dirty || companyid_reset.touched)">
+            <div *ngIf="companyid_reset.errors?.['required']">
+              <span style="color:red;">Company Code is required.</span>
+            </div>
+            <div *ngIf="reactiveFormreset.get('companyid_reset')?.hasError('pattern')" class="text-red ms-2">Space at
+              the
+              beginning is not allowed.</div>
+          </div>
+
+          <div class="row mt-2"><span class="font-bold"><b>User Code</b><span class="ms-1 text-red">*</span></span>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+
+              <input formControlName="usercode_reset" type="text" class="
+                    form-control form-control-lg form-control-solid
+                    custom-input
+                    mb-3 mb-lg-0
+                    bg-white
+                    custom-input
+                  " [ngStyle]="{
+                    'border-color':
+                    usercode_reset.invalid && usercode_reset.touched
+                        ? 'red'
+                        : 'rgb(209, 209, 209)'
+                  }" placeholder="Enter user code" name="usercode_reset" required
+                [readonly]="verificationCompleted1" />
+
+            </div>
+            <div *ngIf="usercode_reset.invalid && (usercode_reset.dirty || usercode_reset.touched)">
+              <div *ngIf="usercode_reset.errors?.['required']">
+                <span style="color:red;">User Code is required.</span>
+              </div>
+              <div *ngIf="reactiveFormreset.get('usercode_reset')?.hasError('pattern')" class="text-red ms-2">Space at
+                the
+                beginning is not allowed.</div>
+            </div>
+            <br>
+          </div>
+
+          <div *ngIf="!otpresetbutton" class="col-lg-12 col-sm-12 col-md-12 mt-2">
+            <div class="row d-flex">
+              <span class="font-bold">
+                <b>Old Password</b>
+                <span class="ms-1 text-red">*</span>
+              </span>
+              <div class="col-lg-10 col-md-10 col-sm-10 mt-2 d-flex align-items-center">
+                <input type="{{ showPassword1 ? 'text' : 'password' }}" formControlName="old_password" class="
+                  form-control form-control-lg form-control-solid 
+                  custom-input
+                  mb-3 mb-lg-0
+                  bg-white
+                  custom-input
+                " [ngStyle]="{
+                  'border-color':
+                  old_password.invalid && old_password.touched
+                      ? 'red'
+                      : 'rgb(209, 209, 209)'
+                }" placeholder="Enter Old Password" name="old_password" required />
+                <!-- <button type="button" style="margin-left:0px; background-color: #008CBA; height: 33px;"
+                  class="btn btn-outline-secondary" (click)="reset.showPassword1 = !reset.showPassword1">
+                  <i class="bi" [ngClass]="{
+                      'bi-eye-fill': !reset.showPassword1,
+                      'bi-eye-slash-fill': reset.showPassword1
+                    }"></i>
+                </button> -->
+
+                <button type="button" style="margin-left:0px;background-color: #008CBA;"
+                class="btn btn-sm btn-outline-secondary" (click)="PasswordVisibility1()">
+                  <i class="bi"
+                    [ngClass]="{'bi-eye-slash-fill': !showPassword1, 'bi-eye-fill': showPassword1}"
+                    style="color: #ffffff; font-size: 15px;"></i>
+                </button>
+              </div>
+           <div class="col-lg-2 d-flex justify-content-end align-items-center">
+                <button class="btn-success btn-sm text-white"
+                  (click)="verifyforreset()">
+                  <span class="text-white">Verify</span>
+                </button>
+              </div>
+              <div *ngIf="
+                      old_password.invalid &&
+                            (old_password.dirty || old_password.touched)
+                          " class="text-red">
+                <div *ngIf="old_password.errors?.['required']">
+                  Old Password is required.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="!otpresetpassword">
+            <label for="password" class="form-label mt-2"><b>New Password<span style="color:red"> *</span></b></label>
+            <div class="input-group input-group-sm has-validation">
+              <input type="{{ showPassword ? 'text' : 'password' }}" id="password" formControlName="password" class="
+                      form-control form-control-lg form-control-solid
+                      custom-input
+                      mb-3 mb-lg-0
+                      bg-white
+                      custom-input
+                    " [ngStyle]="{
+                      'border-color':
+                      password_reset.invalid && password_reset.touched
+                          ? 'red'
+                          : 'rgb(209, 209, 209)'
+                    }" placeholder="Enter New Password" name="password" required maxlength="20" />
+              <button type="button" style="margin-left:0px;background-color: #008CBA;"
+              class="btn btn-sm btn-outline-secondary" (click)="PasswordVisibility2()">
+                <i class="bi"
+                  [ngClass]="{'bi-eye-slash-fill': !showPassword, 'bi-eye-fill': showPassword}"
+                  style="color: #ffffff; font-size: 15px;"></i>
+              </button>
+            </div>
+            <div *ngIf="
+            password_reset.invalid &&
+                  (password_reset.dirty || password_reset.touched)
+                " class="text-red">
+              <div *ngIf="password_reset.errors?.['required']">
+                New Password is required.
+              </div>
+            </div>
+            <div
+              *ngIf="password_reset.errors?.['pattern'] && !password_reset.errors?.['required'] && !password_reset.errors?.['minlength']"
+              class="text-red">
+              Password should contain: "Atleast one upper case letter,
+              one lower case letter, one special character,
+              one number and minimum eight characters".
+            </div>
+          </div>
+
+          <div *ngIf="!otpresetpassword">
+            <label for="exampleFormControlTextarea1" class="form-label mt-2"><b>Confirm New Password</b></label>
+            <div class="input-group input-group-sm has-validation">
+              <input type="{{ showPassword2? 'text' : 'password' }}" id="confirmpassword_reset"
+                formControlName="confirmpassword_reset" class="
+                    form-control form-control-lg form-control-solid
+                    custom-input
+                    mb-3 mb-lg-0
+                    bg-white
+                    custom-input border-secondary" placeholder="Confirm New Password" name="confirmpassword_reset"
+                maxlength="20" />
+             
+              <button type="button" style="margin-left:0px;background-color: #008CBA;"
+              class="btn btn-sm btn-outline-secondary" (click)="PasswordVisibility3()">
+                <i class="bi"
+                  [ngClass]="{'bi-eye-slash-fill': !showPassword2, 'bi-eye-fill': showPassword2}"
+                  style="color: #ffffff; font-size: 15px;"></i>
+              </button>
+            </div>
+            <!-- Validation message for confirm password -->
+            <div class="ms-1 text-red" *ngIf="passwordMismatch1 && confirmpassword_reset.dirty">
+              The new password and confirm password do not match.
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center my-4">
+          <button class="btn-success btn-sm text-white me-2" (click)="onreset()" [disabled]="reactiveFormreset.invalid"
+            [ngClass]="{
+                    'primary-button': !reactiveFormreset.invalid,
+                    'secondary-button': reactiveFormreset.invalid
+                  }" data-bs-dismiss="modal">
+            <i class="fas fa-check text-white fs-5 "></i> &nbsp;Update
+          </button> &nbsp;&nbsp;
+          <button class="btn-danger btn-sm text-white me-4" (click)="onclosereset()" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white"></i> &nbsp;Close
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>
+<div class="modal fade" id="exampleModalsubscribe" tabindex="-1" role="dialog" aria-labelledby="exampleModalsubscribeTitle" aria-hidden="true" style="backdrop-filter: blur(10px); ">
+  <div class="modal-dialog modal-dialog-centered w-50" role="document" >
+    <div class="modal-content" style="border: 4px solid #d9d9d9;">
+      <div class="modal-body pt-0 pb-0" >
+          <i class="fa-solid fa-xmark float-end mt-2 fs-5 cursor-pointer" data-bs-dismiss="modal" style="color: #3fc87c !important;font-size:20px !important"></i>
+
+        <div class="row">
+          <div class="col-lg-6 col-6 me-0 pe-0">
+           
+          <img src="assets/media/Login/subscribe_image.png" alt="subscribe_image" style="border-radius: 8px;width: 100%;" >
+          </div>
+          <div class="col-lg-6 col-6 d-flex align-items-center justify-content-center">
+            <div class="">
+              <h1 class="fw-semibold text-black mb-3" >It's time to <br><span class="" style="color: #3fc87c !important;font-size:40px !important"> Subscribe</span></h1>
+              
+
+              <p style="font-size:12px" class="fw-semibold">Your free trial period of one month has ended. Click the <span class="fw-bold">Subscribe </span>button now!</p>
+             
+              <a href="https://whatsapporder.co.uk/#/payment" target="_blank">
+                  <button class="btn-success btn-sm" style="border-radius: 0px 10px 10px 10px;">Subscribe Now</button>
+
+              </a>
+            
+
+            </div>
+         </div>
+          </div>
+    
+      </div>
+    </div>
+  </div>
+</div>

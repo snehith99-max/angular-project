@@ -1,0 +1,907 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card inbox-card" (click)="actionmenu1()" style="width: 100%;"
+        (click)="$event.stopPropagation(); showOptions = false">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+          <!-- <a routerLink="/crm/CrmSmmGmailDirectInboxSummary" 
+          style="text-decoration: none;"> -->
+         <h5 style="font-weight: bold; margin: 0; color: white;">Sync Inbox</h5>
+       <!-- </a>        -->
+          <div style="cursor: pointer;">
+            <button class="btn me-2 p-1" (click)="$event.stopPropagation(); showOptions = !showOptions">
+              <span class="fa-solid fa-ellipsis-vertical fs-1" style="color: white;"></span>
+            </button>
+            <div *ngIf="showOptions" class="pb-0 rounded bg-white cursor-pointer icon_menu">
+              <div (click)="moveToFolder()" class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal"
+                data-bs-target="#myModaladd"
+                (click)="$event.stopPropagation(); selectAction('add'); showOptions = false">
+                <span><i class="fa-solid fa-folder fs-3 me-5"></i></span>
+                <span [ngClass]="{'selected': selectedAction === 'add'}">Move To Folder</span>
+              </div>
+              <div (click)="moveToTrash()" class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal"
+                data-bs-target="#myModaldelete"
+                (click)="$event.stopPropagation(); selectAction('delete'); showOptions = false">
+                <span><i class="fa-regular fa-trash-can fs-3 me-5"></i></span>
+                <span [ngClass]="{'selected': selectedAction === 'delete'}">Move To Trash</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body inbox-list" (click)="$event.stopPropagation(); showOptions = false">
+          <div class="d-flex justify-content-between align-items-center mb-3" style="margin-top: -15px;">
+            <div class="d-flex align-items-center">
+              <div  class="form-group text-nowrap me-3" style="margin-left: -19px;">
+                <select  id="itemsPerPageSelect" class="form-control" [(ngModel)]="itemsPerPage"
+                  (ngModelChange)="onItemsPerPageChange()" style="width: 43px;height: 30px;">
+                  <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+                </select>
+              </div>
+              <div class="search-container" style="margin-left: -4px;">
+                <div class="search-wrapper">
+                  <i class="search-icon fas fa-search"></i>
+                  <input type="text" class="search-input" placeholder="Search mail" 
+                         [(ngModel)]="searchTerm" (input)="searchEmails()">
+                </div>
+              </div>
+              <!-- <div class="input-group" style="width: 200px;margin-left: 10px;">
+                <input type="text" class="form-control" placeholder="Search Emails" style="height: 30px;" [(ngModel)]="searchTerm"
+                  (input)="searchEmails()">
+              </div> -->
+            </div>
+          </div>
+          <ul class="list-group">
+            <div *ngIf="paginatedEmails && paginatedEmails.length === 0" class="text-center" style="margin-top: 160px;">
+              <span style="font-size: 20px;">No Conversations Here</span>
+            </div>
+            <li class="list-group-item" style="margin-left: -25px;" *ngFor="let email of paginatedEmails"
+              (click)="selectEmail(email)" [class.active]="selectedEmail === email"
+              (mouseenter)="email.isHovered = true" (mouseleave)="email.isHovered = false"
+              [style.border-left-width.px]="selectedEmail === email ? 5 : 0">
+              <div class="email-item d-flex align-items-center">
+                <input type="checkbox"
+                  (click)="$event.stopPropagation(); showOptions = false; toggleCheck(email, $event)"
+                  [(ngModel)]="email.checked" style="margin-right: 10px;" *ngIf="email.isHovered || email.checked">
+                <i class="fas fa-envelope" [class.hidden]="email.isHovered || email.checked"
+                  style="font-size: 18px; margin-right: 10px;"></i>
+                  <div class="email-details" style="flex: 1;">
+                    <ng-container *ngIf="email.sent_date && email.sent_date.trim() !== ''; else noDate">
+                      <div>
+                        <small>
+                          {{ email.from_id.length > 30 ? email.from_id.substring(0, 30) + '...' : email.from_id }}
+                          - </small>
+                        <br *ngIf="email.sent_date">
+                        <small *ngIf="email.sent_date">
+                          {{ email.sent_date }}</small>
+                      </div>
+                      
+                    </ng-container>
+                    <ng-template #noDate>
+                      <div>
+                      <small>{{ email.from_id }}</small>
+                    </div>
+                    </ng-template>
+                    <!-- <label *ngIf="!email.read_flag" style="font-size: 10px; min-width: 200px;">
+                      {{ email.subject.length > 30 ? email.subject.substring(0, 30) + '...' : email.subject }}
+                    </label> -->
+                    <label *ngIf="email.read_flag == 'false' || email.read_flag == 'False'" style="font-size: 10px; min-width: 200px;">
+                      {{ email.subject.length > 30 ? email.subject.substring(0, 30) + '...' : email.subject }}
+                    </label>
+                    <h6 *ngIf="email.read_flag == 'true' || email.read_flag == 'True'" style="font-size: 10px; font-weight: bold; min-width: 200px;">
+                      <b>{{ email.subject.length > 30 ? email.subject.substring(0, 30) + '...' : email.subject }}</b>
+                    </h6>
+                    <h6 *ngIf="email.read_flag === null || email.read_flag === 'null' || email.read_flag === ''" style="font-size: 10px; font-weight: bold; min-width: 200px;">
+                      <b>{{ email.subject.length > 30 ? email.subject.substring(0, 30) + '...' : email.subject }}</b>
+                    </h6>
+                    <!-- <h6 *ngIf="email.read_flag" style="font-size: 10px; font-weight: bold; min-width: 200px;">
+                      <b>{{ email.subject.length > 30 ? email.subject.substring(0, 30) + '...' : email.subject }}</b>
+                    </h6> -->
+                   
+               
+                  </div>
+                  
+              <div *ngIf="selectedEmail === email" style="cursor: pointer;">
+                &nbsp;  &nbsp;   <button style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);"
+                    class="btn me-2 p-1" (click)="$event.stopPropagation(); showOptions1 = !showOptions1">
+                    <span class="fa-solid fa-ellipsis-vertical fs-1" style="color: white;"></span>
+                  </button>
+                  <div *ngIf="showOptions1" class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                    <div (click)="tagEmail(email)" class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal"
+                      data-bs-target="#myModaledittagcustomers"
+                      (click)="$event.stopPropagation(); selectAction('add'); showOptions1 = false">
+                      <span><i class="fa-solid fa-tag fs-3 me-5"></i></span>
+                      &nbsp;<span [ngClass]="{'selected': selectedAction === 'add'}">Tag Customer</span>
+                    </div>
+                    <div (click)="untagEmail(email)" class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal"
+                      data-bs-target="#myModaleditsssdsdsfd"
+                      (click)="$event.stopPropagation(); selectAction('edit'); showOptions1 = false">
+                      <span><i class="fa-solid fa-unlink fs-3 me-5"></i></span>
+                      <span [ngClass]="{'selected': selectedAction === 'edit'}">Untag Customer</span>
+                    </div>
+                    <div class="d-flex p-3 pb-3 Icon_hover" (click)="onclickaddopportunity(email)" data-bs-toggle="modal"
+                      data-bs-target="#Addappointment">
+                      <span><i class="fa fa-plus fs-3 me-5"></i></span>
+                      <span>Add To Opportunity</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+          <pagination class="text-nowrap" style="float: left;" [boundaryLinks]="false" [maxSize]="8"
+            [totalItems]="filteredEmails.length" [itemsPerPage]="itemsPerPage" [(ngModel)]="currentPage"
+            (pageChanged)="pageChanged($event)" [directionLinks]="true" previousText="Previous" nextText="Next">
+          </pagination>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card reply-card" (click)="actionmenu1()" (click)="actionmenu()">
+        <div class="card-header bg-primary text-white"
+          style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="display: flex; align-items: center;">
+            <div class="sender-initial" *ngIf="selectedEmail">{{ getSenderInitial(getEmailFromId(selectedEmail.from_id))
+              }}</div>
+            <h5 style="font-weight: bold; margin: 0; color: white;" *ngIf="selectedEmail">{{
+              getEmailFromId(selectedEmail.from_id) }}</h5>
+          </div>
+        </div>
+
+        <div style="overflow-y: auto;" #scrollContainer>
+          <div *ngIf="selectedEmail; else noEmailSelected">
+            <div class="d-flex flex-column position-relative email-card">
+              <div class="position-absolute top-0 end-0 d-flex align-items-center">
+                <span class="ms-2">{{ selectedEmail.sent_time }}</span> &nbsp; &nbsp;&nbsp;&nbsp;
+                <button (click)="replyButtonClicked(selectedEmail)" class="btn btn-link">
+                  <b><i title="Reply" class="fas fa-reply"></i></b>
+                </button> &nbsp; &nbsp;&nbsp;&nbsp;
+                <button (click)="forwardButtonClicked(selectedEmail,'inbox')" class="btn btn-link">
+                  <b><i title="Forward" class="fas fa-share"></i></b>
+                </button> &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+              </div>
+              <div class="email-card-content">
+
+                <div>
+                  <span class="label">From:</span> {{ selectedEmail.from_id }}
+                </div>
+                
+                <div>
+                  <span class="label">To:</span> {{ selectedEmail.integrated_gmail }}
+                </div>
+                <div *ngIf="selectedEmail.cc">
+                  <span class="label">Cc:</span> {{ selectedEmail.cc }}
+                </div>
+                <div *ngIf="selectedEmail.bcc">
+                  <span class="label">Bcc:</span> {{ selectedEmail.bcc }}
+                </div>
+                <div>
+                  <span class="label">Date:</span> {{ selectedEmail.sent_date }}
+                </div>
+                <div>
+                  <span class="label">Subject:</span> {{ selectedEmail.subject }}
+                </div>
+
+              </div>
+
+              <div *ngIf="selectedEmail.attachement_flag!='N'" class="attachment-container">
+                <div class="text-center" *ngFor="let attachment of gmailapiinboxatatchement_list; let i = index"
+                  class="attachment" (mouseover)="onMouseOver(attachment, i)" (mouseleave)="onMouseLeave()">
+
+                  <div class="attachment-thumbnail text-center">
+                    <i [class]="getIconClass(attachment.original_filename)"
+                      style="font-size: 18px;text-align: center;"></i>
+                  </div>
+
+                  <div class="attachment-info-wrapper">
+                    <div class="attachment-info">
+                      <span class="text-nowrap">{{ attachment.original_filename }}</span>
+                    </div>
+                  </div>
+
+                  <button *ngIf="hoveredAttachment === attachment" (click)="downloadAttachment(attachment)"
+                    class="download-button">
+                    <i class="fas fa-download"></i>
+                  </button>
+                </div>
+              </div>
+
+
+              <div style="text-align: left; overflow-x: hidden; padding-right: 10px;margin-top: -20px;">
+                <span [innerHTML]="second" style=" margin-left: 6px; font-size: 12px;"></span>
+              </div>
+              
+            </div>
+          </div>
+          <div style="margin-top: -5px;"
+            *ngIf="selectedReplmails && selectedReplmails.length > 0; else noReplmailsSelected">
+            <h3 class="reply-mail-details">Reply Mail Details</h3>
+            <div *ngFor="let email of selectedReplmails" class="email-card">
+              <div class="d-flex flex-column position-relative">
+                <div class="position-absolute top-0 end-0 d-flex align-items-center">
+                  <span class="ms-2">{{ email.sent_time }}</span>
+                  <div class="email-actions flex-row">
+                    <!-- <button class="btn btn-link">
+                    <b><i title="Reply" class="fas fa-reply"></i></b>
+                  </button> -->
+                    <button class="btn btn-link" (click)="forwardButtonClicked(email,'reply')">
+                      <b><i title="Forward" class="fas fa-share"></i></b>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="email-body">
+                <div class="email-card-content">
+
+                  <div>
+                    <span class="label">To:</span> {{ email.from_id }}
+                  </div>
+                  <div *ngIf="email.cc">
+                    <span class="label">Cc:</span> {{ email.cc }}
+                  </div>
+                  <div *ngIf="email.bcc">
+                    <span class="label">Bcc:</span> {{ email.bcc }}
+                  </div>
+                  <div>
+                    <span class="label">Date:</span> {{ email.sent_date }}
+                  </div>
+                  <div>
+                    <span class="label">Subject:</span> {{ email.subject }}
+                  </div>
+
+                </div>
+
+                <div *ngIf="email.attachement_flag!='N'" class="attachment-container">
+                  <div class="text-center" *ngFor="let attachment of email.attachments; let i = index"
+                    class="attachment" (mouseover)="onMouseOver(attachment, i)" (mouseleave)="onMouseLeave()">
+
+                    <div class="attachment-thumbnail text-center">
+                      <i [class]="getIconClass(attachment.original_filename)"
+                        style="font-size: 18px;text-align: center;"></i>
+                    </div>
+
+                    <div class="attachment-info-wrapper">
+                      <div class="attachment-info">
+                        <span class="text-nowrap">{{ attachment.original_filename }}</span>
+                      </div>
+                    </div>
+
+                    <button *ngIf="hoveredAttachment === attachment" (click)="downloadAttachment(attachment)"
+                      class="download-button">
+                      <i class="fas fa-download"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- <div class="email-body-text" style="text-align: left;">
+                  <span [innerHTML]="email.body" style="max-width: 90px; display: inline-block; margin-left: 6px;"></span>
+                </div> -->
+                <div style="text-align: left;">
+                  <span [innerHTML]="email.body"
+                    style="display: inline-block; margin-left: 6px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"></span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <ng-template #noReplmailsSelected>
+            <!-- <p>No emails selected for reply.</p> -->
+          </ng-template>
+          <div style="margin-top: -5px;"
+            *ngIf="selectedFwdmails && selectedFwdmails.length > 0; else noFwdmailsSelected">
+            <h3 class="reply-mail-details">Forward Mail Details</h3>
+            <div *ngFor="let email of selectedFwdmails" class="email-card">
+              <div class="d-flex flex-column position-relative">
+                <div class="position-absolute top-0 end-0 d-flex align-items-center">
+                  <span class="ms-2">{{ email.sent_time }}</span>
+                  <div class="email-actions flex-row">
+                    <!-- <button class="btn btn-link">
+                    <b><i title="Reply" class="fas fa-reply"></i></b>
+                  </button> -->
+                    <button class="btn btn-link" (click)="forwardofButton(email,'reply')">
+                      <b><i title="Forward" class="fas fa-share"></i></b>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="email-body">
+                <div class="email-card-content">
+                  <div>
+                    <span class="label">To:</span> {{ email.to_id }}
+                  </div>
+                  <div>
+                    <span class="label">Date:</span> {{ email.sent_date }}
+                  </div>
+                  <div>
+                    <span class="label">Subject:</span> {{ email.subject }}
+                  </div>
+
+                </div>
+
+                <div *ngIf="email.attachement_flag!='N'" class="attachment-container">
+                  <div class="text-center" *ngFor="let attachment of email.attachments; let i = index"
+                    class="attachment" (mouseover)="onMouseOver(attachment, i)" (mouseleave)="onMouseLeave()">
+
+                    <div class="attachment-thumbnail text-center">
+                      <i [class]="getIconClass(attachment.original_filename)"
+                        style="font-size: 18px;text-align: center;"></i>
+                    </div>
+
+                    <div class="attachment-info-wrapper">
+                      <div class="attachment-info">
+                        <span class="text-nowrap">{{ attachment.original_filename }}</span>
+                      </div>
+                    </div>
+
+                    <button *ngIf="hoveredAttachment === attachment" (click)="downloadAttachment(attachment)"
+                      class="download-button">
+                      <i class="fas fa-download"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- <div class="email-body-text" style="text-align: left;">
+                  <span [innerHTML]="email.body" style="max-width: 90px; display: inline-block; margin-left: 6px;"></span>
+                </div> -->
+                <div style="text-align: left;">
+                  <span [innerHTML]="email.body"
+                    style=" display: inline-block; margin-left: 6px;"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ng-template #noFwdmailsSelected>
+            <!-- <p>No emails selected for reply.</p> -->
+          </ng-template>
+          <div class="d-flex flex-column position-relative email-card" *ngIf="selectedEmail">
+            <div>
+              <div class="tab-container" style="margin-top: 10px;">
+                <div class="tab" #emailTab [ngClass]="{'active': isEmailTabActive}" (click)="toggleTab('email')">
+                  <i class="fas fa-envelope"></i> Email
+                </div>
+                <div class="tab" [ngClass]="{'active': isCommentTabActive}" (click)="toggleTab('comment')">
+                  <i class="fas fa-comment"></i> Comment
+                </div>
+              </div>
+              <div class="email-tab-content" *ngIf="isEmailTabActive">
+                <div >
+                  <div *ngIf="isReply" style="display: flex; align-items: center; margin-bottom: 5px;">
+                    <b style="margin-right: 10px;">To:</b>&nbsp;&nbsp;
+                    <input type="text" class="form-control" [(ngModel)]="replytoid" style="width: 580px;" [ngClass]="{ 'invalid-input': !validateEmails(replytoid) }" />
+                  
+                  
+                  </div>
+                  <div *ngIf="!validateEmails(replytoid)" style="color:red;margin-left: 20px;">
+                     
+                    Invaild To Email Format.</div>
+                  
+                
+                  <div *ngIf="isReply">
+          
+                    <div *ngIf="selectedEmail.cc" style="display: flex; align-items: center; margin-bottom: 5px;">
+                      <b style="margin-right: 10px;">Cc:</b>&nbsp;&nbsp;
+                      <input type="text" class="form-control" [(ngModel)]="replyccid" style="width: 580px;" [ngClass]="{ 'invalid-input':!validateEmails(replyccid) }" />
+                     
+                    </div>
+                    <div *ngIf="selectedEmail.cc" >
+                      <div *ngIf="!validateEmails(replyccid)" style="color:red;margin-left: 20px;">
+                        Invalid Cc Email Format.
+                      </div>
+                    </div>
+                    
+                    <div *ngIf="!selectedEmail.cc" style="display: flex; align-items: center; margin-bottom: 5px;">
+                      <b style="margin-right: 10px;">Cc:</b>&nbsp;&nbsp;
+                      <input type="text" class="form-control" [(ngModel)]="replyccid" style="width: 580px;" 
+                             [ngClass]="{ 'invalid-input': replyccid &&!validateEmails(replyccid) }" />
+                      
+                    </div>
+                    <div *ngIf="!selectedEmail.cc">
+                      <div *ngIf="replyccid &&!validateEmails(replyccid)" style="color:red;margin-left: 20px;">
+                        Invalid Cc Email Format.
+                      </div>
+                    </div>
+                    <div *ngIf="selectedEmail.bcc" style="display: flex; align-items: center; margin-bottom: 5px;">
+                      <b style="margin-right: 10px;">Bcc:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <input type="text" class="form-control" [(ngModel)]="replybccid" style="width: 580px;" [ngClass]="{ 'invalid-input':!validateEmails(replybccid) }" />
+                     
+                    </div>
+                    <div *ngIf="selectedEmail.bcc" >
+                      <div *ngIf="!validateEmails(replybccid)" style="color:red;margin-left: 20px;">
+                        Invalid Cc Email Format.
+                      </div>
+                    </div>
+                    
+                    <div *ngIf="!selectedEmail.bcc" style="display: flex; align-items: center; margin-bottom: 5px;">
+                      <b style="margin-right: 10px;">Bcc:</b>
+                      <input type="text" class="form-control" [(ngModel)]="replybccid" style="width: 580px;" 
+                             [ngClass]="{ 'invalid-input': replybccid &&!validateEmails(replybccid) }" />
+                      
+                    </div>
+                    <div *ngIf="!selectedEmail.bcc">
+                      <div *ngIf="replybccid &&!validateEmails(replybccid)" style="color:red;margin-left: 20px;">
+                        Invalid Cc Email Format.
+                      </div>
+                    </div>
+                  </div>
+               
+                  <div *ngIf="isForward" style="display: flex; align-items: center; margin-bottom: 5px;">
+                    <b style="margin-right: 10px;">To:</b>
+                    <input type="text" [(ngModel)]="forwardto" [ngClass]="{ 'invalid-input': forwardto &&!validateEmails(forwardto) }"  class="form-control" style="width: 580px;" />
+                  </div>
+                  <div  *ngIf="isForward">
+                  <div *ngIf="forwardto &&!validateEmails(forwardto)" style="color:red;margin-left: 20px;">
+                    Invalid To Email Format.
+                  </div>
+                </div>
+                  <div *ngIf="isForwardFwd" style="display: flex; align-items: center; margin-bottom: 5px;">
+                    <b style="margin-right: 10px;">To:</b>
+                    <input type="text" [(ngModel)]="forwardto" [ngClass]="{ 'invalid-input': forwardto &&!validateEmails(forwardto) }"   class="form-control" style="width: 580px;" />
+                  </div>
+                  <div  *ngIf="isForwardFwd">
+                    <div *ngIf="forwardto &&!validateEmails(forwardto)" style="color:red;margin-left: 20px;">
+                      Invalid To Email Format.
+                    </div>
+                  </div>
+                  <div *ngIf="isForward" style="display: flex; align-items: center;">
+                    <b style="margin-right: 10px;">Subject: </b>Fwd: {{ subject }}
+                  </div>
+                  <div *ngIf="isForwardFwd" style="display: flex; align-items: center;">
+                    <b style="margin-right: 10px;">Subject: </b>Fwd: {{ subject }}
+                  </div>
+                  <div *ngIf="isReply" style="display: flex; align-items: center;">
+                    <b style="margin-right: 10px;">Subject: </b>Re: {{ selectedEmail.subject }}
+                  </div>
+                  <div *ngIf="isReply">
+                    <b style="margin-right: 10px;">Body: </b>
+                    <angular-editor [config]="config_compose_mail" [(ngModel)]="emailBody"></angular-editor>
+                  </div>
+                  <div class="comment-body" *ngIf="!isReply && !isForward && !isForwardFwd">
+                    <p>Click Reply/Forward Button to Compose Message</p>
+
+
+                  </div>
+               
+
+                  <div class="comment-body" *ngIf="isForward">
+                    <b style="margin-right: 10px;">Body: </b>
+                    <angular-editor [config]="config_compose_mail" [(ngModel)]="emailBody"></angular-editor>
+                  </div>
+                  <div class="comment-body" *ngIf="isForwardFwd">
+                    <b style="margin-right: 10px;">Body: </b>
+                    <angular-editor [config]="config_compose_mail" [(ngModel)]="emailBody"></angular-editor>
+                  </div>
+                  <div *ngIf="isReply" class="comment-footer d-flex align-items-center justify-content-between">
+                    <div class="file-attachment d-flex align-items-center" style="margin-top: 10px;">
+                      <label for="file-upload-forward" class="btn btn-secondary mb-0">
+                        <i style="font-size: 24px;" class="fas fa-paperclip"></i>
+                      </label>
+                      <input type="file" id="file-upload-forward" #fileInput name="attachments"
+                        accept=".xlsx,image/png,image/jpeg,.docx,.pdf,.txt," style="display: none;" multiple
+                        (change)="onFilesSelected($event)">
+                      <div class="file-names ms-2">
+                        <span *ngFor="let fileName of selectedFileNames" class="file-name d-block">{{ fileName }}</span>
+                      </div>
+                    </div>
+                    <button class="comment-footer" (click)="replyToEmail()">Reply</button>
+                  </div>
+                  <div *ngIf="isForward" class="comment-footer d-flex align-items-center justify-content-between">
+                    <div class="file-attachment d-flex align-items-center">
+                    </div>
+                    <button class="comment-footer" (click)="forwardToEmail()">Forward</button>
+
+
+                  </div>
+                  <div *ngIf="isForwardFwd" class="comment-footer d-flex align-items-center justify-content-between">
+                    <div class="file-attachment d-flex align-items-center">
+                    </div>
+                    <button class="comment-footer" (click)="forwardToFwdEmail()">Forward</button>
+
+
+                  </div>
+                </div>
+              </div>
+              <div class="comment-tab-content" *ngIf="isCommentTabActive">
+                <div>
+                  <!-- <div class="comment-body">
+                    <angular-editor [config]="config_compose_mail" formControlName="gmail_body"></angular-editor>
+                  </div>
+                  <div class="comment-footer">
+                    <button>Add comment</button>
+                  </div> -->
+                  <div class="my-comments-section">
+                    <!-- Add Comment Section -->
+                    <div class="my-add-comment">
+                      <div class="my-card-body" style="margin-top: -16px;">
+                        <textarea [(ngModel)]="newComment" class="form-control"
+                          placeholder="Type Something..."></textarea>
+                        <div class="my-comment-footer">
+                          <button (click)="addComment()">Add Comment</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Comments List -->
+                    <div class="my-comment-list" style="margin-top: -1px;">
+                      <div *ngFor="let comment of gmailcomments_list; let i = index"
+                        class="my-comment-item card sktblue">
+                        <div *ngIf="!comment.isEditing" class="my-comment-text">
+                          {{ comment.comments }}
+                          <div class="my-actions">
+                            <button title="Edit" (click)="editComment(i)"><i class="fa fa-edit"
+                                style="font-size: 12px;"></i></button>
+                            <button title="Delete" (click)="deleteComment(i)"><i class="fa fa-trash"
+                                style="font-size: 12px;"></i></button>
+                          </div>
+                        </div>
+                        <div *ngIf="comment.isEditing" class="my-edit-comment">
+                          <textarea class="form-control" style="width:370px" [(ngModel)]="editnewComment"></textarea>
+                          <div class="my-actions">
+                            <button title="Save" (click)="saveComment(i)"><i class="fa fa-save"></i></button>
+                            <button title="Delete" (click)="deleteComment(i)"><i class="fa fa-trash"></i></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <ng-template #noEmailSelected>
+            <div class="text-center" style="margin-top: 160px;">
+              <span style="font-size: 28px;">No Open Conversations Here</span>
+              <p style="font-size: 18px;">You're all caught up.</p>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card inbox-card" (click)="actionmenu1()">
+        <div class="card-header bg-primary text-white py-3">
+          <div class="d-flex align-items-center">
+            <ng-container *ngIf="golbalemail_id && golbalemail_id.trim()">
+              <div class="sender-initials">{{ getSenderInitial(getEmailFromId(golbalemail_id)) }}</div>
+              <h5 class="mb-0 text-white"> {{ getEmailFromId(golbalemail_id).length > 25 ? getEmailFromId(golbalemail_id).substring(0, 25) + '...' : getEmailFromId(golbalemail_id) }}
+              </h5>
+            </ng-container> 
+          </div>
+          <div class="d-flex justify-content-end align-items-start mt-n2">
+           <i class="fas fa-arrow-left fs-3 ms-3 mt-4 circular-icon text-black" title="Back" (click)="onbacks()" style="cursor: pointer;"></i>
+        </div>
+        </div>
+        <ng-container *ngIf="inboxcustomer_list && inboxcustomer_list.length > 0">
+          <div class="card-body" style="margin-top: -20px;">
+            <br><br>
+            <div class="customer-details"
+              *ngIf="inboxcustomer_list[0]?.customer_name || inboxcustomer_list[0]?.customercontact_name || inboxcustomer_list[0]?.address1">
+              <h6>Customer Information</h6>
+              <ul class="list-unstyled">
+                <li *ngIf="inboxcustomer_list[0]?.customer_name">
+                  <label>Customer Name:</label>&nbsp;
+                  <span>{{ inboxcustomer_list[0]?.customer_name }}</span>
+                </li>
+                <li *ngIf="inboxcustomer_list[0]?.customercontact_name">
+                  <label>Contact Person:</label>&nbsp;
+                  <small>{{ inboxcustomer_list[0]?.customercontact_name }}</small>
+                </li>
+                <li *ngIf="inboxcustomer_list[0]?.address1">
+                  <label>Address:</label>&nbsp;
+                  <span>{{ inboxcustomer_list[0]?.address1 }}</span>
+                </li>
+              </ul>
+            </div>
+            <div class="order-payment-summary"
+              *ngIf="inboxcustomer_list[0]?.sales_order_count > 0 || inboxcustomer_list[0]?.invoice_count > 0">
+              <h6>Order & Invoice</h6>
+              <div class="row">
+                <div class="col-md-6" *ngIf="inboxcustomer_list[0]?.sales_order_count > 0">
+                  <div class="card order-summary-card shadow-sm border-0 rounded-lg">
+                    <div class="card-body text-center">
+                      <div class="icon mb-3">
+                        <i class="fas fa-shopping-cart fa-2x text-white"></i>
+                      </div>
+                      <h5 class="card-title font-weight-bold">Total Order</h5>
+                      <p class="card-text display-4">{{ inboxcustomer_list[0]?.sales_order_count }}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6" *ngIf="inboxcustomer_list[0]?.invoice_count > 0">
+                  <div class="card payment-summary-card shadow-sm border-0 rounded-lg">
+                    <div class="card-body text-center">
+                      <div class="icon mb-3">
+                        <i class="fas fa-receipt fa-2x text-white"></i>
+                      </div>
+                      <h5 class="card-title font-weight-bold">Total Invoice</h5>
+                      <p class="card-text display-4">{{ inboxcustomer_list[0]?.invoice_count }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="inboxcustomer_list && inboxcustomer_list.length > 0 && ((inboxcustomer_list[0].sales_order_count === 0 && inboxcustomer_list[0].invoice_count === 0) || (inboxcustomer_list[0].customer_name === null || inboxcustomer_list[0].customer_name === ''))">
+          <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+            <span style="font-size: 16px;">No Customer Details Available</span>
+          </div>
+        </ng-container>
+    
+        <!-- Compose Mail Button -->
+        <!-- <button class="compose-mail-btn btn-primary" (click)="onadd()">
+          <span class="fas fa-pencil text-white fs-6"></span>&nbsp;&nbsp;Compose Mail
+        </button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<form [formGroup]="reactiveFormFolder" #form="ngForm">
+  <div class="modal" id="myModaladd" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+
+        <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+          <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+              class="fa-solid fa-folder fs-3 me-5"></i> &nbsp;&nbsp;Move To Folder </h2>
+
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="row">
+            <span class="fw-bold required"
+              [ngClass]="{'error_input_field': label_id.invalid && label_id.touched || label_id.errors?.['pattern'] }">Folder
+              Name</span>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+
+              <ng-select formControlName="label_id" [ngClass]="{'invalid-border': label_id.invalid && label_id.touched}"
+                [items]="folders" class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="label_name"
+                bindValue="label_id" placeholder="--Select Folder--"></ng-select>
+
+            </div>
+            <div *ngIf="label_id.invalid && (label_id.dirty || label_id.touched)">
+              <div *ngIf="label_id.errors?.['required']">
+                <span style="color:red;">Select Folder</span>
+              </div>
+            </div>
+          </div>
+          <!-- Modal footer -->
+          <div class="text-center my-4">
+            <button (click)="onmovefolder()" [disabled]="reactiveFormFolder.invalid"
+              [ngStyle]="{ 'cursor': reactiveFormFolder.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !reactiveFormFolder.invalid,
+                      'btn-secondary text-white': reactiveFormFolder.invalid }" data-bs-dismiss="modal">
+              <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+            </button>
+            &nbsp;&nbsp;
+            <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+              <i class="fas fa-close text-white"></i> &nbsp;Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+
+<div class="modal modal-xl" id="myModaledittagcustomer" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+
+      <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+        <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i class="fa-solid fa-tag fs-3 me-5"></i>
+          &nbsp;Tag To Customer </h2>
+
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <!-- <div class="row">
+                <span class="fw-bold required" [ngClass]
+                ="{'error_input_field': label_id.invalid && label_id.touched || label_id.errors?.['pattern'] }">Folder Name</span>
+                <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+    
+                  <ng-select formControlName="label_id"              
+                    [ngClass]="{'invalid-border': label_id.invalid && label_id.touched}" [items]="folders" class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                    bindLabel="label_name" bindValue="label_id"
+                    placeholder="--Select Folder--"></ng-select>
+                   
+                </div>
+                <div *ngIf="label_id.invalid && (label_id.dirty || label_id.touched)">
+                  <div *ngIf="label_id.errors?.['required']">
+                      <span style="color:red;">Select Product Units</span>
+                  </div>
+              </div>
+              </div> -->
+        <!-- Modal footer -->
+        <div class="text-center my-4">
+          <!-- <button  (click)="onmovefolder()"  [disabled]="reactiveFormFolder.invalid"
+                        [ngStyle]="{ 'cursor': reactiveFormFolder.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !reactiveFormFolder.invalid,
+                    'btn-secondary text-white': reactiveFormFolder.invalid }" data-bs-dismiss="modal">
+                        <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+                    </button>
+                    &nbsp;&nbsp; -->
+          <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white"></i> &nbsp;Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- mail compose begins -->
+<form #form="ngForm">
+  <div class="modal modal-xl" id="myModalcompose" data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="card-header p-1 pb-2 pt-1 rounded-top bg-lightblue text-blue">
+                  <h2 style="margin-top:10px;font-weight: bold;" class="text-blue">&nbsp;&nbsp;<i
+                          class="fas fa-plus fw-bolder fs-3"></i> &nbsp;&nbsp;Compose Mail</h2>
+              </div>
+              <div class="modal-body">
+                  <div id="kt_app_content" class="app-content  flex-column-fluid ">
+                      <div id="kt_app_content_container" class="app-container  container-xxl ">
+                          
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</form>
+  <!-- add appointment -->
+  <form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="modal" id="Addappointment" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                    <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                            class="fas fa-plus fw-bolder fs-3"></i> &nbsp;&nbsp;Create Opportunity </h2>
+                </div>
+                <div class="modal-body">
+                  <input formControlName="email_id" hidden placeholder="Address Line 1" type="text" class="
+                  form-control form-control-lg form-control-solid
+                  bg-white
+                  mb-3 mb-lg-0
+                  borderc-secondary
+                " name="email_id" />
+                    <div class="row"><span class="font-bold"><b>Lead title</b><span
+                                class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                            <textarea lass="form-control form-control-lg form-control-solid custom-input
+                           mb-3 mb-lg-0 custom-input
+                         " class="form-control " style="height:45px;" formControlName="lead_title">
+                           </textarea>
+                        </div>
+                    </div>
+                    <div *ngIf="lead_title.invalid && (lead_title.dirty || lead_title.touched)">
+                        <div *ngIf="lead_title.errors?.['required']">
+                            <span style="color:red;">Lead Title is required.</span>
+                        </div>
+                    </div>
+                    <div *ngIf="lead_title.invalid && (lead_title.dirty ||lead_title .touched)">
+                        <div *ngIf="lead_title.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format.</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-12 col-lg-12">
+                            <div class="row"><span class="font-bold"><b>Appointment</b><span
+                                        class="ms-1 text-red"></span></span>
+                                <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                                  <input 
+                                  formControlName="appointment_timing"
+                                  type="date" 
+                                  class="
+                                    form-control 
+                                    form-control-lg 
+                                    form-control-solid
+                                    custom-input
+                                    mb-3 
+                                    mb-lg-0 
+                                    bg-white 
+                                    custom-input 
+                                    date-picker
+                                  "
+                                  name="appointment_timing"
+                                  style="width: 100%; max-width: 100%; background-color: #f8f9fa; color: #212529; border: 2px solid #ced4da; border-radius: 0;" 
+                                />
+
+                                </div>
+                            </div>
+                            <!-- <div
+                                *ngIf="appointment_timing.invalid && (appointment_timing.dirty || appointment_timing.touched)">
+                                <div *ngIf="appointment_timing.errors?.['required']">
+                                    <span style="color:red;">Opportunity time is required.</span>
+                                </div>
+                            </div>
+                            <div
+                                *ngIf="appointment_timing.invalid && (appointment_timing.dirty || appointment_timing.touched)">
+                                <div *ngIf="appointment_timing.errors?.['pattern']">
+                                    <span style="color:red;">Invalid Format.</span>
+                                </div>
+                            </div> -->
+                            <br>
+                            <div class="row"><span class="font-bold"><b>Bussines Vertical</b><span
+                                        class="ms-1 text-red">*</span></span>
+                                <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-0 d-flex ">
+                                    <ng-select formControlName="bussiness_verticle"
+                                        [items]="Getbussinessverticledropdown_list" bindLabel="business_vertical"
+                                        bindValue="businessvertical_gid" placeholder="Select Bussines Verticle"
+                                        [class.is-invalid]="
+                                bussiness_verticle.invalid && (bussiness_verticle.dirty || bussiness_verticle.touched) "
+                                        class="custom col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-2">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div
+                                *ngIf="bussiness_verticle.invalid && (bussiness_verticle.dirty || bussiness_verticle.touched)">
+                                <div *ngIf="bussiness_verticle.errors?.['required']">
+                                    <span style="color:red;"> |Bussines Verticle is required.</span>
+                                </div>
+                            </div>
+                            <div
+                                *ngIf="bussiness_verticle.invalid && (bussiness_verticle.dirty ||bussiness_verticle .touched)">
+                                <div *ngIf="bussiness_verticle.errors?.['pattern']">
+                                    <span style="color:red;">Invalid Format.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="text-center my-4">
+                        <button [disabled]="reactiveForm.invalid" (click)="Onsubmit()"
+                            [ngStyle]="{ 'cursor': reactiveForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !reactiveForm.invalid,
+                        'btn-secondary text-white': reactiveForm.invalid }" data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5 "></i> &nbsp;Create
+                        </button> &nbsp;&nbsp;
+                        <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal" (click)="onclose2()">
+                            <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </form>
+      
+  <div style="position: fixed; right: 29px; bottom: 50px;">
+    <!--Re-direction Button-->
+    <i [ngClass]="{
+      'trash_animate3': trash, 
+      'trash_animate_false3': !trash, 
+    }" class="fa-solid  fa-pen-to-square fs-2 p-4 text-primary cursor-pointer rounded-pill mb-2" title="Compose Mail"
+      style="z-index: 500; position: relative;transform: translate(159px ,-45px); " routerLink="/crm/CrmSmmMailscompose">
+    </i>
+  
+    <i [ngClass]="{
+      'trash_animate2': trash, 
+      'trash_animate_false2': !trash, 
+    }" class="fa-regular fa-folder-open fs-2 p-4 text-primary cursor-pointer  rounded-pill mb-2" title="Mail Folder"
+      style="z-index: 500; position: relative;transform: translate(93px ,-31px);" routerLink="/crm/CrmSmmGmailFolderSummary"></i>
+  
+    <i [ngClass]="{
+      'trash_animate1': trash, 
+      'trash_animate_false1': !trash, 
+    }" class="fa-solid fa-envelope-circle-check fs-2 p-4 text-primary cursor-pointer  rounded-pill mb-2"
+      title="Sent Items" style="z-index: 500; position: relative;transform: translate(40px ,0px);" routerLink="/crm/CrmSmmMailsent"></i>
+  
+    <i class="fa-solid fa-trash-can-arrow-up fs-2 p-4 text-primary cursor-pointer  rounded-pill mb-2" [ngClass]="{
+        'trash_animate': trash, 
+        'trash_animate_false': !trash, 
+    }" title="Trash" style="z-index: 500; position: relative;transform: translate(12px ,30px);" routerLink="/crm/CrmSmmGmailTrashSummary"></i>
+   <!--Re-direction Button-->
+  
+  <!--Main Add Button-->
+    <i class="fa-solid fa-plus fs-1 p-4 pb-3 bg-primary rounded-pill text-white hover_button_effect button_shadow_effect"
+      style="z-index: 999; position: relative;" (click)="active()" title=""></i>
+  <!--Main Add Button-->
+  </div>
+

@@ -1,0 +1,94 @@
+<div class="card">  
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Product Module</h3>
+        </div>
+        <div class="col me-5">
+            <button title="Add Product" class="btn-primary btn-sm  mb-4 me-5 float-end" data-bs-toggle="modal" data-bs-target="#addmodal">
+                Add Product
+            </button>
+        </div>
+    </div>
+    <div class="table-responsive ">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="product_list" class="table table-striped table-row-bordered border-bottom gs-7">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th>S.No</th>
+                        <th>Product Code</th>
+                        <th>Product Name</th>
+                        <th>Created by</th>
+                        <th>Created date</th>
+                        <th class="text-center bg-lightblue">Action</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of product_list; let i=index;" class="align-middle">
+                        <td >{{i+1}}</td>
+                        <td class="text-nowrap">{{data.productmodule_gid}}</td>             
+                        <td class="text-nowrap">{{data.productmodule_name}}</td>
+                        <td class="text-nowrap">{{data.created_by}}</td>
+                        <td class="text-nowrap">{{data.created_date}}</td>
+                        <td style="text-align: center;">
+                            <button title="Delete" type="button" data-bs-toggle="modal"data-bs-target="#myModaldelete"
+                            class="btn btn-icon btn-sm bg-danger  me-2 mb-2"
+                            (click)="openModaldelete(data.productmodule_gid)">
+                            <i class="fa-solid fa-trash text-white fs-6"></i>
+                            </button>
+                        </td>
+                        
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal" id="addmodal" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content ">
+                <div class="modal-header bg-primary mb-5">
+                    <h3 class="modal-title text-white">Add Product</h3>
+                </div>
+                <form [formGroup]="Productmodule">
+                    <!-- <div class="col-12 col-lg-12 col-md-12 col-sm-12"><span class="font-bold ms-4">Module Name</span>
+                        <ng-select class="mt-2 ms-4 me-4" [(ngModel)]="mdlmodule_name"formControlName="module_name" bindLabel="module_name" bindValue="module_name"
+                            [items]="module_list" placeholder="Select an option"></ng-select>
+                    </div> -->
+                    <div class="col-12 col-lg-12 col-md-12 col-sm-12"><span class="font-bold ms-4">Module Name</span>
+                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                          <input formControlName="productmodule_name" type="text" 
+                          [ngStyle]="{ 'border-color': Productmodule.get('productmodule_name')?.hasError('required') && Productmodule.get('productmodule_name')?.touched || Productmodule.get('productmodule_name')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input  ms-4"
+                            placeholder="Enter Module Name" />                                    
+                        </div>
+                    </div>
+                    <br>
+                    <div class="text-center mb-10">
+                        <button type="submit" class="btn-success text-white" data-bs-dismiss="modal" [disabled]="Productmodule.invalid" (click)="addProduct()">
+                            <i class="fas fa-check text-white fs-5"></i>
+                            &nbsp;&nbsp;Submit
+                        </button>
+                        <button type="button" class="btn-danger text-white ms-3" data-bs-dismiss="modal"(click)="onclose()">
+                            <i class="fa fa-close fs-5 text-center"></i>
+                            &nbsp;&nbsp;Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>  
+    <div id="myModaldelete" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <h4 class="w-100  fw-bolder fs-1 mt-5">Are you sure ?</h4>
+                    <p class="fw-bold fs-5 mt-4">Do You Want To Delete The Record ?</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn-danger" data-bs-dismiss="modal" (click)="ondelete()"><span class=" fs-6 text-white"></span>Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

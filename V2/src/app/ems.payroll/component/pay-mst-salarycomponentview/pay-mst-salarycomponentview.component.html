@@ -1,0 +1,112 @@
+<div class="m-5" *ngFor="let m of ViewSalaryComponentSummary_list">
+  <div class="m-12 ">
+    <div class="card shadow-lg rounded-top" style="top:-30px;">
+      <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+        <h3 class="fw-bolder text-white">Salary Component View</h3>
+      </div>
+
+      <div class="d-flex flex-row m-6 flex-wrap border-bottom">
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12 "><span class="font-bold">Component Group</span>
+          <p class="mt-3">{{m.componentgroup_name}}</p>
+        </div>
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12"><span class="font-bold">Component Code</span>
+          <p class="mt-3">{{m.component_code}}</p>
+        </div>
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12"> <span class="font-bold">Component Name</span>
+          <p class="mt-3">{{m.component_name}}</p>
+        </div>
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12"><span class="font-bold">Contribution Type</span>
+          <p class="mt-3">{{m.contribution_type}}</p>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row m-6 flex-wrap border-bottom">
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12 "><span class="font-bold">Component Type</span>
+          <p class="mt-3">{{m.component_type}}</p>
+        </div>
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12"><span class="font-bold">Affecting In</span>
+          <p class="mt-3">{{m.affect_in}}</p>
+        </div>
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12"> <span class="font-bold">Lop Deduction</span>
+          <p class="mt-3">{{m.lop_deduction}}</p>
+        </div>
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12"><span class="font-bold">Statutory Payment</span>
+          <p class="mt-3">{{m.statutory_pay}}</p>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row m-6 flex-wrap border-bottom">
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12"><span class="font-bold">Other Allowance</span>
+          <p class="mt-3">{{m.other_allowance}}</p>
+        </div>
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12 "><span class="font-bold">Addition Component</span>
+          <p class="mt-3">{{m.customizecomponent}}</p>
+        </div>
+
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12 "><span class="font-bold">Source Variable</span>
+          <p class="mt-3">{{m.source_variale}}</p>
+        </div>
+
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12 "><span class="font-bold">Operator</span>
+          <p class="mt-3">{{m.formula_operator}}</p>
+        </div>
+
+
+
+      </div>
+
+      <div class="d-flex flex-row m-6 flex-wrap border-bottom">
+
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12 "><span class="font-bold">Addition Variable</span>
+          <p class="mt-3">{{m.formula_variable}}</p> 
+        </div>
+
+      </div>
+
+      <div class="card-header bg-lightblue">
+        <h3 class="card-title"><span class="font-bold">Employee Contribution</span></h3>
+      </div>
+
+      <div class="d-flex flex-row m-6 flex-wrap border-bottom">
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12 "><span class="font-bold">Is Percentage</span>
+          <p class="mt-3">{{m.is_percent}}</p>
+        </div>
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12 "><span class="font-bold">Percentage</span>
+          <p class="mt-3">{{m.employee_percent}}</p>
+        </div>
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12 "><span class="font-bold">Amount</span>
+          <p class="mt-3">{{m.employee_amount}}</p>
+        </div>
+      </div>
+
+      <div class="card-header bg-lightblue">
+        <h3 class="card-title"><span class="font-bold">Employer Contribution</span></h3>
+      </div>
+
+      <div class="d-flex flex-row m-6 flex-wrap border-bottom">
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12 "><span class="font-bold">Is Percentage</span>
+          <p class="mt-3">{{m.is_percentage}}</p>
+        </div>
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12 "><span class="font-bold">Percentage</span>
+          <p class="mt-3">{{m.employer_percentage}}</p>
+        </div>
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12 "><span class="font-bold">Amount</span>
+          <p class="mt-3">{{m.employer_amount}}</p>
+        </div>
+      </div>
+
+
+
+      <div class="text-center my-4">
+        <button class="btn-primary btn-sm text-white me-4 mt-3" routerLink='/payroll/PayMstSalaryComponent'>
+          <i class="fas fa-arrow-left me-2"></i>Back
+        </button>
+
+      </div>
+
+
+
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="card">
+    <br>
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+          <h3 class="card-title"> GST Management Summary</h3>
+        </div>
+    
+        <!-- <div class="col me-5">
+          <button type="button" class="btn-primary btn-sm text-white me-4 float-end" data-bs-toggle="modal"
+            data-bs-target="#myModaladd" >
+            Add Fund Transfer
+          </button>
+        </div> -->
+      </div>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded" >
+            <table id="GetGstManagement_list" class="table table-striped table-row-bordered gy-5 gs-7">
+                <thead>
+                    <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                        <th>Branch Name</th>
+                        <th>GST No</th>
+                        <th>Month</th>
+                        <th>Year</th>
+                        <th>I/P Tax</th>
+                        <th>Tax Payable</th>
+                        <th>Tax Filing Date</th>
+                        <th>Filing Reference No</th>
+                        <th>Action</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of GetGstManagement_list;">
+                        <td>{{data.branch_name}}</td>
+                        <td>{{data.gst_no}}</td>
+                        <td>{{data.month}}</td>
+                        <td>{{data.year}}</td>
+                        <td>{{data.iptax}}</td>
+                        <td>{{data.tax_payable}}</td>
+                        <td>{{data.taxfilling_date}}</td>
+                        <td>{{data.filling_refno}}</td>
+                        <td class="text-center text-nowrap">                         
+                           <button class="link-button" (click)="ingst(data.month,data.year)"  style="margin-left: -40px;">
+                            IN GST
+                        </button> &nbsp;
+                        <button class="link-button" (click)="outgst(data.month,data.year)"    >
+                            OUT GST
+                        </button>
+                        &nbsp;
+                        <button class="link-button" (click)="fillinggst(data.month,data.year)"    >
+                            GST FILING
+                        </button>
+                        
+                            </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+
+ 
+
+   
+    

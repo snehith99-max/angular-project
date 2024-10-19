@@ -1,0 +1,92 @@
+// .primary-button {
+//     background-color: #42ac72;
+//     color: #fff !important;
+//     font-size: 1.1rem !important;
+//     font-weight: 630 !important;
+//     padding: 9px 16px 9px 13px  !important;
+//     border-radius: 3px ;
+//     border: 0;
+//     }
+    
+//     .secondary-button {
+//     background-color: #50cd89;
+//     color: #fff !important;
+// font-size: 1.1rem !important;
+// font-weight: 630 !important;
+// padding: 9px 16px 9px 13px  !important;
+// border-radius: 3px ;
+// border: 0;
+//     }
+//     .invalid-border {
+
+//         border: 1px solid rgb(255, 63, 63);
+//         border-radius: 10px;
+    
+//       }
+
+//       .btn-success:hover {
+//         background-color: #42ac72 !important;
+//     }
+    
+//     .btn-success:disabled {
+//         background-color: #cccccc !important;
+//         cursor: not-allowed !important;
+//     }
+
+.filename-display {
+    margin-top: 10px; /* Adjust margin-top to position the filename display properly */
+    margin-left: 0; /* Adjust margin-left as needed */
+    font-size: 0.875rem; /* Adjust font size if needed */
+  }
+
+  /* Hide the default placeholder text */
+.custom-input::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  
+  /* Hide the default placeholder for other browsers */
+  .custom-input {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .custom-input input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+  }
+  
+  .custom-input .file-label {
+    display: block;
+  }
+
+  .custom-file-label {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid #bebebe; /* Blue border for the file label */
+    padding: 10px 10px; /* Padding around the text */
+    background-color: #ffffff; /* Background color */
+    color: #000000; /* Text color */
+    // border-radius: 4px; /* Rounded corners */
+    text-align: left;
+    font-size: 12px; /* Font size */
+    font-weight: bold; /* Font weight */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+  }
+  
+  .custom-file-label:hover {
+    // background-color: #007bff; /* Change background on hover */
+    color: #000000; /* Change text color on hover */
+  }
+  
+  .custom-file-label input[type="file"] {
+    position: absolute;
+    opacity: 0; /* Hide the actual file input */
+    z-index: -1; /* Ensure it's not clickable */
+    width: 100%; /* Full width to cover the label */
+    height: 100%; /* Full height to cover the label */
+    cursor: pointer; /* Pointer cursor for the input */
+  }
+  
+  

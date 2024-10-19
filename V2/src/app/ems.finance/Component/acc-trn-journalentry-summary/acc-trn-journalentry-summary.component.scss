@@ -1,0 +1,95 @@
+#GetJournalEntry_listss {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd; /* Add border to the table */
+}
+
+#GetJournalEntry_listss th,
+#GetJournalEntry_listss td {
+    border: 1px solid #ddd; /* Add border to table cells */
+    padding: 8px;
+    text-align: left;
+}
+
+#GetJournalEntry_listss tr:nth-child(even) {
+    background-color: #f2f2f2; /* Alternate row background color */
+}
+
+#GetJournalEntry_listss th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  
+}
+/* Hover effect for table rows */
+#GetJournalEntry_listss tr:hover {
+    background-color: #ddd; /* Change background color on hover */
+}
+.pagination-container {
+    height: 50px; /* Set a fixed height for the container */
+    width: 500px;
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
+  
+
+  .d-flex.align-items-center {
+    justify-content: space-between; /* Align the select option and search input field to the left and right sides of the container, respectively */
+  }
+  
+  .form-group {
+    margin-bottom: 0; /* Remove the bottom margin to align the items vertically */
+  }
+  
+  .me-2 {
+    margin-right: 0.5rem; /* Add some spacing between the items */
+  }
+  
+  .ms-1 {
+    margin-left: 0.25rem; /* Add some spacing between the select option and entries label */
+  }
+  thead th:hover {
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 1em;
+    padding-right: 2.5em;
+  }
+  .pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination-scroll-container {
+    overflow-x: auto;
+  }
+  
+  .pagination-controls {
+    font-size: 14px;
+  }
+  
+  .pagination-controls .page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .pagination-controls .page-link {
+    color: #007bff;
+  }
+  
+  .pagination-controls .page-link:hover {
+    background-color: #e9ecef;
+  }
+  
+  .pagination-controls .page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+  }
+  
+  .pagination-controls .page-item:first-child .page-link,
+  .pagination-controls .page-item:last-child .page-link {
+    border-radius: 0;
+  }
+  .pagination-container {
+   margin-left: 150px;
+  }
+  

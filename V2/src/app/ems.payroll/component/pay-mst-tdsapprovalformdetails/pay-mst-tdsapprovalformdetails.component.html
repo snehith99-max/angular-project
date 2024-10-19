@@ -1,0 +1,2280 @@
+<div class="card shadow-lg rounded-top">
+    <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+        <h3 class="fw-bolder text-white">Employee TDS and Form 16</h3>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-20x mb-8 fs-6">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#kt_tab_pane_1" style="color: #009EF7"><b>Personal Information</b></a>
+                    </li>
+                    <li class="nav-item ms-9">
+                        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_2" style="color: #009EF7"><b>Income Tax Document</b></a>
+                    </li>
+                    <li class="nav-item ms-9">
+                        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_3" style="color: #009EF7"><b>Quarters</b></a>
+                    </li>
+                    <li class="nav-item ms-9">
+                        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_4" style="color: #009EF7"><b>Income</b></a>
+                    </li>
+                    <li class="nav-item ms-9">
+                        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_5" style="color: #009EF7"><b>TDS</b></a>
+                    </li>
+                    <!-- <li class="nav-item ms-9">
+                        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_6" style="color: #009EF7"><b>Annexure1</b></a>
+                    </li>
+                    <li class="nav-item ms-9">
+                        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_7" style="color: #009EF7"><b>Annexure2</b></a>
+                    </li> -->
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active ms-5" id="kt_tab_pane_1" role="tabpanel">
+                        <form [formGroup]="personalinfoForm">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="modal-body">
+                                        <div id="kt_app_content" class="app-content  flex-column-fluid">
+                                            <div class="d-flex flex-row m-6 flex-wrap">
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold required">First Name</span>
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                        <input type="text" formControlName="first_name" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input" name="first_name" [ngStyle]="{'border-color': first_name.invalid && first_name.touched ? 'red' : 'rgb(209, 209, 209)'}" />
+                                                        <div *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)">
+                                                            <div *ngIf="first_name.errors?.['required']"><span class="text-red">Full Name is required</span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Last Name</span>
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                        <input type="text" formControlName="last_name" class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-white custom-input" name="last_name" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Gender</span>
+                                                    <div class="d-flex justify-content-start mt-4 ms-2">
+                                                        <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                                                            <input type="radio" name="active_flag" value="Y" formControlName="active_flag">
+                                                            <label class="form-check-label text-gray-700 text-nowrap" for="kt_builder_header_content_menu">Male</label>
+                                                        </div>
+                                                        <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+                                                            <input type="radio" name="active_flag" value="N" formControlName="active_flag">
+                                                            <label class="form-check-label text-gray-700 text-nowrap" for="kt_builder_header_content_menu">Female</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row m-6 flex-wrap">
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">DOB</span>
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                        <input type="text" class="form-control form-control-lg form-control-solid custom-input mb-1 mb-lg-0 border-secondary bg-white custom-input date-picker" formControlName="dob" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold required">Mobile</span>
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                        <input type="text" formControlName="phone" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input" name="phone" [ngStyle]="{'border-color': phone.invalid && phone.touched ? 'red' : 'rgb(209, 209, 209)'}" />
+                                                        <div *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+                                                            <div *ngIf="phone.errors?.['required']"><span class="text-red">Mobile number is required</span></div>
+                                                            <div *ngIf="phone.errors?.['pattern']"><span class="text-red">Maximum 10 digits</span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">E-Mail</span>
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                        <input type="text" formControlName="email_id" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input" name="email_id" [ngStyle]="{'border-color': email_id.invalid && email_id.touched ? 'red' : 'rgb(209, 209, 209)'}" />
+                                                        <div *ngIf="email_id.invalid && (email_id.dirty || email_id.touched)">
+                                                            <div *ngIf="email_id.errors?.['pattern']"><span class="text-red">Invaild Email...!!!</span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row m-6 flex-wrap">
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Blood Group</span>
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                        <input type="text" formControlName="blood_group" class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-white custom-input" name="blood_group" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span
+                                                        class="font-bold">PAN Number</span>
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                        <input type="text" formControlName="pan_number" class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-white custom-input" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span
+                                                        class="font-bold">UAN Number</span>
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                        <input type="text" formControlName="uan_number" class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-white custom-input" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row m-6 flex-wrap">
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span
+                                                        class="font-bold">Address Line 1</span>
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                        <input type="text" formControlName="address_line1" class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-white custom-input" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Address Line 2</span>
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                        <input type="text" formControlName="address_line2" class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-white custom-input" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">City</span>
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                        <input type="text" formControlName="city" class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-white custom-input" />
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="d-flex flex-row m-6 flex-wrap">
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Postal Code</span>
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                        <input type="text" formControlName="postal_code" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input" [ngStyle]="{'border-color': postal_code.invalid && postal_code.touched ? 'red' : 'rgb(209, 209, 209)'}" />
+                                                        <div *ngIf="postal_code.invalid && (postal_code.dirty || postal_code.touched)">
+                                                            <div *ngIf="postal_code.errors?.['pattern']"><span class="text-red">Accepts maximum 6 digits only</span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">State</span>
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                        <input type="text" formControlName="state" class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-white custom-input" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Country</span>
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                        <input type="text" formControlName="country" class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-white custom-input" />
+                                                    </div>
+                                                </div>                                                
+                                            </div>
+                                            
+                                            <div class="text-center my-4">
+                                                <button class="btn-success text-white me-4" (click)="updatepersonaldetails()">
+                                                    <i class="fas fa-check text-white fs-5 me-4"></i>Update
+                                                </button>
+                                                <button class="btn-primary btn-sm text-white" (click)="back()">
+                                                    <i class="fas fa-arrow-left me-4"></i>Back
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="row tab-pane fade show ms-5" id="kt_tab_pane_2" role="tabpane2">
+                        <form [formGroup]="incometaxForm">
+                            <div id="kt_app_content" class="app-content  flex-column-fluid ">
+                                <div class="d-flex flex-row m-6 flex-wrap">
+                                    <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Financial Year</span>
+                                        <ng-select class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" formControlName="finyear_range" bindLabel="finyear_range" bindValue="finyear_range" [(ngModel)]="mdlFinyear" [items]="finyear_list" placeholder="Select an option" required></ng-select>
+                                    </div>
+
+                                    <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold required">Document Type</span>
+                                        <ng-select class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2" formControlName="document_type" placeholder="Select an option" [(ngModel)]="mdlDocType" [ngClass]="{'invalid-border': incometaxForm.get('document_type')?.invalid && incometaxForm.get('document_type')?.touched}">
+                                            <ng-option value="ITR1">ITR1</ng-option>
+                                            <ng-option value="ITR2">ITR2</ng-option>
+                                            <ng-option value="ITR3">ITR3</ng-option>
+                                            <ng-option value="ITR4">ITR4</ng-option>
+                                            <ng-option value="ITR5">ITR5</ng-option>
+                                            <ng-option value="ITR6">ITR6</ng-option>
+                                            <ng-option value="ITR7">ITR7</ng-option>
+                                        </ng-select>
+                                        <div *ngIf="document_type.invalid && (document_type.dirty || document_type.touched)">
+                                            <div *ngIf="document_type.errors?.['required']"><span class="text-red">Document type is required</span></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold required">Document Title</span>
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input" formControlName="document_title" [ngStyle]="{'border-color': document_title.invalid && document_title.touched ? 'red' : 'rgb(209, 209, 209)'}"/>
+                                            <div *ngIf="document_title.invalid && (document_title.dirty || document_title.touched)">
+                                                <div *ngIf="document_title.errors?.['required']"><span class="text-red">Document title is required</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row m-6 flex-wrap">
+                                    <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Remarks</span>
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <textarea type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary custom-input" formControlName="remarks" class="form-control bg-white" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold required">Add Reference File </span>
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input (change)="onChange2($event)"  accept="image/* .xlsx, .xls, .txt, .pdf" type="file" #fileInput class="form-control form-control-lg form-control-solid bg-white mb-3 mb-lg-0  border-secondary custom-input" formControlName="fName" name="fName" />
+                                        </div>
+                                    </div>
+                                </div>
+                               
+
+                                <div class="text-center my-4">
+                                    <button class="btn-success text-white me-4" (click)="submit()">
+                                        <i class="fas fa-check text-white fs-5 me-4"></i>Submit
+                                    </button>
+                                    <button class="btn-primary btn-sm text-white me-4" (click)="back()">
+                                        <i class="fas fa-arrow-left me-4"></i>Back
+                                    </button>
+                                </div>
+                                
+                                <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+                                    <h3 class="fw-bolder text-white">Income Tax Document Summary</h3>
+                                </div>
+                                <div class="table-responsive">
+                                    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                        <table id="incometax" class="table table-striped table-row-bordered border-bottom gs-7 align-middle ">
+                                            <thead>
+                                                <tr class=" fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                                    <th>S.No.</th>
+                                                    <th>Created Date</th>
+                                                    <th>Financial Year</th>
+                                                    <th>Document Type</th>
+                                                    <th>Document Title</th>
+                                                    <th style="text-align: center;">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let data of incometax; let i=index;" class="align-middle">
+                                                    <td>{{i+1}}</td>
+                                                    <td>{{data.created_date | date : 'd-MM-yyyy'}}</td>
+                                                    <td>{{data.finyear_range}}</td>
+                                                    <td>{{data.documenttype_gid}}</td>
+                                                    <td>{{data.document_title}}</td>                                                       
+                                                    <td class="text-center">
+                                                      <button title="Download" type="button" (click)="downloadfile(data.document_upload,data.document_title)" class="btn btn-icon btn-sm bg-success me-2">
+                                                        <span class="fa fa-download fs-6"></span>
+                                                      </button>
+
+                                                      <button title="Delete" type="button" class="btn btn-icon btn-sm bg-danger" data-bs-toggle="modal" data-bs-target="#myModaldelete" (click)="openModaldelete(data.taxdocument_gid)">
+                                                        <span class="fa-solid fa-trash fs-6" style="color: #ffffff;"></span>
+                                                      </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="row tab-pane fade show ms-5" id="kt_tab_pane_3" role="tabpane3">
+                        <form [formGroup]="quartersinfoForm">
+                            <div id="kt_app_content" class="app-content  flex-column-fluid">
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <label class="col-form-label font-bold">Receipt No.of Original Statements</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12" style="text-align: center;">
+                                        <label class="col-form-label font-bold">Amount Paid/Credited</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12" style="text-align: center;">
+                                        <label class="col-form-label font-bold">Amount of Tax Deducted</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <label class="col-form-label font-bold">Amount of Tax Deposited/Remitted</label>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <input type="text" class="form-control" formControlName="employee_gid" hidden>
+                                    <input type="text" class="form-control" formControlName="assessment_gid" hidden>
+
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label font-bold">Quarter 1</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="q1_rpt_original_statement">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="q1_amt_paid_credited" [(ngModel)]="q1_amt_paid_credited" (input)="amountpaidcalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="q1_amt_tax_deducted" [(ngModel)]="q1_amt_tax_deducted" (input)="amounttaxdeductioncalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="q1_amt_tax_deposited" [(ngModel)]="q1_amt_tax_deposited" (input)="amounttaxdepositcalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label font-bold">Quarter 2</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="q2_rpt_original_statement">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="q2_amt_paid_credited" [(ngModel)]="q2_amt_paid_credited" (input)="amountpaidcalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="q2_amt_tax_deducted" [(ngModel)]="q2_amt_tax_deducted" (input)="amounttaxdeductioncalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="q2_amt_tax_deposited" [(ngModel)]="q2_amt_tax_deposited" (input)="amounttaxdepositcalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label font-bold">Quarter 3</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="q3_rpt_original_statement">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control"
+                                                formControlName="q3_amt_paid_credited" [(ngModel)]="q3_amt_paid_credited" (input)="amountpaidcalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="q3_amt_tax_deducted" [(ngModel)]="q3_amt_tax_deducted" (input)="amounttaxdeductioncalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="q3_amt_tax_deposited" [(ngModel)]="q3_amt_tax_deposited" (input)="amounttaxdepositcalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label font-bold">Quarter 4</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="q4_rpt_original_statement">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="q4_amt_paid_credited" [(ngModel)]="q4_amt_paid_credited" (input)="amountpaidcalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="q4_amt_tax_deducted" [(ngModel)]="q4_amt_tax_deducted" (input)="amounttaxdeductioncalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="q4_amt_tax_deposited" [(ngModel)]="q4_amt_tax_deposited" (input)="amounttaxdepositcalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">Total</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control fw-bold bg-secondary" formControlName="total_amt_paid_credited" [(ngModel)]="total_amt_paid_credited" (input)="amountpaidcalc()" style="text-align: right;" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control fw-bold bg-secondary" formControlName="total_amt_tax_deducted" [(ngModel)]="total_amt_tax_deducted" (input)="amounttaxdeductioncalc()" style="text-align: right;" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control fw-bold bg-secondary" formControlName="total_amt_tax_deposited" [(ngModel)]="total_amt_tax_deposited" (input)="amounttaxdepositcalc()" style="text-align: right;" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="text-center my-4">
+                                    <button class="btn-success text-white me-4" (click)="submitquartersdetails()">
+                                        <i class="fas fa-check text-white fs-5 me-4"></i>Submit
+                                    </button>
+                                    <button class="btn-primary btn-sm text-white me-4" (click)="back()">
+                                        <i class="fas fa-arrow-left me-4"></i>Back
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="row tab-pane fade show ms-5" id="kt_tab_pane_4" role="tabpane4">
+                        <form [formGroup]="incomeForm">
+                            <input formControlName="employee_gid" hidden placeholder="Address Line 1" type="text" class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 border-secondary" name="employee_gid" />
+                            <input formControlName="assessment_gid" hidden placeholder="Address Line 1" type="text" class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 border-secondary" name="assessment_gid" />
+
+                            <div id="kt_app_content" class="app-content flex-column-fluid">
+                                
+                                <h4>1. GROSS SALARY</h4>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <label class="col-form-label font-bold">(a) Salary as per provisions contained</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control bg-secondary fw-bold" formControlName="grosssalary_amount" [(ngModel)]="grosssalary_amount" (input)="grosssalarytotal()" style="text-align: right;" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <label class="col-form-label font-bold">(b) Value of perquisites</label>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="perquisites_amount" [(ngModel)]="perquisites_amount" (input)="grosssalarytotal()" style="text-align: right;">
+                                        </div>                                        
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <label class="col-form-label font-bold">Profit of salary</label>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="profitof_salary" [(ngModel)]="profitof_salary" (input)="grosssalarytotal()" style="text-align: right;">
+                                        </div>                                        
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <label class="col-form-label font-bold">Total</label>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control fw-bold bg-secondary" formControlName="totalamount" [(ngModel)]="totalamount" (input)="grosssalarytotal()" readonly style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                    </div>
+                                </div>
+
+                                <h4 class="mt-8">2. LESS: ALLOWANCE TO THE EXTENT</h4>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <label class="col-form-label font-bold">ALLOWANCE</label>
+                                            <input type="text" class="form-control" formControlName="component1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <label class="col-form-label font-bold">RS.</label>
+                                            <input type="text" class="form-control" formControlName="pfamount1" [(ngModel)]="pfamount1" (input)="allowancesalarytotal()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="component2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="pfamount2" [(ngModel)]="pfamount2" (input)="allowancesalarytotal()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="component3">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="pfamount3" [(ngModel)]="pfamount3" (input)="allowancesalarytotal()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control fw-bold bg-secondary" formControlName="lessallowancetotal" [(ngModel)]="lessallowancetotal" (input)="allowancesalarytotal()" readonly style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                        <h4 class="mt-5">3. BALANCE<span class="font-bold ms-2 fs-5">(Gross Total - Allowance Total)</span></h4>
+                                    </div>
+                                    
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control fw-bold bg-secondary" formControlName="balanceamount" [(ngModel)]="balanceamount" (input)="balanceamounttotal()" readonly style="text-align: right;">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                    </div>
+                                </div>
+
+                                <h4 class="mt-8">4. DEDUCTIONS</h4>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <label class="col-form-label font-bold mt-4">(a) Entertainment allowance</label>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" formControlName="entertainment_allowance" [(ngModel)]="entertainment_allowance" (input)="aggreagateof_ab()" class="form-control" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <label class="col-form-label font-bold">(b) Tax on employment</label>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" formControlName="taxon_emp" [(ngModel)]="taxon_emp" (input)="aggreagateof_ab()" class="form-control" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                        <h4 class="mt-8">5. Aggregate of 4(A) and 4(B)</h4>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" formControlName="aggreagateofab" [(ngModel)]="aggreagateofab" (input)="aggreagateof_ab()" class="form-control fw-bold bg-secondary" readonly style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-9 col-md-9 col-sm-12">
+                                        <h4 class="mt-3">6. INCOME CHARGEABLE UNDER THE HEAD 'SALARIES'<span class="font-bold ms-2 fs-5">(Balance - Aggregate of 4(A) and 4(B))</span></h4>
+                                    </div>
+
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" formControlName="incomecharge_headsalaries" [(ngModel)]="incomecharge_headsalaries" (input)="incomechargeabletotal()" class="form-control fw-bold bg-secondary" readonly style="text-align: right;">
+                                        </div>                                        
+                                    </div>
+                                </div>
+
+                                <h4 class="mt-8">7. ADD: ANY OTHER INCOME REPORTED BY THE EMPLOYEE</h4>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <label class="col-form-label font-bold">INCOME</label>
+                                            <input type="text" formControlName="employee_income1" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <label class="col-form-label font-bold">RS.</label>
+                                            <input type="text" formControlName="employeeincome_rs1" [(ngModel)]="employeeincome_rs1" (input)="otherincometotal()" class="form-control" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" formControlName="employee_income2" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" formControlName="employeeincome_rs2" [(ngModel)]="employeeincome_rs2" (input)="otherincometotal()" class="form-control" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" formControlName="employee_income3" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" formControlName="employeeincome_rs3" [(ngModel)]="employeeincome_rs3" (input)="otherincometotal()" class="form-control" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control fw-bold bg-secondary" formControlName="employeeincome_total" [(ngModel)]="employeeincome_total" (input)="otherincometotal()" readonly style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-9 col-md-9 col-sm-12">
+                                        <h4 class="mt-8">8. GROSS TOTAL INCOME</h4>
+                                    </div>
+                                    
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control fw-bold bg-secondary" formControlName="grosstotal_income" [(ngModel)]="grosstotal_income" (input)="totaltaxableincome()" readonly style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center my-4">
+                                <button class="btn-success text-white me-4" (click)="submitincomedetails()">
+                                    <i class="fas fa-check text-white fs-5 me-4"></i>Submit
+                                </button>
+                                <button class="btn-primary btn-sm text-white me-4" (click)="back()">
+                                    <i class="fas fa-arrow-left me-4"></i>Back
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="row tab-pane fade show ms-5" id="kt_tab_pane_5" role="tabpane5">
+                        <form [formGroup]="tdsinfoForm">
+                            <input formControlName="employee_gid" hidden placeholder="Address Line 1" type="text"
+                                class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 border-secondary"
+                                name="employee_gid" />
+
+                            <input formControlName="assessment_gid" hidden placeholder="Address Line 1" type="text"
+                                class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 border-secondary"
+                                name="assessment_gid" />
+
+                            <div id="kt_app_content" class="app-content flex-column-fluid">
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-8 col-md-8 col-sm-12">
+                                        <h4>9. DEDUCTIONS UNDER CHAPTER VIA</h4>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <h4 class="me-8" style="text-align: right;">GROSS TOTAL INCOME</h4>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                            <input type="text" class="form-control fw-bolder bg-secondary" formControlName="grosstotal_income" [(ngModel)]="grosstotal_income" [value]="grosstotal_income" readonly style="margin-top: -12px; border: none; font-size: 14px; width: 120px; text-align: right;">
+                                        </div>                                        
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <label class="col-form-label font-bold">(a) Section 80 C</label>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12" style="text-align: center;">
+                                        <label class="col-form-label fw-bold">Gross Amount</label>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12" style="text-align: center;">
+                                        <label class="col-form-label fw-bold">Deductable Amount</label>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                            <div class="d-flex flex-row flex-wrap mt-2">
+                                                <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <label class="col-form-label font-bold">(i)</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <input type="text" class="form-control" formControlName="section80C_i_name">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="section80C_i_value" [(ngModel)]="section80C_i_value" (input)="section80cgrosscalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                            <div class="d-flex flex-row flex-wrap mt-2">
+                                                <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <label class="col-form-label font-bold">(ii)</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <input type="text" class="form-control" formControlName="section80C_ii_name">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="section80C_ii_value" [(ngModel)]="section80C_ii_value" (input)="section80cgrosscalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                            <div class="d-flex flex-row flex-wrap mt-2">
+                                                <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <label class="col-form-label font-bold">(iii)</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <input type="text" class="form-control" formControlName="section80C_iii_name">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="section80C_iii_value" [(ngModel)]="section80C_iii_value" (input)="section80cgrosscalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                            <div class="d-flex flex-row flex-wrap mt-2">
+                                                <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <label class="col-form-label font-bold">(iv)</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <input type="text" class="form-control" formControlName="section80C_iv_name">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="section80C_iv_value" [(ngModel)]="section80C_iv_value" (input)="section80cgrosscalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                            <div class="d-flex flex-row flex-wrap mt-2">
+                                                <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <label class="col-form-label font-bold">(v)</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <input type="text" class="form-control" formControlName="section80C_v_name">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="section80C_v_value" [(ngModel)]="section80C_v_value" (input)="section80cgrosscalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                            <div class="d-flex flex-row flex-wrap mt-2">
+                                                <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <label class="col-form-label font-bold">(vi)</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <input type="text" class="form-control" formControlName="section80C_vi_name">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="section80C_vi_value" [(ngModel)]="section80C_vi_value" (input)="section80cgrosscalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                            <div class="d-flex flex-row flex-wrap mt-2">
+                                                <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <label class="col-form-label font-bold">(vii)</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <input type="text" class="form-control" formControlName="section80C_vii_name">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="section80C_vii_value" [(ngModel)]="section80C_vii_value" (input)="section80cgrosscalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control fw-bold bg-secondary" formControlName="section80C_vii_gross_total" [(ngModel)]="section80C_vii_gross_total" (input)="section80cgrosscalc()" readonly style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="section80C_vii_deductable_total" [(ngModel)]="section80C_vii_deductable_total" (input)="aggregate4Asectiondeductiblescalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                        <label class="col-form-label font-bold">(b) Section 80 CCC</label>
+                                    </div>
+                                    
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="section80CCC_gross_total" [(ngModel)]="section80CCC_gross_total" (input)="aggregate3sectionsgrosscalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="section80CCC_deductable_total" [(ngModel)]="section80CCC_deductable_total" (input)="aggregate4Asectiondeductiblescalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                        <label class="col-form-label font-bold">(c) Section 80 CCD</label>
+                                    </div>
+                                    
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="section80CCD_gross_total" [(ngModel)]="section80CCD_gross_total" (input)="aggregate3sectionsgrosscalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="section80CCD_deductable_total" [(ngModel)]="section80CCD_deductable_total" (input)="aggregate4Asectiondeductiblescalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                        <label class="col-form-label fw-bold">Aggregate amount deductible under the three sections (i.e., 80C, 80CCC and 80CCD)</label>
+                                    </div>
+
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control fw-bold bg-secondary" formControlName="aggregate3sec_gross_total" [(ngModel)]="aggregate3sec_gross_total" (input)="aggregate3sectionsgrosscalc()" readonly style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="aggregate3sec_deductable_total" [(ngModel)]="aggregate3sec_deductable_total" (input)="aggregate4Asectiondeductiblescalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                        <label class="col-form-label font-bold">(d) Section 80CCD (1B)</label>
+                                    </div>
+                                    
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="section80CCD1B_gross_total" style="text-align: right;">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="section80CCD1B_deductable_total" [(ngModel)]="section80CCD1B_deductable_total" (input)="aggregate4Asectiondeductiblescalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                        <label class="col-form-label font-bold"></label>
+                                    </div>
+                                    
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control fw-bold bg-secondary" formControlName="section_overall_gross_total" [(ngModel)]="section_overall_gross_total" (input)="sectionoverallgrosscalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control fw-bold bg-secondary" formControlName="section_overall_deductable_total" [(ngModel)]="section_overall_deductable_total" (input)="sectionoveralldeductablecalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <label class="col-form-label fw-bold">(B) Other Sections</label>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12" style="text-align: center;">
+                                        <label class="col-form-label fw-bold">Gross Amount</label>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12" style="text-align: center;">
+                                        <label class="col-form-label fw-bold">Qualifying Amount</label>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12" style="text-align: center;">
+                                        <label class="col-form-label fw-bold">Deductable Amount</label>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                            <div class="d-flex flex-row flex-wrap mt-2">
+                                                <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <label class="col-form-label font-bold">(i) Section</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-8 col-md-8 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <input type="text" class="form-control" formControlName="other_section1_value">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="other_section1_gross_amount" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="other_section1_qualifying_amount" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="other_section1_deductable" [(ngModel)]="other_section1_deductable" (input)="aggregate4Asectiondeductiblescalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                            <div class="d-flex flex-row flex-wrap mt-2">
+                                                <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <label class="col-form-label font-bold">(ii) Section</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-8 col-md-8 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <input type="text" class="form-control" formControlName="other_section2_value">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="other_section2_gross_amount" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="other_section2_qualifying_amount" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="other_section2_deductable" [(ngModel)]="other_section2_deductable" (input)="aggregate4Asectiondeductiblescalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                            <div class="d-flex flex-row flex-wrap mt-2">
+                                                <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <label class="col-form-label font-bold">(iii) Section</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-8 col-md-8 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <input type="text" class="form-control" formControlName="other_section3_value">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="other_section3_gross_amount" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="other_section3_qualifying_amount" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="other_section3_deductable" [(ngModel)]="other_section3_deductable" (input)="aggregate4Asectiondeductiblescalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                            <div class="d-flex flex-row flex-wrap mt-2">
+                                                <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <label class="col-form-label font-bold">(iv) Section</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-8 col-md-8 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <input type="text" class="form-control" formControlName="other_section4_value">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="other_section4_gross_amount" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="other_section4_qualifying_amount" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="other_section4_deductable" [(ngModel)]="other_section4_deductable" (input)="aggregate4Asectiondeductiblescalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                            <div class="d-flex flex-row flex-wrap mt-2">
+                                                <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <label class="col-form-label font-bold">(v) Section</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-8 col-md-8 col-sm-12">
+                                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                                        <input type="text" class="form-control" formControlName="other_section5_value">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="other_section5_gross_amount" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="other_section5_qualifying_amount" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="other_section5_deductable" [(ngModel)]="other_section5_deductable" (input)="aggregate4Asectiondeductiblescalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-9 col-md-9 col-sm-12">
+                                        <h4 class="mt-5">10. Aggregate of deductible amount under Chapter VI - A</h4>
+                                    </div>
+                                    
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control fw-bold bg-secondary" formControlName="aggregate4Asec_deductible_total" [(ngModel)]="aggregate4Asec_deductible_total" (input)="aggregate4Asectiondeductiblescalc()" readonly style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-9 col-md-9 col-sm-12">
+                                        <h4 class="mt-5">11. Total Taxable Income</h4>
+                                    </div>
+                                    
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control fw-bold bg-secondary" formControlName="total_taxable_income" [(ngModel)]="total_taxable_income" (input)="totaltaxableincome()" readonly style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-9 col-md-9 col-sm-12">
+                                        <h4 class="mt-5">12. Tax on Total Income</h4>
+                                    </div>
+                                    
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="tax_on_total_income" [(ngModel)]="tax_on_total_income" (input)="educationcesscalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-9 col-md-9 col-sm-12">
+                                        <h4 class="mt-5">13. Education Cess @ 3%</h4>
+                                    </div>
+                                    
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control fw-bold bg-secondary" formControlName="educationcess" [(ngModel)]="educationcess" (input)="educationcesscalc()" readonly style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-9 col-md-9 col-sm-12">
+                                        <h4 class="mt-5">14. Tax Payable<span class="font-bold ms-2">(Tax on Total Income + Education Cess)</span></h4>
+                                    </div>
+                                    
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control fw-bold bg-secondary" formControlName="tax_payable" [(ngModel)]="tax_payable" readonly style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-9 col-md-9 col-sm-12">
+                                        <h4 class="mt-5">15. Less: Relief</h4>
+                                    </div>
+                                    
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="less_relief" [(ngModel)]="less_relief" (input)="nettaxpayablecalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-9 col-md-9 col-sm-12">
+                                        <h4 class="mt-5">16. Net tax payable <span class="font-bold ms-2">(Tax Payable - Less: Relief)</span></h4>                                        
+                                    </div>
+                                    
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control fw-bold bg-secondary" formControlName="net_tax_payable" [(ngModel)]="net_tax_payable" readonly style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-9 col-md-9 col-sm-12">
+                                        <h4 class="mt-5">17. Less: Tax deducted at source us</h4>
+                                    </div>
+                                    
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="less_tax_deducted_at_source" [(ngModel)]="less_tax_deducted_at_source" (input)="balancetaxpayrefundcalc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-9 col-md-9 col-sm-12">
+                                        <h4 class="mt-5">18. Balance Tax Payable / Refundable</h4>
+                                    </div>
+                                    
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control fw-bold bg-secondary" formControlName="balance_tax_pay_refund" [(ngModel)]="balance_tax_pay_refund" readonly style="text-align: right;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center my-4">
+                                <button class="btn-success text-white me-4" data-bs-toggle="modal" data-bs-target="#myModalapprove">
+                                    <i class="fas fa-check text-white fs-5 me-2"></i>Submit
+                                </button>
+                                <button class="btn-primary btn-sm text-white me-4" (click)="back()">
+                                    <i class="fas fa-arrow-left me-2"></i>Back
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- <div class="row tab-pane fade show ms-5" id="kt_tab_pane_6" role="tabpane6">
+                        <form [formGroup]="anx1Form">
+                            <div id="kt_app_content" class="app-content  flex-column-fluid ">
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label font-bold">Sr.No</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <label class="col-form-label font-bold">Total Tax Deposited(Rs.)</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <label class="col-form-label font-bold">Receipt numbers of Form No.
+                                            24G</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <label class="col-form-label font-bold">DDO serial number in Form No.
+                                            24G</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <label class="col-form-label font-bold ms-3">Date of transfer voucher</label>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <label class="col-form-label font-bold">Status of matching with Form No.
+                                            24G</label>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">1</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep1_anx1" [(ngModel)]="totaltax_dep1_anx1" (input)="totaltaxdepanx1calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="receiptnum1_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="ddonum1_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date1_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status1_anx1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">2</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep2_anx1" [(ngModel)]="totaltax_dep2_anx1" (input)="totaltaxdepanx1calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="receiptnum2_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="ddonum2_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date2_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status2_anx1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">3</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep3_anx1" [(ngModel)]="totaltax_dep3_anx1" (input)="totaltaxdepanx1calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="receiptnum3_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="ddonum3_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date3_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status3_anx1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">4</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep4_anx1" [(ngModel)]="totaltax_dep4_anx1" (input)="totaltaxdepanx1calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="receiptnum4_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="ddonum4_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date4_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status4_anx1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">5</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep5_anx1" [(ngModel)]="totaltax_dep5_anx1" (input)="totaltaxdepanx1calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="receiptnum5_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="ddonum5_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date5_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status5_anx1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">6</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep6_anx1" [(ngModel)]="totaltax_dep6_anx1" (input)="totaltaxdepanx1calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="receiptnum6_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="ddonum6_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date6_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status6_anx1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">7</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep7_anx1" [(ngModel)]="totaltax_dep7_anx1" (input)="totaltaxdepanx1calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="receiptnum7_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="ddonum7_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date7_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status7_anx1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">8</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep8_anx1" [(ngModel)]="totaltax_dep8_anx1" (input)="totaltaxdepanx1calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="receiptnum8_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="ddonum8_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date8_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status8_anx1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">9</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep9_anx1" [(ngModel)]="totaltax_dep9_anx1" (input)="totaltaxdepanx1calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="receiptnum9_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="ddonum9_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date9_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status9_anx1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">10</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep10_anx1" [(ngModel)]="totaltax_dep10_anx1" (input)="totaltaxdepanx1calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="receiptnum10_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="ddonum10_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date10_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status10_anx1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">11</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep11_anx1" [(ngModel)]="totaltax_dep11_anx1" (input)="totaltaxdepanx1calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="receiptnum11_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="ddonum11_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date11_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status11_anx1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">12</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep12_anx1" [(ngModel)]="totaltax_dep12_anx1" (input)="totaltaxdepanx1calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="receiptnum12_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="ddonum12_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date12_anx1">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status12_anx1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">Total</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control fw-bold bg-secondary" formControlName="total_tax_deposited_anx1" [(ngModel)]="total_tax_deposited_anx1" (input)="totaltaxdepanx1calc()" style="text-align: right;" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center my-4">
+                                <button class="btn-success text-white me-4" (click)="submitanx1details()">
+                                    <i class="fas fa-check text-white fs-5 me-2"></i>Submit
+                                </button>
+                                <button class="btn-primary btn-sm text-white me-4" (click)="back()">
+                                    <i class="fas fa-arrow-left me-2"></i>Back
+                                </button>
+                            </div>
+
+                        </form>
+                    </div> -->
+                    <!-- <div class="row tab-pane fade show ms-5" id="kt_tab_pane_7" role="tabpane7">
+                        <form [formGroup]="anx2Form">
+
+                            <div id="kt_app_content" class="app-content  flex-column-fluid ">
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label font-bold">Sr.No</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <label class="col-form-label font-bold">Total Tax Deposited(Rs.)</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <label class="col-form-label font-bold">BSR Code Of Bank Branch</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <label class="col-form-label font-bold">Date on Which Tax was</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <label class="col-form-label font-bold">Challan No given by
+                                            Bank/Tr.</label>
+                                    </div>
+                                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                        <label class="col-form-label font-bold">Status of matching with
+                                            OLTAS</label>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">1</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep1_anx2" [(ngModel)]="totaltax_dep1_anx2" (input)="totaltaxdepanx2calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="bsrcode1_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date1_anx2">
+                                
+
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="challan1_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status1_anx2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">2</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep2_anx2" [(ngModel)]="totaltax_dep2_anx2" (input)="totaltaxdepanx2calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="bsrcode2_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker"  formControlName="date2_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="challan2_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status2_anx2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">3</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep3_anx2" [(ngModel)]="totaltax_dep3_anx2" (input)="totaltaxdepanx2calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="bsrcode3_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date3_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="challan3_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status3_anx2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">4</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep4_anx2" [(ngModel)]="totaltax_dep4_anx2" (input)="totaltaxdepanx2calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="bsrcode4_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date4_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="challan4_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status4_anx2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">5</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep5_anx2" [(ngModel)]="totaltax_dep5_anx2" (input)="totaltaxdepanx2calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="bsrcode5_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date5_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="challan5_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status5_anx2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">6</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep6_anx2" [(ngModel)]="totaltax_dep6_anx2" (input)="totaltaxdepanx2calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="bsrcode6_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date6_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="challan6_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status6_anx2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">7</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep7_anx2" [(ngModel)]="totaltax_dep7_anx2" (input)="totaltaxdepanx2calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="bsrcode7_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date7_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="challan7_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status7_anx2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">8</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep8_anx2" [(ngModel)]="totaltax_dep8_anx2" (input)="totaltaxdepanx2calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="bsrcode8_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date8_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="challan8_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status8_anx2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">9</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep9_anx2" [(ngModel)]="totaltax_dep9_anx2" (input)="totaltaxdepanx2calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="bsrcode9_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date9_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="challan9_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status9_anx2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">10</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep10_anx2" [(ngModel)]="totaltax_dep10_anx2" (input)="totaltaxdepanx2calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="bsrcode10_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date10_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="challan10_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status10_anx2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">11</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep11_anx2" [(ngModel)]="totaltax_dep11_anx2" (input)="totaltaxdepanx2calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="bsrcode11_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date11_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="challan11_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status11_anx2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">12</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="totaltax_dep12_anx2" [(ngModel)]="totaltax_dep12_anx2" (input)="totaltaxdepanx2calc()" style="text-align: right;">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="bsrcode12_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="date" class="form-control date-picker" formControlName="date12_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="challan12_anx2">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control" formControlName="status12_anx2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row flex-wrap mt-6">
+                                    <div class="col-12 col-lg-1 col-md-1 col-sm-12">
+                                        <label class="col-form-label fw-bold">Total</label>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                            <input type="text" class="form-control fw-bold bg-secondary" formControlName="total_tax_deposited_anx2" [(ngModel)]="total_tax_deposited_anx2" (input)="totaltaxdepanx2calc()" style="text-align: right;" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center my-4">
+                                <button class="btn-success text-white me-4" (click)="submitanx2details()">
+                                    <i class="fas fa-check text-white fs-5 me-2"></i>Submit
+                                </button>
+                                <button class="btn-primary btn-sm text-white me-4" (click)="back()">
+                                    <i class="fas fa-arrow-left me-2"></i>Back
+                                </button>
+                            </div>
+                        </form>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="myModaldelete" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h4 class="w-100  fw-bolder fs-1 mt-5">Are you sure?</h4>
+                <p class="fw-bold fs-5 mt-4">Do You Want To Delete The Record ?</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn-danger" data-bs-dismiss="modal"
+                    (click)="ondelete()">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myModalapprove" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h4 class="w-100  fw-bolder fs-1 mt-5">Are you sure?</h4>
+                <p class="fw-bold fs-5 mt-4">Do You Want To Approve TDS Details ?</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn-success" data-bs-dismiss="modal" (click)="submittdsdetails()">Approve</button>
+                <button type="button" class="btn-danger" data-bs-dismiss="modal">Reject</button>
+            </div>
+        </div>
+    </div>
+</div>

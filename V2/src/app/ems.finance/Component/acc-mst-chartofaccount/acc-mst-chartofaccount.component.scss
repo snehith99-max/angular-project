@@ -1,0 +1,464 @@
+
+.card {
+  width: 100%;
+}
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.card-text {
+  font-size: 1rem;
+}
+.cardHead {
+  width: 200px;
+  height: 56px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin-bottom: 6px;
+  padding: 18px;
+  background-clip: border-box;
+  border: 0px solid rgba(0, 0, 0, 0);
+  border-radius: .25rem;
+  box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+  transition: all .3s ease-in-out;
+  background-color: white;
+  cursor: pointer;
+}
+
+.cardHead:hover {
+  box-shadow: rgba(0, 0, 0, 0.22) 0px 19px 43px;
+  transform: translate3d(0px, -2px, 0px);
+}
+.cardHead1 {
+  width: 230px;
+  height: 206px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin-bottom: 6px;   
+border: 0px solid rgba(0, 0, 0, 0);
+border-radius: .25rem;
+  padding: 18px;
+  background-clip: border-box;
+  border: 0px solid rgba(0, 0, 0, 0);
+  border-radius: .25rem;
+  box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+  transition: all .3s ease-in-out;
+  background-color: lightblue;
+  cursor: pointer;
+}
+
+
+.custom-card {
+  background-color: lightblue;
+
+}
+.bg-gradient-skyblue {
+
+background: #0d6efd;
+
+background: -webkit-linear-gradient(45deg, #686a66, #0d6efd)!important;
+
+background: linear-gradient(45deg, #686a66, #0d6efd)!important;
+
+}
+
+.cardHead11 {
+
+position: relative;
+
+display: flex;
+
+flex-direction: column;
+
+min-width: 0;
+
+word-wrap: break-word;
+width: 265px;
+height: 66px;
+padding: 18px;
+
+background-clip: border-box;
+
+border: 0px solid rgba(0, 0, 0, 0);
+
+border-radius: .25rem;
+
+margin-bottom: 1.0rem;
+// box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+transition: all .3s ease-in-out;
+
+background-color: white;
+
+}
+.rounded-circle {
+
+border-radius: 50%!important;
+
+}
+
+.ms-auto {
+
+margin-left: 0px;
+
+}
+.radius-10 {
+border-radius: 10px !important;
+}
+.card-body12 {
+// width: 160px;
+height: 360px;  
+}
+.widgets-icons-2 {
+
+width: 35px;
+
+height: 35px;
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+background-color: #ededed;
+
+font-size: 27px;
+
+border-radius: 10px;
+
+}
+
+.border-skyblue {
+
+border-left: 5px solid  #0d6efd !important;
+
+}
+.cardHead1:hover {
+  box-shadow: rgba(0, 0, 0, 0.22) 0px 19px 43px;
+  transform: translate3d(0px, -2px, 0px);
+}
+.cardHead2 {
+  width: 230px;
+  height: 56px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin-bottom: 6px;
+  padding: 18px;
+  background-clip: border-box;
+  border: 0px solid rgba(0, 0, 0, 0);
+  border-radius: .25rem;
+  box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+  transition: all .3s ease-in-out;
+  background-color: white;
+  cursor: pointer;
+}
+
+.cardHead2:hover {
+  box-shadow: rgba(0, 0, 0, 0.22) 0px 19px 43px;
+  transform: translate3d(0px, -2px, 0px);
+}
+.selected {
+  font-weight: bolder;
+  background-color: lightblue; /* Customize the background color for selected card */
+}
+
+.icon-container {
+  display: flex;
+  gap: 8px; /* Adjust the gap between icons */
+}
+
+.edit-icon,
+.delete-icon {
+  color: #555; /* Icon color */
+  font-size: 1.2em; /* Icon size */
+  cursor: pointer;
+}
+
+.edit-icon:hover,
+.delete-icon:hover {
+  color: blue; /* Change icon color on hover */
+}
+
+
+.add-button {
+  background-color: rgb(0, 119, 255);
+  color: #fff !important;
+  font-size: 1.1rem !important;
+  font-weight: 630 !important;
+  padding: 9px 16px 9px 13px !important;
+  border-radius: 3px;
+  border: 0;
+}
+.link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+  color: blue; 
+}
+/* Center the columns horizontally */
+@media (min-width: 768px) {
+  .justify-content-center {
+    justify-content: center !important;
+  }
+}
+
+/* Add margin to the top of the rows for vertical centering */
+.mt-5 {
+  margin-top: 3rem !important;
+}
+.bg-gradient-greendarkbluess {
+
+  background: #25a905;
+
+  background: -webkit-linear-gradient(45deg, #d5fdb1, #25a905)!important;
+
+  background: linear-gradient(45deg, #d5fdb1, #25a905)!important;
+
+}
+.border-lightgreenborder {
+
+  border-left: 5px solid  #25a905 !important;
+
+}
+.border-redskyblue {
+
+  border-left: 5px solid  #eb0d36 !important;
+
+}
+.bg-gradient-reddarkbluess {
+
+  background: #eb0d36;
+
+  background: -webkit-linear-gradient(45deg, #e76060, #ed2c2c)!important;
+
+  background: linear-gradient(45deg, #e76060, #ed2c2c)!important;
+
+}
+.bg-gradient-purple {
+
+  background: #be267a;
+
+  background: -webkit-linear-gradient(45deg, #f8bceb, #be267a)!important;
+
+  background: linear-gradient(45deg, #f7bdde, #be267a)!important;
+
+}
+.border-purple {
+
+  border-left: 5px solid  #809bff !important;
+
+}
+.section {
+  max-height: 240px;
+  padding: 1rem;
+  width: 240px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-color: lightblue #e4e4e4;
+
+}
+
+#kt_chat_contacts_body1 {
+max-height: 300px;
+overflow-y: auto;
+overflow-x: hidden;
+ scrollbar-color: lightblue #e4e4e4;
+}
+
+
+#kt_chat_contacts_body1::-webkit-scrollbar {
+width: 8px;
+/* You can adjust the width to your preference */
+}
+
+#kt_chat_contacts_body1::-webkit-scrollbar-thumb {
+background: #888;
+/* You can set the color of the scrollbar thumb */
+border-radius: 10px;
+/* You can adjust the border radius to your preference */
+height: 5px;
+}
+.btn-purple {
+background-color: #983fd3; /* Set the background color for the ledger icon (e.g., yellow) */
+}
+.btn-ledger {
+background-color: #ffc107; /* Set the background color for the ledger icon (e.g., yellow) */
+}
+.badge-maroon {
+color: #eb0d36;
+background-color: transparent;
+
+
+
+.badge-light1 {
+  color: maroon;
+  background-color: transparent;
+}
+
+}
+.badge-green {
+color: #25a905;
+background-color: transparent;
+}
+.badge-purple {
+color: #be267a;
+background-color: transparent;
+}
+.badge-skyblue {
+color: #0d6efd;
+background-color: transparent;
+}
+
+
+/* Style for nested subrows */
+
+
+/* Style for spacing between parent row and nested subrows */
+.text-end + tr > td {
+padding-top: 10px;
+}
+
+.striped-row:nth-child(odd) {
+  background-color: #f9f9f9; /* Light grey color for odd rows */
+}
+
+.striped-row:nth-child(even) {
+  background-color: #ffffff; /* White color for even rows */
+}
+
+
+
+
+@media screen and (max-width: 800px) {
+  .custom_width {
+      width: 180%
+  }
+}
+
+
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,300,500,700");
+
+$nt-b-color: #337ab7;
+$nt-b-style: dashed;
+
+.detail-content {
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  li {
+    border: 2px $nt-b-style lighten($nt-b-color, 0%);
+    border-width: 0 0 0px 1px;
+    display: flex;
+    .detail {
+      margin: 0;
+      padding: 0 8px 4px 0;
+      margin-bottom: 10px;
+      flex-grow: 1;
+      flex-basis: 100%;
+      fieldset {
+        border: 1px solid lighten($nt-b-color, 20%);
+        background-color: white !important;
+        
+        legend {
+          font-size: 90%;
+          margin-left: 5px;
+          width: auto;
+          margin-bottom: 0;
+          border: none;
+        }
+        > div {
+          margin-left: 5px;
+          margin-right: 12px;
+          table.table-condensed {
+            tbody > tr > td {
+              padding: 2px;
+            }
+          }
+        }
+      }
+
+      &:first-child {
+        border-top: 1px $nt-b-style lighten($nt-b-color, 0%);
+        flex-basis: 1%;
+        background: #fff;
+        margin-top: 19px;
+      }
+    }
+
+    &:first-child {
+      padding-top: 5px;
+    }
+
+    &:last-child {
+      margin-bottom: 20px;
+      > .detail {
+        margin-bottom: 0;
+        &:first-child {
+          margin-left: -1px;
+        }
+      }
+    }
+  }
+}
+}
+
+.animated_custom {
+animation: meetingPanelOpen 2s ease-in-out;
+}
+
+@keyframes meetingPanelOpen {
+0% {
+  transform: rotateX(-50deg) ;
+}
+
+100% {
+  transform: rotateX(0deg) ;
+}
+}
+
+
+/* Add this CSS in your styles.css or the component's CSS file */
+.active {
+  background: rgb(255,127,150);
+  background: linear-gradient(90deg, rgba(255,127,150,1) 0%, rgba(255,255,255,0.9051995798319328) 37%);
+}
+
+.active_bs {
+  background: rgb(178,195,255);
+  background: linear-gradient(90deg, rgba(178,195,255,1) 0%, rgba(255,255,255,0.9051995798319328) 37%);
+}
+
+.Icon_hover:hover{
+  background-color: #f6f8fc;
+  font-weight: 600;
+  border-radius: 6px 6px 6px 6px;
+  color: black;
+}
+
+.icon_menu {
+  position: absolute;
+  width: auto;
+  right: 50px;
+  box-shadow: 4px 4px 7px rgba(174, 174, 192, .8);
+  color: #636363;
+  max-height: 123px;
+  overflow-y: auto;
+  scrollbar-color: rgb(223, 247, 255) #ffffff;
+  z-index: 999;
+}

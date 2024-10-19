@@ -1,0 +1,129 @@
+<div class="card mt-2">
+    <form [formGroup]="DetailedReportForm">
+        <div class="card-title p-2 rounded-top bg-primary d-flex justify-content-between align-items-center">
+            <h1 class="fw-bolder ms-3 text-white">&nbsp;&nbsp; Detailed Report</h1>  
+            <button style="color:black" class="btn btn-sm btn-icon bg-secondary cursor-pointer me-3"
+            routerLink="/finance/AccRptDebtorReportSummary"><i class="fa-solid fa-arrow-left text-blue mb-1"></i></button>          
+        </div>  
+        <div class="d-flex flex-row m-6">
+            <div class="col-12 col-lg-4 col-md-4 col-12">
+                <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                    <label class="fs-3 font-bold mt-5">Customer Name :</label><span class="ms-3 fs-3">{{customer_name}}</span><br>
+                    <label class="fs-3 font-bold mt-5">Customer No :</label><span class="ms-3 fs-3">{{customer_id}}</span>
+                </div>
+            </div>
+            <div class="col-12 col-lg-2 col-md-2 col-12 mt-5">
+                <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                    <label class="font-bold">From Date</label>
+                <input type="date" placeholder="" placeholder="DD-MM-YYYY" formControlName="from_date"
+                    class="form-control date-picker custom-input mb-3 bg-white custom-input mt-2"
+                    pattern="^(?!\s*$).+" />
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-2 col-md-2 col-12 mt-5">
+                <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                    <label class="font-bold">To Date</label>
+                <input type="date" placeholder="" placeholder="DD-MM-YYYY" formControlName="to_date"
+                    class="form-control date-picker custom-input mb-3 bg-white custom-input mt-2"
+                    pattern="^(?!\s*$).+" />
+                </div>                
+            </div>
+
+            <div class="col-12 col-lg-2 col-md-2 col-12 mt-10">
+                <div class="col-12 col-lg-11 col-md-11 col-sm-12">
+                    <button title="Search" type="button" (click)="OnChangeFinancialYear()"
+                        [disabled]="DetailedReportForm.invalid" class="btn btn-icon btn-sm bg-success mb-2 cursor-pointer"><span
+                            class="fa-solid fa-magnifying-glass text-white  fs-3"></span>
+                    </button>
+                </div>
+            </div>   
+        </div> 
+         
+    </form>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-3 pb-0 bg-white rounded">
+            <table id="Getsubbankbook_list" class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                <thead>
+                    <tr  class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th style="width: 1px;">S.No</th>                                                
+                        <th>Transaction Date</th>
+                        <th > Ref No</th>
+                        <th>Account Name</th>
+                     <th>Journal Type</th>
+                        <th  class="text-center">Remarks</th>
+                        <!-- <th style="font-size: 11px; text-align: right;">Transaction Amount</th> -->
+                                               
+                        <th style="text-align: right;">Debit </th>
+                        <th style="text-align: right;">Credit </th>
+                        <th style="text-align: right;">TDS </th>
+                        <th style="text-align: right;"> Balance</th>
+                                                                
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of Getsubbankbook_list;let i=index;">
+                        <td class="text-center">{{i+1}}</td>
+                        <td>{{data.transaction_date}}</td>
+                        <td >{{data.journal_refno}}</td>
+                        <td>{{data.account_name}}</td>
+                       <td>{{data.transaction_type}}</td>
+                        <td style="width: 5px;" class="text-center">
+                            <label title="Remarks" data-bs-toggle="modal" data-bs-target="#myModalremarks"
+                            (click)="popmodal(data.remarks)"    >
+                                <i class="fas fa-question-circle fa-5x text-primary fs-2"></i>
+                            </label>
+                        </td>
+                        <!-- <td style="text-align: right;">{{data.transaction_amount}}</td> -->
+                        
+                        <td style="text-align: right;">{{data.debit_amount}}</td>
+                        <td style="text-align: right;">{{data.credit_amount}}</td>
+                        <td style="text-align: right;">{{data.tds}}</td>
+                        <td style="text-align: right;">{{data.closing_balance}}</td>
+                        
+                    </tr>
+                </tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <!-- <td></td> -->
+                    <td></td>  
+                    <td></td>  
+                                                     
+                    <td style="color:maroon;font-weight: bolder;text-align: center;">Total</td>
+                    <td  style="color:maroon;font-weight: bolder;text-align: right;">{{totalDebit}}</td>
+                    <td  style="color:maroon;font-weight: bolder;text-align: right;">{{totalCredit}}</td>
+                    <td  style="color:maroon;font-weight: bolder;text-align: right;">{{tds}}</td>
+                    <td  style="color:maroon;font-weight: bolder;text-align: right;">{{totalBalance}}</td>
+                </tr>
+            </table>                
+        </div>
+    </div>    
+</div>
+<div class="modal fade" id="myModalremarks" tabindex="-1" data-bs-backdrop='static'
+    aria-labelledby="editamlcategoryLabel" aria-hidden="true" data-bs-keyboard="false">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content  d-flex justify-content-center">
+            <div class="card-header p-1 pb-1 pt-1 rounded-top bg-primary"
+                style="display: flex; align-items: center; height: 40px;">
+                <h3 Style="color: white; font-weight: bold; text-align: left; width: 100%;margin-left: 10px;">
+                    Remarks
+                </h3>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-lg-3 col-md-6 col-lg-12">
+                    <p class="mt-2 wrap-text" style="max-width: 100%; overflow: auto; max-height: 200px;">
+                        {{remarks}}</p>
+                </div>
+                <br/>
+                <div class="text-center my-4">
+                    <button class="btn-danger btn-sm text-white me-2" data-bs-dismiss="modal"
+                        style="background-color: red;">
+                        <i class="fas fa-close text-white"></i> &nbsp;Close
+                    </button>&nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

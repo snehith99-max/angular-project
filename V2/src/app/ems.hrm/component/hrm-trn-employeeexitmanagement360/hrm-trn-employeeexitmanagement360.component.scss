@@ -1,0 +1,68 @@
+// .cke_inner{
+//     background: #2599FF !important;
+// }
+.cke_inner {    
+    background:  #2599FF !important;
+    padding: 5px;
+}
+.cke_1 .cke_inner, .cke_1 .cke_dialog_tab {
+    background-color: rgb(37, 153, 255) !important;
+}
+ 
+.profile-user-info {
+    display: table;
+    width: 98%;
+    width: calc(100% - 24px);
+    margin: 0 auto
+}
+
+.profile-info-row {
+    display: table-row
+}
+
+.profile-info-name,
+.profile-info-value {
+    display: table-cell;
+    border-top: 1px dotted #D5E4F1
+}
+
+.profile-info-name {
+    text-align: left;
+    padding: 6px 10px 6px 100px;
+    font-weight: bolder;
+    color: #667E99;
+    font-size: 13px;
+    background-color: transparent;
+    width: 152px;
+    vertical-align: middle
+}
+
+.profile-info-value {
+    padding: 20px 20px 20px 100px
+}
+
+.profile-info-value>span+span:before {
+    display: inline;
+    content: ",";
+    margin-left: 1px;
+    margin-right: 3px;
+    color: #d71e1e;
+    border-bottom: 1px solid #FFF
+}
+
+.profile-info-value>span+span.editable-container:before {
+    display: none
+}
+
+.approval{
+    width: 400px;
+}
+.content{
+    display: flex;
+    margin-left: 60px;
+}
+
+.right{
+    
+    margin-left: 100px;
+}

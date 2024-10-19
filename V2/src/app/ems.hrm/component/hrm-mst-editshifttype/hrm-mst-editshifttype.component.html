@@ -1,0 +1,311 @@
+<form [formGroup]="reactiveFormedit" #form="ngForm">
+    <div class=" card rounded-top">
+        <!-- <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+            <h3 class="fw-bolder text-white"<i class="fa-solid fa-pen-to-square"></i>Edit Shift Type</h3>
+        </div> -->
+
+        <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+            <h3 class="fw-bolder text-white">
+              <i class="fa-solid fa-pen-to-square fs-2"></i> &nbsp;&nbsp;Edit Shift Type
+            </h3>
+          </div>
+
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <!-- <div class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="font-bold required">Shift Type</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" hidden
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                        formControlName="shifttype_gid" />
+                    <input type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                        placeholder="Enter Shift Name" formControlName="shift_name" />
+                </div>
+            </div> -->
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Shift Type</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                  <input formControlName="shift_name" type="text"
+                    [ngStyle]="{ 'border-color': reactiveFormedit.get('shifttype_gid')?.hasError('required') && reactiveFormedit.get('shifttype_gid')?.touched || reactiveFormedit.get('shifttype_gid')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 ms-2"
+                    placeholder="Enter Shift Name" />
+                  <div
+                    *ngIf="reactiveFormedit.get('shifttype_gid')?.hasError('required') && reactiveFormedit.get('shifttype_gid')?.touched"
+                    class="text-red ms-2">Shift Name is required.</div>
+                  <div *ngIf="reactiveFormedit.get('shifttype_gid')?.hasError('pattern')" class="text-red ms-2">Space at the beginning is not allowed.</div>
+                </div>
+              </div>
+            <div class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="font-bold">E-mail List</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                        placeholder="Enter Email ID" formControlName="email_list" />
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-3 col-sm-12"><span class="font-bold required">Grace Time</span>
+                <div class="col-lg-4 col-5 col-md-9 col-sm-9 fv-row mt-2">
+                    <div style="display: flex; flex-direction: row;">
+                        <input type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                            formControlName="grace_time" />
+                        <span style="margin-left: 10px; margin-top: 13px; font-weight: bold;">Min</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="" class="table border-bottom gs-7">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th rowspan="2">Week Days</th>
+                        <th rowspan="2">Login Time</th>
+                        <th rowspan="2">Logout Time</th>
+                        <th rowspan="2">OT Cutoff</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let data of shiftedit_list; let i=index;" class="align-middle">
+                        <td>{{data.weekday}}</td>
+                        <td >
+                            <input type="time" class="form-control form-control-lg form-control-solid custom-input mb-5 mb-lg-0 
+                            border-secondary bg-white custom-input" [(ngModel)]="data.logintime"
+                                formControlName="logintime_{{i}}" style="width: 110px;" />
+                        </td>
+                        <td >
+                            <input type="time" class="form-control form-control-lg form-control-solid custom-input mb-5 
+                            mb-lg-0 border-secondary bg-white custom-input" formControlName="logouttime_{{i}}"
+                                [(ngModel)]="data.logouttime" style="width: 120px;" />
+                        </td>
+                        <td >
+                            <input type="time" class="form-control form-control-lg form-control-solid custom-input
+                             mb-3 mb-lg-0 border-secondary bg-white custom-input" formControlName="Ot_cutoff_{{i}}"
+                                [(ngModel)]="data.Ot_cutoff" style="width: 120px;" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex flex-row m-3 mt-5 flex-wrap ">
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                <div class="card me-lg-3 me-0 ">
+                    <div class="card-header bg-lightblue card-height55">
+                        <div class="card-title m-0 ">
+                            <h5 class="fw-bolder text-blue">Login</h5>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row m-6 flex-wrap">
+                        <div class="col-12 col-lg-4 col-md-2 col-sm-12"><span class="font-bold">Login Scheduler</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input type="time"
+                                    class="form-control form-control-lg form-control-solid bg-white custom-input border-secondary"
+                                    formControlName="login_scheduler" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4 col-md-2 col-sm-12"><span class="font-bold">Entry CutOff Time</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input type="time"
+                                    class="form-control form-control-lg form-control-solid bg-white custom-input border-secondary"
+                                    formControlName="entrycutoff_time" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4 col-md-2 col-sm-12 "><span class="font-bold">Overnight Flag</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <div class="d-flex justify-content-start mt-7">
+                                    <div
+                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                                        <input type="radio" name="overnight_flag" checked="checked" value="Y"
+                                            formControlName="overnight_flag">
+                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                            for="empAccessYes">Yes</label>
+                                    </div>
+                                    <div
+                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-6">
+                                        <input type="radio" name="overnight_flag" checked="checked" value="N"
+                                            formControlName="overnight_flag">
+                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                            for="empAccessNo">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row m-6 flex-wrap">
+                        <div class="col-12 col-lg-4 col-md-3 col-sm-12"><span class="font-bold">In Overnight Flag</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <div class="d-flex justify-content-start mt-7">
+                                    <div
+                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                                        <input type="radio" name="inovernight_flag" checked="checked" value="Y"
+                                            formControlName="inovernight_flag">
+                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                            for="empAccessYes">Yes</label>
+                                    </div>
+                                    <div
+                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-6">
+                                        <input type="radio" name="inovernight_flag" checked="checked" value="N"
+                                            formControlName="inovernight_flag">
+                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                            for="empAccessNo">No</label>
+                                    </div>
+                                    <div
+                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-6">
+                                        <input type="radio" name="inovernight_flag" checked="checked" value="M"
+                                            formControlName="inovernight_flag">
+                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                            for="empAccessNo">M</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4 col-md-3 col-sm-12"><span class="font-bold">Out Overnight
+                                Flag</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <div class="d-flex justify-content-start mt-7">
+                                    <div
+                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                                        <input type="radio" name="outovernight_flag" checked="checked" value="Y"
+                                            formControlName="outovernight_flag">
+                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                            for="empAccessYes">Yes</label>
+                                    </div>
+                                    <div
+                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-6">
+                                        <input type="radio" name="outovernight_flag" checked="checked" value="N"
+                                            formControlName="outovernight_flag">
+                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                            for="empAccessNo">No</label>
+                                    </div>
+                                    <div
+                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-6">
+                                        <input type="radio" name="outovernight_flag" checked="checked" value="M"
+                                            formControlName="outovernight_flag">
+                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                            for="empAccessNo">M</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                <div class="card me-lg-3 me-0 ">
+                    <div class="card-header bg-lightblue card-height55">
+                        <div class="card-title m-0 ">
+                            <h5 class="fw-bolder text-blue">Logout</h5>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row m-6 flex-wrap">
+                        <div class="col-12 col-lg-4 col-md-2 col-sm-12"><span class="font-bold">Logout Scheduler</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input type="time" min="08:00" max="18:00" step="900"
+                                    class="form-control form-control-lg form-control-solid bg-white custom-input border-secondary"
+                                    formControlName="logout_schedular" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4 col-md-2 col-sm-12"><span class="font-bold">Exit CutOff Time</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input type="time"
+                                    class="form-control form-control-lg form-control-solid bg-white custom-input border-secondary"
+                                    formControlName="existcutoff_time" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-2 col-sm-12"><span class="font-bold">Overnight Flag</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <div class="d-flex justify-content-start mt-7">
+                                    <div
+                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                                        <input type="radio" name="logout_overnight_flag" checked="checked" value="Y"
+                                            formControlName="logout_overnight_flag">
+                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                            for="empAccessYes">Yes</label>
+                                    </div>
+                                    <div
+                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-6">
+                                        <input type="radio" name="logout_overnight_flag" checked="checked" value="N"
+                                            formControlName="logout_overnight_flag">
+                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                            for="empAccessNo">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row m-6 flex-wrap">
+                        <div class="col-12 col-lg-4 col-md-3 col-sm-12"><span class="font-bold">In Overnight Flag</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <div class="d-flex justify-content-start mt-7">
+                                    <div
+                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                                        <input type="radio" name="logout_inovernight_flag" checked="checked" value="Y"
+                                            formControlName="logout_inovernight_flag">
+                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                            for="empAccessYes">Yes</label>
+                                    </div>
+                                    <div
+                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-6">
+                                        <input type="radio" name="logout_inovernight_flag" checked="checked" value="N"
+                                            formControlName="logout_inovernight_flag">
+                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                            for="empAccessNo">No</label>
+                                    </div>
+                                    <div
+                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-6">
+                                        <input type="radio" name="logout_inovernight_flag" checked="checked" value="M"
+                                            formControlName="logout_inovernight_flag">
+                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                            for="empAccessNo">M</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4 col-md-3 col-sm-12"><span class="font-bold">Out Overnight
+                                Flag</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <div class="d-flex justify-content-start mt-7">
+                                    <div
+                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                                        <input type="radio" name="logout_outovernight_flag" checked="checked" value="Y"
+                                            formControlName="logout_outovernight_flag">
+                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                            for="empAccessYes">Yes</label>
+                                    </div>
+                                    <div
+                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-6">
+                                        <input type="radio" name="logout_outovernight_flag" checked="checked" value="N"
+                                            formControlName="logout_outovernight_flag">
+                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                            for="empAccessNo">No</label>
+                                    </div>
+                                    <div
+                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-6">
+                                        <input type="radio" name="logout_outovernight_flag" checked="checked" value="M"
+                                            formControlName="logout_outovernight_flag">
+                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                            for="empAccessNo">M</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mb-10">
+            <button type="submit" class="btn-success text-white" data-bs-dismiss="modal" (click)="submit()">
+                <i class="fas fa-check text-white fs-5 me-3"></i>Update
+            </button>
+            <button type="button" class="btn-primary text-white ms-5" data-bs-dismiss="modal"
+                routerLink="/hrm/HrmMstShiftTypeSummary">
+                <i class="fas fa-arrow-left me-3"></i>
+                Back</button>
+        </div>
+    </div>
+</form>

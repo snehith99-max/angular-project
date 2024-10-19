@@ -1,0 +1,367 @@
+<div class="row" style="margin-top: 10px;">
+
+
+    <div class="col-lg-3 col-md-3 col-sm-" routerLink="/crm/CrmTrnAssignvisitsummary">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-violet">
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Today Appointment</h5>
+                        <!-- <div *ngFor=""> -->
+                            <h4 class="badge-violet  badge-outline-violet fs-4 mt-2">
+                                {{todayvisit}} </h4>
+                        <!-- </div> -->
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-violet text-white ms-auto"><i
+                            class="fa-solid fa-calendar-days"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3" routerLink="/crm/CrmTrnAssignvisitsummaryupcoming">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-darkblue">
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Upcoming Appointment</h5>
+                        <!-- <div *ngFor=""> -->
+                            <h4 class="badge-blue badge-outline-blue fs-4 mt-2">
+                                {{upcoming}}</h4>
+                        <!-- </div> -->
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-darkblue text-white ms-auto"><i
+                            class="fa-solid fa-arrow-up-from-bracket"></i>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-3 col-sm-3" routerLink="/crm/CrmTrnAssignvisitsummaryexpired">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-pinkish">
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Expired Appointment</h5>
+                        <!-- <div *ngFor=""> -->
+                            <h4 class="badge1 badge-outline1 fs-4 mt-2">{{expired}}</h4>
+                        <!-- </div> -->
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-purple text-white ms-auto"><i
+                            class="fa-solid fa-users"></i>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3" routerLink="/crm/CrmTrnAssignvisitsummaryassigned">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-orange"
+            style="background-color: rgb(241, 226, 173);">
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Assigned</h5>
+                        <!-- <div *ngFor=""> -->
+                            <h4 class="badge-brown  badge-outline-brown fs-4 mt-2">
+                                {{totalvisit}}</h4>
+                        <!-- </div> -->
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-darkgreen text-white ms-auto"><i
+                            class="fa fa-file"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- <div class="col-lg-3 col-md-3 col-sm-3" routerLink="/crm/CrmTrnCustomermarketing">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-darkgreen">
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Customer</h5>
+                        <div *ngFor="">
+                            <h4 class="badge-green badge-outline-green fs-4 mt-2">
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-darkgreens text-white ms-auto"><i
+                            class="fa-solid fa-users"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- <div class="col-lg-2 col-md-2 col-sm-2" routerLink="/crm/CrmTrnDropmarketing">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-purple">
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Drop</h5>
+                        <div *ngFor="">
+                            <h4 class="badge-orange badge-outline-orange fs-4 mt-2">
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-darkoranges text-white ms-auto"><i
+                            class="fa-solid fa-circle-down"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+</div>
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Assigned Visits</h3>
+        </div> <div class="col me-5">
+          
+            <button title="Add Appointment" class="btn-primary btn-sm text-white me-4 float-end" data-bs-toggle="modal"
+            data-bs-target="#myModalassign">
+                <i class="fas fa-plus"></i>&nbsp;
+                Appointment</button>
+        </div>
+
+        <!-- <form [formGroup]="reactiveFormSubmit" #form="ngForm">
+
+
+            <div class="d-flex flex-row m-6 flex-wrap">
+                <div class="row ms-3 mt-3 d-flex align-items-center">
+                    <span class="font-bold">Marketing Team</span>
+
+                    <ng-select style="width: 300px;" formControlName="campaign_title"
+                        [items]="marketingteamdropdown_list" (change)="marketingteam()" class="
+                  custom
+                  col-lg-11 col-14 
+                  fv-row
+                  mt-2
+                " bindLabel="campaign_title" bindValue="campaign_gid"></ng-select>
+
+
+                </div>
+
+                <div class="row ms-3 mt-3 d-flex align-items-center">
+                    <span class="font-bold">Executive <span class="ms-1 text-red">*</span></span>
+
+                    <ng-select style="width: 300px;" formControlName="executive" [items]="executive_list" class="
+                  custom
+                  col-lg-11 col-14 
+                  fv-row
+                  mt-2
+                " bindLabel="executive" bindValue="employee_gid"></ng-select>
+                    <br>
+                </div>
+
+
+                <button type="button" class="btn-primary btn-sm text-white ms-2" data-bs-toggle="modal"
+                    data-bs-target="#myModaladd" style="width: 100px;text-align: center;height: 40px;margin-top:40px;"
+                    (click)="OnSubmit()">
+                    <i class="fas fa-check text-white fs-5"></i> &nbsp;&nbsp;&nbsp; Assign
+                </button>
+                <div style="width: 230px;text-align: center;height: 40px;margin-top:50px;">
+                    <input class="form-check-input" type="radio" id="Yes" formControlName="shopify_status" value="Y">
+                    &nbsp;
+                    <label style="font-weight: bolder; font-size: 13px;"
+                        class="form-check-label text-gray-700 text-nowrap" for="Yes">Assigned</label>
+                        &nbsp;&nbsp;
+                    <input class="form-check-input" type="radio" id="Yes" formControlName="shopify_status" value="Y">
+                    &nbsp;
+                    <label style="font-weight: bolder; font-size: 13px;"
+                        class="form-check-label text-gray-700 text-nowrap" for="Yes">Unassigned</label>
+                </div>
+
+
+            </div>
+        </form> -->
+        <!-- <form [formGroup]="reactiveFormSubmit" #form="ngForm">
+
+            <div class="d-flex flex-row m-6 flex-wrap">
+                
+                <div class="row ms-3 mt-3 d-flex align-items-center">
+                    <span class="font-bold">Marketing Team</span>
+
+                    <ng-select style="width: 300px;" formControlName="campaign_title"
+                        [items]="marketingteamdropdown_list" (change)="marketingteam()" class="
+                      custom
+                      col-lg-11 col-14 
+                      fv-row
+                      mt-2
+                    " bindLabel="campaign_title" bindValue="campaign_gid"></ng-select>
+
+                </div>
+
+                
+                <div class="row ms-3 mt-3 d-flex align-items-center">
+                    <span class="font-bold">Executive <span class="ms-1 text-red">*</span></span>
+
+                    <ng-select style="width: 300px;" formControlName="executive" [items]="executive_list" class="
+                      custom
+                      col-lg-11 col-14 
+                      fv-row
+                      mt-2
+                    " bindLabel="executive" bindValue="employee_gid"></ng-select>
+                    <br>
+                </div>
+
+                
+                <div>
+                    <button type="button" class="btn-primary btn-sm text-white ms-2" data-bs-toggle="modal"
+                        data-bs-target="#myModaladd"
+                        style="width: 100px;text-align: center;height: 40px;margin-top:40px;" (click)="OnSubmit()">
+                        <i class="fas fa-check text-white fs-5"></i> &nbsp;&nbsp;&nbsp; Assign
+                    </button>
+                </div>
+
+                
+                <div style="width: 230px;text-align: center;height: 40px;margin-top:50px;">
+                    <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm">
+                        <input class="form-check-input" type="radio" id="Yes" value="Y"
+                            formControlName="Assigned_status" [(ngModel)]="Assignedstatus"
+                            (click)="Getassignvisitsummary()">
+                        &nbsp;
+                        <label style="font-weight: bolder; font-size: 13px;"
+                            class="form-check-label text-gray-700 text-nowrap" for="Yes">Assigned</label>
+                    </div>
+
+                    &nbsp; &nbsp;
+                    <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm">
+                        <input class="form-check-input" type="radio" value="N" id="No" formControlName="Assigned_status"
+                            [(ngModel)]="Assignedstatus" (click)="Getassignvisitsummary()">
+                        &nbsp;
+                        <label style="font-weight: bolder;font-size: 13px;"
+                            class="form-check-label text-gray-700 text-nowrap" for="No">Unassigned</label>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </form> -->
+
+        <div class="table-responsive">
+            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                <table id="assignvisitlist"
+                    class="table table-striped table-row-bordered  border-bottom gs-7 align-middle">
+                    <thead>
+                        <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                            <th style="width:2%">
+                                <!-- <input type="checkbox" id="checkAll" (change)="$event ? masterToggle() : null"
+                                    [checked]="selection.hasValue() && isAllSelected()"
+                                    [indeterminate]="selection.hasValue() && !isAllSelected()" /> -->
+                                S.No
+                            </th>
+                            <th style="width: 5px">Customer Name</th>
+                            <th>Contact Details</th>
+                            <th>Customer Address</th>
+                            <!-- <th style="width: 5px">Region/Source</th>  -->
+                            <th>Appointment Type</th>                        
+                            <th>Appointment Date</th>
+                            <th>Remarks</th>
+                            <th>Assign To</th>
+                            <!-- <th>Schedule By</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of assignvisitlist; let i=index;">
+                            <!-- <td> <input type="checkbox" (click)="$event.stopPropagation()"
+                                    (change)="$event ? selection.toggle(data) : null"
+                                    [checked]="selection.isSelected(data)" /></td> -->
+                            <td style="width:2%">{{i+1}}</td>
+                            <td style="width: 5px">{{data.leadbank_name}}</td>
+                            <td>{{data.contact_details}}</td>
+                            <td>{{data.customer_address}}</td>
+                            <!-- <td style="width: 5px">{{data.region_source}}</td> -->
+                            <td>{{data.schedule_type}}</td>
+                            <td>{{data.schedule_date}}</td>
+                            <td><textarea [(ngModel)]="data.schedule_remarks" style="width: 70px;"></textarea>
+                                <!-- <input type="text" [(ngModel)]="data.schedule_remarks" /> -->
+
+                            </td>
+
+                            <td>{{data.assign_to}}</td>
+                            <!-- <td>{{data.updated_by}}</td> -->
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <form [formGroup]="reactiveFormSubmit" #form="ngForm">
+        <div class="modal" id="myModalassign" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+
+                    <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                        <h2 style="margin-top:10px;color:white;font-weight: bold;"><i class="fas fa-plus fs-2 ms-4"></i>&nbsp;Add Appointment</h2>
+
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <span class="font-bold">Lead Name<span class="ms-1 text-red">*</span></span>
+
+                            <ng-select formControlName="leadbank_name" [items]="lead_dropdown"
+                                class="
+                          custom
+                          col-lg-11 col-14 
+                          fv-row
+                          mt-2
+                        " bindLabel="leadbank_name" bindValue="leadbank_gid"
+                                placeholder="--Lead Name--"></ng-select>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <span class="font-bold">Marketing Team<span class="ms-1 text-red">*</span></span>
+
+                            <ng-select formControlName="campaign_gid" [items]="marketingteamdropdown_list"
+                                (change)="marketingteam()" class="
+                          custom
+                          col-lg-11 col-14 
+                          fv-row
+                          mt-2
+                        " bindLabel="campaign_title" bindValue="campaign_gid"
+                                placeholder="--Select Marketing Team--"></ng-select>
+                        </div>
+
+                        <br>
+                        <div class="row">
+                            <span class="font-bold">Executive <span class="ms-1 text-red">*</span></span>
+
+                            <ng-select formControlName="executive" [items]="executive_list" class="
+                          custom
+                          col-lg-11 col-14 
+                          fv-row
+                          mt-2
+                        " bindLabel="executive" bindValue="employee_gid"
+                                placeholder="--Select Executive--"></ng-select>
+
+                        </div>
+                        <br>
+                        <div class="text-center my-4">
+                            <button (click)="OnSubmit()" [disabled]="reactiveFormSubmit.invalid" [ngClass]="{
+                                                        'primary-button': !reactiveFormSubmit.invalid,
+                                                        'secondary-button': reactiveFormSubmit.invalid
+                                                         }" data-bs-dismiss="modal">
+                                <i class="fas fa-check text-white fs-5 "></i> &nbsp;Assign
+                            </button> &nbsp;&nbsp;
+                            <button (click)="onclose()" class="btn-danger btn-sm text-white me-4"
+                                data-bs-dismiss="modal">
+                                <i class="fas fa-close text-white"></i> &nbsp;Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>

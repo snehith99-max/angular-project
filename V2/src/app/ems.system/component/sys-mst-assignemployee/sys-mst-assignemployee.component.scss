@@ -1,0 +1,36 @@
+.ng-select {
+    position: relative;
+}
+
+.ng-select .ng-select-container {
+    position: relative;
+    overflow: visible;
+}
+
+.ng-select .ng-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    z-index: 1;
+    pointer-events: none;
+    background: white;
+    /* Match the dropdown background */
+    padding: 0 5px;
+    /* Add some padding */
+}
+
+.ng-select .ng-select-container .ng-value-container {
+    overflow: visible;
+    position: relative;
+}
+
+.ng-select .ng-select-container .ng-input {
+    padding-left: 0;
+    /* Adjust padding to align input text */
+}
+
+.ng-select .ng-select-container .ng-placeholder {
+    color: #999;
+    /* Placeholder text color */
+}

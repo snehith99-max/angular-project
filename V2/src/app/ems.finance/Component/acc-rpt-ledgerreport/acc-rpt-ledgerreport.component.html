@@ -1,0 +1,279 @@
+<div class="card">
+    <form [formGroup]="reactiveform">
+        <div class="row ms-3 mt-3 d-flex align-items-center">
+            <div class="col">
+                <h3 class="card-title">Ledger Report</h3>
+            </div>
+        </div>
+
+        <ul class="m-3 nav nav-twotabs nav-line-tabs nav-line-tabs-20x mb-3 fs-6 border-bottom text-center mt-2 ms-6 me-6"
+            id="myTab" role="tablist">
+
+
+            <li class="border border-secondary justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"
+                data-bs-toggle="tab"
+                style="color: #ffffff !important;  background: linear-gradient(45deg, #7dc2bf, #05aa97);"
+                (click)="showTab('Income')" [ngClass]="{'active-custom-tab': currentTab === 'Income'}"
+                href="#kt_tab_pane_2">
+                <a>
+                    <i class="fa-solid fa-money-bill-transfer fs-2 me-4"></i>Income
+                    <span class="badge badge-pill badge-light text-black "></span>
+                </a>
+            </li>
+
+            <li class="border border-secondary justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"
+                data-bs-toggle="tab"
+                style="color: #ffffff !important;  background: linear-gradient(45deg, #7dc2bf, #05aa97);"
+                (click)="showTab('Expense')" [ngClass]="{'active-custom-tab': currentTab === 'Expense'}"
+                href="#kt_tab_pane_1">
+                <a>
+                    <i class="fa-solid fa-hand-holding-dollar fs-2 me-4"></i>Expense
+                    <span class="badge badge-pill badge-light text-black "></span>
+                </a>
+            </li>
+
+            <li class="border border-secondary justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"
+                data-bs-toggle="tab"
+                style="color: #ffffff !important;  background: -webkit-linear-gradient(45deg, #aedaf3, #399C91);"
+                (click)="showTab('Asset')" [ngClass]="{'active-custom-tab': currentTab === 'Asset'}"
+                href="#kt_tab_pane_4">
+                <a>
+                    <i class="fa-solid fa-laptop-medical fs-4 me-4"></i>Asset
+                    <span class="badge badge-pill badge-light text-black "></span>
+                </a>
+            </li>
+
+            <li class="border border-secondary active justify-content-center col twotab sample1 border rounded-0 p-4 twotabs"
+                data-bs-toggle="tab"
+                style="color: #ffffff !important;  background: -webkit-linear-gradient(45deg, #45abe6, #3fe8d4);"
+                (click)="showTab('Liability')" [ngClass]="{'active-custom-tab': currentTab === 'Liability'}"
+                href="#kt_tab_pane_3">
+                <a>
+                    <i class="fa-solid fa-money-bill-1-wave fs-4 me-4"></i>Liability
+                    <span class="badge badge-pill badge-light text-black"></span>
+                </a>
+            </li>
+        </ul>
+
+        <!-- Income -->
+        <ng-container *ngIf="currentTab === 'Income'">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ms-4 p-3 rounded">
+                        <div class="table-responsive">
+                            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                <table id="incomeledgerreport_List"
+                                    class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                    <thead>
+                                        <tr class="fw-bolder fs-5 bg-lightblue text-blue align-middle">
+                                            <th style="width:2%" class="text-center">S.No</th>
+                                            <th>Account Group</th>
+                                            <th>SubGroup</th>
+                                            <th>Ledger</th>
+                                            <th style="text-align: right;">Opening</th>
+                                            <th style="text-align: right;">Debit</th>
+                                            <th style="text-align: right;">Credit</th>
+                                            <th style="text-align: right;">Balance</th>
+                                            <th class="text-center">Action </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of incomeledgerreport_List; let i=index;">
+                                            <td>{{i+1}}</td>
+                                            <td>{{data.MainGroup_name}}</td>
+                                            <td>{{data.subgroup_name}}</td>
+                                            <td>{{data.account_name}}</td>
+                                            <!-- <td style="width:40%">{{data.contact_details}}</td> -->
+                                            <td class="text-end" [ngStyle]="{color: data.opening_amount === '0.00' ? 'red' : 'black'}">{{data.opening_amount}}</td>
+                                            <td class="text-end" [ngStyle]="{color: data.debit_amount === '0.00' ? 'red' : 'black'}">{{data.debit_amount}}</td>
+                                            <td class="text-end" [ngStyle]="{color: data.credit_amount === '0.00' ? 'red' : 'black'}">{{data.credit_amount}}</td>
+                                            <td class="text-end" [ngStyle]="{color: data.closing_amount === '0.00' ? 'red' : 'black'}">{{data.closing_amount}}</td>
+                                            <td class="text-center text-nowrap">
+                                                <button title="View" type="button"
+                                                    class="btn btn-icon btn-sm bg-primary me-2"
+                                                    (click)="IncomeDetailedReport(data.account_gid)">
+                                                    <span class="fa-solid fa-eye text-white fs-4"></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tr>
+                                        <td colspan="5" class="text-end fs-5" style="font-weight: bolder;">Total</td>
+                                        <td class="text-end fs-5" style="font-weight: bolder;">{{totalDebit_income}}</td>
+                                        <td class="text-end fs-5" style="font-weight: bolder;">{{totalCredit_income}}</td>
+                                        <td></td>                                        
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <!-- Expense -->
+        <ng-container *ngIf=" currentTab === 'Expense'">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ms-4 p-3 rounded">
+                        <div class="table-responsive">
+                            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                <table id="expenseledgerreport_List"
+                                    class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                    <thead>
+                                        <tr class="fw-bolder fs-5 bg-lightblue text-blue align-middle">
+                                            <th style="width:2%" class="text-center">S.No</th>
+                                            <th>Account Group</th>
+                                            <th>SubGroup</th>
+                                            <th>Ledger</th>
+                                            <th style="text-align: right;">Opening</th>
+                                            <th style="text-align: right;">Debit</th>
+                                            <th style="text-align: right;">Credit</th>
+                                            <th style="text-align: right;">Balance</th>
+                                            <th class="text-center">Action </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of expenseledgerreport_List; let i=index;">
+                                            <td>{{i+1}}</td>
+                                            <td>{{data.MainGroup_name}}</td>
+                                            <td>{{data.subgroup_name}}</td>
+                                            <td>{{data.account_name}}</td>
+                                            <td class="text-end" [ngStyle]="{color: data.opening_amount === '0.00' ? 'red' : 'black'}">{{data.opening_amount}}</td>
+                                            <td class="text-end" [ngStyle]="{color: data.debit_amount === '0.00' ? 'red' : 'black'}">{{data.debit_amount}}</td>
+                                            <td class="text-end" [ngStyle]="{color: data.credit_amount === '0.00' ? 'red' : 'black'}">{{data.credit_amount}}</td>
+                                            <td class="text-end" [ngStyle]="{color: data.closing_amount === '0.00' ? 'red' : 'black'}">{{data.closing_amount}}</td>
+                                            <td class="text-center text-nowrap">
+                                                <button title="View" type="button"
+                                                    class="btn btn-icon btn-sm bg-primary me-2"
+                                                    (click)="ExpenseDetailedReport(data.account_gid)">
+                                                    <span class="fa-solid fa-eye text-white fs-4"></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tr>
+                                        <td colspan="5" class="text-end fs-5" style="font-weight: bolder;">Total</td>
+                                        <td class="text-end fs-5" style="font-weight: bolder;">{{totalDebit_expense}}</td>
+                                        <td class="text-end fs-5" style="font-weight: bolder;">{{totalCredit_expense}}</td>
+                                        <td></td>                                        
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <!-- Asset -->
+        <ng-container *ngIf="currentTab === 'Asset'">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ms-4 p-3 rounded">
+                        <div class="table-responsive">
+                            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                <table id="assetreport_List"
+                                    class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                    <thead>
+                                        <tr class="fw-bolder fs-5 bg-lightblue text-blue align-middle">
+                                            <th style="width:2%">S.No</th>
+                                            <th>Account Group</th>
+                                            <th>SubGroup</th>
+                                            <th>Ledger</th>
+                                            <th style="text-align: right;">Opening</th>
+                                            <th style="text-align: right;">Debit</th>
+                                            <th style="text-align: right;">Credit</th>
+                                            <th style="text-align: right;">Balance</th>
+                                            <th class="text-center" class="text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of assetreport_List; let i=index;" class="align-middle">
+                                            <td style="width: 2%;">{{i+1}}</td>
+                                            <td>{{data.MainGroup_name}}</td>
+                                            <td>{{data.subgroup_name}}</td>
+                                            <td>{{data.customer_name}}</td>
+                                            <td class="text-end" [ngStyle]="{color: data.opening_amount === '0.00' ? 'red' : 'black'}">{{data.opening_amount}}</td>
+                                            <td class="text-end" [ngStyle]="{color: data.debit_amount === '0.00' ? 'red' : 'black'}">{{data.debit_amount}}</td>
+                                            <td class="text-end" [ngStyle]="{color: data.credit_amount === '0.00' ? 'red' : 'black'}">{{data.credit_amount}}</td>
+                                            <td class="text-end" [ngStyle]="{color: data.closing_amount === '0.00' ? 'red' : 'black'}">{{data.closing_amount}}</td>
+                                            <td class="text-center text-nowrap">
+                                                <button title="Detailed Report" type="button"
+                                                    class="btn btn-icon bg-primary btn-sm me-2 mt-2 "
+                                                    (click)="AssetDetailedReport(data.account_gid,data.customer_gid)">
+                                                    <span class="fa-solid fa-eye text-white fs-2"></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tr>
+                                        <td colspan="5" class="text-end fs-5" style="font-weight: bolder;">Total</td>
+                                        <td class="text-end fs-5" style="font-weight: bolder;">{{totalDebit_asset}}</td>
+                                        <td class="text-end fs-5" style="font-weight: bolder;">{{totalCredit_asset}}</td>
+                                        <td></td>                                        
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <!-- Liability -->
+        <ng-container *ngIf="currentTab === 'Liability'">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ms-4 p-3 rounded">
+                        <div class="table-responsive">
+                            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                                <table id="liabilityreport_List"
+                                    class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                                    <thead>
+                                        <tr class="fw-bolder fs-5 bg-lightblue text-blue align-middle">
+                                            <th style="width:2%" class="text-center">S.No</th>
+                                            <th>Account Group</th>
+                                            <th>SubGroup</th>
+                                            <th>Ledger</th>
+                                            <th style="text-align: right;">Opening</th>
+                                            <th style="text-align: right;">Debit</th>
+                                            <th style="text-align: right;">Credit</th>
+                                            <th style="text-align: right;">Balance</th>
+                                            <th class="text-center">Action </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of liabilityreport_List; let i=index;">
+                                            <td>{{i+1}}</td>
+                                            <td>{{data.MainGroup_name}}</td>
+                                            <td>{{data.subgroup_name}}</td>
+                                            <td>{{data.vendor_companyname}}</td>
+                                            <td class="text-end" [ngStyle]="{color: data.opening_amount === '0.00' ? 'red' : 'black'}">{{data.opening_amount}}</td>
+                                            <td class="text-end" [ngStyle]="{color: data.debit_amount === '0.00' ? 'red' : 'black'}">{{data.debit_amount}}</td>
+                                            <td class="text-end" [ngStyle]="{color: data.credit_amount === '0.00' ? 'red' : 'black'}">{{data.credit_amount}}</td>
+                                            <td class="text-end" [ngStyle]="{color: data.closing_amount === '0.00' ? 'red' : 'black'}">{{data.closing_amount}}</td>
+                                            <td class="text-center text-nowrap">
+                                                <button title="View" type="button"
+                                                    class="btn btn-icon btn-sm bg-primary me-2"
+                                                    (click)="LiabilityDetailedReport(data.account_gid)">
+                                                    <span class="fa-solid fa-eye text-white fs-4"></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tr>
+                                        <td colspan="5" class="text-end fs-5" style="font-weight: bolder;">Total</td>
+                                        <td class="text-end fs-5" style="font-weight: bolder;">{{totalDebit_Liability}}</td>
+                                        <td class="text-end fs-5" style="font-weight: bolder;">{{totalCredit_Liability}}</td>
+                                        <td></td>                                        
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </form>
+</div>

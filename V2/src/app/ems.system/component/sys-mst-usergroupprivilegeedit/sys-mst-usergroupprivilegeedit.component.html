@@ -1,0 +1,109 @@
+<div class="m-4">
+    <form [formGroup]="usergrouptemplateform" #form="ngForm">
+        <div class="card rounded-top">
+            <div class="card-title p-2 rounded-top bg-primary d-flex justify-content-between align-items-center">
+                <h1 class="fw-bolder text-white">
+                    <span class="fas fa-pen-to-square fs-2"></span>&nbsp; Edit User Group Template
+                </h1>
+                <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer me-3" 
+        routerLink="/system/SysMstusergroupprivilegesummary"><i class="fa-solid fa-arrow-left text-blue mb-1"></i><span class="tooltips">Back</span></button>
+            </div>
+                <div class="d-flex flex-row m-6 flex-wrap">
+                    <div class="col-12 col-lg-3 col-md-3 col-sm-12"> 
+                        <span class="font-bold required">User Group Template Code</span>
+                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                            <input formControlName="usergrouptemplate_code" type="text"
+                                [ngStyle]="{ 'border-color': usergrouptemplateform.get('usergrouptemplate_code')?.hasError('required') && usergrouptemplateform.get('usergrouptemplate_code')?.touched || usergrouptemplateform.get('usergrouptemplate_code')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white"
+                                placeholder="User Group Template Code" />
+                            <div *ngIf="usergrouptemplateform.get('usergrouptemplate_code')?.hasError('required') && usergrouptemplateform.get('usergrouptemplate_code')?.touched"
+                                class="text-red ms-2">User Group Template Code is required.</div>
+                            <div *ngIf="usergrouptemplateform.get('usergrouptemplate_code')?.hasError('pattern')" class="text-red ms-2">Space at the beginning is not allowed.</div>
+                        </div>
+                    </div>
+                
+                    <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                        <span class="font-bold required">User Group Template Name</span>
+                        <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                            <input formControlName="usergrouptemplate_name" type="text"
+                                [ngStyle]="{ 'border-color': usergrouptemplateform.get('usergrouptemplate_name')?.hasError('required') && usergrouptemplateform.get('usergrouptemplate_name')?.touched || usergrouptemplateform.get('usergrouptemplate_name')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white"
+                                placeholder="User Group Template Name" />
+                            <div *ngIf="usergrouptemplateform.get('usergrouptemplate_name')?.hasError('required') && usergrouptemplateform.get('usergrouptemplate_name')?.touched"
+                                class="text-red">User Group Template Name is required.</div>
+                            <div *ngIf="usergrouptemplateform.get('usergrouptemplate_name')?.hasError('pattern')"
+                                class="text-red">Space at the beginning is not allowed.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card m-3 border">
+                <div class="card-header bg-lightblue card-height55">
+                    <div class="card-title m-0">
+                <h3 class="fw-bolder fs-2 text-nowrap text-blue">
+                    Assign Privilege
+                </h3>
+            </div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; padding-right: 55px;">
+                    <input type="checkbox" id="checkAll" (change)="masterToggle()" [checked]="isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()" />
+                    <span class="ms-3 fs-3" >Check all</span>
+                </div>           
+                </div>
+            </div>
+
+            <div id="scroll-container" class="scroll overflow-auto m-6 mt-0">
+                <ng-container *ngFor="let data of UserMenuList">
+                    <div class="row">
+                        <div class="col-12">
+                            <div
+                                class="bg-primary p-3 rounded mt-4 text-white d-flex justify-content-between align-items-center">
+                                <div></div>
+                                <div>
+                                    <h4 class="text-white mb-0">{{ data.text }}</h4>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="checkAllSection" (change)="masterToggleForSection(data)"
+                                        [checked]="isAllSelectedForSection(data)"
+                                        [indeterminate]="selection.hasValue() && !isAllSelectedForSection(data)"
+                                        class="me-5" />
+                                </div>
+                            </div>
+
+                            <div class="column" *ngFor="let j of data.submenu;">
+                                <div class="col">
+                                    <h4 class="text-blue bg-lightblue p-3 rounded mt-2">{{ j.text }}</h4>
+                                    <ul class="list-group ps-0">
+                                        <li class="list-group-item list-group-item-action striped-list"
+                                            *ngFor="let k of j.sub1menu">
+                                            <div class="row">
+                                                <div class="col-10">{{ k.text }}</div>
+                                                <div class="col-2">
+                                                    <input type="checkbox" class="pull-right"
+                                                    (change)="$event ? selection.toggle(k) : null"
+                                                    [checked]="selection.isSelected(k) "/>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </ng-container>
+            </div>
+            <div class="text-center mb-3">
+                <button type="submit" class="btn-success text-white" (click)="submit()" data-bs-dismiss="modal"
+                    [disabled]="usergrouptemplateform.invalid || !isAnySelected()">
+                    <i class="fas fa-check text-white fs-5"></i>
+                    Update
+                </button>
+                <button type="button" class="btn-danger ms-5" data-bs-dismiss="modal" (click)="backbutton()">
+                    <i class="fa fa-close fs-5 text-center"></i>
+                    Close
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,111 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web;
+using System.Web.Http;
+using ems.crm.DataAccess;
+using ems.crm.Models;
+using ems.utilities.Functions;
+using ems.utilities.Models;
+
+
+namespace ems.crm.Controllers
+{
+    [Authorize]
+    [RoutePrefix("api/Assignvisit")]
+    public class AssignvisitController : ApiController
+    {
+
+        session_values Objgetgid = new session_values();
+        logintoken getsessionvalues = new logintoken();
+        DaAssignvisit objDacrm = new DaAssignvisit();
+
+        [ActionName("GetassignvisitSummary")]
+        [HttpGet]
+        public HttpResponseMessage GetassignvisitSummary()
+        {
+            MdlAssignvisit values = new MdlAssignvisit();
+            objDacrm.DaGetassignvisitSummary(values);
+            return Request.CreateResponse(HttpStatusCode.OK, values);
+        }
+        [ActionName("GetassignvisitSummaryToday")]
+        [HttpGet]
+        public HttpResponseMessage GetassignvisitSummaryToday()
+        {
+            MdlAssignvisit values = new MdlAssignvisit();
+            objDacrm.DaGetassignvisitSummaryToday(values);
+            return Request.CreateResponse(HttpStatusCode.OK, values);
+        }
+        [ActionName("GetassignvisitSummaryUpcoming")]
+        [HttpGet]
+        public HttpResponseMessage GetassignvisitSummaryUpcoming()
+        {
+            MdlAssignvisit values = new MdlAssignvisit();
+            objDacrm.DaGetassignvisitSummaryUpcoming(values);
+            return Request.CreateResponse(HttpStatusCode.OK, values);
+        }
+        [ActionName("GetassignvisitSummaryExpired")]
+        [HttpGet]
+        public HttpResponseMessage GetassignvisitSummaryExpired()
+        {
+            MdlAssignvisit values = new MdlAssignvisit();
+            objDacrm.DaGetassignvisitSummaryExpired(values);
+            return Request.CreateResponse(HttpStatusCode.OK, values);
+        }
+        [ActionName("Getmarketingteamdropdown")]
+        [HttpGet]
+        public HttpResponseMessage Getmarketingteamdropdown()
+        {
+            MdlAssignvisit values = new MdlAssignvisit();
+            objDacrm.DaGetmarketingteamdropdown(values);
+            return Request.CreateResponse(HttpStatusCode.OK, values);
+        }
+        [ActionName("Getleadbankdropdown")]
+        [HttpGet]
+        public HttpResponseMessage Getleadbankdropdown()
+        {
+            MdlAssignvisit values = new MdlAssignvisit();
+            objDacrm.DaGetleadbankdropdown(values);
+            return Request.CreateResponse(HttpStatusCode.OK, values);
+        }
+
+        [ActionName("Getexecutedropdown")]
+        [HttpGet]
+        public HttpResponseMessage Getexecutedropdown(string user_gid, string campaign_gid)
+        {
+            MdlAssignvisit objresult = new MdlAssignvisit();
+            objDacrm.DaGetexecutedropdown(user_gid, campaign_gid, objresult);
+            return Request.CreateResponse(HttpStatusCode.OK, objresult);
+        }
+
+        [ActionName("Getmarketingteamdropdownonchange")]
+        [HttpGet]
+        public HttpResponseMessage Getmarketingteamdropdownonchange(string campaign_gid)
+        {
+            MdlAssignvisit objresult = new MdlAssignvisit();
+            objDacrm.DaGetmarketingteamdropdownonchange(campaign_gid, objresult);
+            return Request.CreateResponse(HttpStatusCode.OK, objresult);
+        }
+       
+        [ActionName("GetAssignassignvisit")]
+        [HttpPost]
+        public HttpResponseMessage GetAssignassignvisit(assignvisitsubmit_list values)
+        {
+            string token = Request.Headers.GetValues("Authorization").FirstOrDefault();
+            getsessionvalues = Objgetgid.gettokenvalues(token);
+            objDacrm.DaGetAssignassignvisit(getsessionvalues.user_gid, values);
+            return Request.CreateResponse(HttpStatusCode.OK, values);
+        }
+
+        [ActionName("Getvisittilecount")]
+        [HttpGet]
+        public HttpResponseMessage Getvisittilecount()
+        {
+            MdlAssignvisit values = new MdlAssignvisit();
+            objDacrm.DaGetvisittilecount(values);
+            return Request.CreateResponse(HttpStatusCode.OK, values);
+        }
+    }
+}

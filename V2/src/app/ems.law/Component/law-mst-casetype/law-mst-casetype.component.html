@@ -1,0 +1,172 @@
+<div class="card">
+  <div class="ms-3 mt-3 d-flex align-items-center ">
+    <div class="col">
+      <h3 class="card-title">Case Type Summary</h3>
+    </div>
+    <div class="col me-5">
+      <button title="Add Case Type" class="btn-primary btn-sm text-white me-4 mb-2 mt-2 float-end"
+        data-bs-toggle="modal" data-bs-target="#addmodal">
+        <i class="fas fa-plus"></i> &nbsp;&nbsp;
+        Add Case Type</button>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+      <table id="casetypeSummary" class="table table-striped table-row-bordered border-bottom gs-7">
+        <thead>
+          <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+            <th (click)="sortColumn('sno')">S.No<i class="fa ms-2" [ngClass]="getSortIconClass('sno')"></i>
+            </th>
+            <th (click)="sortColumn('casetype_code')">Code<i class="fa ms-2"
+                [ngClass]="getSortIconClass('casetype_code')"></i>
+            </th>
+            <th (click)="sortColumn('casetype_name')">Case Type<i class="fa ms-2"
+                [ngClass]="getSortIconClass('casetype_name')"></i>
+            </th>
+            <th (click)="sortColumn('created_by')">Created By<i class="fa ms-2"
+                [ngClass]="getSortIconClass('created_by')"></i>
+            </th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let data of caseList; let i=index;" class="align-middle">
+            <td>{{i+1}}</td>
+            <td>{{data.casetype_code}}</td>
+            <td>{{data.casetype_name}}</td>
+            <td>{{data.created_by}}</td>
+            <td [ngSwitch]="data.Status" class="text-center text-nowrap ">
+              <button title="Edit" type="button" (click)="editcase(data)" class="btn btn-icon btn-sm bg-etdark me-2"
+                data-bs-toggle="modal" data-bs-target="#Editmodal"><span
+                class="fa-solid fa-pencil text-white  fs-6"></span></button>
+              <button title="Delete" type="button" (click)="openModaldelete(data.casetype_gid)" data-bs-toggle="modal"
+                data-bs-target="#myModaldelete" class="btn btn-icon btn-sm bg-danger me-2">
+                <span class="fa-solid fa-trash text-white  fs-6"></span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="addmodal" data-bs-backdrop='static'>
+  <div class="modal-dialog modal-dialog-centered ">
+      <div class="modal-content " data-bs-backdrop='static'>
+          <div class="modal-header bg-primary mb-5">
+              <h3 class="modal-title text-white"><i class="fas fa-plus -"></i> &nbsp;&nbsp; Add Case Type</h3>
+          </div>
+          <form (ngSubmit)="addcase()" [formGroup]="reactiveForm">
+              
+              <div class="col-12 col-lg-11 col-md-6 col-sm-12 ms-5 mb-5"><span class="font-bold required">
+                  Code</span>
+              <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                  <input [(ngModel)]="reactiveForm.casetypecode" formControlName="casetypecode"
+                  [ngStyle]="{ 'border-color': reactiveForm.get('casetypecode')?.hasError('required') && reactiveForm.get('casetypecode')?.touched ? 'red' : 'rgb(209, 209, 209)' }"
+                      type="text" class="
+                    form-control form-control-lg form-control-solid bg-white custom-input
+                    mb-3 mb-lg-0 " placeholder="Enter Code" maxlength="10"/>
+                    <div *ngIf="reactiveForm.get('casetypecode')?.hasError('required') && reactiveForm.get('casetypecode')?.touched || reactiveForm.get('casetype_code')?.hasError('pattern') "
+                    class="text-red">
+                    Code is required.
+                </div>
+              </div>
+          </div>
+
+              <div class="col-12 col-lg-11 col-md-6 col-sm-12 ms-5 mb-5"><span class="font-bold required"
+                      required="">Case Type</span>
+                  <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2 ">
+                      <input [(ngModel)]="reactiveForm.casetypename"
+                          [ngStyle]="{ 'border-color': reactiveForm.get('casetypename')?.hasError('required') && reactiveForm.get('casetypename')?.touched ? 'red' : 'rgb(209, 209, 209)' }"
+                          formControlName="casetypename" type="text" class="form-control form-control-lg form-control-solid bg-white custom-input
+                    mb-3 mb-lg-0 " placeholder="Enter Case Type" pattern="^(?!\s*$).+" maxlength="30"/>
+                      <div *ngIf="reactiveForm.get('casetypename')?.hasError('required') && reactiveForm.get('casetypename')?.touched || reactiveForm.get('casetype_name')?.hasError('pattern') "
+                          class="text-red">
+                          Case Type is required.
+                      </div>
+                  </div>
+              </div>
+
+              <div class="text-center mb-10">
+                  <button type="submit" class="btn-success text-white" data-bs-dismiss="modal"
+                      [disabled]="reactiveForm.invalid">
+                      <i class="fas fa-check text-white fs-5"></i>
+                      Submit
+                  </button> &nbsp; &nbsp;
+                  <button type="button" class="btn-danger text-white" data-bs-dismiss="modal">
+                      <i class="fa fa-close fs-5 text-center"></i>
+                      Close
+                  </button>
+              </div>
+          </form>
+
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="Editmodal" data-bs-backdrop='static'>
+  <div class="modal-dialog modal-dialog-centered "> 
+      <div class="modal-content ">
+          <div class="modal-header bg-primary mb-5">
+              <h3 class="modal-title text-white "><i class="fas fa-pen-to-square fs-5"></i> &nbsp;&nbsp;Edit
+                Case Type</h3>
+          </div>
+          <form (ngSubmit)="onupdate()" [formGroup]="reactiveFormEdit">
+            <div class="col-12 col-lg-12 col-md-6 col-sm-12 ms-4 mb-3"><span class="font-bold">Code</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input type="text" [(ngModel)]="casetypecode"
+                  class="form-control form-control-lg form-control-solid custom-input inputfield mb-3 mb-lg-0 bg-white custom-input borderc-secondary"
+                  required formControlName="casetypecode" />
+              </div>
+            </div>
+          <div class="col-12 col-lg-11 col-md-6 col-sm-12 ms-5 mb-5"><span class="font-bold required"
+              required="">Case Type</span>
+                  <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                      <input [(ngModel)]="reactiveFormEdit.casetype_name"
+                          formControlName="casetype_name" type="text" class="
+                    form-control form-control-lg form-control-solid bg-white custom-input
+                    mb-3 mb-lg-0 "
+                          [ngStyle]="{ 'border-color': reactiveFormEdit.get('casetype_name')?.hasError('required') && reactiveFormEdit.get('casetype_name')?.touched ? 'red' : 'rgb(209, 209, 209)' }"
+                          pattern="^(?!\s*$).+"  maxlength="30"/>
+                      <div *ngIf="reactiveFormEdit.get('casetype_name')?.hasError('required') && reactiveFormEdit.get('casetype_name')?.touched || reactiveFormEdit.get('casetype_name')?.hasError('pattern') "
+                          class="text-red">
+                          Case Type is required.
+                      </div>
+                  </div>
+              </div>
+              <input formControlName="casetype_gid" hidden placeholder="Address Line 1" type="text"
+              class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary"
+              name="casetype_gid" />
+              <div class="text-center mb-10">
+                  <button type="submit" class="btn-success text-white" data-bs-dismiss="modal"
+                      [disabled]="reactiveFormEdit.invalid">
+                      <i class="fas fa-check text-white fs-5"></i>
+                      Update
+                  </button> &nbsp; &nbsp;
+                  <button type="button" class="btn-danger text-white" data-bs-dismiss="modal">
+                      <i class="fa fa-close fs-5 text-center"></i>
+                      Close
+                  </button>
+              </div>
+          </form>
+
+      </div>
+  </div>
+</div>
+<div id="myModaldelete" class="modal fade">
+  <div class="modal-dialog modal-confirm">
+      <div class="modal-content">
+          <div class="modal-body text-center">
+              <h4 class="w-100  fw-bolder fs-1 mt-5">Are you sure?</h4>
+              <p class="fw-bold fs-5 mt-4">Do You Want To Delete The Record ?</p>
+          </div>
+          <div class="modal-footer justify-content-center">
+              <button type="button" class="btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn-danger" data-bs-dismiss="modal"
+                  (click)="ondelete()">Delete</button>
+          </div>
+      </div>
+  </div>
+</div>

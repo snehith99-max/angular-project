@@ -1,0 +1,140 @@
+<div class="card done" style="border-top:3px solid rgb(43, 123, 243);">
+    <div class="card m-3 border p-4" style="background-color: #eaf2ff;">
+      <div class="row col-lg-12 col-md-12 col-sm-12 text-center mt-3 ">
+  
+        <h3 class=" fw-bolder" style="border: #393939;">Version : <span class="text-blue">{{deploy_details.version}} /
+            {{deploy_details.version_number}}</span>
+        </h3>
+      </div>
+    </div>
+    <div class="card  m-3 border mt-0 mb-0">
+    <div class="d-flex flex-row flex-wrap">
+        <div class="col-lg-8 border" style="background-color: #f1f6ff;">
+            <div class="d-flex flex-row m-4 p-3 pt-0 mb-0 flex-wrap">
+              <div class="col-12 col-lg-3 col-md-6 col-sm-12 "><span class="fw-bolder fs-5">File</span>
+                <p class="mt-3 fs-5">{{deploy_details.file_name}}</p>
+              </div>
+              <div class="col-12 col-lg-3 col-md-6 col-sm-12"> <span class="fw-bolder fs-5">Any New DLL?</span>
+                <p class="mt-3 fs-5">{{deploy_details.dll_status}}</p>
+              </div>
+              <div class="col-12 col-lg-3 col-md-6 col-sm-12"><span class="fw-bolder fs-5">Is there any dependency?</span>
+                <p class="mt-3 fs-5">{{deploy_details.dependency_status}}</p>
+              </div>
+              <div class="col-12 col-lg-3 col-md-6 col-sm-12"> <span class="fw-bolder fs-5">Routes</span>
+                <p class="mt-3 fs-5">{{deploy_details.routes_status}}</p>
+              </div>
+              <div class="col-12 col-lg-3 col-md-6 col-sm-12"><span class="fw-bolder fs-5">Script </span>
+                <p class="mt-3 fs-5">{{deploy_details.script_status}}</p>
+              </div>
+              <div class="col-12 col-lg-3 col-md-6 col-sm-12 "> <span class="fw-bolder fs-5">Approval Remarks</span>
+                <p class="mt-3 fs-5">{{deploy_details.approval_name}}</p>
+              </div>
+              <div class="col-12 col-lg-3 col-md-6 col-sm-12"> <span class="fw-bolder fs-5">Deployed By</span>
+                <p class="mt-3 fs-5">{{deploy_details.created_by}}</p>
+              </div>
+              <div class="col-12 col-lg-3 col-md-6 col-sm-12 "> <span class="fw-bolder fs-5">Deployment date</span>
+                <p class="mt-3 fs-5">{{deploy_details.created_date}}</p>
+              </div>
+              <div class="col-12 col-lg-12 col-md-6 col-sm-12 "> <span class="fw-bolder fs-5">File Description</span>
+                <p class="mt-3 fs-5">{{deploy_details.description}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 border" style="background-color: #deebff;">
+            <div class="table-responsive mt-3 me-5"
+              style="max-height: 170px;overflow: auto; scrollbar-color: lightblue #ffffff;background-color: #deebff;">
+              <div class="mx-3 pt-0 pb-0 bg-white rounded">
+                <table class="table border-bottom mb-4 gs-7 align-middle table-row-bordered" style="background-color: #deebff;">
+                  <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap "style="color: #393939;">
+                      <th>S.No</th>
+                      <th>Module</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of deploy_module; let i = index;">
+                      <td>{{i + 1}}</td>
+                      <td class="fs-5">{{data.team_name}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        <!-- <div class="col-12 col-lg-6 ps-3 pe-3 col-md-12 col-sm-12 fv-row table-responsive">
+          <div class="align-middle rounded-top ms-3 mt-4">
+            <h4 class="text-blue">Module</h4>
+          </div>
+          <table id="onboardingDocumenttable" class="table table-striped table-row-bordered gy-5 gs-7 mt-3 mb-9">
+            <tbody>
+              <tr *ngFor="let data of deploy_module; let i=index;">
+                <td>{{i+1}}</td>
+                <td>{{data.module_name}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div> -->
+        <div class="col-12 col-lg-6 ps-3 pe-3 col-md-12 col-sm-12 fv-row table-responsive">
+          <div class="align-middle rounded-top mt-4">
+            <h4 class="text-blue">Dependency Module</h4>
+          </div>
+          <table id="onboardingDocumenttable" class="table table-striped table-row-bordered gy-5 gs-7 mt-3 mb-9">
+            <thead>
+              <tr class="fw-bolder fs-5 text-nowrap bg-gray " style="color: #393939;">
+                <th>S.No</th>
+                <th>Module</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="deploydependcy_module.length === 0">
+                    <td colspan="4" class="text-center">No DepencyModule</td>
+                  </tr>
+              <tr *ngFor="let data of deploydependcy_module; let i=index;">
+                <td>{{i+1}}</td>
+                <td>{{data.team_name}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-12 col-lg-6 ps-3 pe-3 col-md-12 col-sm-12 fv-row table-responsive">
+            <div class="align-middle rounded-top mt-4">
+              <h4 class="text-blue">Script</h4>
+            </div>
+            <table id="onboardingDocumenttable" class="table table-striped table-row-bordered gy-5 gs-7 mt-3 mb-9">
+              <thead>
+                <tr class="fw-bolder fs-5 text-nowrap bg-gray " style="color: #393939;">
+                  <th>S.No</th>
+                  <th>Script</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="scriptattach_file.length === 0">
+                    <td colspan="4" class="text-center">No Scripts<td>
+                  </tr>
+                <tr *ngFor="let data of scriptattach_file; let i=index;">
+                  <td>{{i+1}}</td>
+                  <td>{{data.docupload_type}}</td>
+                  <td class="text-center text-nowrap">   
+                    <button type="button" class="btn btn-icon btn-sm bg-stssuccess me-2"
+                    (click)="viewFile(data.file_path,data.docupload_type)">
+                    <i class="fa-solid fa-file fs-6"></i></button>
+  
+                  <button type="button" name="document" (click)="downloadFiles(data.file_path,data.docupload_type)"
+                    class="btn btn-icon btn-sm bg-primary me-2">
+                    <span class="fa-solid fa-download text-white fs-6"></span>
+                  </button>
+                </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+      </div>
+      <div class="text-center my-4">
+        <button class="btn-primary btn-sm text-white me-4" (click)="backbutton()">
+          <i class="fas fa-arrow-left"></i> &nbsp;
+          Back</button>
+    
+      </div>
+    </div>

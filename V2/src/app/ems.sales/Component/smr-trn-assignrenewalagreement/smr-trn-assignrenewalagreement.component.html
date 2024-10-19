@@ -1,0 +1,112 @@
+<div class="card">
+    <div class="card-title p-5 pb-3 pt-3 rounded-top bg-primary d-flex justify-content-between align-items-center">
+        <h3 class="fw-bolder text-white"><i class="fa-solid fa-receipt fs-2" aria-hidden="true"></i>&nbsp;&nbsp;Assign Team</h3>
+    
+        <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer " title="back"
+          routerLink="/smr/SmrTrnRenevalsummary"><i class="fa-solid fa-arrow-left-long fs-1 fw-bold"></i></button>
+      </div>
+
+
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="team_list1" class="table table-striped table-row-bordered gy-5 gs-7 ">
+                <thead>
+                    <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th style="width:2%">S.No</th>
+                        <th>Branch </th>
+                        <th>Team</th>
+                        <th>Description</th>
+                        <th style="width: 100px">Manager</th>
+                        <th  style="width: 100px">Employee</th>
+                    
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of team_list1; let i=index;">
+                        <td>{{i+1}}</td>
+                        <td>{{data.branch}}</td>
+                        <td>{{data.team_name}}</td>
+                        <td>{{data.description}}</td>
+                        <td class="align-middle"  style="width: 100px">
+                            <a (click)="getmanagers(data.campaign_gid)" data-bs-toggle="modal"
+                                data-bs-target="#assignmanagerpopup" title="Manager"
+                                class="ms-6 count font-bold">{{data.total_managers}}</a>
+                        </td>
+                        <td class="align-middle"  style="width: 100px">
+                            <a (click)="getemployees(data.campaign_gid)"  data-bs-toggle="modal"
+                                data-bs-target="#assignemployeepopup" title="Employee"
+                                class="ms-6 count font-bold">{{data.total_employees}}</a>
+                        </td>
+                     
+                        <td class="text-center text-nowrap">
+                            <button title="Select Employee" (click)="onassign(data.campaign_gid)"
+                            type="button" class="btn btn-icon btn-sm me-2"
+                            style="background-color:#3fd384;">
+                            <i class="fa fa-list"></i>
+                    </button>
+                     
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal fade" id="assignmanagerpopup" tabindex="-1" data-bs-backdrop='static'
+    aria-labelledby="editamlcategoryLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content ">
+            <div class="modal-header bg-primary mb-5">
+                <h3 class="modal-title text-white"><i class="fa-solid fa-eye fs-3"></i> &nbsp; Assigned Manager</h3>
+            </div>
+
+            <div style="max-height: 160px;" class="overflow-auto p-3" id="scroll-bar-table">
+                <table class="table table-striped table-bordered table-hover table-sm table-responsive">
+                    <tbody>
+                        <tr *ngFor="let data of assignedmanagers_list let i=index;">
+                            <td class="px-0 text-center">{{i+1}}</td>
+                            <td>{{data.assign_manager}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center mb-3 mt-2">
+                <button type="button" class="btn-danger text-white" data-bs-dismiss="modal">
+                    <i class="fa fa-close fs-5 text-center"></i>
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="modal fade" id="assignemployeepopup" tabindex="-1" data-bs-backdrop='static'
+    aria-labelledby="editamlcategoryLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content ">
+            <div class="modal-header bg-primary mb-5">
+                <h3 class="modal-title text-white"><i class="fa-solid fa-eye fs-3"></i> &nbsp; Assigned Employee</h3>
+            </div>
+
+            <div style="max-height: 160px;" class="overflow-auto p-3" id="scroll-bar-table">
+                <table class="table table-striped table-bordered table-hover table-sm table-responsive">
+                    <tbody>
+                        <tr *ngFor="let data of assignedemployees_list; let i=index;">
+                            <td class="px-0 text-center">{{i+1}}</td>
+                            <td>{{data.assign_employee}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center mb-3 mt-2">
+                <button type="button" class="btn-danger text-white" data-bs-dismiss="modal">
+                    <i class="fa fa-close fs-5 text-center"></i>
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+

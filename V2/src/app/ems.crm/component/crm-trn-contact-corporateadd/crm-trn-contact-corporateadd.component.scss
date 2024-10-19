@@ -1,0 +1,16 @@
+.nextbutton {
+    transition: 0.3s;
+    padding: 5px 10px;
+    color: #000000;
+    background-color: rgb(234 237 240);
+    border-radius: 5px;
+    position: relative;
+  }
+   
+  .nextbutton:hover {
+    color: white;
+    background-color: #009EF7;
+    box-shadow: 2px 3px 3px -1px rgba(0, 0, 0, 0.5) !important;
+    transform: translateY(-2px) !important;
+    cursor: pointer;
+  }

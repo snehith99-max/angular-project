@@ -1,0 +1,176 @@
+<div class="card m-5">
+    <div class="card-title p-5 pb-3 pt-3 rounded-top bg-primary d-flex justify-content-between align-items-center">
+      <h1 class="fw-bolder text-white"><i class="fa fa-shopping-cart fs-2" aria-hidden="true"></i>&nbsp;&nbsp;Contract
+        Purchase Order</h1>
+      <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer " title="back"
+        routerLink="/pmr/PmrTrnContractvendor"><i class="fa-solid fa-arrow-left-long fs-1 fw-bold"></i></button>
+    </div>
+
+
+    <div class="card mt-1 m-3 mb-0">
+        <div  class="card-header d-flex align-items-center mb-3 cursor-pointer no-arrow" style="background-color: #def0ff;">
+          <div>
+            <p class="card-title fw-bold fs-3 no-arrow" style="color: #2599ff;">
+              <i class="fa-solid fa-clipboard fs-1"></i> &nbsp;&nbsp;Order Details
+            </p>
+          </div>
+        </div>
+
+        <div >
+            <form [formGroup]="contractpoform">
+              <div  class="d-flex flex-row m-2 ms-5 flex-wrap">
+                  <!-- -------------- Entity ------------- -->
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                  <span class="font-bold" [ngClass]="{'error_input_field': branch_name.invalid && branch_name.touched}">Entity<span class="ms-1 text-red">*</span></span>
+                  <div class="col-lg-12 col-15 col-md-13 col-sm-13 fv-row mt-2">
+                    <ng-select formControlName="branch_name"  
+                      [class.is-invalid]="branch_name.invalid && (branch_name.dirty || branch_name.touched)"
+                      [ngClass]="{'invalid-border': branch_name.invalid && branch_name.touched}" [items]="branch_list" required
+                      class=" col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 no-arrow" bindLabel="branch_name"
+                      bindValue="branch_gid" placeholder="Select Entity" [(ngModel)]="mdlBranchName">
+                    </ng-select>
+                  
+                  </div>
+                </div>
+                <!-- --------------PO Ref No  ------------- -->
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                  <span class="font-bold" [ngClass]="{'error_input_field': po_no.invalid && po_no.touched}" >PO Ref No<span class="ms-1 text-red">*</span></span>
+                  <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" formControlName="po_no"  [class.is-invalid]="po_no.invalid && (po_no.dirty || po_no.touched)"
+                      [ngClass]="{'error_input_field': po_no.invalid && po_no.touched}"
+                      class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input "
+                      placeholder="PO Ref No" style="height:30px;"  class="form-control"  />
+                  </div>
+                </div>
+                  <!-- -------------- PO Date ------------- -->
+              
+              <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                <div  class="d-flex flex-row  flex-wrap">
+              <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                <span class="font-bold" >PO Date<span class="ms-1 text-red">*</span></span>
+                <div class="col-lg-1o col-12 col-md-10 col-sm-10 fv-row mt-2">
+                    <input type="date"   pattern="^(?!\s*$).+" [ngStyle]="{ 'border-color': contractpoform.get('po_date')?.hasError('required')
+                     && contractpoform.get('po_date')?.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                    formControlName="po_date"
+               class="form-control form-control-lg form-control-solid date-picker custom-input mb-3 mb-lg-0 bg-white
+               custom-input date-picker "  placeholder="DD-MM-YYYY" style="height: 40px;"/>
+            </div>
+            </div>
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+              <span class="font-bold" >Expected Date <span class="ms-1 text-red">*</span></span>
+              <div class="col-lg-10 col-12 col-md-10 col-sm-10 fv-row mt-2">
+                  <input type="date"   pattern="^(?!\s*$).+" [ngStyle]="{ 'border-color': contractpoform.get('expected_date')?.hasError('required')
+                   && contractpoform.get('expected_date')?.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                  formControlName="expected_date"
+             class="form-control form-control-lg form-control-solid date-picker custom-input mb-3 mb-lg-0 bg-white
+             custom-input date-picker "  placeholder="DD-MM-YYYY" style="height: 40px;"/>
+          </div>
+          </div>
+      </div>
+      </div>
+      </div>
+      <div class="d-flex flex-row m-2 ms-5 flex-wrap">
+        <div class="col-12 col-lg-4 col-md-3 col-sm-12">
+          <span class="font-bold">Vendor Name</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input type="text" formControlName="vendor_name" 
+              class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input "
+              placeholder="Vendor Name" readonly style="height:30px;"  class="form-control"  />
+          </div>
+          <div class="col-11  fv-row mt-4 ">
+            <textarea type="text" readonly
+              class="form-control mt-4 form-control-lg form-control-solid  custom-input mb-1 mb-lg-2 border-secondary bg-white"
+              readonly  class="form-control" placeholder="Vendor Details" formControlName="vendor_details" rows="4"></textarea>
+          </div>
+        </div>
+         <!-- -------------- bill To ------------- -->
+        <div class="col-12 col-lg-4 col-md-3 col-sm-12">
+          <span class="font-bold">Bill To</span>
+          <div class="col-11 fv-row mt-4">
+            <textarea type="text" readonly
+              class="form-control mt-4 form-control-lg form-control-solid bg-secondary custom-input mb-1 mb-lg-2 border-secondary bg-white custom-input"
+              placeholder="Bill To" formControlName="address1" class="form-control" rows="6"></textarea>
+          </div>
+        </div>
+        <!-- -------------- Shipment To ------------- -->
+        <div class="col-12 col-lg-4 col-md-3 col-sm-12">
+          <span class="font-bold">Shipment To</span>
+          <div class="col-11 fv-row mt-4">
+            <textarea type="text"
+              class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary border-secondary custom-input"
+              placeholder="Shipment To" [(ngModel)]="txtshipto" formControlName="shipping_address" class="form-control"
+              rows="6"></textarea>
+          </div>
+        </div>       
+      </div>
+      <div class="d-flex flex-row m-2 ms-5 flex-wrap">
+        <div class="col-12 col-lg-12 col-md-4 col-sm-11"><span class="font-bold">PO Cover Note</span>
+          <div class="col-lg-12 col-12 col-md-4 col-sm-11 fv-row mt-2">
+            <textarea style="width: 97%;" type="text" class="
+              form-control form-control-lg form-control-solid custom-input
+              mb-3 mb-lg-0  borderc-secondary bg-white custom-input" formControlName="po_covernote"
+              placeholder="Enter PO Cover Note" class="form-control " rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <!-- <input type="hidden" formControlName="purchaseorder_gid"> -->
+            <table class="table table-striped table-bordered text-blue border-bottom gs-7 align-middle">
+                <thead>
+                    <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                        <th class="text-center text-blue" style="width: 1px;">S.No</th>
+                        <th class="text-center text-blue" style="width: 20%;">Product Type</th>
+                        <th class="text-center text-blue" style="width: 10%;">Product Code</th>
+                        <th class="text-center text-blue" style="width: 35%;">Product</th>
+                        <th class="text-center text-blue" style="width: 10%;">Unit</th>
+                        <th class="text-center text-blue" style="width: 35%;">Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of contract_list; let i = index;"> 
+                        <td>{{i + 1}}</td>
+                        <td>{{data.producttype_name}}</td>
+                        <td>{{data.product_code}}</td>
+                        <td>{{data.product_name}}</td>
+                        <td>{{data.productuom_name}}</td>
+                        <td class="text-center">
+                            <input type="number" [(ngModel)]="data.qty_ordered"
+                            class="form-control form-control-lg form-control-solid cust
+                            om-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                            placeholder="0.00"  formControlName="qty_ordered"
+                            style="width: 180px; display: inline-block; text-align: right;"/>
+                        </td>
+                     </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>    
+    <div class="m-2 ms-5 card border">
+        <div class="d-flex justify-content-between align-items-center rounded-top"
+        style="background-color: #def0ff;">
+        <div class="">
+          <h3 class="fw-bolder ms-3 mt-2" style="color: #2599ff;">Terms and Conditions</h3>
+        </div>
+
+        <div class="col-4">
+          <ng-select [items]="terms_list" class="custom mt-2 me-2 mb-2" bindLabel="template_name"
+            [(ngModel)]="mdlTerms" formControlName="template_name" bindValue="template_gid"
+            placeholder="Select an option" (change)="GetOnChangeTerms()"></ng-select>
+        </div>
+      </div>
+      <div class="m-3">
+        <angular-editor [config]="config" formControlName="template_content"></angular-editor>
+      </div>
+    </div>
+    <div class="text-center my-4">
+        <button class="btn-success btn-sm text-white me-2" (click)="onsubmit()"
+        [ngClass]="{'primary-button': !contractpoform.invalid, 'secondary-button': contractpoform.invalid }" >
+            <i class="fas fa-check text-white fs-5"></i> &nbsp; Submit
+        </button> &nbsp;&nbsp;
+    </div>
+    </form>
+  </div>
+</div>
+</div>

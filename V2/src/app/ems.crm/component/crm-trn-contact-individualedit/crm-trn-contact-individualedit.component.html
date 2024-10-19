@@ -1,0 +1,1034 @@
+<!--Add Contact Details-->
+<!--<remarks>Code written by YesuRaja</remarks>-->
+<div class="card rounded-top">
+    <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+        <h3 class="fw-bolder text-white"><i class="fas fa-edit fw-bolder fs-3"></i> &nbsp;&nbsp;&nbsp;Edit Individual
+            <div class=" float-end me-4 ">
+                <button title="Back" type="button"
+                    class="btn btn-sm btn-icon  btn-outline-primary position-absolute top-0 end-0 bg-white mt-4 p-2 me-4"
+                    (click)="backbutton()">
+                    <i class="fa-solid fa-arrow-left text-blue mb-1"></i>
+                </button>
+            </div>
+        </h3>
+
+    </div>
+    <div class=" ms-3 mt-3 d-flex align-items-center">
+        <div class="">
+            <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-20x mb-3 fs-6 border-bottom ms-3">
+                <li class="nav-item  ">
+                    <a class="nav-link active btn btn-flex btn-active-light-primary" data-bs-toggle="tab"
+                        href="#kt_tab_pane_2"><span class="fa fa-user"></span>&nbsp;&nbsp;Basic Details</a>
+                </li>
+                <li class="nav-item  ">
+                    <a class="nav-link  btn btn-flex btn-active-light-primary" data-bs-toggle="tab"
+                        href="#kt_tab_pane_4"><span class="fa fa-user"></span>&nbsp;&nbsp;Address Details</a>
+                </li>
+                <li class="nav-item  ">
+                    <a class="nav-link  btn btn-flex btn-active-light-primary" data-bs-toggle="tab"
+                        href="#kt_tab_pane_3"><span class="fa fa-user"></span>&nbsp;&nbsp;Family & Occupational
+                        Details</a>
+                </li>
+                <li class="nav-item  ">
+                    <a class="nav-link  btn btn-flex btn-active-light-primary" data-bs-toggle="tab"
+                        href="#kt_tab_pane_5"><span class="fa-solid fa-file"></span>&nbsp;&nbsp;Document - Upload</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <form [formGroup]="ContactEditIndividualForm">
+
+            <div class="tab-content" id="myTabContent" style="max-height: 500px;" id="scroll-bar-table">
+                <div class="tab-pane fade show active" id="kt_tab_pane_2" role="tabpanel">
+                    <!-- Individual -->
+                    <div>
+                        <div class="card m-1 border">
+                            <div class="d-flex flex-row m-6  flex-wrap">
+                                <div class="col-12 col-lg-4 col-md-6 col-sm-11">
+                                    <div class="col-lg-11  col-md-11 col-sm-11 fv-row ms-1"><span
+                                            class="font-bold">PAN</span>
+                                        <input type="text" formControlName="txt_pannumber" [(ngModel)]="pan_no"
+                                            [ngStyle]="{ 'border-color': ContactEditIndividualForm.get('txt_pannumber')?.hasError('required') && ContactEditIndividualForm.get('txt_pannumber')?.touched || ContactEditIndividualForm.get('txt_pannumber')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 mt-3"
+                                            placeholder="PAN Number" maxlength="10" />
+                                        <div *ngIf="ContactEditIndividualForm.get('txt_pannumber')?.hasError('required') && ContactEditIndividualForm.get('txt_pannumber')?.touched"
+                                            class="text-red">
+                                            PAN Number is required.
+                                        </div>
+                                        <div class="text-red"
+                                            *ngIf="ContactEditIndividualForm.get('txt_pannumber')?.hasError('pattern')">
+                                            Enter the Valid PAN Number
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row"><span
+                                            class="font-bold ">Aadhaar Number</span>
+                                        <input type="text" formControlName="txt_aadhaarno" [(ngModel)]="aadhar_no"
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 mt-3"
+                                            [ngStyle]="{ 'border-color': ContactEditIndividualForm.get('txt_aadhaarno')?.hasError('required') && ContactEditIndividualForm.get('txt_aadhaarno')?.touched || ContactEditIndividualForm.get('txt_aadhaarno')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                                            placeholder="Aadhaar Number" required maxlength="12" />
+                                        <div *ngIf="ContactEditIndividualForm.get('txt_aadhaarno')?.hasError('required') && ContactEditIndividualForm.get('txt_aadhaarno')?.touched"
+                                            class="text-red">
+                                            Aadhaar Number is required.
+                                        </div>
+                                        <div class="text-red"
+                                            *ngIf="ContactEditIndividualForm.get('txt_aadhaarno')?.hasError('pattern')">
+                                            Enter the Valid Aadhaar Number
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span
+                                        class="font-bold ">Salutation</span>
+                                    <ng-select [(ngModel)]="salutation"
+                                        [ngClass]="{'invalid-border': ContactEditIndividualForm.get('salutation_name')?.invalid && ContactEditIndividualForm.get('salutation_name')?.touched}"
+                                        [items]="Salutations"
+                                        class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-3"
+                                        bindLabel="salutation" placeholder="Select an option"
+                                        formControlName="salutation_name"></ng-select>
+                                    <div *ngIf="ContactEditIndividualForm.get('salutation_name')?.hasError('required') && ContactEditIndividualForm.get('salutation_name')?.touched"
+                                        class="text-red">
+                                        Salutation is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row m-6 mt-0 flex-wrap">
+                                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span
+                                        class="font-bold required">First Name</span>
+                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+
+                                        <input type="text" [(ngModel)]="first_name"
+                                            [ngStyle]="{ 'border-color': ContactEditIndividualForm.get('txtfirst_name')?.hasError('required') && ContactEditIndividualForm.get('txtfirst_name')?.touched ? 'red' : 'rgb(209, 209, 209)' }"
+                                            pattern="^(?!\s*$).+" formControlName="txtfirst_name" required
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input mt-2 inputfield" />
+                                        <div *ngIf="ContactEditIndividualForm.get('txtfirst_name')?.hasError('required') && ContactEditIndividualForm.get('txtfirst_name')?.touched || ContactEditIndividualForm.get('txtfirst_name')?.hasError('pattern')"
+                                            class="text-red">
+                                            First Name is required.
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span
+                                        class="font-bold ">Middle Name</span>
+                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+
+                                        <input type="text" [(ngModel)]="middle_name"
+                                            [ngStyle]="{ 'border-color': ContactEditIndividualForm.get('txtmiddle_name')?.hasError('required') && ContactEditIndividualForm.get('txtmiddle_name')?.touched ? 'red' : 'rgb(209, 209, 209)' }"
+                                            pattern="^(?!\s*$).+" formControlName="txtmiddle_name" required
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input mt-2 inputfield" />
+                                        <div *ngIf="ContactEditIndividualForm.get('txtmiddle_name')?.hasError('required') && ContactEditIndividualForm.get('txtmiddle_name')?.touched || ContactEditIndividualForm.get('txtmiddle_name')?.hasError('pattern')"
+                                            class="text-red">
+                                            Middle Name is required.
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span
+                                        class="font-bold ">Last Name</span>
+                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        <input type="text" formControlName="txtlast_name" [(ngModel)]="last_name"
+                                            class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0  inputfield"
+                                            [ngStyle]="{ 'border-color': ContactEditIndividualForm.get('txtlast_name')?.hasError('required') && ContactEditIndividualForm.get('txtlast_name')?.touched ? 'red' : 'rgb(209, 209, 209)' }" />
+                                        <div *ngIf="ContactEditIndividualForm.get('txtlast_name')?.hasError('required') && ContactEditIndividualForm.get('txtlast_name')?.touched"
+                                            class="text-red">
+                                            Last Name is required.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-lg-4 col-md-6 col-sm-12 mt-5"><span
+                                        class="font-bold ">DOB</span>
+                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+                                        <input type="date" [(ngModel)]="individual_dob" formControlName="txt_dob"
+                                            [ngStyle]="{ 'border-color':  'rgb(209, 209, 209)' }"
+                                            [ngStyle]="{ 'border-color': ContactEditIndividualForm.get('txt_dob')?.hasError('required') && ContactEditIndividualForm.get('txt_dob')?.touched ? 'red' : 'rgb(209, 209, 209)' }"
+                                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input date-picker"
+                                            placeholder="DD-MM-YYYY" />
+                                        <div *ngIf="ContactEditIndividualForm.get('txt_dob')?.hasError('required') && ContactEditIndividualForm.get('txt_dob')?.touched"
+                                            class="text-red">
+                                            DOB is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-4 col-md-6 col-sm-12 mt-5"><span class="font-bold">Age</span>
+                                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                        <input type="number" formControlName="txtage" [(ngModel)]="age"
+                                            class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary inputfield" />
+
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-4 col-md-6 col-sm-12 mt-5"><span
+                                        class="font-bold ">Gender</span>
+                                    <ng-select [(ngModel)]="gender_name"
+                                        [ngClass]="{'invalid-border': ContactEditIndividualForm.get('gender')?.invalid && ContactEditIndividualForm.get('gender')?.touched}"
+                                        [items]="Gender" required
+                                        class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                                        bindLabel="Gender" placeholder="Select an option"
+                                        formControlName="gender"></ng-select>
+                                    <div *ngIf="ContactEditIndividualForm.get('gender')?.hasError('required') && ContactEditIndividualForm.get('gender')?.touched"
+                                        class="text-red">
+                                        Gender is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 1st card -->
+                            <div class="d-flex flex-row m-6 mt-0 flex-wrap">
+
+
+
+
+
+
+
+                                <div class="col-12 col-lg-4 col-md-6 col-sm-12 mt-1"><span
+                                        class="font-bold ">Marital Status</span>
+                                    <ng-select [(ngModel)]="maritalstatus_name"
+                                        [ngClass]="{'invalid-border': ContactEditIndividualForm.get('MaritalStatus')?.invalid && ContactEditIndividualForm.get('MaritalStatus')?.touched}"
+                                        [items]="MaritalStatus" required
+                                        class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                                        bindLabel="MaritalStatus" placeholder="Select an option"
+                                        formControlName="MaritalStatus"></ng-select>
+                                    <div *ngIf="ContactEditIndividualForm.get('MaritalStatus')?.hasError('required') && ContactEditIndividualForm.get('MaritalStatus')?.touched"
+                                        class="text-red">
+                                        Marital status is required.
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-4 col-md-6 col-sm-12 mt-1"><span
+                                        class="font-bold ">Physical Status</span>
+                                    <ng-select [(ngModel)]="physicalstatus_name"
+                                        [ngClass]="{'invalid-border': ContactEditIndividualForm.get('PhysicalStatus')?.invalid && ContactEditIndividualForm.get('PhysicalStatus')?.touched}"
+                                        [items]="PhysicalStatus" required
+                                        class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                                        bindLabel="PhysicalStatus" placeholder="Select an option"
+                                        formControlName="PhysicalStatus"></ng-select>
+                                    <div *ngIf="ContactEditIndividualForm.get('PhysicalStatus')?.hasError('required') && ContactEditIndividualForm.get('PhysicalStatus')?.touched"
+                                        class="text-red">
+                                        Physical status is required.
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-4 col-md-6 col-sm-12 mt-1"><span
+                                        class="font-bold ">Designation</span>
+                                    <ng-select [(ngModel)]="designation_name"
+                                        [ngClass]="{'invalid-border': ContactEditIndividualForm.get('designation_name')?.invalid && ContactEditIndividualForm.get('designation_name')?.touched}"
+                                        [items]="designationList"
+                                        class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                                        bindLabel="designation_name" placeholder="Select an option"
+                                        formControlName="designation_name"></ng-select>
+                                    <div *ngIf="ContactEditIndividualForm.get('designation_name')?.hasError('required') && ContactEditIndividualForm.get('designation_name')?.touched"
+                                        class="text-red">
+                                        Designation is required.
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-4 col-md-6 col-sm-12 mt-5"><span class="font-bold">Region</span>
+                                    <ng-select                                          
+                                        [items]="regionnamelist" required class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 borderc-secondary"
+                                        formControlName="regionname" bindLabel="region_name"  placeholder="Select an option"
+                                        required></ng-select>
+                                  </div>
+                                  <div class="col-12 col-lg-4 col-md-6 col-sm-12 mt-5"><span class="font-bold">Source</span>
+                                    <ng-select                                          
+                                    [items]="source_list" required class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 borderc-secondary"
+                                    formControlName="sourcename" bindLabel="source_name"  placeholder="Select an option"
+                                    required></ng-select>
+                                    
+                                  </div>
+                                  <div class="col-12 col-lg-4 col-md-6 col-sm-12 mt-5">
+                                    <span class="font-bold">Referred By</span>
+                                    <ng-select formControlName="referred_by" [items]="GetLeaddropdown_list" bindLabel="leadbank_name"
+                                      bindValue="leadbank_gid" placeholder="Select Lead"
+                                      class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                    </ng-select>
+                                  </div>
+                            </div>
+                            <div class="d-flex flex-row m-6 mt-0 flex-wrap">
+                            </div>
+                            <!-- 3rd card -->
+                            <h4 class="fw-bolder text-blue ms-5 mt-1 mb-3">Mobile & Email Details</h4>
+                            <!-- <div class="container"> -->
+                            <div class="row">
+                                <div class="col">
+                                    <form [formGroup]="ContactBasicForm" (ngSubmit)="BasicClick()">
+                                        <div class="col-12 col-lg-10 col-md-6 col-sm-12 d-flex flex-row ">
+                                            <div class="col-lg-6 col-12 col-md-11 col-sm-11 fv-row mt-2 ms-10"><p
+                                                    class="font-bold mb-3">Mobile Number</p>
+                                                <ngx-intl-tel-input [cssClass]="'form-control custom-width mt-5'"
+                                                    [preferredCountries]="[CountryISO.India]"
+                                                    [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
+                                                    [searchCountryFlag]="true"
+                                                      [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                                                    [selectedCountryISO]="CountryISO.India" [phoneValidation]="true"
+                                                    name="mobiles" [maxLength]="15" formControlName="txt_mobileno"
+                                                    style="height:40px;"></ngx-intl-tel-input>
+                                                <div *ngIf="ContactBasicForm.get('txt_mobileno')?.hasError('required') && ContactBasicForm.get('txt_mobileno')?.touched || ContactBasicForm.get('txt_mobileno')?.hasError('pattern')"
+                                                    class="text-red">
+                                                    Mobile Number is required.
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 ms-10 mt-2"><span class="font-bold ">Primary
+                                                    Status</span>
+
+                                                <div class="d-flex justify-content-start mt-4 ">
+
+                                                    <div
+                                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                                                        <input type="radio" name="rdbprimarystatus" value="Yes"
+                                                            formControlName="rdbprimarystatus">
+
+
+                                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                                            for="kt_builder_header_content_menu">Yes</label>
+
+                                                    </div>
+                                                    <div
+                                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+                                                        <input type="radio" name="rdbprimarystatus" value="No"
+                                                            formControlName="rdbprimarystatus">
+
+                                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                                            for="kt_builder_header_content_page-title">No</label>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-2 fv-row mt-8">
+                                                &nbsp;&nbsp;&nbsp;
+                                                <button title="Add" type="submit"
+                                                    class="btn btn-icon btn-sm bg-success me-2 "
+                                                    [disabled]="ContactBasicForm.invalid">
+                                                    <span class="fa-solid fa-plus text-white fs-6"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-10 col-md-12 col-sm-12 fv-row mt-2 ms-5">
+                                            <table id="onboardingDocumenttable"
+                                                class="table table-striped table-row-bordered gy-5 gs-7 mt-4">
+                                                <thead>
+                                                    <tr class="fw-bold fs-5 text-nowrap  bg-lightblue text-blue">
+                                                        <th>S.No</th>
+                                                        <th>Mobile No</th>
+                                                        <th>Primary Status</th>
+                                                        <th class="text-center">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let data of MobileList; let i=index;">
+                                                        <td>{{i+1}}</td>
+                                                        <td>{{data.mobile_no}}</td>
+                                                        <td>{{data.primary_status}}</td>
+                                                        <td class="text-center text-nowrap">
+                                                            <button title="Delete" type="button"
+                                                                class="btn btn-icon btn-sm bg-danger me-2"
+                                                                (click)="DeleteDocumentClick(i)"><span
+                                                                    class="fa-solid fa-trash text-white  fs-6"></span></button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col">
+                                    <form [formGroup]="ContactBasicEmailForm" (ngSubmit)="BasicEmailClick()">
+                                        <div class="col-12 col-lg-10 col-md-6 col-sm-12 d-flex flex-row ">
+                                            <div class="col-lg-6 col-12 col-md-11 col-sm-11 fv-row mt-2 ms-10"><p
+                                                    class="font-bold ">Email Address</p>
+                                                <input type="text"
+                                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                                    [ngStyle]="{ 'border-color': ContactBasicEmailForm.get('txt_emailaddress')?.hasError('required') && ContactBasicEmailForm.get('txt_emailaddress')?.touched ? 'red' : 'rgb(209, 209, 209)','height': '42px' }"
+                                                    pattern="^(?!\s*$).+" placeholder="Enter Team Mail Id"
+                                                    formControlName="txt_emailaddress" required />
+                                                <div class="text-red"
+                                                    *ngIf="ContactBasicEmailForm.get('txt_emailaddress')?.hasError('required') && ContactBasicEmailForm.get('txt_emailaddress')?.touched">
+                                                    Email ID is required
+                                                </div>
+                                                <div class="text-red"
+                                                    *ngIf="ContactBasicEmailForm.get('txt_emailaddress')?.hasError('pattern') && ContactBasicEmailForm.get('txt_emailaddress')?.touched">
+                                                    Enter a valid email ID
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-3 ms-10 mt-3"><span class="font-bold ">Primary
+                                                    Status</span>
+
+                                                <div class="d-flex justify-content-start mt-4 ">
+
+                                                    <div
+                                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                                                        <input type="radio" name="rdbstatus" value="Yes"
+                                                            formControlName="rdbstatus">
+
+
+                                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                                            for="kt_builder_header_content_menu">Yes</label>
+
+                                                    </div>
+                                                    <div
+                                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+                                                        <input type="radio" name="rdbstatus" value="No"
+                                                            formControlName="rdbstatus">
+
+                                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                                            for="kt_builder_header_content_page-title">No</label>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-2 fv-row mt-8">
+                                                &nbsp;&nbsp;&nbsp;
+                                                <button title="Add" type="submit"
+                                                    class="btn btn-icon btn-sm bg-success me-2 "
+                                                    [disabled]="ContactBasicEmailForm.invalid">
+                                                    <span class="fa-solid fa-plus text-white fs-6"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-10 col-md-12 col-sm-12 fv-row mt-2 ms-5">
+                                            <table id="onboardingDocumenttable"
+                                                class="table table-striped table-row-bordered gy-5 gs-7 mt-4 ">
+                                                <thead>
+                                                    <tr class="fw-bold fs-5 text-nowrap bg-gray bg-lightblue text-blue">
+                                                        <th>S.No</th>
+                                                        <th>Email Address</th>
+                                                        <th>Primary Status</th>
+                                                        <th class="text-center">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let data of BasicEmaillist; let i=index;">
+                                                        <td>{{i+1}}</td>
+                                                        <td>{{data.email_address}}</td>
+                                                        <td>{{data.primary_status}}</td>
+                                                        <td class="text-center text-nowrap">
+                                                            <button title="Delete" type="button"
+                                                                class="btn btn-icon btn-sm bg-danger me-2"
+                                                                (click)="DeleteEmailClick(i)"><span
+                                                                    class="fa-solid fa-trash text-white  fs-6"></span></button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- </div> -->
+                        </div>
+                        <div class="d-flex flex-row">
+                            <div class="col-lg-6 col-md-11 col-sm-11">
+                                <button class="btn nextbutton btn-sm  me-4 ms-10 mb-3" (click)="backbutton()">
+                                    <i class="fas fa-arrow-left"></i> &nbsp;
+                                    Back</button>
+                            </div>
+                            <div class="col-lg-6 col-md-11 col-sm-11 me-10">
+                                <button class="btn nextbutton btn-sm float-end me-20 mb-3"
+                                    (click)="moveToTab('kt_tab_pane_4')">
+                                    <i class="fas fa-arrow-right"></i> &nbsp;
+                                    Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" id="myTabContent" style="max-height: 700px;" id="scroll-bar-table">
+                <div class="tab-pane fade show" id="kt_tab_pane_3" role="tabpanel">
+                    <div class="card m-3">
+                        <div class="card-header bg-lightblue card-height45">
+                            <div class="card-title m-0 ">
+                                <h4 class="fw-bolder text-blue">Family Details</h4>
+                            </div>
+                        </div>
+                        <!-- 1st row -->
+                        <div class="d-flex flex-row m-6  flex-wrap">
+
+                            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold ">Father's
+                                    First
+                                    Name</span>
+                                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                    <input type="text" formControlName="txt_father_firstname"
+                                        [(ngModel)]="father_firstname"
+                                        [ngStyle]="{ 'border-color': ContactEditIndividualForm.get('txt_father_firstname')?.hasError('required') && ContactEditIndividualForm.get('txt_father_firstname')?.touched ? 'red' : 'rgb(209, 209, 209)' }"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 "
+                                        placeholder="First Name" />
+                                    <div *ngIf="ContactEditIndividualForm.get('txt_father_firstname')?.hasError('required') && ContactEditIndividualForm.get('txt_father_firstname')?.touched"
+                                        class="text-red">
+                                        Father's first name is required.
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Father's Last
+                                    Name</span>
+                                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                    <input type="text" formControlName="txt_father_lastname"
+                                        [(ngModel)]="father_lastname"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 borderc-secondary"
+                                        placeholder="Last Name" />
+                                </div>
+
+                            </div>
+
+                            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold ">Contact
+                                    Number</span>
+                                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                    <input type="text" formControlName="txt_father_contactrefno" maxlength="10"
+                                        [(ngModel)]="fathercontact_no"
+                                        [ngStyle]="{ 'border-color': ContactEditIndividualForm.get('txt_father_contactrefno')?.hasError('required') && ContactEditIndividualForm.get('txt_father_contactrefno')?.touched || ContactEditIndividualForm.get('txt_father_contactrefno')?.hasError('pattern') || ContactEditIndividualForm.get('txt_father_contactrefno').errors?.minlength ? 'red' : 'rgb(209, 209, 209)' }"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 "
+                                        placeholder="Contact Number" />
+
+                                    <div *ngIf="ContactEditIndividualForm.get('txt_father_contactrefno')?.hasError('required') && ContactEditIndividualForm.get('txt_father_contactrefno')?.touched"
+                                        class="text-red">
+                                        Mobile Number is required.
+                                    </div>
+                                    <div class="text-red"
+                                        *ngIf="ContactEditIndividualForm.get('txt_father_contactrefno')?.hasError('pattern')">
+                                        Phone Number containing only numeric digits.
+                                    </div>
+
+                                    <div *ngIf="ContactEditIndividualForm.get('txt_father_contactrefno').errors?.minlength"
+                                        class="text-red">
+                                        Mobile Number not exceed 10 numeric digits.
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+                        </div>
+                        <!-- 2nd row -->
+
+                        <div class="d-flex flex-row m-6 mt-0 flex-wrap">
+
+                            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Mother's First
+                                    Name</span>
+                                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                    <input type="text" formControlName="txt_mother_firstname"
+                                        [(ngModel)]="mother_firstname"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 borderc-secondary"
+                                        placeholder="First Name" />
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Mother's Last
+                                    Name</span>
+                                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                    <input type="text" formControlName="txt_mother_lastname"
+                                        [(ngModel)]="mother_lastname"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 borderc-secondary"
+                                        placeholder="Last Name" />
+                                </div>
+
+                            </div>
+
+                            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Contact
+                                    Number</span>
+                                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                    <input type="text" formControlName="txt_mother_contactrefno"
+                                        [(ngModel)]="mothercontact_no"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 borderc-secondary"
+                                        placeholder="Contact Number" maxlength="10" />
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- 3rd row -->
+
+                        <div class="d-flex flex-row m-6 mt-0 flex-wrap">
+
+                            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Spouse First
+                                    Name</span>
+                                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                    <input type="text" formControlName="txt_spouse_firstname"
+                                        [(ngModel)]="spouse_firstname"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 borderc-secondary"
+                                        placeholder="First Name" />
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Spouse Last
+                                    Name</span>
+                                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                    <input type="text" formControlName="txt_spouse_lastname"
+                                        [(ngModel)]="spouse_lastname"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 borderc-secondary"
+                                        placeholder="Last Name" />
+                                </div>
+
+                            </div>
+
+                            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Contact
+                                    Number</span>
+                                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                    <input type="text" formControlName="txt_spouse_contactrefno"
+                                        [(ngModel)]="spousecontact_no"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 borderc-secondary"
+                                        placeholder="Contact Number" maxlength="10" />
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card m-3">
+                        <div class="card-header bg-lightblue card-height45">
+                            <div class="card-title m-0 ">
+                                <h4 class="fw-bolder text-blue">Occupation Details</h4>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-row m-6 flex-wrap">
+
+                            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold ">Educational
+                                    Qualification</span>
+                                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                    <input type="text" [(ngModel)]="educationalqualification_name"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 "
+                                        [ngStyle]="{ 'border-color': ContactEditIndividualForm.get('txt_edu_qualification')?.hasError('required') && ContactEditIndividualForm.get('txt_edu_qualification')?.touched ? 'red' : 'rgb(209, 209, 209)' }"
+                                        placeholder="Educational Qualification"
+                                        formControlName="txt_edu_qualification" />
+                                </div>
+                                <div *ngIf="ContactEditIndividualForm.get('txt_edu_qualification')?.hasError('required') && ContactEditIndividualForm.get('txt_edu_qualification')?.touched"
+                                    class="text-red">
+                                    Educational Qualification is required.
+                                </div>
+                                <div class="text-red"
+                                    *ngIf="ContactEditIndividualForm.get('txt_edu_qualification')?.hasError('pattern')">
+                                    Space is not accepted
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold ">Main
+                                    Occupation</span>
+                                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                    <input type="text" [(ngModel)]="main_occupation"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 "
+                                        [ngStyle]="{ 'border-color': ContactEditIndividualForm.get('txt_mainoccupation')?.hasError('required') && ContactEditIndividualForm.get('txt_mainoccupation')?.touched ? 'red' : 'rgb(209, 209, 209)' }"
+                                        placeholder="Main Occupation" formControlName="txt_mainoccupation" />
+                                </div>
+                                <div *ngIf="ContactEditIndividualForm.get('txt_mainoccupation')?.hasError('required') && ContactEditIndividualForm.get('txt_mainoccupation')?.touched"
+                                    class="text-red">
+                                    Main Occupation is required.
+                                </div>
+                                <div class="text-red"
+                                    *ngIf="ContactEditIndividualForm.get('txt_mainoccupation')?.hasError('pattern')">
+                                    Space is not accepted
+                                </div>
+                            </div>
+
+
+                            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold ">Annual
+                                    Income</span>
+                                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                    <input type="text" [(ngModel)]="annual_income"
+                                        [ngStyle]="{ 'border-color': ContactEditIndividualForm.get('txt_annualincome')?.hasError('required') && ContactEditIndividualForm.get('txt_annualincome')?.touched ? 'red' : 'rgb(209, 209, 209)' }"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 "
+                                        placeholder="Annual Income" formControlName="txt_annualincome"
+                                        [ngModel]="(inputValue)" (ngModelChange)="inputValue = $event"
+                                        pattern="[0-9,]+" />
+                                    <p style="font-style: italic;">Amount in words <span
+                                            style="font-style:normal;color:blue"> {{
+                                            inputValue  }}</span></p>
+                                </div>
+                                <div *ngIf="ContactEditIndividualForm.get('txt_annualincome')?.hasError('required') && ContactEditIndividualForm.get('txt_annualincome')?.touched"
+                                    class="text-red">
+                                    Annual Income is required.
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="d-flex flex-row m-6 mt-0 flex-wrap">
+
+                            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold ">Monthly
+                                    Income</span>
+                                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                    <input type="text" [(ngModel)]="monthly_income"
+                                        [ngStyle]="{ 'border-color': ContactEditIndividualForm.get('txt_monthlyincome')?.hasError('required') && ContactEditIndividualForm.get('txt_monthlyincome')?.touched ? 'red' : 'rgb(209, 209, 209)' }"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 "
+                                        placeholder="Monthly Income" formControlName="txt_monthlyincome"
+                                        [ngModel]="(MonthlyincomeValue)"
+                                        (ngModelChange)="MonthlyincomeValue = $event" pattern="[0-9,]+" />
+
+                                    <p style="font-style: italic;">Amount in words <span
+                                            style="font-style:normal;color:blue"> {{
+                                            MonthlyincomeValue }}</span></p>
+                                </div>
+                                <div *ngIf="ContactEditIndividualForm.get('txt_monthlyincome')?.hasError('required') && ContactEditIndividualForm.get('txt_monthlyincome')?.touched"
+                                    class="text-red">
+                                    Monthly Income is required.
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold ">Income
+                                    Type</span>
+                                <ng-select formControlName="Incometype" [items]="Incometype"
+                                    [(ngModel)]="incometype_name"
+                                    class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                                    bindLabel="Incometype"
+                                    [ngClass]="{'invalid-border': ContactEditIndividualForm.get('Incometype')?.invalid && (ContactEditIndividualForm.get('Incometype')?.touched || ContactEditIndividualForm.get('Incometype')?.dirty)}"
+                                    placeholder="Select an option"></ng-select>
+                                <div *ngIf="ContactEditIndividualForm.get('Incometype')?.hasError('required') && ContactEditIndividualForm.get('Incometype')?.touched"
+                                    class="text-red">
+                                    Incometype is required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row">
+                            <div class="col-lg-6 col-md-11 col-sm-11">
+                                <button class="btn nextbutton btn-sm  me-4 ms-10 mb-3"
+                                    (click)="moveToPreviousTab('kt_tab_pane_4')">
+                                    <i class="fas fa-arrow-left"></i> &nbsp;
+                                    Previous Tab</button>
+                            </div>
+                            <div class="col-lg-6 col-md-11 col-sm-11 me-10">
+                                <button class="btn nextbutton btn-sm  float-end me-20 mb-3"
+                                    (click)="moveToTab('kt_tab_pane_5')">
+                                    <i class="fas fa-arrow-right"></i> &nbsp;
+                                    Next</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="tab-content" id="myTabContent" style="max-height: 500px;" id="scroll-bar-table">
+                <div class="tab-pane fade " id="kt_tab_pane_4" role="tabpanel">
+                    <!-- Basic -->
+                    <div class="card m-3 ">
+                        <div class="d-flex flex-row m-3 mt-5 flex-wrap ">
+                            <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                <div class="card me-lg-3 me-0 ">
+                                    <div class="card-header bg-lightblue card-height45">
+                                        <div class="card-title m-0 ">
+                                            <h5 class="fw-bolder text-blue">Permanent Address</h5>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row m-lg-6 mt-lg-4 m-6 mt-4">
+                                        <div class="col"><span class="font-bold">Address Line 1</span>
+                                            <div class="col-lg-12 fv-row mt-2">
+                                                <input type="text" [(ngModel)]="address1" class=" 
+                                       form-control form-control-lg form-control-solid bg-white custom-input
+                                       mb-3 mb-lg-0 borderc-secondary" placeholder="Address Line 1"
+                                                    formControlName="txtpermanent_address_line_one" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row m-6 mt-0 ">
+                                        <div class="col"><span class="font-bold">Address Line 2</span>
+                                            <div class="col-lg-12 fv-row mt-2">
+                                                <input type="text" [(ngModel)]="address2" class="
+                                       form-control form-control-lg form-control-solid bg-white custom-input
+                                       mb-3 mb-lg-0 borderc-secondary" placeholder="Address Line 2"
+                                                    formControlName="txtpermanent_address_line_two" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row  m-6 mt-0 mb-11 flex-wrap">
+                                        <div class="col-12 col-lg-6 "><span class="font-bold">Postal Code</span>
+                                            <div class="col-lg-11 fv-row mt-2">
+                                                <input [(ngModel)]="postal_code"
+                                                    formControlName="txtpermanent_postal_code" type="text" class="
+                                       form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input
+                                       mb-3 mb-lg-0" placeholder="Postal Code" maxlength="6"
+                                                    formControlName="txtpermanent_postal_code" />
+                                            </div>
+                                            <div class="text-red"
+                                                *ngIf="ContactEditIndividualForm.get('txtpermanent_postal_code')?.hasError('pattern')">
+                                                PinCode containing only numeric digits.
+                                            </div>
+
+                                            <div *ngIf="ContactEditIndividualForm.get('txtpermanent_postal_code').errors?.minlength"
+                                                class="text-red">
+                                                Pin Code not exceed 6 numeric digits.
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-6">
+                                            <div class="col-lg-12 fv-row"><span class="font-bold">City</span>
+                                                <input [(ngModel)]="city" formControlName="txtpermanent_city"
+                                                    type="text" class="mt-2
+                                       form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input inputfield
+                                       mb-3 mb-lg-0 inputfield" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row  m-6 mt-0 flex-wrap">
+                                        <div class="col-12 col-lg-6"><span class="font-bold">Country</span>
+                                            <ng-select formControlName="permanent_country"
+                                                [(ngModel)]="permanent_country" [items]="countryList"
+                                                class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                                                bindLabel="country_name" placeholder="Select an option"></ng-select>
+                                        </div>
+                                        <div class="col-12 col-lg-6 mt-8 mt-lg-0"><span class="font-bold">State</span>
+                                            <div class="col-lg-12 fv-row mt-2 ">
+                                                <input [(ngModel)]="state" formControlName="txtpermanent_state"
+                                                    type="text" class="
+                                       form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input
+                                       mb-3 mb-lg-0 inputfield" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row  m-6 mt-0 flex-wrap">
+                                        <div class="col-12 col-lg-6 mt-8 mt-lg-0"><span
+                                                class="font-bold">Latitude</span>
+                                            <div class="col-lg-11 fv-row mt-2 ">
+                                                <input [(ngModel)]="latitude" formControlName="txtlatitude" type="text"
+                                                    class="
+                                       form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input
+                                       mb-3 mb-lg-0 inputfield" />
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-6 mt-8 mt-lg-0"><span
+                                                class="font-bold">Longitude</span>
+                                            <div class="col-lg-12 fv-row mt-2 ">
+                                                <input [(ngModel)]="longitude" formControlName="txtlongitude"
+                                                    type="text" class="
+                                       form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input
+                                       mb-3 mb-lg-0 inputfield" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                <div class="card ms-lg-3 ms-md-3 mt-lg-0 mt-md-0 mt-5 me-0">
+                                    <div class="card-header bg-lightblue card-height45">
+                                        <div class="card-title m-0">
+                                            <h5 class="fw-bolder text-blue ">Temporary Address</h5>
+                                        </div>
+                                        <!-- <div><button type="button" class="btn btn-icon btn-sm bg-primary me-2 mt-3"
+                                                (click)="btncopy()"><span
+                                                    class="ki-duotone ki-copy text-white  fs-6"></span></button></div> -->
+                                    </div>
+                                    <div class="d-flex flex-row m-lg-6 mt-lg-4 m-6 mt-4">
+                                        <div class="col"><span class="font-bold">Address Line 1</span>
+                                            <div class="col-lg-12 fv-row mt-2">
+                                                <input type="text" [(ngModel)]="tempaddress1" class="
+                                         form-control form-control-lg form-control-solid bg-white custom-input
+                                         mb-3 mb-lg-0 borderc-secondary" placeholder="Address Line 1"
+                                                    formControlName="txttemporary_address_line_one" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row  m-6 mt-0 ">
+                                        <div class="col"><span class="font-bold">Address Line 2</span>
+                                            <div class="col-lg-12 fv-row mt-2">
+                                                <input type="text" [(ngModel)]="tempaddress2" class=" 
+                                         form-control form-control-lg form-control-solid bg-white custom-input
+                                         mb-3 mb-lg-0 borderc-secondary" placeholder="Address Line 2"
+                                                    formControlName="txttemporary_address_line_two" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row  m-6 mt-0 mb-11 flex-wrap">
+                                        <div class="col-11 col-lg-6 "><span class="font-bold">Postal Code</span>
+                                            <div class="col-lg-11 fv-row mt-2">
+                                                <input [(ngModel)]="temppostal_code"
+                                                    formControlName="txttemporary_postal_code" type="text" class="
+                                       form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input
+                                       mb-3 mb-lg-0" placeholder="Postal Code" maxlength="6" />
+                                            </div>
+                                            <div class="text-red"
+                                                *ngIf="ContactEditIndividualForm.get('txttmppermanent_postal_code')?.hasError('pattern')">
+                                                PinCode containing only numeric digits.
+                                            </div>
+
+                                            <div *ngIf="ContactEditIndividualForm.get('txttmppermanent_postal_code').errors?.minlength"
+                                                class="text-red">
+                                                Pin Code not exceed 6 numeric digits.
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-6">
+                                            <div class="col-lg-12 fv-row"><span class="font-bold">City</span>
+                                                <input [(ngModel)]="tempcity" formControlName="txttmppermanent_city"
+                                                    type="text" class="mt-2
+                                       form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input
+                                       mb-3 mb-lg-0 inputfield " />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row  m-6 mt-0 flex-wrap">
+                                        <div class="col-12 col-lg-6"><span class="font-bold">Country</span>
+                                            <ng-select formControlName="temporary_country"
+                                                [(ngModel)]="tempcountry_name" [items]="countryList"
+                                                class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                                                bindLabel="country_name" placeholder="Select an option"></ng-select>
+                                        </div>
+                                        <div class="col-12 col-lg-6 mt-8 mt-lg-0"><span class="font-bold">State</span>
+                                            <div class="col-lg-12 fv-row mt-2 ">
+                                                <input [(ngModel)]="tempstate" formControlName="txttemp_state"
+                                                    type="text" class="
+                                       form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input
+                                       mb-3 mb-lg-0 inputfield" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row m-6 mt-0 mb-11 flex-wrap">
+                                        <div class="col-12 col-lg-6 mt-8 mt-lg-0 "><span
+                                                class="font-bold">Latitude</span>
+                                            <div class="col-lg-11 fv-row mt-2 ">
+                                                <input [(ngModel)]="templatitude" formControlName="temp_Latitude"
+                                                    type="text" class="
+                                       form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input
+                                       mb-3 mb-lg-0 inputfield" />
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-6 mt-8 mt-lg-0"><span
+                                                class="font-bold">Longitude</span>
+                                            <div class="col-lg-12 fv-row mt-2 ">
+                                                <input [(ngModel)]="templongitude" formControlName="temp_Longitude"
+                                                    type="text" class="
+                                       form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input
+                                       mb-3 mb-lg-0 inputfield" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row">
+                            <div class="col-lg-6 col-md-11 col-sm-11">
+                                <button class="btn nextbutton btn-sm  me-4 ms-10 mb-3"
+                                    (click)="moveToPreviousTab('kt_tab_pane_2')">
+                                    <i class="fas fa-arrow-left"></i> &nbsp;
+                                    Previous Tab</button>
+                            </div>
+                            <div class="col-lg-6 col-md-11 col-sm-11 me-10">
+                                <button class="btn nextbutton btn-sm  float-end me-20 mb-3"
+                                    (click)="moveToTab('kt_tab_pane_3')">
+                                    <i class="fas fa-arrow-right"></i> &nbsp;
+                                    Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+        <div class="tab-content" id="myTabContent" style="max-height: 400px;" id="scroll-bar-table">
+            <div class="tab-pane fade " id="kt_tab_pane_5" role="tabpanel">
+                <!-- Basic -->
+                <div class="d-flex flex-row m-3 mt-5 flex-wrap ">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card me-lg-3 me-0 ">
+                            <div>
+                                <form [formGroup]="GeneralDocumentForm" (ngSubmit)="GentralDOCClick()">
+                                    <!--  [(ngModel)]="HRDocFormdata.cboHRDocument"-->
+                                    <div class="d-flex flex-row m-6 flex-wrap">
+                                        <div class="col-12 col-lg-5 col-md-6 col-sm-6 fv-row">
+                                            <div class="col col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 "><span
+                                                    class="font-bold">Document Name </span>
+                                                <input type="text" formControlName="cboGeneralDocument"
+                                                    placeholder="Document Name" required
+                                                    class="form-control form-control-lg custom-input mb-3  bg-white custom-input mt-2"
+                                                    [ngClass]="{'invalid-border': GeneralDocumentForm.get('cboGeneralDocument')?.invalid && (GeneralDocumentForm.get('cboGeneralDocument')?.touched || GeneralDocumentForm.get('cboGeneralDocument')?.dirty)}" />
+                                                <div *ngIf="GeneralDocumentForm.get('cboGeneralDocument')?.hasError('required') && GeneralDocumentForm.get('cboGeneralDocument')?.touched"
+                                                    class="text-red">
+                                                    Document is required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-5 col-md-6 col-sm-6 mt-2">
+                                            <span class="font-bold">Upload Document</span>
+                                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                                <input type="file" id="fileInput" formControlName="fileInput" #fileInput
+                                                    class="form-control form-control-lg form-control-solid bg-white
+                                      mb-3 mb-lg-0  borderc-secondary custom-input" name="fName" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-md-2 col-sm-2 fv-row mt-10">
+                                            &nbsp;&nbsp;&nbsp;
+                                            <button title="Add" type="submit"
+                                                class="btn btn-icon btn-sm bg-success me-2 "
+                                                [disabled]="GeneralDocumentForm.invalid">
+                                                <span class="fa-solid fa-plus text-white fs-6"></span>
+                                            </button>
+                                        </div>
+                                        <div class="col-12 col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                                            <table id="onboardingDocumenttable"
+                                                class="table table-striped table-row-bordered gy-5 gs-7 mt-4">
+                                                <thead>
+                                                    <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue">
+                                                        <th>S.No</th>
+                                                        <th>Document Name</th>
+                                                        <th>File Name</th>
+                                                        <th class="text-center">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let data of GentralDOClist; let i=index;">
+                                                        <td>{{i+1}}</td>
+                                                        <td>{{data.document_name}}</td>
+                                                        <td>{{data.FileName}}</td>
+                                                        <td class="text-center text-nowrap">
+                                                            <button title="View" type="button"
+                                                                class="btn btn-icon btn-sm bg-stssuccess me-2"
+                                                                (click)="viewFilesAndFile(data.AutoID_Key, data.path, data.FileName)">
+                                                                <i class="fa-solid fa-file fs-6"></i>
+                                                            </button>
+                                                            <button title="Download" type="button" name="document"
+                                                                class="btn btn-icon btn-sm bg-primary me-2"
+                                                                (click)="downloadFilesAndFile(data.AutoID_Key, data.path, data.FileName)">
+                                                                <span
+                                                                    class="fa-solid fa-download text-white fs-6"></span>
+                                                            </button>
+                                                            <button title="Delete" type="button"
+                                                                class="btn btn-icon btn-sm bg-danger me-2"
+                                                                (click)="DeleteGentralDocumentClick(i)"><span
+                                                                    class="fa-solid fa-trash text-white  fs-6"></span></button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="text-center">
+                                    <button type="submit" class="btn-success btn-sm text-white me-2" (click)="onEdit()">
+                                        <i class="fas fa-check text-white fs-5"></i> &nbsp;Update</button>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row">
+                                <div class="col-lg-6 col-md-11 col-sm-11">
+                                    <button class="btn nextbutton btn-sm  me-4 ms-10 mb-3"
+                                        (click)="moveToPreviousTab('kt_tab_pane_3')">
+                                        <i class="fas fa-arrow-left"></i> &nbsp;
+                                        Previous Tab</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,324 @@
+<div class="card">
+    <br>
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title"> Account Summary</h3>
+        </div>
+        <div class="col me-5">
+            <button title="Back" type="button" class="btn btn-icon btn-sm bg-secondary cursor-pointer float-end" style="width: 5%;color: black !important;" routerLink="/finance/AccMstChartofAccountLiability"   ><i class="bi bi-arrow-left-circle  fs-1 fw-bold" style="font-size: 17px;"></i></button>
+             <button type="button" class="btn-primary btn-sm text-white me-4 float-end"   data-bs-target="#myModaladdsubgroup" (click)="onaddsubgroup()" data-bs-toggle="modal"  >
+            <i class="fas fa-plus"></i> &nbsp;&nbsp;&nbsp; Add Account
+        </button>
+        <!-- <div class="col me-5">
+          <button type="button" class="btn-primary btn-sm text-white me-4 float-end" data-bs-toggle="modal"
+            data-bs-target="#myModaladd" >
+            <i class="fas fa-plus"></i> &nbsp;&nbsp;  Add Ledger
+          </button>     <button class="head-menu-item-btn" title="Profile" routerLink="/system/SysMstUserProfile">
+            <i class="fa-solid fa-user"></i>
+        </button> -->
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="Getchartofsubaccount_list" class="table table-striped table-row-bordered gy-5 gs-7">
+                <thead>
+                    <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                        <th>Account SubGroup Name</th>
+                        <th>Account Code</th>
+                        <th>Account Name</th>
+                        <!-- <th>Transaction Amount</th>
+                        <th>Transferred By</th>
+                        <th>Status</th> -->
+                        <th class="text-center text-nowrap">Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of Getchartofsubaccount_list;" >
+                        <td>{{data.accountgroup_name}}</td>
+                        <td>{{data.account_code}}</td>
+                        <td>{{data.account_name}}</td>
+                        <!-- <td>{{data.transaction_amount}}</td>
+                        <td>{{data.user_firstname}}</td>
+
+                        <td>{{data.approval_flag}}</td> -->
+                        <td class="text-center text-nowrap">
+
+                            <button title="Edit Subgroup" type="button"data-bs-toggle="modal"
+                            data-bs-target="#myModaladdsubgroupedit"     (click)="openModalsubedit(data)"
+                                class="btn btn-icon btn-sm bg-edit me-2"><span
+                                    class="fa-solid fa-pencil text-white  fs-6"></span></button>
+
+                            <button title="Delete Subgroup" type="button" data-bs-toggle="modal"
+                                data-bs-target="#myModaldelete"  (click)="handleDeleteClick($event, data.account_gid)"
+                                class="btn btn-icon btn-sm bg-danger me-2"><span
+                                    class="fa-solid fa-trash text-white  fs-6"></span></button>
+                                    <!-- <button title="View Ledger" type="button" (click)="childview(data.account_gid,data.account_code,data.account_name)"
+                                    class="btn btn-icon btn-sm bg-view me-2"><span
+                                        class="fa-solid fa-eye text-white  fs-6"></span></button> -->
+                                        <button title="Sub Account" type="button"
+                                        [disabled]="data.has_child != 'Y'"
+                                        class="btn btn-icon btn-sm btn-purple me-2"
+                                        (click)="childview(data.account_gid, data.account_code, data.account_name)">
+                                    <span class="fas fa-sitemap text-white fs-6"></span>
+                                </button>
+                              
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <!-- <div class="text-center my-4">
+               
+            <button type="button" class="primary-button" (click)="OnSubmit()">
+                <i class="fas fa-check text-white fs-5"></i> &nbsp;Submit
+            </button>&nbsp;&nbsp;
+            <button class="btn-primary btn-sm text-white me-4" (click)="clear()">
+                <i class="ki-duotone ki-entrance-right fs-5">
+                    <i class="path1"></i>
+                    <i class="path2"></i>
+                </i>&nbsp;Back</button>
+        </div> -->
+    </div>
+    <form [formGroup]="ledgerFormsub" #form="ngForm">
+        <div class="modal modal-lg" id="myModaladdsubgroup" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+    
+                    <!-- Modal Header -->
+                    <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                        <h2 style="margin-top:10px;color:white;font-weight: bold;">
+                            &nbsp;&nbsp;<i class="fas fa-plus fw-bolder fs-3"></i> &nbsp;&nbsp;Add Account SubGroup
+                        </h2>
+                    </div>
+    
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="referenceNumber" class="form-label"> Account Group Code</label>
+                                <br><label>{{account_code}}</label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="referenceNumber" class="form-label">Account Group Name</label>
+                                <br><label>{{account_name}}</label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="accountsubcode" class="form-label">
+                                    Account SubGroup Code</label><span style="color: red;"> *</span>
+                                <input type="text" style="height: 40px;" class="form-control" id="accountsubcode" [ngStyle]="{
+                                    'border-color':
+                                    accountsubcode.invalid && accountsubcode.touched
+                                        ? 'red'
+                                        : 'rgb(209, 209, 209)'
+                                  }" pattern="^(?!\s*$).+"  formControlName="accountsubcode" 
+                                    placeholder="" />
+                                    <div *ngIf="accountsubcode.invalid && (accountsubcode.dirty || accountsubcode.touched)">
+                                        <div *ngIf="accountsubcode.errors?.['required']">
+                                               <span style="color:red;">Account Code is required.</span>
+                                           </div>
+                                       </div>
+                                       <div *ngIf="accountsubcode.invalid && (accountsubcode.dirty || accountsubcode.touched)">
+                                           <div *ngIf="accountsubcode.errors?.['pattern']">
+                                               <span style="color:red;">Invalid Format.</span>
+                                           </div>
+                                       </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="accountsubgroup" class="form-label">Account SubGroup Name</label><span
+                                    style="color: red;"> *</span>
+                                <input type="text" style="height: 40px;" class="form-control" id="accountsubgroup"
+                                formControlName="accountsubgroup"  [ngStyle]="{
+                                    'border-color':
+                                    accountsubgroup.invalid && accountsubgroup.touched
+                                        ? 'red'
+                                        : 'rgb(209, 209, 209)'
+                                  }" pattern="^(?!\s*$).+"  
+                                    placeholder="" />
+                                    <div *ngIf="accountsubgroup.invalid && (accountsubgroup.dirty || accountsubgroup.touched)">
+                                        <div *ngIf="accountsubgroup.errors?.['required']">
+                                            <span style="color:red;">Account Group is required.</span>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="accountsubgroup.invalid && (accountsubgroup.dirty || accountsubgroup.touched)">
+                                        <div *ngIf="accountsubgroup.errors?.['pattern']">
+                                            <span style="color:red;">Invalid Format.</span>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="ledger_flag" class="form-label">Make as Ledger</label><br>
+                                <div>
+                                    <!-- Child Radio Buttons (Yes and No) -->
+                                    &nbsp;&nbsp;&nbsp; <input type="radio" id="yesRadio" name="ledger_flag" value="Y"
+                                        formControlName="ledger_flag">
+                                    &nbsp;&nbsp;&nbsp; <label for="yesRadio">Yes</label>
+                                    &nbsp;&nbsp;&nbsp; <input type="radio" id="noRadio" name="ledger_flag" value="N"
+                                        formControlName="ledger_flag">
+                                    &nbsp;&nbsp;&nbsp; <label for="noRadio">No</label>
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="referenceNumber" class="form-label">Ledger Code</label><span
+                                    style="color: red;"> *</span>
+                                <input type="text" style="height: 40px;" class="form-control" id="referenceNumber"
+                                    placeholder="" />
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="referenceNumber" class="form-label">Ledger Name</label><span
+                                    style="color: red;"> *</span>
+                                <input type="text" style="height: 40px;" class="form-control" id="referenceNumber"
+                                    placeholder="" />
+                            </div> -->
+    
+                        </div>
+                    </div>
+    
+                    <!-- Modal Footer -->
+                    <div class="text-center my-4">
+                        <button (click)="onsubmitsubgroup()" [disabled]="ledgerFormsub.invalid"
+                        [ngStyle]="{ 'cursor': ledgerFormsub.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !ledgerFormsub.invalid,
+                    'btn-secondary text-white': ledgerFormsub.invalid }" data-bs-dismiss="modal">
+                        <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+                    </button> &nbsp;&nbsp;
+                        <button type="button" (click)="onclosesubgroup()"  class="btn-danger btn-sm" data-bs-dismiss="modal">
+                            <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    </form>
+    <form [formGroup]="ledgerFormsub" #form="ngForm">
+        <div class="modal modal-lg" id="myModaladdsubgroupedit" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+    
+                    <!-- Modal Header -->
+                    <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                        <h2 style="margin-top:10px;color:white;font-weight: bold;">
+                            &nbsp;&nbsp;<i class="fa-solid fa-pen-to-square fs-3"></i> &nbsp;&nbsp;Edit Account SubGroup
+                        </h2>
+                    </div>
+    
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="referenceNumber" class="form-label"> Account Group Code</label>
+                                <br><label>{{account_code}}</label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="referenceNumber" class="form-label">Account Group Name</label>
+                                <br><label>{{account_name}}</label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="accountsubcode" class="form-label">
+                                    Account SubGroup Code</label><span style="color: red;"> *</span>
+                                <input type="text" style="height: 40px;" class="form-control" id="accountsubcode" [ngStyle]="{
+                                    'border-color':
+                                    accountsubcode.invalid && accountsubcode.touched
+                                        ? 'red'
+                                        : 'rgb(209, 209, 209)'
+                                  }" pattern="(?=.*[a-zA-Z0-9]).+$"  formControlName="accountsubcode" 
+                                    placeholder="" />
+                                    <div *ngIf="accountsubcode.invalid && (accountsubcode.dirty || accountsubcode.touched)">
+                                        <div *ngIf="accountsubcode.errors?.['required']">
+                                               <span style="color:red;">Account Code is required.</span>
+                                           </div>
+                                       </div>
+                                       <div *ngIf="accountsubcode.invalid && (accountsubcode.dirty || accountsubcode.touched)">
+                                           <div *ngIf="accountsubcode.errors?.['pattern']">
+                                               <span style="color:red;">Invalid Format.</span>
+                                           </div>
+                                       </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="accountsubgroup" class="form-label">Account SubGroup Name</label><span
+                                    style="color: red;"> *</span>
+                                <input type="text" style="height: 40px;" class="form-control" id="accountsubgroup"
+                                formControlName="accountsubgroup"  [ngStyle]="{
+                                    'border-color':
+                                    accountsubgroup.invalid && accountsubgroup.touched
+                                        ? 'red'
+                                        : 'rgb(209, 209, 209)'
+                                  }" 
+                                    placeholder="" />
+                                    <div *ngIf="accountsubgroup.invalid && (accountsubgroup.dirty || accountsubgroup.touched)">
+                                        <div *ngIf="accountsubgroup.errors?.['required']">
+                                            <span style="color:red;">Account Group is required.</span>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="accountsubgroup.invalid && (accountsubgroup.dirty || accountsubgroup.touched)">
+                                        <div *ngIf="accountsubgroup.errors?.['pattern']">
+                                            <span style="color:red;">Invalid Format.</span>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="ledger_flag" class="form-label">Make as Ledger</label><br>
+                                <div>
+                                    <!-- Child Radio Buttons (Yes and No) -->
+                                    &nbsp;&nbsp;&nbsp; <input type="radio" id="yesRadio" name="ledger_flag" value="Y"
+                                        formControlName="ledger_flag">
+                                    &nbsp;&nbsp;&nbsp; <label for="yesRadio">Yes</label>
+                                    &nbsp;&nbsp;&nbsp; <input type="radio" id="noRadio" name="ledger_flag" value="N"
+                                        formControlName="ledger_flag">
+                                    &nbsp;&nbsp;&nbsp; <label for="noRadio">No</label>
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="referenceNumber" class="form-label">Ledger Code</label><span
+                                    style="color: red;"> *</span>
+                                <input type="text" style="height: 40px;" class="form-control" id="referenceNumber"
+                                    placeholder="" />
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="referenceNumber" class="form-label">Ledger Name</label><span
+                                    style="color: red;"> *</span>
+                                <input type="text" style="height: 40px;" class="form-control" id="referenceNumber"
+                                    placeholder="" />
+                            </div> -->
+    
+                        </div>
+                    </div>
+    
+                    <!-- Modal Footer -->
+                    <div class="text-center my-4">
+    
+                    <button (click)="onupdatesubgroup()" [disabled]="ledgerFormsub.invalid" [ngClass]="{
+                        'primary-button': !ledgerFormsub.invalid,
+                        'secondary-button': ledgerFormsub.invalid
+                         }" data-bs-dismiss="modal">
+    <i class="fas fa-check text-white fs-5 "></i> &nbsp;Update
+    </button> &nbsp;&nbsp;
+                        <button type="button" class="btn-danger btn-sm" (click)="onclosesubgroup()" data-bs-dismiss="modal">
+                            <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="modal" id="myModaldelete" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="text-center my-4">
+                    <h2><b>Are you sure?</b></h2>
+                    <br>
+                    <p style="display: block;">Do You Want To Delete the Record ?</p><br>
+                    <div class="text-center my-4">
+                        <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+                            <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>&nbsp;
+                        <button class="btn-danger btn-sm text-white me-4"   (click)="ondelete()" data-bs-dismiss="modal">
+                            <i class="fas fa-trash text-white fs-5 "></i> &nbsp;Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

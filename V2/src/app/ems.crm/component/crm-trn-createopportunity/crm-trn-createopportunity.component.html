@@ -1,0 +1,140 @@
+<!-- <div class="card">
+    <div class="card-header bg-primary card-height55">
+        <div class="card-title m-0 ">
+            <h3 class="fw-bolder text-white"> <i class="fas fa-plus fs-1"></i> &nbsp;&nbsp;&nbsp;Create Opportunity</h3>
+        </div>
+        <div class=" float-end me-4 ">
+            <button title="Back" type="button"
+                class="btn btn-sm btn-icon btn-outline-primary position-absolute top-0 end-0 bg-white mt-4 p-2 me-4"
+                (click)="onback()">
+                <i class="fa-solid fa-arrow-left text-blue mb-1"></i>
+            </button>
+        </div>
+    </div>
+    <form [formGroup]="reactiveForm" #form="ngForm">
+                    <div class="modal-body">
+                        <div class="row"><span class="font-bold"><b>Lead title</b><span
+                                    class="ms-1 text-red">*</span></span>
+                            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                                <textarea lass="form-control form-control-lg form-control-solid custom-input
+                               mb-3 mb-lg-0 custom-input
+                             " class="form-control " style="height:45px;" formControlName="lead_title">
+                               </textarea>
+                            </div>
+                        </div>
+                        <div *ngIf="lead_title.invalid && (lead_title.dirty || lead_title.touched)">
+                            <div *ngIf="lead_title.errors?.['required']">
+                                <span style="color:red;">Lead Title is required.</span>
+                            </div>
+                        </div>
+                        <div *ngIf="lead_title.invalid && (lead_title.dirty ||lead_title .touched)">
+                            <div *ngIf="lead_title.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row"><span class="font-bold"><b>Lead</b><span class="ms-1 text-red">*</span></span>
+                            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                                <ng-select formControlName="leadname_gid" [items]="GetLeaddropdown_list"
+                                    bindLabel="leadbank_name" bindValue="leadbank_gid" placeholder="Select Lead"
+                                    [class.is-invalid]="
+                                leadname_gid.invalid && (leadname_gid.dirty || leadname_gid.touched) "
+                                    class="custom col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-2"
+                                    (change)="lead_details()">
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div *ngIf="leadname_gid.invalid && (leadname_gid.dirty || leadname_gid.touched)">
+                            <div *ngIf="leadname_gid.errors?.['required']">
+                                <span style="color:red;">lead is required.</span>
+                            </div>
+                        </div>
+                        <div *ngIf="leadname_gid.invalid && (leadname_gid.dirty ||leadname_gid .touched)">
+                            <div *ngIf="leadname_gid.errors?.['pattern']">
+                                <span style="color:red;">Invalid Format.</span>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-12 col-lg-6">
+                                <span class="font-bold mb-1"><b>Contact Details</b></span>
+                                <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                                    <textarea class="form-control form-control-lg form-control-solid custom-input
+                                    mb-3 mb-lg-0 bg-secondary custom-input
+                                  " class="form-control bg-secondary" style="height:120px;" [value]="leadbank_details"
+                                        readonly>
+                                    </textarea>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col-12 col-lg-6">
+                                <div class="row"><span class="font-bold"><b>Appointment</b><span
+                                            class="ms-1 text-red">*</span></span>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                                        <input formControlName="appointment_timing" type="date" class="
+                                form-control form-control-lg form-control-solid
+                                custom-input
+                                mb-3 mb-lg-0
+                                bg-white
+                                custom-input date-picker
+                               " [ngStyle]="{
+                                 'border-color':
+                                 appointment_timing.invalid && appointment_timing.touched
+                                     ? 'red'
+                                     : 'rgb(209, 209, 209)'
+                               }" pattern="^(?!\s*$).+" name="appointment_timing" required />
+                                    </div>
+                                </div>
+                                <div
+                                    *ngIf="appointment_timing.invalid && (appointment_timing.dirty || appointment_timing.touched)">
+                                    <div *ngIf="appointment_timing.errors?.['required']">
+                                        <span style="color:red;">Opportunity time is required.</span>
+                                    </div>
+                                </div>
+                                <div
+                                    *ngIf="appointment_timing.invalid && (appointment_timing.dirty || appointment_timing.touched)">
+                                    <div *ngIf="appointment_timing.errors?.['pattern']">
+                                        <span style="color:red;">Invalid Format.</span>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row"><span class="font-bold"><b>Bussines Vertical</b><span
+                                            class="ms-1 text-red">*</span></span>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-0 d-flex ">
+                                        <ng-select formControlName="bussiness_verticle"
+                                            [items]="Getbussinessverticledropdown_list" bindLabel="business_vertical"
+                                            bindValue="businessvertical_gid" placeholder="Select Bussines Verticle"
+                                            [class.is-invalid]="
+                                    bussiness_verticle.invalid && (bussiness_verticle.dirty || bussiness_verticle.touched) "
+                                            class="custom col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-2">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div
+                                    *ngIf="bussiness_verticle.invalid && (bussiness_verticle.dirty || bussiness_verticle.touched)">
+                                    <div *ngIf="bussiness_verticle.errors?.['required']">
+                                        <span style="color:red;"> |Bussines Verticle is required.</span>
+                                    </div>
+                                </div>
+                                <div
+                                    *ngIf="bussiness_verticle.invalid && (bussiness_verticle.dirty ||bussiness_verticle .touched)">
+                                    <div *ngIf="bussiness_verticle.errors?.['pattern']">
+                                        <span style="color:red;">Invalid Format.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="text-center my-4">
+                            <button [disabled]="reactiveForm.invalid" (click)="Onsubmit()"
+                                [ngStyle]="{ 'cursor': reactiveForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !reactiveForm.invalid,
+                            'btn-secondary text-white': reactiveForm.invalid }" data-bs-dismiss="modal">
+                                <i class="fas fa-check text-white fs-5 "></i> &nbsp;Create
+                            </button> &nbsp;&nbsp;
+                            <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal" (click)="onclose()">
+                                <i class="fas fa-close text-white"></i> &nbsp;Close
+                            </button>
+                        </div>
+                    </div>
+    </form>
+</div> -->

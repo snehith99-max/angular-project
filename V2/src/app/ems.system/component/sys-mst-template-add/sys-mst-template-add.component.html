@@ -1,0 +1,78 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <div class="card-title p-2 rounded-top bg-primary d-flex justify-content-between align-items-center">
+                <h1 class="fw-bolder text-white">
+                    <span class="fa-solid fa-plus fs-1"></span>&nbsp; Add User Group Template
+                  </h1>
+                  <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer me-3" 
+                  routerLink="/system/SysMstTemplate"><i class="fa-solid fa-arrow-left text-blue mb-1"></i><span class="tooltips">Back</span></button>
+                </div>
+        </div>
+    </div>
+
+    <div class="card m-3">
+        <form [formGroup]="templateform">
+            <div class="d-flex flex-row flex-wrap mt-6 ms-3">
+
+                <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Template Name</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input formControlName="template_name" type="text"
+                            [ngStyle]="{ 'border-color': templateform.get('template_name')?.hasError('required') && templateform.get('template_name')?.touched || templateform.get('template_name')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 ms-2"
+                            placeholder="Template Name" />
+                        <div *ngIf="templateform.get('template_name')?.hasError('required') && templateform.get('template_name')?.touched"
+                            class="text-red ms-2">Template Name is required.</div>
+                        <div *ngIf="templateform.get('template_name')?.hasError('pattern')" class="text-red ms-2">Space
+                            at the beginning is not allowed.</div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Template Type</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <ng-select class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                            [(ngModel)]="mdltemplatetype_gid" formControlName="templatetype_gid" [items]="templatetype_list" bindLabel="templatetype_name" bindValue="templatetype_gid"
+                            [ngClass]="{'invalid-border':templateform.get('templatetype_gid')?.invalid && templateform.get('templatetype_gid')?.touched}"
+                            [ngStyle]="templateform.get('templatetype_gid')?.hasError('required')" placeholder="Select an option"></ng-select>
+                        <div *ngIf="templatetypeControl.invalid && templatetypeControl.touched">
+                            <div *ngIf="templatetypeControl.hasError('required')" class="text-red">Template Type is
+                                required.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row flex-wrap mt-6 ms-3">
+                <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                    <span class="font-bold required">Template Content</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <angular-editor [config]="config" formControlName="template_content">
+                        </angular-editor>
+                        <div *ngIf="templateform.get('template_content')?.hasError('required') && templateform.get('template_content')?.touched" class="text-red">
+                            Template Content is required.
+                        </div>
+                        <div *ngIf="templateform.get('template_content')?.hasError('pattern') && templateform.get('template_content')?.touched" class="text-red ms-2">
+                            Space at the beginning is not allowed.
+                        </div>
+                    </div>
+                </div>
+                </div>
+           
+
+            <div class="card mt-6">
+                <div class="text-center my-4">
+                    <button type="submit" class="btn-success btn-sm text-white me-4" [disabled]="templateform.invalid"
+                        [ngClass]="{'primary-button': !templateform.invalid, 'secondary-button': templateform.invalid}"
+                        (click)="templatesubmit()">
+                        <i class="fas fa-check text-white fs-5 me-3"></i>
+                        Submit
+                    </button>
+
+                    <button class="btn-primary btn-sm text-white me-4" (click)="back()">
+                        <i class="fas fa-arrow-left me-3"></i>
+                        Back
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

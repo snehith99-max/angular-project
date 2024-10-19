@@ -1,0 +1,137 @@
+<div class="card mt-4">
+    <div class="card-header bg-primary card-height55">
+        <div class="card-title m-0">
+            <h3 class="fw-bolder text-white">
+                <i class="fas fa-plus me-4"></i>Add Day Tracker
+            </h3>
+        </div>
+        <div class="align">
+            <div class="col-12 col-lg-12 col-md-6 col-sm-12 mt-4">
+              <div class="d-flex align-items-center" style="margin-top: 15px;">
+               <span class="font-bold text-black fs-5" style="margin-left: 10px;"><b>Outlet</b></span>
+              <b><p class="mt-4 fs-5" style="color: rgb(255, 255, 255); margin-left: 15px;">{{campaign_title}}</p></b>
+              </div>
+            </div>
+          </div>
+          <div class="time">
+            <h3 style="color:#ffffff;  font-style: bold;font-weight: 700;margin-top: 15px;">{{toDate}} &nbsp; {{currentDayName}}</h3>
+            <h3 style="color:#ffffff; "> {{ rxTime | date: 'hh:mm:ss a' }} </h3> 
+        </div>
+    </div>
+
+    <div>
+        <h4 class="mb-0 mt-5 ms-20 text-secondary"> Trade Date: {{this.trade_date}}
+        </h4>
+    </div>
+    <form [formGroup]="reactiveFormadd" #form="ngForm">
+        <div class="row justify-content-center" >
+            <div class="col-12 col-lg-5 col-md-6 col-sm-12">
+                <div class="mt-7">
+                    <div class="card shadow-lg p-3 mb-9 rounded">
+                    <div class="card-header justify-content-center mx-2 "
+                                        style="background: rgb(81,183,204);
+                    background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);">
+                                        <h4 class="card-title fs-3 fw-bold text-black">Revenue</h4>
+                                    </div>
+                    <div class="table-responsive">
+                        <div class="mx-2 pt-0 pb-0 bg-white rounded">
+                            <table id="revenue_list" class="table border-bottom gs-7">
+                                <thead>
+                                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                        <th class="pl-12" style="text-align: center;">Name</th>
+                                        <th style="text-align: center;">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let data of revenue_list;" class="align-middle">
+                                        <td style="text-align: left; font-weight: bold; font-size: 11px;">
+                                            {{data.revenue_name}}
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <input type="number" [(ngModel)]="data.revenue_amount"
+                                                class="form-control form-control-lg form-control-solid cust
+                                                om-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                                placeholder="0.00" formControlName="revenue_amount"
+                                                style="width: 180px; display: inline-block; text-align: right;" (ngModelChange)="revenue_total()"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                            <div class="col-md-12 offset-md-5 ps-6">
+                                <label class="font-bold">Total Revenue:</label>
+                            </div>
+                            <div class="col-md-12 offset-md-5 ps-6">
+                                <input type="text" class="form-control bg-secondary" readonly  [(ngModel)]="total_revenue"
+                                formControlName="revenuetotal" style="text-align:right;width:180px;height:40px;" placeholder="0.00">&nbsp;
+                           </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-5 col-md-6 col-sm-12">
+                <div class="mt-7">
+                    <div class="card shadow-lg p-3 mb-9 rounded">
+                    <div class="card-header justify-content-center mx-2 "
+                    style="background: rgb(81,183,204);
+                        background: linear-gradient(90deg, rgba(81,183,204,1) 0%, rgba(173,221,211,1) 35%, rgba(209,242,255,1) 100%);">
+                                            <h4 class="card-title fs-3 fw-bold text-black">Expenses</h4>
+                    </div>
+                    <div class="table-responsive">
+                        <div class="mx-2 pt-0 pb-0 bg-white rounded">
+                            <table id="expense_list" class="table border-bottom gs-7">
+                                <thead>
+                                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                        <th style="text-align: center;">Name</th>
+                                        <th style="text-align: center;">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let data of expense_list;" class="align-middle">
+                                        <td style="text-align: left; font-weight: bold; font-size: 11px; white-space: nowrap;">
+                                            {{data.expense_name}}
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <input type="number" [(ngModel)]="data.expense_amount"
+                                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                                placeholder="0.00" formControlName="expense_amount"
+                                                style="width: 180px; display: inline-block; text-align: right; "  (ngModelChange)="expense_total()" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                            <div class="col-md-6 offset-md-6 ps-2">
+                                <label class="font-bold">Total Expenses:</label>
+                            </div>
+                            <div class="col-md-6 offset-md-6 ps-2">
+                                <input type="text" class="form-control bg-secondary" readonly formControlName="expensetotal"  [(ngModel)]="total_expence"
+                                 style="text-align:right;width:180px;height:40px;" placeholder="0.00">&nbsp;
+                           </div>
+                </div>
+               </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-12 col-md-6 col-sm-12 ms-8 mb-3">
+            <span class="font-bold"> Manager Remarks</span>
+            <div class="col-lg-4 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <textarea type="text"
+                class="form-control form-control-lg form-control-solid custom-input inputfield mb-3 mb-lg-0 bg-white custom-input borderc-secondary"
+                placeholder="Manager Remarks" formControlName="remarks" pattern="^[a-zA-Z0-9]+(\s[a-zA-Z0-9]+)*$" class="form-control" rows="5"> </textarea>
+            </div>
+        </div>
+        <div class="text-center my-4">
+            <button type="submit" class="btn-success btn-sm text-white me-2" data-bs-dismiss="modal" (click)="submit()">
+                <i class="fas fa-check text-white fs-5 me-3"></i>Submit
+            </button>
+
+            <button type="button" class="btn-danger text-white" data-bs-dismiss="modal"
+                routerLink="/outlet/otlmstdaytrackersummary">
+                <i class="fa fa-close fs-5 text-center"></i>
+                Close
+            </button>
+        </div>
+    </form>
+
+</div>

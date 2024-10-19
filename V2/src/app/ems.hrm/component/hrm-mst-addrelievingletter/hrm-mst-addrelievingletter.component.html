@@ -1,0 +1,286 @@
+<div class="card rounded-top">
+    <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+        <h3 class="fw-bolder text-white">
+            <span class="fa-solid fa-plus text-white fs-6 fw-bold"></span>&nbsp;Add Relieving Letter
+        </h3>
+    </div>
+
+    <form [formGroup]="RelievingLetter">
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <h1 class="font-bold fs-3 mt-6 required">Employee Name</h1>
+            <ng-select class="col-lg-3 col-12 col-md-2 col-sm-2 fv-row mt-2 ms-3" formControlName="employee_gid" [items]="Employee_list" bindLabel="EmployeeCode" bindValue="Employeegid" placeholder="Select an option" (change)="employeeDetailsFetch()" 
+            (clear)="onClearemployee()" [(ngModel)]="mdlempcode"></ng-select>
+        </div>
+
+        <div class="d-flex flex-row m-6 mt-10 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Name</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary border-secondary custom-input" placeholder="" formControlName="Name"  [(ngModel)]="emmployeename" readonly/>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Settlement Date</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="date" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input date-picker" placeholder="DD-MM-YYYY"  formControlName="Settlement_Date"/>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">ID No</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary border-secondary custom-input" placeholder="" formControlName="ID_No" [(ngModel)]="idnumber"  readonly/>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Date of Joining</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary border-secondary custom-input" formControlName="Date_of_Joining" [(ngModel)]="dateofjoin"  readonly />
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Department</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary border-secondary custom-input" placeholder="" formControlName="Department" [(ngModel)]="depatment1"  readonly />
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Date of Relieving</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary border-secondary custom-input" placeholder="" formControlName="Date_of_Relieving" [(ngModel)]="dateofrelieving"  readonly />
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Designation</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary border-secondary custom-input" placeholder="" formControlName="Designation" [(ngModel)]="designation"  readonly />
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Total Services</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary border-secondary custom-input" placeholder="" formControlName="Total_Services" [(ngModel)]="services"  readonly />
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Reason for Settlement</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <textarea class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input" formControlName="Reason_for_Settlement" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                    <div class="d-flex flex-row m-0 flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold">Min Wages</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input" formControlName="Min_Wages" style="text-align: right;"/>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold">Salary/Wages</span>
+                            <div class="mt-2">
+                                <input type="text" [(ngModel)]="salarywages" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input" formControlName="Salary" style="text-align: right;"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                    <div class="d-flex flex-row m-0 flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold">E.S.I.C</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input type="text" [(ngModel)]="ESIC" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input" formControlName="ESIC" style="text-align: right;"/>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold">Leave Salary</span>
+                            <div class="mt-2">
+                                <input type="text" [(ngModel)]="Leave_Salary" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input" formControlName="Leave_Salary" style="text-align: right;"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                    <div class="d-flex flex-row m-0 flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold">E.P.F</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input type="text" [(ngModel)]="EPF" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input" formControlName="EPF" style="text-align: right;"/>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold">Bonus</span>
+                            <div class="mt-2">
+                                <input type="text" [(ngModel)]="Bonus" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input" formControlName="Bonus" style="text-align: right;"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                    <div class="d-flex flex-row m-0 flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold">L.W.F</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input type="text" [(ngModel)]="LWF" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input" placeholder="0.00" formControlName="LWF" style="text-align: right;" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold">Gratuity</span>
+                            <div class="mt-2">
+                                <input type="text" [(ngModel)]="Gratuity" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input" placeholder="0.00" formControlName="Gratuity" style="text-align: right;"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                    <div class="d-flex flex-row m-0 flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold">Loan/Advance/Petty</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input type="text" [(ngModel)]="Loan" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input" formControlName="Loan"  style="text-align: right;"/>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold">Total Rs.</span>
+                            <div class="mt-2">
+                                <input type="text" [(ngModel)]="Total" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary border-secondary custom-input" formControlName="Total" style="text-align: right;"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+
+        <div class="text-center my-4">
+            <button type="calculate" class="btn-success btn-sm text-white me-2" (click)="oncalculate()">
+                <i class="fas fa-check text-white fs-5"></i>
+                <span class="ms-3">Calculate</span>
+            </button>
+        </div>
+
+
+        <div class="card-header bg-lightblue card-height55" style="border-radius: 0px;">
+            <div class="card-title m-0">
+                <h5 class="fw-bolder text-blue">Releiving Letter Template</h5>
+            </div>
+        </div>
+        <ng-select [items]="Letter_list" class="custom col-lg-5 m-6 col-12 fv-row mt-6" bindLabel="template_name" [(ngModel)]="mdlTerms" formControlName="template_name" bindValue="template_gid" placeholder="Select an option" (change)="GetOnChangeTerms()"></ng-select>
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                <angular-editor [config]="config" formControlName="Relievinglettertemplate_content"></angular-editor>
+            </div>
+        </div>
+        <div class="text-center my-4">
+            <button class="btn-success btn-sm text-white me-2" (click)="onsubmit()" [disabled]="RelievingLetter.invalid">
+                <i class="fas fa-check text-white fs-5 me-3"></i>Submit
+            </button>
+
+            <button class="btn-primary btn-sm text-white me-4" (click)="back()">
+                <i class="fas fa-arrow-left me-3"></i>Back
+            </button>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Min Wages</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input" formControlName="Min_Wages" style="text-align: right;"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Salary/Wages</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" [(ngModel)]="salarywages" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input" formControlName="Salary" style="text-align: right;"/>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">E.S.I.C</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" [(ngModel)]="ESIC" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input" formControlName="ESIC" style="text-align: right;"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Leave Salary</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" [(ngModel)]="Leave_Salary" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input" formControlName="Leave_Salary" style="text-align: right;"/>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">E.P.F</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" [(ngModel)]="EPF" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input" formControlName="EPF" style="text-align: right;"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Bonus</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" [(ngModel)]="Bonus" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input" formControlName="Bonus" style="text-align: right;"/>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">L.W.F</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" [(ngModel)]="LWF" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input" placeholder="0.00" formControlName="LWF" style="text-align: right;"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Gratuity</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" [(ngModel)]="Gratuity" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input" placeholder="0.00" formControlName="Gratuity" style="text-align: right;"/>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Loan/Advance/Petty</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" [(ngModel)]="Loan" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input" formControlName="Loan" style="text-align: right;"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Main Total</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" [(ngModel)]="MainTotal" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary border-secondary custom-input" formControlName="MainTotal" input="oncalculate()" style="text-align: right;"/>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Addtional Total</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" [(ngModel)]="AddTotal" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary border-secondary custom-input" formControlName="AddTotal" style="text-align: right;"/>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-2 col-md-2 col-sm-12"><span class="font-bold">OverallTotal Rs.</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" [(ngModel)]="Total" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary border-secondary custom-input" formControlName="Total" style="text-align: right;"/>
+                </div>
+            </div>
+        </div> -->

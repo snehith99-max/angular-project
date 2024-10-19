@@ -1,0 +1,85 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Deployment Tracking</h3>
+        </div>
+        <div class="col me-5">
+            <button title="Add Deployment" class="btn-primary btn-sm text-white me-4 mb-2 mt-0 float-end"
+            routerLink="/ITS/IskMstDeployAdd">
+                <i class="fas fa-plus"></i>
+                &nbsp;Add Deployment</button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="deploy"
+                class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th style="width: 10%;">S.No</th>
+                        <th >Version</th>
+                        <th>Version Number</th>
+                        <th>Module</th>
+                        <th>Routes</th>
+                        <th>Script</th>
+                        <th>Deployed By</th>
+                        <th>Deployment Date</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of deploy_list; let i=index;">
+                        <td>{{i+1}}</td>
+                        <td>{{data.version}}</td>
+                        <td>{{data.version_number}}</td>
+                        <td><a (click)="Module(data.deployment_trackergid)" title="Module View"  data-bs-toggle="modal" data-bs-target="#managerpopup"
+                            class="ms-7 count">{{data.total_module_count}}</a></td>
+                        <td>{{data.routes_status}}</td>
+                        <td>{{data.script_status}}</td>
+                        <td>{{data.created_by}}</td>
+                        <td>{{data.created_date}}</td>
+                        <td class="text-center">
+                            <button title="360 View" type="button" class="btn btn-icon btn-sm bg-primary me-2"
+                            (click)="view(data.deployment_trackergid)"><span
+                                class="fa-solid fa-arrows-spin fa-spin  text-white  fs-6"></span></button>
+                                <button title="Edit"  type="button"
+                                (click)="Edit(data.deployment_trackergid)"
+                                class="btn btn-icon btn-sm bg-etdark me-2"><span
+                                    class="fa-solid fa-pencil text-white  fs-6"></span></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+
+    <div class="modal fade" id="managerpopup" tabindex="-1" data-bs-backdrop='static' aria-labelledby="editamlcategoryLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content ">
+            <div class="modal-header bg-primary mb-5">
+                <h3 class="modal-title text-white"><i class="fa-solid fa-eye fs-3"></i> &nbsp; Module</h3>
+            </div>
+            <div *ngIf="deploy_module && deploy_module.length > 0" class="mt-1 mb-3 ms-3"><b>Module:</b> &nbsp;<span
+                    class="view_count">{{deploy_module.length}}</span></div>
+
+            <div style="max-height: 160px;" class="overflow-auto " id="scroll-bar-table">
+                <table class="table table-striped table-bordered table-hover table-sm table-responsive mt-4">
+                    <tbody>
+                        <tr *ngFor="let data of deploy_module; let i=index;">
+                            <td class="px-0 text-center">{{i+1}}</td>
+                            <td>{{data.team_name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center mb-3 mt-2">
+                <button type="button" class="btn-danger text-white" data-bs-dismiss="modal">
+                    <i class="fa fa-close fs-5 text-center"></i>
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

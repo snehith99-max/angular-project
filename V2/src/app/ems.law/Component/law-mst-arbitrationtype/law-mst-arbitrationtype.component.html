@@ -1,0 +1,217 @@
+<div class="card">
+    <div class="ms-3 mt-3 d-flex align-items-center ">
+        <div class="col">
+            <h3 class="card-title">Arbit Type</h3>
+        </div>
+        <div class="col me-5">
+            <button title="Add Type" class="btn-primary btn-sm text-white me-4 mb-2 mt-2 float-end"
+                data-bs-toggle="modal" data-bs-target="#addmodal">
+                <i class="fas fa-plus"></i> &nbsp;&nbsp;
+                Add Type</button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="ArbitrattiontypeSummary" class="table table-striped table-row-bordered border-bottom gs-7">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th (click)="sortColumn('sno')" >S.No<i class="fa ms-2"
+                            [ngClass]="getSortIconClass('sno')"></i>
+                          </th>
+                        <th (click)="sortColumn('arbit_code')">Code<i class="fa ms-2"
+                                [ngClass]="getSortIconClass('arbit_code')"></i>
+                        </th>
+                        <th (click)="sortColumn('arbit_type')">Arbit Type<i class="fa ms-2"
+                            [ngClass]="getSortIconClass('arbit_type')"></i>
+                        </th>
+                        <th (click)="sortColumn('created_by')">Created By<i class="fa ms-2"
+                          [ngClass]="getSortIconClass('created_by')"></i>
+                      </th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let data of ArbitList; let i=index;" class="align-middle">
+                        <td>{{i+1}}</td>
+                        <td>{{data.arbit_code}}</td>
+                        <td>{{data.arbit_type}}</td>
+                        <td>{{data.created_by}}</td>
+                         <td [ngSwitch]="data.Status" class="text-center text-nowrap ">
+                            <button title="Edit" type="button"
+                                (click)="editArbit(data)" class="btn btn-icon btn-sm bg-etdark me-2"
+                                data-bs-toggle="modal" data-bs-target="#Editmodal"><span
+                                    class="fa-solid fa-pencil text-white  fs-6"></span></button>   
+                                    <button title="Delete" type="button" (click)="openModaldelete(data.arbit_gid)" data-bs-toggle="modal" data-bs-target="#myModaldelete" class="btn btn-icon btn-sm bg-danger me-2">
+                                      <span class="fa-solid fa-trash text-white  fs-6"></span>
+                                    </button> 
+                        </td>  
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="modal" id="addmodal" data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+
+          <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+            <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                class="fas fa-plus fw-bolder fs-3"></i> &nbsp;&nbsp;Add Arbit Type</h2>
+
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="row mt-5"><span class="font-bold"><b>Arbit Code </b><span class="ms-1 text-red">*</span></span>
+              <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                <input formControlName="arbit_code" type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input
+                                " [ngStyle]="{'border-color': arbit_code.invalid && arbit_code.touched? 'red': 'rgb(209, 209, 209)'
+                                             }" pattern="^(?!\s*$).+" required
+                  placeholder="Enter Arbit Code" />
+              </div>
+            </div>
+            <div *ngIf="arbit_code.invalid && (arbit_code.dirty || arbit_code.touched)">
+              <div *ngIf="arbit_code.errors?.['required']">
+                <span style="color:red;">Arbit Code is required</span>
+              </div>
+            </div>
+            <div *ngIf="arbit_code.invalid && (arbit_code.dirty || arbit_code.touched)">
+              <div *ngIf="arbit_code.errors?.['pattern']">
+                <span style="color:red;">Invalid Format</span>
+              </div>
+            </div>
+            <div class="row mt-5"><span class="font-bold"><b>Arbit Type</b><span class="ms-1 text-red">*</span></span>
+              <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                <input formControlName="arbit_type" type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input
+                                " [ngStyle]="{'border-color': arbit_type.invalid && arbit_type.touched? 'red': 'rgb(209, 209, 209)'
+                                             }" pattern="^(?!\s*$).+" name="arbit_type" required
+                  placeholder="Enter Arbit Type" />
+              </div>
+            </div>
+
+            <div *ngIf="arbit_type.invalid && (arbit_type.dirty || arbit_type.touched)">
+              <div *ngIf="arbit_type.errors?.['required']">
+                <span style="color:red;">Arbit Type is required</span>
+              </div>
+            </div>
+
+            <div *ngIf="arbit_type.invalid && (arbit_type.dirty || arbit_type.touched)">
+              <div *ngIf="arbit_type.errors?.['pattern']">
+                <span style="color:red;">Invalid Format</span>
+              </div>
+            </div>
+            <!-- Modal footer -->
+              <div class="text-center my-4">
+                <button class="btn-success btn-sm text-white me-4" (click)="addarbit()" [disabled]="reactiveForm.invalid"
+                  [ngClass]="{
+                          'primary-button': !reactiveForm.invalid,
+                          'secondary-button': reactiveForm.invalid
+                        }" data-bs-dismiss="modal">
+                  <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+                </button> &nbsp;&nbsp;
+              <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+                <i class="fas fa-close text-white"></i> &nbsp;Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form> 
+  <form [formGroup]="reactiveFormEdit" #form="ngForm">
+    <div class="modal" id="Editmodal" data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <!-- Modal Header -->
+
+          <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+            <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                class="fa-solid fa-pencil text-white  fs-6"></i> &nbsp;&nbsp;Edit Arbit</h2>
+
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+            <input type="text" class="
+                    form-control form-control-lg form-control-solid custom-input
+                    mb-3 mb-lg-0  borderc-secondary bg-white custom-input
+                  " hidden placeholder="arbit_gid" formControlName="arbit_gid" class="form-control" />
+          </div>
+          <div class="modal-body">
+            <div class="row mt-5"><span class="font-bold"><b>Arbit Code </b><span class="ms-1 text-red">*</span></span>
+              <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                <input formControlName="arbit_code" type="text" readonly class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input
+                                " [ngStyle]="{'border-color': arbit_code.invalid && arbit_code.touched? 'red': 'rgb(209, 209, 209)'
+                                             }" pattern="^(?!\s*$).+" required
+                  placeholder="Enter Arbit Code" />
+              </div>
+            </div>
+            <div *ngIf="arbit_code.invalid && (arbit_code.dirty || arbit_code.touched)">
+              <div *ngIf="arbit_code.errors?.['required']">
+                <span style="color:red;">Arbit Code is required</span>
+              </div>
+            </div>
+            <div *ngIf="arbit_code.invalid && (arbit_code.dirty || arbit_code.touched)">
+              <div *ngIf="arbit_code.errors?.['pattern']">
+                <span style="color:red;">Invalid Format</span>
+              </div>
+            </div>
+            <div class="row mt-5"><span class="font-bold"><b>Arbit Type</b><span class="ms-1 text-red">*</span></span>
+              <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                <input formControlName="arbit_type" type="text"  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input 
+                                " [ngStyle]="{'border-color': arbit_type.invalid && arbit_type.touched? 'red': 'rgb(209, 209, 209)'
+                                             }" pattern="^(?!\s*$).+" name="arbit_type" required
+                  placeholder="Enter Arbit Type" />
+              </div>
+            </div>
+
+            <div *ngIf="arbit_type.invalid && (arbit_type.dirty || arbit_type.touched)">
+              <div *ngIf="arbit_type.errors?.['required']">
+                <span style="color:red;">Arbit Type is required</span>
+              </div>
+            </div>
+
+            <div *ngIf="arbit_type.invalid && (arbit_type.dirty || arbit_type.touched)">
+              <div *ngIf="arbit_type.errors?.['pattern']">
+                <span style="color:red;">Invalid Format</span>
+              </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="text-center my-4">
+              <button [disabled]="reactiveFormEdit.invalid" [ngClass]="{
+                    'primary-button': !reactiveFormEdit.invalid,
+                    'secondary-button': reactiveFormEdit.invalid
+                  }" data-bs-dismiss="modal" (click)="onupdate()">
+                <i class="fas fa-check text-white fs-5 "></i> &nbsp;Update
+              </button> &nbsp;&nbsp;
+              <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+                <i class="fas fa-close text-white" routerLink="law/LawMstArbittype"></i> &nbsp;Close
+              </button>
+            </div>
+          </div>
+          </div>
+        </div>
+        </div>
+        </form>
+        <div class="modal" id="myModaldelete" data-bs-backdrop="static" data-bs-keyboard="false">
+          <div class="modal-dialog  modal-dialog-centered">
+              <div class="modal-content">
+                  <div class="text-center my-4">
+                      <h2><b>Are you sure?</b></h2>
+                      <br>
+                      <p style="display: block;">Do You Want To Delete the Record ?</p>
+                      <div class="text-center my-4">
+                        <button class="btn-danger btn-sm text-white me-4" (click)="ondelete()" data-bs-dismiss="modal">
+                          <i class="fas fa-trash text-white fs-5 "></i> &nbsp;Delete
+                      </button>
+                          <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+                              <i class="fas fa-close text-white"></i> &nbsp;Close
+                          </button>&nbsp;
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>

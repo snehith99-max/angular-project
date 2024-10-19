@@ -1,0 +1,489 @@
+<div class="card m-5">
+  <div class="card-title p-5 pb-3 pt-3 rounded-top bg-primary d-flex justify-content-between align-items-center">
+    <h1 class="fw-bolder text-white"><i class="fas fa-plus fw-bolder fs-3"></i>&nbsp;&nbsp; Raise Material Indent</h1>
+    <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer " title="back"
+      routerLink="/outlet/OtlTrnMaterialindent"><i class="fa-solid fa-arrow-left-long fs-1 fw-bold"></i></button>
+  </div>
+
+
+  <!-- -------------- First Tab ------------- -->
+  <div class="card mt-1 m-3 mb-0">
+    <div (click)="toggleCollapse('section1')" (click)="sample()"
+      class="card-header d-flex align-items-center mb-3 cursor-pointer" style="background-color: #def0ff;">
+      <div>
+        <p class="card-title fw-bold fs-3" style="color: #2599ff;">
+          <i class="fa-solid fa-clipboard fs-1"></i> &nbsp;&nbsp;MI Details
+        </p>
+      </div>
+    </div>
+
+    <form [formGroup]="RaiseMIForm">
+      <div class="card m-6 border mt-2">
+        <div class="d-flex flex-row ms-10 m-6 flex-wrap">
+          <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+            <span class="font-bold">Branch</span>
+            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+              <input type="text"
+                class=" form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input "
+                placeholder="Branch" readonly formControlName="branch_name" />
+            </div>
+          </div>
+          <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+            <span class="font-bold ">Ref.No</span>
+            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+              <input type="text"
+                class=" form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input "
+                name="MI Ref No" readonly placeholder="Auto Generate" />
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-4 col-md-6 col-sm-12 ">
+            <span class="font-bold required">Date</span>
+            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+              <input type="date" formControlName="materialissued_date"
+                [ngStyle]="{ 'border-color': RaiseMIForm.get('materialissued_date')?.hasError('required') && RaiseMIForm.get('materialissued_date')?.touched ? 'red' : 'rgb(209, 209, 209)' , 'height': '42px'}"
+                class="form-control form-control-lg form-control-solid date-picker custom-input mb-3 mb-lg-0 bg-white custom-input date-picker mt-2"
+                placeholder="DD-MM-YYYY" />
+              <div
+                *ngIf="RaiseMIForm.get('materialissued_date')?.hasError('required') && RaiseMIForm.get('materialissued_date')?.touched"
+                class="text-red">
+                MI Date is required.
+              </div>
+            </div>
+          </div>
+          
+        </div>
+
+        <div class="d-flex flex-row ms-10 m-6 mt-3 flex-wrap">
+          <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+            <span class="font-bold ">Department</span>
+            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+              <input type="text" readonly
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input "
+                name="department_name" formControlName="department_name" placeholder="" />
+            </div>
+          </div>
+
+          <!-- <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+            <span class="font-bold ">Raised By</span>
+            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+              <input type="text" readonly
+                class=" form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                name="user_firstname" placeholder="Raised By" formControlName="user_firstname" />
+            </div>
+          </div> -->
+          <div class="col-12 col-lg-4 col-md-3 col-sm-12">
+            <span class="font-bold required">Requested By</span>
+            <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2 no-arrow">
+              <ng-select style="margin-top: -10px;" [items]="user_list"
+                      class="custom col-lg-11 col-12 fv-row mt-2"  (change)="OnChangerequestor()" (clear)="onclearrequestor()"
+                       bindLabel="employee_name"
+                      formControlName="employee_name" bindValue="user_gid" placeholder="Requested by"
+                      [(ngModel)]="mdlUserName" required>
+                   </ng-select>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-3 col-md-6 col-sm-12"><span class="font-bold ">Priority</span>
+            <div class="d-flex justify-content-start mt-4 ms-2">
+              <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm">
+                <input class="form-check-input" type="radio" name="priority" id="N" formControlName="priority" value="N"
+                  checked>
+                <label class="form-check-label text-gray-700 text-nowrap" for="N">Low</label>
+              </div>
+              <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                <input class="form-check-input" type="radio" name="priority" formControlName="priority" value="Y"
+                  id="Y">
+                <label class="form-check-label text-gray-700 text-nowrap" for="Y">High</label>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+        <span class="font-bold">Priority</span>
+        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-5">
+            <div class="d-flex align-items-center ">
+                <div class="form-check me-3">
+                    <input type="radio" class="form-check-input" name="priority" id="priorityLow" value="low" checked>
+                    <span class="font-bold ">Low</span>
+
+                </div>
+                <div class="form-check ms-4">
+                    <input type="radio" class="form-check-input" name="priority" id="priorityHigh" value="high">
+                    <span class="font-bold ">High</span>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+        </div>
+
+
+        <div class="d-flex flex-row ms-10 m-6 mt-3 flex-wrap">
+          <!-- <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Cost Center Name
+    </span> 
+      <ng-select formControlName="costcenter_name" [items]="imscostenter_list"
+      class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="costcenter_name"
+      bindValue="costcenter_gid" placeholder="Select Cost Center Name" 
+      (change)="OnChangeamount()"></ng-select>
+  </div> -->
+
+          <!-- <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+      <span class="font-bold ">Available Amount</span>
+      <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+          <input  type="text"  style="text-align: right;" class=" form-control form-control-lg form-control-solid bg-white custom-input bg-secondary 
+          mb-3 mb-lg-0 borderc-secondary"  
+          name="available_amount" readonly formControlName="available_amount" placeholder="0.00"/>
+      </div>
+  </div> -->
+
+  <div class="col-12 col-lg-4 col-md-6 col-sm-12 ">
+    <span class="font-bold required">Expected Date</span>
+    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+      <input type="date" formControlName="expected_date"
+        [ngStyle]="{ 'border-color': RaiseMIForm.get('expected_date')?.hasError('required') && RaiseMIForm.get('expected_date')?.touched ? 'red' : 'rgb(209, 209, 209)' , 'height': '42px'}"
+        class="form-control form-control-lg form-control-solid date-picker custom-input mb-3 mb-lg-0 bg-white custom-input date-picker mt-2"
+        placeholder="DD-MM-YYYY" />
+      <div
+        *ngIf="RaiseMIForm.get('expected_date')?.hasError('required') && RaiseMIForm.get('expected_date')?.touched"
+        class="text-red">
+        Expected Date is required.
+      </div>
+    </div>
+  </div>
+
+          <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+            <span class="font-bold ">Remarks</span>
+            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+              <textarea type="text" formControlName="materialrequisition_remarks" name="materialrequisition_remarks"
+                class="form-control form-control-lg form-control-solid borderc-secondary bg-white resize_none"
+                placeholder="Enter MI Remarks" rows="3"></textarea>
+
+            </div>
+          </div>
+          <!-- <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+            <span class="font-bold ">MI Ref</span>
+            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+              <textarea type="text" formControlName="materialrequisition_reference" name="materialrequisition_reference"
+                class="form-control form-control-lg form-control-solid borderc-secondary bg-white resize_none"
+                placeholder="Enter MI Ref" rows="3"></textarea>
+            </div>
+          </div> -->
+          
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- <div class="card mt-1 m-3 mb-0">
+    <div class="card-header d-flex align-items-center mb-3 cursor-pointer rounded-top" id="toggleBtn"
+      (click)="toggleCollapse('section2')" (click)="arrow()" style="background-color: #def0ff;">
+      <div>
+        <p class="card-title fw-bold fs-3" style="color: #2599ff;">
+          <i class="fa-solid fa-box-archive fs-1"></i> &nbsp; Product Details
+        </p>
+      </div>
+
+    </div>
+    <div class="d-flex row m-1 flex-wrap">
+
+      <div class="col-lg-12">
+
+        <div class="row">
+          <div class="col-lg-6">
+            <form [formGroup]="productform">
+              <div class="row  flex-wrap mb-2">
+                <div class="col-1 d-flex justify-content-center align-items-center rounded "
+                  style="background-color: #deefff;">
+                  <span><i class="fa-solid fa-filter fs-1" style="color: #2599ff;"></i></span>
+                </div>
+                <div class="col-5">
+                  <div class="col-12 fv-row ">
+                    <ng-select formControlName="producttype_name"
+                      [class.is-invalid]="producttype_name.invalid && (producttype_name.dirty || producttype_name.touched)"
+                      [items]="imsproducttype_list" required class="custom col-12" bindLabel="producttype_name"
+                      bindValue="producttype_gid" placeholder="Select Product Category" [(ngModel)]="mdlproducttype"
+                      (ngModelChange)="productSearch()">
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="col-5">
+                  <div class="col-12 fv-row ">
+                    <input type="text"
+                      class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                      placeholder="Search Product Name" formControlName="product_name"
+                      style="height: 40px;border-radius: 9px;" class="form-control" (input)="productSearch()" />
+                  </div>
+                </div>
+
+
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-6">
+            <div class="text-end">
+              <button class="btn-success btn-lg fs-2" (click)="productSubmit()" id="toggleBtn"><i
+                  class="fa-solid fa-plus"></i> &nbsp;Add Product</button>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <div style="max-height: 250px; overflow-y: auto;" class="border rounded">
+            <table class="table table-striped table-row-bordered border-bottom gs-7 align-middle"
+              *ngIf="IMSProductList1 && IMSProductList1.length !== 0">
+              <thead>
+                <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                  <th class="text-left">S.No</th>
+                  <th class="text-left">Product Group</th>
+                  <th class="text-left">Product Code</th>
+                  <th class="text-center" style="width: 15%;">Product</th>
+                  <th class="text-center" style="width: 20%;">Qty Requested</th>
+                  <th class="text-center" style="width:10%">Unit</th>
+                  <th class="text-center" style="width: 10%;">Action</th>
+
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of IMSProductList1; let i=index;" class="align-middle">
+                  <td class="text-right">{{i+1}}</td>
+                  <td class="text-right" style="width: 10%;">{{data.productgroup_name}}</td>
+                  <td class="text-left">{{data.product_code}}</td>
+                  <td class="text-left" style="width: 35%;">{{data.product_name}}<br>
+                    <div>
+                      <textarea type="text"
+                        class="form-control form-control-lg form-control-solid borderc-secondary bg-white resize_none"
+                        placeholder="Product Description" [(ngModel)]="data.display_field" rows="1"></textarea>
+                    </div>
+                  </td>
+                  <td class="text-right">
+                    <input type="number"
+                      class="form-control form-control-lg form-control-solid custom-input mb-1 mb-lg-3 ms-12 borderc-secondary bg-white custom-input"
+                      style="height:20px; width: 140px;text-align: right;" [(ngModel)]="data.qty_requested"
+                      value="data.qty_requested" placeholder="0.00">
+                  </td>
+                  <td class="text-center" style="width: 10%;">{{data.productuom_name}}</td>
+                  <td style="width: 5%;" class="text-center">
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                      &nbsp;&nbsp;<button title="Add" (click)="MIProduct(data)" type="button"
+                        class="btn btn-icon btn-sm bg-success me-1">
+                        <span Class="fa-solid fa-plus text-white  fs-6"></span></button>&nbsp;
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <!-- New Product Summary -->
+
+
+  <div>
+    <form [formGroup]="productform">
+      <table class="table table-striped table-bordered text-blue border-bottom gs-7 align-middle">
+        <thead>
+          <tr class="fw-bold fs-6 text-nowrap bg-lightblue text-blue align-middle">
+            <!-- <th class="text-blue text-center">S.No</th> -->
+            <th class="text-blue text-center" style="width: 15%;">Product Group</th>
+            <th class="text-blue text-center" style="width: 15%;">Product Code</th>
+            <th class="text-blue text-center" style="width: 15%;">Product</th>
+            <th class="text-blue text-center" style="width: 15%;">Product Unit</th>
+            <th class="text-blue text-center" style="width: 15%;">Description</th>
+            <th class="text-blue text-center" style="width: 15%;">Qty Requested</th>
+            <!-- <th class="text-blue text-center" style="width: 1%;">Price</th>
+          <th class="text-blue text-center" style="width: 5%;" colspan="2">Discount</th>
+          <th class="text-blue text-center" style="text-align:center;width: 1%;">Tax Rate</th>
+          <th class="text-blue text-center" style="text-align:center;width: 2%;">Tax</th>
+          <th class="text-blue text-center" style="width: 2%;">Total Amount</th> -->
+            <th class="text-blue text-center"style="width: 7%;"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <!-- <td></td> -->
+            <td class="pt-1 pb-1 padding_custom">
+              <ng-select formControlName="productgroup_name" (change)="GetOnChangeProductsGroup()"
+                [class.is-invalid]="productgroup_name.invalid && (productgroup_name.dirty || productgroup_name.touched)"
+                [items]="Getproductgroup" required bindLabel="productgroup_name" class="fixed-width custom-ng-select"
+                bindValue="productgroup_gid" [(ngModel)]="productsearch" appendTo="body"
+                class="no-arrow custom-placeholder ">
+              </ng-select>
+            </td>
+             <td class="padding_custom">
+
+              <ng-select formControlName="product_code"
+                [class.is-invalid]="product_code.invalid && (product_code.dirty || product_code.touched)"
+                [items]="IMSProductList1" required bindLabel="product_code" bindValue="product_code"
+                (clear)="onclearproductcode()" (change)="OnProductCode($event)" [(ngModel)]="productcodesearch1"
+                appendTo="body" class="no-arrow ">
+              </ng-select>
+
+            </td>
+            <td class=" padding_custom" style="max-width: 80% !important;">
+              <ng-select formControlName="product_name"
+                [class.is-invalid]="product_name.invalid && (product_name.dirty || product_name.touched)"
+                [items]="IMSProductList1" required bindLabel="product_name" bindValue="product_gid"
+                (clear)="onclearproduct()" (change)="onProductSelect($event)" [(ngModel)]="productcodesearch" 
+                appendTo="body" class="no-arrow ">
+              </ng-select>
+
+            </td>
+            <td class=" padding_custom">
+              <input
+                 class="form-control form-control-lg form-control-solid custom-input custom_height borderc-secondary bg-white custom-input"
+                  formControlName="product_unit" (change)="onProductSelect($event)" [(ngModel)]="productcodesearch2"  readonly
+                 />
+             </td>
+            <td class=" padding_custom">
+              <textarea
+                 class="form-control form-control-lg form-control-solid custom-input custom_height borderc-secondary bg-white custom-input"
+                  formControlName="display_field" 
+                 >
+               </textarea>
+             </td>
+             <!-- <td class="text-right">
+              <input type="number"
+                class="form-control form-control-lg form-control-solid custom-input mb-1 mb-lg-3 ms-12 borderc-secondary bg-white custom-input"
+                style="height:20px; width: 140px;text-align: right;" [(ngModel)]="MIProduct"
+                value="qty_requested" placeholder="0.00">
+            </td> -->
+            <td class=" padding_custom" style="width: 1%;">
+             <input type="number" formControlName="qty_requested"
+              class="form-control form-control-lg form-control-solid custom-input custom_height borderc-secondary bg-white custom-input"
+              placeholder="0.00" style="text-align: right;" value="qty_requested"
+              [(ngModel)]="qty_req">
+           </td>
+            
+            <td class="padding_custom text-center">
+              <button type="button" class="btn btn-icon btn-sm bg-success me-1"
+              (click)="MIProduct()" >
+                <i class="fa-solid fa-plus"></i>                        
+              </button>
+            </td>  
+            <!-- <td style="width: 5%;" class="text-center">
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                &nbsp;&nbsp;<button title="Add" (click)="MIProduct()" type="button"
+                  class="btn btn-icon btn-sm bg-success me-1">
+                  <span Class="fa-solid fa-plus text-white  fs-6"></span></button>&nbsp;
+              </div>
+            </td> -->
+          </tr>
+          <tr *ngFor="let data of productsummary_list; let i=index;">
+            <!-- <td>{{i+1}}</td> -->
+            <td>{{data.productgroup_name}}</td>
+            <td>{{data.product_code}}</td>
+            <td>{{data.product_name}}</td>
+            <td>{{data.productuom_name}}</td>
+            <td>{{data.display_field}}</td>
+            <td>{{data.qty_requested}}</td>
+            <td class="text-center">
+              <button title="Delete" type="button" (click)="openModaldelete(data.tmpmaterialrequisition_gid)"
+                data-bs-toggle="modal" data-bs-target="#myModaldeleteQA"
+                class="btn btn-icon btn-sm bg-danger me-1"><span
+                  class="fa-solid fa-trash text-white  fs-6"></span></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+
+
+
+
+  <!-- <div class="card mt-1 m-3 mb-0">
+    <div class="card-header d-flex align-items-center mb-3 cursor-pointer rounded-top"
+      (click)="toggleCollapse('section3')" (click)="arrowone()" style="background-color: #def0ff;">
+      <div>
+        <p class="card-title fw-bold fs-3" style="color: #2599ff;">
+          <i class="fa-solid fa-clipboard-list fs-1"></i> &nbsp; Product Summary
+        </p>
+      </div> -->
+  <!-- <div class="ms-auto pt-1 ">
+        <button class="btn text-decoration-none " style="color: #2599ff;">
+          <i class="fa-solid fa-caret-down fs-1" *ngIf="!arrowOne"></i>
+          <i class="fa-solid fa-caret-up fs-1" *ngIf="arrowOne"></i>
+        </button>
+      </div> -->
+  <!-- </div> -->
+  <!-- <div class="collapse" [ngbCollapse]="isCollapsed['section3']"> -->
+  <!-- <div *ngIf="productsummary_list && productsummary_list.length > 0">
+      <div class="table-responsive p-5">
+        <div style="max-height: 250px; overflow-y: auto;" class="border rounded m-2">
+          <table id="productsummary_list" class="table table-striped table-row-bordered gy-4 gs-2 ">
+            <thead class="table_head mb-4">
+              <tr class="text-white fw-bold fs-5 text-nowrap  bg-lightblue card-height55 text-blue">
+                <th class="text-left">S.No</th>
+                <th class="text-left">Product Group</th>
+                <th class="text-left">Product Code</th>
+                <th class="text-center" style="width: 10%;">Product</th>
+                <th class="text-center" style="width: 10%;">Unit</th>
+                <th class="text-center" style="width: 15%;">Qty Requested</th>
+                <th class="text-center" style="width: 15%;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of productsummary_list; let i=index;">
+                <td>{{i+1}}</td>
+                <td>{{data.productgroup_name}}</td>
+                <td>{{data.product_code}}</td>
+                <td style="width: 10%;" class="text-left">{{data.product}}<br>{{data.display_field}}</td>
+                <td style="width: 5%;" class="text-center">{{data.productuom_name}}</td>
+                <td style="width: 5%;text-align: right;">
+                  <div class="me-15">{{data.qty_requested}}</div>
+                </td>
+                <td class="text-center">
+                  <button title="Delete" type="button" (click)="openModaldelete(data.tmpmaterialrequisition_gid)"
+                    data-bs-toggle="modal" data-bs-target="#myModaldeleteQA"
+                    class="btn btn-icon btn-sm bg-danger me-1"><span
+                      class="fa-solid fa-trash text-white  fs-6"></span></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div> -->
+  <form [formGroup]="RaiseMIForm">
+    <div class="m-4 card">
+      <div class="text-center my-4">
+        <!-- <button (click)="onSubmit()" type="submit" class="btn-success btn-sm text-white me-2">
+                <i class="fas fa-check fs-5"></i>
+                <span class="ms-3">Submit</span> </button>
+
+            </div> -->
+
+
+        <button (click)="onSubmit()" [disabled]="RaiseMIForm.invalid"
+          [ngStyle]="{ 'cursor': RaiseMIForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !RaiseMIForm.invalid,
+        'btn-secondary text-white': RaiseMIForm.invalid }" data-bs-dismiss="modal">
+          <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+        </button>
+      </div>
+    </div>
+  </form>
+
+</div>
+
+<div class="modal" id="myModaldeleteQA" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content del_modal-content">
+      <div class="text-center my-4">
+        <h2><b>Are you sure?</b></h2>
+        <p style="display: block;">Do You Want To Delete the Record ?</p>
+        <div class="text-center my-4">
+          <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal" (click)="ondelete()">
+            <i class="bi bi-trash-fill text-white fs-5 me-2"></i>Delete
+          </button>
+          <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white me-2"></i>Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,46 @@
+.scroll {
+    height: 400px; /* Adjust height as needed */
+  }
+  
+  .list-group-item {
+    border: none;
+  }
+  
+  .striped-list:nth-child(odd) {
+    background-color: #f8f9fa;
+  }
+  
+  // .bg-primary {
+  //   background-color: #007bff !important;
+  // }
+  
+  .text-center {
+    text-align: center !important;
+  }
+  
+  .text-white {
+    color: #fff !important;
+  }
+  
+  .p-3 {
+    padding: 1rem !important;
+  }
+  
+  .mt-2 {
+    margin-top: 0.5rem !important;
+  }
+  
+  .rounded {
+    border-radius: 0.25rem !important;
+  }
+  .extend-up {
+    content: '';
+    position: absolute;
+    top: -10px; /* Adjust the value to control how far up the line extends */
+    left: 50%; /* Align in the center of the cell */
+    width: 1px;
+    height: 10px; /* Height of the extended line */
+    background-color: gray; /* Same color as the border */
+  }
+  
+  

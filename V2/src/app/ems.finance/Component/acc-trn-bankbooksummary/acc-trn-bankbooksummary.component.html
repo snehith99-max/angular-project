@@ -1,0 +1,92 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Bank Book</h3>
+        </div>
+    </div>
+    <form [formGroup]="BankBookSummaryForm">
+    <div class="row">
+        <div class="col-12 col-lg-5 col-md-12 col-sm-12">
+                      
+        </div>
+        <div class="col-12 col-lg-2 col-md-12 col-sm-12">
+
+<div class="d-flex justify-content-start mt-4 ">
+    <div
+        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+        <input type="radio" name="rdbbalancetype" value="Active Banks"
+            (change)="OnChangeBankName()" formControlName="bank_type">
+        <label class="form-check-label text-gray-700 text-nowrap"
+            for="kt_builder_header_content_menu">Active Banks</label>
+    </div>
+    <div
+        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+        <input type="radio" name="rdbbalancetype" value="All Banks"
+            (change)="OnChangeBankName()" formControlName="bank_type">
+        <label class="form-check-label text-gray-700 text-nowrap"
+            for="kt_builder_header_content_page-title">All Banks</label>
+    </div>
+</div>
+        </div>
+        
+        <div class="col-12 col-lg-5 col-md-12 col-sm-12">
+           
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="bankbook_list" class="table table-striped table-row-bordered border-bottom  gs-7 align-middle">
+                <thead>
+                    <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th style="font-size: 11px;">S.No</th>
+                        <th style="font-size: 11px;">Bank Code</th>
+                        <th style="font-size: 11px;">Bank Name</th>
+                        <th style="font-size: 11px;">Branch Name</th>
+                        <th style="font-size: 11px;">Account No</th>
+                        <th style="font-size: 11px;">IFSC Code</th>
+                        <th style="font-size: 11px;">NEFT Code</th>
+                        <th style="font-size: 11px;">SWIFT Code</th>
+                        <th style="font-size: 11px; text-align: right;">Opening Balance</th>
+                        <th style="font-size: 11px; text-align: right;">Closing Balance</th>
+                        <th style="font-size: 11px;" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of bankbook_list; let i=index;">
+                        <td >{{i+1}}</td>
+                        <td>{{data.bank_code}}</td>
+                        <td>{{data.bank_name}}</td>
+                        <td>{{data.branch_name}}</td>
+                        <td>{{data.account_no}}</td>
+                        <td>{{data.ifsc_code}}</td>
+                        <td>{{data.neft_code}}</td>
+                        <td>{{data.swift_code}}</td>
+                        <td style="text-align: right;">{{data.openning_balance}}</td>
+                        <td style="text-align: right;">{{data.closing_amount}}</td>
+                        <td class="text-center text-nowrap">
+                            <!-- <div (click)="toggleOptions(data)" style="cursor: pointer;">
+                                <button class="btn me-2 p-1 "><span class="fa-solid fa-ellipsis-vertical fs-1"
+                                        style="color: #4d4d4d;"></span></button>
+                                <div *ngIf="showOptionsDivId === data"
+                                    class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                                    Add Icons
+                                    <div class="d-flex p-3 pb-3 Icon_hover" 
+                                    (click)="onclick(data.bank_gid)">
+                                        <span><i class="fa-solid fa-check fs-3 me-5"></i></span>
+                                        <span>Select</span>
+                                    </div>
+                                    Add Icons
+                                </div>
+                            </div> -->
+                            <button class="btn btn-icon btn-sm  me-2 bg-gradient-darkblue" (click)="onclick(data.bank_gid)">
+                                <i class="fa-solid fa-check fs-3"></i>
+                                <!-- <span style="font-size: 11px;">Select</span> -->
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>
+</div>

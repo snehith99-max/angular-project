@@ -1,0 +1,104 @@
+<form [formGroup]="caseaddform" novalidate="novalidate" (ngSubmit)="onSubmit()">
+    <div class="card -lg rounded-top pb-12 mt-6">
+        <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+            <h3 class="fw-bolder text-white"><i class="fas fa-plus fw-bolder fs-3"></i> &nbsp;&nbsp;&nbsp;Create Case
+            </h3>
+        </div>
+        <div class="card border m-3 mb-0 shadow-sm">
+            <div class="card-header bg-lightblue card-height55">
+                <div class="card-title m-0 ">
+                    <h4 class="fw-bolder text-blue">Case Details</h4>
+                </div>
+            </div>
+            <div class="d-flex flex-row m-6 flex-wrap">
+
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12 "><span class="font-bold required">Institute</span>
+                    <ng-select formControlName="institutename" [items]="caseInstitute_list" [(ngModel)]="institutename"
+                        [ngClass]="{'invalid-border': caseaddform.get('institutename')?.invalid && caseaddform.get('institutename')?.touched}"
+                        class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="institute_name"
+                        placeholder="Select Institute"></ng-select>
+                    <div *ngIf="caseaddform.get('institutename')?.hasError('required') && caseaddform.get('institutename')?.touched"
+                        class="text-red">
+                        Institute is required.
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12 "><span class="font-bold required">Case Type</span>
+                    <ng-select formControlName="casetypename" [items]="casetype_list" [(ngModel)]="casetypename"
+                        [ngClass]="{'invalid-border': caseaddform.get('casetypename')?.invalid && caseaddform.get('casetypename')?.touched}"
+                        class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="casetype_name"
+                        placeholder="Select Case Type"></ng-select>
+                    <div *ngIf="caseaddform.get('casetypename')?.hasError('required') && caseaddform.get('casetypename')?.touched"
+                        class="text-red">
+                        Case Type is required.
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12 "><span class="font-bold required">Case Date</span>
+                    <input type="date" formControlName="casedate" [(ngModel)]="casedate"
+                        [ngStyle]="{ 'border-color': caseaddform.get('casedate')?.hasError('required') && caseaddform.get('casedate')?.touched ? 'red' : 'rgb(209, 209, 209)' , 'height': '42px'}"
+                        class="form-control form-control-lg form-control-solid date-picker custom-input mb-3 mb-lg-0 bg-white custom-input date-picker mt-2"
+                        placeholder="DD-MM-YYYY" />
+
+                    <div *ngIf="caseaddform.get('casedate')?.hasError('required') && caseaddform.get('casedate')?.touched"
+                        class="text-red">
+                        Case Date is required.
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12 mt-4"><span class="font-bold">Case No.<span
+                            class="ms-1 text-red">*</span></span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text"
+                            [ngStyle]="{ 'border-color': caseaddform.get('case_no')?.hasError('required') && caseaddform.get('case_no')?.touched ? 'red' : 'rgb(209, 209, 209)','height': '42px' }"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                            placeholder="Enter Case No." required formControlName="case_no" />
+                    </div>
+                    <div *ngIf="caseaddform.get('case_no')?.hasError('required') && caseaddform.get('case_no')?.touched"
+                        class="text-red">
+                        Case No is required.
+                    </div>
+                    <div class="text-red" *ngIf="caseaddform.get('case_no')?.hasError('pattern')">
+                        Space doesn't accepted
+                    </div>
+
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12 mt-4"><span class="font-bold">Client Name<span
+                            class="ms-1 text-red">*</span></span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="text"
+                            [ngStyle]="{ 'border-color': caseaddform.get('client_name')?.hasError('required') && caseaddform.get('client_name')?.touched ? 'red' : 'rgb(209, 209, 209)','height': '42px' }"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                            placeholder="Enter Client Name" required formControlName="client_name" />
+                    </div>
+                    <div *ngIf="caseaddform.get('client_name')?.hasError('required') && caseaddform.get('client_name')?.touched"
+                        class="text-red">
+                        Client Name is required.
+                    </div>
+                    <div class="text-red" *ngIf="caseaddform.get('client_name')?.hasError('pattern')">
+                        Space doesn't accepted
+                    </div>
+
+                </div>
+                    <div class="col-12 col-lg-4 col-md-6 col-sm-12 mt-4"><span class="font-bold">Remarks<span
+                        class="ms-1 text-red">*</span></span>
+                    <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <textarea type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0  borderc-secondary bg-white custom-input"
+                        placeholder="Enter Case Remarks" formControlName="case_remarks" class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center my-4">
+                <button class="btn-success btn-sm text-white me-2"   [disabled]="caseaddform.invalid">
+                    <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit</button>
+
+                <button class="btn-primary btn-sm text-white me-4" routerLink="/legal/CaseManagement">
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="ms-3">Back</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

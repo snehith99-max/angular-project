@@ -1,0 +1,868 @@
+<div class="row" style="margin-top: 10px;">
+    <div class="row ">
+        <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-4" routerLink="/crm/CrmTrnTelemycampaign">
+                    <div class="cardHead radius-10 border-start border-0 border-3 border-violet">
+                        <div class="card-body12">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <h5 class="mb-0 text-secondary">Today Schedule</h5>
+                                    <h4 class="badge-violet  badge-outline-violet fs-4 mt-2">{{schedule_count}}</h4>
+                                </div>
+                                <div class="widgets-icons-2 rounded-circle bg-gradient-violet text-white ms-auto"><i
+                                        class="fa-solid fa-calendar-days fs-3"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-4" routerLink="/crm/CrmTrnUpcomingtelecaller">
+                    <div class="cardHead radius-10 border-start border-0 border-3 border-skyblue">
+                        <div class="card-body12">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <h5 class="mb-0 text-secondary">Upcoming Schedule</h5>
+                                    <h4 class="badge-bluess  badge-outline-bluess fs-4 mt-2">{{upcomingschedule_count}}
+                                    </h4>
+                                </div>
+                                <div class="widgets-icons-2 rounded-circle bg-gradient-skyblue text-white ms-auto"><i
+                                        class="fas fa-calendar-check fs-3"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="cardHeadtime radius-10 border-start border-0 border-3 border-pink"
+                    style="background-color:#F5F5F5;">
+                    <div class="card-body12">
+                        <div class="d-flex align-items-center">
+                            <div class="ms-1">
+                                <h5 style="color:#75003A;">{{toDate}} &nbsp; {{currentDayName}}</h5>
+                                <h3> {{ rxTime | date: 'hh:mm:ss a' }} </h3>
+                            </div>
+                            <div class="widgets-icons-2 rounded-circle bg-gradient-purples text-white ms-auto"><i
+                                    class="fa-solid fa-clock fa-beat fs-4"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <div class="cardHead radius-10 border-start border-0 border-3 border-blue"
+                routerLink="/crm/CrmTrnTelemycampaignAll">
+                <div class="card-body12">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h5 class="mb-0 text-secondary">Total Leads</h5>
+                            <div>
+                                <h4 class="badge-royalblue badge-outline-royalblue fs-4 mt-2">{{alllead_count}}</h4>
+                            </div>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-darkblues text-white ms-auto"><i
+                                class="fa-solid fa-list fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <div class="cardHead radius-10 border-start border-0 border-3 border-darkblue"
+                routerLink="/crm/CrmTrnTelemycampaignNew">
+                <div class="card-body12">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h5 class="mb-0 text-secondary"> Awareness </h5>
+                            <div>
+                                <h4 class="badge-blue badge-outline-blue fs-4 mt-2">{{newleads_count}}</h4>
+                            </div>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-darkblue text-white ms-auto"><i
+                                class="fa fa-bullhorn fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <div class="cardHead radius-10 border-start border-0 border-3 border-brown"
+                routerLink="/crm/CrmTrnTelemycampaignPending" style="background-color: #f5d4cf;">
+                <div class="card-body12">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h5 class="mb-0 text-secondary">Pending Calls</h5>
+                            <div>
+                                <h4 class="badge-maroon badge-outline-maroon fs-4 mt-2">{{pending_count}}</h4>
+                            </div>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-brown text-white ms-auto"><i
+                                class="fa-solid fa-clock fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <div class="cardHead radius-10 border-start border-0 border-3 border-darkorange"
+                routerLink="/crm/CrmTrnTelemycampaignFollowup">
+                <div class="card-body12">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h5 class="mb-0 text-secondary">Interest</h5>
+                            <div>
+                                <h4 class="badge1  badge-outline1 fs-4 mt-2">{{followup_count}}</h4>
+                            </div>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-purple text-white ms-auto"><i
+                                class="fa fa-thumbs-up fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <div class="cardHead radius-10 border-start border-0 border-3 border-darkgreen"
+                routerLink="/crm/CrmTrnTelemycampaignProspect">
+                <div class="card-body12">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h5 class="mb-0 text-secondary">Consideration</h5>
+                            <div>
+                                <h4 class="badge-green badge-outline-green fs-4 mt-2">{{prospect_count}}</h4>
+                            </div>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-darkgreens text-white ms-auto"><i
+                                class="fas fa-star fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <div class="cardHead radius-10 border-start border-0 border-3 border-orange"
+                routerLink="/crm/CrmTrnTelemycampaignDrop">
+                <div class="card-body12">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h5 class="mb-0 text-secondary">Drop</h5>
+                            <div>
+                                <h4 class="badge-brown badge-outline-brown fs-4 mt-2">{{drop_count}}</h4>
+                            </div>
+                        </div>
+                        <div class="widgets-icons-2 rounded-circle bg-gradient-darkgreen text-white ms-auto"><i
+                                class="fa-solid fa-circle-down fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- summary -->
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Pending Calls</h3>
+        </div>
+        <div class="col me-5">
+            <button title="Add Lead" class="btn-primary btn-sm text-white me-4 float-end" (click)="onadd()">
+                <i class="fas fa-plus"></i>
+                Add Lead</button>
+        </div>
+    </div>
+    <br>
+    <div class="table-responsive">
+        <div class="card card-body m-3 shadow-xl  p-3 mb-5 bg-white rounded">
+            <table id="new_pending_list" class="table table-striped table-row-bordered gy-5 gs-7 ">
+                <thead>
+                    <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue">
+                        <th>S.No</th>
+                        <th>Team </th>
+                        <th>Customer Name</th>
+                        <th>Contact Details</th>
+                        <th>Region/Source</th>
+                        <th class="text-center">Remarks</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of new_pending_list; let i=index;">
+                        <td>{{i+1}}</td>
+                        <td>{{data.campaign_title}}</td>
+                        <td>{{data.leadbank_name}}</td>
+                        <td>{{data.contact_details}}</td>
+                        <td>{{data.regionname}}</td>
+                        <td class="text-center text-nowrap">
+                            <label title="Remarks" data-bs-toggle="modal" data-bs-target="#myModalUpdateimage"
+                            (click)="popmodal(data.remarks,data.leadbank_name,data.leadbank_gid,data.notes_count)">
+                                <i class="fas fa-question-circle fa-5x text-primary fs-2"></i>
+                            </label>
+                        </td>
+                        <td class="text-center text-nowrap">
+                            <button title="360 View" type="button"
+                                class="btn btn-icon btn-sm  me-2 bg-gradient-darkblue">
+                                <i class="fa-solid fa-arrows-spin fa-spin" style="font-size:14px;font-weight:bolder;"
+                                    (click)="Onopen(data.leadbank_gid,data.lead2campaign_gid)"></i>
+                            </button>
+                            <button (click)="openModallog3(data)" title="Schedule" data-bs-toggle="modal" type="button"
+                                data-bs-target="#myschedule"
+                                class="btn btn-icon btn-sm bg-gradient-darkoranges  me-2"><span
+                                    class="fa-regular fa-clock text-white  fs-6"></span>
+                            </button>
+                            <button (click)="openModal1(data.leadbank_gid,data.leadbank_name,data.mobile)" title="Log"
+                                data-bs-toggle="modal" type="button" data-bs-target="#mylog1"
+                                class="btn btn-icon btn-sm bg-success me-2"><span
+                                    class="fa fa-phone text-white  fs-6"></span>
+                            </button>
+                            <!-- <ng-container *ngIf="data.appointment_gid ==='No'"> -->
+                                <button title="Add To Opportunity" type="button" [disabled]="data.appointment_gid !=='No'"
+                                    class="btn btn-icon btn-sm  me-2 bg-gradient-blue" data-bs-toggle="modal"
+                                    data-bs-target="#Addappointment">
+                                    <i class="fa-solid fa-user-check" style="font-size: 14px;font-weight:bolder;"
+                                        (click)="getleadbankgid(data.leadbank_gid)"></i></button>
+                                        <button (click)="viewcalllog(data.leadbank_gid,data.leadbank_name,data.dialed_number)"
+                                        title="Call Log" data-bs-toggle="modal" type="button" data-bs-target="#viewmylog"
+                                        class="btn btn-icon btn-sm bg-primary me-2"><span
+                                            class="bi bi-telephone-inbound-fill  text-white  fs-6"></span>
+                                    </button>
+                            <!-- </ng-container> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+<!---Remarks popup-->
+<div class="modal fade" id="myModalUpdateimage" tabindex="-1" data-bs-backdrop='static'
+    aria-labelledby="editamlcategoryLabel" aria-hidden="true" data-bs-keyboard="false">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content">
+            <div class="card-header p-1 pb-1 pt-1 rounded-top bg-primary"
+                style="display: flex; align-items: center; height: 40px;">
+                <h3 style="color: white; font-weight: bold; text-align: left; width: 100%; margin-left: 10px;">
+                    {{leadbank_name}}</h3>
+            </div>
+            <div class="modal-body">
+              
+ <div class="col-12 col-lg-3 col-md-6 col-lg-12">
+    <span class="fw-bold">Remarks: </span>
+    <p class="mt-2 wrap-text" style="max-width: 100%; overflow: auto; max-height: 200px;">
+        {{remarks}}</p>
+</div>
+<div  class="card"  *ngIf="GetLeadNoteDetails_list && GetLeadNoteDetails_list.length > 0" >
+    <div class="row ms-3 mt-3 d-flex">
+        <div class="col">
+            <div class="d-flex ">
+                <span class="fw-bold" style="margin-left: -15px;">Note Details
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="card card-body  shadow-xl p-5 mb-8 bg-white rounded">
+            <table id="GetLeadNoteDetails_lists" class="table table-striped table-row-bordered  table-responsive"  style="margin-left: -15px;">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th>S.No</th>
+                        <th>Note</th>
+                       <!-- <th>Created By</th>
+                       <th>Created Date</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of GetLeadNoteDetails_list; let i=index;" class="align-middle">
+                        <td>{{i+1}}</td>
+                        <td>
+                            <textarea [(ngModel)]="data.internal_notes" rows="3" style="width: 100%;"></textarea>
+                            
+                          </td>
+                          
+                        <!-- <td style="text-align: center;">{{data.created_by}}</td>
+                <td style="text-align: center;">{{data.created_date}}</td> -->
+
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+                <div class="text-center my-4">
+                    <button class="btn-danger btn-sm text-white me-2" data-bs-dismiss="modal"
+                        style="background-color: red;">
+                        <i class="fas fa-close text-white"></i> &nbsp;Close
+                    </button>&nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- call log form -->
+<form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="modal  modal-xl" id="mylog1" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+
+
+                <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+
+                    <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                            class="fas fa-phone fw-bolder fs-3"></i> &nbsp;&nbsp;Call</h2>
+                </div>
+
+                <div class="modal-body ">
+                    <div class="d-flex flex-row m-6 flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-6"><span class="font-bold"><b>Name</b><span
+                                    class="ms-1 text-red">*</span></span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input formControlName="dialed_name" type="text" class="
+                             form-control form-control-lg form-control-solid
+                             custom-input
+                             mb-3 mb-lg-0
+                             bg-white
+                             custom-input
+                           " [ngStyle]="{
+                             'border-color':
+                             dialed_name.invalid && dialed_name.touched
+                                 ? 'red'
+                                 : 'rgb(209, 209, 209)'
+                           }" required name="dialed_name" />
+                            </div>
+                            <div *ngIf="dialed_name.invalid && (dialed_name.dirty || dialed_name.touched)">
+                                <div *ngIf="dialed_name.errors?.['required']">
+                                    <span style="color:red;">Dial Name is required.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4 col-md-4 col-sm-4"><span class="font-bold"><b> Dial
+                                    Number</b><span class="ms-1 text-red">*</span></span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input formControlName="dialed_number" type="text" class="
+                     form-control form-control-lg form-control-solid
+                     custom-input
+                     mb-3 mb-lg-0
+                     bg-white
+                     custom-input
+                   " [ngStyle]="{
+                     'border-color':
+                     dialed_number.invalid && dialed_number.touched
+                         ? 'red'
+                         : 'rgb(209, 209, 209)'
+                   }" required maxlength="15" name="dialed_number" required />
+                            </div>
+                            <div *ngIf="dialed_number.invalid && (dialed_number.dirty || dialed_number.touched)">
+                                <div *ngIf="dialed_number.errors?.['required']">
+                                    <span style="color:red;">Dialed Number is required.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-2 col-sm-2">
+                            <div *ngFor="let data of new_list; let i=index;">
+
+                                <button title="Click to Call" (click)="getcall(data.mobile,data.leadbank_name)"
+                                    type="submit" class="btn-success btn-sm text-white me-2" style="margin-top: 20px;"
+                                    *ngIf="i === 0">
+                                    <i class="fa fa-phone fs-5"></i>&nbsp;Call</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row m-6 flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-6">
+                            <span class="font-bold"><b>Call Response</b> <span class="ms-1 text-red">*</span></span>
+                            <ng-select formControlName="call_response" [class.is-invalid]="
+                                    call_response.invalid && (call_response.dirty || call_response.touched)"
+                                [ngClass]="{'invalid-border': call_response.invalid && call_response.touched}"
+                                [items]="callresponse_list"
+                                class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                                bindLabel="call_response" bindValue="callresponse_gid" placeholder=""></ng-select>
+                            <div *ngIf="
+                        call_response.invalid && (call_response.dirty || call_response.touched)
+                          " class="invalid-feedback">
+                                <div *ngIf="call_response.errors?.['required']">
+                                    Call Response is required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-6">
+                            <span class="font-bold"><b>Prospective Percentage(%)</b><span
+                                    class="ms-1 text-red">*</span></span>
+                            <ng-select formControlName="prosperctive_percentage"
+                                [class.is-invalid]="
+                            prosperctive_percentage.invalid && (prosperctive_percentage.dirty || prosperctive_percentage.touched)"
+                                [ngClass]="{'invalid-border': prosperctive_percentage.invalid && prosperctive_percentage.touched}"
+                                class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <ng-option value="" disabled selected></ng-option>
+                                <ng-option value="Select Percentage">--Select Percentage--</ng-option>
+                                <ng-option value="25">25</ng-option>
+                                <ng-option value="50">50</ng-option>
+                                <ng-option value="60">60</ng-option>
+                                <ng-option value="75">75</ng-option>
+                                <ng-option value="80">80</ng-option>
+                                <ng-option value="100">100</ng-option>
+                            </ng-select>
+                            <div *ngIf="
+                        prosperctive_percentage.invalid && (prosperctive_percentage.dirty || prosperctive_percentage.touched)
+                              " class="invalid-feedback">
+                                <div *ngIf="prosperctive_percentage.errors?.['required']">
+                                    Prospective Percentage is required.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row m-6 flex-wrap">
+
+
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-6">
+                            <span class="font-bold"><b>Product Name</b><span class="ms-1 text-red"></span></span>
+
+                            <ng-select formControlName="product_name" [class.is-invalid]="
+                    product_name.invalid && (product_name.dirty || product_name.touched)"
+                                [ngClass]="{'invalid-border': product_name.invalid && product_name.touched}"
+                                [items]="product_list" (change)="productname()"
+                                class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="product_name"
+                                bindValue="product_gid"></ng-select>
+                            <div *ngIf="
+                    product_name.invalid && (product_name.dirty || product_name.touched)
+                      " class="invalid-feedback">
+                                <div *ngIf="product_name.errors?.['required']">
+                                    Product Name is required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-6">
+                            <span class="font-bold"><b>Product Group</b><span class="ms-1 text-red"></span></span>
+
+                            <ng-select formControlName="productgroup_name" [class.is-invalid]="
+                    productgroup_name.invalid && (productgroup_name.dirty || productgroup_name.touched)"
+                                [ngClass]="{'invalid-border': productgroup_name.invalid && productgroup_name.touched}"
+                                [items]="product_group_list"
+                                class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                                bindLabel="productgroup_name" bindValue="productgroup_gid"></ng-select>
+                            <div *ngIf="
+                    productgroup_name.invalid && (productgroup_name.dirty || productgroup_name.touched)
+                      " class="invalid-feedback">
+                                <div *ngIf="productgroup_name.errors?.['required']">
+                                    Product Group is required.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 col-md-6 col-sm-6">
+                        <label for="exampleFormControlTextarea1" class="form-label ms-5"><b>Call
+                                Feedback</b></label>
+                        <textarea style="resize: none;" class="form-control ms-5" formControlName="call_feedback"
+                            pattern="^(?!\s*$).+" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="text-center my-4">
+                    <button (click)="onsubmit2()" [disabled]="reactiveForm.invalid" [ngClass]="{
+                                            'primary-button': !reactiveForm.invalid,
+                                            'secondary-button': reactiveForm.invalid
+                                             }" data-bs-dismiss="modal">
+                        <i class="fas fa-check text-white fs-5 "></i> &nbsp;Update Activity
+                    </button> &nbsp;&nbsp;
+                    <button (click)="onclose()" class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white"></i> &nbsp;Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+<form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="modal  modal-lg" id="viewmylog" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+
+                <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+
+                    <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                            class="bi bi-telephone-inbound-fill  fw-bolder fs-3"></i> &nbsp;&nbsp;Call Log</h2>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body ">
+                    <div class="row" style="height: 180px">
+                        <div class="table-responsive">
+                            <div class="card card-body m-3  p-3 mb-5 bg-white rounded "
+                                style=" max-height: 200px; overflow-y: auto;overflow-x: hidden;">
+                                <div>
+                                    <div *ngIf="GetCallLogLead_list && GetCallLogLead_list.length; else noCallLog">
+                                        <div *ngFor="let data of GetCallLogLead_list;">
+                                            <div class="d-flex flex-column position-relative email-card">
+                                                <div class="row">
+                                                    <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                                                        <label><b>Name</b></label>
+                                                        <br />
+                                                        <div>
+                                                            <p>{{leadbank_name}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                                                        <label><b>Dial Number</b></label>
+                                                        <br />
+                                                        <div>
+                                                            <p>{{data.mobile_number}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                                                        <label><b>Call Response</b></label>
+                                                        <br />
+                                                        <div>
+                                                            <p>{{data.call_response}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+
+                                                    <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                                                        <label><b>Prospective Percentage(%) To</b></label>
+                                                        <br />
+                                                        <div>
+                                                            <p>{{data.prospective_percentage}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                                                        <label><b>Product Group</b></label>
+                                                        <br />
+                                                        <div>
+                                                            <p>{{data.productgroup_name}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                                                        <label><b>Product Name</b></label>
+                                                        <br />
+                                                        <div>
+                                                            <p>{{data.product_name}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                                                        <label><b>Created Date</b></label>
+                                                        <br />
+                                                        <div>
+                                                            <p>{{data.created_date}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                                                        <label><b>Call Feedback</b></label>
+                                                        <br />
+                                                        <div>
+                                                            <p>{{data.remarks}}</p>
+                                                            <!-- <textarea type="text" readonly rows="5" class="
+                                                            form-control form-control-lg form-control-solid custom-input
+                                                            mb-3 mb-lg-0  borderc-secondary bg-white custom-input
+                                                          " placeholder="Product Description" 
+                                                                class="form-control"> {{data.remarks}}</textarea> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ng-template #noCallLog>
+                                        <h3 clas="text-center my-4" style="margin-top: 50px;margin-left: 290px;">No Call Log Available</h3>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center my-4">
+                    <!-- <button (click)="onsubmit()" [disabled]="reactiveForm.invalid" [ngClass]="{
+                                            'primary-button': !reactiveForm.invalid,
+                                            'secondary-button': reactiveForm.invalid
+                                             }" data-bs-dismiss="modal">
+                        <i class="fas fa-check text-white fs-5 "></i> &nbsp;Update Activity
+                    </button> &nbsp;&nbsp; -->
+                    <button (click)="onclose()" class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white"></i> &nbsp;Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+<!-- ----------Schedule form ----------- -->
+<div class="modal" id="myschedule" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+
+
+            <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i style="font-size:20px;"
+                        class="fa-solid fa-calendar-days"></i> &nbsp;&nbsp;Schedule Lead -{{person_name}} </h2>
+            </div>
+
+            <div class="modal-body">
+
+                <tabset>
+                    <tab heading="Schedule">
+                        <form [formGroup]="reactiveFormfollow" #form="ngForm">
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                                <span class="font-bold"><b>Schedule Date</b><span class="ms-1 text-red">*</span></span>
+                                <div class="col-xl-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                                    <input formControlName="schedule_date" type="date" class="
+                                             form-control form-control-lg form-control-solid
+                                             custom-input
+                                             mb-3 mb-lg-0
+                                             bg-white
+                                             custom-input borderc-secondary
+                                           " [ngStyle]="{
+                                             'border-color':
+                                             schedule_date.invalid && schedule_date.touched
+                                                 ? 'red'
+                                                 : 'rgb(209, 209, 209)'
+                                           }" placeholder="" pattern="^(?!\s*$).+" name="schedule_date" required />
+                                </div>
+
+                                <div *ngIf="schedule_date.invalid && (schedule_date.dirty || schedule_date.touched)">
+                                    <div *ngIf="schedule_date.errors?.['required']">
+                                        <span style="color:red;">Schedule Date is required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                                <span class="font-bold"><b>Schedule Time</b><span class="ms-1 text-red">*</span></span>
+                                <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                                    <input formControlName="schedule_time" type="time" class="
+                                     form-control form-control-lg form-control-solid
+                                     custom-input
+                                     mb-3 mb-lg-0
+                                     bg-white
+                                     custom-input
+                                   " [ngStyle]="{
+                                     'border-color':
+                                     schedule_time.invalid && schedule_time.touched
+                                         ? 'red'
+                                         : 'rgb(209, 209, 209)'
+                                   }" placeholder="" pattern="^(?!\s*$).+" name="schedule_time" required />
+                                </div>
+
+                                <div *ngIf="schedule_time.invalid && (schedule_time.dirty || schedule_time.touched)">
+                                    <div *ngIf="schedule_time.errors?.['required']">
+                                        <span style="color:red;">Schedule Time is required.</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br>
+                            <span class="font-bold"><b>Schedule Type</b><span style="color: red;">*</span></span>
+                            <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                                <div class="d-flex justify-content-start mt-4 ms-2">
+                                    
+                                    <div class="
+                                      form-check
+                                      form-check-custom
+                                      form-check-primary
+                                      form-check-solid
+                                      form-check-sm
+                                    ">
+                                        <input class="form-check-input" type="radio" name="schedule_type"
+                                            checked="checked" formControlName="schedule_type" value="Meeting" />
+
+                                        <label class="form-check-label text-gray-700 text-nowrap me-1"
+                                            for="kt_builder_header_content_menu">Meeting</label>
+
+                                    </div>
+                                    <div class="
+                                      form-check
+                                      form-check-custom
+                                      form-check-primary
+                                      form-check-solid
+                                      form-check-sm
+                                      
+                                    ">
+                                        <input class="form-check-input" type="radio" name="schedule_type"
+                                            formControlName="schedule_type" value="Call" />
+
+                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                            for="kt_builder_header_content_page-title">Call</label>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                                <label for="exampleFormControlTextarea1" class="form-label"><b>Schedule
+                                        Remarks</b></label>
+                                <br>
+                                <textarea style="resize: none;" class="form-control" formControlName="schedule_remarks"
+                                    pattern="^(?!\s*$).+" placeholder="Enter Schedule Remarks"
+                                    id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                            <div class="text-center my-4">
+                                <button (click)="schedule()" [disabled]="reactiveFormfollow.invalid" [ngClass]="{
+                                                        'primary-button': !reactiveFormfollow.invalid,
+                                                        'secondary-button': reactiveFormfollow.invalid
+                                                         }" data-bs-dismiss="modal">
+                                    <i class="fas fa-check text-white fs-5 "></i> &nbsp;Schedule
+                                </button> &nbsp;&nbsp;
+                                <button (click)="onclose()" class="btn-danger btn-sm text-white me-4"
+                                    data-bs-dismiss="modal">
+                                    <i class="fas fa-close text-white"></i> &nbsp;Cancel
+                                </button>
+                            </div>
+
+                        </form>
+                    </tab>
+                    <tab heading="Log Details">
+                        <div class="log-details-tab-content">
+                            <div class="col-12 col-lg-3 col-md-6 col-lg-12">
+                                <span class="fw-bold" style="font-size: small;"><b>Schedule Log Details
+                                    </b></span><br /><br />
+                                <ng-container *ngFor="let schedule of schedulesummary_list; let i = index">
+                                    <div style="margin-bottom: 5px; padding: 5px; overflow-y: auto; max-height: 300px;"
+                                        class="panel bg-white">
+                                        {{schedule.log_legend}}
+                                        <div style="margin-bottom: 3px; margin-top: 2px;">
+                                            <div class="row">
+                                                <div class="panel-body" style="font-size: x-small;">{{
+                                                    schedule.log_details
+                                                    }}</div>
+                                            </div>
+                                        </div>
+
+                                        <hr style="margin-top: 5px; margin-bottom: 5px;">
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="text-center my-4">
+                            <button class="btn-danger btn-sm text-white me-2" data-bs-dismiss="modal"
+                                style="background-color: red;">
+                                <i class="fas fa-close text-white"></i> &nbsp;Close
+                            </button>&nbsp;
+                        </div>
+                    </tab>
+                </tabset>
+
+            </div>
+        </div>
+    </div>
+</div>
+<form [formGroup]="reactiveFormappointment" #form="ngForm">
+    <div class="modal" id="Addappointment" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                    <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                            class="fas fa-plus fw-bolder fs-3"></i> &nbsp;&nbsp;Add to Opportunity </h2>
+                </div>
+                <div class="modal-body">
+                    <div class="row"><span class="font-bold"><b>Lead title</b><span
+                                class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                            <textarea lass="form-control form-control-lg form-control-solid custom-input
+                           mb-3 mb-lg-0 custom-input
+                         " class="form-control " style="height:45px;" formControlName="lead_title">
+                           </textarea>
+                        </div>
+                    </div>
+                    <div *ngIf="lead_title.invalid && (lead_title.dirty || lead_title.touched)">
+                        <div *ngIf="lead_title.errors?.['required']">
+                            <span style="color:red;">Lead Title is required.</span>
+                        </div>
+                    </div>
+                    <div *ngIf="lead_title.invalid && (lead_title.dirty ||lead_title .touched)">
+                        <div *ngIf="lead_title.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format.</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row"><span class="font-bold"><b>Opportunity</b><span
+                                class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                            <input formControlName="appointment_timing" type="date" class="
+                            form-control form-control-lg form-control-solid
+                            custom-input
+                            mb-3 mb-lg-0
+                            bg-white
+                            custom-input date-picker
+                           " [ngStyle]="{
+                             'border-color':
+                             appointment_timing.invalid && appointment_timing.touched
+                                 ? 'red'
+                                 : 'rgb(209, 209, 209)'
+                           }" pattern="^(?!\s*$).+" name="appointment_timing" required />
+                        </div>
+                    </div>
+                    <div *ngIf="appointment_timing.invalid && (appointment_timing.dirty || appointment_timing.touched)">
+                        <div *ngIf="appointment_timing.errors?.['required']">
+                            <span style="color:red;">Opportunity time is required.</span>
+                        </div>
+                    </div>
+                    <div *ngIf="appointment_timing.invalid && (appointment_timing.dirty || appointment_timing.touched)">
+                        <div *ngIf="appointment_timing.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format.</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row"><span class="font-bold"><b>Bussines Vertical</b><span
+                                class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-0 d-flex ">
+                            <ng-select formControlName="bussiness_verticle" [items]="Getbussinessverticledropdown_list"
+                                bindLabel="business_vertical" bindValue="businessvertical_gid"
+                                placeholder="Select Bussines Verticle"
+                                [class.is-invalid]="
+                                bussiness_verticle.invalid && (bussiness_verticle.dirty || bussiness_verticle.touched) "
+                                class="custom col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-2">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div *ngIf="bussiness_verticle.invalid && (bussiness_verticle.dirty || bussiness_verticle.touched)">
+                        <div *ngIf="bussiness_verticle.errors?.['required']">
+                            <span style="color:red;"> |Bussines Verticle is required.</span>
+                        </div>
+                    </div>
+                    <div *ngIf="bussiness_verticle.invalid && (bussiness_verticle.dirty ||bussiness_verticle .touched)">
+                        <div *ngIf="bussiness_verticle.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format.</span>
+                        </div>
+                    </div>
+
+
+                    <br>
+                    <div class="text-center my-4">
+                        <button [disabled]="reactiveFormappointment.invalid" (click)="onaddopportunity()"
+                            [ngStyle]="{ 'cursor': reactiveFormappointment.invalid ? 'not-allowed' : 'pointer'}"
+                            [ngClass]="{ 'btn-success': !reactiveFormappointment.invalid,
+                        'btn-secondary text-white': reactiveFormappointment.invalid }" data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5 "></i> &nbsp;Add
+                        </button> &nbsp;&nbsp;
+                        <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal" (click)="onclose()">
+                            <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- ------------ -->

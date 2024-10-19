@@ -1,0 +1,51 @@
+<form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="card">
+        <div class="row ms-3 mt-3 d-flex align-items-center">
+            <div class="col">
+                <h3 class="card-title">ESI Summary</h3>
+            </div>
+
+            <div class="col me-5">
+                <button title="Export ESI Report" type="button" class="btn btn-icon btn-sm bg-etdark me-2 mt-2 float-end" (click)="esitxtfrmt()">
+                  <span class="fs-2 fa-solid fa-file-lines"></span>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="table-responsive">
+            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                <table id="esi_list" class="table table-striped table-row-bordered gy-5 gs-7 ">
+                    <thead>
+                        <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                            <th>S.No</th>
+                            <th>IP Number</th>
+                            <th>IP Name</th>
+                            <th style="text-align:left">Actual Working Days(Month)</th>
+                            <th style="text-align:left">ESI Employee Contribution</th>
+                            <th style="text-align:left">ESI Employer Contribution</th>
+                            <th style="text-align:left">Total Monthly Wages</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of esi_list; let i=index;" class="align-middle">
+                            <td>{{i+1}}</td>
+                            <td>{{data.esi_no}}</td>
+                            <td>{{data.employee_name}}</td>
+                            <td style="text-align:left">{{data.actual_month_workingdays}}</td>
+                            <td style="text-align:left">{{data.employee_esi}}</td>
+                            <td style="text-align:left">{{data.employer_esi}}</td>
+                            <td style="text-align:left">{{data.earned_gross_salary}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="text-center my-4">
+            <button class="btn-primary btn-sm text-white me-4" routerLink="/payroll/PayRptPfEsiFormat">
+                <i class="fas fa-arrow-left me-3"></i>Back
+            </button>
+        </div>
+    </div>
+</form>

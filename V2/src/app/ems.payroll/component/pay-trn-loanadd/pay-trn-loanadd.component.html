@@ -1,0 +1,276 @@
+<div class="card">
+  <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+    <h3 class="fw-bolder text-white"><b>Create Loan</b></h3>
+  </div>
+  <form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="m-4 mt-4 border card ">
+      <!-- ADD Function -->
+      <div class="d-flex flex-row m-6 flex-wrap">
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Loan Ref. No</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="loan_refno" type="text"
+              class="form-control form-control-lg form-control-solid borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+              placeholder="Enter Loan Ref. No" name="loan_refno" required readonly />
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Employee</span>
+          <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <ng-select formControlName="employee"
+              [class.is-invalid]="employee.invalid && (employee.dirty || employee.touched)"
+              [ngClass]="{'invalid-border': employee.invalid && employee.touched}" [items]="employeelist" required
+              class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="employee_name"
+              bindValue="employee_gid" placeholder="Select an option"></ng-select>
+            <div *ngIf="employee.invalid && (employee.dirty || employee.touched)">
+              <div *ngIf="employee.errors?.['required']"><span class="text-red">Employee is required.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold requierd">Type</span>
+          <div class="d-flex justify-content-start mt-4 ms-2">
+            <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+              <input class="form-check-input" type="radio" name="active_flag" formControlName="type" value="loan" />
+              <label class="form-check-label text-gray-700 text-nowrap" for="empAccessYes">Loan</label>
+            </div>
+            <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+              <input class="form-check-input" type="radio" name="active_flag" formControlName="type" value="advance" />
+              <label class="form-check-label text-gray-700 text-nowrap" for="empAccessNo">ADVANCE</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="d-flex flex-row m-6 flex-wrap">
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Loan Name</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="loan_name" type="text"
+              class="form-control form-control-lg form-control-solid  custom-input mb-3 mb-lg-0 bg-white custom-input"
+              [ngStyle]="{'border-color': loan_name.invalid && loan_name.touched ? 'red' : 'rgb(209, 209, 209)'}"
+              placeholder="Enter Loan Name" pattern="^(?!\s*$).+" name="loan_name" required />
+          </div>
+          <div *ngIf="loan_name.invalid && (loan_name.dirty || loan_name.touched)">
+            <div *ngIf="loan_name.errors?.['required']"><span class="text-red">Loan Name is required.</span>
+            </div>
+          </div>
+          <div *ngIf="reactiveForm.get('loan_name')?.hasError('pattern')" class="text-red ms-2">Space
+            at the beginning is not allowed.</div>
+        </div>
+
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Loan Amount</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="loan_amount" type="text"
+            class="form-control form-control-lg form-control-solid  custom-input mb-3 mb-lg-0 bg-white custom-input"
+              [ngStyle]="{'border-color': loan_amount.invalid && loan_amount.touched ? 'red' : 'rgb(209, 209, 209)'}"
+              placeholder="Enter Loan Amount" pattern="^(?!\s*$).+" name="loan_amount" required [(ngModel)]="loanamount"
+              (input)="pendingamountcalc()" />
+          </div>
+          <div *ngIf="loan_amount.invalid && (loan_amount.dirty || loan_amount.touched)">
+            <div *ngIf="loan_amount.errors?.['required']"><span class="text-red">Loan Amount is required.</span>
+            </div>
+          </div>
+          <div *ngIf="reactiveForm.get('loan_amount')?.hasError('pattern')" class="text-red ms-2">Space
+            at the beginning is not allowed.</div>
+
+        </div>
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required ms-3">Duration Period</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="duration_period" type="text"
+            class="form-control form-control-lg form-control-solid  custom-input mb-3 mb-lg-0 bg-white custom-input"
+            [ngStyle]="{'border-color': duration_period.invalid && duration_period.touched ? 'red' : 'rgb(209, 209, 209)'}"
+            placeholder="Enter Duration" name="pend_amt" [(ngModel)]="durationperiod" (input)="pendingamountcalc()"
+            required />
+          </div>
+          <div *ngIf="duration_period.invalid && (duration_period.dirty || duration_period.touched)">
+            <div *ngIf="duration_period.errors?.['required']"><span class="text-red">Duration Period is required.</span>
+            </div>
+          </div>
+          <div *ngIf="reactiveForm.get('duration_period')?.hasError('pattern')" class="text-red ms-2">Space
+            at the beginning is not allowed.</div>
+        </div>
+      </div>
+
+      <!-- <div class="d-flex flex-row m-6 flex-wrap">
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Paid Amount</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="paid_amt" type="text" class="form-control form-control-lg form-control-solid  borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input" placeholder="Enter Paid Amount" name="paid_amt" required />
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Pending Amount</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="pend_amt" type="text" class="form-control form-control-lg form-control-solid  borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input" placeholder="Enter Pending Amount" name="pend_amt" required />
+          </div>
+
+        </div>
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required ms-3">Duration Period</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="durationperiod" type="text" class="form-control form-control-lg form-control-solid  borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input" placeholder="Enter Pending Amount" name="pend_amt" required />
+
+          </div>
+        </div>
+      </div> -->
+      <div class="d-flex flex-row m-6 flex-wrap">
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Repayment
+            Amount(permonth)</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="repayamtpermonth" type="text"
+              class="form-control form-control-lg form-control-solid  borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+              placeholder="Enter Paid Amount" name="paid_amt" [(ngModel)]="repayamtpermonth" required readonly />
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Repayment Start from</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input type="text" formControlName="repaymentstartdate"
+            [ngStyle]="{ 'border-color': reactiveForm.get('repaymentstartdate')?.hasError('required') && reactiveForm.get('repaymentstartdate')?.touched ? 'red' : 'rgb(209, 209, 209)' }"
+            class="form-control form-control-lg form-control-solid date-picker custom-input mb-3 mb-lg-0 bg-white" placeholder="DD-MM-YYYY"
+            name="repaymentstartdate" />
+            <div *ngIf="reactiveForm.get('repaymentstartdate')?.hasError('required') && reactiveForm.get('repaymentstartdate')?.touched || reactiveForm.get('repaymentstartdate')?.hasError('pattern')"
+            class="text-red">Repayment Date is Required.</div>
+          </div>
+
+        </div>
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold  ms-3">Remarks</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <textarea type="text" formControlName="remarks"
+              class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0  borderc-secondary bg-white custom-input"
+              placeholder=" Enter Remarks" formControlName="remarks" class="form-control" rows="3">
+            </textarea>
+            <div *ngIf="reactiveForm.get('remarks')?.hasError('pattern')" class="text-red ms-2">Space
+              at the beginning is not allowed.</div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-row fv-row flex-wrap m-6">
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold required">Payment Mode</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            
+            <ng-select formControlName="payment_mode" class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" placeholder="Select an option"
+            [class.is-invalid]="payment_mode.invalid && (payment_mode.dirty || payment_mode.touched)"
+            [ngClass]="{'invalid-border': payment_mode.invalid && payment_mode.touched}"
+               [(ngModel)]="paymentmode" (ngModelChange)="showTextBox($event)">
+              <ng-option value="Cash">Cash</ng-option>
+              <ng-option value="Cheque">Cheque</ng-option>
+              <ng-option value="DD">DD</ng-option>
+              <ng-option value="NEFT">NEFT</ng-option>
+            </ng-select>
+            <div *ngIf="payment_mode.invalid && (payment_mode.dirty || payment_mode.touched)">
+              <div *ngIf="payment_mode.errors?.['required']"><span class="text-red">Payment Mode is required.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row m-6 flex-wrap mt-5" *ngIf="showInput">
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Date</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-3">
+            <input type="date" formControlName="payment_date"
+              class="form-control form-control-lg
+            form-control-solid borderc-secondary date-picker custom-input mb-3 mb-lg-0 bg-white custom-input mb-3 mb-lg-0" placeholder="DD-MM-YYYY"
+              name="payment_date" />
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row m-6 flex-wrap mt-5" *ngIf="showInput1 || showInput2">
+        <div class="col-12 col-lg-2 col-md-2 col-sm-12"><span class="font-bold">Cheque No</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+            <input formControlName="cheque_no" type="text"
+              class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-white custom-input mt-3"
+              placeholder="Enter Cheque No" name="cheque_no" />
+          </div>
+          <div *ngIf="cheque_no.invalid && (cheque_no.dirty || cheque_no.touched)">
+            <div *ngIf="cheque_no.errors.pattern" class="text-red">Invalid cheque number.</div>
+          </div>
+          <div *ngIf="reactiveForm.get('cheque_no')?.hasError('pattern')" class="text-red">Space
+            at the beginning is not allowed.</div>
+        </div>
+
+        <div class="col-12 col-lg-2 col-md-2 col-sm-12"><span class="font-bold">Date</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-3">
+            <input type="date" formControlName="payment_date"
+              class="form-control form-control-lg
+            form-control-solid borderc-secondary date-picker custom-input mb-3 mb-lg-0 bg-white custom-input mb-3 mb-lg-0" placeholder="DD-MM-YYYY"
+              name="payment_date" />
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Deposit Bank</span>
+          <div class="mt-3">
+            <ng-select formControlName="bank" [class.is-invalid]="bank.invalid && (bank.dirty || bank.touched)"
+              [ngClass]="{'invalid-border': bank.invalid && bank.touched}" [items]="bankdetailslist" required
+              class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="bank_name"
+              bindValue="bank_name" placeholder="Select an option"></ng-select>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-2 col-md-2 col-sm-12"><span class="font-bold">Bank Name</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+            <input formControlName="bank_name" type="text"
+              class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-white custom-input mt-3"
+              placeholder="Enter Bank Name" name="bank_name" />
+              <div *ngIf="reactiveForm.get('bank_name')?.hasError('pattern')" class="text-red">Space
+                at the beginning is not allowed.</div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-2 col-md-2 col-sm-12"><span class="font-bold">Branch Name</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+            <input formControlName="branch_name" type="text"
+              class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-white custom-input mt-3"
+              placeholder="Enter Branch Name" name="branch_name" />
+              <div *ngIf="reactiveForm.get('branch_name')?.hasError('pattern')" class="text-red">Space
+                at the beginning is not allowed.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row m-6 flex-wrap mt-5" *ngIf="showInput3">
+        <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-3"><span class="font-bold">Date</span>
+            <input type="date" formControlName="payment_date"
+              class="form-control form-control-lg
+            form-control-solid borderc-secondary date-picker custom-input mb-3 mb-lg-0 bg-white custom-input mb-3 mb-lg-0" placeholder="DD-MM-YYYY"
+              name="payment_date" />
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row"><span class="font-bold">Transaction Ref.No</span>
+            <input formControlName="transaction_no" type="text"
+              class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-white custom-input mt-3"
+              placeholder="Enter Transaction Ref No" name="transaction_no" />
+          </div>
+          <div *ngIf="reactiveForm.get('transaction_no')?.hasError('pattern')" class="text-red">Space
+            at the beginning is not allowed.</div>
+        </div>
+
+        <div class="col-12 col-lg-2 col-md-2 col-sm-12"><span class="font-bold">Deposit Bank</span>
+          <div class="mt-3">
+            <ng-select formControlName="bank" [class.is-invalid]="bank.invalid && (bank.dirty || bank.touched)"
+              [ngClass]="{'invalid-border': bank.invalid && bank.touched}" [items]="bankdetailslist" required
+              class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="bank_name"
+              bindValue="bank_name" placeholder="Select an option"></ng-select>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center my-4">
+        <button class="me-4 btn-success" (click)="onconfirm()" [disabled]="reactiveForm.invalid"
+          class="btn-success btn-sm text-white me-4">
+          <i class="fas fa-check text-white fs-5"></i>
+          <span class="ms-3">Submit</span>
+        </button>
+        <button class="btn-primary btn-sm text-white me-2" (click)="oncancel()">
+          <i class="fas fa-arrow-left fs-5 me-2"></i>
+          <span class="ms-3">Back</span>
+        </button>
+      </div>
+
+    </div>
+  </form>
+</div>

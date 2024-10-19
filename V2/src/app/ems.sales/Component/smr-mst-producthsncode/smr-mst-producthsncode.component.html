@@ -1,0 +1,60 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Product Summary</h3>
+        </div>
+    </div>
+        <div class="table-responsive">
+            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded  table-responsive">
+                <table id="product_list" class="table  table-striped table-row-bordered gy-5 gs-7 ">
+                    <thead>
+                        <tr class=" text-white fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                            <th style="width: 3%;">S.No</th>
+                            <th style="width: 10%;">Product Group</th>
+                            <th style="width:9%;">Product Code</th>
+                            <th style="width: 20%;">Product</th>
+                            <th class="text-center" style="width: 5%;">Units</th>
+                            <th class="text-center" style="width: 5%;">Status</th>
+                            <th class="text-center" style="width: 5%;">HSN Code</th>
+                            <th class="text-center" style="width: 5%;">HSN Code Description</th>
+                            <!-- <th class="text-center" style="width: 5%;">Product GST Tax Percentage</th> -->
+                            <th class="text-center" style="width: 5%;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of products; let i=index;" style="white-space: nowrap;"
+                            class="align-middle">
+                            <td style="width: 2%;">{{i+1}}</td>
+                            <td style="width: 10%;">{{data.productgroup_name}}</td>
+                            <td style="width:9%;">{{data.product_code}}</td>
+                            <td class="text-wrap" style="width: 20%;">{{data.product_name}}</td>
+                            <td class="text-center" style="width: 5%;">{{data.productuom_name}}</td>
+                            <td [ngSwitch]="data.Status" class="text-center" style="width: 5%;">
+                                <label *ngSwitchCase="'Active'" class="badge bg-success text-white ">Active</label>
+                                <label *ngSwitchCase="'InActive'" class="badge bg-danger text-white ">InActive</label>
+                            </td>
+                            <td class="text-center" style="width: 5%;">
+                                <input type="text" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                                  style="height: 40px;"  [(ngModel)]="data.hsn_number"/>
+                              </td>
+                              <td class="text-center" style="width: 5%;">
+                                <textarea type="text" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                                 style="height: 40px;" [(ngModel)]="data.hsn_desc"></textarea>
+                              </td>
+                              <!-- <td class="text-center" style="width: 5%;">
+                                <input type="text" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                                  style="height: 40px; width: 10px;" [(ngModel)]="data.gstproducttax_percentage"/>
+                              </td> -->
+                            <td class="text-center text-nowrap" style="width: 5%;">
+                                <button title="Update" type="button" class="btn btn-icon
+                                btn-sm bg-primary me-2" (click)="HsnCodeUpdate(data.product_gid,data.hsn_number,data.hsn_desc,data.gstproducttax_percentage)">
+                                    <span class="fa-solid fa fa-retweet fs-2"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <!-- </form> -->
+</div>

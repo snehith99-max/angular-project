@@ -1,0 +1,75 @@
+<form [formGroup]="reactiveFormadd" #form="ngForm">
+<div class="card rounded-top">
+    <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+        <h3 class="fw-bolder text-white">
+          <span class="fa-solid fa-plus text-white fs-6 fw-bold"></span>&nbsp;Holiday Grade Assign</h3>
+    </div>
+    <div class="d-flex flex-row m-6 flex-wrap">
+       
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required ms-2">Holiday Grade</span>
+            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+              <input formControlName="holidaygrade_code" type="text"
+                [ngStyle]="{ 'border-color': reactiveFormadd.get('holidaygrade_code')?.hasError('required') && reactiveFormadd.get('holidaygrade_code')?.touched || reactiveFormadd.get('holidaygrade_code')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 ms-2"
+                placeholder="Enter Holiday Grade" />
+              <div
+                *ngIf="reactiveFormadd.get('holidaygrade_code')?.hasError('required') && reactiveFormadd.get('holidaygrade_code')?.touched"
+                class="text-red ms-2">Holiday Grade is required.</div>
+              <div *ngIf="reactiveFormadd.get('holidaygrade_code')?.hasError('pattern')" class="text-red ms-2">Space at the beginning is not allowed.</div>
+            </div>
+          </div>
+       
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required ms-2">Holiday Grade Name</span>
+            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+              <input formControlName="holidaygrade_name" type="text"
+                [ngStyle]="{ 'border-color': reactiveFormadd.get('holidaygrade_name')?.hasError('required') && reactiveFormadd.get('holidaygrade_name')?.touched || reactiveFormadd.get('holidaygrade_name')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 ms-2"
+                placeholder="Enter Holiday Grade Name" />
+              <div
+                *ngIf="reactiveFormadd.get('holidaygrade_name')?.hasError('required') && reactiveFormadd.get('holidaygrade_name')?.touched"
+                class="text-red ms-2">Holiday Grade Name is required.</div>
+              <div *ngIf="reactiveFormadd.get('holidaygrade_name')?.hasError('pattern')" class="text-red ms-2">Space at the beginning is not allowed.</div>
+            </div>
+          </div>
+    </div>
+
+    
+    <div class="table-responsive">
+        <div class="card card-body m-0 p-3 mb-5 bg-white rounded mt-7">
+            <table id="Holidaygradeassign_list" class="table table-striped table-row-bordered gy-4 gs-2">
+                <thead>
+                    <tr class="text-white fw-bold fs-5 text-nowrap bg-lightblue text-blue">
+                         <th style="width: 2px;">
+                                <input type="checkbox" id="checkAll" (change)="$event ? masterToggle() : null"
+                                    [checked]="selection.hasValue() && isAllSelected()"
+                                    [indeterminate]="selection.hasValue() && !isAllSelected()"/>&nbsp;&nbsp; Check All
+                        </th>                        
+                        <th>Holiday</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of Holidaygradeassign_list; let i=index;">
+                        <td> <input type="checkbox" 
+                            (change)="$event ? selection.toggle(data) : null"
+                            [checked]="selection.isSelected(data)" /></td>
+                        <td>{{data.holiday_name}}</td>
+                        <td>{{data.holiday_date |date: 'dd-MM-yyyy'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="text-center mb-10">
+        <button type="submit" class="btn-success text-white" (click)="submit()" data-bs-dismiss="modal" [disabled]="reactiveFormadd.invalid" >
+            <i class="fas fa-check text-white fs-5"></i>
+            &nbsp;&nbsp;Submit
+        </button> &nbsp; &nbsp;
+        <button type="button" class="btn-primary text-white" data-bs-dismiss="modal" routerLink="/hrm/HrmMstHolidaysummary">
+            <i class="fas fa-arrow-left me-3"></i>
+          Back
+        </button>
+    </div>
+</div>
+</form>

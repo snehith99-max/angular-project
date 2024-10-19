@@ -1,0 +1,279 @@
+<div class="card">
+    <div class="card-title p-5 pb-3 pt-3 rounded-top bg-primary d-flex justify-content-between align-items-center">
+        <h1 class="fw-bolder text-white"><i class="fa-solid fa-eye fs-2" aria-hidden="true"></i>&nbsp;&nbsp;Receipt
+            View</h1>
+        <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer " title="back"
+            routerLink="/smr/SmrTrnReceiptsummary"><i class="fa-solid fa-arrow-left-long fs-1 fw-bold"></i></button>
+    </div>
+    <div class="card mt-1 m-3 mb-0">
+        <div class="card-header d-flex align-items-center mb-3 cursor-pointer no-arrow"
+            style="background-color: #def0ff;">
+            <div>
+                <p class="card-title fw-bold fs-3 no-arrow" style="color: #2599ff;">
+                    <i class="fa-solid fa-clipboard fs-1"></i> &nbsp;&nbsp;Receipt Details
+                </p>
+            </div>
+        </div>
+
+       
+            <div class="d-flex flex-row m-6 mt-4 ms-12 mb-6 me-12 flex-wrap border-bottom">
+                <div class="col-12 col-lg-3 col-md-6 col-sm-12"><span
+                        class="fw-bold ">Receipt Date</span>
+                    <div class="col-lg-6 col-12 col-md-11 mb-6 col-sm-11 fv-row mt-2">
+                       <p class="mt-3">{{this.receipt_date}}</p>                       
+                    </div>
+                </div>
+               
+                <div class="col-12 col-lg-3 col-md-6 col-sm-12"><span class="fw-bold ">Branch</span>
+                    <p class="mt-3">{{this.branch}}</p>
+                </div>
+                <div class="col-12 col-lg-3 col-md-6 col-sm-12"><span class="fw-bold">Customer Details</span>
+                    <p class="mt-3">{{this.customer_name}}<br>
+                        {{this.email}}<br>
+                        {{this.mobile}}</p>
+                </div>
+                <div class="col-12 col-lg-3 col-md-6 col-sm-12"> <span class="fw-bold">Customer Address</span>
+                    <p class="mt-3">{{this.address}}</p>
+                </div>
+                <br>
+            </div>
+        
+
+        <div class="card-body">
+            <!-- Add a wrapper for responsive table -->
+            <div class="table-responsive">
+                <table id="addgrn_lists"
+                    class="table table-striped table-bordered text-blue border-bottom gs-7 align-middle w-100">
+                    <thead class="table_head">
+                        <tr class="fw-bold fs-6 bg-lightblue text-blue align-middle">
+                            <th class="text-blue text-center fs-6">Invoice Ref.No</th>
+                            <th class="text-blue text-center fs-6">Invoice Amount</th>
+                            <th class="text-blue text-center fs-6">Advance Amount</th>
+                            <th class="text-blue text-center fs-6">Outstanding Amount</th>
+                            <th class="text-blue text-center fs-6">Received Amount</th>
+                            <th class="text-blue text-center fs-6">TDS Receivable({{this.defaultcurrencycode}})</th>
+                            <th class="text-blue text-center fs-6">Adjust Amount({{this.defaultcurrencycode}})</th>
+                            <th class="text-blue text-center fs-6">Invoice Amount({{this.defaultcurrencycode}})</th>
+                            <th class="text-blue text-center fs-6">Payment Amount({{this.defaultcurrencycode}})</th>
+                            <th class="text-blue text-center fs-6">Received Amount in Bank({{this.defaultcurrencycode}})</th>
+                            <th class="text-blue text-center fs-6">Bank Charges({{this.defaultcurrencycode}})</th>
+                            <th class="text-blue text-center fs-6">Exchange Loss({{this.defaultcurrencycode}})</th>
+                            <th class="text-blue text-center fs-6">Exchange Gain({{this.defaultcurrencycode}})</th>
+                            <th class="text-blue text-center fs-6">Total Amount</th>
+                            <th class="text-blue text-center">Payment Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of receiptview "class="align-middle">
+                            <td>{{data.invoice_refno}}</td>
+                            <td style="text-align: right;">{{data.invoice_amount}}</td>
+                            <td style="text-align: right;">{{data.advance_received}}</td>
+                            <td style="text-align: right;">{{data.outstanding_amount}}</td>
+                            <td>{{data.receivedamount_bank}}</td>
+                            <td>{{data.tds_amount}} </td>
+                            <td>{{data.adjust_amount}} </td>
+                            <td>{{data.invoiceamount_basecurrency}} </td>
+                            <td>{{data.paymentamont_basecur}}</td>
+                            <td>{{data.receivedamount_bank}} </td>
+                            <td>{{data.bank_charge}}</td>
+                            <td>{{data.exchange_loss}}</td>
+                            <td>{{data.exchange_gain}}</td>
+                            <td>{{data.total_pay}}</td>
+                            <td>{{data.payment_remarks}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="d-flex flex-row m-6 mt-4  mb-6 me-12 flex-wrap border-bottom">
+                <!-- <div class="col-12 col-lg-3 col-md-6 col-sm-12"><span
+                        class="fw-bold ">Receipt mode</span>
+                    <div class="col-lg-6 col-12 col-md-11 mb-6 col-sm-11 fv-row mt-2">
+                       <p class="mt-3">{{this.receipt_mode}}</p>                       
+                    </div>
+                </div> -->
+                <div *ngIf="receipt_mode === 'Cheque'" class="col-12 col-lg-12">
+                    <div class="row mb-3">
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <span class="fw-bold">Receipt mode</span>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <span class="fw-bold">Date</span>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <span class="fw-bold">Cheque No</span>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <span class="fw-bold">Deposited Bank Name</span>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <span class="fw-bold">Bank Name</span>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <span class="fw-bold">Branch Name</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <p class="mt-2">{{this.receipt_mode}}</p>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <p class="mt-2">{{this.date}}</p>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <p class="mt-2">{{this.cheque_number}}</p>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <p class="mt-2">{{this.depositedbank}}</p>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <p class="mt-2">{{this.depositedbank}}</p>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <p class="mt-2">{{this.branch}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="receipt_mode === 'CREDITCARD'" class="col-12 col-lg-12">
+                    <div class="row mb-3">
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <span class="fw-bold">Receipt mode</span>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <span class="fw-bold">Date</span>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <span class="fw-bold">Credit Card No</span>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <span class="fw-bold">Deposited Bank Name</span>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <span class="fw-bold">Bank Name</span>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <span class="fw-bold">Branch Name</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <p class="mt-2">{{this.receipt_mode}}</p>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <p class="mt-2">{{this.date}}</p>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <p class="mt-2">{{this.transactionref}}</p>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <p class="mt-2">{{this.depositedbank}}</p>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <p class="mt-2">{{this.depositedbank}}</p>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <p class="mt-2">{{this.branch}}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div *ngIf="receipt_mode === 'DD'" class="col-12 col-lg-12">
+                    <div class="row mb-3">
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <span class="fw-bold">Receipt mode</span>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <span class="fw-bold">Date</span>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <span class="fw-bold">DD No.</span>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <span class="fw-bold">Deposited Bank Name</span>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <span class="fw-bold">Bank Name</span>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <span class="fw-bold">Branch Name</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <p class="mt-2">{{this.receipt_mode}}</p>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <p class="mt-2">{{this.date}}</p>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <p class="mt-2">{{this.transactionref}}</p>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <p class="mt-2">{{this.depositedbank}}</p>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <p class="mt-2">{{this.depositedbank}}</p>
+                        </div>
+                        <div class="col-12 col-lg-2 col-md-4 col-sm-6">
+                            <p class="mt-2">{{this.branch}}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div *ngIf="receipt_mode === 'NEFT'" class="col-12 col-lg-12">
+                    <div class="row mb-3">
+                        <!-- Labels Row -->
+                        <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                            <span class="fw-bold">Receipt mode</span>
+                        </div>
+                        <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                            <span class="fw-bold">Date</span>
+                        </div>
+                        <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                            <span class="fw-bold">Transaction Ref.No</span>
+                        </div>
+                        <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                            <span class="fw-bold">Deposited Bank Name</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Values Row -->
+                        <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                            <p class="mt-2">{{this.receipt_mode}}</p>
+                        </div>
+                        <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                            <p class="mt-2">{{this.date}}</p>
+                        </div>
+                        <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                            <p class="mt-2">{{this.transactionref}}</p>
+                        </div>
+                        <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                            <p class="mt-2">{{this.depositedbank}}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div *ngIf="receipt_mode === 'Cash'" class="col-12 col-lg-12">
+                    <div class="row mb-3">
+                        <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                            <span class="fw-bold">Receipt mode</span>
+                            <p class="mt-2">{{this.receipt_mode}}</p>
+                        </div>
+                        <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                            <span class="fw-bold">Date</span>
+                            <p class="mt-2">{{this.cash_date}}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <br>
+            </div>
+        </div>
+
+        <div class="text-center p-2">
+            <button (click)="onback()" type="submit" class="btn-primary btn-sm text-white me-2">
+                <i class="fas fa-arrow-left fs-5"></i>
+                <span class="ms-3">Back</span> </button>
+        </div>

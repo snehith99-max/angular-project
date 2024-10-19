@@ -1,0 +1,113 @@
+.mail-button {
+    background-color: #ffffff !important;
+    font-size: 1.1rem !important;
+    font-weight: 630 !important;
+    padding: 9px 16px 9px 13px !important;
+    border-radius: 3px;
+    border: 0;
+}
+.bg-gradient-darkblue {
+  
+  background: #0597F2;
+
+  background: -webkit-linear-gradient(45deg, #0597F2, #0597F2) !important;
+
+  background: linear-gradient(45deg, #0597F2, #0597F2) !important;
+
+} 
+.suggested-contacts {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  margin-top: 5px;
+  left: 140px;
+
+}
+.contact {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.contact:hover {
+  background-color: #f0f0f0;
+}
+
+.contact-image {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-name {
+  font-weight: bold;
+}
+
+.contact-email {
+  color: rgb(128, 128, 128);
+}
+.badges {
+  background-color: #def0ff;
+}
+.badge{
+color: #2599ff;
+}
+.bcc-button {
+  background-color: white;
+  border: 1px solid #6c757d;
+  color: #6c757d;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.bcc-button:hover {
+  background-color: #f8f9fa;
+}
+.circular-icon {
+    background-color: #f0f0f0; /* Set your desired background color */
+    border-radius: 50%; /* Make the background circular */
+    padding: 10px; /* Adjust the padding to make the circle the desired size */
+    display: inline-flex; /* Align the icon within the circle */
+    align-items: center; /* Center the icon vertically */
+    justify-content: center; /* Center the icon horizontally */
+}
+.circular-icon:hover {
+    background-color: #e0e0e0; /* Change the background color on hover */
+}
+.text-muted {
+  color: #6c757d !important;
+}
+
+.text-danger {
+  color: #dc3545 !important;
+}
+
+.text-primary {
+  color: #007bff !important;
+}
+
+.text-success {
+  color: #28a745 !important;
+}
+
+.text-warning {
+  color: #ffc107 !important;
+}
+
+.text-secondary {
+  color: #6c757d !important;
+}
+.url {
+  color: blue;
+  text-decoration: underline;
+}

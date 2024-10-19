@@ -1,0 +1,77 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title fw-bold">Outstanding Amount Report</h3>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-2 mt-3 row">
+              <label for="FromDate"><b>From Date:</b></label>
+              <input type="date" pattern="^(?!\s*$).+" [max]="maxDate"[(ngModel)]="from_date"
+                class="form-control form-control-lg form-control date-picker custom-input mb-3 mb-lg-0 bg-white"
+                placeholder="DD-MM-YYYY" />
+            </div>&nbsp;&nbsp;&nbsp;
+            <div class="col-md-2 mt-3 row">
+              <label for="ToDate"><b>To Date:</b></label>
+              <input type="date" pattern="^(?!\s*$).+" [max]="maxDate"[(ngModel)]="to_date"
+                class="form-control form-control-lg form-control date-picker custom-input mb-3 mb-lg-0 bg-white"
+                placeholder="DD-MM-YYYY" />
+            </div>&nbsp;&nbsp;&nbsp;
+            <div class="col-md-1 mt-9 row">
+              <button class="btn-success btn-sm text-black me-1" (click)="onSearchClick()">Search</button>
+            </div>
+            <div class="col-md-1 mt-9 row">
+              <button class="btn-warning btn-sm text-black ms-1" (click)="onrefreshclick()">Refresh</button>
+            </div>
+          </div>
+</div>
+    <br>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="outstandingamountreport_list" class="table table-striped table-row-bordered gy-5 gs-7">
+                <thead>
+                    <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th style="width: 1%;" >S.No</th>
+                        <th style="width: 2%;">Invoice Date</th>
+                        <th style="width: 2%;">Invoice Ref.No</th>
+                        <!-- <th style="width: 7%;">Branch Name</th> -->
+                        <th style="width: 10%;">Vendor </th>
+                        <th style="text-align: right; width: 3%;">Invoice Amount</th>
+                        <th style="text-align: right; width: 3%;">Paid Amount</th>
+                        <th style="text-align: right; width: 3%;">Outstanding Amount</th>
+                        <th style="width: 2%;">Due Date</th>
+                        <th style="width: 2%;text-align:center;">Date Expried</th>
+                        <th style="width: 4%;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of outstandingamountreport_list;let i =index">
+                        <td style="width: 1%;">{{i+1}}</td>
+                        <td style="width: 2%;">{{ data.invoice_date }}</td>
+                        <td style="width: 2%;">{{ data.invoice_refno }}</td>
+                        <!-- <td style="width: 7%;">{{ data.branch_name }}</td> -->
+                        <td style="width: 10%;">{{ data.companydetails }}</td>
+                        <td style="width: 3%;text-align: right;" >{{ data.invoice_amount }}</td>
+                        <td style="width: 3%;text-align: right;" >{{ data.payment_amount }}</td>
+                        <td style="width: 3%;text-align: right;" >{{ data.outstanding_amount }}</td>
+                        <td style="width:2%;">{{ data.due_date }}</td>
+                        <td style="width: 2%;text-align: center;" >{{ data.pending_days }}</td>
+                        <td style="width: 4%;">{{ data.invoice_status }}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue">
+                        <td colspan="4" style="text-align: right;"><strong>Total</strong></td>
+                        <td style="text-align: right;"><strong>{{ calculateTotal() | number }}</strong></td>
+                        <td style="text-align: right;"><strong>{{ calculateTotal1() | number }}</strong></td>
+                        <td style="text-align: right;"><strong>{{ calculateTotal2() | number }}</strong></td>
+                        <td colspan="3"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+
+
+
+</div>

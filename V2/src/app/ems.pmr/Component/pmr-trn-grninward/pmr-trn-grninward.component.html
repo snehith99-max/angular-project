@@ -1,0 +1,234 @@
+<div class="card mt-4">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title fw-bold"><b>GRN Inward </b></h3>
+        </div>
+
+        <div class="col me-5">
+            <button type="button" class="btn-primary btn-sm text-white me-4 float-end" data-bs-toggle="modal"
+                data-bs-target="#myModaladd" (click)="onadd()">
+                <i class="fas fa-plus"></i>&nbsp; Add GRN Inward
+            </button>
+        </div>
+    </div>
+
+
+    <div class="card mt-3 mb-3 m-5 border borderc-secondary">
+      <div class="row m-5">
+        <!-- Chart Column -->
+        <div class="col-lg-9 col-md-12 mb-3 ">
+          <ng-container *ngIf="flag">
+            <div class="d-flex flex-column border rounded" id="chart">
+              <apx-chart [series]="chartOptions?.series"
+                         [chart]="chartOptions?.chart"
+                         [xaxis]="chartOptions?.xaxis"
+                         [yaxis]="chartOptions?.yaxis"
+                         [labels]="chartOptions?.labels"
+                         [title]="chartOptions?.title"
+                         [subtitle]="chartOptions?.subtitle"
+                         [dataLabels]="chartOptions?.dataLabels"
+                         [stroke]="chartOptions?.stroke"
+                         [legend]="chartOptions?.legend">
+              </apx-chart>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="!flag">
+            <div class="d-flex justify-content-center">
+              <span>
+                <img src=".\assets\media\images\No_data_found.png" class="h-78px w-300px">
+              </span>
+            </div>
+          </ng-container>
+        </div>
+        
+        <!-- Info Panel Column -->
+        <div class="col-lg-3 col-md-12 mb-3 mt-8">
+          <div class="card border border-secondary  rounded-3 bg-light " style="width: 100%;">
+            <div class="card-body p-4">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="text-uppercase text-muted text-center mb-3">GRN Raised</h6>
+                  <div>
+                    <h2 class="text-dark display-6 text-center">{{ordertoinvoicecount}}</h2>
+                  </div>
+                </div>
+                <div class="widgets-icons-2 bg-primary text-white p-3 rounded-circle" style="margin-left: -10px;">
+                  <i class="fa-solid fa-file-invoice" style="font-size: 1.5rem;"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="card border border-secondary  rounded-3 bg-light" style="width: 100%;">
+            <div class="card-body p-4">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="text-uppercase text-muted text-center mb-3">Order Raised</h6>
+                  <div>
+                    <h2 class="text-dark display-6 text-center">{{ordercount}}</h2>
+                  </div>
+                </div>
+                <div class="widgets-icons-2 bg-primary text-white p-3 rounded-circle" style="margin-left: -10px;">
+                  <i class="fa-solid fa-thumbs-up" style="font-size: 1.5rem;"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="GrnInward_lists"  class="table table-striped table-row-bordered gy-5 gs-7">
+                <thead class="table_head">
+                    <tr class=" text-white fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th style="width: 2%;">S.No </th>
+                        <th style="width: 3%;">Branch</th>
+                        <th style="width: 12%;">Date</th>
+                        <th style="width: 10%;">Ref No</th>
+                        <th style="width: 20%;">PO Ref No </th>
+                        <th style="width: 15%;">Vendor</th>
+                        <th style="width: 5%;" class="text-center">Details</th> 
+                        <th style="width: 13%;">Despatch Mode</th>
+                        <th style="width: 5%;">Delivery No  </th>
+                        <th style="width: 15%;">GRN Status</th>
+                        <th style="width: 5%;" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of GrnInward_lists; let i=index;">
+                        <td>{{i+1}}</td>
+                        <td>{{data.branch_prefix}}</td>
+                        <td>{{data.grn_date}}</td>
+                        <td>{{data.grn_gid}}</td> 
+                        <td>{{data.porefno}}</td> 
+                        <td class="ellipsis">{{data.vendor}}</td>
+                        <td class="text-center"> <label title="Product Details" data-bs-toggle="modal" data-bs-target="#myModalcustomerdetail"
+                          (click)="Getproduct(data.grn_gid)">
+                          <i class="fas fa-question-circle fa-5x text-primary fs-2" style="cursor: pointer;"></i>
+                        </label></td>
+                        <td>{{data.despatch_mode}}</td>
+                        <td>{{data.dc_no}}</td>
+                        <td>{{data.grn_flag}}</td>
+                        <td class="text-center text-nowrap">
+
+                            <!-- routerLink="/pmr/PmrTrnGrninwardView -->
+
+                            <button title="View" type="button" class="btn btn-icon btn-sm bg-primary me-2" (click)="onview(data.grn_gid)" >  <span
+                                 class="fa-solid fa-eye text-white  fs-6" style="background: radial-gradient(circle, #47acbe 0%, #4aa5b9 100%);"></span></button>   
+                                 
+                          <button title="Pdf" type="button" data-bs-toggle="modal" data-bs-target="#myModalPdf"
+                            class="btn btn-icon btn-sm background-color6 me-2 "
+                            style="background: radial-gradient(circle, #47acbe 0%, #4aa5b9 100%);"><span
+                            class="fa-solid fa-file-pdf fs-6" (click)="PrintPDF(data.grn_gid)"></span>
+                          </button>
+                          <button title="Download File" type="button" data-bs-toggle="modal" data-bs-target="#myModalPdf"
+                            class="btn btn-icon btn-sm background-color6 me-2 "
+                            style="background: radial-gradient(circle, #04dc86 0%, #04dc86 100%);"><span
+                            class="fa-solid fa-file-image fs-6" (click)="filedownload(data.file_path,data.file_name)"></span>
+                          </button>   
+                          
+                          <button title="Purchase Return" type="button" data-bs-toggle="modal" data-bs-target="#myModalPdf"
+                          class="btn btn-icon btn-sm background-color6 me-2 "
+                          style="background: radial-gradient(circle, #c055f1 0%, #c055f1 100%);"><span
+                          class="fa-solid fas fa-reply-all fs-6" (click)="addpurchasereturn(data.grn_gid,data.vendor_gid)"></span>
+                        </button>  
+                        <!-- <button type="button" (click)="posttomintsoft(data.grn_gid)" data-bs-toggle="modal"
+                        data-bs-target="#MdlPostToMintSoft"
+                        *ngIf="!data.mintsoftasn_id && data.mintsoft_flag == 'Y'"
+                        class="btn btn-icon btn-sm bg-dark me-2"><i class="fa-solid fa-arrow-right fs-6"></i>
+                        <span class="tool">Push To mintsoft</span>
+                      </button> -->
+
+                      
+                          
+                          
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<form [formGroup]="ASNForm">
+  <div class="modal" id="MdlPostToMintSoft" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content d-flex justify-content-center">
+        <div class="card-header p-1 pb-1 pt-1 rounded-top bg-primary"
+          style="display: flex; align-items: center; height: 40px;">
+          <h3 Style="color: white; font-weight: bold; text-align: left; width: 100%; margin-left: 10px;">Post to
+            MintSoft
+          </h3>
+        </div>
+        <div class="modal-body">
+          <div class="mb-2 mt-2">
+            <label for="exampleFormControlTextarea1" class="form-label"><b>Warehouse</b></label>
+            <input placeholder="WareHouse" type="text" id="WareHouse" name="WareHouse" style="width:100%;"
+              formControlName="warehouse" class=" form form-control form-control-sd mt-2 bg-secondary" readonly>
+          </div>
+          <div class="mb-2 mt-2">
+            <label for="exampleFormControlTextarea1" class="form-label"><b>Product Supplier</b></label>
+            <input placeholder="Product Supplier" type="text" id="WareHouse" name="Product Supplier" style="width:100%;"
+              formControlName="supplier_name" class=" form form-control form-control-sd mt-2 bg-secondary" readonly>
+          </div>
+          <div class="mb-2 mt-2">
+            <label for="exampleFormControlTextarea1" class="form-label"><b>GoodsInType</b></label>
+            <ng-select formControlName="goodsintypes_id" [items]="GetASN_list" [(ngModel)]="MdlASN"
+              class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" bindValue="goodsintypes_id"
+              bindLabel="goodsintypes_name"></ng-select>
+          </div>
+        </div>
+        <div class="text-center my-4">
+          <button class="me-4 btn-success" data-bs-dismiss="modal" (click)="OnUpdatePost()">
+            <i class="fas fa-check text-white fs-5 me -3"></i>
+            <span class="ms-3">Submit</span>
+          </button>
+          <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white"></i>
+            <span class="ms-2">Close</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+<div class="modal" id="myModalcustomerdetail" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content d-flex justify-content-center">
+      <div class="card-header p-1 pb-1 pt-1 rounded-top bg-primary"
+         style="display: flex; align-items: center; height: 40px;">
+         <h3 style="margin-top: 10px; color: white; font-weight: bold" class="mt-8">
+          &nbsp;&nbsp;Product Details
+        </h3>
+     </div>
+     <div class="modal-body">
+      <table id="materialindentlist" class="table table-striped table-bordered text-blue border-bottom gs-7 align-middle ">
+        <thead>
+            <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                <th  class="text-blue text-center" style="width:10%">Product Group</th>
+                <th  class="text-blue text-center" style="width: 20%;">Product</th>
+                <th  class="text-blue text-center" style="width: 5%;">Ordered Qty</th> 
+                <th  class="text-blue text-center" style="width: 5%;">Received Qty</th> 
+            </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of grnproduct_lists;let i = index;">
+          <td>{{data.productgroup_name}}</td>
+          <td>{{data.product_code}}/{{data.product_name}}</td>
+          <td>{{data.qty_ordered}} {{data.productuom_name}}</td>
+          <td>{{data.qty_delivered}} {{data.productuom_name}}</td>
+        </tr>
+      </tbody>
+        </table>
+      <div class="text-center my-4">
+        <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+          <i class="fas fa-close text-white"></i> &nbsp;Close
+        </button>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

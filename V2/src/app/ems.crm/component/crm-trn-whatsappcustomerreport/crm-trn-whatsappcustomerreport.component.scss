@@ -1,0 +1,16 @@
+.bg-whatsapp
+{
+  background-color: #075e54;
+}
+.bg-lightblues{
+    background-color: #4c755c;
+}
+.icon-green {
+    color: rgb(89, 138, 89);
+}
+.hover-effect:hover {
+    background-color: #4b8f65; /* Change background color on hover */
+    color: white; /* Change text color on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    transition: all 0.3s ease; /* Smooth transition effect */
+}

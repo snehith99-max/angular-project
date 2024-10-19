@@ -1,0 +1,64 @@
+<div class="card mt-4">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+          <h3 class="card-title fw-bold"><b>Opening Stock Summary</b></h3>
+        </div>
+        <div class="col me-2">
+          <button type="button" class="btn-primary btn-sm text-white me-4 float-end" data-bs-toggle="modal"
+            data-bs-target="#myModaladd" (click)="onadd()">
+            <i class="fas fa-plus fw-bold"></i>&nbsp;Create Opening Stock
+          </button>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="col-lg-3 col-md-6">
+            <div class="fw-bold">Branch Name</div>
+            
+                <ng-select [items]="Branchdtl_list" placeholder="Select an option" [(ngModel)]="branch_name1"
+                class="custom w-100 fv-row mt-2" bindLabel="branch_name"
+                bindValue="branch_gid" (change)="OnChangeFinancialYear()">
+            </ng-select>
+            
+        </div>
+        <div class="col-lg-3 col-md-6 ms-3">
+            <div class="fw-bold">Financial Year</div>
+            <ng-select [items]="FinancialYear_List" placeholder="Select an option" [(ngModel)]="finyear"
+                class="custom w-100 fv-row mt-2" bindLabel="finyear" 
+                bindValue="finyear" (change)="OnChangeFinancialYear()">
+            </ng-select>
+        </div>
+    </div>
+    
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="stock_list" class="table table-striped table-row-bordered gy-5 gs-7 ">
+                <thead>
+                    <tr class="fw-bold fs-5 text-nowrap bg-lightblue align-middle text-blue">
+                        <th style="width: 5%;">S.No</th>                        
+                        <th style="width: 10%;">Branch </th>
+                        <th style="width: 10%;">Product Group</th>
+                        <th style="width: 25%;">Product </th>
+                        <th style="width: 25%;">Description</th>
+                        <th style="width: 10%;">Stock </th>
+                        <th class="text-center bg-lightblue ">Action</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of stock_list; let i=index;">  
+                        <td>{{i+1}}</td>
+                        <td>{{data.branch_prefix}}</td>
+                        <td>{{data.productgroup_name}}</td>
+                        <td class="ellipsis">{{data.product_code}}/{{data.product_name}}</td>
+                        <td class="ellipsis">{{data.display_field}}</td>
+                        <td>{{data.opening_stock}}  {{data.productuom_name}}</td>
+                        <td class="text-center">
+                            <button title="Edit" type="button" class="btn btn-icon btn-sm bg-etdark me-2"  style="background-color:#009688;" 
+                            (click)="onedit(data.stock_gid)" data-bs-toggle="modal" data-bs-target="#myModaledit"><span
+                            class="fa-solid fa-pencil text-white  fs-6"></span></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

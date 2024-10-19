@@ -1,0 +1,28 @@
+.progress-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.progress-value {
+  font-weight: bold;
+  margin-bottom: 1px; /* Adjust space between value and progress bar */
+}
+
+.progress-bar-container {
+  width: 100%;
+  background-color: #f3f3f3; /* Light gray background for the container */
+  border-radius: 2px;
+  overflow: hidden;
+  height: 10px; /* Reduced height */
+}
+
+.progress-bar {
+  height: 100%; /* Fill the container */
+  line-height: 15px; /* Center text vertically */
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 2px;
+}

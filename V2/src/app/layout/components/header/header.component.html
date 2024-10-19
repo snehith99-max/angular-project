@@ -1,0 +1,173 @@
+<div class="head" [ngClass]="getHeaderClass()" (click)="onDocumentClick($event)">
+    <div class="head-content">
+        <div class="head-content-left">
+            <div *ngFor=" let list of menu; let i = index;" style="padding-left: 6px;">
+                <button class="head-menu-item-name-btn" (click)="getsidemenu(list, i);selectHead(i)"
+                    [ngClass]="{'activeHeader': selectedIndex === i}">{{list.text}}</button>
+            </div>
+        </div>
+        <div class="head-content-right">
+            <div *ngIf="home_page == 'Y'">
+               
+                <button class="head-menu-item-btn" id="home" title="Home"  routerLink="/auth/HomePage">
+                    <i class="fa-solid fa-house" style="font-size:14px;font-weight: bolder;"></i>
+                </button>
+            </div>           
+                <button class="head-menu-item-btn" id="Help and Support" title="Help and Support" routerLink="/sbc/SbcMstHelpandsupport">
+                    <i class="fa fa-question-circle" style="font-size:16px;font-weight: bolder;"></i>
+                </button>
+            <button class="head-menu-item-btn" id="meetings" title="meetings" (click)="openMeetingPanel()">
+                <i class="fa-solid fa-calendar" style="font-size:14px;font-weight: bolder;"></i>
+            </button>
+            <!-- <button *ngIf="!hideButton" class="head-menu-item-btn " title="Service" (click)="service()">
+                <i class="fa-solid fa-gear" style="font-size:14px;font-weight: bolder;"></i>
+            </button> -->
+            <button *ngIf="!hideButton  && service_flag === 'Y'" class="head-menu-item-btn " title="Service" (click)="service()">
+                <i class="fa-solid fa-gear" style="font-size:14px;font-weight: bolder;"></i>
+            </button>
+            <button *ngIf="!hideButton" class="head-menu-item-btn" title="Social Media" (click)="social()">
+                <i class="fas fa-poll" style="font-size:14px;font-weight: bolder;"></i>
+            </button>
+            <!-- <button class="head-menu-item-btn " id="notification" title="Notification" (click)="onClickNotification()">
+                <i class="fa-solid fa-bell" style="font-size:17px;"><span class="translate-middle badge rounded-pill bg-danger">{{notification_count}}</span></i>
+            </button> -->
+          <!-- Notification Button -->
+<button *ngIf="!hideButton" class="head-menu-item-btn" id="notification" title="Notification" (click)="onClickNotification()">
+    <i class="fa-solid fa-bell" style="font-size: 17px; position: relative;">
+        <span class="translate-middle badge rounded-pill bg-danger text-white" style="position: absolute; top: -8px; left: 12px;">
+            {{notification_count}}
+        </span>
+    </i>
+</button>
+
+<!-- Notification Panel -->
+<div *ngIf="showMessage" class="sampel card border">
+    <div class="bg-white rounded-top">
+        <h4 class="text-center pt-4 pb-3 align-middle">Notification</h4>
+    </div>
+
+    <div class="notification_list" id="scroll-bar-table">
+        <!-- Show message if there are no notifications -->
+        <div *ngIf="notification_list.length === 0" class="no-notifications-container text-center p-4">
+            <img src="./assets/media/logos/notification_image.png" alt="No notifications" class="no-notifications-image">
+        </div>
+
+        <!-- Display notifications if there are any -->
+        <div *ngIf="notification_list.length > 0">
+            <div *ngFor="let data of notification_list;">
+
+                <div class="row p-3 d-flex justify-content-center align-items-center border-bottom border border-secondary nassar"
+                    *ngIf="data.ca_type == 'wa'" (click)="customer360redirect(data.leadbank_gid, data.lead2campaign_gid)">
+
+                    <div class="col-1 ps-2">
+                        <i class="fa-brands fa-whatsapp" style="color: #04ff00; font-size: 2.75rem;"></i>
+                    </div>
+                    <div class="col-8">
+                        <div class="ps-3">
+                            <span class="fw-bold" >{{data.displayName}}</span>&nbsp;sent a message
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="notification-badge">
+                            {{data.count}}
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row p-3 d-flex justify-content-center align-items-center border-bottom border border-secondary nassar"
+                    *ngIf="data.ca_type == 'em'" (click)="customer360redirect1(data.leadbank_gid, data.lead2campaign_gid)">
+
+                    <div class="col-1">
+                        <i class="fa fa-envelope" style="color: #0077ff; font-size: 1.75rem;"></i>
+                    </div>
+                    <div class="col-8">
+                        <div class="ps-3">
+                            <span class="fw-bold">{{data.displayName}}</span>&nbsp;sent a message
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="notification-badge">
+                            {{data.count}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row p-3 d-flex justify-content-center align-items-center border-bottom border border-secondary nassar"
+                    *ngIf="data.ca_type == 'gm'" (click)="customer360redirect2(data.contact_id)">
+
+                    <div class="col-1">
+                        <i class="fa fa-envelope" style="color: #0077ff; font-size: 1.75rem;"></i>
+                    </div>
+                    <div class="col-8">
+                        <div class="ps-3">
+                            <span class="fw-bold" style="cursor: pointer;">{{data.displayName}}</span><br>
+                            <span>sent a message</span>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div>
+                            <span class="fa-solid fa-bell fa-beat fs-5" style="color: rgb(55, 177, 55);"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row p-3 d-flex justify-content-center align-items-center border-bottom border border-secondary nassar"
+                    *ngIf="data.ca_type == 'om'" (click)="customer360redirect3(data.contact_id)">
+
+                    <div class="col-1">
+                        <i class="fa fa-envelope" style="color: #0077ff; font-size: 1.75rem;"></i>
+                    </div>
+                    <div class="col-8">
+                        <div class="ps-3">
+                            <span class="fw-bold"  style="cursor: pointer;">{{data.displayName}}</span><br>
+                            <span>sent a message</span>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div>
+                            <span class="fa-solid fa-bell fa-beat fs-5" style="color: rgb(55, 177, 55);"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- notification for message-->
+            <button class="head-menu-item-btn" title="Profile" routerLink="/system/SysMstUserProfile">
+                <i class="fa-solid fa-user" style="font-size:14px;font-weight: bolder;"></i>
+            </button>
+            <button class="head-menu-item-btn" title="Logout" (click)="logout()">
+                <i class="fa-solid fa-power-off" style="font-size:14px;font-weight: bolder;"></i>
+            </button>
+        </div>
+    </div>
+    <span class="float-end fs-4 me-4" style="color:brown;"><b>Logged in as : </b><b class="fs-4"
+            style="color: black;">{{employee_details}}</b></span>
+    <div *ngIf="router.url != '/crm/CrmDashboard' && router.url != '/smr/SmrDashboard' && router.url != '/pmr/PmrDashboard' && router.url != '/hrm/HrmMemberDashboard'">
+        <div *ngIf="showBreadCurmList" class="headBreadCrum">
+            <a style="cursor: pointer !important;" class="p-0"><span
+                    *ngIf="level_one_name != '' && level_one_name != null" (click)=redirect_menu(level_one_link)>
+                    &nbsp;&nbsp; {{level_one_name}} <span style="color: black;">></span>
+                </span></a>
+            <a style="cursor: pointer !important;" class="p-0"><span
+                    *ngIf="level_two_name != '' && level_two_name != null" (click)=redirect_menu(level_three_link)>
+                    {{level_two_name}} <span style="color: black;">></span>
+                </span></a>
+            <a style="cursor: pointer !important;" class="p-0"><span
+                    *ngIf="level_three_name != '' && level_three_name != null" (click)=redirect_menu(level_three_link)>
+                    {{level_three_name}} <span style="color: black;"></span>
+                </span></a>
+
+            <!-- <span *ngIf="level_four_link != '' && level_four_link != null" (click) = redirect_menu(level_four_link)>
+               >{{level_four_name}} 
+            </span>  -->
+        </div>
+    </div>
+
+
+    <layout-meetings-panel *ngIf="openPanel"></layout-meetings-panel>
+</div>

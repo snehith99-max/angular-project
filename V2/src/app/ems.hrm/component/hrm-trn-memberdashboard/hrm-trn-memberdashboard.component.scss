@@ -1,0 +1,517 @@
+  .bg-gradient-darkblue {
+  
+    background: #399C91;
+  
+     background: -webkit-linear-gradient(45deg, #aedaf3, #399C91)!important;
+  
+   background: linear-gradient(45deg, #9ff8f4, #399C91)!important;
+  
+ }
+
+ .bg-gradient-skyblue {
+  
+  background: #0d6efd;
+
+  background: -webkit-linear-gradient(45deg, #686a66, #0d6efd)!important;
+
+  background: linear-gradient(45deg, #686a66, #0d6efd)!important;
+
+}
+
+.bg-gradient-yellow{
+  
+    background: #d5a508;
+  
+    background: -webkit-linear-gradient(45deg, #edf0ea, #d5a508)!important;
+  
+    background: linear-gradient(45deg, #eeefed, #d5a508)!important;
+  
+  }
+  .bg-gradient-red{
+  
+    background: #ce0909;
+  
+    background: -webkit-linear-gradient(45deg, #edf0ea, #ce0909)!important;
+  
+    background: linear-gradient(45deg, #eeefed, #ce0909)!important;
+  
+  }
+
+  
+.border-darkblue {
+  
+  border-left: 5px solid  #399C91 !important;
+
+}
+.border-skyblue {
+  
+  border-left: 5px solid  #0d6efd !important;
+
+}
+.border-violet {
+  
+  border-left: 5px solid  #cf045f !important;
+
+}
+
+.border-Ytd {
+
+  border-left: 5px solid  #109603 !important;
+
+}
+.border-Due {
+
+  border-left: 5px solid  #030b7f !important;
+
+}
+.border-brown {
+  
+  border-left: 5px solid  #90017b !important;
+
+}
+.border-yellow {
+  
+  border-left: 5px solid  #d5a508 !important;
+
+}
+.border-orderdon {
+  
+  border-left: 5px solid  rgb(219, 87, 5) !important;
+
+}
+
+.cardHead {
+
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+
+  padding: 18px;
+
+  background-clip: border-box;
+
+  border: 0px solid rgba(0, 0, 0, 0);
+
+  border-radius: .0rem;
+
+  box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%);
+
+
+  background-color: white;
+
+}
+
+.card-body12 {
+  // width: 160px;
+  height: 30px;  
+}
+
+
+.widgets-icons-2 {
+  
+  width: 30px;
+
+  height: 30px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background-color: #ededed;
+
+  font-size: 27px;
+
+  border-radius: 10px;
+
+}
+
+
+.radius-10 {
+  border-radius: 10px !important;
+}
+.card1 {
+  border-radius: 6px;
+  width: 100%;
+  margin-left: -9.5px;
+
+  .card-head {
+      background-color: #2196f3;
+      height: 60px;
+      padding: 8px 0 0 12px;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+
+      .main-head {
+          font-size: 14px;
+          font-weight: bold;
+          color: #ffffff;
+          text-align: left;
+      }
+
+      .sub-head {
+          font-size: 11px;
+          color: #ffffff;
+          text-align: left;
+          margin-top: -8px;
+      }
+
+      .head-right {
+          text-align: right;
+          margin: -50px 20px 0px 0px;
+          font-size: 20px;
+          font-weight: bold;
+          color: #ffffff;
+      }
+  }
+
+  .card-body {
+      height: 180px;
+      border: #2196f3 1px solid;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+
+      .body-left {
+          font-size: 13px;
+          text-align: left;
+          margin: -8px 0px 0px -11px;
+      }
+
+      .body-right {
+          text-align: right;
+          margin: -20px -10px 0px 0px;
+          font-size: 15px;
+          font-weight: bold;
+      }
+
+      .icon {
+          margin-top: 30px;
+
+          i {
+              font-size: 35px;
+          }
+
+          .text {
+              text-align: left;
+              margin: -8px 0px 0px -10px;
+              font-size: 11px;
+          }
+
+          .success {
+              text-align: left;
+              margin: 8px 0px 0px -10px;
+              color: #4caf50;
+              font-weight: bold;
+          }
+      }
+
+      .submit-button {
+          text-align: right;
+          margin: 20px -10px 0 0;
+
+          .btn-primary {
+              background-color: #2196f3 !important;
+          }
+
+          i {
+              margin-top: -2px;
+          }
+
+          .btn-text {
+              font-size: 13px;
+              font-weight: bold;
+          }
+      }
+  }
+}
+
+
+
+
+
+
+.card-header {
+  background-image: linear-gradient(to right, #2429e0, #39ffff, #2429e0);
+  border-radius: 0px;
+}
+
+.body-left {
+  font-size: 13px;
+  text-align: left;
+  margin: -8px 0px 0px -11px;
+}
+
+.body-right {
+  text-align: right;
+  margin: -20px -10px 0px 0px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.submit-button {
+  text-align: right;
+  margin: 20px -10px 0 0;
+
+  .btn-primary {
+      background-color: #2196f3 !important;
+  }
+
+  i {
+      margin-top: -2px;
+  }
+
+  .btn-text {
+      font-size: 13px;
+      font-weight: bold;
+  }
+}
+
+.icon {
+  margin-top: 30px;
+
+  i {
+      font-size: 35px;
+  }
+
+  .text {
+      text-align: left;
+      margin: -8px 0px 0px -10px;
+      font-size: 11px;
+  }
+
+  .success {
+      text-align: left;
+      margin: 8px 0px 0px -10px;
+      color: #4caf50;
+      font-weight: bold;
+  }
+}
+
+
+.iattendancepopup {
+  width: 350px;
+
+  .modal-header{
+      background-color: #2196f3;
+      height: 50px;
+  }   
+
+  .modal-title{
+      color: #ffffff;
+  }
+ 
+  .iattendancepopupbody {        
+      .para {
+          font-size: 20px;
+          font-weight: bold;
+          text-align: center;
+      }
+  }
+
+  .contain {
+      margin: 0 0 15px 0;
+  }    
+}
+
+.loginpopup {
+  width: 350px;
+
+  .modal-header{
+      background-color: #3f51b5;
+      height: 50px;
+  }   
+
+  .modal-title{
+      color: #ffffff;
+  }
+ 
+  .loginpopupbody {
+      text-align: left;
+      .login-input {
+          width: 130px;
+          height: 30px;
+          padding: 8px;
+          border: 1px #c2c2c2 solid;
+          border-radius: 6px;
+      }
+  
+      .inputfield {
+          width: 280px;
+          padding: 8px;
+          border: 1px #c2c2c2 solid;
+          border-radius: 6px;
+      }
+  }
+
+  .contain {
+      margin: 0 0 15px 0;
+  }
+}
+
+.logoutpopup {
+  width: 350px;
+
+  .modal-header{
+      background-color: #6a1b9a;
+      height: 50px;
+  }   
+
+  .modal-title{
+      color: #ffffff;
+  }
+ 
+  .logoutpopupbody {
+      text-align: left;
+
+      .logout-input {
+          width: 130px;
+          height: 30px;
+          padding: 8px;
+          border: 1px #c2c2c2 solid;
+          border-radius: 6px;
+      }
+  
+      .inputfield {
+          width: 280px;
+          padding: 8px;
+          border: 1px #c2c2c2 solid;
+          border-radius: 6px;
+      }
+  }
+
+  .contain {
+      margin: 0 0 15px 0;
+  }    
+}
+
+.odpopup {
+  width: 350px;
+
+  .modal-header{
+      background-color: #78909c;
+      height: 50px;
+  }   
+
+  .modal-title{
+      color: #ffffff;
+  }
+ 
+  .odpopupbody {       
+
+      .oddate-input {
+          width: 280px;
+          height: 30px;
+          padding: 8px;
+          border: 1px #c2c2c2 solid;
+          border-radius: 6px;
+      }
+
+      .od-input {
+          width: 130px;
+          height: 30px;
+          padding: 8px;
+          border: 1px #c2c2c2 solid;
+          border-radius: 6px;
+      }
+  
+      .inputfield {
+          width: 280px;
+          padding: 8px;
+          border: 1px #c2c2c2 solid;
+          border-radius: 6px;
+      }
+  }
+
+  .contain {
+      margin: 0 0 15px 0;
+  }    
+}
+
+.applycompoffpopup {
+  width: 350px;
+
+  .modal-header{
+      background-color: #009688;
+      height: 50px;
+  }   
+
+  .modal-title{
+      color: #ffffff;
+  }
+ 
+  .applycompoffbody {
+
+      .compoff-input {
+          width: 130px;
+          height: 30px;
+          padding: 8px;
+          border: 1px #c2c2c2 solid;
+          border-radius: 6px;
+      }
+  
+      .inputfield {
+          width: 280px;
+          padding: 8px;
+          border: 1px #c2c2c2 solid;
+          border-radius: 6px;
+      }
+  }
+
+  .contain {
+      margin: 0 0 15px 0;
+  }
+}
+
+.permissionpopup {
+  width: 350px;
+
+  .modal-header{
+      background-color: #00bcd4;
+      height: 50px;
+  }   
+
+  .modal-title{
+      color: #ffffff;
+  }
+ 
+  .permissionpopupbody {       
+
+      .permissiondate-input {
+          width: 280px;
+          height: 30px;
+          padding: 8px;
+          border: 1px #c2c2c2 solid;
+          border-radius: 6px;
+      }
+
+      .permission-input {
+          width: 130px;
+          height: 30px;
+          padding: 8px;
+          border: 1px #c2c2c2 solid;
+          border-radius: 6px;
+      }
+  
+      .inputfield {
+          width: 280px;
+          padding: 8px;
+          border: 1px #c2c2c2 solid;
+          border-radius: 6px;
+      }
+  }
+
+  .contain {
+      margin: 0 0 15px 0;
+  }    
+}
+
+
+.background-color6{
+    background: #3c9fa7;
+    background: radial-gradient(circle, #47acbe 0%, #4aa5b9 100%); 
+  }

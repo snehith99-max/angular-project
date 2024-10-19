@@ -1,0 +1,41 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <div class="card-title p-2 rounded-top bg-primary d-flex justify-content-between align-items-center">
+                <h1 class="fw-bolder text-white">
+                <i class="fa fa-sitemap fs-1"></i> Organisation Hierarchy
+            </h1>
+            <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer me-3" 
+            routerLink="/system/SysMstModuleManager"><i class="fa-solid fa-arrow-left text-blue mb-1"></i><span class="tooltips">Back</span></button>
+          </div>
+        </div>
+
+       
+    </div>
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+       
+
+        <div class="col me-5">
+            <button title="Clear" class="btn-danger btn-sm text-white me-4 mb-2 mt-2 float-end" (click)="clear()" >Clear</button>
+        </div>
+    </div>
+
+    <table #summaryTable>
+        <div *ngFor="let level of org_hierarchy_levellist">
+            {{ level }} 
+        </div>
+
+        <div>
+            <div [innerHTML]="org_hierarchy_levellist">
+                
+            </div>
+        </div>
+    </table>
+    
+    <div class="text-center my-4">  
+        <button type="back" class="btn-primary btn-sm text-white me-4" (click)="back()">
+            <i class="fa fa-arrow-left fs-5 text-center"></i>
+          <span class="ms-3">Back</span>
+        </button>
+      </div>
+</div>

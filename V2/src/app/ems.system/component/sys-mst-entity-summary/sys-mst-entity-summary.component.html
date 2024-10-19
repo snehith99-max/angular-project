@@ -1,0 +1,427 @@
+<div class="card shadow-sm">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Entity Summary</h3>
+        </div>
+
+        <div class="col me-5">
+            <button title="Add Entity" class="btn-primary btn-sm text-white me-4 mb-2 mt-2 float-end"
+                data-bs-toggle="modal" data-bs-target="#myModaladd">
+                Add Entity
+            </button>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <div class="card card-body m-3 shadow-lg p-3 mb-5 bg-white rounded">
+            <table id="entity_list" class="table table-striped table-row-bordered gy-5 gs-7 ">
+                <thead>
+                    <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th>S.No</th>
+                        <th>Code </th>
+                        <th>Prefix </th>
+                        <th>Entity</th>
+                        <th>Description</th>
+                        <th>Created By</th>
+                        <th>Created Date</th>
+                        <th>Status</th>
+                        <th class="text-center bg-lightblue ">Action</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of entity_list; let i=index;" class="align-middle">
+                        <td>{{i+1}}</td>
+                        <td>{{data.entity_code}}</td>
+                        <td>{{data.entity_prefix}}</td>
+                        <td>{{data.entity_name}}</td>
+                        <td>{{data.entity_description}}</td>
+                        <td>{{data.created_by}}</td>
+                        <td>{{data.created_date}}</td>
+                        <td [ngSwitch]="data.EntityStatus" class="text-center" style="width: 5%;">
+                            <label *ngSwitchCase="'Active'" class="badge bg-success text-white ">Active</label>
+                            <label *ngSwitchCase="'InActive'" class="badge bg-warning text-white ">InActive</label>
+                          </td>
+                        <td class="text-center text-nowrap">
+                            <!-- <div (click)="toggleOptions(data.entity_gid)" style="cursor: pointer;">
+                                <button class="btn me-2 p-1 "><span class="fa-solid fa-ellipsis-vertical fs-1"
+                                        style="color: #4d4d4d;"></span></button>
+                                <div *ngIf="showOptionsDivId === data.entity_gid"
+                                    class="pb-0 rounded bg-white cursor-pointer icon_menu">
+
+                                    <div class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal"
+                                        data-bs-target="#myModaledit" (click)="openModaledit(data)">
+                                        <span><i class="fa-regular fa-pen-to-square fs-3 me-5"></i></span>
+                                        <span>Edit</span>
+                                    </div>
+                                    <div class="d-flex p-3 pb-3 Icon_hover" (click)="openModaldelete(data.entity_gid)"
+                                        data-bs-toggle="modal" data-bs-target="#myModaldelete">
+                                        <span><i class="fa-regular fa-trash-can fs-3 me-5"></i></span>
+                                        <span>Delete</span>
+                                    </div>
+
+                                </div>
+                            </div> -->
+                            <button title="Edit" type="button" data-bs-toggle="modal" data-bs-target="#myModaledit"
+                                class="btn btn-icon btn-sm bg-etdark me-2 mb-2" (click)="openModaledit(data)">
+                                <i class="fas fa-pencil text-white fs-6"></i>
+                            </button>
+                            <button title="{{ data.EntityStatus === 'Active' ? 'InActive' : 'Active' }}" type="button"
+              class="btn btn-icon btn-sm {{ data.EntityStatus === 'Active' ? 'bg-warning' : 'bg-success' }} me-2 mb-2"
+              (click)="toggleStatus(data.entity_gid)"
+              [attr.data-bs-target]="data.EntityStatus === 'Active' ? '#myModalinactive' : '#myModalactive'"
+              [attr.data-bs-toggle]="data.EntityStatus === 'Active' ? 'modal' : 'modal'">
+              <span class="fa-solid fa-thumbs-{{ data.EntityStatus === 'Active' ? 'down' : 'up' }} text-white fs-6"></span>
+              </button>
+                            <!-- <button title="Delete" type="button" data-bs-toggle="modal" data-bs-target="#myModaldelete"
+                                class="btn btn-icon btn-sm bg-danger  me-2 mb-2"
+                                (click)="openModaldelete(data.entity_gid)">
+                                <i class="fa-solid fa-trash text-white fs-6"></i>
+                            </button> -->
+                        </td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- The Modal Active -->
+<div class="modal" id="myModalactive" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog del_modal-dialog">
+      <div class="modal-content del_modal-content">
+        <div class="text-center my-4">
+          <h2><b>Are you sure?</b></h2>
+          <p style="display: block;">Do You Want To Active the Entity?</p>
+          <div class="text-center my-4">
+            <button class="btn-success btn-sm text-white me-4" (click)="onActivate()" data-bs-dismiss="modal">
+              <i class="fa fa-toggle-on fs-5 me-2"></i>Active
+            </button>
+            <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+              <i class="fas fa-close text-white me-2"></i>Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- The Modal Inactive -->
+  <div class="modal" id="myModalinactive" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog del_modal-dialog">
+      <div class="modal-content del_modal-content">
+        <div class="text-center my-4">
+          <h2><b>Are you sure?</b></h2>
+          <p style="display: block;">Do You Want To Inactive the Entity?</p>
+          <div class="text-center my-4">
+            <button class="btn-warning btn-sm text-white me-4" (click)="onInactivate()" data-bs-dismiss="modal">
+              <i class="fa fa-toggle-off fs-5 me-2"></i>Inactive
+            </button>
+            <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+              <i class="fas fa-close text-white me-2"></i>Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+<!-- The Modal ADD -->
+<form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="modal mt-20" id="myModaladd" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+                    <div>
+                        <h2 class="fw-bolder ms-5 mt-4 text-white">Add Entity</h2>
+                    </div>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="d-flex flex-row flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <span class="font-bold required">Entity Code</span>
+                            <div class="col-12 col-lg-11 col-md-11 col-sm-12 fv-row mt-2">
+                                <input formControlName="entity_code" type="text"
+                                    class="form-control form-control-lg form-control-solid borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                    [ngStyle]="{'border-color': entity_code.invalid && entity_code.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                    placeholder="Enter Entity Code" name="entity_code"minlength="1" maxlength="8" />
+                                <div *ngIf="reactiveForm.get('entity_code')?.hasError('required') && reactiveForm.get('entity_code')?.touched"
+                                    class="text-red ms-2">Entity Code is required.</div>
+                                <div *ngIf="entity_code.invalid && (entity_code.dirty || entity_code.touched)">
+                                    <div *ngIf="entity_code.errors?.['pattern']">
+                                        <span class="text-red">
+                                            Maximum 8 digits</span>
+                                    </div>
+                                </div>
+                                <div *ngIf="reactiveForm.get('entity_code')?.hasError('pattern')" class="text-red">Space
+                                    at the
+                                    beginning is not allowed.</div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <span class="font-bold required">Entity Prefix</span>
+                            <div class="col-12 col-lg-11 col-md-11 col-sm-12 fv-row mt-2">
+                                <input formControlName="entity_prefix" type="text"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                                    [ngStyle]="{'border-color': entity_prefix.invalid && entity_prefix.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                    placeholder="Enter Entity Prefix" name="entity_prefix" maxlength="5" />
+                                <div *ngIf="reactiveForm.get('entity_prefix')?.hasError('required') && reactiveForm.get('entity_prefix')?.touched"
+                                    class="text-red ms-2">Entity Prefix is required.</div>
+                                <div *ngIf="entity_prefix.invalid && (entity_prefix.dirty || entity_prefix.touched)">
+                                    <div *ngIf="entity_prefix.errors?.['pattern']">
+                                        <span class="text-red">
+                                            Maximum 5</span>
+                                    </div>
+                                </div>
+                                <div *ngIf="reactiveForm.get('entity_prefix')?.hasError('pattern')" class="text-red">
+                                    Space at the
+                                    beginning is not allowed.</div>
+                            </div>
+                        </div> -->
+
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <span class="font-bold required">Entity Prefix</span>
+                            <div class="col-12 col-lg-11 col-md-11 col-sm-12 fv-row mt-2">
+                                <input formControlName="entity_prefix" type="text"
+                                    class="form-control form-control-lg form-control-solid borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                    [ngStyle]="{'border-color': entity_prefix.invalid && entity_prefix.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                    placeholder="Enter Entity Prefix" name="entity_prefix" maxlength="8" />
+                                <div *ngIf="reactiveForm.get('entity_prefix')?.hasError('required') && reactiveForm.get('entity_prefix')?.touched"
+                                    class="text-red ms-2">Entity Prefix is required.</div>
+                                <div *ngIf="entity_prefix.invalid && (entity_prefix.dirty || entity_prefix.touched)">
+                                    <div *ngIf="entity_prefix.errors?.['pattern']">
+                                        <span class="text-red">
+                                            Maximum 8 digits</span>
+                                    </div>
+                                </div>
+                                <div *ngIf="reactiveForm.get('entity_prefix')?.hasError('pattern')" class="text-red">
+                                    Space at the beginning is not allowed.</div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="d-flex flex-row flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-4"><span class="font-bold required">Entity
+                                Name</span>
+                            <div class="col-12 col-lg-11 col-md-11 col-sm-12 fv-row mt-2">
+                                <input formControlName="entity_name" type="text"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                                    [ngStyle]="{'border-color': entity_name.invalid && entity_name.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                    placeholder="Entity Name" name="entity_name" required />
+                                <div *ngIf="entity_name.invalid && (entity_name.dirty || entity_name.touched)">
+                                    <div *ngIf="entity_name.errors?.['required']"><span class="text-red">Entity
+                                            name is required.</span></div>
+                                </div>
+                                <div *ngIf="reactiveForm.get('entity_name')?.hasError('pattern')" class="text-red">Space
+                                    at the
+                                    beginning is not allowed.</div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-4"><span class="font-bold">Entity
+                                Description</span>
+                            <div class="col-12 col-lg-11 col-md-11 col-sm-12 fv-row mt-2">
+                                    <textarea type="text" class="form-control form-control-lg form-control-solid custom-input
+                                    mb-3 mb-lg-0  borderc-secondary bg-white custom-input
+                                    " placeholder=" Enter Entity Description(Maximum 1000 Characters)" formControlName="entity_description"
+                                    style="height: 40px;" (ngModelChange)="updateRemainingCharsadd()"
+                                    maxlength="1000">
+                                    </textarea>
+                                    <div class="text-muted fw-bold  mt-2">
+                                        Remaining characters: {{ remainingChars }}/1000
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Modal footer -->
+                    <div class="text-center my-4">
+                        <button class="me-4 btn-success" (click)="onsubmit()" [disabled]="reactiveForm.invalid"
+                            [ngClass]="{
+                'primary-button': !reactiveForm.invalid,
+                'secondary-button': reactiveForm.invalid
+              }" data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>
+                            <span class="ms-3">Submit</span>
+                        </button>
+                        <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+                            <i class="fas fa-close text-white fs-5"></i>
+                            <span class="ms-3">Close</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- The Modal Edit -->
+<form [formGroup]="reactiveFormEdit" #form="ngForm">
+    <div class="modal mt-20" id="myModaledit" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+
+                <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+                    <div>
+                        <h2 class="fw-bolder ms-5 mt-4" style="color: #ffffff;"><i
+                                class="fas fa-pen-to-square fs-2 me-2"></i>Edit Entity</h2>
+                    </div>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                    <div class="d-flex flex-row flex-wrap">
+
+
+                        <!-- <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Entity
+                            Code</span>
+                        <div class="col-12 col-lg-11 col-md-11 col-sm-12 fv-row mt-2">
+                            <input formControlName="entity_codeedit" type="text"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 ms-2"
+                                [ngStyle]="{ 'border-color': reactiveFormEdit.get('entity_codeedit')?.hasError('required') && reactiveFormEdit.get('entity_codeedit')?.touched || reactiveFormEdit.get('entity_codeedit')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                                placeholder="Entity Code" name="entity_code" readonly />
+                            <div *ngIf="reactiveFormEdit.get('entity_codeedit')?.hasError('required') && reactiveFormEdit.get('entity_codeedit')?.touched"
+                                class="text-red ms-2"> Entity Code Name is required.</div>
+                           
+                        </div>
+                    </div> -->
+
+                    <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                        <span class="font-bold ">Entity Code</span>
+                        <div class="col-12 col-lg-11 col-md-11 col-sm-12 fv-row mt-2">
+                            <input formControlName="entity_codeedit" type="text"
+                                class="form-control form-control-lg form-control-solid bg-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                placeholder="Enter Entity Prefix" name="entity_codeedit" maxlength="8"readonly />           
+                                                     
+                        </div>
+                    </div>
+                        <!-- <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Entity
+                                Prefix</span>
+                            <div class="col-12 col-lg-11 col-md-11 col-sm-12 fv-row mt-2">
+                                <input formControlName="entity_prefixedit" type="text"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 ms-2"
+                                    [ngStyle]="{ 'border-color': reactiveFormEdit.get('entity_prefixedit')?.hasError('required') && reactiveFormEdit.get('entity_prefixedit')?.touched || reactiveFormEdit.get('entity_prefixedit')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                                    placeholder="Entity Prefix" name="entity_prefix" required />
+                                <div *ngIf="reactiveFormEdit.get('entity_prefixedit')?.hasError('required') && reactiveFormEdit.get('entity_prefixedit')?.touched"
+                                    class="text-red ms-2"> Entity Prefix Name is required.</div>
+                                <div *ngIf="reactiveFormEdit.get('entity_prefixedit')?.hasError('pattern')"
+                                    class="text-red">Space at the
+                                    beginning is not allowed.</div>
+                            </div>
+                        </div> -->
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <span class="font-bold required">Entity Prefix</span>
+                            <div class="col-12 col-lg-11 col-md-11 col-sm-12 fv-row mt-2">
+                                <input formControlName="entity_prefixedit" type="text"
+                                    class="form-control form-control-lg form-control-solid borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                    [ngStyle]="{'border-color': entity_prefixedit.invalid && entity_prefixedit.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                    placeholder="Enter Entity Prefix" name="entity_prefixedit" maxlength="8" />
+                                <div *ngIf="reactiveFormEdit.get('entity_prefixedit')?.hasError('required') && reactiveFormEdit.get('entity_prefixedit')?.touched"
+                                    class="text-red ms-2">Entity Prefix is required.</div>
+                                <div *ngIf="entity_prefixedit.invalid && (entity_prefixedit.dirty || entity_prefixedit.touched)">
+                                    <div *ngIf="entity_prefixedit.errors?.['pattern']">
+                                        <span class="text-red">
+                                            Maximum 8 digits</span>
+                                    </div>
+                                </div>
+                                <div *ngIf="reactiveFormEdit.get('entity_prefixedit')?.hasError('pattern')" class="text-red">
+                                    Space at the
+                                    beginning is not allowed.</div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="d-flex flex-row flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-4"><span class="font-bold required">Entity
+                                Name</span>
+                                <div class="col-12 col-lg-11 col-md-11 col-sm-12 fv-row mt-2">
+                                    <input formControlName="entityedit_name" type="text"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                    [ngStyle]="{ 'border-color': reactiveFormEdit.get('entityedit_name')?.hasError('required') && reactiveFormEdit.get('entityedit_name')?.touched || reactiveFormEdit.get('entityedit_name')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                                    placeholder="Entity Name" name="entity_name"  />
+                                <div *ngIf="reactiveFormEdit.get('entityedit_name')?.hasError('required') && reactiveFormEdit.get('entityedit_name')?.touched"
+                                    class="text-red"> Entity Name is required.</div>
+                                <div *ngIf="reactiveFormEdit.get('entityedit_name')?.hasError('pattern')"
+                                    class="text-red">Space at the
+                                    beginning is not allowed.</div>
+                            </div>
+                        </div>
+
+
+                        <!-- <div class="mt-4">
+                            <label for="exampleFormControlTextarea1" class="form-label"><span class="font-bold"> Entity
+                                    Description</span></label>
+                            <textarea class="form-control" formControlName="entityedit_description"
+                                placeholder="Entity Description" id="exampleFormControlTextarea1" rows="3"
+                                style="resize: none;"></textarea>
+                            <div *ngIf="reactiveFormEdit.get('entityedit_description')?.hasError('pattern')"
+                                class="text-red">Space at the
+                                beginning is not allowed.</div>
+                        </div> -->
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-4"><span class="font-bold">Entity
+                            Description</span>
+                        <div class=" mt-2">
+                                <textarea type="text" class="form-control form-control-lg form-control-solid custom-input
+                                    mb-3 mb-lg-0  borderc-secondary bg-white custom-input
+                                    " placeholder=" Enter Entity Description(Maximum 1000 Characters)" formControlName="entityedit_description"
+                                    style="height: 40px;" (ngModelChange)="updateRemainingCharsadd1()"
+                                    maxlength="1000">
+                                </textarea>
+                                <div class="text-muted fw-bold  mt-2">
+                                    Remaining characters: {{ remainingChars }}/1000
+                                </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="text-center my-4">
+                    <button class="me-4 btn-success" (click)="onupdate()" [disabled]="reactiveFormEdit.invalid"
+                        [ngClass]="{
+                    'primary-button': !reactiveFormEdit.invalid,
+                    'secondary-button': reactiveFormEdit.invalid
+                  }" data-bs-dismiss="modal">
+                        <i class="fas fa-check text-white fs-5"></i>
+                        <span class="ms-3">Update</span>
+                    </button>
+                    <button class="btn-danger btn-sm text-white me-4" (click)="oncloseedit()" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white"></i>
+                        <span class="ms-3">Close</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- The Modal Delete -->
+<!-- <div id="myModaldelete" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h4 class="w-100  fw-bolder fs-1 mt-5">Are you sure ?</h4>
+                <p class="fw-bold fs-5 mt-4">Do You Want To Delete The Record ?</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn-danger" data-bs-dismiss="modal" (click)="ondelete()">
+                    <span class="text-white"></span>Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div> -->

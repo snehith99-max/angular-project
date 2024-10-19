@@ -1,0 +1,35 @@
+.ptagcenter
+{
+    text-align: center;
+    right: 10px;
+
+}
+.textbox
+{
+    position: absolute;
+    right: 10px;
+    text-indent: 100px;
+
+}
+.searchbutton
+{
+    position: relative;
+    text-align: center  ;
+}
+.cardhead
+{
+    background: rgb(12,179,179);
+background: radial-gradient(circle, rgba(12,179,179,0.5944502801120448) 0%, rgba(26,204,171,0.5389758198201156) 100%);
+}
+
+.excel-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 12px; /* Adjust padding for a smaller button */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.hidden {
+    display: none;
+}

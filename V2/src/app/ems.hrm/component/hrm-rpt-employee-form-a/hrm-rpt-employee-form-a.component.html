@@ -1,0 +1,165 @@
+<div class="card shadow-sm">
+    
+    <div class="card-title p-5 pb-3 pt-3 rounded-top bg-primary d-flex justify-content-between align-items-center">
+      <h1 class="fw-bolder text-white fs-2">Employee Report Form A</h1>
+      <button style="color: white !important;" class="btn btn-icon btn-sm bg-success mr-05 ms-2" title="Form A Export Excel" (click)="exportformAExcel()">
+        <i class="bi bi-file-earmark-arrow-up fs-3"></i>
+    </button>
+    </div>
+
+    <div class="table-responsive">
+        <div class="card card-body m-3 p-3 mb-5 bg-white rounded align-middle">
+          <table id="employeereportformalist" class="table table-striped table-row-bordered gy-5 gs-7 ">
+            <thead>
+              <tr class="fw-bold fs-6 text-nowrap bg-lightblue text-blue table-header">
+                <th class="align-bottom">S.No</th>
+                <th>User Code</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>Father Name</th>
+                <th>Birth Date</th>
+                <th>Nationality</th>
+                <th>Education Level</th>
+                <th>Joining Date</th>
+                <th>Branch</th>
+                <th>Department</th>
+                <th>Designation</th>
+                <!-- <th>Category Address</th> -->
+                <!-- <th>Employment Type</th> -->
+                <th>Mobile</th>
+                <th>UAN</th>
+                <th>PAN</th>
+                <th>ESIC</th>
+                <th>LWF</th>
+                <th>AADHAAR</th>
+                <th>Account</th>
+                <th>Bank</th>
+                <th>Branch(IFSC)</th>
+                <th>Present Address</th>
+                <th>Permanent Address</th>
+                <!-- <th>Service Book</th> -->
+                <th>Exit Date</th>
+                <!-- <th>Exit Reason</th> -->
+                <!-- <th>Mark Identification</th> -->
+                <th>Photo</th>
+                <th>Signature</th>
+                <th>Remarks</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of employeereportformalist; let i=index;" class="align-bottom">
+                <td>{{i+1}}</td>
+                <td>{{data.user_code}}</td>
+                <td>{{data.user_firstname}}</td>
+                <td>{{data.user_lastname}}</td>
+                <td>{{data.employee_gender}}</td>
+                <td>{{data.father_name}}</td>
+                <td>{{data.employee_dob}}</td>
+                <td>{{data.nationality}}</td>
+                <td>{{data.employee_qualification}}</td>
+                <td>{{data.employee_joiningdate}}</td>
+                <td>{{data.branch_name}}</td>
+                <td>{{data.department_name}}</td>
+                <td>{{data.designation_name}}</td>
+                <!-- <td>{{data.category_address}}</td>
+                <td>{{data.employment_type}}</td> -->
+                <td>{{data.employee_mobileno}}</td>
+                <td>{{data.uan_no}}</td>
+                <td>{{data.pan_no}}</td>
+                <td>{{data.esi_no}}</td>
+                <td>{{data.LWF}}</td>
+                <td>{{data.Aadhar}}</td>
+                <td>{{data.ac_no}}</td>
+                <td>{{data.bank}}</td>
+                <td>{{data.bank_code}}</td>
+                <td>{{data.emp_address}}</td>
+                <td>{{data.emp_address}}</td>
+                <!-- <td>{{data.servicebookno}}</td> -->
+                <td>{{data.exit_date}}</td>
+                <!-- <td>{{data.reason_exit}}</td> -->
+                <!-- <td>{{data.mark_identification}}</td> -->
+                <td style="width:13%;">
+                  <img src="{{data.employee_photo}}" alt="" style="width:130%;height:55px;cursor:pointer;border-radius: 3px;">
+                </td>
+                <td style="width:9%;">
+                  <img src="{{data.employee_sign}}" alt="" style="width:90%;height:55px;cursor:pointer;border-radius: 3px;">
+                </td>
+                <td>{{data.remarks}}</td>
+                <td class="text-center text-nowrap">
+                  <button title="Photo" type="button" data-bs-toggle="modal" data-bs-target="#myModalphoto"
+                  class="btn btn-icon btn-sm bg-warning me-2 mb-2"
+                  (click)="openModalphoto(data.user_gid)">
+                  <i class="fa-solid fa-camera fs-6"></i>
+              </button>
+                  </td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </div>
+
+      <!-- The Modal Edit -->
+
+<form [formGroup]="reactiveFormadd" #form="ngForm">
+  <div class="modal mt-20" id="myModalphoto" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+
+        <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+          <div>
+            <h2 class="fw-bolder ms-5 mt-4" style="color: #ffffff;">Employee Photo and Signature</h2>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex flex-row mt-0 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"> <span class="font-bold required">Employee Image</span>
+              <div class="col-lg-10 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input style="width: 300%;" (change)="onChange4($event)" accept="image/*" formControlName = "employee_photo" type="file" #fileInput name="fName"
+                [ngStyle]="{ 'border-color': reactiveFormadd.get('employee_photo')?.hasError('required') && reactiveFormadd.get('employee_photo')?.touched || reactiveFormadd.get('employee_photo')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"/>
+                </div>
+                <div *ngIf="reactiveFormadd.get('employee_photo')?.hasError('required') && reactiveFormadd.get('employee_photo')?.touched"
+                class="text-red">Employee Image is required.</div>
+                <div *ngIf="invalidFileFormat" 
+                class="text-red">
+                Invalid file. Accept image only.
+              </div>
+            </div> 
+</div>
+
+<div class="d-flex flex-row mt-0 flex-wrap mt-2">
+<div class="col-12 col-lg-4 col-md-6 col-sm-12"> <span class="font-bold required">Employee Signature</span>
+  <div class="col-lg-10 col-12 col-md-11 col-sm-11 fv-row mt-2">
+    <input style="width: 300%;" (change)="onChange5($event)" accept="image/*"  formControlName = "employee_sign" type="file" #fileInput name="fName" 
+    [ngStyle]="{ 'border-color': reactiveFormadd.get('employee_sign')?.hasError('required') && reactiveFormadd.get('employee_sign')?.touched || reactiveFormadd.get('employee_sign')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"/>
+  </div>
+  <div *ngIf="reactiveFormadd.get('employee_sign')?.hasError('required') && reactiveFormadd.get('employee_sign')?.touched"
+  class="text-red">Employee Signature is required.</div>
+  <div *ngIf="invalidFileFormat1" 
+                class="text-red">
+                Invalid file. Accept image only.
+              </div>
+</div> 
+</div>
+
+<div class="text-center my-4">
+  <button type="submit" class="me-4 btn-success" (click)="onadd()" [disabled]="invalidFileFormat || invalidFileFormat1 || reactiveFormadd.invalid"
+  [ngClass]="{'primary-button': !reactiveFormadd.invalid, 'secondary-button': reactiveFormadd.invalid}"
+   data-bs-dismiss="modal">
+    <i class="fa fa-check fs-5"></i>&nbsp;Submit</button>
+
+    <button class="btn-danger btn-sm text-white ms-8 me-2 mt-5" (click)="onclose()" data-bs-dismiss="modal">
+      <i class="fas fa-close me-3"></i>Close
+    </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</form>

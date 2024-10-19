@@ -1,0 +1,195 @@
+<div class="card  mt-4">
+
+    <div class="row ms-3 mt-5 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title fw-bold">Revenue Category Summary</h3>
+        </div>
+
+        <div class="col me-5">
+            <button type="button" class="btn-primary btn-sm text-white me-4 float-end" data-bs-toggle="modal"
+                data-bs-target="#myModaladd">
+                <!-- <i class="fas fa-plus"></i> &nbsp;&nbsp;&nbsp; Add Revenue -->
+                <span class="fa-solid fa-plus text-white fs-6 fw-bold"></span>&nbsp;Add Revenue
+            </button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="revenue_list" class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th style="width:2%">S.No</th>
+                        <th>Revenue Code </th>
+                        <th>Revenue Name</th>
+                        <th>Revenue Description</th>
+                        <th class="text-center">Action </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr *ngFor="let data of revenue_list1; let i=index;">
+                        <td>{{i+1}}</td>
+                        <td>{{data.revenue_code}}</td>
+                        <td>{{data.revenue_name}}</td>
+                        <td>{{data.revenue_desc}}</td>
+
+                        <td class="text-center text-nowrap">
+                            <button title="Delete" type="button" (click)="openModaldelete(data.revenue_gid)"
+                                data-bs-toggle="modal" data-bs-target="#myModaldelete"
+                                class="btn btn-icon btn-sm bg-danger me-2"><span
+                                    class="fa-solid fa-trash text-white  fs-6"></span></button>
+                            <!-- <span (click)="toggleOptions(data.revenue_gid)" style="cursor: pointer;">
+                                <button class="btn me-2 p-1">
+                                    <span class="fa-solid fa-ellipsis-vertical fs-1" style="color: #4d4d4d;"></span>
+                                </button>
+                                <div *ngIf="showOptionsDivId === data.revenue_gid"
+                                    class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                                    
+                                    <div class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal"
+                                        data-bs-target="#myModaldelete" (click)="openModaldelete(data.revenue_gid)">
+                                        <span><i class="fa-regular fa-trash-can fs-3 me-6"></i></span>
+                                        <span>Delete</span>
+                                    </div>
+                                </div>
+                            </span> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- add -->
+<form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="modal" id="myModaladd" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+
+                <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                    <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+                            class="fas fa-plus fw-bolder fs-3"></i> &nbsp;&nbsp;Add Revenue </h2>
+
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row">
+                        <span class="font-bold ">Revenue Code</span>
+                        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                            <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input type="text"
+                                    class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                    name="Revenue Code" readonly placeholder="Auto Generate" />
+                            </div>
+
+
+
+                            <!-- <input  type="text" class="
+                            form-control form-control-lg form-control-solid
+                            custom-input
+                            mb-3 mb-lg-0
+                            bg-white
+                            custom-input
+                          "   name="Revenue Code" readonly placeholder="Auto Generate"/> -->
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row"><span class="font-bold" [ngClass]="{'error_input_field': revenue_name.invalid && revenue_name.touched || revenue_name.errors?.['pattern'] }">Revenue Name<span class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+
+                            <input formControlName="revenue_name" type="text" class="
+                                             form-control form-control-lg form-control-solid
+                                             custom-input
+                                             mb-3 mb-lg-0
+                                             bg-white
+                                             custom-input
+                                           " [ngStyle]="{
+                                             'border-color':
+                                             revenue_name.invalid && revenue_name.touched
+                                                 ? 'red'
+                                                 : 'rgb(209, 209, 209)'
+                                           }" name="revenue_name" required
+                                placeholder="Enter Revenue Name" />
+                        </div>
+
+                    </div>
+                    <!-- <div *ngIf="revenue_name.invalid && (revenue_name.dirty || revenue_name.touched)">
+                        <div *ngIf="revenue_name.errors?.['required']">
+                            <span style="color:red;">Revenue Name is required.</span>
+                        </div>
+                    </div>
+                    <div *ngIf="revenue_name.invalid && (revenue_name.dirty || revenue_name.touched)">
+                        <div *ngIf="revenue_name.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format.</span>
+                        </div>
+                    </div> -->
+                    <br>
+                    <div class="row"><span class="font-bold" [ngClass]="{'error_input_field': revenue_desc.invalid && revenue_desc.touched || revenue_desc.errors?.['pattern'] }">Revenue Description<span
+                                class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+
+                            <input formControlName="revenue_desc" type="text" class="
+                                             form-control form-control-lg form-control-solid
+                                             custom-input
+                                             mb-3 mb-lg-0
+                                             bg-white
+                                             custom-input
+                                           " [ngStyle]="{
+                                             'border-color':
+                                             revenue_desc.invalid && revenue_desc.touched
+                                                 ? 'red'
+                                                 : 'rgb(209, 209, 209)'
+                                           }" pattern="^(?!\s*$).+" name="revenue_desc" required
+                                placeholder="Enter Revenue Description" />
+                        </div>
+
+                    </div>
+                    <!-- <div *ngIf="revenue_desc.invalid && (revenue_desc.dirty || revenue_desc.touched)">
+                        <div *ngIf="revenue_desc.errors?.['required']">
+                            <span style="color:red;">Revenue Description is required.</span>
+                        </div>
+                    </div>
+                    <div *ngIf="revenue_desc.invalid && (revenue_desc.dirty || revenue_desc.touched)">
+                        <div *ngIf="revenue_desc.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format.</span>
+                        </div>
+                    </div> -->
+                    <br>
+                    <!-- Modal footer -->
+                    <div class="text-center my-4">
+                        <button (click)="onsubmit()" [disabled]="reactiveForm.invalid"
+                            [ngStyle]="{ 'cursor': reactiveForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !reactiveForm.invalid,
+                        'btn-secondary text-white': reactiveForm.invalid }" data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+                        </button> &nbsp;&nbsp;
+                        <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+                            <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="modal" id="myModaldelete" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="text-center my-4">
+                <h2><b>Are you sure?</b></h2>
+                <br>
+                <p style="display: block;">Do You Want To Delete the Record ?</p><br>
+                <div class="text-center my-4">
+                    <button class="btn-danger btn-sm text-white me-4" (click)="ondelete()" data-bs-dismiss="modal">
+                        <i class="fas fa-trash text-white fs-5 "></i> &nbsp;Delete
+                    </button>&nbsp;
+                    <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white"></i> &nbsp;Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>

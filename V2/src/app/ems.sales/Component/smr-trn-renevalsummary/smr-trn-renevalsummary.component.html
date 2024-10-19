@@ -1,0 +1,172 @@
+<div class="card shadow-sm">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="row mt-4">
+          <div class="col-lg-3 col-md-2 col-sm-2">
+            <div class="col ms-2">
+              <h2 class="card-title fw-bolder">Renewal Management</h2>
+            </div>
+          </div>
+        <div class="col">
+          <button type="button"  (click)="add()" class="btn-primary btn-sm text-white me-2 float-end" data-bs-toggle="modal"
+            data-bs-target="#myModaladd" >
+        &nbsp;&nbsp;Create Agreement
+          </button>
+        </div>
+       </div>
+    </div>
+    
+    <div class="tab-content" >
+            <div class="border rounded table-responsive m-5 mt-2">
+                <table id="renewalsummary_list2" class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                    <thead>
+                        <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                            <th style="width: 1%;">S.No</th>
+                            <th class="text-nowrap" > Renewal Date</th>
+                            <th style="width:25%" >Customer</th>
+                            <th  class="text-nowrap">Contact Details</th>
+                            <th class="text-nowrap">Renewal Type</th>
+                            <th style="text-align: right;">Order Value</th>
+                            <!-- <th  class="text-nowrap">Details</th>  -->
+                            <th  class="text-nowrap">Created Date</th>
+                            <th  class="text-nowrap">Duration</th>
+                            <th hidden>renewal gid</th>    
+                            <th class="text-center">Action</th>  
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of renewalsummary_list2; let i=index;" class="align-middle">
+                            <td >{{i+1}}</td>
+                            <td class="text-nowrap">{{data.renewal_date}}</td>
+                            <td style="width:25%">{{data.customer_name}}</td>
+                            <td  class="text-nowrap">{{data.contact_details}}</td>
+                            <td class="text-nowrap" >{{data.renewal}}</td>
+                            <td style="text-align: right;">{{data.Grandtotal}}</td>
+                            <!-- <td class="text-center text-nowrap">
+                                <label title="Details" data-bs-toggle="modal" data-bs-target="#myModalDetails"
+                                (click)="GetViewrenewaldetails(data.renewal_gid)">
+                                  <i class="fas fa-question-circle fa-5x text-primary fs-2"></i>
+                                </label>
+                            </td> -->
+                            <td class="text-nowrap">{{data.salesorder_date}}</td>
+                            <td class="text-nowrap">{{data.duration}}</td>
+                            <td hidden>{{data.renewal_gid}}</td>
+                            <td class="text-center text-nowrap">
+                                
+                                <button title="Assign Team"  data-bs-toggle="modal" (click)="openModalasssign(data.renewal_gid)"
+                                type="button" data-bs-target="#myModalemployee" class="btn btn-icon btn-sm  me-2"
+                                style="background-color:#035AA6;"><i class="fa fa-users"
+                                    style="font-size:16px;"></i>
+                                </button> 
+                                <button title="View" type="button" class="btn btn-icon btn-sm bg-primary me-2"
+                                (click)="onview(data.renewal_gid)"   data-bs-toggle="modal"><span class="fa-solid fa-eye text-white fs-6"></span></button>
+                                <button title="Edit" type="button" class="btn btn-icon btn-sm bg-etdark me-2"
+                                (click)="onEdit(data.renewal_gid)"   data-bs-toggle="modal"><span class="fa-solid fa-pencil text-white fs-6"></span></button>
+
+                                
+                                <button title="Raise Invoice" type="button" class="btn btn-icon
+                               btn-sm bg-warning me-2"(click)="RaisetoOrder(data.renewal_gid)" >
+                              <span class="fas fa-file-invoice  fs-6"></span>
+                          </button>
+                          <button title="Drop" type="button" class="btn btn-icon btn-sm bg-danger me-2"
+                          data-bs-target="#myModalrenew"  (click)="openModalrenew(data.renewal_gid)"   
+                          data-bs-toggle="modal"><span class="fa-sharp fa-solid fa-ban fa-xl" ></span></button>      
+                              
+                                <span (click)="toggleOptions(data.renewal_gid)" style="cursor: pointer;">
+                                    <button class="btn me-2 p-1">
+                                      <span class="fa-solid fa-ellipsis-vertical fs-1" style="color: #4d4d4d;"></span>
+                                    </button>
+                                    <div *ngIf="showOptionsDivId === data.renewal_gid"
+                                      class="pb-0 rounded bg-white cursor-pointer icon_menu">
+
+                                      <div *ngIf="data.renewal == 'Agreement'" class="d-flex p-3 pb-3 Icon_hover" (click)="Invoicetotag(data.renewal_gid)" >
+                                        <span class="fas fa-file-invoice  fs-6"></span>&nbsp;&nbsp;
+                                        <span>Invoice Tag</span>
+                                      </div>
+                                      <div class="d-flex p-3 pb-3 Icon_hover" (click)="openModaldelete(data.renewal_gid)"
+                                         data-bs-target="#myModaldelete" data-bs-toggle="modal"  >                  
+                                        <span class="fas fa-trash  fs-6"></span>&nbsp;&nbsp;
+                                        <span>Delete</span>
+                                      </div> 
+                                      
+                                    </div>
+                                  </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+       
+    </div>
+    
+    <div class="modal" id="myModaldelete" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="text-center my-4">
+                <h2><b>Are you sure?</b></h2>
+                <br>
+                <p style="display: block;">Do You Want to Delete the Record ?</p>
+            <div class="text-center my-4">
+                <button class="btn-danger btn-sm text-white me-4" (click)="ondelete()" data-bs-dismiss="modal" >          
+                    <i class="fas fa-trash text-white fs-5  "></i> &nbsp;Delete
+                </button>
+                <button class="btn-primary btn-sm text-white me-2"  data-bs-dismiss="modal">
+                    <i class="fas fa-close text-white"></i> &nbsp;Close
+                    </button>&nbsp;
+            </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    
+<div class="modal fade" id="myModalDetails" tabindex="-1" data-bs-backdrop='static' aria-labelledby="editamlcategoryLabel" aria-hidden="true" data-bs-keyboard="false">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content  d-flex justify-content-center">
+            <div class="card-header p-1 pb-1 pt-1 rounded-top bg-primary" style="display: flex; align-items: center; height: 40px;">
+                <h3 Style="color: white; font-weight: bold; text-align: left; width: 100%; margin-left: 10px;">Product Details</h3>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 col-lg-3 col-md-6 col-lg-12"  >
+                    <table class="table table-striped table-bordered table-hover table-sm table-responsive">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Product Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of Viewrenewaldetail_list; let i=index;">
+                                <td class="px-0">{{i+1}}</td>
+                                <td>{{data.product_name}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center my-4">
+                    <button class="btn-danger btn-sm text-white me-2" data-bs-dismiss="modal" style="background-color: red;">
+                    <i class="fas fa-close text-white"></i> &nbsp;Close
+                    </button>&nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+<div class="modal" id="myModalrenew" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="text-center my-4">
+            <h2><b>Are you sure?</b></h2>
+            <br>
+            <p style="display: block;">Do You Want to drop the Record ?</p>
+          <div class="text-center my-4">
+            <button class="btn-danger btn-sm text-white me-4" (click)="ondrop()" data-bs-dismiss="modal" >          
+                <i class="fa-solid fa-sharp fa-ban fa-xl text-white fs-5 "></i> &nbsp;Drop
+            </button>
+            <button class="btn-primary btn-sm text-white me-2"  data-bs-dismiss="modal">
+                <i class="fas fa-close text-white"></i> &nbsp;Close
+            </button>&nbsp;
+          </div>
+        </div>
+        </div>
+    </div>
+</div>

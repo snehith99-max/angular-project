@@ -1,0 +1,198 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="row d-flex">
+            <div class="col-8">
+                <h3 class="card-title">Branch Management</h3>
+            </div>
+            <div class="col-4">
+                <h3 class="card-title float-end">Total Products:{{total_products}}&nbsp;</h3>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                <table id="branchsum_list" class="table table-striped table-row-bordered border-bottom gs-7">
+                    <thead>
+                        <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue text-center">
+                            <th>S.No</th>
+                            <th class="text-nowrap">Branch Code </th>
+                            <th class="text-center">Branch Name</th>
+                            <!--<th class="text-center">Branch Location</th> -->
+                            <th class="text-center">Assigned Product</th>
+                            <th class="text-center">Shop</th>
+                            <th class="text-center">Action</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of branchsum_list; let i=index;" class="text-center">
+                            <td>{{i+1}}</td>
+                            <td class="text-nowrap">{{data.branch_code}}</td>
+                            <td class="text-nowrap ">{{data.branch_name}}</td>
+                            <!-- <td class="text-nowrap ">{{data.branch_location}}</td> -->
+                            <td class="align-middle text-center">
+                                <a class="ms-6 count font-bold">{{data.assignedproduct}}</a>
+                            </td>
+                            <td class="text-center">
+                                <ng-container>
+                                    <div *ngIf="data.cart_status ==='Y'"
+                                      class="form-check form-switch d-flex justify-content-center align-items-center ">
+                                      <input class="form-check-input form-switch text-center text-nowrap slider " type="checkbox" role="switch"
+                                        title="Shop" (click)="toggleswitch('N',data.branch_gid)"  id="flexSwitchCheckDefault" style=" background-color: #2ec049;">
+                                    </div>
+                                    <div *ngIf="data.cart_status ==='N'"
+                                      class="form-check form-switch d-flex justify-content-center align-items-center ">
+                                      <input class="form-check-input form-switch text-center text-nowrap slider " type="checkbox" role="switch"
+                                        title="Shop" (click)="toggleswitch('Y',data.branch_gid)" id="flexSwitchCheckDefault" style=" background-color: #cea82a;">
+                                    </div>
+                                  </ng-container>
+                            </td>
+                            <td class="text-nowrap">
+                                <button title="Assign Product" type="button" (click)="WaAssignProduct(data.branch_gid)"
+                                    class="btn btn-icon btn-sm bg-primary me-2" style="height: 10px !important;"><span
+                                        class="fas fa-cart-plus fs-3"></span></button>
+                                <button title="Set Price" type="button" (click)="Waupdateprice(data.branch_gid)"
+                                    class="btn btn-icon btn-sm bg-view me-2" style="height: 10px !important;"><span
+                                        class="fa-solid fa-pen-to-square fs-3"></span></button>
+                                <button title="WhatsApp Product" type="button" (click)="WaProduct(data.branch_gid)"
+                                    class="btn btn-icon btn-sm bg-edit me-2" style="height: 10px !important;"><i
+                                        class="fa-brands fa-whatsapp fs-3 "></i></button>
+                                <button title="Phone"  type="button" data-bs-toggle="modal"
+                                    data-bs-target="#mymodelnumberupdate" class="btn btn-icon btn-sm bg-primary me-2"
+                                    (click)="openModalupdate(data)" style="height: 10px !important;"><i
+                                        class="fa-solid fa-phone fs-3 "></i></button>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="mymodelnumberupdate" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="card-header pb-3 pt-6  rounded-top bg-primary">
+                <div>
+                    <h3 class="fw-bolder text-white"><i class="fa-solid fa-phone fs-3 ms-2 "></i>&nbsp;Update Mobile
+                        Number</h3>
+                </div>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form [formGroup]="formmobileconfig" #form="ngForm">
+                    <div class="row">
+                        <input class="form-control form-control-lg" formControlName="branch_gid" hidden type="text"
+                            aria-label=".form-control-lg example" autocomplete="off" required style="height:40px;">
+                        <div class="col-6">
+                            <div class="row">
+                                <span class="font-bold required">Manager Number</span>
+                                <div class="col-lg-12 col-md-12 col-sm-12 fv-row mb-2 mt-2 d-flex">
+                                    <input type="text" formControlName="manager_number"
+                                        placeholder="Enter With Country Code"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 bg-white borderc-secondary custom-input"
+                                        name="manager_number" style="height:40px;" />
+                                </div>
+                                <div
+                                    *ngIf="formmobileconfig.get('manager_number')?.hasError('required') && formmobileconfig.get('manager_number')?.touched">
+                                    <span class=" text-red">Mobile number is required</span>
+                                </div>
+                                <div *ngIf="formmobileconfig.get('manager_number')?.hasError('pattern')">
+                                    <span class="text-red">Invalid number format</span>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <span class="font-bold required">Send Message</span>
+                                <div class="d-flex justify-content-start mt-4 ms-2">
+                                    <div
+                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                                        <input class="form-check-input" type="radio" name="msgsend_manger"
+                                            formControlName="msgsend_manger" value="Y" />
+                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                            for="msgsend_manger">Yes</label>
+                                    </div>
+                                    <div
+                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+                                        <input class="form-check-input" type="radio" name="msgsend_manger"
+                                            formControlName="msgsend_manger" value="N" />
+                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                            for="msgsend_manger">No</label>
+                                    </div>
+                                </div>
+                                <div
+                                    *ngIf="formmobileconfig.get('msgsend_manger')?.hasError('required') && formmobileconfig.get('msgsend_manger')?.touched">
+                                    <span class=" text-red">Required Field</span>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col-6">
+                            <div class="row">
+                                <span class="font-bold">Owner Number</span>
+                                <div class="col-lg-12 col-md-12 col-sm-12 fv-row mb-2 mt-2 d-flex">
+                                    <input type="text" formControlName="owner_number"
+                                        placeholder="Enter With Country Code"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 bg-white borderc-secondary custom-input"
+                                        name="owner_number" style="height:40px;" />
+                                </div>
+                                <div *ngIf="formmobileconfig.get('owner_number')?.hasError('pattern')">
+                                    <span class="text-red">Invalid number format</span>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <span class="font-bold">Send Message</span>
+                                <div class="d-flex justify-content-start mt-4 ms-2">
+                                    <div
+                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                                        <input class="form-check-input" type="radio" name="msgsend_owner"
+                                            formControlName="msgsend_owner" value="Y" />
+                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                            for="msgsend_owner">Yes</label>
+                                    </div>
+                                    <div
+                                        class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+                                        <input class="form-check-input" type="radio" name="msgsend_owner"
+                                            formControlName="msgsend_owner" value="N" />
+                                        <label class="form-check-label text-gray-700 text-nowrap"
+                                            for="msgsend_owner">No</label>
+                                    </div>
+                                </div>
+                                <div
+                                    *ngIf="formmobileconfig.get('msgsend_manger')?.hasError('required') && formmobileconfig.get('msgsend_manger')?.touched">
+                                    <span class=" text-red">Required Field</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center my-4">
+                        <button class="me-4 btn-success" (click)="onupdatemobileconfig()"
+                            [disabled]="formmobileconfig.invalid"
+                            [ngClass]="{'primary-button': !formmobileconfig.invalid, 'secondary-button': formmobileconfig.invalid}"
+                            data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>
+                            <span class="ms-3">Update</span>
+                        </button>
+                        <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+                            <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="text-center my-4">
+
+            </div>
+        </div>
+    </div>
+</div>

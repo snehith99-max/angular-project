@@ -1,0 +1,22 @@
+.sample {
+    width: 10px;
+}
+.orderhover:hover {
+    background-color: #d8daf8;
+}
+.custom-tbody {
+    overflow-y: auto;
+    height: 300px;
+}
+
+.custom-tbody1 {
+    overflow-y: auto;
+    height: 290px;
+}
+.table thead th {
+    position: sticky;
+    top: 0;
+    background: #def0ff; /* Background color of the header */
+    z-index: 0;
+    border-bottom: 2px solid #ddd;
+  }

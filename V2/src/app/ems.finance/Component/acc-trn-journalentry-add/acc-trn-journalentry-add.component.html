@@ -1,0 +1,235 @@
+<div class="card m-4">
+    <div class="card-header bg-primary" style="height:10px">
+        <div class="card-title m-0 ">
+            <h3 class="fw-bolder text-white"> <i class="fas fa-plus"></i> &nbsp;&nbsp;&nbsp;Add Journal</h3>
+        </div>
+    </div>
+    <form [formGroup]="reactiveform" (ngSubmit)="onsubmit()">
+       
+        <div class="d-flex flex-row m-6 flex-wrap">
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><b>Reference Number</b>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" style="height: 40px;" readonly class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input
+                       " placeholder="Auto Generated" class="form-control"
+                        />
+                </div>
+                <!-- <div *ngIf="bank_code.invalid && (bank_code.dirty || bank_code.touched)">
+                    <div *ngIf="bank_code.errors?.['required']">
+                        <span style="color:red;">Bank Code is required.</span>
+                    </div>
+                    <div *ngIf="bank_code.errors?.['pattern']">
+                        <span style="color:red;">Bank Code is required.</span>
+                    </div>
+                </div> -->
+
+            </div>
+      
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                <b>Transaction Date</b><span style="color: red;">*</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="date" pattern="^(?!\s*$).+"   style="height: 40px;"
+                        [ngStyle]="{ 'border-color': reactiveform.get('created_date')?.hasError('required') && reactiveform.get('created_date')?.touched ? 'red' : 'rgb(209, 209, 209)' , 'height': '42px'}"
+                        formControlName="created_date"
+                        class="form-control form-control-lg form-control-solid date-picker custom-input mb-3 mb-lg-0 bg-white custom-input date-picker mt-2"
+                        placeholder="DD-MM-YYYY" />
+                    
+                    </div>
+                <div *ngIf="created_date.invalid && (created_date.dirty || created_date.touched)">
+                    <div *ngIf="created_date.errors?.['required']">
+                        <span style="color:red;">Date is required.</span>
+                    </div>
+                    <div *ngIf="created_date.errors?.['pattern']">
+                        <span style="color:red;">Invalid date format.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><b>Branch Name</b><span style="color: red;">*</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <ng-select
+                        class="form-select form-control-lg bg-white form-select-lg borderc-secondary custom-input select2"
+                        formControlName="branch_name" required
+                        class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="branch_name"
+                        bindValue="branch_gid" [items]="branchname_list" placeholder="Select an option"
+                        [ngClass]="{'invalid-border': branch_name.invalid && branch_name.touched}" [(ngModel)]="mdlBranchName"></ng-select>
+                </div>
+                <div *ngIf="branch_name.invalid && (branch_name.dirty || branch_name.touched)">
+                    <div *ngIf="branch_name.errors?.['required']">
+                        <span style="color:red;">Branch Name is required.</span>
+                    </div>
+                    <div *ngIf="branch_name.errors?.['pattern']">
+                        <span style="color:red;">Branch Name is required.</span>
+                    </div>
+                </div>
+
+            </div>
+          
+
+           
+        </div>
+        <div class="d-flex flex-row m-6 flex-wrap">            
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12"><b>Remarks</b>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+                        <textarea type="text"   style="height: 40px;"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0  borderc-secondary bg-white custom-input"
+                            placeholder="" formControlName="remarks" class="form-control"></textarea>
+                    </div>
+                </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><b>Document Upload</b>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="file"   accept=".xlsx,image/png, image/jpeg,.docx,.pdf,.txt,"  style="height: 40px;"  (change)="onChange2($event)" 
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                        />
+                        
+                </div>
+              
+            </div>
+           
+            
+          
+        </div>
+        <div class="d-flex flex-row m-6 flex-wrap">   
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+            </div>   
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+            </div>        
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                <button type="button" (click)="addjournal()" class="btn-primary btn-sm text-white me-4 float-end" style="margin-top: -23px;">
+                    <i class="fas fa-plus"></i>&nbsp; Add Account 
+                </button>
+            </div>
+        </div>
+        <div  style="margin-left:10px ;width:98%;margin-top: -10px;" >  
+            <table   class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+              <thead >
+                <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                    <!-- <td>Sl.No</td> -->
+                  <th>Account Group <span style="color: red;">*</span></th>
+                  <th>Account Name <span style="color: red;">*</span></th>
+                  <th>Debit Amount <span style="color: red;">*</span></th>
+                  <th>Credit Amount<span style="color: red;">*</span></th>
+                  <th>Particulars</th>
+                  <th class="align-center">Action</th>
+                </tr>
+              </thead>
+              <tbody formArrayName="details">
+
+                <tr  *ngFor="let item of details.controls;let i=index" [formGroupName]="i">
+                  <!--Product Group Dropdown-->
+                  <!-- <td>{{i+1}}</td> -->
+                  <td>
+                    <div class="col-lg-36 col-12 col-md-30 col-sm-30 fv-row mt-2">
+                      <ng-select  [items]="accountgroup_list" required    (change)="changeaccountgroup(i)"
+                      class="form-select form-control-lg bg-white form-select-lg borderc-secondary custom-input select2"
+                      class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2"   [ngClass]="{'invalid-border': accountGroup(i).invalid && accountGroup(i).touched}" bindValue="account_gid" formControlName="accountGroup"  bindLabel="account_name"
+                        placeholder="Select an option"
+                       ></ng-select>
+                    </div>
+                    <div *ngIf="accountGroup(i)?.invalid && (accountGroup(i)?.dirty || accountGroup(i)?.touched)">
+                        <div *ngIf="accountGroup(i)?.errors?.['required']">
+                            <span style="color:red;">Account Group is required.</span>
+                        </div>
+                    </div>
+                  </td>
+                  <!--Product Code-->
+                  <td>
+                    <div class="col-lg-15 col-11 col-md-13 col-sm-13 fv-row mt-2">
+                        <ng-select  [items]="accountname_list" required
+                        class="form-select form-control-lg bg-white form-select-lg borderc-secondary custom-input select2"
+                        class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2"   [ngClass]="{'invalid-border': accountName(i).invalid && accountName(i).touched}" bindValue="account_gid"  formControlName="accountName"   bindLabel="account_name"
+                        placeholder="Select an option"
+                       ></ng-select>
+                    </div>
+                    <div *ngIf="accountName(i)?.invalid && (accountName(i)?.dirty || accountName(i)?.touched)">
+                        <div *ngIf="accountName(i)?.errors?.['required']">
+                            <span style="color:red;">Account Name is required.</span>
+                        </div>
+                    </div>
+                   
+                  </td>
+                  <!--Product Name-->
+                  <td>
+                    <div class="col-lg-18 col-11 col-md-13 col-sm-13 fv-row mt-2">
+
+                      <input type="text" style="height: 40px;" [ngStyle]="{
+                        'border-color':
+                        debitAmount(i).invalid && debitAmount(i).touched
+                            ? 'red'
+                            : 'rgb(209, 209, 209)'
+                      }" pattern="^(?!\s*$).+"   (input)="onDebitAmountChange(i)" formControlName="debitAmount" class="form-control text-end"
+                        id="debitAmount" placeholder="" />
+                    <div *ngIf="debitAmount(i).invalid && (debitAmount(i).dirty || debitAmount(i).touched)">
+                        <div *ngIf="debitAmount(i).errors?.['required']">
+                            <span style="color:red;">Debit Amount is required.</span>
+                        </div>
+                        <div  *ngIf="debitAmount(i).errors?.['pattern']">
+                            <span style="color:red;">Invalid Debit Amount Format.</span>
+                        </div>
+                    </div>
+
+                    </div>
+                  </td>
+                  <!--Unit-->
+                  <td>
+                    <div class="col-lg-18 col-11 col-md-13 col-sm-13 fv-row mt-2">
+
+                        <input type="text" style="height: 40px;"  (input)="onCreditAmountChange(i)" [ngStyle]="{
+                            'border-color':
+                            creditAmount(i).invalid && creditAmount(i).touched
+                                ? 'red'
+                                : 'rgb(209, 209, 209)'
+                          }" pattern="^(?!\s*$).+"  formControlName="creditAmount" class="form-control text-end"
+                            id="creditAmount" placeholder="" />
+                        <div *ngIf="creditAmount(i).invalid && (creditAmount(i).dirty || creditAmount(i).touched)">
+                            <div *ngIf="creditAmount(i).errors?.['required']">
+                                <span style="color:red;">Credit Amount is required.</span>
+                            </div>
+                            <div  *ngIf="creditAmount(i).errors?.['pattern']">
+                                <span style="color:red;">Invalid Credit Amount Format.</span>
+                            </div>
+                        </div>          
+                      </div>
+                  </td>
+
+                  <!--Requested Quantity-->
+                  <td>
+                    <div class="col-lg-18 col-11 col-md-13 col-sm-13 fv-row mt-2">
+                        <textarea type="text"  formControlName="particulars"  style="height: 40px;"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0  borderc-secondary bg-white custom-input"
+                            placeholder="" class="form-control"></textarea>
+                     </div>
+                  </td>
+
+                  <td class="text-center text-nowrap">
+                    <button title="Add" type="button" (click)="Removejournal(i)" class="btn btn-icon btn-sm bg-danger me-2"
+                     >
+                      <span class="fa-solid fa-trash text-white  fs-6"></span></button>
+                  </td>
+                </tr>
+              </tbody>
+
+
+           </table>
+        </div> 
+        <br><br>                  
+        <div class="text-center my-4">
+                <button [disabled]="reactiveform.invalid"
+                        [ngStyle]="{ 'cursor': reactiveform.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !reactiveform.invalid,
+                'btn-secondary text-white': reactiveform.invalid }" data-bs-dismiss="modal">
+                        <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+                    </button> &nbsp;&nbsp;             
+            <button class="btn-primary btn-sm text-white me-4" (click)="redirecttolist()">
+                <i class="ki-duotone ki-entrance-right fs-5">
+                    <i class="path1"></i>
+                    <i class="path2"></i>
+                </i>&nbsp;Back</button>  
+                <br><br>     
+        </div>              
+    </form>
+    <div>
+
+    </div>
+</div>
+    

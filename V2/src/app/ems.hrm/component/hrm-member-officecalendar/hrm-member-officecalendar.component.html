@@ -1,0 +1,140 @@
+<div class="card card-bordered">
+  
+  <div class="card-title p-5 pb-3 pt-3 rounded-top bg-primary d-flex justify-content-between align-items-center">
+    <h1 class="fw-bolder text-white fs-2">Office Calendar</h1>
+    <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer " title="Back"
+      routerLink="/hrm/HrmTrnMemberdhashboard"><i class="fa-solid fa-arrow-left-long fs-1 fw-bold"></i></button>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="submit-button ms-5 mt-5">
+      <button type="button" class="btn-primary btn-text" data-bs-toggle="modal" data-bs-target="#officecalendar1">
+        <i class="fa fa-hand-point-right"></i>
+        <span class="btn-text ms-3">Create Event</span>
+      </button>
+    </div>
+   
+  </div>
+  <br>
+
+  <div class="calendar-container"
+    style="width: 100%; padding: 20px; box-sizing: border-box; overflow: hidden; position: relative;">
+    <full-calendar #calendar [options]="calendarOptions"
+      style="width: 100%; height: 100%; display: block; position: relative;"></full-calendar>
+  </div>
+
+  <div class="modal fade" id="officecalendar" tabindex="-1">
+  </div>
+
+</div>
+
+<form [formGroup]="createeventform" #form="ngForm">
+  <div class="modal" id="officecalendar1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="card-header pb-3 pt-6  rounded-top bg-primary">
+          <div>
+            <h3 class="fw-bolder text-white">&nbsp; <i class="fas fa-plus"></i>&nbsp;&nbsp;Create Event</h3>
+          </div>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+
+          <div class="row">
+
+            <div class="col-lg-6 col-md-6 col-sm-6 fv-row">
+              <span class="fw-bold">Event Date<span class="ms-1 text-red">*</span></span>
+              <input formControlName="event_date" type="text"
+                class="form-control form-control-lg form-control-solid date-picker custom-input bg-white"
+                placeholder="DD-MM-YYYY" name="event_date" required style="height:40px;" />
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 fv-row">
+              <span class="fw-bold">Event Time</span>
+              <input formControlName="event_time" type="time"
+                class="form-control form-control-lg form-control-solid custom-input bg-white" placeholder="Event Time"
+                name="event_time" required style="height:40px;" />
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <span class="fw-bold">Event Name</span>
+            <div class="col-lg-12  col-md-12 col-sm-12 fv-row mt-2">
+              <input formControlName="event_title" type="text"
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                placeholder="Enter Event Name" name="event_title" required style="height:40px;" />
+            </div>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="text-center my-4">
+          <button title="submit" class="btn-success text-white me-4" data-bs-dismiss="modal" (click)="createeventsubmit()"
+            [disabled]="createeventform.invalid">
+            <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+          </button> &nbsp;&nbsp;
+          <button title="close" class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white"></i> &nbsp;Close
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- update event form -->
+<form [formGroup]="updateEventForm" #form="ngForm">
+  <div class="modal" id="updateEventModal" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="card-header  pb-3 pt-6 rounded-top bg-primary">
+          <div class=" d-flex justify-content-between align-items-center">
+            <h3 class="fw-bolder text-white">&nbsp;&nbsp;Event Updates</h3>
+            <i title="delete event" class="fa-regular fa-trash-can text-white" style="font-size:15px; cursor: pointer;"
+              data-bs-dismiss="modal"
+              (click)="deleteevent(this.updateEventForm.value.reminder_gid)">&nbsp;&nbsp;&nbsp;&nbsp;</i>
+          </div>
+
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="row">
+            <input type="hidden" formControlName="reminder_gid">
+            <div class="col-lg-6 col-md-6 col-sm-6 fv-row">
+              <span class="fw-bold">Event Date<span class="ms-1 text-red">*</span></span>
+              <input formControlName="event_date" type="text"
+                class="form-control form-control-lg form-control-solid date-picker custom-input bg-white"
+                placeholder="DD-MM-YYYY" name="event_date" required style="height:40px;" />
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 fv-row">
+              <span class="fw-bold">Event Time</span>
+              <input formControlName="event_time" type="time"
+                class="form-control form-control-lg form-control-solid custom-input bg-white" placeholder="Event Time"
+                name="event_time" required style="height:40px;" />
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <span class="fw-bold">Event Name</span>
+            <div class="col-lg-12  col-md-12 col-sm-12 fv-row mt-2">
+              <input formControlName="event_title" type="text"
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                placeholder="Enter Event Name" name="event_title" required style="height:40px;" />
+            </div>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="text-center my-4">
+          <button title="update" class="btn-success text-white me-4" data-bs-dismiss="modal" (click)="updateEvent()"
+            [disabled]="updateEventForm.invalid">
+            <i class="fas fa-check text-white fs-5 "></i> &nbsp;Update
+          </button> &nbsp;&nbsp;
+          <button title="close" class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white"></i> &nbsp;Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

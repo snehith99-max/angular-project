@@ -1,0 +1,86 @@
+<div class="card">
+    <div class="ms-3 mt-3 d-flex align-items-center ">
+        <div class="col">
+            <h3 class="card-title">Arbitration</h3>
+        </div>
+        <div class="col me-5">
+            <button title="Add Arbitration" class="btn-primary btn-sm text-white me-4 mb-2 mt-2 float-end"
+            routerLink="/law/LawTrnArbitrationadd">
+                <i class="fas fa-plus"></i> &nbsp;&nbsp;
+                Add Arbit</button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="ArbitrationSummary" class="table table-striped table-row-bordered border-bottom gs-7">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+
+                        <th (click)="sortColumn('sno')"  >S.No<i class="fa ms-2"
+                            [ngClass]="getSortIconClass('sno')"></i>
+                          </th>
+                          <th (click)="sortColumn('Date')">Date<i class="fa ms-2"
+                            [ngClass]="getSortIconClass('Date')"></i>
+                        </th>
+                        <th (click)="sortColumn('Code')">Arbit No<i class="fa ms-2"
+                                [ngClass]="getSortIconClass('Code')"></i>
+                        </th>
+                        <th (click)="sortColumn('type')">Arbit Type<i class="fa ms-2"
+                            [ngClass]="getSortIconClass('type')"></i>
+                        </th>
+                        <th (click)="sortColumn('Institute')">Institute<i class="fa ms-2"
+                            [ngClass]="getSortIconClass('Institute')"></i>
+                        </th>
+                        <th (click)="sortColumn('Arbit')">Arbit<i class="fa ms-2"
+                            [ngClass]="getSortIconClass('Arbit')"></i>
+                        </th>
+                        <th (click)="sortColumn('Arbitrator')">Arbitrator<i class="fa ms-2"
+                            [ngClass]="getSortIconClass('Arbitrator')"></i>
+                        </th>
+                        <th (click)="sortColumn('Createdby')">Created By<i class="fa ms-2"
+                            [ngClass]="getSortIconClass('Createdby')"></i>
+                        </th>
+                        <th (click)="sortColumn('Status')">Status<i class="fa ms-2"
+                            [ngClass]="getSortIconClass('Status')"></i>
+                        </th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let data of ArbitrationList; let i=index;" class="align-middle">
+                        <td>{{i+1}}</td>
+                        <td>{{data.arbitration_date}}</td>
+                        <td>{{data.arbitration_no}}</td>
+                        <td>{{data.arbit_type}}</td>
+                        <td>{{data.institute}}</td>
+                        <td>{{data.title}}</td>
+                        <td>{{data.arbitrator}}</td>
+                        <td>{{data.created_date}}</td>
+                        <td>{{data.Status}}</td>
+                        <!-- <td [ngSwitch]="data.Institute_status">
+                          <label *ngSwitchCase="'Active'" class="badge bg-success text-white ">Active</label>
+                          <label *ngSwitchCase="'InActive'" class="badge bg-danger text-white ">Inactive</label>
+                        </td> -->
+                         <td [ngSwitch]="data.Status" class="text-center text-nowrap ">
+                            <!-- <button title="View" type="button" class="btn btn-icon btn-sm bg-primary me-2"
+                                (click)="View(data)" data-bs-toggle="modal"
+                                data-bs-target="#viewmodal"><span
+                                    class="fa-solid fa-eye text-white fs-6"></span></button>
+                            <button [disabled]="data.Institute_status === 'InActive'" title="Edit" type="button"
+                                (click)="editInstitute(data)" class="btn btn-icon btn-sm bg-etdark me-2"
+                                data-bs-toggle="modal" data-bs-target="#Editmodal"><span
+                                    class="fa-solid fa-pencil text-white  fs-6"></span></button>
+                                    <button title="Active" type="button" class="btn btn-icon btn-sm bg-success me-2 " data-bs-target="#myModalactive" data-bs-toggle="modal" (click)="openModalactive(data)" [disabled]="data.Institute_status === 'Active'">
+                                      <span class="fa-solid  fa-thumbs-up text-white fs-6"></span>
+                                     </button> 
+                                     <button title="Inactive" type="button" class="btn btn-icon btn-sm bg-danger me-2 " data-bs-target="#myModalinactive" data-bs-toggle="modal" (click)="openModalinactive(data)" [disabled]="data.Institute_status === 'InActive'">
+                                      <span class="fa-solid  fa-thumbs-down text-white fs-6"></span>
+                                     </button>  -->
+                        </td> 
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

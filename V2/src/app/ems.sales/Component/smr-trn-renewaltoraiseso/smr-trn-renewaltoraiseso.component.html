@@ -1,0 +1,509 @@
+<div class="card m-5">
+    <div class="card-title p-2 rounded-top bg-primary d-flex justify-content-between align-items-center">
+      <h1 class="fw-bolder ms-3 text-white"><i class="fa fa-shopping-cart fs-2" aria-hidden="true"></i>&nbsp;&nbsp;Raise
+        Sales Order</h1>
+      <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer me-3"
+        routerLink="/smr/SmrTrnRenevalsummary"><i class="fa-solid fa-arrow-left text-blue mb-1"></i></button>
+    </div>
+  
+    <div class="card mt-1 m-3 mb-0">
+      <div class="card-header d-flex align-items-center mb-3 cursor-pointer" style="background-color: #def0ff;">
+        <div>
+          <p class="card-title fw-bold fs-3 " style="color: #2599ff;">
+            <i class="fa-solid fa-clipboard fs-1"></i> &nbsp;SO Details
+          </p>
+        </div>
+      </div>
+  
+      <div>
+        <input type="hidden" formControlName="tmpsalesorderdtl_gid">
+        <form [formGroup]="combinedFormData">
+         <div class="card p-4 border ms-5 me-5 mb-4">
+            <div class="row g-7 mt-0">
+              <div class="col-lg-4 col-12 mt-2">
+                <span class="font-bold">Branch</span>
+                <div class="col-12 fv-row mt-4">
+                  <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                    <input type="text" readonly
+                      class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white me-3"
+                      formControlName="branch_name" />
+                  </div>
+  
+                </div>
+              </div>
+              <div class="col-lg-4 col-12 mt-2">
+                <span class="font-bold">Order Ref. No</span>
+  
+                <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                  <input type="text" readonly
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white me-3"
+                    formControlName="so_referencenumber" placeholder="New Sales Order - Auto Generate" />
+                </div>
+              </div>
+              <div class="col-lg-4 col-12 mt-2">
+                <span class="font-bold">Order Date</span>
+                <div class="col-12 fv-row mt-4">
+                  <input type="date" pattern="^(?!\s*$).+"
+                    [ngStyle]="{ 'border-color': combinedFormData.get('salesorder_date')?.hasError('required') && combinedFormData.get('salesorder_date')?.touched ? 'red' : 'rgb(209, 209, 209)' , 'height': '42px'}"
+                    formControlName="salesorder_date"
+                    class="form-control form-control-lg form-control-solid date-picker custom-input mb-3 mb-lg-0 bg-white custom-input date-picker mt-2"
+                    placeholder="DD-MM-YYYY" />
+                </div>
+              </div>
+            </div>
+  
+            <div class="row g-7 mt-1">
+  
+              <div class="col-lg-4 col-12 mt-2">
+                <span class="font-bold">Customer</span>
+                <div class="col-12 fv-row mt-4">
+                  <input type="text" readonly
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white me-3"
+                    formControlName="customer_name" />
+                    <div class="col-lg-12 col-12 mt-2">                   
+                      <div class="col-12 fv-row mt-4">                      
+                        <textarea type="text" readonly    class="form-control mt-4 form-control-lg form-control-solid bg-secondary custom-input mb-1 mb-lg-2 border-secondary bg-white custom-input"
+                          placeholder="Customer Details" formControlName="customer_details" class="form-control" rows="4"></textarea>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-12 mt-2">
+                <span class="font-bold">Bill To</span>
+                <div class="col-12 fv-row mt-4">
+                  
+                  <textarea type="text" 
+                    class="form-control mt-4 form-control-lg form-control-solid bg-secondary custom-input mb-1 mb-lg-2 border-secondary bg-white custom-input"
+                    placeholder="Bill To" formControlName="customer_address" class="form-control" rows="7"></textarea>
+                </div>
+              </div>
+              <div class="col-lg-4 col-12 mt-2">
+                <span class="font-bold">Shipment To</span>
+                <div class="col-12 fv-row mt-4">
+                  <textarea type="text"  
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary border-secondary custom-input"
+                    placeholder="Shipment To" formControlName="shipping_to" class="form-control" rows="7"></textarea>
+                </div>
+              </div>
+            </div>
+  
+          <div class="row g-7 mt-2">
+              <div class="col-lg-4 col-12">
+                <span class="font-bold">Sales Person</span>
+                <div class="col-lg-12 col-12 fv-row mt-4">
+                  <input type="text" [(ngModel)]="mdlUserName" readonly
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0  borderc-secondary bg-white custom-input"
+                    placeholder="Sales Person" formControlName="user_name" class="form-control" style="height:40px;" />
+  
+                </div>
+              </div>
+              <div class="col-lg-4 col-12">
+                <span class="font-bold">Delivery Terms</span>
+                <div class="col-lg-12 col-12 fv-row mt-4">
+                  <input type="text" [(ngModel)]="mdldeliverydays" readonly
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0  borderc-secondary bg-white custom-input"
+                    placeholder="Delivery Terms" formControlName="delivery_days" class="form-control" style="height:40px;" />
+                </div>
+              </div>
+              <div class="col-lg-4 col-12">
+                <span class="font-bold">Payment Terms</span>
+                <div class="col-lg-12 col-12 fv-row mt-4">
+                  <input type="text" [(ngModel)]="mdldpaymentdays" readonly
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0  borderc-secondary bg-white custom-input"
+                    placeholder="Payment Terms" formControlName="payment_days" class="form-control" style="height:40px;" />
+                </div>
+              </div>
+              
+              
+            </div>
+            <div class="row g-7 mt-2">
+              <div class="col-lg-4 col-12 ">
+                <span class="font-bold">Currency<span class="ms-1 text-red">*</span></span>
+                <div class="col-lg-12 col-12  fv-row">
+                  <div class="row">
+                    <div class="col-lg-9 col-9 fv-row">
+                      <input type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white me-3"
+                        formControlName="currency_code" />
+                    </div>
+                    <div class="col-lg-3 col-3 fv-row">
+                      <input type="text" [(ngModel)]="exchange"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0  borderc-secondary bg-white custom-input"
+                        placeholder="Exchange Rate" formControlName="exchange_rate" class="form-control"
+                        style="height:40px;" />
+                    </div>
+                  </div>
+                </div>
+              </div> 
+              <div class="col-lg-8 col-12 mt-2">
+                <span class="font-bold">Remarks</span>
+                <div class="col-12 fv-row mt-4">
+                  <textarea type="text"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary border-secondary custom-input"
+                    placeholder="remarks" formControlName="so_remarks" class="form-control" rows="3"></textarea>
+                </div>
+              </div>           
+            </div>
+          </div>
+         
+        </form>
+      </div>
+    </div>
+  
+    <div class="card mt-1 m-3 mb-0">
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="kt_tab_pane_2" role="tabpanel">
+          <div>
+          <form [formGroup]="productform">
+              <table class="table table-striped table-bordered text-blue border-bottom gs-7 align-middle">
+              <thead>
+                  <tr class="fw-bold fs-6 text-nowrap bg-lightblue text-blue align-middle">
+                    <th class="text-blue" style="width: 1%;">Product Group</th>
+                    <th class="text-blue" style="width: 1%;">Product Code</th>
+                    <th class="text-blue" style="width: 8%;">Product</th>
+                    <th class="text-blue" style="width: 8%;">Description</th>
+                    <th class="text-blue" tyle="width:1%;">Quantity</th>
+                    <th class="text-blue" style="width: 1%;">Price</th>
+                    <th class="text-blue" style="width: 6%;" colspan="2">Discount</th>
+                    <th class="text-blue" style="text-align:center;width: 1%;">Tax Rate</th>
+                    <th class="text-blue" style="text-align:center;width: 1%;">Tax</th>
+                    <th class="text-blue" style="width: 1%;">Total Amount</th>
+                    <th  class="text-blue" style="width: 1%;"></th>
+                  </tr>
+                </thead>
+               <tbody>
+                  <tr>
+                    <td class="pt-1 pb-1 padding_custom">                  
+                      <ng-select formControlName="producraddproductgroup_name"
+                      (change)="GetOnChangeProductsGroup()"
+                      [class.is-invalid]="productgroup_name.invalid && (productgroup_name.dirty || productgroup_name.touched)"
+                      [items]="Getproductgroup" required bindLabel="productgroup_name"
+                      class="fixed-width custom-ng-select" (clear)="onclearproduct()"
+                      bindValue="productgroup_gid" [(ngModel)]="productsearch"
+                      appendTo="body" class="no-arrow custom-placeholder ">
+           </ng-select>
+           
+                    </td>
+                    <td class="padding_custom">
+                       
+                        <ng-select formControlName="product_code"
+                        [class.is-invalid]="product_code.invalid && (product_code.dirty || product_code.touched)"
+                        [items]="SOProductList" required bindLabel="product_code" bindValue="product_code"
+                          (change)="OnProductCode($event)" (clear)="onclearproductcode()" [(ngModel)]="productcodesearch1"
+                        appendTo="body" class="no-arrow ">
+                      </ng-select>
+             
+                    </td>
+                    <td class=" padding_custom" style="max-width: 80% !important;">
+                        <ng-select formControlName="product_name" 
+                          [class.is-invalid]="product_name.invalid && (product_name.dirty || product_name.touched)"
+                          [items]="SOProductList" required bindLabel="product_name" bindValue="product_gid"
+                         (change)="onProductSelect($event)" (clear)="onclearproduct()"  [(ngModel)]="productcodesearch"
+                          appendTo="body" class="no-arrow ">
+                        </ng-select>                        
+                   
+                    </td>
+                    <td class=" padding_custom">
+                     <textarea
+                        class="form-control form-control-lg form-control-solid custom-input custom_height borderc-secondary bg-white custom-input"
+                         formControlName="product_remarks"
+                        >
+                      </textarea>
+                    </td>
+                       <td class=" padding_custom" style="width: 1%;">
+                      <input type="text"
+                        class="form-control form-control-lg form-control-solid custom-input custom_height borderc-secondary bg-white custom-input"
+                        placeholder="0.00" style="text-align: right;" formControlName="productquantity"
+                        [(ngModel)]="productquantity" (input)="prodcutaddtotalcal()"  (keypress)="onKeyPress($event)">
+                    </td>
+                    <td class=" padding_custom" style="width: 2%;">
+                      <input type="text"
+                        class="form-control form-control-lg form-control-solid custom-input custom_height borderc-secondary bg-white custom-input"
+                        placeholder="0.00" style="text-align: right;" formControlName="unitprice"
+                        [(ngModel)]="productunitprice"  (input)="calculateProductTotal()" (keypress)="onKeyPress($event)">
+                    </td>
+                   <td class=" padding_custom" colspan="2" >
+                    <div class="d-flex">
+                      <input type="text" 
+                      class="form-control form-control-lg form-control-solid custom-input custom_height borderc-secondary bg-white custom-input text-end mr-1"
+                      placeholder="0.00" style="text-align: right;" formControlName="productdiscount"
+                      [(ngModel)]="productdiscount" (input)="calculateProductTotal()"  (keypress)="onKeyPress($event)">
+               
+                      <input type="text" readonly
+                      class="form-control form-control-lg form-control-solid custom-input custom_height borderc-secondary bg-white custom-input text-end"
+                      placeholder="0.00" style="text-align: right;" formControlName="productdiscount_amountvalue"
+                      [(ngModel)]="productdiscount_amountvalue" (input)="prodcutaddtotalcal()"  (keypress)="onKeyPress($event)">
+               
+                    </div>
+                       
+                   
+                        </td>
+                    <!-- <td class=" padding_custom" colspan="2">
+                   </td> -->
+                   <td class=" padding_custom" *ngIf="!tax_prefix2">
+                    <input type="text"
+                      class="form-control form-control-lg form-control-solid custom-input custom_height borderc-secondary bg-secondary bg-white custom-input"
+                      style="text-align: left;"  placeholder="Rate" formControlName="tax_prefix"  (keypress)="onKeyPress($event)"
+                      [(ngModel)]="tax_prefix" readonly>
+                  </td>
+                  <td class="padding_custom" *ngIf="tax_prefix2">
+                    <input type="text"
+                     class="borderc-secondary custom-input form-control mb-1 "
+                      formControlName="tax_prefix"
+                       style="text-align: left; height: 20px; font-size:9px !important"
+                        placeholder="Rate" [(ngModel)]="tax_prefix" readonly/>
+                        <input type="text"
+                     class="borderc-secondary custom-input form-control "
+                      formControlName="tax_prefix2"
+                       style="text-align: left; height: 20px; font-size:9px !important"
+                        placeholder="Rate" [(ngModel)]="tax_prefix2" readonly/>
+                  </td>
+  
+                  <td class=" padding_custom" *ngIf="!taxamount2">
+                    <input type="text"
+                      class="form-control form-control-lg form-control-solid custom-input custom_height borderc-secondary bg-secondary bg-white custom-input"
+                      style="text-align: right;"  placeholder="Tax" formControlName="taxamount1"  (keypress)="onKeyPress($event)"
+                      [(ngModel)]="taxamount1" readonly>
+                  </td>
+                  <td class="padding_custom" *ngIf="taxamount2">
+                    <input type="text"
+                    class="form-control borderc-secondary custom-input mb-1"
+                    style="text-align: right; height: 20px; font-size:9px !important" 
+                     placeholder="Tax" formControlName="taxamount1"  (keypress)="onKeyPress($event)"
+                    [(ngModel)]="taxamount1" readonly>
+                        <input type="text"
+                     class="borderc-secondary custom-input form-control"
+                      formControlName="taxamount2"
+                       style="text-align: right; height: 20px; font-size:9px !important"
+                        placeholder="Rate" [(ngModel)]="taxamount2"/>
+                  </td>
+                  <td class=" padding_custom">
+                      <input type="text" 
+                        class="form-control form-control-lg form-control-solid custom-input custom_height borderc-secondary bg-secondary bg-white "
+                        style="text-align: right" formControlName="producttotal_amount"  (keypress)="onKeyPress($event)"
+                        [(ngModel)]="producttotal_amount" readonly>
+                  </td>
+                  <td class="padding_custom text-center">
+                        <button type="button" class="btn btn-icon btn-sm bg-success me-1"
+                          (click)="productAddSubmit()">
+                          <i class="fa-solid fa-plus"></i>                        
+                        </button>
+                  </td>    
+                  </tr>
+                  <tr *ngFor="let data of salesorders_list; let i=index;">                  
+                    <td>{{data.productgroup_name}}</td>
+                    <td>{{data.product_code}}</td>
+                    <td style="text-align: left;">{{data.product_name}}</td>
+                    <td >{{data.product_remarks}}</td>
+                    <td style="text-align: right;">{{data.quantity}} {{data.productuom_name}}</td>
+                    <td style="text-align: right;">{{data.product_price}}</td>
+                    <td style="text-align: right;">{{data.discountpercentage}} %</td>
+                    <td style="text-align: right;"> {{data.discountamount}}</td>
+                    <td class="text-center" >{{data.tax_prefix1}}
+                      <span *ngIf="data.tax_prefix2 === 0">---</span><span *ngIf="data.tax_prefix2 !== 0">{{ data.tax_prefix2 }}</span>
+                      <br>
+                      <span *ngIf="data.tax_prefix3 === 0">---</span><span *ngIf="data.tax_prefix3 !== 0">{{ data.tax_prefix3 }}</span>
+                    </td>
+                    <td style="text-align: right;">
+                      {{data.tax_amount}}
+                      <br>
+                      <span *ngIf="data.tax_amount2 != 0">{{data.tax_amount2}}</span>
+                    </td>
+                    <td style="text-align: right;">{{data.totalamount}}</td>
+                    <td class="text-center">
+                      <button type="button" (click)="openModaldelete(data.tmpsalesorderdtl_gid)" data-bs-toggle="modal"
+                        data-bs-target="#myModaldeleteQA" class="btn btn-icon btn-sm bg-danger me-1">
+                        <i class="fa-solid fa-trash"></i>
+  
+                      </button>
+                    </td>
+  
+                  </tr>
+                </tbody>
+              </table>
+           
+          </form>
+          </div>
+        </div>
+      </div>
+      
+      
+      <br>
+      <div>
+        <div>
+   <form [formGroup]="combinedFormData">
+            <div class="m-4 card">
+              <div class="row">
+                <div class="col-lg-8">
+                  <div class="mt-4 card border">
+                    <div class="d-flex justify-content-between align-items-center rounded-top"
+                      style="background-color: #def0ff;">
+                      <div class="">
+                        <h3 class="fw-bolder ms-3 mt-2" style="color: #2599ff; height:20px;">Terms and Conditions</h3>
+                      </div>
+                      <div class="col-4">
+                        <!-- <ng-select [items]="terms_list" class="custom mt-2 me-2 mb-2" bindLabel="template_name"
+                          [(ngModel)]="mdlTerms" formControlName="template_name" bindValue="template_gid"
+                          placeholder="Select an option" (change)="GetOnChangeTerms()"></ng-select> -->
+                      </div>
+                    </div>
+                    <div class="m-3 d-flex flex-column">
+                      <div style="height: 320px;">
+                        <!-- <angular-editor [config]="config" formControlName="termsandconditions"></angular-editor> -->
+                        <p [innerHTML]="termsandconditions"></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="mt-4 card border" style="background-color: #f9f9f99d;">
+                    <div class="row g-6 p-3">
+                      <!-- <div class="col-lg-12">
+                        <span class="font-bold">Net Amount</span>
+                        <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-4">
+                          <input type="text" class="form-control fw-bold bg-secondary custom-input text-end"
+                            formControlName="totalamount" [(ngModel)]="producttotalamount" readonly>
+                        </div>
+                      </div> -->
+                      <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                          <label class="col-form-label font-bold">Net Amount :</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-lg-6 col-md-6 col-sm-12 ps-0">
+                        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row ">
+                          <input type="text" class="form-control fw-bold bg-secondary" 
+                           formControlName="totalamount" [(ngModel)]="producttotalamount"
+                            (ngModelChange)="finaltotal()" style="text-align: right;" readonly>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-row flex-wrap" *ngIf="allchargeslist[0].flag == 'Y'">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                          <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row">
+                            <label class="col-form-label font-bold">Add On Charges :</label>
+                          </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12 ">
+                          <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row">
+                            <input type="text" class="form-control" formControlName="addon_charge"
+                             [(ngModel)]="addon_charge" (ngModelChange)="finaltotal()" 
+                             style=" text-align: right;">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-row flex-wrap" *ngIf="allchargeslist[1].flag == 'Y'">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                            <label class="col-form-label font-bold text-nowrap">Additional Discount :</label>      
+                          </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                          <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row">
+                            <input type="text" class="form-control"
+                             formControlName="additional_discount" 
+                            [(ngModel)]="additional_discount" 
+                            (ngModelChange)="finaltotal()" style=" text-align: right;">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-row flex-wrap" *ngIf="allchargeslist[1].flag == 'Y'">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                            <label class="col-form-label font-bold text-nowrap">Freight Charges :</label>
+                          </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                          <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row">
+                            <input type="text" class="form-control" formControlName="freight_charges"
+                             [(ngModel)]="freight_charges" (ngModelChange)="finaltotal()" 
+                             style=" text-align: right;">
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="d-flex flex-row flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                          <div class="col-lg-8 col-12 col-md-11 col-sm-11 fv-row">
+                            <label class="col-form-label font-bold text-nowrap">Additional Tax :</label>
+                          </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="d-flex">                         
+                                  <ng-select  [items]="tax4_list" formControlName="tax_name4" bindLabel="tax_name4"
+                                  bindValue="tax_gid" placeholder="Select Tax" [(ngModel)]="tax_name4" 
+                                  (clear)="OnClearOverallTax()" (change)="OnchangeTaxamount4()">
+                                </ng-select>&nbsp;&nbsp;                             
+                            <input type="text" class="form-control bg-secondary"  (input)="OnchangeTaxamount4()" readonly
+                            style="text-align:right;" formControlName="tax_amount4"
+                            [(ngModel)]="tax_amount4">                                                                        
+                              </div>                                              
+                        </div>
+                      </div>  
+                      <div class="d-flex flex-row  flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                            <label class="col-form-label font-bold">Round Off :</label>
+                          </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                          <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row">
+                            <input type="text" class="form-control"
+                             formControlName="roundoff" [(ngModel)]="roundoff" 
+                             (ngModelChange)="finaltotal()" style=" text-align: right;">
+                          </div>
+                        </div>
+                        
+                      </div>                  
+                      <div class="d-flex flex-row  flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                            <label class="col-form-label font-bold">Grand Total :</label>
+                          </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                          <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row">
+                            <input type="text" class="form-control"
+                             formControlName="grandtotal" [(ngModel)]="grandtotal" 
+                             (ngModelChange)="finaltotal()" style=" text-align: right;">
+                          </div>
+                        </div>
+                        
+                      </div>                  
+                     
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="text-center my-4">
+                <button (click)="onSubmit()" type="submit" class="btn-success btn-sm text-white me-2">
+                  <i class="fas fa-check fs-5"></i>
+                  <span class="ms-3">Submit</span> </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal" id="myModaldeleteQA" data-bs-backdrop="static" data-bs-keyboard="false">
+          <div class="modal-dialog  ">
+            <div class="modal-content del_modal-content">
+              <div class="text-center my-4">
+                <h2><b>Are you sure?</b></h2>
+                <p style="display: block;">Do You Want To Delete the Record ?</p>
+                <div class="text-center my-4">
+                  <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal" (click)="ondelete()">
+                    <i class="bi bi-trash-fill text-white fs-5 me-2"></i>Delete
+                  </button>
+                  <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+                    <i class="fas fa-close text-white me-2"></i>Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  

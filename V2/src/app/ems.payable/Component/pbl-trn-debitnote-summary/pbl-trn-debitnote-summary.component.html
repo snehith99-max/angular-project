@@ -1,0 +1,91 @@
+<div class="card mt-4">
+    
+    <div class="row ms-3 mt-3 d-flex align-items-center justify-content-between">
+        <div class="col">
+            <h3 class="card-title fw-bold">Debit Note Summary</h3>
+        </div>
+        <div class="col-auto">
+            <button type="button" title="Raise debit note"
+                class="btn-primary btn-lg text-white mb-2 mt-2 me-5"
+                routerLink="/payable/PblTrnRaiseDebitNote">
+                <i class="fa-solid fa-plus me-2"></i>&nbsp; Raise debit note
+            </button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="Getdebitnote_list" class="table-stripped table table-row-bordered border-bottom gs-7">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th>S.No</th>
+                        <th>Invoice Date</th>
+                        <th>Invoice Ref.No</th>
+                        <th>Company Name</th>
+                        <th>Contact Person</th>
+                        <th>Mobile</th>
+                        <th>Invoice Amount</th>
+                        <th>Debit Amount</th>
+                        <th>Debit Date</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of Getdebitnote_list; let i=index;" class="align-middle">
+                        <td>{{i+1}}</td>
+                        <td>{{data.invoice_date}}</td>
+                        <td>{{data.invoice_refno}}</td>
+                        <td>{{data.vendor_companyname}}</td>
+                        <td>{{data.contactperson_name}}</td>
+                        <td>{{data.mobile}}</td>
+                        <td style="text-align:right;">{{data.invoice_amount}}</td>
+                        <td style="text-align:right;">{{data.debit_amount}}</td>
+                        <td>{{data.debit_date}}</td>
+                        <td class="text-center" >
+                            
+                                <button type="button" title="View" class="btn btn-icon btn-sm bg-primary me-2 mt-2"
+                                    (click)="DebitView(data.invoice_gid)"><span
+                                        class="fa-solid fa-eye text-white fs-2"></span></button>
+
+                                <button  type="button" title="Stock Return" *ngIf="!buttonhide(data.debitnote_gid)"
+                                    class="btn btn-icon btn-sm btn-return me-2 mt-2"
+                                    (click)="stockreturn(data.invoice_gid, data.debitnote_gid)"><i
+                                        class="bi bi-arrow-return-left fs-2"></i></button>
+
+                                <button   type="button" title="PDF" *ngIf="buttonhide(data.debitnote_gid)"
+                                    class="btn btn-icon btn-sm btn-pdf me-2 mt-2 text-center"
+                                    (click)="DebitPDF(data.debitnote_gid, data.invoice_gid)"><i
+                                        class="fa-solid fa-file-pdf fs-2 ms-2"></i></button>
+
+                                    <button title="Delete" type="button" class="btn btn-icon btn-sm bg-danger me-2"
+                                        data-bs-target="#myModaldelete" (click)="openModaldelete(data.debitnote_gid, data.payment_gid)"   
+                                        data-bs-toggle="modal">
+                                        <span class="fa fa-trash text-white fs-6"></span>
+                                    </button> 
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="myModaldelete" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="text-center my-4">
+                <h2><b>Are you sure?</b></h2>
+                <br>
+                <p>Do You Want to Delete the Record?</p>
+                <div class="text-center my-4">
+                    <button class="btn-danger btn-sm text-white me-4" (click)="DeleteDebit()" data-bs-dismiss="modal">          
+                        <i class="fas fa-trash text-white fs-5"></i> &nbsp;Delete
+                    </button>
+                    <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white"></i> &nbsp;Close
+                    </button>&nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

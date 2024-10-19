@@ -1,0 +1,234 @@
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <div id="kt_app_content_container" class="app-container container-xxl">
+        <div class="d-flex flex-column flex-lg-row">
+            <div class="flex-lg-row-fluid ms-lg-7 ms-xl-10">
+                <!--begin::Card-->
+                <div class="card shadow-lg">
+                    <div class="card-header d-flex justify-content-between py-3">
+                        <h2 class="mt-3">Compose Mail</h2>
+                    </div>
+
+                    <div class="card-body">
+                        <form [formGroup]="MailForm" #form="ngForm" id="kt_inbox_compose_form">
+                            <div class="d-flex flex-row flex-wrap m-3">
+                                <div class="col-12 col-md-1 col-lg-1 col-sm-12">
+                                    <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-6">
+                                        <span class="font-bold">From</span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-8 col-lg-8 col-sm-12">
+                                    <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                                        <ng-select [items]="GetMailId_list" class="mt-2" bindLabel="employee_emailid" formControlName="employee_emailid" bindValue="employee_emailid" placeholder="Select an option">
+                                        </ng-select>
+                                        <div *ngIf="employee_emailid.invalid && (employee_emailid.dirty || employee_emailid.touched)">
+                                        <div *ngIf="employee_emailid.errors?.['required']">
+                                            <span class="text-red ms-2 mt-3">From mail is required</span>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row flex-wrap m-3">
+                                <div class="col-12 col-md-1 col-lg-1 col-sm-12">
+                                    <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-6">
+                                        <span class="font-bold">To</span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-8 col-lg-8 col-sm-12">
+                                    <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2 input-field">
+                                        <input type="text" class="form-control form-control-transparent border-secondary shorter-text-box" formControlName="to_emailid" value="" data-kt-inbox-form="tagify" style="border-left: none; border-right: none; border-top: none; border-radius: 0;"/> 
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <div class="d-flex flex-row flex-wrap m-3">
+                                <div class="col-12 col-md-1 col-lg-1 col-sm-12">
+                                    <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-6">
+                                        <span class="font-bold">Cc</span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-8 col-lg-8 col-sm-12">
+                                    <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2 input-field">
+                                        <input type="text" class="form-control form-control-transparent border-secondary" formControlName="cc" value="" data-kt-inbox-form="tagify" style="border-left: none; border-right: none; border-top: none; border-radius: 0;"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row flex-wrap m-3">
+                                <div class="col-12 col-md-1 col-lg-1 col-sm-12">
+                                    <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-6">
+                                        <span class="font-bold">Bcc</span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-8 col-lg-8 col-sm-12">
+                                    <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2 input-field">
+                                        <input type="text" class="form-control form-control-transparent border-secondary" formControlName="bcc" value="" data-kt-inbox-form="tagify" style="border-left: none; border-right: none; border-top: none; border-radius: 0;"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row flex-wrap m-3">
+                                <div class="col-12 col-md-12 col-lg-9 col-sm-12">
+                                    <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-6 input-field">
+                                        <input type="text" class="form-control form-control-transparent border-secondary" formControlName="subject" placeholder="Subject" style="border-left: none; border-right: none; border-top: none; border-radius: 0;"/>
+                                        <div *ngIf="subject.invalid && (subject.dirty || subject.touched)">
+                                            <div *ngIf="subject.errors?.['required']">
+                                                <span class="text-red ms-2 mt-3">Subject is required</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row flex-wrap m-3">
+                                <div class="col-12 col-md-1 col-lg-1 col-sm-12">
+                                    <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-6">
+                                        <span class="font-bold">Upload</span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-8 col-lg-8 col-sm-12">
+                                    <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                                        <div *ngIf="safePdfUrl && attach_file_name" style="margin-top: 2px;">
+                                            <!-- Use class="small-text" or class="big-text" to change the font size -->
+                                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="{{safePdfUrl}}" download="{{attach_file_name}}" style="font-size: 13px; /* Small text */">{{attach_file_name}}</a>
+                                            <!-- For bigger text, change the font size above -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row flex-wrap justify-content-center">                                
+                                <div class="d-flex align-items-center me-3">
+                                    <div class="btn-group align-items-center me-4">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn-success send-button" (click)="onadd()">Send</button>                            
+                                        </div>
+                                    </div>
+                            
+                                    <div class="btn-group">
+                                        <button type="button" class="btn-primary btn-sm text-white me-2" (click)="onback()">Back</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- <div class="card-body p-0">
+    <form [formGroup]="MailForm" #form="ngForm" id="kt_inbox_compose_form">
+        <div class="d-block">
+            <div class="d-flex align-items-center border-bottom px-8 min-h-50px">
+                <div class="text-gray-900 fw-bold w-75px">From:</div>
+                <ng-select [items]="GetMailId_list" class="custom col-lg-5  col-12 fv-row mt-2"
+                    bindLabel="employee_emailid" formControlName="employee_emailid"
+                    bindValue="employee_emailid" placeholder="Select an option"></ng-select>
+                <div
+                    *ngIf="employee_emailid.invalid && (employee_emailid.dirty || employee_emailid.touched)">
+                    <div *ngIf="employee_emailid.errors?.['required']">
+                        <span class="text-red">From mail is required.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center border-bottom px-8 min-h-50px">
+                <div class="text=text-gray-900 fw-bold w-75px">To:</div>
+                <input type="text"
+                    class="form-control form-control-transparent border-secondary shorter-text-box"
+                    formControlName="to_emailid" value="" data-kt-inbox-form="tagify" />
+                <div *ngIf="to_emailid.invalid && (to_emailid.dirty || to_emailid.touched)">
+                    <div *ngIf="to_emailid.errors?.['required']">
+                        <span style="color:red;">To mail is required.</span>
+                    </div>
+                    <div *ngIf="to_emailid.errors?.['pattern']">
+                        <span style="color:red;">Invaild Email Format.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex align-items-center border-bottom px-8 min-h-50px">
+                <div class="text-gray-900 fw-bold w-75px">
+                    Cc:
+                </div>
+                <input type="text" class="form-control form-control-transparent border-secondary"
+                    formControlName="cc" value="" data-kt-inbox-form="tagify" />
+            </div>
+            <div class="d-flex align-items-center border-bottom px-8 min-h-50px">
+                <div class="text-gray-900 fw-bold w-75px">
+                    Bcc:
+                </div>
+                <input type="text" class="form-control form-control-transparent border-secondary"
+                    formControlName="bcc" value="" data-kt-inbox-form="tagify" />
+            </div>
+            <div class="border-bottom">
+                <input
+                    class="form-control form-control-transparent border-secondary px-8 min-h-45px"
+                    formControlName="subject" placeholder="Subject" />
+                <div *ngIf="subject.invalid && (subject.dirty || subject.touched)">
+                    <div *ngIf="subject.errors?.['required']">
+                        <span style="color:red;">Subject is required.</span>
+                    </div>
+                </div>
+            </div><br>
+            <div class="d-flex align-items-center border-bottom px-8 min-h-50px"
+                style="display: flex; align-items: center;">
+                <span style="font-weight: bold; margin-right: 10px;">Upload</span>
+                <div style="margin-top: 2px;">
+                    <div *ngIf="safePdfUrl && attach_file_name" style="margin-top: 2px;">
+                        Use class="small-text" or class="big-text" to change the font size
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="{{safePdfUrl}}"
+                            download="{{attach_file_name}}"
+                            style="font-size: 13px; /* Small text */">{{attach_file_name}}</a>
+                        For bigger text, change the font size above
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div
+                class="d-flex flex-stack flex-wrap justify-content-center gap-2 py-5 ps-8 pe-5 border-top">
+                begin::Actions
+                <div class="d-flex align-items-center me-3">
+                    begin::Send
+                    <div class="btn-group align-items-center  me-4 ">
+                        begin::Submit
+
+                        Example split danger button
+                        app/send-button/send-button.component.html
+                        <div class="btn-group ">
+                            <button type="button" class="btn send-button  text-blue "
+                                style="left: 0%;" (click)="onadd()">Send</button>
+                            <button type="button"
+                           class="btn send-button dropdown-toggle dropdown-toggle-split text-white"
+                           (click)="toggleDropdown()" [attr.aria-expanded]="isDropdownOpen"
+                           aria-haspopup="true">
+                           <span class="sr-only">Toggle Dropdown</span>
+                           <div class="dropdown-menu" [ngClass]="{ 'show': isDropdownOpen }">
+                               <a class="dropdown-item" href="#">Schedule send</a>
+                           </div>
+                       </button>
+
+                        </div>
+                        end::Submit
+
+                    </div>
+
+                    <div class="btn-group">
+
+                        <button type="button" class="btn back-button text-red "
+                            (click)="onback()">Back</button>
+
+                    </div>
+                </div>
+                end::Actions
+            </div>
+        </div>
+    </form>
+</div> -->

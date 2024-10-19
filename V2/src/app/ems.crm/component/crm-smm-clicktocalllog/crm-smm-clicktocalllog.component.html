@@ -1,0 +1,448 @@
+<div class="row" style="margin-top: 10px;">
+  <div class="col-lg-3 col-md-3 col-sm-3">
+    <div class="cardHeadLeads radius-10" style="border-left: 5px solid #098030; cursor: not-allowed;">
+      <div class="card-body12">
+        <div class="d-flex align-items-center">
+
+          <div>
+            <h5 class="mb-0 text-secondary "> Total Count </h5>
+            <h5 class="badge-green badge-outline-green badge-success fs-4 mt-2">{{total_count}}</h5>
+          </div>
+          <div class="widgets-icons-2 rounded-circle bg-gradient-darkgreens text-white ms-auto"><i
+              class="fa fa-clipboard fs-3"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-3 col-sm-3">
+    <div class="cardHeadLeads radius-10" style="border-left: 5px solid #612b5a; cursor: not-allowed;">
+      <div class="card-body12">
+        <div class="d-flex align-items-center">
+
+          <div>
+            <h5 class="mb-0 text-secondary "> Answered</h5>
+            <h5 class="badge-violet badge-outline-violet badge-success fs-4 mt-2">{{answered}}</h5>
+          </div>
+          <div class="widgets-icons-2 rounded-circle bg-gradient-darkviolet text-white ms-auto"><i
+              class="fas fa-phone-alt answered-call-icon"></i>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-3 col-md-3 col-sm-3">
+    <div class="cardHeadLeads radius-10 border-start border-0 border-3 border-red" style="cursor: not-allowed;">
+      <div class="card-body12">
+        <div class="d-flex align-items-center">
+
+          <div>
+            <h5 class="mb-0 text-secondary "> Customer Missed</h5>
+            <h5 class="badge-red badge-outline-red badge-success fs-4 mt-2">{{customer_missed}}</h5>
+          </div>
+          <div class="widgets-icons-2 rounded-circle bg-gradient-darkred text-white ms-auto"><i
+              class="fas fa-phone-slash missed-call-icon"></i>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-3 col-sm-3">
+    <div class="cardHeadLeads radius-10 border-start border-0 border-3 border-orange" style="cursor: not-allowed;">
+      <div class="card-body12">
+        <div class="d-flex align-items-center">
+
+          <div>
+            <h5 class="mb-0 text-secondary "> Agent Missed</h5>
+            <h5 class="badge-orange badge-outline-orange badge-success fs-4 mt-2">{{agent_missed}}</h5>
+          </div>
+          <div class="widgets-icons-2 rounded-circle bg-gradient-darkoranges text-white ms-auto"><i
+              class="fas fa-phone-slash rejected-call-icon"></i>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card shadow-sm">
+  <div class="card-header bg-clicktocall" style="color: white;">
+
+    <h3 class="card-title"> <i class="fas fa-list-alt me-1"></i>&nbsp;&nbsp;Call Summary</h3>
+    <div style="margin: 13px; ">
+      <input class="me-3 custom-input" style="border: 0;border-radius: 5px;height: 30px !important;" autocomplete="off"
+        type="tel" [(ngModel)]="phone_number" maxlength="10" placeholder="Enter The Number"
+        (input)="onInputChange($event)" />
+        <button class="btn-success me-3" [disabled]="phone_number.length !== 10" (click)="clicktocall(phone_number)">
+          <i class="fas fa-phone me-1"></i>CALL
+        </button>
+      <button title="Back" routerLink="/crm/CrmSmmClicktocallagents" class="btn-secondary btn-sm text-black me-4">
+        <i class="fas fa-file-alt me-1"></i> Report
+      </button>
+      <button title="Back" routerLink="/crm/CrmSmmClicktocall" class="btn-secondary text-black me-4 "><span
+          class="fas fa-arrow-left"></span> &nbsp;Back</button>
+    </div>
+  </div>
+
+</div>
+<!-- <br> -->
+<div class="row">
+  <!-- ADD Function -->
+
+  <div class="table-responsive">
+    <div class="card card-body m-3 shadow-xl p-3 mb-5 bg-white rounded">
+      <div class="row ms-3 mt-3 d-flex align-items-center">
+        <!-- <div class="col">
+            <h3 class="card-title"><i class="fas fa-id-card"></i>
+  
+              &nbsp;&nbsp;Call Log Report</h3>
+          </div> -->
+      </div>
+      <span class="symbol-label bg-light-danger text-danger fs-6 fw-bolder" style="margin-left: auto;"> Notes: <span>&nbsp;<label class="ms-3"
+        class="badge text-black fs-4" style="background-color: rgb(124, 241, 241);">&nbsp;&nbsp;</label>&nbsp;Indicates the INBOUND Calls</span></span>
+
+      <table id="calllog_report" class="table  table-row-bordered border-bottom gs-7">
+        <thead>
+          <tr class="text-white fw-bold fs-6 text-nowrap bg-clicktocall" style="text-align: center">
+            <th>S.No</th>
+            <th>Phone Number</th>
+            <th>Name</th>
+            <th>Call Type</th>
+            <th>Call Status</th>
+            <th>Agent</th>
+            <!-- <th>Station</th> -->
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Duration</th>
+            <th>Remarks</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of calllog_report; let i=index;" class="align-middle"
+            [ngClass]="{'inbound-row': data.direction == 'INBOUND'}" style="text-align: center">
+            <td>{{i+1}}</td>
+            <td>{{data.phone_number}}</td>
+            <td>{{data.user_name}}</td>
+            <td>{{data.direction}}</td>
+            <td>{{data.call_status}}</td>
+            <td>{{data.agent}}</td>
+            <!-- <td>{{data.station}}</td> -->
+            <td>{{data.start_time}}</td>
+            <td>{{data.endtime}}</td>
+            <td>{{data.duration}}</td>
+            <td>{{data.remarks}}</td>
+            <td class="text-center text-nowrap">
+              <!-- <button title="Notes" type="button" (click)="notesupdate(data)" data-bs-toggle="modal"
+                data-bs-target="#myModalnotes" class="btn btn-icon btn-sm  notes-button"><span
+                  class="fas fa-pencil-alt notes-icon"></span></button>&nbsp;
+              <button title="Audio" type="button" [disabled]="data.call_status != 'ANSWERED'" data-bs-toggle="modal"
+                data-bs-target="#myModalaudio1" (click)="getaudio(data.uniqueid)"
+                class="btn btn-icon btn-sm bg-view bg-primary m-2">
+                <span class="fa-solid fa-play"></span></button>
+                <button title="Log" type="button" (click)="getlogreport(data.phone_number)" data-bs-toggle="modal"
+                data-bs-target="#callreport" class="btn btn-icon btn-sm bg-view me-2"><span
+                  class="fa-solid fa-list-alt"></span></button>&nbsp; -->
+              <!-- <button title="Log" type="button" (click)="getlogreport(data.phone_number)" data-bs-toggle="modal"
+                data-bs-target="#myModalexpand" class="btn btn-icon btn-sm bg-view me-2"><span
+                  class="fa-solid fa-list-alt"></span></button>&nbsp; -->
+              <!-- <button title="Add to Lead" type="button"
+              [disabled]="data.lead_flag != 'N' " data-bs-toggle="modal"
+                data-bs-target="#myModaledit" (click)="addlead(data)" class="btn btn-icon btn-sm bg-views me-2"><span
+                  class="fa-solid fa-user-plus text-white fs-6"></span></button> -->
+
+
+                  <div style="cursor: pointer;">
+                    <button title="Options" class="btn me-2 p-1 " (click)="toggleOptions(data.individual_gid)"><span
+                            class="fa-solid fa-ellipsis-vertical fs-1"
+                            style="color: #4d4d4d;"></span></button>
+                    <div *ngIf="showOptionsDivId === data.individual_gid"
+                        class="pb-0 rounded bg-white cursor-pointer icon_menu" style="right: 65px;">
+                        <!--Icons -->
+                        <div class="d-flex p-3 pb-3 Icon_hover"
+                        (click)="notesupdate(data)" data-bs-toggle="modal"
+                data-bs-target="#myModalnotes">
+                            <span><i class="fas fa-pencil-alt notes-icon fs-3 me-5"></i></span>
+                            <span>Notes</span>
+                        </div>
+                        <div class="d-flex p-3 pb-3 Icon_hover" [ngClass]="{'disabled': data.call_status !== 'ANSWERED'}" data-bs-toggle="modal"
+                        data-bs-target="#myModalaudio1" (click)="getaudio(data.uniqueid)">
+                          <span><i class="fa-solid fa-play fs-3 me-5"></i></span>
+                          <span>Audio</span>
+                      </div>
+                        <div class="d-flex p-3 pb-3 Icon_hover"
+                        (click)="getlogreport(data.phone_number)" data-bs-toggle="modal"
+                data-bs-target="#callreport">
+                            <span><i class="fa-solid fa-list-alt fs-3 me-5"></i></span>
+                            <span>Log</span>
+                        </div>
+                      
+                        <div class="d-flex p-3 pb-3 Icon_hover" [ngClass]="{'disabled': data.lead_flag !== 'N'}" data-bs-toggle="modal"
+                        data-bs-target="#myModaledit" (click)="addlead(data)">
+                          <span><i class="fa-solid fa-user-plus fs-3 me-5"></i></span>
+                          <span>Add to Lead</span>
+                      </div>
+                        <!--Icons -->
+                    </div>
+                </div>
+            </td>
+            <!-- </button> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- The Modal Audio Play -->
+<div class="modal" id="myModalaudio1" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="card-header p-1 pb-2 pt-1 rounded-top bg-skyblue">
+        <h2 style="margin-top:10px;color:white;font-weight: bold;">
+          &nbsp; <i class="fa-solid fa-volume-up" style="font-size: 17px;"></i>
+          &nbsp;&nbsp;Audio</h2>
+      </div><br>
+      <div style="margin-left: 100px;"> <audio controls id="html-audio" [src]="recording_path"></audio>
+      </div>
+
+      <BR>
+
+      <div class="text-center my-4">
+        <button class="btn-danger btn-sm text-white me-2" data-bs-dismiss="modal">
+          <i class="fas fa-close text-white"></i> &nbsp;Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- </div> -->
+</div>
+<!-- //Lead//expand// -->
+<div class="modal modal-lg" id="myModalexpand" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content ">
+      <!-- Modal Header -->
+      <div class="check m-2">
+
+        <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+          <h2 style="margin-top: 10px;justify-content: center;color:white;font-weight: bold;">
+            &nbsp;&nbsp;Phone Number: {{phone_number}}</h2>
+        </div>
+
+        <table id="individualcalllog_report" class="table  table-row-bordered gy-5 gs-7 ">
+          <thead>
+            <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue" style="text-align: center">
+              <th>S.No</th>
+              <th>Call Date</th>
+              <th>Call Type</th>
+              <th>Call Status</th>
+              <th>Agent</th>
+              <th >Station</th>
+              <th>Duration</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data1 of individualcalllog_report; let i=index;" style="text-align: center"  [ngClass]="{'inbound-row': data1.direction == 'INBOUND'}">
+              <td>{{i+1}}</td>
+              <td>{{data1.start_time}}</td>
+              <td>{{data1.direction}}</td>
+              <td>{{data1.call_status}}</td>
+              <td>{{data1.agent}}</td>
+              <td>{{data1.station}}</td>
+              <td>{{data1.duration}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-center my-4">
+          <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+            <i class="fas fa-arrow-left text-white"></i> &nbsp;Back
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- The Modal Notes -->
+<form [formGroup]="reactiveForm" #form="ngForm">
+  <div class="modal" id="myModalnotes" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+
+        <div class="card-head p-1 pb-2 pt-1 rounded-top bg-primary">
+          <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+              class="fas fa-pen-to-square fs-3"></i> &nbsp;&nbsp;Edit</h2>
+
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <input class="form-control form-control-lg" formControlName="individual_gid" hidden pattern="^(?!\s*$).+"
+            type="text" aria-label=".form-control-lg example" autocomplete="off" />
+          <!-- <div class="row"><span class="font-bold"><b>Display Name</b><span class="ms-1 text-red">*</span></span>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+              <input formControlName="user_name" type="text" class="form-control form-control-lg form-control-solid
+                             custom-input mb-3 mb-lg-0 bg-white custom-input
+                                 " [ngStyle]="{'border-color':user_name.invalid && user_name.touched? 'red'
+                                            : 'rgb(209, 209, 209)'}" pattern="^(?!\s*$).+" name="" required />
+            </div>
+          </div> -->
+          <!-- <div *ngIf="user_name.invalid && (user_name.dirty || user_name.touched)">
+            <div *ngIf="user_name.errors?.['required']">
+              <span style="color:red;">Name is required.</span>
+            </div>
+          </div> -->
+          <!-- <div *ngIf="user_name.invalid && (user_name.dirty || user_name.touched)">
+            <div *ngIf="user_name.errors?.['pattern']">
+              <span style="color:red;">Invalid Format.</span>
+            </div>
+          </div> -->
+          <br>
+
+          <div class="mb-3">
+            <label for="remarks" class="form-label"><b>Remarks</b></label>
+            <textarea class="form-control" formControlName="remarks" pattern="^(?!\s*$).+" id="remarks" rows="3"
+              placeholder="Enter Team Description"></textarea>
+          </div>
+          <br>
+
+
+          <!-- Modal footer -->
+          <div class="text-center my-4">
+            <button (click)="onupdate()" [disabled]="reactiveForm.invalid" [ngClass]="{
+                          'primary-button': !reactiveForm.invalid,
+                          'secondary-button': reactiveForm.invalid
+                        }" data-bs-dismiss="modal">
+              <i class="fas fa-check text-white fs-5"></i> &nbsp;Update
+            </button>
+            &nbsp;&nbsp;
+            <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+              <i class="fas fa-close text-white"></i> &nbsp;Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<form [formGroup]="reactiveFormContactEdit" #form="ngForm">
+  <div class="modal" id="myModaledit" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="card-header p-1 pb-2 pt-1 rounded-top bg-clicktocall">
+          <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+              class="fa-solid fa-user-plus text-white fs-2"></i>&nbsp;&nbsp;Add To Lead</h2>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+
+          <div class="row"><span class="font-bold"><b>Display Name</b>
+            <span class="ms-1 text-red">*</span> </span>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+              <input type="text" class="
+                            form-control form-control-lg form-control-solid
+                            custom-input
+                            mb-3 mb-lg-0
+                            bg-white
+                            custom-input
+                      " placeholder="" formControlName="user_name" pattern="^(?!\s*$).+" name="user_name"
+                class="form-control" required  />
+            </div>
+          </div>
+
+          <br>
+
+          <div class="form-group">
+            <div class="row"> <span class="font-bold"><b>Mobile Number</b></span>
+              <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                <input type="text" class="form-control form-control-lg form-control-solid custom-input
+                   mb-3 mb-lg-0 bg-white custom-input" placeholder="" formControlName="phone_number"
+                  pattern="^(?!\s*$).+" name="user_name" class="form-control" required readonly />
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row"><span class="font-bold"><b>Customer Type</b>
+              <span class="ms-1 text-red">*</span></span>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+              <ng-select formControlName="customertype_edit" [items]="customertype_list"
+                class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="customer_type1"
+                bindValue="customertype_gid1" placeholder="--Select Customer Type--"></ng-select>
+            </div>
+          </div>
+          <br>
+
+          <br>
+          <!-- Modal footer -->
+          <div class="text-center my-4">
+            <button (click)="onupdatecontact()" [disabled]="reactiveFormContactEdit.invalid" [ngClass]="{
+              'primary-button': !reactiveFormContactEdit.invalid,
+              'secondary-button': reactiveFormContactEdit.invalid
+            }" data-bs-dismiss="modal">
+  <i class="fas fa-check text-white fs-5"></i> &nbsp;Submit
+</button>&nbsp;&nbsp;
+            <button class="btn-danger btn-sm text-white me-2" data-bs-dismiss="modal" (click)="onclose()">
+              <i class="fas fa-close text-white"></i> &nbsp;Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="modal modal-sm" id="callreport" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background-color: rgba(236, 240, 240, 0);">
+      <!-- Modal Header -->
+      <div class="check m-2">
+        <div class="calllog">
+
+          <div class="content">
+
+            <header class="logpage">
+              <h1 class="logpage-title" style="color: aliceblue;">Phone Number :{{phone_number}}</h1>
+            </header>
+
+
+            <section class="summary" style="overflow-y:scroll;">
+              <article>
+                <ul class="summary-list">
+                  <li class="summary-list-item" *ngFor="let data1 of individualcalllog_report; let i=index;">
+                    <div class="summary-view summary-format">
+                      <p class="summary-format-text">{{data1.start_time}}<span>{{data1.duration}}</span></p>
+                    </div>
+                    <div class="summary-view summary-icon call">
+                      <span><i class="fas fa-phone-volume"></i>
+                      </span>
+                    </div>
+                    <div class="summary-view summary-text">
+                      <p class="test1">{{data1.direction}}&nbsp;&nbsp;<span style="color: rgb(2, 2, 2);"><b>{{data1.agent}}</b></span></p>
+                      <p class="test2">{{data1.call_status}}</p>
+                    </div>
+                  </li>
+                </ul>
+              </article>
+            </section>
+
+          </div>
+          <div class="text-center">
+            <button class="btn-danger btn-sm text-white me-4 rounded-pill" (click)="onclose()" data-bs-dismiss="modal">
+              <i class="fas fa-times"></i> <!-- Add "x" symbol icon -->
+              <span class="ms-2">Close</span> <!-- Add Close text -->
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

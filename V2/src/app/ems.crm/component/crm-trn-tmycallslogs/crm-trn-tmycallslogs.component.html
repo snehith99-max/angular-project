@@ -1,0 +1,75 @@
+<div class="table-responsive">
+    <div class="card card-body m-3 shadow-xl p-3 mb-5 bg-white rounded">
+      <div class="row ms-3 mt-3 d-flex align-items-center">
+ 
+      </div>
+      <span class="symbol-label bg-light-danger text-danger fs-6 fw-bolder" style="margin-left: auto;"> Notes:
+        <span>&nbsp;<label class="ms-3" class="badge text-black fs-4"
+            style="background-color: rgb(124, 241, 241);">&nbsp;&nbsp;</label>&nbsp;Indicates the INBOUND
+          Calls</span></span>
+      <table id="calllog_report" class="table table-row-bordered border-bottom gs-7">
+        <thead>
+            <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+            <th class="text-center" style="width:2%">S.No</th>
+            <th class="text-center">Phone Number</th>
+            <th class="text-center">User Name</th>
+            <th class="text-center">Call Type</th>
+            <th class="text-center">Call Status</th>
+            <th class="text-center">Station</th>
+            <th class="text-center">Start Time</th>
+            <th class="text-center">End Time</th>
+            <th class="text-center">Duration</th>
+            <th class="text-center">Remarks</th>
+            <th class="text-center">listen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of calllog_report; let i=index;" class="align-middle"
+            [ngClass]="{'inbound-row': data.direction == 'INBOUND'}" style="text-align: center">
+            <td>{{i+1}}</td>
+            <td>{{data.phone_number}}</td>
+            <td>{{data.user_name}}</td>
+            <td>{{data.direction}}</td>
+            <td>{{data.call_status}}</td>
+            <td>{{data.station}}</td>
+            <td>{{data.start_time}}</td>
+            <td>{{data.endtime}}</td>
+            <td>{{data.duration}}</td>
+            <td>{{data.remarks}}</td>
+            <td class="text-center text-nowrap">
+                <button title="Audio" type="button" data-bs-toggle="modal"
+                data-bs-target="#myModalaudio1"
+                class="btn btn-icon btn-sm bg-view bg-primary m-2">
+                <span class="fa-solid fa-play"></span>
+              </button>
+            </td>
+            <!-- </button> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal" id="myModalaudio1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="card-header p-1 pb-2 pt-1 rounded-top bg-skyblue">
+          <h2 style="margin-top:10px;color:white;font-weight: bold;">
+            &nbsp; <i class="fa-solid fa-volume-up" style="font-size: 17px;"></i>
+            &nbsp;&nbsp;Audio</h2>
+        </div><br>
+        <div style="margin-left: 100px;"> <audio controls id="html-audio" [src]="recording_path"></audio>
+        </div>
+  
+        <BR>
+  
+        <div class="text-center my-4">
+          <button class="btn-danger btn-sm text-white me-2" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white"></i> &nbsp;Close</button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- </div> -->
+  </div>

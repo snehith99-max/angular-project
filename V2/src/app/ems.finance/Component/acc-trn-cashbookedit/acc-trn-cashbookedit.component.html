@@ -1,0 +1,97 @@
+<div class="card">
+  <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+    <h3 class="fw-bolder text-white"><i class="fas fa-plus fw-bolder fs-3"></i> &nbsp;&nbsp; Edit Cash Book
+    </h3>
+  </div>
+  <form [formGroup]="reactiveForm">
+    <div class="d-flex flex-row m-6 flex-wrap" *ngFor="let data of cashbookdtl_List">    
+      <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+        <span class="font-bold">Branch Code<span class="ms-1 text-red"></span></span>
+       <p class="mt-3">{{data.branch_code}}</p>
+      </div>    
+      <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+        <span class="font-bold">Branch Name<span class="ms-1 text-red"></span></span>
+        <p class="mt-3">{{data.branch_name}}</p>       
+      </div>
+      <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+        <span class="font-bold">Parent Name<span class="ms-1 text-red"></span></span>
+        <p class="mt-3">{{data.parent_name}}</p>  
+      </div>
+      <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+        <span class="font-bold">GL Code<span class="ms-1 text-red"></span></span>
+        <p class="mt-3">{{data.gl_code}}</p>        
+      </div>
+    </div>
+    <div class="d-flex flex-row m-6 mt-0 flex-wrap">      
+      <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+        <span class="font-bold required">External GL Code<span class="ms-1 text-red"></span></span>
+        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+          <input type="text" formControlName="externalgl_code" 
+            class="form-control form-control-lg custom-input mb-3 mb-lg-0 custom-input mt-2" 
+            pattern="^(?!\s*$).+" />
+        </div>
+        <div *ngIf="externalgl_code.invalid && (externalgl_code.dirty || externalgl_code.touched)">
+          <div *ngIf="externalgl_code.errors?.['required']">
+            <span style="color:red;">External GL Code is required.</span>
+          </div>
+          <div *ngIf="externalgl_code.errors?.['pattern']">
+            <span style="color:red;">Invalid format.</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+        <span class="font-bold required">Date<span class="ms-1 text-red"></span></span>
+        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+          <input type="date" placeholder="DD-MM-YYYY" formControlName="transaction_date"
+            class="form-control  date-picker custom-input mb-3  bg-white custom-input mt-2" pattern="^(?!\s*$).+" />
+
+        </div>
+        <div *ngIf="transaction_date.invalid && (transaction_date.dirty || transaction_date.touched)">
+          <div *ngIf="transaction_date.errors?.['required']">
+            <span style="color:red;">Date is required.</span>
+          </div>
+          <div *ngIf="transaction_date.errors?.['pattern']">
+            <span style="color:red;">Invalid Date format.</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+        <span class="font-bold required">Opening Balance<span class="ms-1 text-red"></span></span>
+        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+          <input type="text" formControlName="openning_balance" class="form-control"
+          class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary custom-input mt-2"
+             pattern="^(?!\s*$).+" />
+        </div>
+        <div *ngIf="openning_balance.invalid && (openning_balance.dirty || openning_balance.touched)">
+          <div *ngIf="openning_balance.errors?.['required']">
+              <span style="color:red;">Opening Balance is required.</span>
+          </div>
+          <div *ngIf="openning_balance.errors?.['pattern']">
+              <span style="color:red;">Invalid format.</span>
+          </div>
+      </div>
+      </div>
+    </div>
+    <div class="d-flex flex-row m-6 flex-wrap"> 
+      <div class="col-12 col-lg-12 col-md-6 col-sm-12">
+        <span class="font-bold">Remarks<span class="ms-1 text-red"></span></span>
+        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+          <textarea class="form-control bg-white borderc-secondary mt-2" rows="3" formControlName="remarks" 
+            style="border-radius: 5px;" placeholder="Enter Remarks.."></textarea>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="text-center my-4">
+      <button class="btn-success btn-sm text-white me-4" (click)="update()" [disabled]="reactiveForm.invalid"
+        [ngStyle]="{ 'cursor': reactiveForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !reactiveForm.invalid,
+'btn-secondary text-white': reactiveForm.invalid }">
+        <i class="fas fa-check text-white fs-5"></i> &nbsp; Update
+      </button>
+
+      <button class="btn-primary btn-sm text-white me-4" (click)="back()">
+        <i class="fas fa-arrow-left"></i> &nbsp; Back
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,37 @@
+#scroll-bar-table {
+    // display: flex;
+    // flex-direction: column-reverse; /* Change to column-reverse to reverse the order */
+    overflow-y: auto;
+    max-height: 200px;
+    /* Set a max height or adjust as needed */
+  }
+   
+  #scroll-bar-table::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+  }
+   
+  #scroll-bar-table::-webkit-scrollbar {
+    width: 4px;
+    background-color: #F5F5F5;
+  }
+   
+  #scroll-bar-table::-webkit-scrollbar-thumb {
+    background-color: #003f75;
+  }
+  .nextbutton {
+    transition: 0.3s;
+    padding: 5px 10px;
+    color: #000000;
+    background-color: rgb(234 237 240);
+    border-radius: 5px;
+    position: relative;
+  }
+   
+  .nextbutton:hover {
+    color: white;
+    background-color: #009EF7;
+    box-shadow: 2px 3px 3px -1px rgba(0, 0, 0, 0.5) !important;
+    transform: translateY(-2px) !important;
+    cursor: pointer;
+  }

@@ -1,0 +1,322 @@
+<div class="card mt-4">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title fw-bold">Price Segment</h3>
+        </div>
+
+        <div class="col me-5">
+            <button type="button" class="btn-primary btn-sm text-white me-4 mt-2 float-end" data-bs-toggle="modal" data-bs-target="#myModaladd">
+                <span class="fa-solid fa-plus text-white fs-6 fw-bold"></span>&nbsp; Add Price Segment
+            </button>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded mt-2">
+            <table id="pricesegment_list" class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                <thead>
+                    <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th style="width: 1%;">S.No </th>
+                        <th>Prefix</th>
+                        <th>Price Segment</th>
+                        <th style="width: 10%; text-align: left;" >Discount Percentage</th>
+                        <th class="text-center">Assigned Product</th>
+                        <th class="text-center">Assigned Customer</th>
+                        <th class="text-center bg-lightblue ">Action</th>                     </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of pricesegment_list; let i=index;" class="align-middle">
+                        <td style="width: 1%;">{{i+1}}</td>
+                        <td>{{data.pricesegment_prefix}}</td>
+                        <td>{{data.pricesegment_name}}</td>
+                        <td style="width: 10%;">{{data.discount_percentage}}</td>
+                        <td class="text-center " style="width: 150px;" >
+                            <a class="ms-6 count font-bold">{{data.productcount}}</a>
+                          </td>
+                          <td class="text-center" style="width: 80px;">
+                            <a class="ms-6 count font-bold">{{data.customercount}}</a>
+                          </td>
+                          <td class="align-middle" style="width: 10%; text-align: center;" class="text-center text-nowrap">
+                            <button title="Edit" type="button" class="btn btn-icon btn-sm bg-etdark me-2" (click)="openModaledit(data)" data-bs-toggle="modal" data-bs-target="#myModaledit">
+                                <span class="fa-solid fa-pencil text-white fs-6"></span>
+                            </button>
+                            <button title="Assign Customer" type="button" class="btn btn-icon btn-sm bg-primary me-2" (click)="assign(data.pricesegment_gid)" data-bs-toggle="modal">
+                                <span><i class="fa-solid fas fa-users fs-3"></i></span>
+                            </button>
+                            <button title="UnAssign Customer" type="button" class="btn btn-icon btn-sm bg-warning me-2" (click)="Unassign(data.pricesegment_gid)" data-bs-toggle="modal">
+                                <span><i class="fa-solid fa-users-slash fs-3"></i></span>
+                            </button>
+                            <button title="Assign Product" type="button" class="btn btn-icon btn-sm me-2" *ngIf="data.has_child != 'N'" (click)="assignproducts(data.pricesegment_gid)" style="background: radial-gradient(circle, rgb(92, 89, 255) 0%, rgb(77, 88, 246) 100%);">
+                                <i class="fa-solid fa-cart-plus fs-3" style="font-size: 16px;"></i>
+                            </button>
+                            <button title="Unassign Product" type="button" class="btn btn-icon btn-sm me-2" *ngIf="data.has_child != 'N'" (click)="unassignproducts(data.pricesegment_gid)" style="background: radial-gradient(circle, #47acbe 0%, #4aa5b9 100%);">
+                                <i class="fa-solid fa-cart-shopping fs-3" style="font-size: 16px;"></i>
+                            </button>
+                            <!-- <button title="Delete" type="button" class="btn btn-icon btn-sm bg-danger me-2" (click)="openModaldelete(data.pricesegment_gid)" data-bs-toggle="modal" data-bs-target="#myModaldelete">
+                                <span class="fa-solid fa-trash text-white fs-6"></span>
+                            </button> -->
+                            <span (click)="toggleOptions(data.pricesegment_gid)" style="cursor: pointer;">
+                                <button class="btn me-2 p-1 "><span class="fa-solid fa-ellipsis-vertical fs-1 "
+                                    style="color: #4d4d4d;"></span></button>
+                                <div *ngIf="showOptionsDivId === data.pricesegment_gid"
+                                  class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                                  <div class="d-flex p-3 pb-3 Icon_hover" (click)="openModaldelete(data.pricesegment_gid)" data-bs-toggle="modal" data-bs-target="#myModaldelete"
+                                    *ngIf="data.has_child != 'N'">
+                                    <span><i class="fa-solid fa-trash  fs-3 me-4"></i></span>
+                                    <span>Delete</span>
+                                  </div>
+                                 
+                                </div>
+                              </span>
+                        </td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- The Modal ADD UNIT CLASS DETAILS-->
+<form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="modal" id="myModaladd" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                    <h2 class="fw-bolder ms-5 mt-4 text-white"><span class="fa-solid fa-plus text-white fs-6"></span>&nbsp;Add Price Segment</h2>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="d-flex flex-row m-6 flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required"  [ngClass]
+                            ="{'error_input_field': pricesegment_prefix.invalid && pricesegment_prefix.touched || pricesegment_prefix.errors?.['pattern'] }">Prefix</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input formControlName="pricesegment_prefix" type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input" [ngStyle]="{'border-color':pricesegment_prefix.invalid && pricesegment_prefix.touched ? 'red' : 'rgb(209, 209, 209)'}" placeholder="Enter Prefix " name="pricesegment_prefix"/>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required" [ngClass]
+                            ="{'error_input_field': pricesegment_code.invalid && pricesegment_code.touched || pricesegment_code.errors?.['pattern'] }">Price Segment Code</span>
+                            <div class="mt-2">
+                                <input formControlName="pricesegment_code" type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input" [ngStyle]="{'border-color': pricesegment_code.invalid && pricesegment_code.touched ? 'red': 'rgb(209, 209, 209)'}" placeholder="Enter Price Segment Code" name="pricesegment_code" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row m-6 flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required" [ngClass]
+                            ="{'error_input_field': pricesegment_name.invalid && pricesegment_name.touched || pricesegment_name.errors?.['pattern'] }">Price Segment Name</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input formControlName="pricesegment_name" type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input" [ngStyle]="{'border-color': pricesegment_name.invalid && pricesegment_name.touched ? 'red' : 'rgb(209, 209, 209)' }" placeholder="Enter Price Segment Name" name="pricesegment_name" />
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12 "><span class="font-bold required" [ngClass]
+                            ="{'error_input_field': discount_percentage.invalid && discount_percentage.touched || discount_percentage.errors?.['pattern'] }">Discount Percentage (%)</span>
+                           <div class=" mt-2 input-group mb-3">
+                            <input formControlName="discount_percentage" type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input" [ngStyle]="{'border-color': discount_percentage.invalid && discount_percentage.touched ? 'red' : 'rgb(209, 209, 209)' }" placeholder="Enter Discount Percentage" name="discount_percentage" />
+                            
+                          </div>
+                        </div>
+
+                        
+                          
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="text-center my-4">
+                    <button class="btn-success text-white me-3" (click)="onsubmit()" [disabled]="reactiveForm.invalid" data-bs-dismiss="modal">
+                        <i class="fas fa-check text-white fs-5 me-4"></i>Submit
+                    </button>
+                    <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal" (click)="onclose()">
+                        <i class="fas fa-close text-white me-4"></i>Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- The Modal EDIT UNIT CLASS DETAILS-->
+<form [formGroup]="reactiveFormEdit" #form="ngForm">
+    <div class="modal" id="myModaledit" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                    <h2 class="fw-bolder ms-5 mt-4 text-white">
+                        <i class="fa-solid fa-pen-to-square fs-2 me-4"></i>Edit Price Segment
+                    </h2>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <input class="form-control form-control-lg" formControlName="pricesegment_gid" hidden type="text" placeholder="Enter Entity" aria-label=".form-control-lg example" autocomplete="off">
+                    
+                    <div class="d-flex flex-row m-6 flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required" [ngClass]
+                            ="{'error_input_field': editpricesegment_prefix.invalid && editpricesegment_prefix.touched }">Prefix</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input formControlName="editpricesegment_prefix" required type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input" [ngStyle]="{'border-color': editpricesegment_prefix.invalid && editpricesegment_prefix.touched ? 'red' : 'rgb(209, 209, 209)' }" placeholder="Enter Prefix "  name="editpricesegment_prefix"/>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required" [ngClass]
+                            ="{'error_input_field': pricesegmentedit_code.invalid && pricesegmentedit_code.touched || pricesegmentedit_code.errors?.['pattern'] }">Price Segment Code</span>
+                            <div class="mt-2">
+                                <input formControlName="pricesegmentedit_code" type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input" [ngStyle]="{'border-color':pricesegmentedit_code.invalid && pricesegmentedit_code.touched ? 'red' : 'rgb(209, 209, 209)' }" placeholder="Enter Price Segment Code" pattern="^(?!\s*$).+" name="pricesegmentedit_code"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row m-6 flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required" [ngClass]
+                            ="{'error_input_field': pricesegmentedit_name.invalid && pricesegmentedit_name.touched || pricesegmentedit_name.errors?.['pattern'] }">Price Segment Name</span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input formControlName="pricesegmentedit_name" type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input" [ngStyle]="{'border-color': pricesegmentedit_name.invalid && pricesegmentedit_name.touched ? 'red' : 'rgb(209, 209, 209)' }" placeholder="Enter Price Segment Name" pattern="^(?!\s*$).+" name="pricesegmentedit_name"/>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required" [ngClass]
+                            ="{'error_input_field': editdiscount_percentage.invalid && editdiscount_percentage.touched || editdiscount_percentage.errors?.['pattern'] }">Discount Percentage (%)</span>
+                            <div class="mt-2">
+                                <div style="display: flex; flex-direction: column;">
+                                    <input formControlName="editdiscount_percentage" type="Number" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input" [ngStyle]="{'border-color': editdiscount_percentage.invalid && editdiscount_percentage.touched ? 'red' : 'rgb(209, 209, 209)' }" placeholder="Enter Discount Percentage" name="editdiscount_percentage" />
+                                    <!-- <span style="margin-left: 160px; margin-top: -26px; font-weight: bold;">%</span>                                     -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                <!-- Modal footer -->
+                <div class="text-center my-4">
+                    <!-- <button class="btn-success text-white me-3" (click)="onupdate()"  data-bs-dismiss="modal">
+                        <i class="fas fa-check text-white fs-5 me-4"></i>Update
+                    </button> -->
+                    <button type="update" class="btn-success btn-sm text-white me-2" data-bs-dismiss="modal"
+                        [disabled]="reactiveFormEdit.invalid"
+                        [ngClass]="{'primary-button': !reactiveFormEdit.invalid,'secondary-button': reactiveFormEdit.invalid}"
+                        (click)="onupdate()">
+                        <i class="fas fa-check text-white fs-5"></i> &nbsp; Update
+                    </button>
+                    <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white me-4"></i>Close
+                    </button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- The Modal Delete -->
+<div class="modal" id="myModaldelete" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered del_modal-dialog">
+        <div class="modal-content del_modal-content">
+            <div class="text-center my-4">
+                <h2 class="fw-bold">Are you sure?</h2>
+                <p style="display: block;">Do You Want To Delete the Record ?</p>
+                <div class="text-center my-4">
+                    <button class="btn-danger btn-sm text-white me-3" (click)="ondelete()" data-bs-dismiss="modal">
+                        <i class="fas fa-trash text-white fs-5 me-2"></i>Delete
+                    </button>
+
+                    <button class="btn-primary btn-sm text-white me-4" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white me-2"></i>Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal modal-lg" id="myModalassigncustomer" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                <h2 class="fw-bolder ms-5 mt-4 text-white">
+                    <i class="bi bi-people fs-2 me-3"></i>Assign Customer to Price Segment
+                </h2>
+            </div>
+
+            <div class="text-center my-4">
+                <span class="fw-bold fs-3">Price Segment Code</span>
+                <span class="fw-bold fs-4 text-red ms-3">{{teamname}}</span>
+            
+                <span class="fw-bold fs-3 ms-10">Price Segment Name</span>
+                <span class="fw-bold fs-4 text-red ms-3">{{branch_name}}</span>
+            </div>
+
+            <div class="container-fluid">
+                <dual-list [sort]="keepSorted" [source]="source" [key]="key" [key1]="key1" [display]="display"
+                    [filter]="filter" [(destination)]="confirmed" height="265px" [format]="format"
+                    [disabled]="disabled" (parentApiCall) = "getListFromManagerList($event)"></dual-list>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="assignedproducts" tabindex="-1" data-bs-backdrop='static'
+aria-labelledby="editamlcategoryLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered ">
+    <div class="modal-content">
+      <div class="d-flex justify-content-center">
+        <div style="max-height: 160px;" class="overflow-auto p-3 col-10" id="scroll-bar-table">
+          <table id="LeadsCountList"
+            class="table table-striped table-bordered table-hover table-sm table-responsive">
+            <thead style="background-color:#def0ff;">
+              <tr>
+                <th class="text-center">Product Code</th>
+                <th class="text-center">Product Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of pricesegmentproduct_list; let i=index;">
+                <td class="text-center">{{data.product_code}}</td>
+                <td class="text-center">{{data.product_name}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="text-center mb-3 mt-2">
+        <button type="button" class="btn-danger text-white" data-bs-dismiss="modal">
+          <i class="fa fa-close fs-5 text-center"></i>
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="assignedcustomers" tabindex="-1" data-bs-backdrop='static'
+aria-labelledby="editamlcategoryLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered ">
+  <div class="modal-content ">
+    <div class="d-flex justify-content-center">
+      <div style="max-height: 160px;" class="overflow-auto p-3 col-10 " id="scroll-bar-table">
+        <table id="LeadsCountList"
+          class="table table-striped table-bordered table-hover table-sm table-responsive">
+          <thead style="background-color:#def0ff;">
+            <th class="text-center">CustomerId</th>
+            <th class="text-center">Customer Name</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of pricesegmentcustomer_list; let i=index;">
+              <td class="text-center">{{data.customer_id}}</td>
+              <td class="text-center">{{data.customer_name}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="text-center mb-3 mt-2">
+      <button type="button" class="btn-danger text-white" data-bs-dismiss="modal">
+        <i class="fa fa-close fs-5 text-center"></i>
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+</div>

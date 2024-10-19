@@ -1,0 +1,513 @@
+<div class="row justify-content-center align-items-center" style="margin-top: 10px;">
+    <div class="col-lg-2 col-md-2 col-sm-2">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-darkgreen"
+            style="background-color:#ffffff;">
+            <div class="card-body12">
+                <!-- routerLink="/smr/SmrMstTaxsegmenttotalcustomers" -->
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Total Vendor</h5>
+                        <div *ngFor="let data of TaxSegmentVendor_list">
+                            <h4 class="badge-green badge-outline-green badge-secondary fs-4 mt-2">
+                                {{data.total_vendor}}</h4>
+                        </div>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-darkgreens text-white ms-auto">
+                        <i class="fa-solid fa-people-roof fs-3"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-orange"
+            style="background-color:#ffffff;">
+
+            <div class="card-body12">
+                <!-- routerLink="/smr/SrmMstTaxSegmentWithinState" -->
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Assigned</h5>
+                        <div *ngFor="let data of TaxSegmentVendor_list">
+                            <h4 class="badge-orange  badge-outline-orange fs-4 mt-2">
+                                {{data.assign_vendor}}</h4>
+                        </div>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-brown text-white ms-auto"><i
+                        class="fa-solid fa fa-users"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-2 col-md-2 col-sm-2">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-pink "
+            style="background-color:#ffffff;">
+            <div class="card-body12">
+                <!-- routerLink="/smr/SrmMstTaxSegmentUnassign" -->
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Unassigned</h5>
+                        <div *ngFor="let data of TaxSegmentVendor_list">
+                            <h4 class="badge1  badge-outline1 fs-4 mt-2 ">{{data.unassign_vendor}}</h4>
+                        </div>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-violet text-white ms-auto"><i class="fa-solid fa-users-slash"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-container *ngIf="page==='tax'">
+<div class="card ">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title fw-bold">Tax Segment Summary</h3>
+        </div>
+
+        <div class="col me-5">
+            <button type="button" class="btn-primary btn-sm text-white me-4 float-end" data-bs-toggle="modal" data-bs-target="#taxsegmentadd">
+               <span class="fa-solid fa-plus text-white fs-6 fw-bold"></span>&nbsp;Add Segment
+            </button>
+        </div>
+    </div>
+  
+        <div class="table-responsive">
+            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded mt-2">
+                <table id="taxsegment_list"
+                    class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                    <thead>
+
+                        <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                            <th style="width: 2%;">S.No</th>
+                            <th>Prefix Code</th>
+                            <th>Tax Segment</th>
+                            <th>Description</th>                                                              
+                            <th style="text-align: center;" >Assigned Vendors</th>                                                                    
+                            <th>Status</th>     
+                            <th class="text-center bg-lightblue ">Action</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of taxsegment_list; let i=index;" class="align-middle">
+                            <td>{{i+1}}</td>
+                            <td>{{data.taxsegment_code}}</td>
+                            <td>{{data.taxsegment_name}}</td>
+                            <td>{{data.taxsegment_description}}</td>
+                            <td style="text-align: center;" >
+                                <a class="ms-6 count font-bold ">{{data.assignvendor}}</a>
+                            </td>                            
+                            <td>
+                                <span *ngIf="data.active_flag==='Y'" class="badge bg-success text-white ">Active</span>
+                                <span *ngIf="data.active_flag==='N'" class="badge bg-danger text-white ">Inactive</span>
+                            </td>
+
+                                 <td class="text-center text-nowrap">
+
+                                    <button title="Edit" type="button" class="btn btn-icon btn-sm me-2" style="background-color: #009688;" (click)="openModaledit(data)" data-bs-toggle="modal" data-bs-target="#taxsegmentedit">
+                                        <span class="fa-solid fa-pencil text-white fs-6"></span>
+                                    </button>
+                                        
+                                            <button title="Assign Vendor" type="button" class="btn btn-icon btn-sm me-2" style="background: radial-gradient(circle, rgb(92, 89, 255) 0%, rgb(77, 88, 246) 100%);"  
+                                            (click)="AssignVendor(data.taxsegment_gid)">
+                                                <span class="fa-solid fa-users text-white fs-6"></span>                    
+                                            </button>
+                                            <button title="Unassign Vendor" type="button" class="btn btn-icon
+                                            btn-sm bg-warning me-2" 
+                                             (click)="UnAssignVendor(data.taxsegment_gid)">
+                                                <span class="fa-regular fas fa-users-slash fs-6"></span>                
+                                            </button>
+
+                                            <!-- <button title="UnAssign Customer" type="button" class="btn btn-icon
+                                            btn-sm bg-warning me-2" (click)="openModalunAssignCustomer(data.taxsegment_gid)"
+                                            data-bs-toggle="modal">
+                                            <span><i class="fa-regular fas fa-users fs-3"></i></span>
+                                          </button> -->
+
+                                          
+                                            <button title="Delete" type="button" (click)="openModaldelete(data.taxsegment_gid)" data-bs-toggle="modal" data-bs-target="#taxsegmentdelete" 
+                                            class="btn btn-icon btn-sm me-2" style="background-color: #dc3545;">
+                                                <span class="fa-solid fa-trash text-white fs-6"></span>
+                                            </button>
+
+                                             <!-- <div (click)="toggleOptions(data.taxsegment_gid)" style="cursor: pointer;">
+                                                <button class="btn me-2 p-1">
+                                                    <span class="fa-solid fa-ellipsis-vertical fs-1" style="color: #4d4d4d;"></span>
+                                                </button>
+                                                <div *ngIf="showOptionsDivId === data.taxsegment_gid" class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                                                    <div class="d-flex p-3 pb-3 Icon_hover" (click)="openModaledit(data)"  data-bs-toggle="modal"
+                                                    data-bs-target="#taxsegmentedit" >
+                                                        <span><i class="fa-solid fa-pencil fs-3 me-4"></i></span>
+                                                        <span>Edit</span>
+                                                    </div>
+                                                    <div class="d-flex p-3 pb-3 Icon_hover" (click)="AssignVendor(data.taxsegment_gid)">                                                    
+                                                        <span><i class="fa-solid  fa-users fs-3 me-4"></i></span>
+                                                        <span>Assign Vendor</span>
+                                                    </div>
+
+                                                    <div class="d-flex p-3 pb-3 Icon_hover"  (click)="UnAssignVendor(data.taxsegment_gid)">                                                    
+                                                        <span><i class="fa-solid  fa-users-slash fs-3 me-4"></i></span>
+                                                        <span>UnAssign Vendor</span>
+                                                    </div>
+
+                                                    <div class="d-flex p-3 pb-3 Icon_hover" (click)="openModaldelete(data.taxsegment_gid)"
+                                                    data-bs-toggle="modal" data-bs-target="#taxsegmentdelete">
+                                                        <span><i class="fa-solid fa-trash fs-3 me-4"></i></span>
+                                                        <span>Delete</span>
+                                                    </div>
+                                                </div>
+                                            </div>  -->
+                                           
+                            </td> 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+</div>
+</ng-container>
+<!-- add -->
+<form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="modal" id="taxsegmentadd" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <!-- <div class="card-header p-1 pb-2 pt-1  rounded-top bg-primary">
+                    <h2 class="ms-2" style="margin-top:10px;color:white;font-weight: bold;"> <span class="fa-solid fa-plus text-white fs-3"></span>&nbsp;Add Tax Segment</h2>
+                </div> -->
+
+                <div class=" bg-primary rounded-top">
+                    <h3 class="p-4 pt-5 text-white fw-bold"> <i class="fas fa-plus fs-5"></i>&nbsp;&nbsp;&nbsp;
+                        Add Tax Segment
+                    </h3>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row"><span class="font-bold required"[ngClass]="{'error_input_field': taxsegment_code.invalid && taxsegment_code.touched}"><b>Tax Segment Prefix</b></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+
+                            <!-- <input class="form-control form-control-lg" formControlName="entity_name" pattern="^(?!\s*$).+" type="text" placeholder="Enter Entity" aria-label=".form-control-lg example" autocomplete="off" required  [class.is-invalid]="entity_name.invalid && (entity_name.dirty || entity_name.touched)">
+                                             -->
+                            <input formControlName="taxsegment_code" type="text" class="
+                                             form-control form-control-lg form-control-solid
+                                             custom-input
+                                             mb-3 mb-lg-0
+                                             bg-white
+                                             custom-input
+                                           " [ngStyle]="{
+                                             'border-color':
+                                             taxsegment_code.invalid && taxsegment_code.touched
+                                                 ? 'red'
+                                                 : 'rgb(209, 209, 209)'
+                                           }" pattern="^(?!\s*$).+" name="taxsegment_code" required  />
+                        </div>
+
+                    </div>
+                 
+                    <!-- <div *ngIf="taxsegment_code.invalid && (taxsegment_code.dirty || taxsegment_code.touched)">
+                        <div *ngIf="taxsegment_code.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format.</span>
+                        </div>
+                    </div> -->
+                    <br>
+                    <div class="row"><span class="font-bold required" 
+
+                        [ngClass]="{'error_input_field': taxsegment_name.invalid && taxsegment_name.touched}"><b>Tax Segment </b></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+
+                            <!-- <input class="form-control form-control-lg" formControlName="entity_name" pattern="^(?!\s*$).+" type="text" placeholder="Enter Entity" aria-label=".form-control-lg example" autocomplete="off" required  [class.is-invalid]="entity_name.invalid && (entity_name.dirty || entity_name.touched)">
+                                             -->
+                            <input formControlName="taxsegment_name" type="text" class="
+                                             form-control form-control-lg form-control-solid
+                                             custom-input
+                                             mb-3 mb-lg-0
+                                             bg-white
+                                             custom-input
+                                           " [ngStyle]="{
+                                             'border-color':
+                                             taxsegment_name.invalid && taxsegment_name.touched
+                                                 ? 'red'
+                                                 : 'rgb(209, 209, 209)'
+                                           }" pattern="^(?!\s*$).+" name="taxsegment_name" required />
+                        </div>
+
+                    </div>
+                
+                  
+                    <br>
+
+                    <div class="row"><span class="font-bold"><b>Description </b></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+
+                            <!-- <input class="form-control form-control-lg" formControlName="entity_name" pattern="^(?!\s*$).+" type="text" placeholder="Enter Entity" aria-label=".form-control-lg example" autocomplete="off" required  [class.is-invalid]="entity_name.invalid && (entity_name.dirty || entity_name.touched)">
+                                                 -->
+                            <textarea formControlName="taxsegment_description" type="text" class="
+                                                 form-control form-control-lg form-control-solid
+                                                 custom-input
+                                                 mb-3 mb-lg-0
+                                                 bg-white
+                                                 custom-input borderc-secondary
+                                               " name="taxsegment_description" row="3"
+                                ></textarea>
+                        </div>
+
+                    </div>
+                   
+    
+                    <br>
+                    
+                    <div class="col-6">
+                        <span class="fw-bold ">Active Flag</span><span class="ms-1 text-red">*</span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                            <div
+                                class="form-check form-check-custom mb-3 mb-lg-0 form-check-success form-check-solid form-check-sm">
+                                <input class="form-check-input mb-3 mb-lg-0" type="radio" name="flagtracker" id="Y"
+                                    formControlName="active_flag" value="Y">
+                                <label class="form-check-label text-gray-700 text-nowrap" for="Yes">Yes</label>
+                            </div>
+                            <div
+                                class="form-check form-check-custom mb-3 mb-lg-0 form-check-success form-check-solid form-check-sm ms-10">
+                                <input class="form-check-input mb-3 mb-lg-0" type="radio" name="flagtracker"
+                                    formControlName="active_flag" value="N" id="N">
+                                <label class="form-check-label text-gray-700 text-nowrap" for="No">No</label>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- Modal footer -->
+                    <div class="text-center my-4">
+                        <button (click)="onsubmit()" [disabled]="reactiveForm.invalid"
+                            [ngStyle]="{ 'cursor': reactiveForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !reactiveForm.invalid,
+                        'btn-secondary text-white': reactiveForm.invalid }" data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+                        </button> &nbsp;&nbsp;
+                        <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+                            <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<form [formGroup]="reactiveFormEdit" #form="ngForm">
+    <div class="modal" id="taxsegmentedit" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                
+
+
+                <!-- <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                    <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<span
+                        class="fa-solid fa-pencil text-white  fs-3"></span> &nbsp;Edit Tax Segment </h2>
+
+                </div> -->
+                <!-- <div class="card-header pb-3 pt-6 rounded-top bg-primary">
+                    <div>
+                        <h2 class="fw-bolder text-white">
+                            &nbsp;&nbsp;<i class="fa-solid fa-pencil fs-2"></i>&nbsp; Edit Tax Segment</h2>
+                    </div>
+
+                </div> -->
+
+                <div class=" bg-primary rounded-top">
+                    <h3 class="p-4 pt-5 text-white fw-bold"> <i class="fas fa-pencil fs-5"></i>&nbsp;&nbsp;&nbsp;
+                        Edit Tax Segment
+                    </h3>
+                </div>
+
+                <div class="modal-body">
+                    <input type="hidden" formControlName = "taxsegment_gid">
+                    <div class="row"><span class="font-bold"><b>Tax Segment Prefix</b><span class="ms-1 text-red"></span></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                            <input [readonly]="isReadOnly" formControlName="taxsegment_code_edit" type="" class="
+                                form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                [ngStyle]="{'border-color':taxsegment_code_edit.invalid && taxsegment_code_edit.touched ? 'red' : 'rgb(209, 209, 209)'}" 
+                                pattern="^(?!\s*$).+" name="taxsegment_code_edit" required />
+                        </div>
+                    </div>
+                    <div
+                        *ngIf="taxsegment_code_edit.invalid && (taxsegment_code_edit.dirty || taxsegment_code_edit.touched)">
+                        <div *ngIf="taxsegment_code_edit.errors?.['required']">
+                            <span style="color:red;">Tax Segment Code is required.</span>
+                        </div>
+                    </div>
+                    <div
+                        *ngIf="taxsegment_code_edit.invalid && (taxsegment_code_edit.dirty || taxsegment_code_edit.touched)">
+                        <div *ngIf="taxsegment_code_edit.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format.</span>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row"><span class="font-bold required" 
+                        [ngClass]="{'error_input_field': taxsegment_name_edit.invalid && taxsegment_name_edit.touched}"
+                        ><b>Tax Segment  </b></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                            <input formControlName="taxsegment_name_edit" type="text" class="
+                                                 form-control form-control-lg form-control-solid
+                                                 custom-input
+                                                 mb-3 mb-lg-0
+                                                 bg-white
+                                                 custom-input
+                                               " [ngStyle]="{
+                                                 'border-color':
+                                                 taxsegment_name_edit.invalid && taxsegment_name_edit.touched
+                                                     ? 'red'
+                                                     : 'rgb(209, 209, 209)'
+                                               }" pattern="^(?!\s*$).+" name="taxsegment_name_edit" required />
+                        </div>
+
+                    </div>
+                  
+                    <div
+                        *ngIf="taxsegment_name_edit.invalid && (taxsegment_name_edit.dirty || taxsegment_name_edit.touched)">
+                        <div *ngIf="taxsegment_name_edit.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format.</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row"><span class="font-bold"><b>Description </b></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                            <textarea formControlName="taxsegment_description_edit" type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                                name="taxsegment_description_edit" row="3">
+                            </textarea>
+                        </div>
+
+                    </div>
+
+                    <!-- <div
+                        *ngIf="taxsegment_description_edit.invalid && (taxsegment_description_edit.dirty || taxsegment_description_edit.touched)">
+                        <div *ngIf="taxsegment_description_edit.errors?.['required']">
+                            <span style="color:red;">Tax Segment Description is required.</span>
+                        </div>
+                    </div>
+                    <div
+                        *ngIf="taxsegment_description_edit.invalid && (taxsegment_description_edit.dirty || taxsegment_description_edit.touched)">
+                        <div *ngIf="taxsegment_description_edit.errors?.['pattern']">
+                            <span style="color:red;">Invalid Format.</span>
+                        </div>
+                    </div> -->
+
+
+
+                    <br>
+
+                    <div class="col-6">
+                        <span class="fw-bold ">Active Flag</span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                            <div
+                                class="form-check form-check-custom mb-3 mb-lg-0 form-check-success form-check-solid form-check-sm">
+                                <input class="form-check-input mb-3 mb-lg-0" type="radio" name="flagtracker" id="Y"
+                                    formControlName="active_flag_edit" value="Y">
+                                <label class="form-check-label text-gray-700 text-nowrap" for="Yes">Yes</label>
+                            </div>
+                            <div
+                                class="form-check form-check-custom mb-3 mb-lg-0 form-check-success form-check-solid form-check-sm ms-10">
+                                <input class="form-check-input mb-3 mb-lg-0" type="radio" name="flagtracker"
+                                    formControlName="active_flag_edit" value="N" id="N">
+                                <label class="form-check-label text-gray-700 text-nowrap" for="No">No</label>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="text-center my-4">
+                        <button class="btn-success btn-sm text-white me-2" (click)="onupdate()" [disabled]="reactiveFormEdit.invalid" [ngClass]="{
+                                                    'primary-button': !reactiveFormEdit.invalid,
+                                                    'secondary-button': reactiveFormEdit.invalid
+                                                     }" data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5 "></i> &nbsp;Update
+                        </button> &nbsp;&nbsp;
+                        <button (click)="onclose()" class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+                            <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="modal" id="taxsegmentdelete" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content del_modal-content">
+            <div class="text-center my-4">
+                <h2><b>Are you sure?</b></h2>               
+                <p style="display: block;">Do You Want To Delete the Record ?</p><br>
+                <div class="text-center my-4">
+                    <button class="btn-danger btn-sm text-white me-3" (click)="ondelete()" data-bs-dismiss="modal">
+                        <i class="fas fa-trash text-white fs-5 me-2"></i>Delete
+                      </button>
+                      <button class="btn-primary btn-sm text-white me-4" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white me-2"></i>Close
+                      </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="modal fade" id="myModalUpdateimage9" tabindex="-1" data-bs-backdrop='static'
+    aria-labelledby="editamlcategoryLabel" aria-hidden="true" data-bs-keyboard="false">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content  d-flex justify-content-center">
+            <div class="card-header p-1 pb-1 pt-1 rounded-top bg-primary"
+                style="display: flex; align-items: center; height: 40px;">
+
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                        <!-- <table class="table table-striped table-bordered table-hover table-sm table-responsive mt-4">
+                            <tbody>
+                                <tr *ngFor="let data of tax_list; let i=index;">
+                                    <td class="px-0 text-center">{{i+1}}</td>
+                                    <td>{{data.tax_name}}</td>
+                                </tr>
+                            </tbody>
+                        </table> -->
+                    </div>
+                </div>
+                <div class="text-center my-4">
+                    <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal"
+                        style="background-color: red;">
+                        <i class="fas fa-arrow-left text-white"></i> &nbsp;Back
+                    </button>&nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //Assign Customer// -->
+
+
+<!-- //Assign Vendor// -->
+
+
+<!-- <ng-container *ngIf="page==='withinstatecustomer'">
+    <app-smr-mst-taxsegmentwithinstatecustomer></app-smr-mst-taxsegmentwithinstatecustomer>
+</ng-container>
+<ng-container *ngIf="page==='intersate'">
+    <app-smr-mst-taxsegmentinterstatecustomer></app-smr-mst-taxsegmentinterstatecustomer>
+</ng-container>
+<ng-container *ngIf="page==='totalcustomer'">
+    <app-smr-mst-taxsegmenttotalcustomers></app-smr-mst-taxsegmenttotalcustomers>
+</ng-container>
+<ng-container *ngIf="page==='overseas'">
+    <app-smr-mst-taxsegmentoverseascustomer></app-smr-mst-taxsegmentoverseascustomer>
+</ng-container>
+<ng-container *ngIf="page==='unassign'">
+    <app-smr-mst-taxsegmentunassigncustomer></app-smr-mst-taxsegmentunassigncustomer>
+</ng-container>
+<ng-container *ngIf="page==='other'">
+    <app-smr-mst-taxsegmentothersegments></app-smr-mst-taxsegmentothersegments>
+</ng-container>
+     -->

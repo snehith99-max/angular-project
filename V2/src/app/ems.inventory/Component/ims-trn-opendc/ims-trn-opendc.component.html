@@ -1,0 +1,125 @@
+
+<div class="card mt-4">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+          <h3 class="card-title fw-bold">Open DC</h3>
+        </div>
+        <div class="col me-5">
+          <button type="button" class="btn-primary btn-sm text-white me-4 float-end" data-bs-toggle="modal"
+            data-bs-target="#myModaladd" routerLink="/ims/ImsTrnOpendccreate"><i class="fas fa-plus fw-bold"></i>&nbsp;&nbsp;
+            Create Open DC
+          </button>
+        </div>
+      </div> 
+      <div class="table-responsive mt-3 me-5">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded ">
+            <table id="opndcsummary_list" class="table table-striped table-row-bordered gy-5 gs-7 align-middle">
+            <thead>
+              <tr class="fw-bolder  fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                <th style="width: 1%;">S.No</th>
+                <th style="width: 15%;">DC Date</th>
+                <th style="width: 20%;">DC Reference.No</th>
+                <th>Entity</th>
+                <!-- <th>Details</th> -->
+                <th style="width: 10%;">Status</th>
+                <th class="text-center bg-lightblue ">Action</th> 
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of opndcsummary_list; let i=index;" >
+                    <td>{{i+1}}</td>
+                    <td>{{data.directorder_date}}</td>
+                    <td>{{data.directorder_refno}}</td> 
+                    <td>{{data.branch_name}}</td> 
+                    <!-- <td class="text-center text-nowrap">
+                      <label title="Product Details" data-bs-toggle="modal" data-bs-target="#myModalUpdateimage9"
+                          (click)="Details(data.parameter,data.directorder_gid)">
+                          <i class="fas fa-question-circle fa-5x text-primary fs-2"></i>
+                      </label>
+                  </td> -->
+                    <td>{{data.delivery_status}}</td>
+                          <td class="text-center text-nowrap">
+                            <!-- <span (click)="toggleOptions(data.directorder_gid)">
+                                <button class="btn me-2 p-1">
+                                    <span class="fa-solid fa-ellipsis-vertical fs-1" style="color: #4d4d4d;"></span>
+                                </button>
+                            </span>
+                            <div *ngIf="showOptionsDivId === data.directorder_gid"
+                                 class="pb-0 rounded bg-white cursor-pointer icon_menu" 
+                                 style="margin-right:-15px; margin-top: -15px;">
+                                <div class="d-flex p-3 pb-3 Icon_hover" 
+                                     (click)="PrintPDF(data.directorder_gid)" 
+                                     *ngIf="data.has_child != 'N'">
+                                    <span><i class="fa-solid fa-file-pdf fs-3 me-4"></i></span>
+                                    <span>Pdf</span>
+                                </div>
+                                <div class="d-flex p-3 pb-3 Icon_hover" 
+                                (click)="onView(data.directorder_gid)" 
+                                *ngIf="data.has_child != 'N'">
+                               <span><i class="fa-solid fa-eye fs-3 me-4"></i></span>
+                               <span>View</span>
+                           </div>
+                            </div> -->
+
+                            <button title="View" type="button" class="btn btn-icon btn-sm bg-primary me-2"
+                            (click)="onView(data.directorder_gid)" data-bs-toggle="modal" *ngIf="data.has_child != 'N'"><span
+                              class="fa-solid fa-eye text-white fs-6"></span></button>
+                            <button title="Pdf" type="button" data-bs-toggle="modal" data-bs-target="#myModalPdf"
+                              class="btn btn-icon btn-sm background-color6 me-2 "  *ngIf="data.has_child != 'N'"
+                              style="background: radial-gradient(circle, #47acbe 0%, #4aa5b9 100%);"><span
+                              class="fa-solid fa-file-pdf fs-6" (click)="PrintPDF(data.directorder_gid)"></span>
+                            </button>
+                        </td> 
+                  </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+<!-- details popup -->
+<div class="modal fade" id="myModalUpdateimage9" tabindex="-1" data-bs-backdrop='static'
+aria-labelledby="editamlcategoryLabel" aria-hidden="true" data-bs-keyboard="false">
+<div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content  d-flex justify-content-center">
+        <div class="card-header p-1 pb-1 pt-1 rounded-top bg-primary"
+            style="display: flex; align-items: center; height: 40px;">
+            <h3 style="margin-top: 10px; color: white; font-weight: bold" class="mt-8">
+             &nbsp;&nbsp;Product Details
+           </h3>
+        </div>
+        <div class="modal-body">
+          <div class="table-responsive">
+            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded" >
+              <table class="table table-striped table-row-bordered gy-5 gs-7 ">
+                <thead>
+                  <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+                    <th>S.No </th>
+                    <th>Product Code </th>
+                    <th>Product Name </th>
+                    <th>Qty Requested </th>
+                    <th>Qty Delivery </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of product_list; let i=index;" style="white-space: nowrap;">                                   
+                   <td>{{i+1}}</td>
+                    <td>{{data.product_code}}</td>
+                    <td>{{data.product_name}}</td>
+                    <td>{{data.product_qty}}</td>
+                    <td>{{data.product_qtydelivered}}</td>
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+            <div class="text-center my-4">
+                <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal"
+                    style="background-color: red;">
+                    <i class="fas fa-arrow-left text-white"></i> &nbsp;Back
+                </button>&nbsp;
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+    

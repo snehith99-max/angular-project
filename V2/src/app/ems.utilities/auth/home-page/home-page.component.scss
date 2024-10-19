@@ -1,0 +1,65 @@
+.border_custom_line{
+    border: 1px solid #9c9c9c;
+  }
+  
+  .border_custom_Inline{
+  border: 2px solid #c1c1c1;
+  }
+  
+  .border_custom_dottedline{
+  border: 1px dashed #949494;
+  border-style: dashed;
+  }
+  
+  .custom_font_size{
+    font-size: 30px;
+  }
+  
+  @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+  @media (max-width: 992px) {
+    .table-responsive-md td {
+      display: block;
+      width: 100% !important;
+      text-align: left;
+      border: none;
+      margin-bottom: 1rem;
+    }
+   
+    .table-responsive-md td > div {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+    }
+   
+    .table-responsive-md hr {
+      margin-top: 0;
+    }
+  }
+  
+  .inter_fonts{
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    // font-style: normal;
+  }
+  
+  .nunito_fonts{
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+  }
+  
+  .hover_effect:hover{
+    color: #131313 !important;
+    background-color: #dfdfdf;
+    
+  }
+  
+  .hover_effect_redirect:hover {
+    box-shadow: rgba(42, 42, 42, 0.1) 0px 6px 9px -1px, rgba(0, 0, 0, 0.06) 0px 4px 4px -1px;
+    cursor: pointer;
+    border: 2px solid #bebebe;
+    background-color: rgb(223, 249, 255);
+  }
+  
+  
+  

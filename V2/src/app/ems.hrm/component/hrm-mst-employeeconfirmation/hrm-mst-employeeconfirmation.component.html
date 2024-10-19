@@ -1,0 +1,366 @@
+<div class="card rounded-top">
+    <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+        <h3 class="fw-bolder text-white">
+            <span class="fa-solid fa-user-check fs-6 text-white"></span>&nbsp;Confirm As Employee
+        </h3>
+    </div>
+
+    <div class="card m-3 border">
+        <div class="card-header bg-lightblue card-height55">
+            <div class="card-title m-0">
+                <h4 class="fw-bolder text-blue">Employee Details</h4>
+            </div>
+        </div>
+    </div>
+
+    <form [formGroup]="confirmationform" #form="ngForm">
+        <input formControlName="offer_gid" hidden placeholder="Address Line 1" type="text"
+            class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary"
+            name="offer_gid" />
+        <input formControlName="basic_salary" hidden placeholder="Address Line 1" type="text"
+            class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary"
+            name="basic_salary" />
+
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Name</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary border-secondary custom-input"
+                        formControlName="first_name" readonly />
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Designation</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary border-secondary custom-input"
+                        formControlName="designation_name" readonly />
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Department</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary border-secondary custom-input"
+                        formControlName="department_name" readonly />
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Branch</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary border-secondary custom-input"
+                        formControlName="branch_name" readonly />
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Employee Code</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" formControlName="user_code"
+                        [ngStyle]="{ 'border-color': confirmationform.get('user_code')?.hasError('required') && confirmationform.get('user_code')?.touched ? 'red' : 'rgb(209, 209, 209)' }"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"
+                        placeholder="Employee Code" />
+                    <div *ngIf="confirmationform.get('user_code')?.hasError('required') && confirmationform.get('user_code')?.touched || confirmationform.get('user_code')?.hasError('pattern')"
+                        class="text-red">Employee Code is required.</div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Job Type</span>
+                <ng-select class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" formControlName="jobtype" [(ngModel)]="mdljobtype"
+                    placeholder="Select an option">
+                    <ng-option value="permanent">Permanent</ng-option>
+                    <ng-option value="probationary">Probationary</ng-option>
+                </ng-select>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold required">User Password</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <div class="input-group input-group-sm has-validation">
+                        <input [type]="confirmation.showUserPassword ? 'password' : 'user_password'" id="user_password"
+                            (change)="userpassword(user_password)" formControlName="user_password"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                            [ngStyle]="{'border-color':user_password.invalid && user_password.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                            placeholder="User Password" name="user_password"
+                            [class.is-invalid]="user_password.invalid && (user_password.dirty || user_password.touched)" />
+                        <button type="button" style="margin-left:0px;background-color: #008CBA;"
+                            class="btn btn-outline-secondary"
+                            (click)="confirmation.showUserPassword = !confirmation.showUserPassword">
+                            <i class="bi"
+                                [ngClass]="{'bi-eye-fill': !confirmation.showUserPassword, 'bi-eye-slash-fill': confirmation.showUserPassword}"
+                                style="color: #ffffff; font-size: 20px;"></i>
+                        </button>
+
+                        <div *ngIf="user_password.invalid && (user_password.dirty || user_password.touched)"
+                            class="invalid-feedback">
+                            <div *ngIf="user_password.errors?.['required']">
+                                <span
+                                    style="color: red; width: 200px; margin-top: 1px; margin-left: 1px; font-size: 11px;">User
+                                    Password is required</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div for="confirmpassword" class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold">Confirm
+                    Password</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <div class="input-group input-group-sm has-validation">
+
+                        <input formControlName="confirmpassword" readonly type="password"
+                            class="form-control form-control-lg form-control-solid border-secondary bg-secondary custom-input mb-2 mb-lg-0"
+                            name="confirmpassword" placeholder="Confirm Password" />
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                <div class="d-flex justify-content-start ms-2">
+                    <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold">Employee Access</span>
+                        <div class="col-12 col-lg-11 col-md-11 col-sm-11">
+                            <div
+                                class="form-check form-check-custom form-check-primary form-check-solid form-check-sm mt-7">
+                                <input type="radio" name="active_flag" value="Y" formControlName="active_flag">
+                                <label class="form-check-label text-gray-700 text-nowrap"
+                                    for="kt_builder_header_content_menu">Yes</label>
+
+                                <input type="radio" class="ms-3" name="active_flag" value="N"
+                                    formControlName="active_flag">
+                                <label class="form-check-label text-gray-700 text-nowrap"
+                                    for="kt_builder_header_content_menu">No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold">Status</span>
+                        <div class="col-12 col-lg-11 col-md-11 col-sm-11">
+                            <div
+                                class="form-check form-check-custom form-check-primary form-check-solid form-check-sm mt-7">
+                                <input type="radio" name="user_status" value="Y" formControlName="user_status">
+                                <label class="form-check-label text-gray-700 text-nowrap"
+                                    for="kt_builder_header_content_menu">Yes</label>
+
+                                <input type="radio" class="ms-3" name="user_status" value="N"
+                                    formControlName="user_status">
+                                <label class="form-check-label text-gray-700 text-nowrap"
+                                    for="kt_builder_header_content_menu">No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card m-3 border">
+            <div class="card-header bg-lightblue card-height55">
+                <div class="card-title m-0">
+                    <h4 class="fw-bolder text-blue">Salary Details</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row m-6 flex-wrap">
+
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                <span class="font-bold required">Salary Grade Template Name</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <ng-select class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                        formControlName="template_name" bindLabel="salarygradetemplate_name"
+                        bindValue="salarygradetemplate_gid" [items]="salarygradelist" [class.is-invalid]="confirmationform.get('template_name')?.invalid
+                  && (confirmationform.get('template_name')?.dirty || confirmationform.get('template_name')?.touched)"
+                        [ngClass]="{'invalid-border': confirmationform.get('template_name')?.invalid &&
+                      confirmationform.get('template_name')?.touched}" placeholder="Select an option"
+                        [(ngModel)]="template_name"></ng-select>
+
+                    <div *ngIf="confirmationform.get('template_name')?.hasError('required') &&
+                   confirmationform.get('template_name')?.touched " class="text-red">Template Name is required.</div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-4 col-sm-12"><span class="font-bold required">Gross Salary</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="text" formControlName="gross_salary"
+                        [ngStyle]="{ 'border-color': confirmationform.get('gross_salary')?.hasError('required') && confirmationform.get('gross_salary')?.touched ? 'red' : 'rgb(209, 209, 209)' }"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"
+                        placeholder="Enter Gross Salary" (keypress)="onKeyPress($event)"
+                        [class.is-invalid]="submitted && (gross_salary?.invalid || !gross_salary?.value)" />
+                    <div *ngIf="confirmationform.get('gross_salary')?.hasError('required') && confirmationform.get('gross_salary')?.touched "
+                        class="text-red">Gross salary required.</div>
+                </div>
+            </div>
+
+            <button title="Go" type="button" class="btn btn-icon btn-sm bg-primary ms-2 me-2 mt-9" (click)="fetchdetails1()">
+                <span class="fa-solid fa-arrow-right fs-6 text-white"></span>
+            </button>
+
+            <script>
+                let buttonClicked = false;
+
+                function fetchdetails1() {
+                    if (!buttonClicked) {
+                        alert("Button clicked!");
+                        buttonClicked = true;
+                    }
+                }
+            </script>
+
+
+
+        </div>
+
+        <div class="card shadow-sm mt-4 addition" style="width:800px ;" *ngIf="buttonClicked">
+
+            <div class="card-header">
+                <h3 class="card-title">Addition Component</h3>
+            </div>
+
+            <div class="table-responsive">
+                <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                    <table id="Addition_list" class="table border-bottom gs-7">
+                        <thead>
+
+                            <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                <th rowspan="2">S.No</th>
+                                <th rowspan="2">Component Group</th>
+                                <th rowspan="2">Component Name</th>
+                                <th style="text-align:right">Employee Contribution</th>
+                                <th style="text-align:right">Employer Contribution</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of Addition_list; let i=index;" class="align-middle">
+
+                                <td>{{i+1}}</td>
+                                <td>{{data.componentgroup_name}}</td>
+                                <td>{{data.salarycomponent_name}}</td>
+                                <td style="text-align:right">{{data.salarycomponent_amount}}</td>
+                                <td style="text-align:right">{{data.salarycomponent_amount_employer}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="card-header">
+                <h3 class="card-title">Deduction Component</h3>
+            </div>
+
+            <div class="table-responsive">
+                <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                    <table id="Deduction_list" class="table border-bottom gs-7">
+                        <thead>
+
+                            <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                <th rowspan="2">S.No</th>
+                                <th rowspan="2">Component Group</th>
+                                <th rowspan="2">Component Name</th>
+                                <th style="text-align:right">Employee Contribution</th>
+                                <th style="text-align:right">Employer Contribution</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of Deduction_list; let i=index;" class="align-middle">
+
+                                <td>{{i+1}}</td>
+                                <td>{{data.componentgroup_name}}</td>
+                                <td>{{data.salarycomponent_name}}</td>
+                                <td style="text-align:right">{{data.salarycomponent_amount}}</td>
+                                <td style="text-align:right">{{data.salarycomponent_amount_employer}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card-header">
+                <h3 class="card-title">Other Component</h3>
+            </div>
+
+            <div class="table-responsive">
+                <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                    <table id="Others_list" class="table border-bottom gs-7">
+                        <thead>
+
+                            <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                <th rowspan="2">S.No</th>
+                                <th rowspan="2">Component Group</th>
+                                <th rowspan="2">Component Name</th>
+                                <th style="text-align:right">Employee Contribution</th>
+                                <th style="text-align:right">Employer Contribution</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of Others_list; let i=index;" class="align-middle">
+
+                                <td>{{i+1}}</td>
+                                <td>{{data.componentgroup_name}}</td>
+                                <td>{{data.salarycomponent_name}}</td>
+                                <td style="text-align:right">{{data.salarycomponent_amount}}</td>
+                                <td style="text-align:right">{{data.salarycomponent_amount_employer}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>        
+
+        <div style="display: flex; justify-content: flex-end; margin-top: 10px;margin-bottom: 10px;">
+            <div style="margin-left: 100px;">
+                <span><span class="font-bold">Net Salary</span></span>
+                <input type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-secondary custom-input" formControlName="net_salary" placeholder="0.00" style="width: 100px; display: inline-block; text-align: right; margin-left: 10px;" readonly>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; margin-top: 10px;margin-bottom: 10px;">
+            <div>
+                <span style=" margin-left: 20px;"><span class="font-bold">CTC</span></span>
+                <input type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-secondary custom-input" formControlName="ctc" placeholder="0.00" style="width: 100px; display: inline-block; text-align: right; margin-left: 10px;" readonly>
+            </div>
+        </div>
+
+        <div class="text-center my-4">
+            <button class="btn-success text-white" (click)="submit()">
+                <i class="fas fa-check text-white fs-5 me-3"></i>Submit
+            </button>
+            <button style="margin-left: 10px;" class="btn-primary btn-sm text-white me-4" routerLink="/hrm/HrmTrnOfferLetter">
+                <i class="fas fa-arrow-left me-3"></i>Back
+            </button>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+<!--<div style="display: flex; justify-content: flex-end; margin-top: 10px;margin-bottom: 10px; margin-right: 250px;">
+            <div>
+                <span><span class="font-bold">Net Salary</span></span>
+                <input type="text"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                    formControlName="net_salary" placeholder="0.00"
+                    style="width: 100px; display: inline-block; text-align: right; margin-left: 10px;">
+            </div>
+        </div>
+
+        <div class="float-end" style="margin-right: 250px; margin-bottom: 20px;">            
+                <span class="font-bold">CTC</span>
+                <input type="text"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input ms-2"
+                    formControlName="ctc" placeholder="0.00"
+                    style="width: 100px; display: inline-block; text-align: right;">
+            
+        </div> -->

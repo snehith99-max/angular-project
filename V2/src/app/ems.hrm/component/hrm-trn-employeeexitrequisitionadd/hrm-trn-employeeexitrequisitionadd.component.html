@@ -1,0 +1,92 @@
+<div class="card">
+  <div class="card-header bg-primary">
+    <h3 class="card-title text-white">Exit Requisition Add     
+    </h3>
+  </div>
+
+  <form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="m-4 mt-4 border card ">
+      <!-- ADD Function -->
+      <div class="d-flex flex-row m-6 flex-wrap">
+        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Employee Code</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="employee_code" type="text" class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-secondary custom-input" name="employee_code" readonly/>
+          </div>
+        </div>
+
+        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Employee Name</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="employee_name" type="text" class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-secondary custom-input" name="employee_name" readonly/>
+          </div>
+        </div>
+
+        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Employee Joining Date</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="employee_date" type="text" class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-secondary custom-input" name="employee_date" readonly/>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row m-6 flex-wrap">
+        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Branch</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="branch" type="text" class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-secondary custom-input" name="branch" readonly/>
+          </div>
+        </div>
+
+        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Department</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="department" type="text" class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-secondary custom-input" name="department" readonly/>
+          </div>
+        </div>
+
+        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Designation</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="designation" type="text" class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-secondary custom-input" name="designation" readonly/>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex flex-row m-6 flex-wrap">
+        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold">Apply Date</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input formControlName="apply_date" type="text" class="form-control form-control-lg form-control-solid border-secondary custom-input mb-3 mb-lg-0 bg-secondary custom-input" name="apply_date" readonly/>
+          </div>
+        </div>
+
+        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold required">Date Of Relieving</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <input type="date" formControlName="relieving_date" class="form-control form-control-l form-control-solid border-secondary date-picker custom-input mb-3 mb-lg-0 bg-white custom-input mb-3 mb-lg-0" placeholder="DD-MM-YYYY" [ngStyle]="{'border-color': relieving_date.invalid && relieving_date.touched ? 'red' : 'rgb(209, 209, 209)'}" name="relieving_date" required/>
+          </div>
+          <div *ngIf="relieving_date.invalid && (relieving_date.dirty || relieving_date.touched)">
+            <div *ngIf="relieving_date.errors?.['required']"><span class="text-red fs-7">Relieving Date is required.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-4 col-lg-4 col-md-4 col-sm-4"><span class="font-bold required">Reason for Relieving</span>
+          <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+            <textarea type="text" formControlName="reason" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0  border-secondary bg-white custom-input" placeholder=" Enter Reason" [ngStyle]="{'border-color': reason.invalid && reason.touched ? 'red' : 'rgb(209, 209, 209)'}" formControlName="reason" class="form-control" rows="3" required>
+            </textarea>
+          </div>
+          <div *ngIf="reason.invalid && (reason.dirty || reason.touched)">
+            <div *ngIf="reason.errors?.['required']"><span class="text-red fs-7">Reason is required.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center my-4">
+        <button class="me-4 btn-success" (click)="onconfirm()" [disabled]="reactiveForm.invalid" class="btn-success btn-sm text-white me-4">
+          <i class="fas fa-check text-white fs-5"></i>
+          <span class="ms-3">Submit</span>
+        </button>
+
+        <button class="btn-primary btn-sm text-white me-4" (click)="oncancel()">
+          <i class="fa fa-arrow-left"></i>
+          <span class="ms-3">Back</span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

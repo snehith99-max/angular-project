@@ -1,0 +1,104 @@
+
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+          <h3 class="card-title fw-bold">Open DC Summary</h3>
+        </div>
+        <div class="col me-5">
+          <button type="button" class="btn-primary btn-sm text-white me-4 float-end" data-bs-toggle="modal"
+            data-bs-target="#myModaladd" routerLink="/ims/ImsTrnOpendcAddselect"><i class="fas fa-plus"></i>&nbsp;&nbsp;
+            Raise Open DC
+          </button>
+        </div>
+      </div> 
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+      
+         <input type="hidden" formControlName="directorder_gid">
+          <table id="opndcsummary_list" class="table table-striped table-row-bordered gy-5 gs-7 ">
+            <thead>
+              <tr class="fw-bold fs-5 text-nowrap bg-lightblue text-blue">
+                <th>S.No </th>
+                <th>DO Date</th>
+                <th>DO Ref.No</th>
+                <th>Customer </th>
+                <th>Contact Details </th>
+                <th class="text-center">Details</th>
+                <th>Created By</th>
+                <th>Status</th>
+                <th class="text-center bg-lightblue ">Action</th> 
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of opndcsummary_list; let i=index;" >
+                <td>{{i+1}}</td>
+                <td>{{data.directorder_date}}</td>
+                <td>{{data.directorder_refno}}</td> 
+                <td class="ellipsis">{{data.customer_name}}</td>
+                <td class="ellipsis">
+                  <!-- <ng-container *ngIf="data.contact && data.contact.length > 25">
+                    <div *ngFor="let line of splitIntoLines(data.contact, 25)">
+                      {{ line }}
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="!data.contact || data.contact.length <= 25"> -->
+                    {{ data.contact }}
+                  <!-- </ng-container> -->
+                </td>
+                <td class="text-center text-nowrap">
+                  <label title="Product Details" data-bs-toggle="modal" data-bs-target="#myModalUpdateimage9"
+                      (click)="Details(data.parameter,data.directorder_gid)">
+                      <i class="fas fa-question-circle fa-5x text-primary fs-2"></i>
+                  </label>
+              </td>
+                <td>{{data.user_firstname}}</td>
+                <td>{{data.delivery_status}}</td>
+                <td class="text-center text-nowrap">
+                  <button title="Pdf" type="button" data-bs-toggle="modal" data-bs-target="#myModalPdf"
+                  class="btn btn-icon btn-sm background-color6 me-2" style="background: radial-gradient(circle, #47acbe 0%, #4aa5b9 100%);" ><span
+                      class="fa-solid fa-file-pdf text-white  fs-6" (click)="PrintPDF(data.directorder_gid)"></span></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+<!-- details popup -->
+<div class="modal fade" id="myModalUpdateimage9" tabindex="-1" data-bs-backdrop='static'
+aria-labelledby="editamlcategoryLabel" aria-hidden="true" data-bs-keyboard="false">
+<div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content  d-flex justify-content-center">
+        <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+            <h2 style="margin-top: 10px; color: white; font-weight: bold">
+             &nbsp;&nbsp;Product Details
+           </h2>
+        </div>
+        <div class="modal-body">
+          <table  class="table table-striped table-bordered text-blue border-bottom gs-7 align-middle ">
+            <thead>
+                <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                  <th class="text-blue text-center" style="width: 5%;">S.No </th>
+                  <th class="text-blue text-center" style="width: 15%;">Product</th>
+                  <th class="text-blue text-center" style="width: 10%;">Requested Qty</th>
+                  <th class="text-blue text-center" style="width: 10%;">Delivery Qty</th> 
+                </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let data of product_list;let i = index;">
+              <td>{{i+1}}</td>
+                    <td>{{data.product_code}}/{{data.product_name}}</td>
+                    <td>{{data.product_qty}} {{data.productuom_name}}</td>
+                    <td>{{data.product_qtydelivered}} {{data.productuom_name}}</td>
+            </tr>
+          </tbody>
+            </table>
+          <div class="text-center my-4">
+            <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+              <i class="fas fa-close text-white"></i> &nbsp;Close
+            </button>
+          </div>
+        </div>
+    </div>
+</div>
+</div>
+    

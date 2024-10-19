@@ -1,0 +1,152 @@
+<div class="card rounded-top">
+  <form [formGroup]="roleForm">
+    <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+      <h3 class="fw-bolder text-white"><span class="fa-solid fa-plus text-white fs-6 fw-bold"></span>&nbsp;Add Role
+      </h3>
+    </div>
+    <div class="d-flex flex-row m-6 flex-wrap">
+      <div class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="font-bold">Code Generation</span>
+        <div class="d-flex justify-content-start ms-4 mt-4">
+          <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm"
+            style="margin-left: -10px;">
+            <input type="radio" name="Code_Generation" value="Y" formControlName="Code_Generation"
+              [(ngModel)]="Code_Generation" (change)="toggleInputField()">
+
+            <label class="form-check-label text-gray-700 text-nowrap"
+              for="kt_builder_header_content_menu">Automatic</label>
+          </div>
+          <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-8">
+            <input type="radio" name="Code_Generation" value="N" formControlName="Code_Generation"
+              [(ngModel)]="Code_Generation" (change)="toggleInputField()">
+            <label class="form-check-label text-gray-700 text-nowrap"
+              for="kt_builder_header_content_menu">Manual</label>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-3 col-md-3 col-sm-12" *ngIf="Code_Generation === 'Y'"><span class="font-bold">Role
+          Code</span>
+        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+          <input type="text"
+            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-secondary"
+            [style.background-color]="Code_Generation === 'N' ? 'white' : 'rgb(255, 255, 255)'"
+            formControlName="rolecode_auto" name="rolecode_auto" readonly />
+
+        </div>
+      </div>
+
+
+      <div class="col-12 col-lg-3 col-md-3 col-sm-12" *ngIf="Code_Generation === 'N'"><span
+          class="font-bold required">Role Code</span>
+        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+          <input type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white"
+            [ngStyle]="{'border-color': rolecode_manual.invalid && rolecode_manual.touched ? 'red' : 'rgb(209, 209, 209)'}"
+            [style.background-color]="Code_Generation === 'N' ? 'white' : 'rgb(255, 255, 255)'"
+            placeholder="Enter Role Code" formControlName="rolecode_manual" name="rolecode_manual"
+            *ngIf="Code_Generation === 'N'" />
+
+          <div *ngIf="rolecode_manual.invalid && (rolecode_manual.dirty || rolecode_manual.touched)">
+            <div *ngIf="rolecode_manual.errors?.['required']">
+              <span class="text-red">Role code is required.</span>
+            </div>
+          </div>
+          <div *ngIf="roleForm.get('rolecode_manual')?.hasError('pattern')" class="text-red">Space at the
+            beginning is not allowed.</div>
+        </div>
+      </div>
+
+
+
+
+
+      <!-- <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold required">Role Title</span>
+        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+        <input formControlName="Role_name" type="text"
+            [ngStyle]="{ 'border-color': roleForm.get('Role_name')?.hasError('required') && roleForm.get('Role_name')?.touched || roleForm.get('Role_name')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 ms-2"
+            placeholder="Role Name" />
+        <div *ngIf="roleForm.get('Role_name')?.hasError('required') && roleForm.get('Role_name')?.touched"
+            class="text-red ms-2">Role Tile is required.</div>
+            <div *ngIf="roleForm.get('Role_name')?.hasError('pattern')"
+            class="text-red ms-2">Space at the beginning is not allowed.</div>
+    </div>
+</div> -->
+
+      <div class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="font-bold required ms-2">Role Name</span>
+        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+          <input formControlName="Role_name" type="text"
+            [ngStyle]="{ 'border-color': roleForm.get('Role_name')?.hasError('required') && roleForm.get('Role_name')?.touched || roleForm.get('Role_name')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 ms-2"
+            placeholder="Role Name" />
+          <div *ngIf="roleForm.get('Role_name')?.hasError('required') && roleForm.get('Role_name')?.touched"
+            class="text-red ms-2">Role Name is required.</div>
+          <div *ngIf="roleForm.get('Role_name')?.hasError('pattern')" class="text-red ms-2">Space at the beginning is
+            not allowed.</div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="font-bold">Reporting To Role</span>
+        <ng-select class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" formControlName="Reporting_to"
+          bindLabel="role_name" bindValue="role_name" [items]="reportingtoList" placeholder="Select an option"></ng-select>
+          
+      </div>
+    </div>
+
+
+    <div class="d-flex flex-row m-6 flex-wrap">
+      <div class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="font-bold required">Probation Period</span>
+        <div class="d-flex flex-row flex-wrap">
+          <div class="col-12 col-lg-9 col-md-9 col-sm-12">
+            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+              <input type="number" formControlName="Probation_Period"
+                [ngStyle]="{ 'border-color': roleForm.get('Probation_Period')?.hasError('required') && roleForm.get('Probation_Period')?.touched ? 'red' : 'rgb(209, 209, 209)' }"
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"
+                placeholder="Probation Period" />
+              <div
+                *ngIf="roleForm.get('Probation_Period')?.hasError('required') && roleForm.get('Probation_Period')?.touched || roleForm.get('Probation_Period')?.hasError('pattern')"
+                class="text-red">Probation period is required.</div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-6">
+              <span><b>Month(s)</b></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="font-bold required">Job Description</span>
+        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+          <textarea formControlName="Job_Description"
+            [ngStyle]="{ 'border-color': roleForm.get('Job_Description')?.hasError('required') && roleForm.get('Job_Description')?.touched ? 'red' : 'rgb(209, 209, 209)' }"
+            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white ms-2"
+            class="form-control" rows="3"></textarea>
+          <div
+            *ngIf="roleForm.get('Job_Description')?.hasError('required') && roleForm.get('Job_Description')?.touched || roleForm.get('Job_Description')?.hasError('pattern')"
+            class="text-red">Job description is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-3 col-md-3 col-sm-12"><span class="font-bold">Role Responsible</span>
+        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+          <textarea class="form-control rounded" formControlName="Role_Responsible" [(ngModel)]="txtroleresponsible"
+            rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center my-4">
+      <button *ngIf="Code_Generation === 'N'" type="submit" class="btn-success btn-sm text-white me-2" (click)="AddSubmit()" [disabled]="roleForm.invalid">
+        <i class="fas fa-check text-white fs-5 me-3"></i>Submit
+      </button>
+      <button *ngIf="Code_Generation === 'Y'" type="submit" class="btn-success btn-sm text-white me-2" (click)="AddSubmit()" 
+      [disabled]="roleForm.get('Role_name')?.invalid || roleForm.get('Probation_Period')?.invalid || roleForm.get('Job_Description')?.invalid">
+        <i class="fas fa-check text-white fs-5 me-3"></i>Submit
+      </button>
+
+      <button class="btn-primary btn-sm text-white me-4" (click)="backbutton()">
+        <i class="fas fa-arrow-left me-3"></i>Back
+      </button>
+    </div>
+
+  </form>
+</div>

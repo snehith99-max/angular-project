@@ -1,0 +1,369 @@
+<div class="card mt-4">
+  <div class="row ms-3 mt-3 d-flex align-items-center">
+    <div class="col">
+      <h3 class="card-title fw-bold">Product Unit </h3>
+    </div>
+
+    <div class="col me-5">
+      <button type="button" class="btn-primary btn-sm text-white me-4 float-end" data-bs-toggle="modal"
+        data-bs-target="#myModaladd">
+        <i class="fas fa-plus fw-bold"></i>&nbsp;
+        Add Product Unit 
+      </button>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+      <table id="productunit_list" class="table table-striped table-row-bordered border-bottom gs-7">
+        <thead>
+          <tr class="fw-bold fs-7 text-nowrap bg-lightblue text-blue align-middle">
+            <!-- <th style="width: 5%"></th> -->
+            <th style="width: 1%;" >S.No</th>
+            <th >Unit Class</th>
+            <th  >Unit Code</th>
+            <th >Unit</th>
+            <th class="text-center bg-lightblue ">Action</th> 
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of productunit_list; let i=index;">
+            <td style="width: 1%;">{{ i + 1 }}</td>
+            <td>{{ data.productuomclass_name }}</td>
+            <td>{{ data.productuomclass_code }}</td>
+            <td>{{ data.productuom_name }}</td>
+      
+            <td class="text-center">
+                            
+              <button title="Edit" type="button" class="btn btn-icon btn-sm me-2"
+                  style="background-color:#009688;" (click)="Openproductunit(data)" data-bs-toggle="modal"
+                  data-bs-target="#myModaleditproduct">
+                  <span class="fa-solid fa-pencil text-white  fs-6"></span>
+              </button>
+
+              <button title="Delete" type="button" (click)="openModaldelete(data.productuom_gid)"
+              data-bs-toggle="modal" data-bs-target="#myModaldelete"
+                  class="btn btn-icon btn-sm bg-danger me-2"><span
+                      class="fa-solid fa-trash text-white  fs-6"></span></button>
+            </td>
+
+            <!-- <td class="text-center text-nowrap" >
+
+              <div (click)="toggleOptions(data.productuom_gid)" style="cursor: pointer;">
+                <button class="btn me-2 p-1">
+                  <span class="fa-solid fa-ellipsis-vertical fs-1" style="color: #4d4d4d;"></span>
+                </button>
+                <div *ngIf="showOptionsDivId === data.productuom_gid"
+                  class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                  <div class="d-flex p-3 pb-3 Icon_hover" (click)="Openproductunit(data)" data-bs-toggle="modal"
+                    data-bs-target="#myModaleditproduct">
+                    <span><i class="fa-solid fa-pencil fs-3 me-4"></i></span>
+                    <span>Edit</span>
+                  </div>
+                      <div class="d-flex p-3 pb-3 Icon_hover" (click)="openModaldelete(data.productuom_gid)"
+                    data-bs-toggle="modal" data-bs-target="#myModaldelete">
+                    <span><i class="fa-solid fa-trash fs-3 me-4"></i></span>
+                    <span>Delete</span>
+                  </div>
+                </div>
+              </div>
+            </td> -->
+
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- The Modal ADD UNIT CLASS DETAILS-->
+<form [formGroup]="reactiveForm" #form="ngForm">
+  <div class="modal" id="myModaladd" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+
+        <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+          <h3 style="margin-top: 10px; color: white; font-weight: bold">&nbsp;&nbsp;<i
+              class="fas fa-plus fw-bolder fs-5"></i> &nbsp;&nbsp;Add Product Unit</h3>
+
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          
+          <br/>  
+          <div class="row">
+            <span class="fw-bold required" [ngClass]="{'error_input_field': productuomclass_name.invalid && productuomclass_name.touched}">Unit Class</span>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+
+              <ng-select formControlName="productuomclass_name"
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                [ngClass]="{'invalid-border':productuomclass_name.invalid && productuomclass_name.touched}"              
+                [items]="unitclass_list" class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                bindLabel="productuomclass_name" bindValue="productuomclass_gid"
+                placeholder="--Select Unit Class--"></ng-select>
+            </div>
+          </div>
+          <div *ngIf="
+              productuomclass_name.invalid &&
+              (productuomclass_name.dirty || productuomclass_name.touched)
+            ">
+            <!-- <div *ngIf="productuomclass_name.errors?.['required']">
+              <span style="color: red">Unit Class  is required.</span>
+            </div>
+            <div *ngIf="productuomclass_name.errors?.['pattern']">
+              <span style="color: red">Unit Class  is required.</span>
+            </div> -->
+          </div>
+          <br />
+          <div class="row">
+            <span class="fw-bold required " [ngClass]="{'error_input_field': productuomclass_code.invalid && productuomclass_code.touched}">Unit Code</span>
+            <div class="col-lg-11 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+              <input formControlName="productuomclass_code" type="text"
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                [ngClass]="{'error_input_field': productuomclass_code.invalid && productuomclass_code.touched}"
+                [ngStyle]="{
+                  'border-color':
+                    productuomclass_code.invalid && productuomclass_code.touched
+                      ? 'red'
+                      : 'rgb(209, 209, 209)'
+                }" placeholder="Enter Unit Code"
+                name="productuomclass_code" required style="height:40px;" /> 
+            </div>
+          </div>
+          <br/>
+          <div class="row">
+            <span class="fw-bold"[ngClass]="{'error_input_field': productuom_name.invalid && productuom_name.touched}">Unit<span class="ms-1 text-red">*</span></span>
+            <div class="col-lg-11 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+
+              <input formControlName="productuom_name" type="text"
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                
+                [ngStyle]="{
+                'border-color':
+                  productuom_name.invalid && productuom_name.touched
+                    ? 'red'
+                    : 'rgb(209, 209, 209)'}" placeholder="Enter Unit Name"
+                pattern="^(?!.*\s{2})[A-Za-z0-9]+(?:\s[A-Za-z0-9]+)*$" name="productuom_name" required
+                style="height:40px;" />
+            </div>
+          </div>
+          
+           <!-- <div *ngIf="
+           productuom_name.invalid &&
+              (productuom_name.dirty || productuom_name.touched)">
+            <div *ngIf="productuom_name.errors?.['required']">
+              <span style="color: red">Unit  is required.</span>
+            </div>
+            <div *ngIf="productuom_name.errors?.['pattern']">
+              <span style="color: red">Unit is required.</span>
+            </div>
+          </div> -->
+        </div>
+
+        <!-- Modal footer -->
+        <div class="text-center my-4">
+          <button type="submit" class="btn-success btn-sm text-white me-2"
+          (click)="onsubmit()" [disabled]="reactiveForm.invalid" 
+          [ngClass]="{'primary-button': !reactiveForm.invalid,
+                        'secondary-button': reactiveForm.invalid
+                      }" data-bs-dismiss="modal">
+            <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+          </button> &nbsp;&nbsp;
+          <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal" (click)="onclose()">
+            <i class="fas fa-close text-white"></i> &nbsp;Close
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>
+
+
+<!-- The Modal Delete -->
+<div class="modal" id="myModaldelete" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="text-center my-4">
+        <h2><b>Are you sure?</b></h2>
+
+        <p style="display: block;">Do You Want To Delete the Record ?</p>
+        <div class="text-center my-4">
+          <button class="btn-danger btn-sm text-white me-4" (click)="ondelete()" data-bs-dismiss="modal">
+            <i class="fas fa-trash text-white fs-5 "></i> &nbsp;Delete
+          </button>
+          <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white"></i> &nbsp;Close
+          </button>&nbsp;
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- Product unit edit -->
+<form [formGroup]="ProductunitFormEdit" #form="ngForm">
+  <div class="modal" id="myModaleditproduct" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <!-- Modal Header -->
+
+        <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+          <h3 style="margin-top: 10px; color: white; font-weight: bold">
+            &nbsp;&nbsp;<i class="fa-solid fa-pencil fs-5"></i>
+            &nbsp;&nbsp; Edit Product Unit
+          </h3>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">          
+          <br />
+          <div class="row">
+            <span class="fw-bold"[ngClass]="{'error_input_field': productuomclass_nameedit.invalid && productuomclass_nameedit.touched}">Unit Class<span class="ms-1 text-red">*</span></span>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+              <ng-select formControlName="productuomclass_nameedit"
+              class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                [ngClass]="{'invalid-border': productuomclass_nameedit.invalid && productuomclass_nameedit.touched}"
+                
+                [items]="unitclass_list" class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                bindLabel="productuomclass_name" bindValue="productuomclass_gid"
+                placeholder="--Select Unit Class--"></ng-select>
+            </div>
+          </div>
+          <!-- <div *ngIf="
+          productuomclass_nameedit.invalid &&
+              (productuomclass_nameedit.dirty || productuomclass_nameedit.touched)
+            ">
+            <div *ngIf="productuomclass_nameedit.errors?.['required']">
+              <span style="color: red">Unit Class is required.</span>
+            </div>
+            <div *ngIf="productuomclass_nameedit.errors?.['pattern']">
+              <span style="color: red">Unit Class is required.</span>
+            </div>
+          </div> -->
+          <br />
+          <!-- <div class="row">
+            <span class="fw-bold" [ngClass]="{'error_input_field': productuomedit_code.invalid && productuomedit_code.touched}"> Unit Code
+              <span class="ms-1 text-red">*</span></span>
+            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+             
+              <input formControlName="productuomedit_code" type="text"
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                [ngClass]="{'error_input_field': productuomedit_code.invalid && productuomedit_code.touched}"
+                [ngStyle]="{
+                    'border-color':
+                    productuomedit_code.invalid &&
+                    productuomedit_code.touched
+                        ? 'red'
+                        : 'rgb(209, 209, 209)'
+                  }" placeholder="Enter Product Unit Code"  name="productuomedit_code" required
+                style="height:40px;" />
+            </div>
+          </div> -->
+          <div class="row">
+            <span class="fw-bold required " [ngClass]="{'error_input_field': productuomedit_code.invalid && productuomedit_code.touched}">Unit Code</span>
+            <div class="col-lg-11 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+              <input formControlName="productuomedit_code" type="text"
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                [ngStyle]="{
+                  'border-color':
+                  productuomedit_code.invalid && productuomedit_code.touched
+                      ? 'red'
+                      : 'rgb(209, 209, 209)'
+                }" placeholder="Enter Unit Code"
+                name="productuomedit_code" required style="height:40px;" /> 
+            </div>
+          </div>
+          <!-- <div *ngIf="
+          productuomedit_code.invalid &&
+                (productuomedit_code.dirty ||
+                productuomedit_code.touched)
+              ">
+            <div *ngIf="productuomedit_code.errors?.['required']">
+              <span style="color: red">Unit Code is required.</span>
+            </div>
+            <div *ngIf="productuomedit_code.errors?.['pattern']">
+              <span style="color: red">Invalid Format.</span>
+            </div>
+          </div> -->
+          <br/>
+          <div class="row">
+            <span class="fw-bold" [ngClass]="{'error_input_field': productuomedit_name.invalid && productuomedit_name.touched}"> Unit 
+              <span class="ms-1 text-red">*</span></span>
+            <div class="col-lg-11 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+              <input class="form-control form-control-lg" formControlName="productuom_gid" hidden pattern="^(?!\s*$).+"
+                type="text" placeholder="Enter Entity" aria-label=".form-control-lg example" autocomplete="off"
+                required />
+              <input formControlName="productuomedit_name" type="text"
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                [ngStyle]="{
+                    'border-color':
+                    productuomedit_name.invalid &&
+                    productuomedit_name.touched
+                        ? 'red'
+                        : 'rgb(209, 209, 209)'
+                  }" placeholder="Enter Product Unit Name" pattern="^(?!\s*$).+" name="productuomedit_name" required
+                style="height:40px;" />
+            </div>
+          </div>
+          <!-- <div *ngIf="
+          productuomedit_name.invalid &&
+                (productuomedit_name.dirty ||
+                productuomedit_name.touched)
+              ">
+            <div *ngIf="productuomedit_name.errors?.['required']">
+              <span style="color: red">Unit is required.</span>
+            </div>
+            <div *ngIf="productuomedit_name.errors?.['pattern']">
+              <span style="color: red">Invalid Format.</span>
+            </div>
+          </div> -->
+        </div>
+
+
+        <!-- Modal footer -->
+        <div class="text-center my-4">
+          <button type="update" class="btn-success btn-sm text-white me-2"
+           (click)="onsubmitproductunitedit()" [ngClass]="{
+      'primary-button': !ProductunitFormEdit.invalid,
+      'secondary-button': ProductunitFormEdit.invalid
+    }" [disabled]="ProductunitFormEdit.invalid" data-bs-dismiss="modal">
+            <i class="fas fa-check text-white fs-5"></i> &nbsp;Update
+          </button>
+
+          &nbsp;&nbsp;
+          <button class="btn-danger btn-sm text-white me-4"  (click)="onclose2()"data-bs-dismiss="modal">
+            <i class="fas fa-close text-white"></i> &nbsp;Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- The product unit Delete -->
+<div class="modal" id="myproductunitdelete" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content ">
+      <div class="text-center my-4">
+        <h2><b>Are you sure?</b></h2>
+        <p style="display: block">Do You Want To Delete the Record ?</p>
+        <div class="text-center my-4">
+          <button class="btn-danger btn-sm text-white me-4" (click)="ondelete2()" data-bs-dismiss="modal">
+            <i class="fas fa-trash text-white fs-5"></i> &nbsp;Delete
+          </button>
+          <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white"></i> &nbsp;Close</button>&nbsp;
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

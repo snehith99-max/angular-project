@@ -1,0 +1,246 @@
+<div class="card -lg rounded-top ">
+    <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+        <h3 class="fw-bolder text-white"><i class="fas fa-plus fw-bolder fs-3"></i> &nbsp;&nbsp;&nbsp;Add Deployment
+        </h3>
+    </div>
+    <form [formGroup]="AddForm">
+        <div class="d-flex flex-row m-6 flex-wrap mb-0">
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12 ">
+                <span class="font-bold required">Version</span>
+                <div class="pe-8">
+                    <ng-select [items]="version_list" bindLabel="version_name" formControlName="txt_version"
+                        class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2 bg-secondary"
+                        [ngClass]="{'invalid-border': AddForm.get('txt_version')?.invalid && (AddForm.get('txt_version')?.touched || AddForm.get('txt_version')?.dirty)}"
+                    placeholder="Select an option"></ng-select>
+                    <div *ngIf="AddForm.get('txt_version')?.hasError('required') && (AddForm.get('txt_version')?.touched || AddForm.get('txt_version')?.dirty) || AddForm.get('txt_version')?.hasError('pattern')"
+                        class="text-red">
+                        Version is required.
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12 ">
+                <span class="font-bold required">Module</span>
+                <div class="pe-8">
+                    <ng-select [items]="Team_list" bindLabel="team_name" formControlName="txt_module"
+                        class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2 bg-secondary"
+                        [ngClass]="{'invalid-border': AddForm.get('txt_module')?.invalid && (AddForm.get('txt_module')?.touched || AddForm.get('txt_module')?.dirty)}"
+                        placeholder="Select an option" [multiple]="true"></ng-select>
+                        <div
+                        *ngIf="AddForm.get('txt_module')?.hasError('required') && (AddForm.get('txt_module')?.touched || AddForm.get('txt_module')?.dirty) || AddForm.get('txt_module')?.hasError('pattern')"
+                        class="text-red">
+                        Module is required.
+                      </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12 ">
+                <span class="font-bold required ms-2">Version Number</span>
+                <div class="pe-8">
+                    <input type="text" formControlName="txtversion_no" [(ngModel)]="version_no" (input)="checkduplicate()"
+                    [ngStyle]="{ 'border-color': AddForm.get('txtversion_no')?.hasError('required') && AddForm.get('txtversion_no')?.touched  || duplicate || AddForm.get('txtversion_no')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input mt-2 ms-2"
+                        placeholder="Enter Version Number" required />
+                        <div *ngIf="AddForm.get('txtversion_no')?.hasError('required') && AddForm.get('txtversion_no')?.touched" class="text-red ms-2">
+                            Version Number is required.
+                          </div>
+                          <div class="text-red ms-2" *ngIf="AddForm.get('txtversion_no')?.hasError('pattern')">
+                            Space is not accepted.
+                          </div>
+                          <div class="text-red ms-2" *ngIf="duplicate">
+                            {{ duplicateErrorMsg }}
+                          </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-row flex-wrap m-6 mt-0 me-0">
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12 mt-5">
+                <span class="font-bold required">Files</span>
+                <div class="pe-10">
+                    <ng-select [items]="file_list" bindLabel="file_name" formControlName="txt_file"
+                        class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2 bg-secondary"
+                        [ngClass]="{'invalid-border': AddForm.get('txt_file')?.invalid && (AddForm.get('txt_file')?.touched || AddForm.get('txt_file')?.dirty)}"
+                        placeholder="Select an option"></ng-select>
+                        <div *ngIf="AddForm.get('txt_file')?.hasError('required') && (AddForm.get('txt_file')?.touched || AddForm.get('txt_file')?.dirty) || AddForm.get('txt_file')?.hasError('pattern')"
+                        class="text-red">
+                        Files is required.
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-2 col-md-6 col-sm-12 mt-5">
+                <span class="font-bold required">Any New DLL?</span>
+                <div class="d-flex justify-content-start mt-2">
+
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm mt-2">
+                        <input  type="radio" formControlName="txt_newdll"
+                            name="inlineRadioOptionsg" value="Yes">
+                        <label class="form-check-label text-gray-700 text-nowrap" for="inlineRadio1">Yes</label>
+                    </div>
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm mt-2 ms-5">
+                        <input  type="radio" formControlName="txt_newdll"
+                            name="inlineRadioOptionsg" value="No">
+                        <label class="form-check-label text-gray-700 text-nowrap" for="inlineRadio2">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-2 col-md-6 col-sm-12 mt-5">
+                <span class="font-bold required">Is there any dependency?</span>
+                <div class="d-flex justify-content-start mt-2">
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm mt-2">
+                        <input  type="radio" formControlName="txt_dep" name="inlineRadioOptions"
+                            (click)="approveyes()" value="Yes">
+                        <label class="form-check-label text-gray-700 text-nowrap" for="inlineRadio1">Yes</label>
+                    </div>
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm mt-2 ms-5">
+                        <input  type="radio" formControlName="txt_dep" name="inlineRadioOptions"
+                            (click)="approveno()" value="No">
+                        <label class="form-check-label text-gray-700 text-nowrap" for="inlineRadio2">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-2 col-md-6 col-sm-12 mt-5">
+                <span class="font-bold required">Routes</span>
+                <div class="d-flex justify-content-start mt-2">
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm mt-2">
+                        <input  type="radio" formControlName="txt_routes"
+                            name="inlineRadioOptions3" value="Yes">
+                        <label class="form-check-label text-gray-700 text-nowrap" for="inlineRadio1">Yes</label>
+                    </div>
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm mt-2 ms-5">
+                        <input  type="radio" formControlName="txt_routes"
+                            name="inlineRadioOptions3" value="No">
+                        <label class="form-check-label text-gray-700 text-nowrap" for="inlineRadio2">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-2 col-md-6 col-sm-12 mt-5">
+                <span class="font-bold required ms-3">Script</span>
+                <div class="d-flex justify-content-start mt-2">
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-3 mt-2">
+                        <input  type="radio" formControlName="txtscript" (click)="scriptyes()"
+                            name="inlineRadioOptions1" value="Yes">
+                        <label class="form-check-label text-gray-700 text-nowrap" for="inlineRadio1">Yes</label>
+                    </div>
+                    <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm mt-2 ms-5">
+                        <input  type="radio" formControlName="txtscript" (click)="scriptno()"
+                            name="inlineRadioOptions1" value="No">
+                        <label class="form-check-label text-gray-700 text-nowrap" for="inlineRadio2">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 mt-4" *ngIf="approves">
+                <div class="d-flex flex-row flex-wrap card border p-6 pt-4 m-6 mt-2 ms-0 mb-0"
+                    style="background-color: #eaedf07a;">
+                    <div class="col-lg-4">
+                        <span class="font-bold required">Module</span>
+                        <div class="pe-8">
+                            <ng-select [items]="filteredTeamList" bindLabel="team_name" formControlName="txtmodule_dep"
+                                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2 bg-secondary"
+                                [ngClass]="{'invalid-border': AddForm.get('txtmodule_dep')?.invalid && (AddForm.get('txtmodule_dep')?.touched || AddForm.get('txtmodule_dep')?.dirty)}"
+                                placeholder="Select an option" [multiple]="true"></ng-select>
+                                <div *ngIf="AddForm.get('txtmodule_dep')?.hasError('required') && (AddForm.get('txtmodule_dep')?.touched || AddForm.get('txtmodule_dep')?.dirty) || AddForm.get('txtmodule_dep')?.hasError('pattern')"
+                                class="text-red">
+                                Module is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <span class="font-bold required">Approval Remarks</span>
+                        <div class="pe-8">
+                            <input type="text" formControlName="txtapproval"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input mt-2"
+                                [ngStyle]="{ 'border-color': AddForm.get('txtapproval')?.hasError('required') && AddForm.get('txtapproval')?.touched || AddForm.get('txtapproval')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                                placeholder="Enter Approval Remarks" required /> 
+                                   <div *ngIf="AddForm.get('txtapproval')?.hasError('required') && AddForm.get('txtapproval')?.touched" class="text-red">
+                                    Approval Remarks is required.
+                                  </div>
+                                  <div class="text-red" *ngIf="AddForm.get('txtapproval')?.hasError('pattern')">
+                                    Space is not accepted.
+                                  </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 m-6 me-0 ps-0 pt-0 pb-0 p-6">
+            <div class="me-10">
+                <span class="font-bold required">File Description</span>
+                <textarea class="form-control rounded-0 mt-3 textarea-resize-none" ng-trim="true"
+                [ngStyle]="{ 'border-color': AddForm.get('txt_description')?.hasError('required') && AddForm.get('txt_description')?.touched || AddForm.get('txt_description')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                    id="exampleFormControlTextarea2" formControlName="txt_description" [(ngModel)]="remarks" rows="3"
+                    (ngModelChange)="updateRemainingCharsadd()" maxlength="1000" placeholder="Enter File Description"></textarea>
+                <div class="text-muted font-bold mt-2 float-end">
+                    Remaining characters: {{ remainingChars }}/1000
+                </div>
+                <div *ngIf="AddForm.get('txt_description')?.hasError('required') && AddForm.get('txt_description')?.touched" class="text-red">
+                    File Description is required.
+                  </div>
+                  <div class="text-red" *ngIf="AddForm.get('txt_description')?.hasError('pattern')">
+                    Space is not accepted.
+                  </div>
+            </div>
+        </div>
+
+    </form>
+    <div class="card  m-3 mt-0" *ngIf="attachshow">
+        <div class="align-middle rounded-top ms-3 mt-4">
+            <h4 style="color: #1836B1;">Script Attachment <span class="text-red font-bold">(Note: Only .txt format is
+                    allowed)</span></h4>
+        </div>
+        <div class="d-flex flex-row m-6 mt-0 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-6 col-sm-6 mt-2">
+                <span class="font-bold required">Upload Document</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input type="file" id="fileInput" #fileInput [(ngModel)]="Document" class="form-control form-control-lg form-control-solid bg-white
+          mb-3 mb-lg-0  borderc-secondary custom-input" name="fName" multiple />
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 fv-row mt-10">
+                &nbsp;&nbsp;&nbsp;
+                <button title="Add" (click)="DocumentClick1()" [disabled]="!Document"
+                    class="btn btn-icon btn-sm bg-success me-2">
+                    <span class="fa-solid fa-plus text-white fs-6"></span>
+                </button>
+            </div>
+            <div class="col-12 col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                <table id="onboardingDocumenttable" class="table table-striped table-row-bordered gy-5 gs-7 mt-4">
+                    <thead>
+                        <tr class="fw-bold fs-5 text-nowrap bg-gray text-black ">
+                            <th>S.No</th>
+                            <th>Script</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let data of document_list; let i=index;">
+                            <td>{{i+1}}</td>
+                            <td>{{data.file_name}}</td>
+                            <td class="text-center">
+                                <button title="View" type="button" class="btn btn-icon btn-sm bg-stssuccess me-2"
+                                    (click)="viewFile(data.AutoID_Key)">
+                                    <i class="fa-solid fa-file fs-6"></i></button>
+                                <button title="Download" type="button" name="document"
+                                    class="btn btn-icon btn-sm bg-primary me-2"
+                                    (click)="downloadFiles(data.AutoID_Key, data.file_name)">
+                                    <span class="fa-solid fa-download text-white fs-6"></span>
+                                </button>
+                                <button title="Delete" type="button" class="btn btn-icon btn-sm bg-danger me-2"
+                                    data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                    (click)="DeleteDocumentClick(i)"><span
+                                        class="fa-solid fa-trash text-white  fs-6"></span></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="text-center my-4">
+        <button type="submit" class="btn-success text-white" data-bs-dismiss="modal" (click)="submit()"
+            [disabled]="AddForm.invalid || (attachshow && document_list.length === 0) || duplicate">
+            <i class="fas fa-check text-white fs-5"></i>&nbsp; &nbsp; Submit
+        </button> &nbsp;
+        <button class="btn-primary btn-sm text-white me-4" (click)="backbutton()">
+            <i class="fas fa-arrow-left"></i> &nbsp;
+            Back</button>
+    </div>
+</div>

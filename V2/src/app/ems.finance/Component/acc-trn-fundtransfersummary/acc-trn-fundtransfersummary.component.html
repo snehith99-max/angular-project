@@ -1,0 +1,442 @@
+<div class="card">
+    <br>
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title"> Fund Transfer Summary</h3>
+        </div>
+
+        <div class="col me-5">
+            <button type="button" class="btn-primary btn-sm text-white me-4 float-end" (click)="openModaladd()"
+                data-bs-toggle="modal" data-bs-target="#myModaladd">
+                Add Fund Transfer
+            </button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="GetFundTransfer_list" class="table table-striped table-row-bordered gy-5 gs-7">
+                <thead>
+                    <tr class="fw-bold fs-6 text-nowrap bg-lightblue text-blue align-middle">
+                        <th>Transaction Date</th>
+                        <th>Transferred From</th>
+                        <th>Transferred To</th>
+                        <th style="text-align: right;">Transaction Amount</th>
+                        <th>Transferred By</th>
+                        <th>Status</th>
+                        &nbsp;&nbsp;<th>Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of GetFundTransfer_list;" class="align-middle">
+                        <td>{{data.transaction_date}}</td>
+                        <td>{{data.from_branch}}</td>
+                        <td>{{data.to_branch}}</td>
+                        <td style="text-align: right;">{{data.transaction_amount}}</td>
+                        <td>{{data.user_firstname}}</td>
+                        <td>
+                            <span *ngIf="data.approval_flag === 'Approved'" class="status-badge bg-success">
+                                Approved
+                            </span>
+                            <span *ngIf="data.approval_flag === 'Rejected'" class="status-badge bg-danger">
+                                Rejected
+                            </span>
+                            <span *ngIf="data.approval_flag === 'Pending'" class="status-badge bg-warning">
+                                Pending
+                            </span>
+                        </td>
+                        <td class="text-center text-nowrap">
+                            <!-- <div (click)="toggleOptions(data)" style="cursor: pointer;">
+                                <button class="btn me-2 p-1 "><span class="fa-solid fa-ellipsis-vertical fs-1"
+                                        style="color: #4d4d4d;"></span></button>
+
+                                <div *ngIf="showOptionsDivId === data"
+                                    class="pb-0 rounded bg-white cursor-pointer icon_menu">
+
+                                    <div class="d-flex p-3 pb-3 Icon_hover" title="View" data-bs-toggle="modal"
+                                        data-bs-target="#myModalview" (click)="reviewmodal(data)">
+                                        <span><i class="fa-solid fa-eye fs-3 me-5"></i></span>
+                                        <span>View</span>
+                                    </div>
+
+                                    <div class="d-flex p-3 pb-3 Icon_hover" (click)="openModaledit(data)" title="Edit"
+                                        *ngIf="data.approval_flag !== 'Rejected'" data-bs-target="#myModaledit"
+                                        data-bs-toggle="modal">
+                                        <span><i class="fa-regular fa-pen-to-square fs-3 me-5"></i></span>
+                                        <span>Edit</span>
+                                    </div>
+
+                                    <div class="d-flex p-3 pb-3 Icon_hover" *ngIf="data.approval_flag !== 'Rejected'"
+                                        (click)="openModaldelete(data.pettycash_gid)" data-bs-toggle="modal"
+                                        data-bs-target="#myModaldelete">
+                                        <span><i class="fa-regular fa-trash-can fs-3 me-5"></i></span>
+                                        <span>Delete</span>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <button class="btn btn-icon bg-primary me-2" title="View" data-bs-toggle="modal" data-bs-target="#myModalview" (click)="reviewmodal(data)">
+                                <i class="fa-solid fa-eye fs-3"></i>
+                            </button>
+
+                            <button class="btn btn-icon bg-success me-2" (click)="openModaledit(data)" title="Edit" *ngIf="data.approval_flag !== 'Rejected'" data-bs-target="#myModaledit" data-bs-toggle="modal">
+                                <i class="fa-regular fa-pen-to-square fs-3"></i>
+                            </button>
+
+                            <button class="btn btn-icon bg-danger" *ngIf="data.approval_flag !== 'Rejected'" (click)="openModaldelete(data.pettycash_gid)" data-bs-toggle="modal" data-bs-target="#myModaldelete">
+                                <i class="fa-regular fa-trash-can fs-3"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- add -->
+    <form [formGroup]="reactiveform" (ngSubmit)="onsubmit()">
+        <div class="modal modal-lg" id="myModaladd" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                        <h2 style="margin-top:10px;color:white;font-weight: bold;" class="ms-3">Add Fund Transfer
+                        </h2>
+                    </div>
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="referenceNumber" class="form-label"><span class="font-bold">Voucher Number</span></label>
+                                <input type="text" style="height: 40px;" readonly class="form-control"
+                                    id="referenceNumber" placeholder="Auto Generated" />
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="transactionDate" class="form-label">
+                                    <span class="font-bold required">Transaction Date</span>
+                                </label>
+                                <input type="date" pattern="^(?!\s*$).+" style="height: 40px;"
+                                    [ngStyle]="{ 'border-color': reactiveform.get('created_date')?.hasError('required') && reactiveform.get('created_date')?.touched ? 'red' : 'rgb(209, 209, 209)' , 'height': '42px'}"
+                                    formControlName="created_date"
+                                    class="form-control date-picker custom-input bg-white" placeholder="DD-MM-YYYY" />
+                                <div *ngIf="created_date.invalid && (created_date.dirty || created_date.touched)">
+                                    <div *ngIf="created_date.errors?.['required']">
+                                        <span style="color:red;">Date is required.</span>
+                                    </div>
+                                    <div *ngIf="created_date.errors?.['pattern']">
+                                        <span style="color:red;">Invalid date format.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3"><span class="font-bold required">Transfer From Branch</span>
+                                <ng-select (ngModelChange)="filterToBranchOptions($event)"
+                                    class="form-select form-control-lg bg-white form-select-lg borderc-secondary custom-input select2"
+                                    formControlName="frombranch" required
+                                    class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                                    bindLabel="branch_name" bindValue="branch_gid" [items]="branchname_list"
+                                    placeholder="Select an option"
+                                    [ngClass]="{'invalid-border': frombranch.invalid && frombranch.touched}"></ng-select>
+
+                                <div *ngIf="frombranch.invalid && (frombranch.dirty || frombranch.touched)">
+                                    <div *ngIf="frombranch.errors?.['required']">
+                                        <span style="color:red;"> From Branch is required.</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3"><span class="font-bold required">Transfer To Branch</span>
+
+                                <ng-select
+                                    class="form-select form-control-lg bg-white form-select-lg borderc-secondary custom-input select2"
+                                    formControlName="tobranch" required
+                                    class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2"
+                                    bindLabel="branch_name" bindValue="branch_gid" [items]="filteredBranches"
+                                    placeholder="Select an option"
+                                    [ngClass]="{'invalid-border': tobranch.invalid && tobranch.touched}"></ng-select>
+
+                                <div *ngIf="tobranch.invalid && (tobranch.dirty || tobranch.touched)">
+                                    <div *ngIf="tobranch.errors?.['required']">
+                                        <span style="color:red;">To Branch is required.</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="referenceNumber" class="form-label"><span class="font-bold required">Transfer Amount</span></label>
+
+                                <input type="text" (change)="formatCurrencyValue()" style="height: 40px; text-align: right;"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                                    placeholder="" formControlName="transfer_amount" class="form-control" currencyInput
+                                    [ngClass]="{'invalid-border': transfer_amount.invalid && transfer_amount.touched}" />
+                                <div
+                                    *ngIf="transfer_amount.invalid && (transfer_amount.dirty || transfer_amount.touched)">
+                                    <div *ngIf="transfer_amount.errors?.['required']">
+                                        <span style="color:red;">Transfer Amount is required.</span>
+                                    </div>
+                                    <!-- <div *ngIf="openning_balance.errors?.['pattern']">
+                                    <span style="color:red;">Openning Balance is required.</span>
+                                </div> -->
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="transactionDate" class="form-label">
+                                    <span>Remarks</span>
+                                </label>
+
+                                <textarea type="text" style="height: 40px;"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0  borderc-secondary bg-white custom-input"
+                                    placeholder="" formControlName="remarks" class="form-control"></textarea>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="text-center my-4">
+
+                        <button data-bs-dismiss="modal" [disabled]="reactiveform.invalid"
+                            [ngStyle]="{ 'cursor': reactiveform.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !reactiveform.invalid,
+        'btn-secondary text-white': reactiveform.invalid }" class="primary-button">
+                            <i class="fas fa-check text-white fs-5"></i> &nbsp;Submit
+                        </button>&nbsp;&nbsp;
+                        <button type="button" class="btn-danger btn-sm" (click)="clear()" data-bs-dismiss="modal">
+                            <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </form>
+    <!-- edit popup -->
+    <form [formGroup]="reactiveform" (ngSubmit)="onupdate()">
+        <div class="modal modal-lg" id="myModaledit" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                        <h2 style="margin-top:10px;color:white;font-weight: bold;">
+                            &nbsp;&nbsp;<i class="fa-solid fa-pen-to-square fs-3"></i> &nbsp;&nbsp;Edit Fund Transfer
+                        </h2>
+                    </div>
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="referenceNumber" class="form-label"><b>Voucher Number</b></label>
+                                <br> <span>
+                                    {{pettycashgid}}
+                                </span>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="transactionDate" class="form-label">
+                                    <b>Transaction Date</b>
+                                </label>
+                                <br><span>{{transactiondate}}</span>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3"><b>Transfer From Branch</b>
+
+                                <br> <span>
+                                    {{frombranchname}}
+                                </span>
+
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3"><b>Transfer To Branch</b>
+
+                                <br> <span>
+                                    {{tobranchname}}
+                                </span>
+
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="referenceNumber" class="form-label"><b>Transfer Amount</b> <span
+                                        style="color: red;">*</span></label>
+
+                                <input type="text" (change)="formatCurrencyValue()" style="height: 40px;"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                                    placeholder="" formControlName="transfer_amount" class="form-control"
+                                    [ngClass]="{'invalid-border': transfer_amount.invalid && transfer_amount.touched}" />
+                                <div
+                                    *ngIf="transfer_amount.invalid && (transfer_amount.dirty || transfer_amount.touched)">
+                                    <div *ngIf="transfer_amount.errors?.['required']">
+                                        <span style="color:red;">Transfer Amount is required.</span>
+                                    </div>
+                                    <!-- <div *ngIf="openning_balance.errors?.['pattern']">
+                                    <span style="color:red;">Openning Balance is required.</span>
+                                </div> -->
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label for="transactionDate" class="form-label">
+                                    <b>Remarks</b>
+                                </label>
+
+                                <textarea type="text" style="height: 40px;"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0  borderc-secondary bg-white custom-input"
+                                    placeholder="" formControlName="remarks" class="form-control"></textarea>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="text-center my-4">
+
+                        <button data-bs-dismiss="modal" [disabled]="reactiveform.invalid" [ngClass]="{
+                    'primary-button': !reactiveform.invalid,
+                    'secondary-button': reactiveform.invalid
+                     }">
+                            <i class="fas fa-check text-white fs-5"></i> &nbsp;Update
+                        </button>&nbsp;&nbsp;
+                        <button type="button" class="btn-danger btn-sm" (click)="clear()" data-bs-dismiss="modal">
+                            <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </form>
+    <!--Remarks popup-->
+    <div class="modal fade" id="myModalremarks" tabindex="-1" data-bs-backdrop='static'
+        aria-labelledby="editamlcategoryLabel" aria-hidden="true" data-bs-keyboard="false">
+        <div class="modal-dialog modal-md modal-dialog-centered">
+            <div class="modal-content  d-flex justify-content-center">
+                <div class="card-header p-1 pb-1 pt-1 rounded-top bg-primary"
+                    style="display: flex; align-items: center; height: 40px;">
+
+                    <h3 Style="color: white; font-weight: bold; text-align: left; width: 100%;margin-left: 10px;">
+                        {{from_branch}} /{{to_branch}}
+                    </h3>
+                </div>
+                <div class="modal-body">
+
+                    <div class="col-12 col-lg-3 col-md-6 col-lg-12">
+
+                        <span class="fw-bold">Remarks </span>
+
+                        <p class="mt-2 wrap-text" style="max-width: 100%; overflow: auto; max-height: 200px;">
+                            {{remarks}}</p>
+
+                    </div>
+                    <div class="text-center my-4">
+                        <button class="btn-danger btn-sm text-white me-2" data-bs-dismiss="modal"
+                            style="background-color: red;">
+                            <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>&nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal" id="myModaldelete" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="text-center my-4">
+                    <h2><b>Are you sure?</b></h2>
+                    <br>
+                    <p style="display: block;">Do You Want To Delete the Record ?</p><br>
+                    <div class="text-center my-4">
+                        <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+                            <i class="fas fa-close text-white"></i> &nbsp;Close
+                        </button>&nbsp;
+                        <button class="btn-danger btn-sm text-white me-4" (click)="ondelete()" data-bs-dismiss="modal">
+                            <i class="fas fa-trash text-white fs-5 "></i> &nbsp;Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--View popup-->
+    <form [formGroup]="reactiveformview">
+        <div class="modal modal-lg" id="myModalview" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+                        <h2 style="margin-top:10px;color:white;font-weight: bold;">
+                            &nbsp;&nbsp;<i class="fas fa-eye fw-bolder fs-3"></i> &nbsp;&nbsp;&nbsp;View Fund Transfer
+                        </h2>
+                    </div>
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-12 mb-3">
+                                <label for="referenceNumber" class="form-label"><b>Voucher Number</b></label>
+                                <br>
+                                <label>{{pettycashgid}} </label>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 mb-3">
+                                <label for="transactionDate" class="form-label">
+                                    <b>Transaction Date</b>
+                                </label>
+                                <br>
+                                <label>{{transactiondate}}</label>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 mb-3">
+                                <label for="referenceNumber" class="form-label"><b>Transfered By</b></label>
+                                <br>
+                                <label>{{frombranchname}} </label>
+                            </div>
+                        </div>
+
+                        <div class="row">                            
+                            <div class="col-lg-4 col-md-4 col-sm-12 mb-3">
+                                <label for="transactionDate" class="form-label">
+                                    <b>Transfered To</b>
+                                </label>
+                                <br>
+                                <label>{{tobranchname}}</label>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 mb-3">
+                                <label class="form-label">
+                                    <b>Amount</b>
+                                </label>
+                                <br>
+                                <label>{{transaction_amount}}</label>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 mb-3">
+                                <label for="referenceNumber" class="form-label"><b>Remarks</b></label>
+                                <textarea type="text" style="height: 40px;" readonly
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0  borderc-secondary bg-white custom-input"
+                                    placeholder="" formControlName="remarks" class="form-control"></textarea>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-12 mb-3" *ngIf="approval_flag !== 'Pending'">
+                                <label for="transactionDate" class="form-label"><b>Reason</b></label>
+                                <textarea type="text" style="height: 40px;"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input"
+                                    placeholder="" formControlName="reason" class="form-control">
+                                </textarea>
+                            </div>
+                        </div>
+                        <!-- Modal Footer -->
+                        <div class="text-center my-4">
+                            <button type="button" class="btn-danger btn-sm" (click)="clear()"
+                                style="font-weight: 630 !important" data-bs-dismiss="modal">
+                                <i class="bi bi-arrow-left-circle text-white"></i> &nbsp;Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>

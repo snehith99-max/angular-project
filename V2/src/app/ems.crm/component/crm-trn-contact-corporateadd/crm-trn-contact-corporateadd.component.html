@@ -1,0 +1,1093 @@
+<!-- <form [formGroup]="ContactAddForm" (ngSubmit)="onadd()"> -->
+<div class="card rounded-top">
+  <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary">
+    <h3 class="fw-bolder text-white"><i class="fas fa-plus fw-bolder fs-3"></i> &nbsp;&nbsp;&nbsp;Add Corporate
+      <div class=" float-end me-4 ">
+        <button title="Back" type="button"
+          class="btn btn-sm btn-icon  btn-outline-primary position-absolute top-0 end-0 bg-white mt-4 p-2 me-4"
+          (click)="backbutton()">
+          <i class="fa-solid fa-arrow-left text-blue mb-1"></i>
+        </button>
+      </div>
+    </h3>
+  </div>
+  <div class=" ms-3 mt-3 d-flex align-items-center">
+    <div class="">
+      <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-20x fs-6 border-bottom">
+        <li class="nav-item  ">
+          <a class="nav-link active btn btn-flex btn-active-light-primary" data-bs-toggle="tab"
+            href="#kt_tab_pane_2"><span class="fa fa-user"></span>&nbsp;&nbsp;Basic Details</a>
+        </li>
+        <li class="nav-item  ">
+          <a class="nav-link  btn btn-flex btn-active-light-primary" data-bs-toggle="tab" href="#kt_tab_pane_5"><span
+              class="fa fa-user"></span>&nbsp;&nbsp;Branch & Address Details</a>
+        </li>
+        <li class="nav-item  ">
+          <a class="nav-link  btn btn-flex btn-active-light-primary" data-bs-toggle="tab" href="#kt_tab_pane_4"><span
+              class="fa fa-user"></span>&nbsp;&nbsp;Promoter Details</a>
+        </li>
+        <li class="nav-item  ">
+          <a class="nav-link  btn btn-flex btn-active-light-primary" data-bs-toggle="tab" href="#kt_tab_pane_3"><span
+              class="fa fa-user"></span>&nbsp;&nbsp;Director Details</a>
+        </li>
+        <li class="nav-item  ">
+          <a class="nav-link  btn btn-flex btn-active-light-primary" data-bs-toggle="tab" href="#kt_tab_pane_6"><span
+              class="fa-solid fa-file"></span>&nbsp;&nbsp;Document - Upload</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <form [formGroup]="ContactAddCompanyForm">
+
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="kt_tab_pane_2" role="tabpanel">
+        <!-- Company -->
+        <div class="card m-3 border" id="scroll-bar-table">
+
+          <!-- <div class="card-header bg-lightblue card-height45">
+                  <div class="card-title m-0">
+                    <h4 class="fw-bolder text-blue">Basic Details</h4>
+                  </div>
+                </div> -->
+          <!-- 1st card -->
+          <div class="d-flex flex-row m-6 mb-0 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">PAN</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input type="text" formControlName="txt_panno"
+                  class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary"
+                  placeholder="Enter PAN Value" maxlength="10" />
+                <div class="text-red" *ngIf="ContactAddCompanyForm.get('txt_panno')?.hasError('pattern')">
+                  Enter the Valid PAN Number
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Legal/Trade Name</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input type="text" formControlName="txt_tradename"
+                  class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary inputfield " />
+                <div *ngIf="txt_tradename.invalid && (txt_tradename.dirty || txt_tradename.touched)">
+                  <div *ngIf="txt_tradename.errors?.['required']">
+                    <span style="color:red;">Legal/Trade Name is Mandatory</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Legal Entity
+                Identification(LEI)</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input type="text" formControlName="txt_legalentityname"
+                  class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary inputfield "
+                  maxlength="20" />
+
+              </div>
+            </div>
+
+
+          </div>
+          <!-- 2nd card -->
+
+          <div class="d-flex flex-row m-6 mt-0 mt-3 flex-wrap">
+          </div>
+
+          <div class="d-flex flex-row m-6 mt-0 flex-wrap">
+            <!-- <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Corporate Identification
+                      Number(CIN)</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                      <input type="text" formControlName="txt_cinno"
+                       class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0  inputfield" />
+      
+                    </div>
+                    <div
+                    *ngIf="ContactAddCompanyForm.get('txt_cinno')?.hasError('required') && ContactAddCompanyForm.get('txt_cinno')?.touched"
+                    class="text-red">
+                    CIN Number is required.
+                  </div>
+                  <div class="text-red" *ngIf="ContactAddCompanyForm.get('txt_cinno')?.hasError('pattern')">
+                    CIN Number is required.
+                  </div>
+                  </div> -->
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+              <span class="font-bold">Corporate Identification Number (CIN)</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input type="text" formControlName="txt_cinno"
+                  class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 inputfield borderc-secondary" />
+              </div>
+              <div *ngIf="txt_cinno.invalid && (txt_cinno.dirty || txt_cinno.touched)" class="text-red">
+                <div *ngIf="txt_cinno.errors.pattern">Invalid CIN Number format.</div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Corporate Identification Number(CIN)
+                Date</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input type="date" formControlName="CIN_date"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input date-picker inputfield borderc-secondary" />
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+              <span class="font-bold">Constitution</span>
+              <ng-select [items]="constitutiondropdown_list" required
+                class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 borderc-secondary"
+                formControlName="cboConstitution" bindLabel="constitution_name" placeholder="Select an option"
+                required></ng-select>
+            </div>
+
+          </div>
+
+          <div class="d-flex flex-row m-6 mt-0 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold ">Business Start Date</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input type="date" formControlName="txt_business_startdate"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white custom-input date-picker"
+                  placeholder="DD-MM-YYYY" />
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Business Vintage</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input type="text" formControlName="txt_businessvintage"
+                  class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary inputfield" />
+
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">TAN</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input type="text" formControlName="txt_TAN"
+                  class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary"
+                  placeholder="Enter TAN" maxlength="10" />
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-row m-6 mt-0 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">TAN State</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input type="text" formControlName="txt_TAN_state"
+                  class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary inputfield" />
+
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">KIN</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input type="text" formControlName="txt_KIN"
+                  class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary"
+                  placeholder="Enter KIN" maxlength="14" />
+
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Udyam Registration</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input type="text" formControlName="txt_Udhayam_Registration"
+                  class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary"
+                  placeholder="Enter Udyam Registration" />
+
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-row ms-6 me-6 mt-0 flex-wrap">
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12 mt-1"><span class="font-bold">Category - AML</span>
+              <ng-select [items]="Category_AML"
+                class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-1 height-10px" bindLabel="Category_AML"
+                placeholder="Select an option" formControlName="txt_AML_Category"></ng-select>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12 mt-1"><span class="font-bold">Category -
+                Business</span>
+              <ng-select [items]="Category_Business"
+                class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-1 height-10px borderc-secondary"
+                bindLabel="Category_Business" placeholder="Select an option"
+                formControlName="txt_AML_Business"></ng-select>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Last Year Turnover</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input type="text" formControlName="txt_last_yearturnover"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 borderc-secondary"
+                  placeholder="Last Year Turnover" (ngModelChange)="lastyearValue = $event" pattern="[0-9,]+" />
+                <p style="font-style: italic;">Amount in words <span style="font-style:normal;color:blue"></span></p>
+              </div>
+
+            </div>
+            <!-- <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Last Year Turnover</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                      <input type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 "
+                        placeholder="Last Year Turnover" formControlName="txt_last_yearturnover"
+                        [ngModel]="(inputValue | amountcomma)" (ngModelChange)="inputValue = $event" pattern="[0-9,]+" />
+                      <p style="font-style: italic;">Amount in words <span style="font-style:normal;color:blue"> {{
+                          inputValue | amountwords }}</span></p>
+                    </div>
+                    <div
+                      *ngIf="ContactAddCompanyForm.get('txt_last_yearturnover')?.hasError('required') && ContactAddCompanyForm.get('txt_last_yearturnover')?.touched"
+                      class="text-red">
+                      Last Year Turnover is required.
+                    </div>
+                  </div> -->
+          </div>
+          <div class="d-flex flex-row">
+            <div class="col-lg-6 col-md-11 col-sm-11">
+              <button class="btn nextbutton btn-sm  me-4 ms-10 mb-3" (click)="backbutton()">
+                <i class="fas fa-arrow-left"></i> &nbsp;
+                Back</button>
+            </div>
+            <div class="col-lg-6 col-md-11 col-sm-11 me-10">
+              <button class="btn nextbutton btn-sm float-end me-20 mb-3" (click)="moveToTab('kt_tab_pane_5')">
+                <i class="fas fa-arrow-right"></i> &nbsp;
+                Next</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show" id="kt_tab_pane_5" role="tabpanel">
+        <div class="card m-3" id="scroll-bar-table">
+          <div class="p-4 align-middle rounded-top bg-lightblue">
+            <h4 class="fw-bolder text-blue">Industry / Referred By</h4>
+          </div>
+          <div class="d-flex flex-row m-6  flex-wrap">
+
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+              <span class="font-bold">Region</span>
+              <ng-select [items]="regionnamelist" required
+                class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 borderc-secondary"
+                formControlName="regionname" bindLabel="region_name" placeholder="Select an option"
+                required></ng-select>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+              <span class="font-bold">Source</span>
+              <ng-select [items]="source_list" required
+                class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 borderc-secondary"
+                formControlName="sourcename" bindLabel="source_name" placeholder="Select an option"
+                required></ng-select>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+              <span class="font-bold">Referred By</span>
+              <ng-select formControlName="referred_by" [items]="GetLeaddropdown_list" bindLabel="leadbank_name"
+                bindValue="leadbank_gid" placeholder="Select Lead"
+                class="custom col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-2">
+              </ng-select>
+            </div>
+          </div>
+          <div class="p-4 align-middle rounded-top bg-lightblue">
+            <h4 class="fw-bolder text-blue"> Branch Details</h4>
+          </div>
+          <form [formGroup]="GSTForm">
+            <div class="d-flex flex-row m-6  flex-wrap">
+
+
+              <div class="col-12 col-lg-3 col-md-6 col-sm-12"><span class="font-bold">GST Number</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                  <input type="text" [(ngModel)]="gstFormData.gst_no"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input mb-3 mb-lg-0 borderc-secondary"
+                    placeholder="GST Number" formControlName="txt_gst_no" />
+                  <div *ngIf="txt_gst_no.invalid && (txt_gst_no.dirty || txt_gst_no.touched)" class="text-red">
+                    <div *ngIf="txt_gst_no.errors.pattern">Invalid GST number format.</div>
+                  </div>
+                </div>
+
+
+              </div>
+              <div class="col-12 col-lg-3 col-md-6 col-sm-12"><span class="font-bold">GST State</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                  <input type="text" [(ngModel)]="gstFormData.gst_state"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input mb-3 mb-lg-0 borderc-secondary"
+                    placeholder="GST State" formControlName="txt_gst_state" />
+                  <div class="text-red" *ngIf="GSTForm.get('txt_gst_state')?.hasError('pattern')">
+                    Space is not accepted
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-md-6 col-sm-12"><span class="font-bold">GST Location</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                  <input type="text" [(ngModel)]="gstFormData.gst"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 borderc-secondary"
+                    placeholder="GST Location" formControlName="txt_location" />
+                  <div class="text-red" *ngIf="GSTForm.get('txt_location')?.hasError('pattern')">
+                    Space is not accepted
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-lg-3 col-12 col-md-11 col-sm-11 fv-row mt-7">
+                <button type="button" title="Add GST" class=" btn-success btn-sm text-white" (click)="addGST()"
+                  [disabled]="GSTForm.invalid">
+                  <i class="fas fa-plus"></i> &nbsp;&nbsp;
+                  Add
+
+                </button>
+
+
+
+              </div>
+
+              <div class="col-12 col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                <table id="onboardingDocumenttable" class="table table-striped table-row-bordered gy-5 gs-7 mt-4">
+                  <thead>
+                    <tr class="fw-bold fs-5 text-nowrap bg-gray ">
+                      <th>S.No</th>
+                      <!-- <th>GST Registered</th> -->
+                      <th>GST Number</th>
+                      <th>GST State</th>
+                      <td>GST Location</td>
+                      <th class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of gst_list; let i=index;">
+                      <td>{{i+1}}</td>
+                      <!-- <td>{{data.gst_registered}}</td> -->
+                      <td>{{data.gst_no}}</td>
+                      <td>{{data.gst_state}}</td>
+                      <td>{{data.gst_location}}</td>
+                      <td class="text-center text-nowrap">
+                        <button title="Delete" type="button" (click)="deleteGST(i)"
+                          class="btn btn-icon btn-sm bg-danger me-2">
+                          <span class="fa-solid fa-trash text-white fs-6"></span>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+
+
+
+
+            </div>
+          </form>
+
+          <div class="card ms-3 mb-3">
+            <div class="d-flex flex-row m-3 mt-5 flex-wrap ">
+              <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card me-lg-3 me-0 ">
+                  <div class="p-4 align-middle rounded-top bg-lightblue">
+
+                    <h4 class="fw-bolder text-blue"> Address</h4>
+
+                  </div>
+                  <form [formGroup]="AddressCompanyForm">
+                    <div class="d-flex flex-row m-lg-6 mt-lg-4 m-6 mt-4">
+                      <div class="col-12 col-lg-3 col-md-6 col-sm-12"><span class="font-bold"> Address Type</span>
+                        <ng-select [items]="Addresstype" formControlName="Addresstype"
+                          class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 borderc-secondary"
+                          bindLabel="Addresstype" placeholder="Select an option"></ng-select>
+
+                      </div>
+                      <div class="col-lg-3"><span class="font-bold">Address Line 1</span>
+                        <div class="col-lg-11 fv-row mt-2">
+                          <input type="text" class="
+                               form-control form-control-lg form-control-solid bg-white custom-input
+                                 mb-3 mb-lg-0 borderc-secondary" placeholder="Address Line 1"
+                            formControlName="txt_address1" />
+
+                        </div>
+                      </div>
+                      <div class="col-lg-3"><span class="font-bold">Address Line 2</span>
+                        <div class="col-lg-12 fv-row mt-2">
+                          <input type="text" class="
+                                                                       form-control form-control-lg form-control-solid bg-white custom-input
+                                                                       mb-3 mb-lg-0 borderc-secondary"
+                            placeholder="Address Line 2" formControlName="txt_address2" />
+                        </div>
+                      </div>
+                      <div class="col-12 col-lg-3 col-md-6 col-sm-12 ms-10"><span class="font-bold">Primary
+                          status</span>
+
+
+                        <div class="d-flex justify-content-start mt-4 ms-2">
+
+                          <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                            <input type="radio" [(ngModel)]="addressFormData.primary_status"
+                              formControlName="rdbpstatus" name="rdbpstatus" value="Yes">
+
+
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                              for="kt_builder_header_content_menu">Yes</label>
+
+                          </div>
+
+
+                          <div
+                            class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+                            <input type="radio" [(ngModel)]="addressFormData.primary_status"
+                              formControlName="rdbpstatus" name="rdbpstatus" value="No">
+
+                            <label class="form-check-label text-gray-700 text-nowrap"
+                              for="kt_builder_header_content_page-title">No</label>
+
+                          </div>
+
+
+
+                        </div>
+
+
+                      </div>
+
+                    </div>
+                    <div class="d-flex flex-row m-6 mt-0 ">
+
+                      <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                        <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
+                          <span class="font-bold"
+                            [ngClass]="{'error_input_field': txt_mobileno.invalid && txt_mobileno.touched}">Mobile
+                            Number</span>
+                          <div class="mt-3">
+                            <ngx-intl-tel-input [cssClass]="'form-control custom-width '"
+                              [preferredCountries]="[CountryISO.India]" [enableAutoCountrySelect]="true"
+                              [enablePlaceholder]="true" [searchCountryFlag]="true"
+                              [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                              [selectedCountryISO]="CountryISO.India" [phoneValidation]="true" name="txt_mobileno"
+                              [maxLength]="15" formControlName="txt_mobileno" style="height:40px;"></ngx-intl-tel-input>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                        <div class="col-lg-11 col-md-11 col-sm-11 mt-3"><span class="font-bold ">Email Address</span>
+
+                          <input type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input borderc-secondary mt-3"
+                            pattern="^(?!\s*$).+" placeholder="Enter Team Mail Id" formControlName="txt_emailaddress"
+                            required />
+
+                          <div class="text-red"
+                            *ngIf="AddressCompanyForm.get('txt_emailaddress')?.hasError('pattern') && AddressCompanyForm.get('txt_emailaddress')?.touched">
+                            Enter a valid email ID
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 col-lg-3">
+                        <div class="col-lg-12 fv-row mt-3">
+                          <span class="font-bold">Postal Code</span>
+                          <input formControlName="txtpermanent_postal_code" type="text"
+                            class="form-control form-control-lg form-control-solid bg-white custom-input mt-2 mb-3 mb-lg-0 borderc-secondary"
+                            placeholder="Postal Code" maxlength="6" />
+                          <!-- <div class="text-red" *ngIf="AddressCompanyForm.get('txtpermanent_postal_code')?.hasError('pattern') && AddressCompanyForm.get('txtpermanent_postal_code')?.touched">
+                              PinCode should contain only numeric digits.
+                            </div> -->
+                          <div
+                            *ngIf="AddressCompanyForm.get('txtpermanent_postal_code')?.hasError('required') && AddressCompanyForm.get('txtpermanent_postal_code')?.touched || AddressCompanyForm.get('txtpermanent_postal_code')?.hasError('pattern')"
+                            class="text-blue">
+                            PinCode should contain only numeric digits.
+                          </div>
+                          <!-- <div class="text-red" *ngIf="AddressCompanyForm.get('txtpermanent_postal_code')?.hasError('minlength') && AddressCompanyForm.get('txtpermanent_postal_code')?.touched">
+                              Pin Code should not exceed 6 numeric digits.
+                            </div> -->
+
+                        </div>
+
+                      </div>
+                      <div class="col-12 col-lg-3 ms-10">
+                        <div class="col-lg-11 fv-row mt-3"><span class="font-bold">City</span>
+                          <input formControlName="txt_city" type="text" class="mt-2
+                            form-control form-control-lg form-control-solid  bg-white custom-input
+                             mb-3 mb-lg-0 borderc-secondary" />
+                        </div>
+                      </div>
+
+                    </div>
+                    <!-- <div class="d-flex flex-row  m-6 mt-0 mb-11 flex-wrap">
+               
+                      </div> -->
+
+                    <div class="d-flex flex-row  m-6 mt-0 flex-wrap">
+                      <div class="col-12 col-lg-3"><span class="font-bold">Country</span>
+                        <ng-select formControlName="Drp_country" [items]="countryList" [(ngModel)]="Drp_country"
+                          class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 borderc-secondary"
+                          bindLabel="country_name" placeholder="Select an option"></ng-select>
+
+                      </div>
+                      <div class="col-12 col-lg-3 mt-8 mt-lg-0"><span class="font-bold">State</span>
+                        <div class="col-lg-11 fv-row mt-2 ">
+                          <input formControlName="txt_state" type="text" class="
+                            form-control form-control-lg form-control-solid  bg-white custom-input
+                             mb-3 mb-lg-0 inputfield borderc-secondary" />
+
+                        </div>
+                      </div>
+                      <div class="col-12 col-lg-3 mt-8 mt-lg-0"><span class="font-bold">Latitude</span>
+                        <div class="col-lg-12 fv-row mt-2 ">
+                          <input formControlName="Latitude" type="text" class="
+                            form-control form-control-lg form-control-solid bg-white custom-input
+                             mb-3 mb-lg-0 inputfield borderc-secondary" />
+
+                        </div>
+                      </div>
+
+                      <div class="col-12 col-lg-3 mt-8 mt-lg-0">
+                        <div class="col-lg-11 fv-row mt-2  ms-10"><span class="font-bold">Longitude</span>
+                          <input formControlName="Longitude" type="text" class="
+                              form-control form-control-lg form-control-solid  bg-white custom-input
+                               mb-3 mb-lg-0 inputfield borderc-secondary" />
+
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <div class="text-center my-4">
+                    <button type="submit" class="btn-success btn-sm text-white me-2" (click)="AddressClick()">
+                      <i class="fas fa-check text-white fs-5"></i> &nbsp;Add</button>
+                  </div>
+
+
+                  <div class="col-12 col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                    <table id="onboardingDocumenttable" class="table table-striped table-row-bordered gy-5 gs-7 mt-4">
+                      <thead>
+                        <tr class="fw-bold fs-5 text-nowrap bg-gray ">
+                          <th>S.No</th>
+                          <th>Address Type</th>
+                          <th>Address</th>
+                          <th>Mobile No</th>
+                          <th>Email Address</th>
+                          <th>Primary status</th>
+                          <th class="text-center">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let data of AddressList; let i=index;">
+                          <td>{{i+1}}</td>
+                          <td>{{data.addresstype}}</td>
+                          <td>
+                            {{data.address1}},{{data.address2}},
+                            <br />{{data.city}},{{data.state}},{{data.country_name}},{{data.postal_code}}
+                            <br /> <b>Latitude:</b> {{data.latitude}}
+                            <br /> <b>Longitude:</b> {{data.longitude}}
+                          </td>
+                          <td>{{data.mobile_no}}</td>
+                          <td>{{data.email_address}}</td>
+                          <td title="PrimaryStatus">{{data.primary_status}}</td>
+                          <td class="text-center text-nowrap">
+                            <button title="Delete" type="button" (click)="AddressDeleteClick(i)"
+                              class="btn btn-icon btn-sm bg-danger me-2">
+                              <span class="fa-solid fa-trash text-white fs-6"></span>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-row">
+              <div class="col-lg-6 col-md-11 col-sm-11">
+                <button class="btn nextbutton btn-sm  me-4 ms-10 mb-3" (click)="moveToPreviousTab('kt_tab_pane_2')">
+                  <i class="fas fa-arrow-left text-black"></i> &nbsp;
+                  Previous Tab</button>
+              </div>
+              <div class="col-lg-6 col-md-11 col-sm-11 me-10">
+                <button class="btn nextbutton btn-sm  float-end me-20 mb-3" (click)="moveToTab('kt_tab_pane_4')">
+                  <i class="fas fa-arrow-right"></i> &nbsp;
+                  Next</button>
+              </div>
+              <!-- <div class="col-lg-6 col-md-11 col-sm-11">
+                    <button class="btn-primary btn-sm text-white me-4 ms-10" (click)="backbutton()">
+                      <i class="fas fa-arrow-left"></i> &nbsp;
+                      Previous Tab</button>
+                  </div>
+                  <div class="col-lg-6 col-md-11 col-sm-11 me-10">
+                    <button class="btn-primary btn-sm text-white float-end me-20" (click)="backbutton()">
+                      <i class="fas fa-arrow-right"></i> &nbsp;
+                      Next</button>
+                  </div> -->
+            </div>
+            <!-- </form> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show " id="kt_tab_pane_3" role="tabpanel">
+        <div class="card" style="max-height: 500px;" id="scroll-bar-table">
+          <div class=" ms-3 mt-3 d-flex align-items-center">
+            <div class="col">
+              <h3 class="card-title ms-3">Director</h3>
+            </div>
+            <div class="col me-5">
+              <button title="Add Director" [hidden]="!hide1"
+                class="btn-primary btn-sm text-white me-4 mt-3 ms-3 float-end" (click)="AddDirector()">
+                <i class="fas fa-plus"></i> &nbsp;
+                Add Director</button>
+            </div>
+          </div>
+          <div [hidden]="!showreply1">
+            <form [formGroup]="ContactDirectorAddForm">
+              <div class="card m-3 border"> <!-- *ngIf="value1.rdbcontacttype==='Individual'" -->
+                <div class="card-header bg-lightblue card-height45">
+                  <div class="card-title m-0 ">
+                    <h4 class="fw-bolder text-blue">Add Director</h4>
+                  </div>
+                </div>
+                <div class="d-flex flex-row   flex-wrap">
+                  <div class="col-12 col-lg-3 col-md-6 col-sm-12 mt-5 ">
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 ms-5"><span class="font-bold">Salutation</span>
+                      <ng-select
+                        [ngClass]="{'invalid-border': ContactDirectorAddForm.get('salutation_name')?.invalid && ContactDirectorAddForm.get('salutation_name')?.touched}"
+                        [items]="Salutations" 
+                        bindLabel="salutation" placeholder="Select an option"
+                        formControlName="salutation_name"></ng-select>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-3 col-md-6 col-sm-12 mt-5 ">
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                      <span class="font-bold">First Name</span>
+
+                      <input type="text" pattern="^(?!\s*$).+" formControlName="txtfirst_name"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input mt-2 inputfield borderc-secondary" />
+                    </div>
+
+
+                  </div>
+                  <div class="col-12 col-lg-3 col-md-6 col-sm-12 mt-5"><span class="font-bold">Middle Name</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+
+
+                      <input type="text" pattern="^(?!\s*$).+" formControlName="txtmiddle_name"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input mt-2 inputfield borderc-secondary" />
+
+                    </div>
+
+
+                  </div>
+                  <div class="col-12 col-lg-3 col-md-6 col-sm-12 mt-5"><span class="font-bold">Last Name</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                      <input type="text" formControlName="txtlast_name"
+                        class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 inputfield borderc-secondary" />
+                    </div>
+                  </div>
+                 
+                </div>
+                <div class="d-flex flex-row mt-5  flex-wrap">
+                  <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-3 ms-5"><span class="font-bold">PAN
+                        Number</span>
+                      <input type="text" formControlName="txt_pannumber"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 mt-3 borderc-secondary"
+                        placeholder="PAN Number" maxlength="10" />
+                      <div class="text-red" *ngIf="ContactDirectorAddForm.get('txt_pannumber')?.hasError('pattern')">
+                        Enter the Valid PAN Number
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-3"><span class="font-bold">Aadhaar
+                        Number</span>
+                      <input type="text" formControlName="txt_aadhaarno"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 mt-3 borderc-secondary"
+                        placeholder="Aadhaar Number" required maxlength="12" />
+                      <div class="text-red" *ngIf="ContactDirectorAddForm.get('txt_aadhaarno')?.hasError('pattern')">
+                        Enter the Valid Aadhaar Number
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                    <div class="col-lg-11 col-md-11 col-sm-11 mt-3">
+                      <span class="font-bold" [ngClass]="{'error_input_field': txt_mobilenodirector.invalid && txt_mobilenodirector.touched}">Mobile
+                        Number</span>                      <div class="mt-3">
+                        <ngx-intl-tel-input [cssClass]="'form-control custom-width'"
+                          [preferredCountries]="[CountryISO.India]" [enableAutoCountrySelect]="true"
+                          [enablePlaceholder]="true" [searchCountryFlag]="true"
+                          [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                          [selectedCountryISO]="CountryISO.India" [phoneValidation]="true" name="txt_mobileno"
+                          [maxLength]="15" formControlName="txt_mobileno" style="height:40px;"></ngx-intl-tel-input>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                    <div class="col-lg-11 col-md-11 col-sm-11 mt-3"><span class="font-bold">Email Address</span>
+                      <input type="text" formControlName="txt_emailaddress"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input mt-3 borderc-secondary"
+                        placeholder="Email Address" maxlength="255" />
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-3 col-md-6 col-sm-12 mt-5">
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 ms-5"><span class="font-bold">Designation</span>
+                      <ng-select [items]="designationList"
+                        
+                        bindLabel="designation_name" placeholder="Select an option"
+                        formControlName="designation_name"></ng-select>
+                    </div>
+                  </div>
+                </div>
+              <br>
+              </div>
+            </form>
+            <div class="text-center">
+              <button class="btn-success text-white" (click)="DirectorAdd()">
+                <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                Add
+              </button> &nbsp;
+              <button type="button" class="btn-danger " (click)="DirectorcancelAdd()">
+                <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                Close
+              </button>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <div class="card card-body m-3  p-3 mb-5 bg-white rounded">
+              <table id="Directorsummary" class="table table-striped table-row-bordered gy-5 gs-7 ">
+                <thead>
+                  <tr class=" text-white fw-bold fs-5 text-nowrap bg-lightblue text-blue">
+                    <th (click)="sortColumn('S.No')">S.No<i class="fa ms-2" [ngClass]="getSortIconClass('S.No')"></i>
+                    </th>
+                    <th (click)="sortColumn('PAN')">PAN<i class="fa ms-2" [ngClass]="getSortIconClass('PAN')"></i></th>
+                    <th (click)="sortColumn('Aadhaar Number')">Aadhaar Number<i class="fa ms-2"
+                        [ngClass]="getSortIconClass('Aadhaar Number')"></i></th>
+                    <th (click)="sortColumn('Director')">Director<i class="fa ms-2"
+                        [ngClass]="getSortIconClass('Director')"></i></th>
+                    <th (click)="sortColumn('Mobile Number')">Mobile Number<i class="fa ms-2"
+                        [ngClass]="getSortIconClass('Mobile Number')"></i></th>
+                    <th (click)="sortColumn('Email Address')">Email Address<i class="fa ms-2"
+                        [ngClass]="getSortIconClass('Email Address')"></i></th>
+                    <th (click)="sortColumn('Designation')">Designation<i class="fa ms-2"
+                        [ngClass]="getSortIconClass('Designation')"></i></th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of DirectorList; let i=index;">
+                    <td>{{i+1}}</td>
+                    <td>{{data.pan_no}}</td>
+                    <td>{{data.aadhar_no}}</td>
+                    <td>{{data.salutation}} {{data.first_name}} {{data.middle_name}} {{data.last_name}}</td>
+                    <td>{{data.mobile}}</td>
+                    <td>{{data.email}}</td>
+                    <td>{{data.designation}}</td>
+                    <td class="text-center text-nowrap">
+                      <button title="Delete" type="button" class="btn btn-icon btn-sm bg-danger me-2"
+                        (click)="DirectorDeleteClick(i)"><span
+                          class="fa-solid fa-trash text-white  fs-6"></span></button>
+                      <!--(click)="delete(data.bloodgroup_gid)" data-bs-toggle="modal"  data-bs-target="#bloodgroupdelete"-->
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <br>
+          <div class="d-flex flex-row">
+            <div class="col-lg-6 col-md-11 col-sm-11">
+              <button class="btn nextbutton btn-sm  me-4 ms-10 mb-3" (click)="moveToPreviousTab('kt_tab_pane_4')">
+                <i class="fas fa-arrow-left"></i> &nbsp;
+                Previous Tab</button>
+            </div>
+            <div class="col-lg-6 col-md-11 col-sm-11 me-10">
+              <button class="btn nextbutton btn-sm  float-end me-20 mb-3" (click)="moveToTab('kt_tab_pane_6')">
+                <i class="fas fa-arrow-right"></i> &nbsp;
+                Next</button>
+            </div>
+          </div>
+          <div id="promotdelete" class="modal fade">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body text-center">
+                  <h4 class="w-100  fw-bolder fs-1 mt-5">Are you sure?</h4>
+                  <p class="fw-bold fs-5 mt-4">Do You Want To Delete The Record ?</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                  <button type="button" class="btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn-danger" data-bs-dismiss="modal">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show" id="kt_tab_pane_4" role="tabpanel">
+        <div class="card" id="scroll-bar-table">
+          <div class=" ms-3 mt-3 d-flex align-items-center">
+            <div class="col">
+              <h3 class="card-title ms-3">Promoter</h3>
+            </div>
+            <div class="col me-5">
+              <button title="Add Promoter" [hidden]="!hide" class="btn-primary btn-sm text-white me-4 ms-3 float-end"
+                data-bs-toggle="modal" data-bs-target="#Adpromoter" (click)="AddPromoter()">
+                <i class="fas fa-plus"></i> &nbsp;
+                Add Promoter</button>
+            </div>
+          </div>
+          <div [hidden]="!showreply">
+            <form [formGroup]="ContactPromoterAddForm">
+              <div class="card m-3 border"> <!-- *ngIf="value1.rdbcontacttype==='Individual'" -->
+                <div class="card-header bg-lightblue card-height45">
+                  <div class="card-title m-0 ">
+                    <h4 class="fw-bolder text-blue">Add Promoter</h4>
+                  </div>
+                </div>
+                <div class="d-flex flex-row   flex-wrap">
+                  <div class="col-12 col-lg-3 col-md-6 col-sm-12 mt-5">
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 ms-5"><span class="font-bold">Salutation
+                        </span>
+                        <ng-select
+                        [ngClass]="{'invalid-border': ContactPromoterAddForm.get('salutation_name')?.invalid && ContactPromoterAddForm.get('salutation_name')?.touched}"
+                        [items]="Salutations"
+                        bindLabel="salutation" placeholder="Select an option"
+                        formControlName="salutation_name"></ng-select>
+                    </div>
+
+                  </div>
+                  <div class="col-12 col-lg-3 col-md-6 col-sm-12 mt-5 ">
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row ">
+                      <span class="font-bold">First Name</span>
+
+                      <input type="text" pattern="^(?!\s*$).+" formControlName="txtfirst_name" required
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input mt-2 inputfield borderc-secondary" />
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-3 col-md-6 col-sm-12 mt-5"><span class="font-bold">Middle Name</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                      <input type="text" pattern="^(?!\s*$).+" formControlName="txtmiddle_name"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input mt-2 inputfield borderc-secondary" />
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-3 col-md-6 col-sm-12 mt-5"><span class="font-bold">Last Name</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                      <input type="text" formControlName="txtlast_name"
+                        class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 inputfield borderc-secondary" />
+                    </div>
+                  </div>
+                 
+                </div>
+                <div class="d-flex flex-row mt-5  flex-wrap">
+                  <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-3 ms-5"><span class="font-bold">PAN
+                        Number</span>
+                      <input type="text" formControlName="txt_pannumber"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 mt-3 borderc-secondary"
+                        placeholder="PAN Number" maxlength="10" />
+
+                      <div class="text-red" *ngIf="ContactPromoterAddForm.get('txt_pannumber')?.hasError('pattern')">
+                        Enter the Valid PAN Number
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-3"><span class="font-bold">Aadhaar
+                        Number</span>
+                      <input type="text" formControlName="txt_aadhaarno"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 mt-3 borderc-secondary"
+                        placeholder="Aadhaar Number" required maxlength="12" />
+
+                      <div class="text-red" *ngIf="ContactPromoterAddForm.get('txt_aadhaarno')?.hasError('pattern')">
+                        Enter the Valid Aadhaar Number
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                    <div class="col-lg-11 col-md-11 col-sm-11 mt-3">
+                      <span class="font-bold"
+                        [ngClass]="{'error_input_field': txt_mobilenopromoter.invalid && txt_mobilenopromoter.touched}">Mobile
+                        Number</span>
+                      <div class="mt-3">
+                        <ngx-intl-tel-input [cssClass]="'form-control custom-width'"
+                          [preferredCountries]="[CountryISO.India]" [enableAutoCountrySelect]="true"
+                          [enablePlaceholder]="true" [searchCountryFlag]="true"
+                          [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                          [selectedCountryISO]="CountryISO.India" [phoneValidation]="true" name="txt_mobileno"
+                          [maxLength]="15" formControlName="txt_mobileno" style="height:40px;"></ngx-intl-tel-input>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-3 col-md-6 col-sm-12">
+                    <div class="col-lg-11 col-md-11 col-sm-11 mt-3"><span class="font-bold">Email Address</span>
+                      <input type="text" formControlName="txt_emailaddress"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input mt-3 borderc-secondary"
+                        placeholder="Email Address" maxlength="255" />
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-3 col-md-6 col-sm-12 mt-5">
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 ms-5"><span class="font-bold">Designation</span>
+                      <ng-select [items]="designationList"
+                        bindLabel="designation_name" placeholder="Select an option"
+                        formControlName="designation_name"></ng-select>
+                    </div>
+                  </div>
+                </div>
+              <br>
+              </div>
+            </form>
+            <div class="text-center">
+              <button class="btn-success text-white" (click)="PromoterAdd()">
+                <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                Add
+              </button> &nbsp;
+              <button type="button" class="btn-danger " (click)="cancelAdd()">
+                <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                Close
+              </button>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <div class="card card-body m-3  p-3 mb-5 bg-white rounded">
+              <table id="Promotersummary" class="table table-striped table-row-bordered gy-5 gs-7 ">
+                <thead>
+                  <tr class=" text-white fw-bold fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                    <th (click)="sortColumn('S.No')">S.No<i class="fa ms-2" [ngClass]="getSortIconClass('S.No')"></i>
+                    </th>
+                    <th (click)="sortColumn('PAN')">PAN<i class="fa ms-2" [ngClass]="getSortIconClass('PAN')"></i></th>
+                    <th (click)="sortColumn('Aadhaar Number')">Aadhaar Number<i class="fa ms-2"
+                        [ngClass]="getSortIconClass('Aadhaar Number')"></i></th>
+                    <th (click)="sortColumn('Promoter')">Promoter<i class="fa ms-2"
+                        [ngClass]="getSortIconClass('Promoter')"></i></th>
+                    <th (click)="sortColumn('Mobile Number')">Mobile Number<i class="fa ms-2"
+                        [ngClass]="getSortIconClass('Mobile Number')"></i></th>
+                    <th (click)="sortColumn('Email Address')">Email Address<i class="fa ms-2"
+                        [ngClass]="getSortIconClass('Email Address')"></i></th>
+                    <th (click)="sortColumn('Designation')">Designation<i class="fa ms-2"
+                        [ngClass]="getSortIconClass('Designation')"></i></th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of PromoterList; let i=index;">
+                    <td>{{i+1}}</td>
+                    <td>{{data.pan_no}}</td>
+                    <td>{{data.aadhar_no}}</td>
+                    <td>{{data.salutation}} {{data.first_name}} {{data.middle_name}} {{data.last_name}}</td>
+                    <td>{{data.mobile}}</td>
+                    <td>{{data.email}}</td>
+                    <td>{{data.designation}}</td>
+                    <td class="text-center text-nowrap">
+                      <!-- <button title="Edit" type="button" class="btn btn-icon btn-sm bg-etdark me-2" (click)="EditPromoter()"><span class="fa-solid fa-pencil text-white  fs-6"></span></button> -->
+                      <button title="Delete" type="button" class="btn btn-icon btn-sm bg-danger me-2"
+                        (click)="PromoterDeleteClick(i)"><span
+                          class="fa-solid fa-trash text-white  fs-6"></span></button>
+                      <!--(click)="delete(data.bloodgroup_gid)" data-bs-toggle="modal"  data-bs-target="#bloodgroupdelete"-->
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="d-flex flex-row">
+            <div class="col-lg-6 col-md-11 col-sm-11">
+              <button class="btn nextbutton btn-sm  me-4 ms-10 mb-3" (click)="moveToPreviousTab('kt_tab_pane_5')">
+                <i class="fas fa-arrow-left"></i> &nbsp;
+                Previous Tab</button>
+            </div>
+            <div class="col-lg-6 col-md-11 col-sm-11 me-10">
+              <button class="btn nextbutton btn-sm  float-end me-20 mb-3" (click)="moveToTab('kt_tab_pane_3')">
+                <i class="fas fa-arrow-right"></i> &nbsp;
+                Next</button>
+            </div>
+          </div>
+          <div id="promotdelete" class="modal fade">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body text-center">
+                  <h4 class="w-100  fw-bolder fs-1 mt-5">Are you sure?</h4>
+                  <p class="fw-bold fs-5 mt-4">Do You Want To Delete The Record ?</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                  <button type="button" class="btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn-danger" data-bs-dismiss="modal">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade" id="kt_tab_pane_6" role="tabpanel">
+        <!-- Basic -->
+        <div class="d-flex flex-row m-3 mt-5 flex-wrap " id="scroll-bar-table">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="card me-lg-3 me-0 ">
+              <!-- <div class="card-header bg-lightblue card-height45">
+                    <div class="card-title m-0 ">
+                      <h5 class="fw-bolder text-blue">Document - Upload</h5>
+                    </div>
+                  </div> -->
+              <div>
+                <form [formGroup]="GeneralDocumentForm">
+                  <!--  [(ngModel)]="HRDocFormdata.cboHRDocument"-->
+                  <div class="d-flex flex-row m-6 flex-wrap">
+                    <div class="col-12 col-lg-5 col-md-6 col-sm-6 fv-row">
+                      <div class="col col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2 "><span
+                          class="font-bold">Document Name</span>
+                        <input type="text" formControlName="cboGeneralDocument" placeholder="Document Name" required
+                          class="form-control form-control-lg custom-input mb-3  bg-white custom-input mt-2 borderc-secondary" />
+                      </div>
+                    </div>
+                    <div class="col-12 col-lg-5 col-md-6 col-sm-6 mt-2">
+                      <span class="font-bold">Upload Document</span>
+                      <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input type="file" id="fileInput" formControlName="fileInput" #fileInput class="form-control form-control-lg form-control-solid bg-white
+                                    mb-3 mb-lg-0  borderc-secondary custom-input" name="fName" />
+                      </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 fv-row  mt-10">
+                      &nbsp;&nbsp;&nbsp;
+                      <button title="Add" type="submit" class="btn btn-icon btn-sm bg-success me-2 "
+                        [disabled]="GeneralDocumentForm.invalid" (click)="GentralDOCClick()">
+                        <span class="fa-solid fa-plus text-white fs-6"></span>
+                      </button>
+                    </div>
+                    <div class="col-12 col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                      <table id="onboardingDocumenttable" class="table table-striped table-row-bordered gy-5 gs-7 mt-4">
+                        <thead>
+                          <tr class="fw-bold fs-5 text-nowrap bg-gray text-black">
+                            <th>S.No</th>
+                            <th>Document Name</th>
+                            <th>File Path</th>
+                            <th class="text-center">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of GentralDOClist; let i=index;">
+                            <td>{{i+1}}</td>
+                            <td>{{data.document_name}}</td>
+                            <td>{{data.file_name}}</td>
+                            <td class="text-center text-nowrap">
+                              <button title="View" type="button" class="btn btn-icon btn-sm bg-stssuccess me-2"
+                                (click)="viewFile(data.AutoID_Key)">
+                                <i class="fa-solid fa-file fs-6"></i></button>
+
+                              <button title="Download" (click)="downloadFiles(data.AutoID_Key, data.file_name)"
+                                type="button" name="document" class="btn btn-icon btn-sm bg-primary me-2">
+                                <!--(click) = "downloadFiles(data.AutoID_Key, data.file_name)-->
+                                <span class="fa-solid fa-download text-white fs-6"></span>
+                              </button>
+                              <button title="Delete" type="button" class="btn btn-icon btn-sm bg-danger me-2"
+                                (click)="DeleteGentralDocumentClick(i)"><span
+                                  class="fa-solid fa-trash text-white  fs-6"></span></button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                  </div>
+
+                </form>
+                <div class="text-center my-4">
+                  <button type="submit" class="btn-success btn-sm text-white me-2" (click)="oncorporateadd()">
+                    <i class="fas fa-check text-white fs-5"></i> &nbsp;Submit</button>
+                </div>
+                <div class="d-flex flex-row">
+                  <div class="col-lg-6 col-md-11 col-sm-11">
+                    <button class="btn nextbutton btn-sm  me-4 ms-10 mb-3" (click)="moveToPreviousTab('kt_tab_pane_3')">
+                      <i class="fas fa-arrow-left"></i> &nbsp;
+                      Previous Tab</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,217 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { EmsUtilitiesModule } from '../ems.utilities/ems.utilities.module';
+import { HrmTrnAdmincontrolComponent } from './component/hrm-trn-admincontrol/hrm-trn-admincontrol.component';
+import { HrmMstEmployeeviewComponent } from './component/hrm-mst-employeeview/hrm-mst-employeeview.component';
+import { HrmTrnEmployeeonboardComponent } from './component/hrm-trn-employeeonboard/hrm-trn-employeeonboard.component';
+import { HrmTrnEmployeeonboardaddComponent } from './component/hrm-trn-employeeonboardadd/hrm-trn-employeeonboardadd.component';
+import { HrmTrnEmployeeonboardEditComponent } from './component/hrm-trn-employeeonboard-edit/hrm-trn-employeeonboard-edit.component';
+import { HrmTrnEmployeeboardviewpendingComponent } from './component/hrm-trn-employeeboardviewpending/hrm-trn-employeeboardviewpending.component';
+import { HrmTrnEmployeeonboardViewCompletedComponent } from './component/hrm-trn-employeeonboard-view-completed/hrm-trn-employeeonboard-view-completed.component';
+import { HrmMstSubfunctionComponent } from './component/hrm-mst-subfunction/hrm-mst-subfunction.component';
+import { HrmMstBaselocationComponent } from './component/hrm-mst-baselocation/hrm-mst-baselocation.component';
+import { HrmMstTeammasterComponent } from './component/hrm-mst-teammaster/hrm-mst-teammaster.component';
+import { HrmMstRoleSummaryComponent } from './component/hrm-mst-role-summary/hrm-mst-role-summary.component';
+import { HrmMstRoleAddComponent } from './component/hrm-mst-role-add/hrm-mst-role-add.component';
+import { HrmMstRoleEditComponent } from './component/hrm-mst-role-edit/hrm-mst-role-edit.component';
+import { HrmMstBranchSummaryComponent } from './component/hrm-mst-branch-summary/hrm-mst-branch-summary.component';
+import { HrmMstDepartmentSummaryComponent } from './component/hrm-mst-department-summary/hrm-mst-department-summary.component';
+import { HrmMstDesignationComponent } from './component/hrm-mst-designation/hrm-mst-designation.component';
+import { HrmMstEntityComponent } from './component/hrm-mst-entity/hrm-mst-entity.component';
+import { HrmMstBloodgroupComponent } from './component/hrm-mst-bloodgroup/hrm-mst-bloodgroup.component';
+import { HrmMstHrdocumentComponent } from './component/hrm-mst-hrdocument/hrm-mst-hrdocument.component';
+import { HrmMstTaskmasterComponent } from './component/hrm-mst-taskmaster/hrm-mst-taskmaster.component';
+import { HrmMemberDashboardComponent } from './component/hrm-member-dashboard/hrm-member-dashboard.component';
+import { HrmMemberMyleaveComponent } from './component/hrm-member-myleave/hrm-member-myleave.component';
+import { HrmMemberApproveleaveComponent } from './component/hrm-member-approveleave/hrm-member-approveleave.component';
+import { HrmTrnProfileComponent } from './component/hrm-trn-profile/hrm-trn-profile.component';
+import { HrmTrnIattendanceComponent } from './component/hrm-trn-iattendance/hrm-trn-iattendance.component';
+import { HrmTrnProbationperiodComponent } from './component/hrm-trn-probationperiod/hrm-trn-probationperiod.component';
+import { HrmTrnProbationhistoryComponent } from './component/hrm-trn-probationhistory/hrm-trn-probationhistory.component';
+import { HrmTrnProbationleaveupdateComponent } from './component/hrm-trn-probationleaveupdate/hrm-trn-probationleaveupdate.component';
+import { HrmTrnAppointmentorderComponent } from './component/hrm-trn-appointmentorder/hrm-trn-appointmentorder.component';
+import { HrmTrnAppointmentordereditComponent } from './component/hrm-trn-appointmentorderedit/hrm-trn-appointmentorderedit.component';
+import { HrmTrnAssetcustodianComponent } from './component/hrm-trn-assetcustodian/hrm-trn-assetcustodian.component';
+import { HrmTrnAddassetcustodianComponent } from './component/hrm-trn-addassetcustodian/hrm-trn-addassetcustodian.component';
+import { HrmTrnCompanypolicyComponent } from './component/hrm-trn-companypolicy/hrm-trn-companypolicy.component';
+import { HrmMstEmployeeaddComponent } from './component/hrm-mst-employeeadd/hrm-mst-employeeadd.component';
+import { HrmMstEmployeeeditComponent } from './component/hrm-mst-employeeedit/hrm-mst-employeeedit.component';
+import { HrmTrnLeavebalancesummaryComponent } from './hrm-trn-leavebalancesummary/hrm-trn-leavebalancesummary.component';
+import { HrmTrnLeavebalanceeditComponent } from './hrm-trn-leavebalanceedit/hrm-trn-leavebalanceedit.component';
+import { HrmMemberMonthlyattendanceComponent } from './component/hrm-member-monthlyattendance/hrm-member-monthlyattendance.component';
+import { HrmMemberOfficecalendarComponent } from './component/hrm-member-officecalendar/hrm-member-officecalendar.component';
+import { HrmMstShifttypeComponent } from './component/hrm-mst-shifttype/hrm-mst-shifttype.component';
+import { HrmMstAddshifttypeComponent } from './component/hrm-mst-addshifttype/hrm-mst-addshifttype.component';
+import { HrmMstLeavetypeComponent } from './component/hrm-mst-leavetype/hrm-mst-leavetype.component';
+import { HrmMstLeavegradeComponent } from './component/hrm-mst-leavegrade/hrm-mst-leavegrade.component';
+import { HrmMstAddleavegradeComponent } from './component/hrm-mst-addleavegrade/hrm-mst-addleavegrade.component';
+import { HrmMstAddholidaygradeComponent } from './component/hrm-mst-addholidaygrade/hrm-mst-addholidaygrade.component';
+import { HrmTrnAddholidayasignComponent } from './component/hrm-trn-addholidayasign/hrm-trn-addholidayasign.component';
+import { HrmTrnAttendancenonrollformanufacturingComponent } from './component/hrm-trn-attendancenonrollformanufacturing/hrm-trn-attendancenonrollformanufacturing.component';
+import { HrmMstShiftassignmentComponent } from './component/hrm-mst-shiftassignment/hrm-mst-shiftassignment.component';
+import { HrmTrnOfferletterComponent } from './component/hrm-trn-offerletter/hrm-trn-offerletter.component';
+import { HrmTrnAddOfferLetterComponent } from './component/hrm-trn-add-offer-letter/hrm-trn-add-offer-letter.component';
+import { ShiftUnAssignmentComponent } from './component/shift-un-assignment/shift-un-assignment.component';
+import { HrmTrnLeavegradeassign2employeeComponent } from './component/hrm-trn-leavegradeassign2employee/hrm-trn-leavegradeassign2employee.component';
+import { HrmTrnLeavegradeunassign2employeeComponent } from './component/hrm-trn-leavegradeunassign2employee/hrm-trn-leavegradeunassign2employee.component';
+import { HrmRptMonthlyattendanceReportComponent } from './component/hrm-rpt-monthlyattendance-report/hrm-rpt-monthlyattendance-report.component';
+import { HrmTrnManualregulationComponent } from './component/hrm-trn-manualregulation/hrm-trn-manualregulation.component';
+import { HrmMstEmployeeassetlistComponent } from './component/hrm-mst-employeeassetlist/hrm-mst-employeeassetlist.component';
+import { HrmMstHolidaygradeManagementComponent } from './component/hrm-mst-holidaygrade-management/hrm-mst-holidaygrade-management.component';
+import { HrmMstHolidayassignemployeeComponent } from './component/hrm-mst-holidayassignemployee/hrm-mst-holidayassignemployee.component';
+import { HrmMstUnassignemployeeComponent } from './component/hrm-mst-unassignemployee/hrm-mst-unassignemployee.component';
+import { HrmDashboardComponent } from './component/hrm-dashboard/hrm-dashboard.component';
+import { HrmAttendanceConfigurationComponent } from './component/hrm-attendance-configuration/hrm-attendance-configuration.component';
+import { HrmMstEmployeeconfirmationComponent } from './component/hrm-mst-employeeconfirmation/hrm-mst-employeeconfirmation.component';
+import { HrmForm22Component } from './component/hrm-form22/hrm-form22.component';
+import { HrmTrnStatutoryformsComponent } from './component/hrm-trn-statutoryforms/hrm-trn-statutoryforms.component';
+import { HrmTrnForm25componentComponent } from './component/hrm-trn-form25component/hrm-trn-form25component.component';
+import { HrmTrnDailyattendanceComponent } from './component/hrm-trn-dailyattendance/hrm-trn-dailyattendance.component';
+import { HrmTrnAnnualform22Component } from './component/hrm-trn-annualform22/hrm-trn-annualform22.component';
+import { HrmMstWeekoffmanagementComponent } from './component/hrm-mst-weekoffmanagement/hrm-mst-weekoffmanagement.component';
+import { HrmMstWeeklyoffComponent } from './component/hrm-mst-weeklyoff/hrm-mst-weeklyoff.component';
+import { HrmMstWeekoffemployeesComponent } from './component/hrm-mst-weekoffemployees/hrm-mst-weekoffemployees.component';
+import { HrmMstAssignedholidaygradeviewComponent } from './component/hrm-mst-assignedholidaygradeview/hrm-mst-assignedholidaygradeview.component';
+import { HrmMstEditholidaygradeComponent } from './component/hrm-mst-editholidaygrade/hrm-mst-editholidaygrade.component';
+import { HrmMstRolegradeComponent } from './component/hrm-mst-rolegrade/hrm-mst-rolegrade.component';
+import { HrmMstRoledesignationComponent } from './component/hrm-mst-roledesignation/hrm-mst-roledesignation.component';
+import { HrmTrnEmployeeexitrequisitionsummaryComponent } from './component/hrm-trn-employeeexitrequisitionsummary/hrm-trn-employeeexitrequisitionsummary.component';
+import { HrmTrnEmployeeexitrequisitionaddComponent } from './component/hrm-trn-employeeexitrequisitionadd/hrm-trn-employeeexitrequisitionadd.component';
+import { HrmMstExperiencelettersummaryComponent } from './component/hrm-mst-experiencelettersummary/hrm-mst-experiencelettersummary.component';
+import { HrmMstExperienceletterdirectaddComponent } from './component/hrm-mst-experienceletterdirectadd/hrm-mst-experienceletterdirectadd.component';
+import { HrmMstReleivingletterComponent } from './component/hrm-mst-releivingletter/hrm-mst-releivingletter.component';
+import { HrmMstAddrelievingletterComponent } from './component/hrm-mst-addrelievingletter/hrm-mst-addrelievingletter.component';
+import { HrmTrnEmployeeexitmanagmentComponent } from './component/hrm-trn-employeeexitmanagment/hrm-trn-employeeexitmanagment.component';
+import { HrmTrnEmployeeexitmanagement360Component } from './component/hrm-trn-employeeexitmanagement360/hrm-trn-employeeexitmanagement360.component';
+import { HrmTrnAppraisalmanagementComponent } from './component/hrm-trn-appraisalmanagement/hrm-trn-appraisalmanagement.component';
+import { HrmTrnAppraisaladdComponent } from './component/hrm-trn-appraisaladd/hrm-trn-appraisaladd.component';
+import { HrmMstEditshifttypeComponent } from './component/hrm-mst-editshifttype/hrm-mst-editshifttype.component';
+import { HrmTrnEmployee360Component } from './component/hrm-trn-employee360/hrm-trn-employee360.component';
+import { HrmTrnAppraisal360Component } from './component/hrm-trn-appraisal360/hrm-trn-appraisal360.component';
+import { WeekoffviewComponent } from './component/weekoffview/weekoffview.component';
+import { HrmTrnLeavemanagesummaryComponent } from './component/hrm-trn-leavemanagesummary/hrm-trn-leavemanagesummary.component';
+import { HrmTrnLeavemanageComponent } from './component/hrm-trn-leavemanage/hrm-trn-leavemanage.component';
+import { HrmTrnPromotionsummaryComponent } from './component/hrm-trn-promotionsummary/hrm-trn-promotionsummary.component';
+import { HrmTrnPromotionaddComponent } from './component/hrm-trn-promotionadd/hrm-trn-promotionadd.component';
+import { HrmTrnPromotionhistoryComponent } from './component/hrm-trn-promotionhistory/hrm-trn-promotionhistory.component';
+import { HrmTrnDepromotedetailssummaryComponent } from './component/hrm-trn-depromotedetailssummary/hrm-trn-depromotedetailssummary.component';
+import { HrmTrnMemberdashboardComponent } from './component/hrm-trn-memberdashboard/hrm-trn-memberdashboard.component';
+import { HrmRptEmployeeFormAComponent } from './component/hrm-rpt-employee-form-a/hrm-rpt-employee-form-a.component';
+import { HrmTrnDepromoteaddComponent } from './component/hrm-trn-depromoteadd/hrm-trn-depromoteadd.component';
+import { HrmTrnDePromotionhistoryComponent } from './component/hrm-trn-de-promotionhistory/hrm-trn-de-promotionhistory.component';
+
+
+const routes: Routes = [
+  { path: 'HrmTrnAdmincontrol', component: HrmTrnAdmincontrolComponent },
+  { path: 'HrmMstEmployeeadd', component: HrmMstEmployeeaddComponent },
+  { path: 'Employeeprofile', component: HrmTrnProfileComponent },
+  { path: 'HrmMstEmployeedit/:employee_gid', component: HrmMstEmployeeeditComponent },
+  { path: 'HrmTrnCompanyPolicy', component: HrmTrnCompanypolicyComponent },
+  { path: 'HrmMstEmployeview/:employee_gid', component: HrmMstEmployeeviewComponent },
+  { path: 'HrmtrnEmployeeonboard', component: HrmTrnEmployeeonboardComponent },
+  { path: 'HrmtrnEmployeeonboardadd', component: HrmTrnEmployeeonboardaddComponent },
+  { path: 'HrmtrnEmployeeonboardedit', component: HrmTrnEmployeeonboardEditComponent },
+  { path: 'HrmtrnEmployeeonboardview', component: HrmMstEmployeeviewComponent },
+  { path: 'HrmtrnEmployeeonboardviewpending', component: HrmTrnEmployeeboardviewpendingComponent },
+  { path: 'HrmtrnEmployeeonboardviewcompleted', component: HrmTrnEmployeeonboardViewCompletedComponent },
+  { path: 'HrmMStSubfunction', component: HrmMstSubfunctionComponent },
+  { path: 'HrmMstBaselocation', component: HrmMstBaselocationComponent },
+  { path: 'HrmMstTeamMaster', component: HrmMstTeammasterComponent },
+  { path: 'HrmMstRoleSummary', component: HrmMstRoleSummaryComponent },
+  { path: 'HrmMstRoleAdd', component: HrmMstRoleAddComponent },
+  { path: 'HrmMstRoleEdit', component: HrmMstRoleEditComponent },
+  { path: 'HrmMstBranchSummary', component: HrmMstBranchSummaryComponent },
+  { path: 'HrmMstDepartmentSummary', component: HrmMstDepartmentSummaryComponent },
+  { path: 'HrmMstDesignation', component: HrmMstDesignationComponent },
+  { path: 'HrmMstEntity', component: HrmMstEntityComponent },
+  { path: 'HrmMstBloodGroup', component: HrmMstBloodgroupComponent },
+  { path: 'HrmMstHrDocument', component: HrmMstHrdocumentComponent },
+  { path: 'HrmMstTaskmaster', component: HrmMstTaskmasterComponent },
+  { path: 'HrmMemberDashboard', component: HrmMemberDashboardComponent },
+  { path: 'HrmMyLeave', component: HrmMemberMyleaveComponent },
+  { path: 'HrmApproveLeave', component: HrmMemberApproveleaveComponent },
+  { path: 'HrmTrnIattendance', component: HrmTrnIattendanceComponent },
+  { path: 'hrm-trn-probationperiod', component: HrmTrnProbationperiodComponent },
+  { path: 'Probationhistory/:employee_gid', component: HrmTrnProbationhistoryComponent },
+  { path: 'Probationleaveupdate/:employee_gid', component: HrmTrnProbationleaveupdateComponent },
+  { path: 'HrmTrnAppointmentorder', component: HrmTrnAppointmentorderComponent },
+  { path: 'HrmTrnAppointmentorderedit/:appointmentorder_gid', component: HrmTrnAppointmentordereditComponent },
+  { path: 'HrmTrnAssetCustodian', component: HrmTrnAssetcustodianComponent },
+  { path: 'HrmTrnAddAssetcustodian/:employee_gid', component: HrmTrnAddassetcustodianComponent },
+  { path: 'HrmTrnLeavebalancesummary', component: HrmTrnLeavebalancesummaryComponent },
+  { path: 'HrmTrnLeavebalanceedit/:employee_gid', component: HrmTrnLeavebalanceeditComponent },
+  { path: 'HrmMonthlyattendance', component: HrmMemberMonthlyattendanceComponent },
+  { path: 'HrmOfficecalendar', component: HrmMemberOfficecalendarComponent },
+  { path: 'HrmMstShiftTypeSummary', component: HrmMstShifttypeComponent },
+  { path: 'HrmMstAddShiftType', component: HrmMstAddshifttypeComponent },
+  { path: 'HrmMstLeaveType', component: HrmMstLeavetypeComponent },
+  { path: 'HrmMstLeaveGrade', component: HrmMstLeavegradeComponent },
+  { path: 'HrmMstAddLeaveGrade', component: HrmMstAddleavegradeComponent },
+  { path: 'HrmRptMonthlyattendanceReport', component: HrmRptMonthlyattendanceReportComponent },
+  { path: 'HrmMstHolidaysummary', component: HrmMstHolidaygradeManagementComponent },
+  { path: 'HrmMstAddHolidaygrademanagement', component: HrmMstAddholidaygradeComponent },
+  { path: 'HrmTrnAddHolidayAssign', component: HrmTrnAddholidayasignComponent },
+  { path: 'hrm-trn-attendancenonrollformanufacturing', component: HrmTrnAttendancenonrollformanufacturingComponent },
+  { path: 'HrmMstShiftAssignment/:shifttype_gid', component: HrmMstShiftassignmentComponent },
+  { path: 'HrmTrnOfferLetter', component: HrmTrnOfferletterComponent },
+  { path: 'HrmTrnAddofferletter', component: HrmTrnAddOfferLetterComponent },
+  { path: 'HrmMstUnShiftAssignment/:shifttype_gid', component: ShiftUnAssignmentComponent },
+  { path: 'HrmTrnLeavegradeassign2employee/:leavegrade_gid', component: HrmTrnLeavegradeassign2employeeComponent },
+  { path: 'HrmTrnLeavegradeunassign2employee/:leavegrade_gid', component: HrmTrnLeavegradeunassign2employeeComponent },
+  { path: 'HrmTrnManualRegulation', component: HrmTrnManualregulationComponent },
+  { path: 'HrmMstEmployeeassetlist', component: HrmMstEmployeeassetlistComponent },
+  { path: 'HrmMstHolidayAssignEmployee/:holidaygrade_gid', component: HrmMstHolidayassignemployeeComponent },
+  { path: 'HrmMstHolidayUnAssignEmployee/:holidaygrade_gid', component: HrmMstUnassignemployeeComponent },
+  { path: 'HrmDashboard', component: HrmDashboardComponent },
+  { path: 'HrmConfiguration', component: HrmAttendanceConfigurationComponent },
+  { path: 'HrmForm25', component: HrmTrnForm25componentComponent },
+  { path: 'HrmMstEmployeeconfirmation/:offer_gid', component: HrmMstEmployeeconfirmationComponent },
+  { path: 'HrmForm22/:formyear', component: HrmForm22Component },
+  { path: 'HrmTrnStatutoryforms', component: HrmTrnStatutoryformsComponent },
+  { path: 'HrmMstEditHolidayGrade/:holidaygrade_gid', component: HrmMstEditholidaygradeComponent },
+  { path: 'HrmTrnDailyAttendance', component: HrmTrnDailyattendanceComponent },
+  { path: 'annualform22/:formnameyear', component: HrmTrnAnnualform22Component },
+  { path: 'HrmMstAssignedholidaygradeview/:holidaygrade_gid', component: HrmMstAssignedholidaygradeviewComponent },
+  { path: 'HrmMstRoleGrade', component: HrmMstRolegradeComponent },
+  { path: 'HrmMstRoleDesignation', component: HrmMstRoledesignationComponent },
+  { path: 'HrmMstRoleDesignation', component: HrmMstRoledesignationComponent },
+  { path: 'HrmTrnEmployeeexitrequisitionsummary', component: HrmTrnEmployeeexitrequisitionsummaryComponent },
+  { path: 'HrmTrnEmployeeexitrequisitionadd', component: HrmTrnEmployeeexitrequisitionaddComponent },
+  { path: 'HrmMstExperienceletter', component: HrmMstExperiencelettersummaryComponent },
+  { path: 'HrmMstExperienceletterdirectadd', component: HrmMstExperienceletterdirectaddComponent },
+  { path: 'HrmMstReleivingLetter', component: HrmMstReleivingletterComponent },
+  { path: 'HrmMstAddReleivingLetter', component: HrmMstAddrelievingletterComponent },
+  { path: 'HrmExitManagment', component: HrmTrnEmployeeexitmanagmentComponent },
+  { path: 'HrmExitmanagement360/:exitemployee_gid1', component: HrmTrnEmployeeexitmanagement360Component },
+  { path: 'HrmTrnAppraisalmanagement', component: HrmTrnAppraisalmanagementComponent },
+  { path: 'HrmTrnAppraisaladd/:user_gid', component: HrmTrnAppraisaladdComponent },
+   { path: 'HrmMstWeekoffmanagement', component: HrmMstWeekoffmanagementComponent },
+  { path: 'HrmMstWeeklyoff/:employee_gid/:employee_name', component: HrmMstWeeklyoffComponent },
+  { path: 'HrmMstWeeklyoffemployees/:weekoff_list1', component: HrmMstWeekoffemployeesComponent },
+  { path: 'HrmMstEditShiftType/:shifttype_gid', component: HrmMstEditshifttypeComponent },
+  { path: 'HrmTrnEmployee360/:employee_gid', component: HrmTrnEmployee360Component },
+  { path: 'HrmTrnAppraisal360/:user_gid', component: HrmTrnAppraisal360Component },
+  { path: 'Weekoffview/:employee_gid', component: WeekoffviewComponent },
+  { path: 'HrmTrnLeavemanagesummary', component: HrmTrnLeavemanagesummaryComponent },
+  { path: 'HrmTrnLeavemanage', component: HrmTrnLeavemanageComponent },
+  { path: 'HrmTrnPromotionsummary', component: HrmTrnPromotionsummaryComponent },
+  { path: 'HrmTrnPromotionadd', component: HrmTrnPromotionaddComponent },
+  { path: 'HrmTrnPromotionhistory/:employee_gid', component: HrmTrnPromotionhistoryComponent },
+  { path: 'HrmTrnDepromotedetailssummary', component: HrmTrnDepromotedetailssummaryComponent },
+  { path: 'HrmTrnMemberdhashboard', component: HrmTrnMemberdashboardComponent },
+  { path: 'HrmRptEmployeeFormA', component: HrmRptEmployeeFormAComponent },
+  { path: 'HrmTrnDepromoteadd', component: HrmTrnDepromoteaddComponent },
+  { path: 'HrmTrnDePromotionhistory/:employee_gid', component: HrmTrnDePromotionhistoryComponent },
+
+
+
+
+];
+
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+
+export class EmsHrmRoutingModule { }

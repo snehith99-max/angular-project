@@ -1,0 +1,1609 @@
+.bg-stssuccess{
+  background-color: #4caf50 !important;
+}
+button[enabled] {
+  background-color: #42ac72 !important;
+  font-size: 1.1rem !important;
+  font-weight: 630 !important;
+  padding: 9px 16px 9px 13px !important;
+  border-radius: 3px;
+  border: 0;
+}
+button[disabled] {
+  background-color: #cecece !important;
+  font-size: 1.1rem !important;
+  font-weight: 630 !important;
+  padding: 9px 16px 9px 13px !important;
+  border-radius: 3px;
+  cursor: not-allowed;
+  border: 0;
+}
+
+button[enabled]:hover {
+  background-color: #42ac72 !important;
+
+}
+
+.del_modal-dialog {
+  margin-left: 500px;
+    
+  .del_modal-content{
+      height: 200px;
+      width: 350px;
+
+      h2 {
+          margin-top: 20px;
+      }
+      
+      p {
+          margin-top: 20px;
+      }
+
+      button {
+          margin-top: 15px;
+      }
+  }
+}
+
+  div.record-picker {
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .count {
+    transition: 0.3s;
+    padding: 5px 10px;
+    color: #000000;
+    background-color: rgba(237, 243, 237, 0.781);
+    border-radius: 5px;
+  }
+  
+  // .count:hover {
+  //   background-color: rgb(27, 193, 239);
+  //   transform: scale(1.05);
+  // }
+  .count1 {
+    transition: 0.3s;
+    padding: 5px 10px;
+    color: #000000;
+    background-color: rgba(237, 243, 237, 0.781);
+    border-radius: 5px;
+  }
+  .rounded-circle {
+  
+  border-radius: 50% !important;
+  
+  }
+  
+  .ms-auto {
+  
+  margin-left: 0px;
+  
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+    /* Adjust padding as needed */
+    background-color: #007bff;
+    /* Adjust background color as needed */
+    border-radius: 0.25rem;
+    /* Add border-radius as needed */
+  }
+  
+  .back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+    /* Adjust padding as needed */
+    background-color: #ff0000;
+    /* Adjust background color as needed */
+    border-radius: 0.25rem;
+    /* Add border-radius as needed */
+  }
+  
+  /* http://www.ourtuts.com/how-to-customize-browser-scrollbars-using-css3/ */
+  div.record-picker::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  div.record-picker::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+  }
+  
+  .cardHeadLeads {
+  
+    position: relative;
+  
+    display: flex;
+  
+    flex-direction: column;
+  
+    min-width: 0;
+  
+    word-wrap: break-word;
+  
+    padding: 18px;
+  
+    background-clip: border-box;
+  
+    border: 0px solid rgba(0, 0, 0, 0);
+  
+    border-radius: .25rem;
+  
+    margin-bottom: 1.0rem;
+  
+    box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+  
+    transition: all .3s ease-in-out;
+  
+    background-color: white;
+  
+  }
+  
+  div.record-picker {
+    scrollbar-base-color: #337ab7;
+    scrollbar-3dlight-color: #337ab7;
+    scrollbar-highlight-color: #337ab7;
+    scrollbar-track-color: #eee;
+    scrollbar-arrow-color: gray;
+    scrollbar-shadow-color: gray;
+    // scrollbar-dark-shadow-color: gray;
+  }
+  
+  div.record-picker::-webkit-scrollbar-track {
+    background: #eee;
+    box-shadow: 0px 0px 3px #dfdfdf inset;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+  
+  div.record-picker::-webkit-scrollbar-thumb {
+    background: #337ab7;
+    border: thin solid gray;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+  
+  div.record-picker::-webkit-scrollbar-thumb:hover {
+    background: #286090;
+  }
+  
+  .record-picker ul {
+    margin: 0;
+    padding: 0 0 1px 0;
+  }
+  
+  .record-picker li {
+    border-top: thin solid #ddd;
+    border-bottom: 1px solid #ddd;
+    display: block;
+    padding: 2px 2px 2px 10px;
+    margin-bottom: -1px;
+    font-size: 0.85em;
+    cursor: pointer;
+    white-space: nowrap;
+    min-height: 16px;
+  }
+  
+  .record-picker li:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .record-picker li.selected {
+    background-color: #d9edf7;
+  }
+  
+  .record-picker li.selected:hover {
+    background-color: #c4e3f3;
+  }
+  
+  .record-picker li.disabled {
+    opacity: 0.5;
+    cursor: default;
+    background-color: inherit;
+  }
+  
+  .record-picker li:first-child {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-top: none;
+  }
+  
+  .record-picker li:last-child {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom: none;
+  }
+  
+  .record-picker label {
+    cursor: pointer;
+    font-weight: inherit;
+    font-size: 14px;
+    padding: 4px;
+    margin-bottom: -1px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  .record-picker ul.over {
+    background-color: lightgray;
+  }
+  
+  .dual-list {
+    display: -webkit-box;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+  }
+  
+  .dual-list .listbox {
+    width: 50%;
+    margin: 0px;
+  }
+  
+  .dual-list .button-bar {
+    margin-top: 8px;
+  }
+  
+  /* &nbsp;&nbsp;&nbsp;&#9654; */
+  .point-right::after {
+    content: "\00A0\00A0\00A0\25B6";
+  }
+  
+  /* &#9664;&nbsp;&nbsp;&nbsp; */
+  .point-left::before {
+    content: "\25C0\00A0\00A0\00A0";
+  }
+  
+  .dual-list .button-bar button {
+    width: 47%;
+  }
+  
+  button.btn-block {
+    display: block;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  
+  .filter {
+    margin-bottom: -2.2em;
+  }
+  
+  .filter::after {
+    content: "o";
+    width: 40px;
+    color: transparent;
+    font-size: 2em;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 64l192 192v192l128-32V256L512 64H0z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity: .2;
+    top: -36px;
+    left: calc(100% - 21px);
+    position: relative;
+  }
+  
+  .table-container {
+    margin-left: -1055px;
+    /* Adjust the margin value as needed */
+  }
+  
+  
+  //Tiles style properties//
+  
+  .primary-button {
+    background-color: #42ac72;
+    color: #fff !important;
+    font-size: 1.1rem !important;
+    font-weight: 630 !important;
+    padding: 9px 16px 9px 13px !important;
+    border-radius: 3px;
+    border: 0;
+  }
+  
+  .secondary-button {
+    background-color: #50cd89;
+    color: #fff !important;
+    font-size: 1.1rem !important;
+    font-weight: 630 !important;
+    padding: 9px 16px 9px 13px !important;
+    border-radius: 3px;
+    border: 0;
+  }
+  
+  .radius-10 {
+    border-radius: 10px !important;
+  }
+  
+  .card-body12 {
+    // width: 160px;
+    height: 34px;
+  }
+  
+  .cardHead {
+  
+    position: relative;
+  
+    display: flex;
+  
+    flex-direction: column;
+  
+    min-width: 0;
+  
+    word-wrap: break-word;
+  
+    padding: 18px;
+  
+    background-clip: border-box;
+  
+    border: 0px solid rgba(0, 0, 0, 0);
+  
+    border-radius: .25rem;
+  
+    margin-bottom: 1.0rem;
+  
+    box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+  
+    transition: all .3s ease-in-out;
+  
+    background-color: white;
+  
+  }
+  
+  
+  
+  
+  
+  .cardHead:hover {
+  
+    box-shadow: rgba(0, 0, 0, 0.22) 0px 19px 43px;
+  
+    transform: translate3d(0px, -2px, 0px);
+  
+    cursor: pointer;
+  
+    pointer-events: auto;
+  
+  }
+  
+  
+  
+  .widgets-icons-2 {
+  
+    width: 38px;
+  
+    height: 38px;
+  
+    display: flex;
+  
+    align-items: center;
+  
+    justify-content: center;
+  
+    background-color: #ededed;
+  
+    font-size: 27px;
+  
+    border-radius: 10px;
+  
+  }
+  
+  .rounded-circle {
+  
+    border-radius: 50% !important;
+  
+  }
+  
+  .ms-auto {
+  
+    margin-left: 0px;
+  
+  }
+  
+  
+  
+  .bg-gradient-info {
+  
+    background: #17ead9;
+  
+    background: -webkit-linear-gradient(45deg, #17ead9, #6078ea) !important;
+  
+    background: linear-gradient(45deg, #17ead9, #6078ea) !important;
+  
+  }
+  
+  
+  
+  .bg-gradient-violet {
+  
+    background: #510e66;
+  
+    background: -webkit-linear-gradient(45deg, #eadbf8, #85329c) !important;
+  
+    background: linear-gradient(45deg, #e9b2fa, #7e2279) !important;
+  
+  }
+  
+  
+  
+  .bg-gradient-brown {
+  
+    background: #740f0f;
+  
+    background: -webkit-linear-gradient(45deg, #a05518, #c43a3a) !important;
+  
+    background: linear-gradient(45deg, #f2f565, #da3535) !important;
+  
+  }
+  
+  
+  
+  .bg-gradient-darkblue {
+  
+    background: #399C91;
+  
+    background: -webkit-linear-gradient(45deg, #aedaf3, #399C91) !important;
+  
+    background: linear-gradient(45deg, #9ff8f4, #399C91) !important;
+  
+  }
+  
+  .bg-gradient-darkblue {
+  
+    background: #399C91;
+  
+    background: -webkit-linear-gradient(45deg, #aedaf3, #399C91) !important;
+  
+    background: linear-gradient(45deg, #9ff8f4, #399C91) !important;
+  
+  }
+  
+  .bg-gradient-purple {
+  
+    background: #be267a;
+  
+    background: -webkit-linear-gradient(45deg, #f8bceb, #be267a) !important;
+  
+    background: linear-gradient(45deg, #f7bdde, #be267a) !important;
+  
+  }
+  
+  .bg-gradient-darkgreen {
+  
+    background: #B66B1A;
+  
+    background: -webkit-linear-gradient(45deg, #ecd776, #B66B1A) !important;
+  
+    background: linear-gradient(45deg, #eff77e, #B66B1A) !important;
+  
+  }
+  
+  .bg-gradient-darkblues {
+  
+    background: #1E2961;
+  
+    background: -webkit-linear-gradient(45deg, #c0c4f8, #1E2961) !important;
+  
+    background: linear-gradient(45deg, #cfc8f8, #1E2961) !important;
+  
+  }
+  
+  .bg-gradient-darkoranges {
+  
+    background: #ec9b20;
+  
+    background: -webkit-linear-gradient(45deg, #faab6b, #ec9b20) !important;
+  
+    background: linear-gradient(45deg, #ccf8a4, #ec9b20) !important;
+  
+  }
+  
+  .bg-gradient-darkgreens {
+  
+    background: #3F7B33;
+  
+    background: -webkit-linear-gradient(45deg, #47ac6d, #3F7B33) !important;
+  
+    background: linear-gradient(45deg, #c9fc9b, #3F7B33) !important;
+  
+  }
+  
+  .border-orange {
+  
+    border-left: 5px solid #B66B1A !important;
+  
+  }
+  
+  .border-blue {
+  
+    border-left: 5px solid #1E2961 !important;
+  
+  }
+  
+  .border-purple {
+  
+    border-left: 5px solid #ec9b20 !important;
+  
+  }
+  
+  .border-darkgreen {
+  
+    border-left: 5px solid #d6d6bc !important;
+  
+  }
+  
+  .border-darkblue {
+  
+    border-left: 5px solid #399C91 !important;
+  
+  }
+  
+  .border-violet {
+  
+    border-left: 5px solid #d6d6bc !important;
+  
+  }
+  
+  .border-brown {
+  
+    border-left: 5px solid #d6d6bc !important;
+  
+  }
+  
+  .border-darkorange {
+  
+    border-left: 5px solid #d6d6bc !important;
+  
+  }
+  
+  .card-body12 {
+    border-radius: 15px;
+  }
+  
+  .check {
+    max-height: 400px;
+    /* Set a maximum height for the container */
+    overflow-x: auto;
+    /* Enable vertical scrolling when content overflows */
+    overflow-y: none;
+  }
+  
+  //Tiles count outline styles
+  
+  //Pink
+  .badge1 {
+    color: rgb(231, 114, 216);
+    background-color: transparent;
+  
+    &.badge-outline1 {
+      color: rgb(223, 101, 223);
+      border: 1px solid;
+      background-color: transparent;
+      border-radius: 5px;
+      padding: 5px;
+      margin-right: 50px;
+      padding-top: 1px;
+      padding-bottom: 1px;
+      // margin: 25px;
+    }
+  
+    .badge-light1 {
+      color: pink;
+      background-color: transparent;
+    }
+  }
+  //Violet
+  .badge-violet {
+    color: rgb(194, 13, 194);
+    background-color: transparent;
+  
+    &.badge-outline-violet {
+      color: rgb(155, 53, 155);
+      border: 1px solid;
+      background-color: transparent;
+      border-radius: 5px;
+      padding: 5px;
+      margin-right: 50px;
+      padding-top: 1px;
+      padding-bottom: 1px;
+      // margin: 25px;
+    }
+  
+    .badge-light1 {
+      color: violet;
+      background-color: transparent;
+    }
+  }
+  
+  //Orange
+  .badge-orange {
+    color: rgb(236, 152, 42);
+    background-color: transparent;
+  
+    &.badge-outline-orange {
+      color: rgb(230, 141, 26);
+      border: 1px solid;
+      background-color: transparent;
+      border-radius: 5px;
+      padding: 5px;
+      margin-right: 50px;
+      padding-top: 1px;
+      padding-bottom: 1px;
+      // margin: 25px;
+    }
+  
+    .badge-light1 {
+      color: orange;
+      background-color: transparent;
+    }
+  }
+  
+  //Green color
+  .badge-green {
+    color: rgb(42, 148, 59);
+    background-color: transparent;
+  
+    &.badge-outline-green {
+      color: rgb(61, 179, 46);
+      border: 1px solid;
+      background-color: transparent;
+      border-radius: 5px;
+      padding: 5px;
+      margin-right: 50px;
+      padding-top: 1px;
+      padding-bottom: 1px;
+      // margin: 25px;
+    }
+  
+    .badge-light1 {
+      color: green;
+      background-color: transparent;
+    }
+  
+  }
+
+  .Icon_hover:hover{
+    background-color: #f6f8fc;
+    font-weight: 600;
+    border-radius: 6px 6px 6px 6px;
+    color: black;
+  }
+  
+  .icon_menu {
+    position: absolute;
+    width: auto;
+    right: 40px;
+    box-shadow: 4px 4px 7px rgba(174, 174, 192, .8);
+    color: #636363;
+    max-height: 123px;
+    overflow-y: auto;
+    scrollbar-color: rgb(223, 247, 255) #ffffff;
+    z-index: 2;
+  }
+
+  .btn-group {
+    display: flex;
+    justify-content: center;
+    /* Centers the buttons as a group */
+  }
+  
+  .btn-group .btn {
+    border-radius: 0;
+    /* Removes border radius for a tab-like appearance */
+  }
+  
+  .btn-group .btn:first-child {
+    border-top-left-radius: 2rem;
+    /* Adds border radius to the first button */
+    border-bottom-left-radius: 2rem;
+  }
+  
+  .btn-group .btn:last-child {
+    border-top-right-radius: 2rem;
+    /* Adds border radius to the last button */
+    border-bottom-right-radius: 2rem;
+  }
+  
+  .btn-current {
+    background-color: rgb(245, 242, 242) !important;
+    color: #030303 !important;
+    font-size: 1.1rem !important;
+    font-weight: 630 !important;
+    padding: 9px 16px 9px 13px !important;
+    border-radius: 3px;
+    border: 0;
+  }
+  
+  .btn-current:hover {
+    background-color:  rgba(209,242,255,1)!important;
+  }
+  
+  
+  .highlighted {
+    background-color:  rgba(209,242,255,1)!important; /* Or any other styling you prefer */
+  }
+  
+  .badge-blue {
+    color: #2cacbd;
+    background-color: transparent;
+  
+    &.badge-outline-blue {
+      color: r#2cacbd;
+      border: 1px solid;
+      background-color: transparent;
+      border-radius: 5px;
+      padding: 5px;
+      margin-right: 35px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      // margin: 25px;
+    }
+  
+    .badge-light1 {
+      color: #2cacbd;
+      background-color: transparent;
+    }
+  }
+  //Maroon color
+  .badge-maroon {
+    color: #d87040;
+    background-color: transparent;
+  
+    &.badge-outline-maroon {
+      color: r#d87040;
+      border: 1px solid;
+      background-color: transparent;
+      border-radius: 5px;
+      padding: 5px;
+      margin-right: 35px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      // margin: 25px;
+    }
+  
+    .badge-light1 {
+      color: #d87040;
+      background-color: transparent;
+    }
+  }
+  .bg-gradient-violet {
+  
+    background: #510e66;
+  
+    background: -webkit-linear-gradient(45deg, #eadbf8, #85329c) !important;
+  
+    background: linear-gradient(45deg, #e9b2fa, #7e2279) !important;
+  
+  }
+  
+  .border-brown {
+  
+    border-left: 5px solid #C11C1C !important;
+  
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  .card-body12 {
+    // width: 160px;
+    height: 36px;
+  }
+  
+  .cardHead1 {
+    background-color: rgb(255, 255, 255);
+  }
+  
+  .cardHead {
+  
+    position: relative;
+  
+    display: flex;
+  
+    flex-direction: column;
+  
+    min-width: 0;
+  
+  
+    padding: 18px;
+  
+    background-clip: border-box;
+  
+    border: 0px solid rgba(0, 0, 0, 0);
+  
+    border-radius: .25rem;
+  
+    margin-bottom: 1.0rem;
+  
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+   
+  
+  }
+  
+  #chart {
+    max-width: 400px;
+    margin: 5px auto;
+    align-items: center;
+  }
+  
+  #legend {
+    .apx-chart-label {
+      // Styles for the chart labels
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+      // Add any other styles you want to customize
+    }
+  }
+  
+  
+  
+  .cardHead:hover {
+  
+  
+    transform: translate3d(0px, 0px, 0px);
+  
+  
+  
+  }
+  
+  
+  
+  .widgets-icons-2 {
+  
+    width: 35px;
+  
+    height: 35px;
+  
+    display: flex;
+  
+    align-items: center;
+  
+    justify-content: center;
+  
+    background-color: #ededed;
+  
+    font-size: 27px;
+  
+    border-radius: 10px;
+  
+  }
+  .rounded-circle {
+  
+    border-radius: 50% !important;
+  
+  }
+  
+  .ms-auto {
+  
+    margin-left: 0px;
+  
+  }
+  
+  
+  
+  .bg-gradient-info {
+  
+    background: #17ead9;
+  
+    background: -webkit-linear-gradient(45deg, #17ead9, #6078ea) !important;
+  
+    background: linear-gradient(45deg, #17ead9, #6078ea) !important;
+  
+  }
+  
+  
+  
+  .bg-gradient-Tp {
+  
+    background: rgb(118, 18, 148);
+  
+    background: -webkit-linear-gradient(45deg, #f8dbed, rgb(175, 8, 108)) !important;
+  
+    background: linear-gradient(45deg, #fab2e9, #c91271) !important;
+  
+  }
+  
+  .bg-gradient-PP {
+  
+    background: rgb(22, 18, 148);
+  
+    background: -webkit-linear-gradient(45deg, #dcdbf8, rgb(14, 8, 175)) !important;
+  
+    background: linear-gradient(45deg, #b4b2fa, #1212c9) !important;
+  
+  }
+  
+  .bg-gradient-SD {
+  
+    background: rgb(193, 222, 229);
+  
+  
+  }
+  
+  .bg-gradient-SD1 {
+  
+    background: rgb(174, 238, 200);
+    background: radial-gradient(circle, rgba(174, 238, 200, 1) 0%, rgba(73, 177, 132, 1) 100%);
+  
+  }
+  
+  
+  
+  .bg-gradient-Torder {
+  
+    background: #0f5c74;
+  
+    background: -webkit-linear-gradient(45deg, #c5e9f5, rgb(58, 155, 196)) !important;
+  
+    background: linear-gradient(45deg, #d2eef9, #359eda) !important;
+  
+  }
+  
+  .bg-gradient-info {
+    background: rgb(25, 167, 206) !important;
+  
+  }
+  
+  .bg-gradient-darkblue {
+  
+    background: #399C91;
+  
+    background: -webkit-linear-gradient(45deg, #aedaf3, #399C91) !important;
+  
+    background: linear-gradient(45deg, #9ff8f4, #399C91) !important;
+  
+  }
+  
+  .bg-gradient-darkblue {
+  
+    background: #399C91;
+  
+    background: -webkit-linear-gradient(45deg, #aedaf3, #399C91) !important;
+  
+    background: linear-gradient(45deg, #9ff8f4, #399C91) !important;
+  
+  }
+  
+  .bg-gradient-purple {
+  
+    background: #be267a;
+  
+    background: -webkit-linear-gradient(45deg, #f8bceb, #be267a) !important;
+  
+    background: linear-gradient(45deg, #f7bdde, #be267a) !important;
+  
+  }
+  
+  .bg-gradient-darkgreen {
+  
+    background: #B66B1A;
+  
+    background: -webkit-linear-gradient(45deg, #ecd776, #B66B1A) !important;
+  
+    background: linear-gradient(45deg, #eff77e, #B66B1A) !important;
+  
+  }
+  
+  .bg-gradient-darkblues {
+  
+    background: #1E2961;
+  
+    background: -webkit-linear-gradient(45deg, #c0c4f8, #1E2961) !important;
+  
+    background: linear-gradient(45deg, #cfc8f8, #1E2961) !important;
+  
+  }
+  
+  .bg-gradient-TQ {
+  
+    background: #1e6125;
+  
+    background: -webkit-linear-gradient(45deg, #c0f8c7, #32611e) !important;
+  
+    background: linear-gradient(45deg, #caf8c8, #1e612b) !important;
+  
+  }
+  
+  .bg-gradient-TQ1 {
+  
+    background: #20992c;
+  
+    background: -webkit-linear-gradient(#66c23f) !important;
+  
+    background: linear-gradient(#3cbc56) !important;
+  
+  }
+  
+  .bg-gradient-CancelOrder {
+  
+    background: #7e039a;
+  
+    background: -webkit-linear-gradient(45deg, rgb(242, 168, 237), #860492) !important;
+  
+    background: linear-gradient(45deg, #edcfeb, #9305a0) !important;
+  
+  }
+  
+  .bg-gradient-CancelOrder1 {
+  
+    background: #c19204;
+  
+    background: -webkit-linear-gradient(45deg, rgb(242, 233, 168), #eab003) !important;
+  
+    background: linear-gradient(45deg, #edeacf, #deb202) !important;
+  
+  }
+  
+  .bg-gradient-Co {
+  
+    background: #757b33;
+  
+    background: -webkit-linear-gradient(45deg, #aca447, #7b7a33) !important;
+  
+    background: linear-gradient(45deg, #c9fc9b, #3F7B33) !important;
+  
+  }
+  
+  .bg-gradient-Cq {
+  
+    background: #7b3345;
+  
+    background: -webkit-linear-gradient(45deg, rgb(227, 140, 140), #af1b1b) !important;
+  
+    background: linear-gradient(45deg, #f1a8a8, #ae1313) !important;
+  
+  }
+  
+  .bg-gradient-Cq1 {
+  
+    background: #7b3376;
+  
+    background: -webkit-linear-gradient(45deg, rgb(225, 191, 240), #af1b8f) !important;
+  
+    background: linear-gradient(45deg, #f0a8f1, #9c13ae) !important;
+  
+  }
+  
+  .bg-gradient-orderdon {
+  
+    background: #ed7d21;
+  
+    background: -webkit-linear-gradient(45deg, rgb(244, 225, 207), rgb(255, 120, 2)) !important;
+  
+    background: linear-gradient(45deg, #f1ddcf, #f25607) !important;
+  
+  }
+  
+  .bg-gradient-Mtd {
+  
+    background: #f10606;
+  
+    background: -webkit-linear-gradient(45deg, rgb(244, 207, 207), rgb(255, 2, 2)) !important;
+  
+    background: linear-gradient(45deg, #f1cfcf, #f20707) !important;
+  
+  }
+  
+  .bg-gradient-Ytd {
+  
+    background: #00910a;
+  
+    background: -webkit-linear-gradient(45deg, rgb(207, 244, 211), rgb(2, 174, 13)) !important;
+  
+    background: linear-gradient(45deg, #d2f1cf, #009c0d) !important;
+  
+  }
+  
+  .bg-gradient-Cdue {
+  
+    background: #001691;
+  
+    background: -webkit-linear-gradient(45deg, rgb(207, 208, 244), rgb(2, 13, 174)) !important;
+  
+    background: linear-gradient(45deg, #cfd0f1, #000d9c) !important;
+  
+  }
+  
+  .bg-gradient-Odue {
+  
+    background: #790091;
+  
+    background: -webkit-linear-gradient(45deg, rgb(244, 207, 243), rgb(174, 2, 171)) !important;
+  
+    background: linear-gradient(45deg, #f1cff0, #9c0085) !important;
+  
+  }
+  
+  .bg-dashboard {
+  
+    background: rgb(254, 254, 255);
+    background: linear-gradient(90deg, rgba(254, 254, 255, 1) 0%, rgba(10, 46, 114, 1) 53%, rgba(0, 212, 255, 1) 100%);
+  }
+  
+  
+  .border-Tinvoice {
+    border-left: 5px solid #971ab6 !important;
+  }
+  
+  .border-red1 {
+  
+    border-left: 5px solid #3F7B33 !important;
+  
+  }
+  
+  .border-invoice {
+    border-left: 5px solid #791dbb !important;
+  }
+  
+  .border-blue {
+  
+    border-left: 5px solid #1E2961 !important;
+  
+  }
+  
+  .border-orderdon {
+  
+    border-left: 5px solid rgb(219, 87, 5) !important;
+  
+  }
+  
+  .border-darkgreen {
+  
+    border-left: 5px solid rgb(164, 47, 47) !important;
+  
+  }
+  
+  .border-darkgreen1 {
+  
+    border-left: 5px solid rgb(133, 50, 50) !important;
+  
+  }
+  
+  .border-PendingPay {
+  
+    border-left: 5px solid #0f13f0 !important;
+  
+  }
+  
+  .border-pink {
+  
+    border-left: 5px solid #d20a5a !important;
+  
+  }
+  
+  .border-red {
+  
+    border-left: 5px solid #ad1212 !important;
+  
+  }
+  
+  .border-order {
+  
+    border-left: 5px solid rgb(58, 155, 196) !important;
+  
+  }
+  
+  .border-DComp {
+  
+    border-left: 5px solid rgb(113, 5, 172) !important;
+  
+  }
+  
+  .border-yellow {
+  
+    border-left: 5px solid #d5a508 !important;
+  
+  }
+  
+  
+  .border-violet {
+  
+    border-left: 5px solid #764C9B !important;
+  
+  }
+  
+  .border-Ytd {
+  
+    border-left: 5px solid #109603 !important;
+  
+  }
+  
+  .border-Due {
+  
+    border-left: 5px solid #030b7f !important;
+  
+  }
+  
+  
+  .bg-gradient-brown {
+  
+    background: #740f0f;
+  
+    background: -webkit-linear-gradient(45deg, #a05518, #c43a3a) !important;
+  
+    background: linear-gradient(45deg, #f2f565, #da3535) !important;
+  
+  }
+  
+  
+  
+  .radius-10 {
+    border-radius: 10px !important;
+  }
+  
+  .bg-white {
+    background: #1E2961;
+  }
+  
+  .cardHead2 {
+  
+    position: relative;
+  
+    display: flex;
+  
+    flex-direction: column;
+  
+    min-width: 0;
+  
+    word-wrap: break-word;
+  
+    padding: 20px;
+  
+    border-radius: .25rem;
+  
+    margin-bottom: 1.0rem;
+  
+    transition: all .3s ease-in-out;
+  
+    background-color: white;
+  
+  }
+  
+  .cardHead2:hover {
+  
+    box-shadow: rgba(0, 0, 0, 0.22) 0px 19px 43px;
+  
+    transform: translate3d(0px, -2px, 0px);
+  
+    cursor: pointer;
+  
+    pointer-events: auto;
+  
+  }
+  
+  .card2 {
+    width: 165px;
+    border-radius: 15px;
+    height: 60px;
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 3px, rgba(0, 0, 0, 0.1) 0px -1px 0px inset;
+  }
+  
+  //Pink
+  .badge1 {
+    color: rgb(231, 114, 216);
+    background-color: transparent;
+  
+    &.badge-outline1 {
+      color: rgb(223, 101, 223);
+      border: 1px solid;
+      background-color: transparent;
+      border-radius: 5px;
+      padding: 5px;
+      margin-right: 50px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      // margin: 25px;
+    }
+  
+    .badge-light1 {
+      color: pink;
+      background-color: transparent;
+    }
+  }
+  
+  //Violet
+  .badge-violet {
+    color: rgb(194, 13, 194);
+    background-color: transparent;
+  
+    &.badge-outline-violet {
+      color: rgb(155, 53, 155);
+      border: 1px solid;
+      background-color: transparent;
+      border-radius: 5px;
+      padding: 5px;
+      margin-right: 50px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      // margin: 25px;
+    }
+  
+    .badge-light1 {
+      color: violet;
+      background-color: transparent;
+    }
+  }
+  
+  //Orange
+  .badge-orange {
+    color: rgb(236, 152, 42);
+    background-color: transparent;
+  
+    &.badge-outline-orange {
+      color: rgb(230, 141, 26);
+      border: 1px solid;
+      background-color: transparent;
+      border-radius: 5px;
+      padding: 5px;
+      margin-right: 50px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      // margin: 25px;
+    }
+  
+    .badge-light1 {
+      color: orange;
+      background-color: transparent;
+    }
+  }
+  
+  //Green color
+  .badge-green {
+    color: rgb(42, 148, 59);
+    background-color: transparent;
+  
+    &.badge-outline-green {
+      color: rgb(61, 179, 46);
+      border: 1px solid;
+      background-color: transparent;
+      border-radius: 5px;
+      padding: 5px;
+      margin-right: 50px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      // margin: 25px;
+    }
+  
+    .badge-light1 {
+      color: green;
+      background-color: transparent;
+    }
+  }
+  
+  //Tiles count outline styles
+  
+  //Pink
+  .badge1 {
+    color: rgb(231, 114, 216);
+    background-color: transparent;
+  
+    &.badge-outline1 {
+      color: rgb(223, 101, 223);
+      border: 1px solid;
+      background-color: transparent;
+      border-radius: 5px;
+      padding: 5px;
+      margin-right: 50px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      // margin: 25px;
+    }
+  
+    .badge-light1 {
+      color: pink;
+      background-color: transparent;
+    }
+  }
+  
+  //Violet
+  .badge-violet {
+    color: rgb(194, 13, 194);
+    background-color: transparent;
+  
+    &.badge-outline-violet {
+      color: rgb(155, 53, 155);
+      border: 1px solid;
+      background-color: transparent;
+      border-radius: 5px;
+      padding: 5px;
+      margin-right: 50px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      // margin: 25px;
+    }
+  
+    .badge-light1 {
+      color: violet;
+      background-color: transparent;
+    }
+  }
+  
+  //Orange
+  .badge-orange {
+    color: rgb(236, 152, 42);
+    background-color: transparent;
+  
+    &.badge-outline-orange {
+      color: rgb(230, 141, 26);
+      border: 1px solid;
+      background-color: transparent;
+      border-radius: 5px;
+      padding: 5px;
+      margin-right: 50px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      // margin: 25px;
+    }
+  
+    .badge-light1 {
+      color: orange;
+      background-color: transparent;
+    }
+  }
+  
+  //Green color
+  .badge-green {
+    color: rgb(42, 148, 59);
+    background-color: transparent;
+  
+    &.badge-outline-green {
+      color: rgb(61, 179, 46);
+      border: 1px solid;
+      background-color: transparent;
+      border-radius: 5px;
+      padding: 5px;
+      margin-right: 50px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      // margin: 25px;
+    }
+  
+    .badge-light1 {
+      color: green;
+      background-color: transparent;
+    }
+  }
+  
+  //blue color
+  .badge-blue {
+    color: #2cacbd;
+    background-color: transparent;
+  
+    &.badge-outline-blue {
+      color: r#2cacbd;
+      border: 1px solid;
+      background-color: transparent;
+      border-radius: 5px;
+      padding: 5px;
+      margin-right: 50px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      // margin: 25px;
+    }
+  
+    .badge-light1 {
+      color: #2cacbd;
+      background-color: transparent;
+    }
+  }
+  
+  //Royal Blue color
+  .badge-royalblue {
+    color: #330be9;
+    background-color: transparent;
+  
+    &.badge-outline-royalblue {
+      color: r#131277;
+      border: 1px solid;
+      background-color: transparent;
+      border-radius: 5px;
+      padding: 5px;
+      margin-right: 50px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      // margin: 25px;
+    }
+  
+    .badge-light1 {
+      color: #2cacbd;
+      background-color: transparent;
+    }
+  }
+  
+  //Brown color
+  .badge-brown {
+    color: #d87040;
+    background-color: transparent;
+  
+    &.badge-outline-brown {
+      color: #d87040;
+      border: 1px solid;
+      background-color: transparent;
+      border-radius: 5px;
+      padding: 5px;
+      margin-right: 50px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      // margin: 25px;
+    }
+  
+    .badge-light1 {
+      color: brown;
+      background-color: transparent;
+    }
+  }
+  
+  //Maroon color
+  .badge-maroon {
+    color: #8b2d15;
+    background-color: transparent;
+  
+    &.badge-outline-maroon {
+      color: r#a7240d;
+      border: 1px solid;
+      background-color: transparent;
+      border-radius: 5px;
+      padding: 5px;
+      margin-right: 50px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      // margin: 25px;
+    }
+  
+    .badge-light1 {
+      color: maroon;
+      background-color: transparent;
+    }
+  }
+  
+  //coffee color
+  .badge-coffee {
+    color: #662405;
+    background-color: transparent;
+  
+    &.badge-outline-coffee {
+      color: r#4e0c00;
+      border: 1px solid;
+      background-color: transparent;
+      border-radius: 5px;
+      padding: 5px;
+      margin-right: 50px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      // margin: 25px;
+    }
+  
+    .badge-light1 {
+      color: maroon;
+      background-color: transparent;
+    }
+  }

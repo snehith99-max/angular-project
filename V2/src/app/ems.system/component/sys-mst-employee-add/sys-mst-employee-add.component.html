@@ -1,0 +1,521 @@
+<div class="m-4">
+  <form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="card shadow-lg rounded-top">
+      <div class="card-title p-2 rounded-top bg-primary d-flex justify-content-between align-items-center">
+        <h1 class="fw-bolder" style="color: #ffffff;">
+          <span class="fa-solid fa-plus fs-1"></span>&nbsp; Add Employee
+        </h1>
+        <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer me-3" 
+        routerLink="/system/SysMstEmployeeSummary"><i class="fa-solid fa-arrow-left text-blue mb-1"></i><span class="tooltips">Back</span></button>
+      </div>
+      <div class="card m-3">
+        <div class="card-header bg-lightblue card-height55">
+          <div class="card-title m-0">
+            <h4 class="fw-bolder text-blue">Office Details</h4>
+          </div>
+        </div>
+
+        <div class="d-flex flex-row m-6 flex-wrap">
+          <!-- <div class="col-12 col-lg-4 col-md-12 col-sm-12"><span class="font-bold required">Entity</span>
+
+            <ng-select formControlName="entityname" [items]="entity_list"
+              class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="entity_name"
+              [ngClass]="{'invalid-border':reactiveForm.get('entityname')?.invalid && reactiveForm.get('entityname')?.touched}"
+              bindValue="entity_gid" placeholder="Select Entity"></ng-select>
+            <div
+              *ngIf="reactiveForm.get('entityname')?.hasError('required') && reactiveForm.get('entityname')?.touched || reactiveForm.get('entityname')?.hasError('pattern')"
+              class="text-red"> Entity is required.</div>
+          </div> -->
+
+          <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Branch</span>
+
+            <ng-select formControlName="branchname" [items]="branchList"
+              class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="branch_name"
+              [ngClass]="{'invalid-border':reactiveForm.get('branchname')?.invalid && reactiveForm.get('branchname')?.touched}"
+              bindValue="branch_gid" placeholder="Select Branch"></ng-select>
+            <div
+              *ngIf="reactiveForm.get('branchname')?.hasError('required') && reactiveForm.get('branchname')?.touched || reactiveForm.get('branchname')?.hasError('pattern')"
+              class="text-red"> Branch Name is required.</div>
+          </div>
+          <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Department</span>
+            <ng-select formControlName="departmentname" [items]="departmentList"
+              [ngClass]="{'invalid-border':reactiveForm.get('departmentname')?.invalid && reactiveForm.get('departmentname')?.touched}"
+              class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="department_name"
+              bindValue="department_gid" placeholder="Select Department"></ng-select>
+            <div
+              *ngIf="reactiveForm.get('departmentname')?.hasError('required') && reactiveForm.get('departmentname')?.touched || reactiveForm.get('departmentname')?.hasError('pattern')"
+              class="text-red"> Department Name is required.</div>
+          </div>
+          <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Designation</span>
+            <ng-select formControlName="designationname" [items]="designation_list"
+              [ngClass]="{'invalid-border':reactiveForm.get('designationname')?.invalid && reactiveForm.get('designationname')?.touched}"
+              class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="designation_name"
+              bindValue="designation_gid" placeholder="Select Designation"></ng-select>
+            <div
+              *ngIf="reactiveForm.get('designationname')?.hasError('required') && reactiveForm.get('designationname')?.touched || reactiveForm.get('designationname')?.hasError('pattern')"
+              class="text-red"> Designation Name is required.</div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-row m-6 mt-0 flex-wrap">
+          <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+            <span class="font-bold required">Employee Access</span>
+            <div class="d-flex justify-content-start mt-4 ms-2">
+              <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                <input class="form-check-input" type="radio" name="active_flag" formControlName="active_flag"
+                  value="Y" />
+                <label class="form-check-label text-gray-700 text-nowrap" for="empAccessYes">Yes</label>
+              </div>
+              <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+                <input class="form-check-input" type="radio" name="active_flag" formControlName="active_flag"
+                  value="N" />
+                <label class="form-check-label text-gray-700 text-nowrap" for="empAccessNo">No</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">User Code</span>
+            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+              <input formControlName="user_code" type="text"
+                [ngStyle]="{ 'border-color': reactiveForm.get('user_code')?.hasError('required') && reactiveForm.get('user_code')?.touched || reactiveForm.get('user_code')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"
+                placeholder="User Code" />
+              <div *ngIf="reactiveForm.get('user_code')?.hasError('required') && reactiveForm.get('user_code')?.touched"
+                class="text-red ms-2">User Code is required.</div>
+              <div *ngIf="reactiveForm.get('user_code')?.hasError('pattern')" class="text-red ms-2">Space at the
+                beginning is not allowed.</div>
+            </div>
+          </div>
+          <div class="col-11 col-lg-4 col-md-6 col-sm-11">
+            <label for="password" class="form-label"><span class="font-bold required">User Password</span></label>
+            <div class="input-group input-group-sm has-validation" style="width:92%">
+              <input [type]="employee.showPassword ? 'text' : 'password'" id="password"
+                (change)="userpassword(password)" formControlName="password"
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                [ngStyle]="{'border-color':password.invalid && password.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                placeholder="User Password" name="password" required
+                maxlength="20"
+                [class.is-invalid]="password.invalid && (password.dirty || password.touched)" />
+              <button type="button" style="margin-left:0px;background-color: #008CBA;z-index: 0;"
+                class="btn btn-sm btn-outline-secondary" (click)="employee.showPassword = !employee.showPassword">
+                <i class="bi"
+                  [ngClass]="{'bi-eye-fill': !employee.showPassword, 'bi-eye-slash-fill': employee.showPassword}"
+                  style="color: #ffffff;"></i>
+              </button>
+              <div *ngIf="password.invalid && (password.dirty || password.touched)" class="invalid-feedback">
+                <div *ngIf="password.errors?.['required']">
+                  <span style="color: red; width: 200px; margin-top: 1px; margin-left: 8px; font-size: 11px;">User
+                    password is required</span>
+                </div>
+                <!-- <div *ngIf="reactiveForm.get('password')?.hasError('pattern')" class="text-red ms-2 font-size: 11px;">Space at the beginning is not allowed.</div> -->
+                <!-- <div *ngIf="password.errors?.['minlength']" class="text-red ms-2 font-size: 11px;">Password must be at least 6 characters long.</div> -->
+
+                <div class="text-red" *ngIf="reactiveForm.get('password')?.hasError('pattern')">
+                  Password should contain: "Atleast one upper case letter,
+                  one lower case letter, one special character,
+                  one number and minimum eight characters".
+                </div>
+
+                <!-- <div *ngIf="password.errors?.['minlength']">
+                  <span style="color: red; width: 200px; margin-top: 1px; font-size: 11px;">Password must be at least 6 characters long.</span>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-row m-6 mt-0 flex-wrap">
+          
+
+          <!-- <div class="col-11 col-lg-4 col-md-6 col-sm-11">
+            <label for="password" class="form-label"><span class="font-bold required">User Password</span></label>
+            <div class="input-group input-group-sm has-validation" style="width:92%">
+              <input [type]="employee.showPassword ? 'text' : 'password'" id="password"
+                (change)="userpassword(password)" formControlName="password"
+                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                [ngStyle]="{'border-color': password.invalid && (password.dirty || password.touched) ? 'red' : 'rgb(209, 209, 209)'}"
+                placeholder="User Password" name="password" required
+                [class.is-invalid]="password.invalid && (password.dirty || password.touched)" />
+              <button type="button" style="margin-left:0px;background-color: #008CBA;" class="btn btn-outline-secondary"
+                (click)="employee.showPassword = !employee.showPassword">
+                <i class="bi"
+                  [ngClass]="{'bi-eye-fill': !employee.showPassword, 'bi-eye-slash-fill': employee.showPassword}"
+                  style="color: #ffffff; font-size: 20px;"></i>
+              </button>
+              <div *ngIf="password.invalid && (password.dirty || password.touched)" class="invalid-feedback">
+                <div *ngIf="reactiveForm.get('password')?.hasError('pattern')"><span
+                    style="color: red; width: 200px; margin-top: 1px; margin-left: 8px; font-size: 11px;">
+                    Space at the beginning is not allowed.</span></div>
+                <div *ngIf="password.errors?.['minlength']">
+                  <span style="color: red; width: 200px; margin-top: 1px; margin-left: 8px; font-size: 11px;">Password
+                    must be at least 6 characters long.</span>
+                </div>
+                <div *ngIf="password.errors?.['maxlength']">
+                  <span style="color: red; width: 200px; margin-top: 1px; margin-left: 8px; font-size: 11px;">Password
+                    must be at most 20 characters long.</span>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+
+
+          <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+            <span class="font-bold">Confirm User Password</span>
+            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+              <input formControlName="confirmpassword" readonly type="password"
+                class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-2 mb-lg-0"
+                name="confirmpassword" placeholder="Confirm User Password" />
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+            <span class="font-bold">Upload Photo</span>
+            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+              <input (change)="onChange2($event)" formControlName="employee_photo" accept="image/*" type="file" #fileInput
+                class="form-control form-control-lg form-control-solid bg-white mb-3 mb-lg-0  borderc-secondary custom-input"
+                name="fName" />
+                <div *ngIf="invalidFileFormat"
+                class="text-red">
+                Invalid file. Accept image format.
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">User Group Template</span>
+            <ng-select formControlName="usergrouptemplate" [items]="usergrouptemp_list"
+              class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="usergrouptemplate_name"
+              bindValue="usergrouptemplate_gid" placeholder="Select Designation"></ng-select>
+          </div> 
+        </div>
+
+        <div class="m-3 mt-5 border card">
+          <div class="card-header bg-lightblue card-height55">
+            <div class="card-title m-0">
+              <h5 class="fw-bolder text-blue">Personal Details</h5>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row m-6 flex-wrap">
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">First Name</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="first_name" type="text"
+                  [ngStyle]="{ 'border-color': reactiveForm.get('first_name')?.hasError('required') && reactiveForm.get('first_name')?.touched || reactiveForm.get('first_name')?.hasError('pattern') ? 'red' : 'rgb(209, 209, 209)' }"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0"
+                  placeholder="First Name" />
+                <div
+                  *ngIf="reactiveForm.get('first_name')?.hasError('required') && reactiveForm.get('first_name')?.touched"
+                  class="text-red ms-2">First Name is required.</div>
+                <div *ngIf="reactiveForm.get('first_name')?.hasError('pattern')" class="text-red ms-2">Space at the
+                  beginning is not allowed.</div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+              <span class="font-bold">Last Name</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="last_name" type="text"
+                  class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                  placeholder="Last Name" name="last_name" />
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+              <span class="font-bold">Gender</span>
+              <div class="d-flex justify-content-start mt-4 ms-2">
+                <!--begin::Check-->
+                <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                  <input class="form-check-input" type="radio" name="gender" checked="checked" formControlName="gender"
+                    value="male" />
+                  <!--begin::Label-->
+                  <label class="form-check-label text-gray-700 text-nowrap"
+                    for="kt_builder_header_content_menu">Male</label>
+                  <!--end::Label-->
+                </div>
+                <!--end::Check-->
+                <!--begin::Check-->
+                <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+                  <input class="form-check-input" type="radio" name="gender" formControlName="gender" value="female" />
+                  <!--begin::Label-->
+                  <label class="form-check-label text-gray-700 text-nowrap"
+                    for="kt_builder_header_content_page-title">Female</label>
+                  <!--end::Label-->
+                </div>
+                <!--end::Check-->
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row m-6 mt-0 flex-wrap">
+            <!-- <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+              <span class="font-bold required">Personal Email Address</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="email" type="text"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                  [ngStyle]="{'border-color': email.invalid && email.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                  placeholder="Personal Email Address" name="email" required />
+                <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                  <div *ngIf="email.errors?.['required']">
+                    <span class="text-red">Email is required</span>
+                  </div>
+                  <div *ngIf="email.errors?.['pattern']">
+                    <span class="text-red">Space is not allowed and invaild Email...!!!</span>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Personal Email</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input type="text" formControlName="email" [ngStyle]="{ 'border-color': reactiveForm.get('email')?.hasError('pattern') && reactiveForm.get('email')?.touched ? 'red' : 'rgb(209, 209, 209)' }" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0" placeholder="Personal Email" />
+                <div *ngIf="reactiveForm.get('email')?.hasError('pattern') && reactiveForm.get('email')?.touched || reactiveForm.get('email')?.hasError('pattern')" class="text-red">Invaild Email.</div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+              <span class="font-bold required">Personal Phone Number</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="mobile" id="mobile" type="text"  pattern="^[0-9]{10,12}$" 
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                  [ngStyle]="{'border-color': mobile.invalid && mobile.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                  placeholder="Personal Phone Number" name="mobile" minlength="10"maxlength="12" autocomplete="off" />
+                <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)">
+                  <div *ngIf="mobile.errors?.['required']">
+                    <span class="text-red">Phone number is required</span>
+                  </div>
+                  <div *ngIf="mobile.errors?.['pattern']">
+                    <span class="text-red">Space not allowed and accepts max 12 digits</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold required">Company Email</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input type="text" formControlName="comp_email" [ngStyle]="{ 'border-color': reactiveForm.get('comp_email')?.hasError('pattern') && reactiveForm.get('comp_email')?.touched ? 'red' : 'rgb(209, 209, 209)' }" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input  mb-3 mb-lg-0" placeholder="Company Email" />
+                <div *ngIf="reactiveForm.get('comp_email')?.hasError('pattern') && reactiveForm.get('comp_email')?.touched || reactiveForm.get('comp_email')?.hasError('pattern')" class="text-red">Invaild Email.</div>
+              </div>
+                </div>
+            </div> -->
+
+            <!-- <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+              <span class="font-bold required">Company Email Address</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="comp_email" type="text"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                  [ngStyle]="{'border-color': comp_email.invalid && comp_email.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                  placeholder="Company Email Address" name="comp_email" required />
+                <div *ngIf="comp_email.invalid && (comp_email.dirty || comp_email.touched)">
+                  <div *ngIf="comp_email.errors?.['required']">
+                    <span class="text-red">Company Email is required</span>
+                  </div>
+                  <div *ngIf="comp_email.errors?.['pattern']">
+                    <span class="text-red">Space is not allowed and invaild Email...!!!</span>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+              <span class="font-bold required">Official Mail Address</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="comp_email" type="text"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                  [ngStyle]="{'border-color': comp_email?.invalid && comp_email?.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                  placeholder="Official Mail Address" name="comp_email" required />
+                <div *ngIf="comp_email?.invalid && (comp_email?.dirty || comp_email?.touched)">
+                  <div *ngIf="comp_email?.errors?.['required']">
+                    <span class="text-red">Official Mail Address is required</span>
+                  </div>
+                  <div *ngIf="comp_email?.errors?.['pattern']">
+                    <span class="text-red">Invalid email format or public domain is not allowed!</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+        <div class="d-flex flex-row m-3 mt-5 flex-wrap">
+          <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+            <div class="card me-lg-3 me-0">
+              <div class="card-header bg-lightblue card-height55">
+                <div class="card-title m-0">
+                  <h5 class="fw-bolder text-blue">Permanent Address</h5>
+                </div>
+              </div>
+              <div class="d-flex flex-row m-lg-6 mt-lg-4 m-6 mt-4">
+                <div class="col">
+                  <span class="font-bold">Address Line 1</span>
+                  <div class="col-lg-12 fv-row mt-2">
+                    <input formControlName="permanent_address1" placeholder="Address Line 1" type="text"
+                      class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary"
+                      name="permanent_address1" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-row m-6 mt-0">
+                <div class="col">
+                  <span class="font-bold">Address Line 2</span>
+                  <div class="col-lg-12 fv-row mt-2">
+                    <input formControlName="permanent_address2" type="text" placeholder="Address Line 2"
+                      class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary"
+                      name="permanent_address2" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-row m-6 mt-0 mb-11 flex-wrap">
+                <div class="col-12 col-lg-6">
+                  <span class="font-bold">City</span>
+                  <div class="col-lg-11 fv-row mt-2">
+                    <input formControlName="permanent_city" type="text" placeholder="City"
+                      class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                      name="permanent_city" />
+                  </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <span class="font-bold">Postal Code</span>
+                  <div class="col-lg-11 fv-row mt-2">
+                    <input placeholder="Postal" formControlName="permanent_postal" type="text"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                      name="fName" pattern="^[0-9]{6}$" maxlength="6"
+                      [ngStyle]="{'border-color': permanent_postal.minlength || permanent_postal.invalid && permanent_postal.touched ? 'red' : 'rgb(209, 209, 209)'}" />
+                  </div>
+                  <div *ngIf="reactiveForm.get('permanent_postal').errors?.['pattern']" class="text-red">
+                    Pin Code not exceed 6 numeric digits.
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-row m-6 mt-0 flex-wrap">
+                <div class="col-12 col-lg-6 mt-8 mt-lg-0">
+                  <span class="font-bold">State</span>
+                  <div class="col-lg-11 fv-row mt-2">
+                    <input formControlName="permanent_state" type="text" placeholder="State"
+                      class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                      name="permanent_state" />
+                  </div>
+                </div>
+
+                <div class="col-12 col-lg-6">
+                  <div class="col-lg-11 fv-row mb-2">
+                    <span class="font-bold">Country</span>
+                    <ng-select formControlName="country" [items]="country_list2"
+                      class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="country_names"
+                      bindValue="country_gids" placeholder="Select Country"></ng-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+            <div class="card ms-lg-3 ms-md-3 mt-lg-0 mt-md-0 mt-5 me-0">
+              <div class="card-header bg-lightblue card-height55">
+                <div class="row">
+                  <div class="card-title m-0 col-lg-12">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <h5 class="fw-bolder text-blue mb-0">Temporary Address</h5>
+                      <button (click)="copyAddress()" type="button" title="Copy"
+                        class="btn btn-icon btn-sm bg-primary ms-5">
+                        <span class="ki-duotone ki-copy fs-4" style="color: #ffffff;"></span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                </div>
+              </div>
+              <div class="d-flex flex-row m-lg-6 mt-lg-4 m-6 mt-4">
+                <div class="col">
+                  <span class="font-bold">Address Line 1</span>
+                  <div class="col-lg-12 fv-row mt-2">
+                    <input placeholder="Address Line 1" formControlName="temporary_address1" type="text"
+                      class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary"
+                      name="temporary_address1" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-row m-6 mt-0">
+                <div class="col">
+                  <span class="font-bold">Address Line 2</span>
+                  <div class="col-lg-12 fv-row mt-2">
+                    <input placeholder="Address Line 2" type="text" formControlName="temporary_address2"
+                      class="form-control form-control-lg form-control-solid bg-white custom-input mb-3 mb-lg-0 borderc-secondary"
+                      name="temporary_address2" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-row m-6 mt-0 mb-11 flex-wrap">
+                <div class="col-12 col-lg-6">
+                  <span class="font-bold">City</span>
+                  <div class="col-lg-11 fv-row mt-2">
+                    <input placeholder="City" formControlName="temporary_city" type="text"
+                      class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                      name="fName" />
+                  </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <span class="font-bold">Postal Code</span>
+                  <div class="col-lg-11 fv-row mt-2">
+                    <input placeholder="Postal" formControlName="temporary_postal" type="text"
+                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                      name="fName" pattern="^[0-9]{6}$" maxlength="6"
+                      [ngStyle]="{'border-color': temporary_postal.minlength || temporary_postal.invalid && temporary_postal.touched ? 'red' : 'rgb(209, 209, 209)'}" />
+                    </div>
+                  <!-- <div *ngIf="temporary_postal.invalid && (temporary_postal.dirty || temporary_postal.touched)">
+                    <div *ngIf="temporary_postal.errors?.['pattern']">
+                      <span style="color: red; width: 200px; margin-top: 5px; margin-left: 8px; font-size: 11px;">*
+                        Maximum 12 digits with alphanumeric or less than 12 digits with alphanumeric or less than 12
+                        digits</span>
+                    </div>
+                  </div> -->
+
+                  <div *ngIf="reactiveForm.get('temporary_postal').errors?.['pattern']" class="text-red">
+                    Pin Code not exceed 6 numeric digits.
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-row m-6 mt-0 flex-wrap">
+                <div class="col-12 col-lg-6 mt-8 mt-lg-0">
+                  <span class="font-bold">State</span>
+                  <div class="col-lg-11 fv-row mt-2">
+                    <input placeholder="State" formControlName="temporary_state" type="text"
+                      class="form-control form-control-lg form-control-solid borderc-secondary bg-white custom-input mb-3 mb-lg-0"
+                      name="fName" />
+                  </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <div class="col-lg-11 fv-row mb-2">
+                    <span class="font-bold">Country</span>
+                    <ng-select formControlName="countryname" [items]="country_list2"
+                      class="custom col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2" bindLabel="country_names"
+                      bindValue="country_gids" placeholder="Select Country"></ng-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center my-4">
+          <button class="me-4 btn-success" (click)="validate()" [disabled]="reactiveForm.invalid"
+            [ngClass]="{'primary-button': !reactiveForm.invalid, 'secondary-button': reactiveForm.invalid}"
+            data-bs-dismiss="modal">
+            <i class="fas fa-check text-white fs-5"></i>
+            <span class="ms-3">Submit</span>
+          </button>
+
+          <button class="btn-primary btn-sm text-white me-4" routerLink="/system/SysMstEmployeeSummary">
+            <i class="fas fa-arrow-left"></i>
+            <span class="ms-3">Back</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

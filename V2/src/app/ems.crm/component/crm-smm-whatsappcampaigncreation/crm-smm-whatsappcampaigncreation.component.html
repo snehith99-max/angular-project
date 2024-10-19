@@ -1,0 +1,136 @@
+<div class="m-12">
+    <div class="card">
+        <div class="card shadow-lg rounded-top" style="top:-27px;">
+            <div class="card-header bg-skyblue" style="color: white;">
+                <h3 class="card-title"><i class="fa fa-plus-circle fs-3"></i>&nbsp;&nbsp;Create Campaign</h3>
+            </div>
+
+            <form [formGroup]="reactiveForm" #form="ngForm">
+                <div class="m-4 mt-4 border card ">
+                    <div class="d-flex flex-row m-6 flex-wrap">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold fs-6"><b>Campaign Title</b><span
+                                    class="ms-1 text-red">*</span></span>
+                            <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input type="text" formControlName="name" class="
+                            form-control form-control-lg form-control-solid
+                            borderc-secondary
+                            custom-input
+                            mb-3 mb-lg-0
+                            bg-white
+                            custom-input
+                          " [ngStyle]="{
+                            'border-color':
+                            name.invalid && name.touched
+                                ? 'red'
+                                : 'rgb(209, 209, 209)'
+                          }" placeholder="" pattern="^(?!\s*$).+" name="project_name" />
+                            </div>
+                            <div *ngIf="name.invalid && (name.dirty || name.touched)">
+                                <div *ngIf="name.errors?.['required'] || name.errors?.['whitespace']">
+                                    <span style="color:red;">Campaign Title is required.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row m-6 flex-wrap">
+                        <div class="col-12 col-lg-12 col-md-6 col-sm-12">
+                            <span class="font-bold"><b>Poster Attachments</b></span>
+                            <div class="d-flex justify-content-start mt-4 ms-2">
+                                <div
+                                    class="form-check form-check-custom form-check-success form-check-solid form-check-sm">
+                                    <input class="form-check-input" type="radio" (click)="show()"
+                                        name="active_flag" value="Y" checked />
+                                    <label class="form-check-label text-gray-700 text-nowrap"
+                                        for="empAccessYes">Image</label>
+
+                                </div>
+                                <div
+                                    class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                                    <input class="form-check-input" type="radio" (click)="showno()" name="active_flag"
+                                        value="N" />
+                                    <label class="form-check-label text-gray-700 text-nowrap"
+                                        for="empAccessNo">Video / Files</label>
+                                </div>
+                            </div>
+                            <br>
+                            <input (change)="onChange2($event)" (click)="setFileType('image')" accept="image/*"
+                                [hidden]="!showimage" type="file" #fileInput class="
+              form-control form-control-lg form-control-solid bg-white
+              mb-3 mb-lg-0  borderc-secondary custom-input
+            " name="fName" />
+                            <input (change)="onChange2($event)" (click)="setFileType('file')" [hidden]="!showdocument"
+                                type="file" #fileInput class="
+                      form-control form-control-lg form-control-solid bg-white
+                      mb-3 mb-lg-0  borderc-secondary custom-input
+                    " name="fName" />
+                        </div>
+                        <!-- <div class="col-12 col-lg-4 col-md-6 col-sm-12" [hidden]="!showdocument">
+                            <span class="font-bold fs-6"><b>Poster Document</b></span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input (change)="onChange2($event)"  (click)="setFileType('file')"
+                                    type="file" #fileInput class="
+                      form-control form-control-lg form-control-solid bg-white
+                      mb-3 mb-lg-0  borderc-secondary custom-input
+                    " name="fName" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4 col-md-6 col-sm-12" [hidden]="!showimage">
+                            <span class="font-bold fs-6"><b>Poster Image</b></span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input (change)="onChange2($event)" (click)="setFileType('image')" accept="image/*"
+                                    type="file" #fileInput class="
+                      form-control form-control-lg form-control-solid bg-white
+                      mb-3 mb-lg-0  borderc-secondary custom-input
+                    " name="fName" />
+                            </div>
+                        </div> -->
+
+                    </div>
+                    <div class="d-flex flex-row m-6 flex-wrap">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12 ps-0 pe-1">
+                            <span class="font-bold fs-6"><b>Content</b></span>
+                            <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <ckeditor [config]="config" formControlName="body" debounce="500"></ckeditor>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row m-6 flex-wrap">
+
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <span class="font-bold fs-6"><b>Footer</b></span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input formControlName="footer" type="text" class="
+                                         form-control form-control-lg form-control-solid
+                                         custom-input
+                                         mb-3 mb-lg-0
+                                         bg-white
+                                         custom-input
+                                         borderc-secondary
+                                       " placeholder="Text Here" pattern="^(?!\s*$).+" name="footer" required />
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12 ps-0 pe-1">
+                            <span class="font-bold fs-6"><b>Remarks</b></span>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <textarea formControlName="description" rows="2" type="text" class="form-control"
+                                    pattern="^(?!\s*$).+" name="description" required></textarea>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center my-4">
+                        <button title="Create Campaign" type="submit" (click)="onsubmit()"
+                            class="btn-success btn-sm text-white me-2">
+                            <i class="fa fa-check fs-5"></i>&nbsp;Create Campaign</button>
+                        <button title="Back" routerLink="/crm/CrmSmmWhatsappcampaign"
+                            class="btn-primary btn-sm text-black me-4 "><i class="ki-duotone ki-entrance-right fs-5">
+                                <i class="path1"></i>
+                                <i class="path2"></i>
+                            </i>&nbsp;Back</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,412 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Credit Card </h3>
+        </div>
+
+        <div class="col me-5">
+            <button type="button" class="btn-primary btn-sm text-white me-4 float-end" data-bs-toggle="modal"
+                data-bs-target="#creditcardadd"> Add Credit Card
+            </button>
+        </div>
+    </div>
+    <br />
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="creditcard_List" class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th style="width:2%">S.No</th>
+                        <th>Bank Code</th>
+                        <th>Bank Name</th>
+                        <th>Card Holder Name</th>
+                        <th>Credit Card Number</th>
+                        <th class="text-end">Opening Balance</th>
+                        <th>Status</th>
+                        <th class="text-center bg-lightblue ">Action</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of creditcard_List; let i=index;">
+                        <td>{{i+1}}</td>
+                        <td>{{data.bank_code}}</td>
+                        <td>{{data.bank_name}}</td>
+                        <td>{{data.cardholder_name}}</td>
+                        <td>{{data.creditcard_no}}</td>
+                        <td style="text-align: right;">{{data.openning_balance}}</td>
+                        <td>
+                            <span *ngIf="data.status_flag === 'Y'" class="status-badge bg-success">
+                                Active
+                            </span>
+                            <span *ngIf="data.status_flag === 'N'" class="status-badge bg-danger">
+                                Inactive
+                            </span>
+                        </td>
+                        <td class="text-center text-nowrap">
+                            <!-- <div (click)="toggleOptions(data)" style="cursor: pointer;">
+                                <button class="btn me-2 p-1 "><span class="fa-solid fa-ellipsis-vertical fs-1"
+                                        style="color: #4d4d4d;"></span></button>
+                                <div *ngIf="showOptionsDivId === data"
+                                    class="pb-0 rounded bg-white cursor-pointer icon_menu">
+                                    Add Icons
+                                    <div class="d-flex p-3 pb-3 Icon_hover" (click)="edit(data)" data-bs-toggle="modal"
+                                        data-bs-target="#creditcardedit">
+                                        <span><i class="fa-solid fa-pencil fs-3 me-5"></i></span>
+                                        <span>Edit</span>
+                                    </div>
+                                    <div class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal"
+                                        data-bs-target="#myModalactive" (click)="openModalactive(data.bank_gid)"
+                                        *ngIf="data.status_flag !== 'N'">
+                                        <span><i class="fa-solid fa-thumbs-down fs-3 me-5"></i></span>
+                                        <span>Inactive</span>
+                                    </div>
+                                    <div class="d-flex p-3 pb-3 Icon_hover" data-bs-target="#myModalinactive"
+                                        data-bs-toggle="modal" (click)="openModalinactive(data.bank_gid)"
+                                        *ngIf="data.status_flag !== 'Y'">
+                                        <span><i class="fa-solid fa-thumbs-up fs-3 me-5"></i></span>
+                                        <span>Activate</span>
+                                    </div>
+                                    Add Icons
+                                </div>
+                            </div> -->
+
+                            <button title="Edit" type="button" class="btn btn-icon btn-sm bg-success me-2" (click)="edit(data)" [disabled]="data.status_flag === 'N'" data-bs-toggle="modal" data-bs-target="#creditcardedit">
+                                <span class="fa-solid fa-pencil text-white  fs-6"></span>
+                            </button>
+                            <button title="Activate" type="button" class="btn btn-icon btn-sm bg-stssuccess me-2" (click)="openModalactive(data.bank_gid)" *ngIf="data.status_flag !== 'N'" data-bs-target="#myModalactive" data-bs-toggle="modal">
+                                <span class="fas fa-thumbs-up" style="color: #ffffff;"></span>
+                            </button>                           
+                            <button title="Deactivate" type="button" class="btn btn-icon btn-sm bg-inactive me-2" (click)="openModalinactive(data.bank_gid)" *ngIf="data.status_flag !== 'Y'" data-bs-target="#myModalinactive" data-bs-toggle="modal">
+                                <span class="fas fa-thumbs-down" style="color: #ffffff;"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal top fade" id="creditcardadd" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog  modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white">Add Credit Card</h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="CreditCardForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-4 col-md-12 col-sm-12">
+                            <span class="font-bold required">Bank Code</span>
+                            <input formControlName="bank_code" type="text"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input"
+                                [ngStyle]="{'border-color': bank_code.invalid && bank_code.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                placeholder="Bank Code" name="bank_code" required />
+
+                            <div *ngIf="bank_code.invalid && (bank_code.dirty || bank_code.touched)">
+                                <div *ngIf="bank_code.errors?.['required']"><span class="text-red">Bank code is required.</span></div>
+                            </div>
+
+                            <div *ngIf="CreditCardForm.get('bank_code')?.hasError('pattern')" class="text-red ms-2">Space at the beginning is not allowed.</div>
+                        </div>
+                        <div class="col-12 col-lg-4 col-md-12 col-sm-12"><span class="font-bold required">Bank Name </span>
+                            <input formControlName="bank_name" type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input" [ngStyle]="{'border-color': bank_name.invalid && bank_name.touched ? 'red' : 'rgb(209, 209, 209)'}" placeholder="Bank Name" name="bank_name" required />
+                            <div *ngIf="bank_name.invalid && (bank_name.dirty || bank_name.touched)">
+                                <div *ngIf="bank_name.errors?.['required']"><span class="text-red">Bank name is required.</span></div>
+                            </div>
+                            <div *ngIf="CreditCardForm.get('bank_name')?.hasError('pattern')" class="text-red ms-2">Space at the beginning is not allowed.</div>
+                        </div>
+                        <div class="col-12 col-lg-4 col-md-12 col-sm-12"><span class="font-bold required">Card Holder Name </span>
+                            <input formControlName="cardholder_name" type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input" [ngStyle]="{'border-color': cardholder_name.invalid && cardholder_name.touched ? 'red' : 'rgb(209, 209, 209)'}" placeholder="Card Holder" name="cardholder_name" required />
+                            <div *ngIf="cardholder_name.invalid && (cardholder_name.dirty || cardholder_name.touched)">
+                                <div *ngIf="cardholder_name.errors?.['required']"><span class="text-red">Card Holder Name is required.</span></div>
+                            </div>
+                            <div *ngIf="CreditCardForm.get('cardholder_name')?.hasError('pattern')" class="text-red ms-2">Space at the beginning is not allowed.</div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-4 col-md-12 col-sm-12">
+                            <span class="font-bold required">Card Number</span>
+                            <input formControlName="card_number" type="text" 
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input" 
+                            [ngStyle]="{'border-color': card_number.invalid && card_number.touched ? 'red' : 'rgb(209, 209, 209)'}" 
+                            placeholder="Card Number " name="card_number" maxlength="16" required (keypress)="validateNumericInput($event)" />
+                            <div *ngIf="card_number.invalid && (card_number.dirty || card_number.touched)">
+                                <div *ngIf="card_number.errors?.['required']"><span class="text-red">Card Number is required.</span></div>
+                            </div>
+                            <div *ngIf="CreditCardForm.get('card_number')?.hasError('pattern')" class="text-red ms-2">Space at the beginning is not allowed.</div>
+                        </div>
+                        <div class="col-12 col-lg-4 col-md-12 col-sm-12"><span class="font-bold required">Opening Balance</span>
+                            <input formControlName="opening_balance" type="text" style="text-align:right" 
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white  custom-input" 
+                            [ngStyle]="{'border-color': opening_balance.invalid && opening_balance.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                            (input)="formatCurrency($event)" 
+                            (keypress)="validateNumericInput($event)"
+                            placeholder="0.00" name="opening_balance" />
+                            <div *ngIf="opening_balance.invalid && (opening_balance.dirty || opening_balance.touched)">
+                                <div *ngIf="opening_balance.errors?.['required']">
+                                    <span class="text-red">Opening Balance is required.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4 col-md-12 col-sm-12"><span class="font-bold">Branch Name<span class="ms-1 text-red">*</span></span>
+                            <ng-select [items]="branchname_list" placeholder="Select an option" required formControlName="branch_name" class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row" bindLabel="branch_name" bindValue="branch_gid" [class.is-invalid]="CreditCardForm.get('branch_name')?.invalid && (CreditCardForm.get('branch_name')?.dirty || CreditCardForm.get('branch_name')?.touched)" [ngClass]="{'invalid-border': CreditCardForm.get('branch_name')?.invalid && CreditCardForm.get('branch_name')?.touched}">
+                            </ng-select>
+                            <div *ngIf="branch_name.invalid && (branch_name.dirty || branch_name.touched)">
+                                <div *ngIf="branch_name.errors?.['required']">
+                                    <span style="color:red;">Branch Name is required.</span>
+                                </div>
+                                <div *ngIf="branch_name.errors?.['pattern']">
+                                    <span style="color:red;">Branch Name is required.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-4 col-md-11 col-sm-11">
+                            <span class="font-bold">Account Group<span class="ms-1 text-red">*</span></span>
+                            <ng-select [items]="acctgroupname_List" required placeholder="Select an option"
+                                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row "
+                                formControlName="account_group" bindLabel="account_name" bindValue="account_gid"
+                                [class.is-invalid]="CreditCardForm.get('account_group')?.invalid && (CreditCardForm.get('account_group')?.dirty || CreditCardForm.get('account_group')?.touched)"
+                                [ngClass]="{'invalid-border': CreditCardForm.get('account_group')?.invalid && CreditCardForm.get('account_group')?.touched}">
+                            </ng-select>
+                            <div *ngIf="account_group.invalid && (account_group.dirty || account_group.touched)">
+                                <div *ngIf="account_group.errors?.['required']">
+                                    <span style="color:red;">Account Group is required.</span>
+                                </div>
+                                <div *ngIf="account_group.errors?.['pattern']">
+                                    <span style="color:red;">Account Group is required.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4 col-md-11 col-sm-11">
+                            <span class="font-bold">Transaction Type<span class="ms-1 text-red">*</span></span>
+                            <ng-select [items]="transactiontypelist" required placeholder="Select an option"
+                                class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row"
+                                formControlName="transaction_type" bindLabel="transaction_type"
+                                bindValue="transaction_type"
+                                [class.is-invalid]="CreditCardForm.get('transaction_type')?.invalid && (CreditCardForm.get('transaction_type')?.dirty || CreditCardForm.get('transaction_type')?.touched)"
+                                [ngClass]="{'invalid-border': CreditCardForm.get('transaction_type')?.invalid && CreditCardForm.get('transaction_type')?.touched}">
+                            </ng-select>
+                            <div
+                                *ngIf="transaction_type.invalid && (transaction_type.dirty || transaction_type.touched)">
+                                <div *ngIf="transaction_type.errors?.['required']">
+                                    <span style="color:red;">Transaction Type is required.</span>
+                                </div>
+                                <div *ngIf="transaction_type.errors?.['pattern']">
+                                    <span style="color:red;">Transaction Type is required.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4 col-md-12 col-sm-12">
+                            <span class="font-bold required"> Date</span>
+                            <input type="date" required placeholder="DD-MM-YYYY"
+                                class="form-control form-control-lg date-picker custom-input mb-3 bg-white custom-input"
+                                [ngStyle]="{ 'border-color': CreditCardForm.get('date_value')?.hasError('required') && CreditCardForm.get('date_value')?.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                                formControlName="date_value" pattern="^(?!\s*$).+" />
+                            <div *ngIf="date_value.invalid && (date_value.dirty || date_value.touched)">
+                                <div *ngIf="date_value.errors?.['required']">
+                                    <span style="color:red;">Date is required.</span>
+                                </div>
+                                <div *ngIf="date_value.errors?.['pattern']">
+                                    <span style="color:red;">Invalid date format.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-4 col-md-12 col-sm-12">
+                            <span class="font-bold">Remarks</span>
+                            <textarea class="form-control bg-white borderc-secondary" rows="3" formControlName="remarks"
+                                style="border-radius: 5px;" placeholder="Enter Remarks"></textarea>
+
+                        </div>
+                    </div>
+                    <br />
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" (click)="submit()" data-bs-dismiss="modal"
+                            [disabled]="CreditCardForm.invalid"
+                            [ngStyle]="{ 'cursor': CreditCardForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !CreditCardForm.invalid,
+                            'btn-secondary text-white': CreditCardForm.invalid }">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Submit
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal" (click)="onclose()">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal top fade" id="creditcardedit" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white"> <i class="fa-solid fa-pen-to-square fs-5"></i>&nbsp; Edit Credit Card
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="CreditCardEditForm">
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-6 col-sm-12 mb-4 mt-2">
+                            <span class="font-bold">Bank Code </span>
+                            <p>{{editbank_code}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row col-lg-12 col-md-12 col-sm-12"><span class="font-bold required">Bank Name</span>
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <input formControlName="editbank_name" type="text"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 border-secondary mb-lg-0 bg-white custom-input  mb-3 mb-lg-0 mt-2"
+                                placeholder="Enter Bank Name" />
+                                <div *ngIf="editbank_name.invalid && (editbank_name.dirty || editbank_name.touched)">
+                                    <div *ngIf="editbank_name.errors?.['required']">
+                                        <span style="color:red;">Bank Name is required.</span>
+                                    </div>
+                                </div>
+                            <div *ngIf="CreditCardEditForm.get('editbank_name')?.hasError('pattern')"
+                                class="text-red ms-2">Space at
+                                the beginning is not allowed.</div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Card Holder Name </span>
+                            <input type="text" formControlName="editcardholder_name"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input mt-2"
+                                placeholder="" />
+                                <div *ngIf="editcardholder_name.invalid && (editcardholder_name.dirty || editcardholder_name.touched)">
+                                    <div *ngIf="editcardholder_name.errors?.['required']">
+                                        <span style="color:red;">Card Holder Name is required.</span>
+                                    </div>
+                                </div>
+                            <div *ngIf="CreditCardEditForm.get('editcardholder_name')?.hasError('pattern')"
+                                class="text-red ms-2">Space at
+                                the beginning is not allowed.</div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12">
+                            <span class="font-bold required">Card Number </span>
+                            <input type="text" formControlName="editcard_number"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary custom-input mt-2"
+                                placeholder="" (keypress)="validateNumericInput($event)" />
+                            <div *ngIf="editcard_number.invalid && (editcard_number.dirty || editcard_number.touched)">
+                                <div *ngIf="editcard_number.errors?.['required']">
+                                    <span style="color:red;">Card Number is required.</span>
+                                </div>
+                                <!-- <div *ngIf="editcard_number.errors?.['pattern']">
+                                    <span style="color:red;">Invalid format.</span>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-4 col-md-12 col-sm-12">
+                            <span class="font-bold">Opening Balance </span>
+                            <br />
+                            <p class="mt-2">{{editopening_balance}}</p>
+                        </div>
+                    </div>
+                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-12 col-lg-4 col-md-6 col-sm-12 mb-4">
+                            <span class="font-bold">Default Account</span>
+                            <br />
+                            <div class="d-flex justify-content-start mt-4 ">
+                                <div
+                                    class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                                    <input type="radio" name="rdbdefaultaact" value="Y"
+                                        formControlName="default_account">
+                                    <label class="form-check-label text-gray-700 text-nowrap"
+                                        for="kt_builder_header_content_menu">Y</label>
+                                </div>
+                                <div
+                                    class="form-check form-check-custom form-check-primary form-check-solid form-check-sm ms-10">
+                                    <input type="radio" name="rdbdefaultaact" value="N"
+                                        formControlName="default_account">
+                                    <label class="form-check-label text-gray-700 text-nowrap"
+                                        for="kt_builder_header_content_page-title">N</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-success text-white" (click)="update()"
+                            [disabled]="CreditCardEditForm.invalid"
+                            [ngStyle]="{ 'cursor': CreditCardEditForm.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !CreditCardEditForm.invalid,
+                'btn-secondary text-white': CreditCardEditForm.invalid }" data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Update
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal Active -->
+
+<div class="modal" id="myModalactive" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog del_modal-dialog modal-dialog-centered">
+        <div class="modal-content del_modal-content">
+            <div class="text-center my-4">
+                <br />
+                <h2><b>Are you sure?</b></h2>
+                <br />
+                <p style="display: block;font-size: 14px;">Do You Want To Inactive this Credit Card?</p>
+                <br />
+                <div class="text-center my-4">
+                    <button class="btn-danger btn-sm text-white me-4" (click)="onactive()" data-bs-dismiss="modal">
+                        <i class="fas fa-thumbs-down fs-5 me-2"></i>Inactive
+                    </button>
+
+                    <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white me-2"></i>Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal Inactive -->
+
+<div class="modal" id="myModalinactive" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog del_modal-dialog modal-dialog-centered">
+        <div class="modal-content del_modal-content">
+            <div class="text-center my-4">
+                <br />
+                <h1><b>Are you sure?</b></h1>
+                <br />
+                <p style="display: block;font-size: 14px;">Do You Want To Active this Credit Card?</p>
+                <br />
+                <div class="text-center my-4">
+                    <button class="btn-success btn-sm text-white me-4" (click)="oninactive()" data-bs-dismiss="modal">
+                        <i class="fas fa-thumbs-up fs-5 me-2"></i>Active
+                    </button>
+                    <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white me-2"></i>Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

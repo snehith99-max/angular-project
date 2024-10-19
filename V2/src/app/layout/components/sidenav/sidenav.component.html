@@ -1,0 +1,192 @@
+<!-- <div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed': ''">
+    <div class="logo-container ms-7" >
+        <a  (click)="toggleCollapse()"><img src="./assets/media/logos/NoQu.png" style="width:30px;height:100%;margin-left:-15px;" alt="Logo"></a>
+        <div class="logo-text" @fadeInOut *ngIf="collapsed"> &nbsp;&nbsp;&nbsp;&nbsp;<img src="./assets/media/logos/storyboardHR.png" style="width:100%;height:100%;margin-left:-26px;" alt="Logo"></div>
+        <button class="btn-close" @rotate *ngIf="collapsed" (click)="closeSidenav()">
+            <i class="fa fa-times close-icon" style="color: #000; width:100%;height:100%; " ></i>
+        </button>&nbsp;&nbsp;&nbsp;&nbsp;
+    </div> -->
+    <div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed': ''">
+        <div class="logo-container ms-3" >
+            <a  (click)="toggleCollapse()"><img *ngIf= "!collapsed && !hideImage" src="{{menulogo}}" style="width:35px;height:40%;margin-left:-9px;" alt="Logo"></a>
+            <div class="logo-text" @fadeInOut *ngIf="collapsed"> &nbsp;&nbsp;&nbsp;&nbsp;<img  src="{{sidenav}}" style="width:70%;height:60%;margin-left:-13px;" alt="Logo"></div>
+            <button class="btn-close" @rotate *ngIf="collapsed" (click)="closeSidenav()">
+            <i class="fa fa-times close-icon" style="color: #000; width:100%;height:100%; " ></i>
+            </button>&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+    <div class="scrollwrap scrollwrap_delayed" >
+        <ul class="sidenav-nav">
+            <li class="sidenav-nav-item" *ngFor="let data of submenu">
+                <a class="sidenav-nav-link" (click)="handleClick(data);toggleCollapse()"
+                    *ngIf="data.sub1menu && data.sub1menu.length > 0"
+                    [ngClass]="getActiveClass(data)">
+                    
+                    <ng-container *ngIf="module_name ==='Marketing'">
+                    <i *ngIf="data.text === 'Master'" title="Master" class="fa fa-bars fa-custom"></i>
+                    <i *ngIf="data.text === 'Product Master'" title="Product Master" class="fa-solid fa-cubes fa-custom"></i>
+                    <i *ngIf="data.text === 'Digital Marketing'" title="Digital Marketing" class="fa-solid fa-computer fa-custom"></i>
+                    <i *ngIf="data.text === 'Leads'" title="Leads" class="fa-solid fa-people-group fa-custom"></i>
+                    <i *ngIf="data.text === 'Inside Sales'" title="Inside Sales" class="fa fa-phone fa-custom"></i>
+                    <i *ngIf="data.text === 'Marketing'" title="Marketing" class="fa-solid fa-ranking-star fa-custom"></i>
+                    <i *ngIf="data.text === 'Campaign'" title="Campaign" class="fas fa-bullhorn fa-custom"></i>
+                    <i *ngIf="data.text === 'Product Report'" title="Product Report" class="fa fa-bar-chart fa-custom"></i>
+                    <i *ngIf="data.text === 'Document Manager'" title="Document Manager" class="fa fa-file-text fa-custom"></i>
+                    <i *ngIf="data.text === 'Marketing Report'" title="Marketing Report" class="fa fa-line-chart fa-custom"></i>
+                    <i *ngIf="data.text === 'Mail Management'" title="Mail Management" class="fas fa-envelope fa-custom"></i>
+
+                    </ng-container>
+                   
+
+                    <!-- sales -->
+
+                    <ng-container *ngIf="module_name ==='Sales'">
+                        <i *ngIf="data.text === 'Settings'" title="Settings" class="fas fa-cogs fs-2 fa-custom"></i>
+                        <i *ngIf="data.text === 'Master'" title="Master" class="fa fa-bars fa-custom"></i>
+                        <i *ngIf="data.text === 'Product Management'" title="Product Management" class="fa-solid fa-cubes  fa-custom"></i>
+                        <i *ngIf="data.text === 'Customer Management'" title="Customer Management" class="fa-solid fa-user fa-custom"></i>
+                        <!-- boba tea -->
+                        <i *ngIf="data.text === 'Product Master'" title="Product Master" class="fa-solid fa-cubes  fa-custom"></i>
+                        <i *ngIf="data.text === 'Customer Master'" title="Customer Master" class="fa-solid fa-user fa-custom"></i>
+                        <i *ngIf="data.text === 'Order'" title="Order" class="fas fa-clipboard-list fs-2  fa-custom"></i>
+                        <i *ngIf="data.text === 'e-commerce'" title="e-commerce" class="fas fa-cart-shopping fa-custom"></i>
+                        <i *ngIf="data.text === 'Sales'" title="Sales" class="fab fa-stripe-s fa-custom"></i>
+                        <i *ngIf="data.text === 'Order Management'" title="Order Management" class="fas fa-clipboard-list fs-2  fa-custom"></i>
+                        <i *ngIf="data.text === 'Approval Management'" title="Approval Management" class="fa fa-clipboard-check fa-custom"></i>
+                        <i *ngIf="data.text === 'Customer Report'" title="Customer Report" class="fa-solid fa-chart-bar fa-custom"></i>
+                        <i *ngIf="data.text === 'Invoice'" title="Invoice" class="fa-solid fa-file-lines fs-1 fa-custom"></i>
+                        <i *ngIf="data.text === 'Receipt'" title="Receipt" class="fa fa-receipt fs-2 fa-custom"></i>
+                        <i *ngIf="data.text === 'Order Report'" title="Order Report" class="fa fa-line-chart  fa-custom"></i>
+                        <i *ngIf="data.text === 'Renewal'" title="Renewal" class="fa fa-refresh fa-custom"></i>
+                        <i *ngIf="data.text === 'POS'" title="POS" class="fa-solid fa-scale-balanced fa-custom"></i>
+                        <i *ngIf="data.text === 'Finance'" title="Finance" class="fa-solid fa-money-check-dollar fs-2 fa-custom"></i>
+                        <i *ngIf="data.text === 'Report'" title="Report" class="fa-solid fa-chart-gantt fs-2  fa-custom"></i>
+                        <i *ngIf="data.text === 'Reports'" title="Report" class="fa-solid fa-chart-gantt fs-2  fa-custom"></i>
+                        <i *ngIf="data.text === 'Product Report'" title="Product Report" class="fa-solid fa-chart-area fs-2  fa-custom"></i>
+                        <i *ngIf="data.text === 'Renewal Report'" title="Renewal Report" class="fa-solid fa-chart-pie fa-custom"></i>
+                        </ng-container>
+                        <!-- Purchase -->
+                        <ng-container *ngIf="module_name ==='Purchase'">
+                            <i *ngIf="data.text === 'Settings'" title="Settings" class="fas fa-cogs fa-custom"></i>
+                            <i *ngIf="data.text === 'Masters'" title="Masters" class="fa fa-bars fa-custom"></i>
+                            <i *ngIf="data.text === 'Product Master'" title="Product Master" class="fa-solid fa-cubes fa-custom"></i>
+                            <i *ngIf="data.text === 'Vendor Master'" title="Vendor Master" class="fa-solid fa-user-tie fa-custom"></i>
+                            <i *ngIf="data.text === 'Procurement'" title="Procurement" class="fas fa-cart-shopping fa-custom"></i>
+                            <i *ngIf="data.text === 'Purchase'" title="Purchase" class="fas fa-shopping-basket fa-custom"></i>
+                            <i *ngIf="data.text === 'Invoice'" title="Invoice" class="fa fa-file-invoice fa-custom"></i>
+                            <i *ngIf="data.text === 'Payment'" title="Payment" class="fa-solid fa-credit-card fa-custom"></i>
+                            <i *ngIf="data.text === 'Store'" title="Store" class="fas fa-store fa-custom"></i>
+                            <i *ngIf="data.text === 'Finance'" title="Finance" class="fa-solid fa-money-check-dollar fs-2 fa-custom"></i>
+                            <i *ngIf="data.text === 'Report'" title="Report" class="fa fa-bar-chart fa-custom"></i>
+                            <i *ngIf="data.text === 'Reports'" title="Report" class="fa fa-bar-chart fa-custom"></i>
+                            <i *ngIf="data.text === 'Vendor Management'" title="Vendor Management" class="fa-solid fa-user-tie fa-custom"></i>
+                           
+                            </ng-container>
+                            <!-- Inventory -->
+                            <ng-container *ngIf="module_name ==='Inventory'">
+                                <i *ngIf="data.text === 'Settings'" title="Settings" class="fas fa-cog fa-custom"></i>
+                                <i *ngIf="data.text === 'Master'" title="Master" class="fa fa-bars fa-custom"></i>
+                                <i *ngIf="data.text === 'Material Management'" title="Material Management" class="fa-solid fa-cubes fa-custom"></i>
+                                <i *ngIf="data.text === 'Stock Master'" title="Stock Master" class="fa-solid  fa-balance-scale fa-custom"></i>
+                                <i *ngIf="data.text === 'Stores Management'" title="Stores Management" class="fas fa-warehouse fa-custom"></i>
+                                <i *ngIf="data.text === 'Re-Order-Level'" title="Re-Order-Level" class="fas fa-level-down-alt fa-custom"></i>
+                                <i *ngIf="data.text === 'POS'" title="POS" class="fa fa-cash-register fa-custom"></i>
+                                <i *ngIf="data.text === 'GRN'" title="GRN" class="fa-solid fa-receipt fa-custom"></i>
+                                <i *ngIf="data.text === 'Approval Management'" title="Approval Management" class="fas fa-store fa-custom"></i>
+                                <i *ngIf="data.text === 'Delivery Order'" title="Delivery Order" class="fa-solid fa-space-shuttle fa-custom"></i>
+                                <i *ngIf="data.text === 'Reports'" title="Reports" class="fa fa-bar-chart fa-custom"></i>
+                                <i *ngIf="data.text === 'Report'" title="Reports" class="fa fa-bar-chart fa-custom"></i>
+                                <i *ngIf="data.text === 'Stock Management'" title="Stock Management" class="fa-solid fa-balance-scale fa-custom"></i>
+                                <i *ngIf="data.text === 'Stock Transfer'" title="Stock Transfer" class="fa-solid fa-exchange fa-custom"></i>
+                               
+                                </ng-container>             
+                                <ng-container *ngIf="module_name === 'Finance'">
+                                    <i *ngIf="data.text === 'Settings'" title="Settings" class="fas fa-cogs fa-custom"></i>
+                                    <i *ngIf="data.text === 'Masters'" title="Masters" class="fa fa-bars fa-custom"></i>
+                                    <i *ngIf="data.text === 'Expense Management'" title="Expense Management" class="fa-solid fa-money-bill-transfer fa-custom"></i>
+                                    <i *ngIf="data.text === 'Journals'" title="Journals" class="fas fa-receipt fa-custom"></i>
+                                    <i *ngIf="data.text === 'Tax Management'" title="Tax Management" class="fa fa-file-invoice-dollar fa-custom"></i>
+                                    <i *ngIf="data.text === 'Finance'" title="Finance" class="fas fa-exchange-alt fa-custom"></i>
+                                    <i *ngIf="data.text === 'GST Management'" title="GST Management" class="bi bi-cash-coin fa-custom"></i>
+                                    <i *ngIf="data.text === 'Invoice'" title="Invoice" class="fas fa-file-invoice fa-custom"></i>
+                                    <i *ngIf="data.text === 'Approval Management'" title="Approval Management" class="fas fa-thumbs-up fa-custom"></i>
+                                    <i *ngIf="data.text === 'Check Management'" title="Check Management" class="fas fa-money-check-alt fa-custom"></i>
+                                    <i *ngIf="data.text === 'Report'" title="Report" class="fa fa-line-chart fa-custom"></i>
+                                   </ng-container>
+                                   <ng-container *ngIf="module_name ==='HR'">
+                                    <i *ngIf="data.text === 'Settings'" title="Settings" class="fa-solid fa-gear fa-custom"></i>
+                                    <i *ngIf="data.text === 'Master'" title="Master" class="fa fa-bars fa-custom"></i>
+                                    <i *ngIf="data.text === 'Role'" title="Role" class="fa-solid fa-user-gear fa-custom"></i>
+                                    <i *ngIf="data.text === 'Shift'" title="Shift" class="fa-solid fa-clock-rotate-left fa-custom"></i>
+                                    <i *ngIf="data.text === 'Recruitment'" title="Recruitment" class="fa-regular fa-address-card fa-custom"></i>
+                                    <i *ngIf="data.text === 'Attendance'" title="Attendance" class="fa-solid fa-user-check fa-custom"></i>
+                                    <i *ngIf="data.text === 'Employee OnBoard'" title="Employee OnBoard" class="fa-regular fa-handshake fa-custom"></i>
+                                    <i *ngIf="data.text === 'HR Management'" title="HR Management" class="fa-solid fa-users fa-custom"></i>
+                                    <i *ngIf="data.text === 'Leave'" title="Leave" class="fa-solid fa-person-walking-arrow-right fa-custom"></i>
+                                    <i *ngIf="data.text === 'ESS Portal'" title="ESS Portal" class="fa-regular fa-hand-pointer fa-custom"></i>
+                                    <i *ngIf="data.text === 'Performance Management'" title="Performance Management" class="fa fa-solid fa-chart-line fa-custom"></i>
+                                    <i *ngIf="data.text === 'Regulation'" title="Regulation" class="fa-solid fa-list-check fa-custom"></i>
+                                    <i *ngIf="data.text === 'Dashboard'" title="Dashboard" class="fa fa-chart-pie fa-custom"></i>
+                                    <i *ngIf="data.text === 'File Management'" title="File Management" class="fa fa-file-text fa-custom"></i>
+                                    <i *ngIf="data.text === 'Reports'" title="Reports" class="fas fa-chart-bar fa-custom"></i>
+                                    <i *ngIf="data.text === 'Custodian Management'" title="Custodian Management" class="fa fa-address-book fa-custom"></i>
+                                    <i *ngIf="data.text === 'Exit Management'" title="Exit Management" class="fa-solid fa-right-from-bracket fa-custom"></i>
+                                    <i *ngIf="data.text === 'Worker Management'" title="Worker Management" class="fas fa-user-hard-hat fa-custom"></i>
+
+                                </ng-container>
+                                <ng-container *ngIf="module_name ==='Systems'">
+                                    <i *ngIf="data.text === 'Settings'" title="Settings" class="fa-solid fa-gear fa-custom"></i>
+                                    <i *ngIf="data.text === 'Master'" title="Master" class="fa fa-bars fa-custom"></i>
+                                    <i *ngIf="data.text === 'Report'" title="Report" class="fas fa-chart-bar fa-custom"></i>
+                                </ng-container>
+                                <ng-container *ngIf="module_name ==='Payroll'">
+                                    <i *ngIf="data.text === 'Master'" title="Master" class="fa fa-bars fa-custom"></i>
+                                    <i *ngIf="data.text === 'Loan'" title="Loan" class="fa fa-hand-holding-usd fa-custom"></i>
+                                    <i *ngIf="data.text === 'Salary'" title="Salary" class="fas fa-money-bill-alt fa-custom"></i>
+                                    <i *ngIf="data.text === 'Tax'" title="Tax" class="fa-solid fa-percent fa-custom"></i>
+                                    <i *ngIf="data.text === 'Report'" title="Report" class="fas fa-chart-bar fa-custom"></i>
+                                </ng-container>
+                                <ng-container *ngIf="module_name ==='Outlet'">
+                                    <i *ngIf="data.text === 'Master'" title="Master" class="fa fa-bars fa-custom"></i>
+                                    <i *ngIf="data.text === 'Outlet Management'" title="Outlet Management" class="fas fa-warehouse fa-custom"></i>
+                                    <i *ngIf="data.text === 'Report'" title="Report" class="fas fa-chart-bar fa-custom"></i>
+                                </ng-container>
+                                <ng-container *ngIf="module_name ==='IT'">
+                                    <i *ngIf="data.text === 'Master'" title="Master" class="fa fa-bars fa-custom"></i>
+                                    <i *ngIf="data.text === 'Task Management'" title="Task Management" class="fa-regular fa-address-card fa-custom"></i>
+                                    <i *ngIf="data.text === 'Deployment'" title="Deployment" class="fa-solid fa-server fa-custom"></i>
+                                </ng-container>
+                        <ng-container *ngIf="module_name !=='Marketing' && module_name !== 'Sales' && module_name !=='Purchase' && module_name !=='Inventory'&& module_name !=='Finance' && module_name !=='HR'&& module_name !=='Systems'&& module_name !=='Payroll'&& module_name !=='Outlet' && module_name !=='IT'">
+                            <i class="sidenav-link-icon fa-brands fa-elementor"></i>
+                           </ng-container>
+
+                    <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+                        {{data.text}}
+                    </span>
+                    <i *ngIf="data.sub1menu && collapsed" class="menu-collapse-icon"
+                        [ngClass]="!data.expanded ? 'fa fa-angle-right' : 'fa fa-angle-down'"
+                    ></i>
+                </a>
+    
+                <a class="sidenav-nav-link" 
+                    *ngIf="!data.sub1menu || (data.sub1menu && data.sub1menu.length === 0)"
+                    [routerLink]="[data.routeLink]" 
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact: true}"
+                    (click)="shrinkItems(data)">
+                    <i class="sidenav-link-icon fa-brands fa-elementor"></i>
+                    <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+                        {{data.text}}
+                    </span>
+                </a>
+                <div *ngIf="collapsed && data.sub1menu && data.sub1menu.length > 0" (click)="closeSidenav()">
+                    <layout-sublevel-menu
+                        [data]="data"
+                        [collapsed]="collapsed"
+                        [multiple]="multiple"
+                        [expanded]="data.expanded"
+                    ></layout-sublevel-menu>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

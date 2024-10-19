@@ -1,0 +1,337 @@
+<div class="card m-5">
+    <div class="card-title p-2 rounded-top bg-primary d-flex justify-content-between align-items-center">
+        <h1 class="fw-bolder ms-3 text-white"><i class="fa fa-shopping-cart fs-2"
+                aria-hidden="true"></i>&nbsp;&nbsp;Stock Return</h1>
+        <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer me-3"
+            routerLink="/smr/SmrTrnCreditNoteSummary"><i class="fa-solid fa-arrow-left text-blue mb-1"></i><span
+                class="tooltips">Back</span></button>
+    </div>
+    <div class="card mt-1 m-3 mb-0">
+        <div class="card-header d-flex align-items-center mb-3 cursor-pointer" style="background-color: #def0ff;">
+            <p class="card-title fw-bold fs-3 " style="color: #2599ff;">
+                <i class="fa-solid fa-clipboard fs-1"></i> &nbsp;Credit Note Details
+            </p>
+        </div>
+        <form [formGroup]="combinedFormData">
+            <input type="hidden" formControlName="invoice_gid" class="form-control" />
+            <div class="card p-4 border ms-5 me-5 mb-4">
+                <div class="d-flex flex-row m-2 flex-wrap">
+                    <!-- --------------Order Ref. No ------------- -->
+                    <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                        <span class="font-bold">Order Ref. No.</span>
+                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                            <input type="text" formControlName="creditnote_gid" hidden>
+                            <input type="text" formControlName="order_refno"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 borderc-secondary mb-lg-0 borderc-secondary bg-white "
+                                placeholder="Order Ref.No" style="height:40px;" readonly />
+                        </div>
+                    </div>
+                    <!-- --------------Invoice Ref. No ------------- -->
+                    <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                        <span class="font-bold">Invoice Ref. No.</span>
+                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                            <input type="text" formControlName="invoice_refno"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 borderc-secondary bg-white "
+                                placeholder="Invoice Ref.No" style="height:40px;" readonly />
+                        </div>
+                    </div>
+                    <!-- --------------Order Date ------------- -->
+                    <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                        <span class="font-bold">Invoice Date</span>
+                        <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                            <input type="date" pattern="^(?!\s*$).+" formControlName="invoice_date" class="form-control form-control-lg form-control-solid date-picker custom-input mb-3 mb-lg-0 bg-white
+             custom-input date-picker borderc-secondary" placeholder="DD-MM-YYYY" style="height: 40px;" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-row m-2 flex-wrap">
+                    <!-- Customer Name -->
+                    <div class="col-12 col-lg-4 col-md-3 col-sm-12">
+                        <span class="font-bold">Customer Name</span>
+                        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input type="text" pattern="^(?!\s*$).+" formControlName="customer_name"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary"
+                                    placeholder="Customer Name" style="height: 40px;" readonly />
+                            </div>
+
+                        </div>
+                        <div class="col-11  fv-row mt-2 ">
+                            <textarea type="text" readonly
+                                class="form-control mt-4 form-control-lg form-control-solid mb-1 mb-lg-2 border-secondary bg-white custom-input  large-textbox"
+                                readonly placeholder="Customer Details" class="form-control"
+                                formControlName="customer_details" rows="4"></textarea>
+                        </div>
+                    </div>
+                    <!-- -------------- bill To ------------- -->
+                    <div class="col-12 col-lg-4 col-md-3 col-sm-12">
+                        <span class="font-bold">Email Address</span>
+                        <div class="col-11 fv-row mt-2">
+                            <input type="text" formControlName="customer_email"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 borderc-secondary mb-lg-0 borderc-secondary bg-white "
+                                placeholder="Email Address" style="height:40px;" readonly />
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4 col-md-6 col-sm-12"><span class="font-bold">Remarks</span>
+                        <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                            <textarea type="text" class="
+                                form-control form-control-lg form-control-solid custom-input
+                                mb-3 mb-lg-0  borderc-secondary bg-white custom-input" formControlName="remarks"
+                                placeholder="Enter Remarks" class="form-control " style="width: 105%;" rows="3"
+                                readonly></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- --------------Second Tab ------------- -->
+        <div class="tab-content">
+            <form [formGroup]="productform">
+                <table class="table table-striped table-bordered text-blue border-bottom gs-7 align-middle">
+                    <thead>
+                        <tr class="fw-bold fs-6 text-nowrap bg-lightblue text-blue align-middle">
+                            <th class="text-blue text-center" style="width: 1%;">Product Group</th>
+                            <th class="text-blue text-center" style="width: 1%;">Product Code</th>
+                            <th class="text-blue text-center" style="width: 5%;">Product</th>
+                            <th class="text-blue text-center" style="width: 4%;">Description</th>
+                            <th class="text-blue text-center" style="width: 1%;">Amount</th>
+                            <th class="text-blue text-center" style="text-align:center;width: 1%;">Tax Rate</th>
+                            <th class="text-blue text-center" style="text-align:center;width: 2%;">Tax</th>
+                            <th class="text-blue text-center" style="width: 2%;">Total Amount</th>
+                            <th class="text-blue text-center" style="width: 2%;">Stock Return</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="padding_custom">
+                                <input type="text" formControlName="invoicedtl_gid" hidden>
+                                <input type="text" pattern="^(?!\s*$).+" formControlName="productgroup_name"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary"
+                                    placeholder="Product Group Name" style="height: 40px;" readonly />
+
+                            </td>
+                            <td class="padding_custom">
+
+                                <input type="text" pattern="^(?!\s*$).+" formControlName="product_code"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary"
+                                    placeholder="Product Code" style="height: 40px;" readonly />
+
+                            </td>
+                            <td class=" padding_custom" style="max-width: 80% !important;">
+                                <input type="text" pattern="^(?!\s*$).+" formControlName="product_name"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary"
+                                    placeholder="Product Name" style="height: 40px;" readonly />
+
+                            </td>
+                            <td class="padding_custom">
+                                <textarea
+                                    class="form-control form-control-lg form-control-solid custom-input custom_height borderc-secondary bg-white custom-input"
+                                    formControlName="display_field" rows="7" readonly>
+                                </textarea>
+                            </td>
+                            <td class=" padding_custom" style="max-width: 80% !important;">
+                                <input type="text" pattern="^(?!\s*$).+" formControlName="product_amount"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary"
+                                    placeholder="Product Aount" style="height: 40px;text-align: right;" readonly />
+
+                            </td>
+
+                            <td class="text-center">
+                                <input type="text" formControlName="tax_name"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 borderc-secondary mb-lg-0 borderc-secondary bg-white "
+                                    [(ngModel)]="tax_name" readonly>
+
+                                <span *ngIf="tax_name2 === 0">---</span>
+                                <input *ngIf="tax_name2 !== 0" type="text"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 borderc-secondary mb-lg-0 borderc-secondary bg-white "
+                                    formControlName="tax_name2" [(ngModel)]="tax_name2" readonly>
+
+                            </td>
+                            <td style="text-align: right;">
+                                <input type="text"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 borderc-secondary mb-lg-0 borderc-secondary bg-white "
+                                    formControlName="tax_amount" [(ngModel)]="tax_amount" readonly>
+
+                                <span *ngIf="tax_amount2 === 0">---</span>
+                                <input *ngIf="tax_amount2 !== 0" type="text"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 borderc-secondary mb-lg-0 borderc-secondary bg-white "
+                                    formControlName="tax_amount2" [(ngModel)]="tax_amount2" readonly>
+
+                            </td>
+
+                            <td class=" padding_custom">
+                                <input type="text"
+                                    class="form-control form-control-lg form-control-solid custom-input custom_height borderc-secondary  bg-white "
+                                    style="text-align: right" formControlName="producttotal_amount" readonly>
+                            </td>
+                            <td class=" padding_custom">
+                                <input type="text"
+                                    class="form-control form-control-lg form-control-solid custom-input custom_height borderc-secondary  bg-white "
+                                    style="text-align: right" formControlName="stock_return" placeholder="Stock Return" >
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </form>
+        </div>
+    </div>
+    <!-- --------------Third Tab ------------- -->
+    <div class="card mt-0 m-2 mb-0">
+        <form [formGroup]="combinedFormData">
+            <div class="row d-flex justify-content-end">
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                    <div class="d-flex flex-row  flex-wrap ">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                <label class="col-form-label font-bold">Net Amount :</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row">
+                                <input type="text"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 borderc-secondary mb-lg-0 borderc-secondary bg-white "
+                                    formControlName="netamount" style="text-align: right;" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row  flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row">
+                                <label class="col-form-label font-bold">Add On Charges :</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row">
+                                <input type="text"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 borderc-secondary mb-lg-0 borderc-secondary bg-white "
+                                    formControlName="addon_charge" style=" text-align: right;" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row  flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                <label class="col-form-label font-bold text-nowrap">Additional Discount :</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row">
+                                <input type="text"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 borderc-secondary mb-lg-0 borderc-secondary bg-white "
+                                    formControlName="additional_discount" style=" text-align: right;" readonly/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row  flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-lg-8 col-12 col-md-11 col-sm-11 fv-row">
+                                <label class="col-form-label font-bold text-nowrap">Additional Tax :</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <Div class="d-flex">
+                                <input type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 borderc-secondary mb-lg-0 borderc-secondary bg-white" readonly
+                                    style="width: 50%; text-align:right;" formControlName="tax_name4">
+                                &nbsp;&nbsp;
+                                <input type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 borderc-secondary mb-lg-0 borderc-secondary bg-white" readonly
+                                    style="width: 50%; text-align:right;" formControlName="tax_amount4">
+                            </Div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row  flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row">
+                                <label class="col-form-label font-bold">Grand Total :</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row">
+                                <input type="text"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 borderc-secondary mb-lg-0 borderc-secondary bg-white "
+                                    formControlName="grandtotal" style=" text-align: right;" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content">
+                <form [formGroup]="combinedFormData">
+                    <table class="table table-striped table-bordered text-blue border-bottom gs-7 align-middle">
+                        <thead>
+                            <tr class="fw-bold fs-6 text-nowrap bg-lightblue text-blue align-middle">
+                                <th class="text-blue text-center" style="width: 1%;">Credit Date</th>
+                                <th class="text-blue text-center" style="width: 1%;">Invoice No.</th>
+                                <th class="text-blue text-center" style="width: 1%;">Invoice Amount</th>
+                                <th class="text-blue text-center" style="width: 1%;">Paid Amount</th>
+                                <th class="text-blue text-center" style="text-align:center;width: 1%;">Outstanding
+                                    Amount</th>
+                                <th class="text-blue text-center" style="text-align:center;width: 1%;">Credit Note
+                                    Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="padding_custom">
+                                    <input type="date" pattern="^(?!\s*$).+" formControlName="credit_date" class="form-control form-control-lg form-control-solid date-picker custom-input mb-3 mb-lg-0 bg-white
+                                            custom-input date-picker borderc-secondary" placeholder="DD-MM-YYYY"
+                                        style="height: 40px;" readonly />
+                                </td>
+                                <td class="padding_custom">
+                                    <input type="text" pattern="^(?!\s*$).+" formControlName="invoice_refno1"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary"
+                                        placeholder="Invoice No." style="height: 40px;" readonly />
+
+                                </td>
+                                <td class="padding_custom">
+
+                                    <input type="text" pattern="^(?!\s*$).+" formControlName="invoice_amount"  style="text-align: right"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary"
+                                        placeholder="Invoice Amount" style="height: 40px;text-align: right;" readonly />
+
+                                </td>
+                                <td class=" padding_custom" style="max-width: 80% !important;">
+                                    <input type="text" pattern="^(?!\s*$).+" formControlName="paid_amount"  style="text-align: right"
+                                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white borderc-secondary"
+                                        placeholder="Paid Amount" style="height: 40px;text-align: right;" readonly />
+
+                                </td>
+
+
+
+                                <td class=" padding_custom">
+                                    <input type="text"
+                                        class="form-control form-control-lg form-control-solid custom-input custom_height borderc-secondary  bg-white "
+                                        style="text-align: right" formControlName="outstanding_amount"
+                                        placeholder="Outstanding Amount" style="text-align: right;" readonly />
+                                </td>
+
+                                <td class=" padding_custom">
+                                    <input type="text"
+                                        class="form-control form-control-lg form-control-solid custom-input custom_height borderc-secondary  bg-white "
+                                        style="text-align: right" formControlName="creditnote_amount"
+                                        placeholder="Credit Note Amount" style="text-align: right;" readonly />
+                                </td>
+
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </form>
+            </div>
+
+            <div class="text-center my-4">
+                <button type="submit" (click)="onSubmit()" class="btn-success btn-sm text-white me-2">
+                    <i class="fas fa-check fs-5"></i>
+                    <span class="ms-3">Submit</span> </button>
+
+            </div>
+        </form>
+    </div>
+
+</div>

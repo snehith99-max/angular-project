@@ -1,0 +1,157 @@
+<div class="card">
+    <!-- <div class="card-header" style="background-color: #F08080;">
+        <h3 class="card-title"><i class="fas fa-comments" style="font-size: 20px;color: whitesmoke;"></i>&nbsp;&nbsp;<b
+                style="color: whitesmoke;">Chat Analytics
+            </b>
+        </h3>
+        <button title="Chats" routerLink="/crm/CrmSmmWebsiteChat" class="btn-secondary btn-sm text-black me-4 "><span
+                class="fas fa-comment fs-3"></span>&nbsp;
+            Chats</button>
+    </div> -->
+
+    <div class="card-header bg-skyblue" style="background-color: #063970;">
+        <h3 class="card-title " style="color: #f5f5f5"><i class="fas fa-comments"
+                style="color: #f5f5f5; font-size: 20px;"></i>
+            &nbsp;Report</h3>
+        <div style="margin: 13px; ">
+            <button title="Chats" routerLink="/crm/CrmSmmClicktocall" class="btn-secondary btn-sm text-black me-4 "><i
+                    class="ki-duotone ki-entrance-right fs-5">
+                    <i class="path1"></i>
+                    <i class="path2"></i>
+                </i>&nbsp;Back</button>
+        </div>
+    </div>
+    <br>
+    <div class=" me-5 ms-5 mb-2">
+        <div class="card-header" style="background-color: #063970;">
+            <div class="card-title" style="color: whitesmoke;">
+                Agent Details
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="card card-body m-3 shadow-xl p-3 mb-5 bg-white rounded radius-10">
+            <div id="kt_chat_contacts_body1">
+                <table id="agent_report" class="table table-striped table-row-bordered border-bottom gs-7">
+                    <thead>
+                        <tr class="fw-bolder fs-5 text-nowrap bg-mail text-black align-middle radius-10"
+                            style="background-color:rgb(224, 224, 224);text-align: center">
+                            <th>S.No</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Total Calls</th>
+                            <th>Answered</th>
+                            <th>Agent Missed</th>
+                            <th>Customer Missed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of agent_report; let i=index;" style="text-align: center">
+
+                            <td>{{i+1}}</td>
+                            <td>{{data.agent_name}}</td>
+                            <td>{{data.agent_mailid}}</td>
+                            <td>{{data.agent_number}}</td>
+                            <td>{{data.total_count}}</td>
+                            <td>{{data.answered}}</td>
+                            <td>{{data.agent_missed}}</td>
+                            <td>{{data.customer_missed}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="m-5 me-1 d-flex flex-wrap mb-0 mt-0 ">
+        <div class="col-12 col-lg-12 row">
+            <div class="col-12 col-lg-6 pe-0">
+                <div class="m-3 me-0 card shadow-lg p-3 rounded" style="height:470px;">
+                    <div class="card-header" style="background: #063970;
+          background: linear-gradient(90deg, #3478c2 0%, #a8d9fa 35%, #d0e5f3 100%);color:black;font-size: 14px;">
+                        <b style="padding-top: 12px;">Current Month</b>
+                    </div>
+
+
+                    <div class="d-flex flex-wrap justify-content-center " style="margin-top: 100px;">
+                        <div id="chart">
+                            <div *ngIf="!emptyFlag">
+                                <!-- Render the chart if data is available -->
+                                <apx-chart [series]="agentreport.series" [chart]="agentreport.chart"
+                                    [labels]="agentreport.labels" [responsive]="agentreport.responsive"
+                                    [fill]="agentreport.fill"></apx-chart>
+                            </div>
+
+                            <div *ngIf="emptyFlag">
+                                <!-- Display a message if no data is available -->
+                                <h1>No Records are found.</h1>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 pe-0">
+                <div class="m-3 me-0 card shadow-lg p-3 rounded" style="height:470px;">
+                    <div class="me-0">
+                        <div class="card-header" style="background: #063970;
+          background: linear-gradient(90deg, #3478c2 0%, #a8d9fa 35%, #d0e5f3 100%);color:black;font-size: 14px;">
+                            <b style="padding-top: 12px;">Month Wise Lead Details</b>
+                        </div>
+                        <div class="d-flex justify-content-center mt-4 ms-2 pe-4">
+
+                            <div class="pe-4">
+                                <input type="radio" name="chartType" (change)="updateChart('DayWise')"
+                                    style="margin-right: 5px;" checked>
+                                <span style="font-size: 16px;">DayWise</span>
+                            </div>
+                            <div class="pe-4">
+                                <input type="radio" name="chartType" (change)="updateChart('week')"
+                                    style="margin-right: 5px;">
+                                <span style="font-size: 16px;">Week</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="selectedChartType === 'DayWise'">
+                        <apx-chart [series]="daywisechart.series" [chart]="daywisechart.chart"
+                            [xaxis]="daywisechart.xaxis" [dataLabels]="daywisechart.dataLabels"
+                            [title]="daywisechart.title">
+                        </apx-chart>
+                    </div>
+                    <div *ngIf="selectedChartType === 'week'">
+                        <apx-chart [series]="weekchart.series" [chart]="weekchart.chart" [xaxis]="weekchart.xaxis"
+                            [dataLabels]="weekchart.dataLabels" [title]="weekchart.title">
+                        </apx-chart>
+                    </div>
+                    <div *ngIf="!selectedChartType">
+                        <apx-chart [series]="daywisechart.series" [chart]="daywisechart.chart"
+                            [xaxis]="daywisechart.xaxis" [dataLabels]="daywisechart.dataLabels"
+                            [title]="daywisechart.title">
+                        </apx-chart>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModaldelete" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="text-center my-4">
+                <h2><b>Are you sure?</b></h2>
+                <br>
+                <p style="display: block;">Do You Want To Delete the Record ?</p>
+                <div class="text-center my-4">
+                    <button class="btn-primary btn-sm text-white me-2" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white"></i> &nbsp;Close
+                    </button>&nbsp;
+                    <button class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+                        <i class="fas fa-trash text-white fs-5 "></i> &nbsp;Delete
+                    </button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

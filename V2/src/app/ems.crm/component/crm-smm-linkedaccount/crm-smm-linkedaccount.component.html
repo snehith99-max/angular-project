@@ -1,0 +1,495 @@
+<div class="card shadow-sm">
+
+  <div class="card-header bg-linkedin" style="color: white;">
+    <h3 class="card-title"><i class="bi bi-linkedin" style="font-size: 20px;"></i>&nbsp;&nbsp;Linkedin Accounts
+    </h3>
+    <div>
+      <button style="color: black !important;" class="btn btn-icon btn-sm bg-secondary cursor-pointer ms-auto mt-2"
+        (click)="summaryrefresh()" title="Refresh Summary">
+        <i class="fa-solid fas fa-sync-alt fs-1 fw-bold"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="table-responsive">
+    <div class="m-3 shadow-xl p-3 mb-5 bg-white rounded">
+      <table id="accountsummary_list" class="table table-striped table-row-bordered border-bottom gs-7">
+        <thead>
+          <tr class="text-white fw-bold fs-6 text-nowrap bg-linkedin align-middle">
+            <th>S.No</th>
+            <th>Company ID</th>
+            <th>Company Name</th>
+            <th>Website</th>
+            <th>Founded On</th>
+            <th>Followers Count</th>
+            <th class="text-center">Action</th> 
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of accountsummary_list ;let i=index;" class="align-middle">
+            <td>{{i+1}}</td>
+            <td>{{data.account_id}}</td>
+            <td>{{data.company_name}}</td>
+            <td>{{data.company_website}}</td>
+            <td>{{data.founded_on}}</td>
+            <td>{{data.followers_count}}</td>
+            <td>
+              <!-- <div style="cursor: pointer;">
+                <button class="btn me-2 p-1 " title="Options" (click)="toggleOptions(data.account_id)"><span
+                    class="fa-solid fa-ellipsis-vertical fs-1" style="color: #4d4d4d;"></span></button>
+                <div *ngIf="showOptionsDivId === data.account_id" class="pb-0 rounded bg-white cursor-pointer icon_menu"
+                  style="right: 110px;">
+                  <div class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal" (click)="viewaccount(data.account_id)"
+                    data-bs-target="#viewaccount"><i class="fa-solid fa-eye fs-3 me-5"></i><span>View</span>
+                  </div>
+                  <div class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal" (click)="postview(data.account_id)"
+                    data-bs-target="#viewpost"><i class="fas fa-image fs-3 me-5"></i><span>View Post</span>
+                  </div>
+                  <div class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal" (click)="postimage(data.account_id)"
+                  data-bs-target="#postimage"><i class="fas fa-upload fs-3 me-5"></i><span>Upload Post</span>
+                </div>
+                </div>
+              </div> -->
+
+              <button title="View Account" type="button" data-bs-toggle="modal" (click)="viewaccount(data.account_id)"
+                data-bs-target="#viewaccount" class="btn btn-icon btn-sm bg-view me-2"><span
+                  class="fa-solid fa-eye"></span></button>
+                  <button title="View Post" type="button" data-bs-toggle="modal" (click)="postview(data.account_id)"
+                  data-bs-target="#myModalview" class="btn btn-icon btn-sm bg-view me-2"
+                  style="height: 10px !important;"><span class="fas fa-image fs-3"></span></button>
+              <button title="Upload Post" type="button" data-bs-toggle="modal" data-bs-target="#myModallinkedinpost"
+                class="btn btn-icon btn-sm bg-upload me-2" (click)="postimage(data.account_id)"
+                style="height: 10px !important;"><span class="fas fa-upload"></span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+<div class="modal modal-lg" id="viewaccount" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="card card-bordered" style="background-color: #ffffff;">
+        <div class="card-header d-flex align-items-center bg-linkedin">
+          <div>
+            <h3 class="fw-bolder text-white"><i class="fa-solid fa-gear fw-bolder fs-3"></i>
+              &nbsp;&nbsp;&nbsp;Account Details</h3>
+
+          </div>
+          <div>
+            <button title="Back" class="btn-secondary btn-sm text-black me-4 " data-bs-dismiss="modal"><i
+                class="ki-duotone ki-entrance-right fs-5">
+                <i class="path1"></i>
+                <i class="path2"></i>
+              </i>&nbsp;Back</button>
+          </div>
+        </div>
+        <div class="m-3">
+          <div class="row ">
+
+            <div class="col-lg-3" style="background-color: #fcfbfd;">
+              <div style="background-color: #fcfbfd;height: 300px;">
+                <ul class="nav flex-column fs-4 fw-semibold mt-3 mb-3 custom-text">
+                  <li class="nav-item p-2 d-flex align-items-center mt-3 cursor-pointer sample"
+                    (click)="showTab('pageinfo')"
+                    [ngClass]="{'active-custom-style': currentTab === 'pageinfo', 'pageinfo': currentTab === 'pageinfo'}">
+                    <i class="fa-solid fa-building fs-1 me-4"
+                      [ngClass]="{'active-custom-style': currentTab === 'pageinfo', 'pageinfo': currentTab === 'pageinfo'}"
+                      style="color: #25d366;"></i>
+                    <span>Page Info</span>
+                  </li>
+
+                  <li class="nav-item p-2 d-flex align-items-center mt-3 cursor-pointer sample"
+                    (click)="showTab('overview')"
+                    [ngClass]="{'active-custom-style': currentTab === 'overview', 'overview': currentTab === 'overview'}">
+                    <i class="fa fa-bars fs-1 me-4" style="color: #25d366;"
+                      [ngClass]="{'active-custom-style': currentTab === 'overview', 'overview': currentTab === 'overview'}"></i>
+                    <span>Overview</span>
+                  </li>
+                  <li class="nav-item p-2 d-flex align-items-center mt-3 cursor-pointer sample"
+                    (click)="showTab('locations')"
+                    [ngClass]="{'active-custom-style': currentTab === 'locations', 'locations': currentTab === 'locations'}">
+                    <i class="fas fa-map-marker-alt fs-1 me-4" style="color: #25d366;"
+                      [ngClass]="{'active-custom-style': currentTab === 'locations', 'locations': currentTab === 'locations'}"></i>
+                    <span>Locations</span>
+                  </li>
+                  <li class="nav-item p-2 d-flex align-items-center mt-3 cursor-pointer sample"
+                    (click)="showTab('specialties')"
+                    [ngClass]="{'active-custom-style': currentTab === 'specialties', 'specialties': currentTab === 'specialties'}">
+                    <i class="fa fa-bar-chart fs-1 me-4" style="color: #25d366;"
+                      [ngClass]="{'active-custom-style': currentTab === 'specialties', 'specialties': currentTab === 'specialties'}"></i>
+                    <span>Specialties</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-9" style="background-color: #ffffff;">
+              <div *ngIf="currentTab === 'pageinfo'" class="m-2 mt-5">
+                <span class="fs-1 d-flex align-items-center fw-semibold"><u>Page Info</u></span>
+                <div style="max-height: 385px; overflow-y: auto;" class="mt-1">
+                  <div class="col-xs-12 col-sm-9">
+
+
+                    <div class="profile-user-info">
+                      <div class="profile-info-row">
+                        <div class="profile-info-name"> Company ID </div>
+
+                        <div class="profile-info-value">
+                          <span class="fs-5 fw-bold">{{account_id}}</span>
+                        </div>
+                      </div>
+
+                      <div class="profile-info-row">
+                        <div class="profile-info-name">Company Name
+                        </div>
+
+                        <div class="profile-info-value">
+                          <span class="fs-5 fw-bold">{{company_name}}</span>
+
+                        </div>
+                      </div>
+
+
+                    </div>
+
+                    <div class="hr hr-8 dotted"></div>
+
+
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="currentTab === 'overview'" class="m-2 mt-5">
+                <span class="fs-1 d-flex align-items-center fw-semibold"><u>Overview</u></span>
+                <div class="card  mt-5 mb-3" style="max-height: 250px; overflow-y: hidden;">
+                  <div style="max-height: 385px; overflow-y: auto;" class="mt-1">
+                    <div class="col-xs-12 col-sm-9">
+                      <div class="profile-info-row">
+                        <div class="profile-info-name"> Company Name</div>
+
+                        <div class="profile-info-value">
+                          <span class="fs-5 fw-bold">{{company_name}}</span>
+                        </div>
+                      </div>
+                      <div class="profile-info-row">
+                        <div class="profile-info-name">Website URL</div>
+
+                        <div class="profile-info-value">
+                          <span class="fs-5 fw-bold">{{company_website}}</span>
+                        </div>
+                      </div>
+                      <div class="profile-info-row">
+                        <div class="profile-info-name">Year Founded</div>
+
+                        <div class="profile-info-value">
+                          <span class="fs-5 fw-bold">{{founded_on}}</span>
+                        </div>
+                      </div>
+                      <div class="profile-info-row">
+                        <div class="profile-info-name">Followers Count</div>
+
+                        <div class="profile-info-value">
+                          <span class="fs-5 fw-bold">{{followers_count}}</span>
+                        </div>
+                      </div>
+                      <div class="profile-info-row">
+                        <div class="profile-info-name">Organization Status</div>
+
+                        <div class="profile-info-value">
+                          <span class="fs-5 fw-bold">{{organizationStatus}}</span>
+                        </div>
+                      </div>
+                      <div class="profile-info-row">
+                        <div class="profile-info-name">Organization Type</div>
+
+                        <div class="profile-info-value">
+                          <span class="fs-5 fw-bold">{{organizationType}}</span>
+                        </div>
+                      </div>
+                      <div class="profile-info-row">
+                        <div class="profile-info-name">Description</div>
+
+                        <div class="profile-info-value">
+                          <span class="fs-5 fw-bold" [innerHTML]="description"></span>
+                        </div>
+                      </div>
+
+                      <div class="hr hr-8 dotted"></div>
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="currentTab === 'locations'" class="m-2 mt-5">
+                <span class="fs-1 d-flex align-items-center fw-semibold"><u>Locations</u></span>
+                <div class="card  mt-5 mb-3" style="max-height: 250px; overflow-y: hidden;">
+                  <div style="max-height: 385px; overflow-y: auto;" class="mt-1">
+                    <div class="table-responsive">
+                      <div class="card card-body m-3 shadow-xl p-3 mb-5 bg-white rounded">
+                        <table id="accountsummary_list"
+                          class="table table-striped table-row-bordered border-bottom gs-7">
+                          <thead>
+                            <tr class="text-white fw-bold fs-6 text-nowrap bg-linkedin align-middle">
+                              <th>S.No</th>
+                              <th>Location Type</th>
+                              <th>Location Name</th>
+                              <th>Address</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let a of accountview_list ;let i=index;" class="align-middle">
+                              <td>{{i+1}}</td>
+                              <td>{{a.location_type}}</td>
+                              <td>{{a.locationcompany_name}}</td>
+                              <td>
+                                {{a.line1}}{{a.line2}},<br>{{a.city}},{{a.geographicArea}}
+                                {{a.postalCode}},{{a.country}}
+                              </td>
+                              <td>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="currentTab === 'specialties'" class="m-2 mt-5">
+                <span class="fs-1 d-flex align-items-center fw-semibold"><u>Specialties</u>
+                </span>
+                <div class="card mt-5 mb-3" style="max-height: 250px; overflow-y: hidden;">
+                  <div style="max-height: 385px; overflow-y: auto;" class="mt-1">
+                    <div>
+                      <ul class="nav flex-column fs-4 fw-semibold mt-3 mb-3 custom-text">
+                        <!-- Split the localizedSpecialties string by comma and iterate over each value -->
+                        <li *ngFor="let specialty of localizedSpecialties.split(',')">
+                          <div class="symbol-label bg-light-danger text-danger fs-5 ms-15 ">
+                            <b>{{ specialty.trim() }}</b>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="hr hr-8 dotted"></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<div class="modal" id="myModallinkedinpost" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="card-header p-1 pb-2 pt-1 rounded-top bg-primary">
+        <h2 style="margin-top:10px;color:white;font-weight: bold;">&nbsp;&nbsp;<i
+            class="fas fa-upload fw-bolder fs-3"></i> &nbsp;&nbsp;Post</h2>
+      </div>
+
+      <div class="modal-body">
+        <tabset>
+          <tab heading="Text Post">
+            <h4 class=" mt-4 text-center" style="color:rgb(29, 158, 115);"><u>Text Post</u></h4>
+            <form [formGroup]="Linkedintextpost" #form="ngForm">
+              <div class="modal-body">
+                <div class="row"><span class="font-bold"><b>Text</b><span class="ms-1 text-red">*</span></span>
+                  <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                    <textarea formControlName="linkedin_text" rows="4" type="text" class="
+                    form-control form-control-lg form-control-solid
+                    mb-3 mb-lg-0
+                    bg-white
+                " [ngStyle]="{ 'border-color': linkedin_text.invalid && linkedin_text.touched ? 'red' : 'rgb(209, 209, 209)', 'width': 'calc(110% - 8px)' }"
+                      placeholder="Enter Text Here" name="image_caption" required></textarea>
+                  </div>
+                  <div *ngIf="linkedin_text.invalid && (linkedin_text.dirty || linkedin_text.touched)">
+                    <div *ngIf="linkedin_text.errors?.['required']  || linkedin_text.errors?.['whitespace']">
+                      <span style="color:red;">Text is required.</span>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+              <!-- Modal footer -->
+              <div class="text-center my-4">
+
+                <button (click)="onlinkedintextpost()" [disabled]="Linkedintextpost.invalid" [ngClass]="{
+                    'primary-button': !Linkedintextpost.invalid,
+                    'secondary-button': Linkedintextpost.invalid
+                     }" data-bs-dismiss="modal">
+                  <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+                </button>&nbsp;&nbsp;
+                <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+                  <i class="fas fa-close text-white"></i> &nbsp;Close
+                </button>
+              </div>
+
+            </form>
+          </tab>
+          <tab heading="Media Post">
+            <h4 class=" mt-4 text-center" style="color:rgb(29, 158, 115);"><u>Media Post</u></h4>
+
+            <form [formGroup]="Linkedinmediapost" #form="ngForm">
+              <div class="modal-body">
+                <div class="row"><span class="font-bold"><b>Caption</b><span class="ms-1 text-red">*</span></span>
+                  <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                    <textarea formControlName="linkedin_text" rows="4" type="text" class="
+                    form-control form-control-lg form-control-solid
+                    mb-3 mb-lg-0
+                    bg-white
+                " [ngStyle]="{ 'border-color': linkedin_text.invalid && linkedin_text.touched ? 'red' : 'rgb(209, 209, 209)', 'width': 'calc(110% - 8px)' }"
+                      placeholder="Enter Caption" name="linkedin_text" required></textarea>
+                  </div>
+                  <div *ngIf="linkedin_text.invalid && (linkedin_text.dirty || linkedin_text.touched)">
+                    <div *ngIf="linkedin_text.errors?.['required']  || linkedin_text.errors?.['whitespace']">
+                      <span style="color:red;">Caption is required.</span>
+                    </div>
+                  </div>
+
+                </div>
+                <br>
+                <span class="font-bold"><b>Image\Video Only</b><span class="ms-1 text-red">*</span></span>
+                <br>
+                <div class="input-group mb-4" style="margin-left: 12px;width:97%;">
+                  <input class="form-control" accept="image/*, video/*" (change)="onChange2($event)" multiple="true"
+                    style="margin-left:-8px;width: calc(50% - 8px); height: 40px;" formControlName="file_path"
+                    type="file" #fileInput />
+
+                </div>
+              </div>
+              <!-- Modal footer -->
+              <div class="text-center my-4">
+
+                <button (click)="onlinkedinmediapost()" [disabled]="Linkedinmediapost.invalid" [ngClass]="{
+                    'primary-button': !Linkedinmediapost.invalid,
+                    'secondary-button': Linkedinmediapost.invalid
+                     }" data-bs-dismiss="modal">
+                  <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+                </button>&nbsp;&nbsp;
+                <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+                  <i class="fas fa-close text-white"></i> &nbsp;Close
+                </button>
+              </div>
+
+            </form>
+          </tab>
+          <tab heading="Create Poll">
+            <h4 class=" mt-4 text-center" style="color:rgb(29, 158, 115);"><u>Poll </u></h4>
+            <form [formGroup]="Linkedinpollpost" #form="ngForm">
+              <div class="modal-body">
+                <div class="row"><span class="font-bold"><b>Heading</b></span>
+                  <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                    <input formControlName="linkedin_text" type="text" class="
+                    form-control form-control-lg form-control-solid mb-3 mb-lg-0 bg-white custom-input"
+                      placeholder="Enter The Caption Here" name="mention" />
+                  </div>
+                </div>
+                <div class="row"><span class="font-bold"><b>Your question </b><span
+                      class="ms-1 text-red">*</span></span>
+                  <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                    <textarea formControlName="poll_question" rows="1" type="text" class="form-control" #myInput
+                      [maxlength]="maxChar" placeholder="E.g., How do you communicate to work" [ngStyle]="{'border-color': poll_question.invalid && poll_question.touched? 'red': 'rgb(209, 209, 209)'
+                   }" name="poll_question" required></textarea>
+                  </div>
+                  <div *ngIf="poll_question.invalid && (poll_question.dirty || poll_question.touched)">
+                    <div *ngIf="poll_question.errors?.['required']  || poll_question.errors?.['whitespace']">
+                      <span style="color:red;">Text is required.</span>
+                    </div>
+                  </div>
+                  <label class="text-end">{{myInput.value.length}} /{{maxChar}}</label>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <span class="font-bold"><b>Option 1</b></span>
+                    <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                      <input formControlName="option1" type="text" #myInput1 [maxlength]="maxChar1" class="
+                      form-control form-control-lg form-control-solid mb-3 mb-lg-0 bg-white custom-input"
+                        placeholder="E.g., Public transporation" name="mention" />
+                    </div>
+                    <label class="float-end">{{myInput1.value.length}} /{{maxChar1}}</label>
+
+                  </div>
+                  <div class="col-lg-6">
+                    <span class="font-bold"><b>Option2</b></span>
+                    <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                      <input formControlName="option2" type="text" #myInput2 [maxlength]="maxChar1" class="
+                      form-control form-control-lg form-control-solid mb-3 mb-lg-0 bg-white custom-input"
+                        placeholder="E.g., Drive Myself" name="mention" />
+                    </div>
+                    <label class="float-end">{{myInput2.value.length}} /{{maxChar1}}</label>
+                  </div>
+                </div>
+                <BR><BR>
+                <div class="row">
+                  <div class="col-lg-6" *ngIf="showOption3">
+                    <span class="font-bold"><b>Option3</b></span>
+                    <button class="float-end" style="color: #009ef7;" (click)="removeOption(3)"
+                      [disabled]="showOption4">Remove</button>
+                    <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+                      <input formControlName="option3" type="text" #myInput3 [maxlength]="maxChar1" class="
+                          form-control form-control-lg form-control-solid mb-3 mb-lg-0 bg-white custom-input"
+                        placeholder="E.g., Drive Myself" name="mention" />
+                    </div>
+                    <label class="float-end">{{myInput3.value.length}} /{{maxChar1}}</label>
+                  </div>
+                  <div class="col-lg-6" *ngIf="showOption4">
+                    <span class="font-bold"><b>Option4</b></span>
+                    <button class="float-end" style="color: #009ef7;" (click)="removeOption(4)">Remove</button>
+                    <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+                      <input formControlName="option4" type="text" #myInput4 [maxlength]="maxChar1" class="
+                          form-control form-control-lg form-control-solid mb-3 mb-lg-0 bg-white custom-input"
+                        placeholder="E.g., Drive Myself" name="mention" />
+                    </div>
+                    <label class="float-end">{{myInput4.value.length}} /{{maxChar1}}</label>
+                  </div>
+                </div>
+                <button (click)="addoption()" style="background-color: #52b7f1;">
+                  <i class="fa fa-plus text-white fs-5"></i> &nbsp;Add Option
+                </button>
+
+                <br><br>
+                <div class="row"><span class="font-bold"><b>Poll Duration</b></span>
+                  <ng-select formControlName="poll_duration" [(ngModel)]="pollduration" bindLabel="poll_duration"
+                    placeholder="Select an option">
+                    <ng-option value="ONE_DAY">1 day</ng-option>
+                    <ng-option value="THREE_DAYS">3 days</ng-option>
+                    <ng-option value="SEVEN_DAYS">1 week</ng-option>
+                    <ng-option value="FOURTEEN_DAYS">2 weeks</ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="text-center my-4">
+                <button (click)="onlinkedinpollpost()" [disabled]="Linkedinpollpost.invalid" [ngClass]="{
+                    'primary-button': !Linkedinpollpost.invalid,
+                    'secondary-button': Linkedinpollpost.invalid
+                     }" data-bs-dismiss="modal">
+                  <i class="fas fa-check text-white fs-5 "></i> &nbsp;Submit
+                </button>&nbsp;&nbsp;
+                <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+                  <i class="fas fa-close text-white"></i> &nbsp;Close
+                </button>
+              </div>
+
+            </form>
+          </tab>
+        </tabset>
+
+
+      </div>
+    </div>
+  </div>
+</div>

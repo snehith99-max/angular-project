@@ -1,0 +1,91 @@
+<div class="row" style="margin-top: 10px;">
+    <div class="col-lg-4 col-md-4 col-sm-4" [routerLink]="['/crm/CrmTrnTcontactmanagement']">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-brown" [ngStyle]="getColor(1)">
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Total Contacts</h5>
+                            <h4 class="badge badge-outline badge-danger fs-4 mt-2">{{total_count}}</h4>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-brown text-white ms-auto">
+                        <i class="fa-solid fa-users-between-lines"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4" [routerLink]="['/crm/CrmTrnCorporateContactSummary']">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-darkgreen" [ngStyle]="getColor(2)">
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Corporate Contacts</h5>
+                            <h4 class="badge badge-outline badge-success fs-4 mt-2">{{Corporate_count}}</h4>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-darkgreens text-white ms-auto">
+                        <i class="fa-solid fa-street-view"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-4" [routerLink]="['/crm/CrmTrnIndividualContactSummary']">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-violet" [ngStyle]="getColor(3)">
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Individual Contacts</h5>
+                            <h4 class="badge badge-outline1 badge-danger fs-4 mt-2">{{Individual_count}}</h4>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-violet text-white ms-auto">
+                        <i class="fa-solid fa-users-rectangle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+<!-- <div class="row box-widget">
+    <div class="col-lg-4 col-md-6 col-sm-12" [routerLink]="['/crm/CrmTrnTcontactmanagement']">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-info" style="padding: 10px;" [ngStyle]="getColor(1)" >
+           <div class="card-body">
+               <div class="d-flex align-items-center">
+                   <div>
+                       <h3 class="mb-0 text-secondary">Total Contacts</h3>
+                   </div>
+                   <div class="widgets-icons-3 rounded-circle bg-gradient-info text-white ms-auto"><span class="text-white fs-3 mt-2">{{total_count}}</span>
+                   </div>
+               </div>
+           </div>
+        </div>
+      </div>
+ 
+      <div class="col-lg-4 col-md-6 col-sm-12"  [routerLink]="['/crm/CrmTrnCorporateContactSummary']">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-purple" style="padding: 10px;" [ngStyle]="getColor(3)" >
+           <div class="card-body">
+               <div class="d-flex align-items-center">
+                   <div>
+                       <h3 class="mb-0 text-secondary">Corporate Contacts</h3>
+                   </div>
+                   <div class="widgets-icons-3 rounded-circle bg-gradient-purple text-white ms-auto"><span class="text-white fs-3 mt-2">{{Corporate_count}}</span>
+                   </div>
+               </div>
+           </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12" [routerLink]="['/crm/CrmTrnIndividualContactSummary']">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-success"style="padding: 10px;" [ngStyle]="getColor(2)" >
+           <div class="card-body">
+               <div class="d-flex align-items-center">
+                   <div>
+                       <h3 class="mb-0 text-secondary">Individual Contacts</h3>
+                   </div>
+                   <div class="widgets-icons-3 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><span class="text-white fs-3 mt-2">{{Individual_count}}</span>
+                   </div>
+               </div>
+           </div>
+        </div>
+      </div>
+</div> -->

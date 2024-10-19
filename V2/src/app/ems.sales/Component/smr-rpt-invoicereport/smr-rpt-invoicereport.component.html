@@ -1,0 +1,414 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Invoice Summary</h3>
+        </div>
+
+        <div class="col me-5">
+            <button title="Raise Invoice" class="btn-primary btn-sm text-white me-4 mb-2 mt-2 float-end"
+                (click)="onraiseinvoice()">+ Raise Invoice</button>
+            <button title="Direct Invoice" class="btn-primary btn-sm text-white me-4 mb-2 mt-2 float-end"
+                (click)="onadd()">+ Direct Invoice</button>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between mt-5">
+        <div class="d-flex align-items-center">
+            <div class="form-group me-2">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label for="itemsPerPageSelect" class="me-1">Show</label>
+            </div>
+            <div class="form-group me-2">
+                <select id="itemsPerPageSelect" class="form-control d-inline-block" [(ngModel)]="itemsPerPage"
+                    (ngModelChange)="onItemsPerPageChange()">
+                    <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="itemsPerPageSelect" class="ms-1">entries</label>
+            </div>
+        </div>
+        <div class="d-flex align-items-center">
+            <div class="form-group me-2" style="margin-right: 10px;">
+                <label for="searchInput" class="ms-1" style="margin-left: -5px;">Search:</label>
+            </div>
+            <div class="form-group" style="margin-right: 10px;">
+                <input type="text" class="form-control" style="width:120px;" id="searchInput" (keyup)="search($event)"
+                    placeholder="" />
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded mt-2">
+            <table class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle padding_custom">
+                        <th style="width: 1%;">S.No</th>
+                        <th style="width: 8%;">Date</th>
+                        <th style="width: 12%;" (click)="sort('so_referencenumber')">Order Ref.No</th>
+                        <th (click)="sort('invoice_refno')" style="width: 10%;">Invoice Ref.No</th>
+                        <th (click)="sort('customer_name')" style="width: 45%;">Customer</th>
+                        <th style="width: 35%;">Contact</th>
+                        <th style="text-align: right;">Invoice Value</th>
+                        <th (click)="sort('invoice_status')">Status</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of page_list; let i=index;" class="align-middle ">
+                        <td>{{i+1}}</td>
+                        <td class="text-nowrap">{{data.invoice_date | date: 'dd-MM-yyyy'}}</td>
+                        <td style="width: 12%;">{{data.so_referencenumber}}</td>
+
+                        <td class="text-nowrap" style="width: 10%;">{{data.invoice_refno}}</td>
+                        <td style="width:45%">{{data.customer_name }}</td>
+                        <td style="width: 35%;">{{data.customer_contactperson}}</td>
+                        <td style="text-align: right;">{{data.invoice_amount}}</td>
+                        <td class="text-nowrap">{{data.status}}</td>
+                        <td class="text-center text-nowrap">
+                            <button title="View" type="button" class="btn btn-icon
+                              btn-sm bg-primary me-2" (click)="viewinvoice(data.invoice_gid)">
+                                <span class="fa-solid fa-eye fs-6 text-white"></span>
+                            </button>
+                            <button title="Edit" type="button" class="btn btn-icon
+                              btn-sm bg-etdark me-2" (click)="editinvoice(data.invoice_gid)"
+                                [disabled]="data.invoice_status === 'IRN Cancelled'">
+                                <span class="fa-solid fa-pencil fs-6 text-white"></span>
+                            </button>
+                            <button title="Change Invoice Ref.No" type="button" class="btn btn-icon btn-sm bg-warning me-2"
+                                (click)="editinvoiceRefno(data)" data-bs-toggle="modal" data-bs-target="#myinvoicerefnoform">
+                                <span class="fa-solid fa-file-invoice fs-6 text-white"></span>
+                            </button>
+                            <button title="Pdf" type="button" data-bs-toggle="modal" data-bs-target="#myModalPdf"
+                                class="btn btn-icon btn-sm background-color6 me-2 "
+                                style="background: radial-gradient(circle, #47acbe 0%, #4aa5b9 100%);"><span
+                                    class="fa-solid fa-file-pdf fs-6" (click)="PrintPDF(data.invoice_gid)"></span>
+                            </button>
+                            <button title="Mail" type="button" class="btn btn-icon btn-sm background-color3 me-2"
+                                (click)="Mail(data.invoice_gid)">
+                                <span class="fa fa-envelope  fs-6 text-white"></span>
+                            </button>
+                            <span (click)="toggleOptions(data.invoice_gid)" style="cursor: pointer;">
+                                <button class="btn me-2 p-1 "><span class="fa-solid fa-ellipsis-vertical fs-1 "
+                                        style="color: #4d4d4d;"></span></button>
+                                <div *ngIf="showOptionsDivId === data.invoice_gid"
+                                    class="pb-0 rounded bg-white cursor-pointer icon_menu">
+
+                                    <!-- <div class="d-flex p-3 pb-3 Icon_hover" (click)="viewinvoice(data.invoice_gid)"
+                                        *ngIf="data.has_child != 'N'">
+                                        <span><i class="fa-solid fa-eye fs-3 me-4"></i></span>
+                                        <span>View</span>
+                                    </div> -->
+                                    <!-- <div class="d-flex p-3 pb-3 Icon_hover" (click)="editinvoice(data.invoice_gid)"
+                                        *ngIf="data.has_child != 'N'">
+                                        <span><i class="fa-solid fa-pencil fs-3 me-4"></i></span>
+                                        <span>Edit</span>
+                                    </div> -->
+                                    <!-- <div class="d-flex p-3 pb-3 Icon_hover" (click)="Mail(data.invoice_gid)"
+                                        *ngIf="data.has_child != 'N'">
+                                        <span><i class="fa-solid fa-envelope fs-3 me-4"></i></span>
+                                        <span>Mail</span>
+                                    </div> -->
+                                    <!-- <div class="d-flex p-3 pb-3 Icon_hover" (click)="editinvoiceRefno(data)"
+                                        data-bs-toggle="modal" data-bs-target="#myinvoicerefnoform"
+                                        *ngIf="data.has_child != 'N'">
+                                        <span><i class="fa-solid fa-file-invoice fs-3 me-4"></i></span>
+                                        <span>Change Ref.No</span>
+                                    </div> -->
+                                    <div class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal"
+                                        data-bs-target="#myinvoicecancel" (click)="openModaldelete(data)"
+                                        *ngIf="data.has_child != 'N'">
+                                        <span><i class="fa-solid fa-xmark fs-3 me-4"></i></span>
+                                        <span>Cancel Invoice</span>
+                                    </div>
+                                    <!-- <div class="d-flex p-3 pb-3 Icon_hover" (click)="PrintPDF(data.invoice_gid)"
+                                        *ngIf="data.has_child != 'N'">
+                                        <span><i class="fa-solid fa-file-pdf fs-3 me-4"></i></span>
+                                        <span>PDF</span>
+                                    </div> -->
+
+                                    <!-- <div class="d-flex p-3 pb-3 Icon_hover"
+                                        (click)="Delivery(data.salesorder_gid,data.invoice_gid)"
+                                        *ngIf="data.has_child != 'N'">
+                                        <span><i class="fa-solid fa-arrow-up fs-3 me-4"></i></span>
+                                        <span>Raise Delivery Order</span>
+                                    </div> -->
+                                    <div class="d-flex p-3 pb-3 Icon_hover" (click)="collectpayment()"
+                                        *ngIf="data.has_child != 'N'">
+                                        <span><i class="fa-solid fa-money-check fs-3 me-4"></i></span>
+                                        <span>Collect Payment</span>
+                                    </div>
+                                    <div class="d-flex p-3 pb-3 Icon_hover" (click)="einvoice(data.invoice_gid)"
+                                        *ngIf="data.has_child != 'N' && data.einvoice_flag === 'Y' && data.irn ===''||data.irn ===null||data.status === 'IRN Cancelled'">
+                                        <span><i class="fa-solid fa-envelope fs-3 me-4"></i></span>
+                                        <span>IRN</span>
+                                    </div>
+                                    <div class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal"
+                                        data-bs-target="#myModalcancel" (click)="myModaladddetails(data)"
+                                        *ngIf="data.has_child != 'N' && data.einvoice_flag === 'Y'&& data.irn != ''">
+                                        <span><i class="fa-solid fa-xmark fs-3 me-4"></i></span>
+                                        <span>Cancel IRN</span>
+                                    </div>
+                                    <div class="d-flex p-3 pb-3 Icon_hover" data-bs-toggle="modal"
+                                        data-bs-target="#myModalcreditnote" (click)="creditnoteModaldetails(data)"
+                                        *ngIf="data.has_child != 'N' && data.einvoice_flag === 'Y'&& data.irn != ''">
+                                        <span><i class="fa-solid fa-money-check fs-3 me-4"></i></span>
+                                        <span>Credit Note IRN</span>
+                                    </div>
+
+                                </div>
+                            </span>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="noResultsMessage" class="text-center">
+                {{ noResultsMessage }}
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="text-nowrap">
+                    Showing {{ startIndex + 1 }} to {{ endIndex }} of {{ total_list }} entries
+                </div>
+                <div class="pagination-container float-end">
+                    <div class="pagination-scroll-container" style="margin-left: 122px;">
+                        <pagination [boundaryLinks]="false" [maxSize]="8" [totalItems]="total_list"
+                            [itemsPerPage]="itemsPerPage" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"
+                            [directionLinks]="true" previousText="Previous" nextText="Next" class="pagination-controls">
+                        </pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- change Invoice Ref No -->
+<form [formGroup]="invoicerefnoform" #form="ngForm">
+    <div class="modal fade" id="myinvoicerefnoform" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="card-header pb-3 pt-6 rounded-top bg-primary">
+                    <div>
+                        <h3 class="fw-bolder text-white ms-6"> <i class="fa-solid fa-file-invoice fs-3"></i>&nbsp;Change
+                            Invoice Ref.No</h3>
+                    </div>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row">
+                        <input formControlName="invoice_gid" hidden />
+                        <span class="fw-bold">Old Invoice Reference No</span>
+                        <div class="col-lg-12  col-md-12 col-sm-12 fv-row mt-2">
+                            <input formControlName="Old_invoicerefno" type="text"
+                                class="form-control form-control-lg form-control-solid borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+                                name="Old_invoicerefno" readonly style="height:40px;" />
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="row">
+                        <span class="fw-bold"
+                            [ngClass]="{'error_input_field': new_invoicerefno.invalid && new_invoicerefno.touched || new_invoicerefno.errors?.['pattern'] }">New
+                            Invoice Reference No<span class="ms-1 text-red">*</span></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2">
+                            <input formControlName="new_invoicerefno" type="text" class="form-control form-control-lg form-control-solid 
+                custom-input mb-3 mb-lg-0 bg-white custom-input" [ngStyle]="{'border-color': new_invoicerefno.invalid 
+                 && new_invoicerefno.touched ? 'red' : 'rgb(209, 209, 209)' }" placeholder="Enter New Invoice Ref.No"
+                                name="new_invoicerefno" required style="height:40px;" />
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Modal footer -->
+                <div class="text-center my-4">
+                    <button (click)="oninvoicerefnosubmit()" class="me-4" [disabled]="invoicerefnoform.invalid"
+                        [ngStyle]="{ 'cursor': invoicerefnoform.invalid ? 'not-allowed' : 'pointer'}" [ngClass]="{ 'btn-success': !invoicerefnoform.invalid,
+            'btn-secondary text-white': invoicerefnoform.invalid }" data-bs-dismiss="modal">
+                        <i class="fas fa-check text-white"></i>
+                        &nbsp;Update
+                    </button>
+                    <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white"></i> &nbsp;Close
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+<!-- Cancel Invoice -->
+<div class="modal fade" id="myinvoicecancel" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="text-center my-4">
+                <h2 class="fw-bold">Are you sure?</h2>
+                <p style="display: block;">Do You Want To Cancel the Invoice ?</p>
+                <div class="text-center my-4">
+                    <button class="btn-danger btn-sm text-white me-4" (click)="oncancelinvoice()"
+                        data-bs-dismiss="modal">
+                        <i class="fas fa-xmark text-white fs-5 me-2"></i>Cancel
+                    </button>
+                    <button class="btn-primary btn-sm text-white me-4" data-bs-dismiss="modal">
+                        <i class="fas fa-close text-white me-2"></i>Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Credit note irn -->
+<form [formGroup]="creditnoteForm" #form="ngForm">
+    <div class="modal mt-20" id="myModalcreditnote" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+                    <div>
+                        <h2 class="fw-bolder ms-5 mt-4" style="color: #ffffff;">Credit Note</h2>
+                    </div>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="d-flex flex-row flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><b>Invoice Ref.No</b>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input formControlName="invoice_refno_creditnote" type="text"
+                                    name="invoice_refno_creditnote"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input" />
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><b>Invoice Date</b>
+                            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+                                <input formControlName="invoice_date_creditnote" type="text"
+                                    name="invoice_date_creditnote"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row flex-wrap mt-4">
+                        <span><b>IRN No</b></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+                            <input formControlName="irn_no_creditnote" type="text" name="irn_no_creditnote"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input" />
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row flex-wrap mt-4">
+                        <div class="col-12 col-lg-9 col-md-9 col-sm-12"><b>Customer Name</b>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input formControlName="invoice_custname_creditnote" type="text"
+                                    name="invoice_custname_creditnote"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input" />
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-3 col-md-3 col-sm-12"><b>Invoice Amount</b>
+                            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+                                <input formControlName="invoice_amount_creditnote" type="text"
+                                    name="invoice_amount_creditnote"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                    style="text-align: right;" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Modal footer -->
+                    <div class="text-center my-4 mt-8">
+                        <button class="btn-success me-4" (click)="creditnotesubmit()"
+                            [disabled]="creditnoteForm.invalid"
+                            [ngClass]="{'primary-button': !creditnoteForm.invalid, 'secondary-button': creditnoteForm.invalid}"
+                            data-bs-dismiss="modal">
+                            <i class="bi bi-check-square fs-5"></i>
+                            <span class="ms-3">Submit</span>
+                        </button>
+                        <button class="btn-danger btn-sm text-white me-4" (click)="back()" data-bs-dismiss="modal">
+                            <i class="fas fa-close text-white fs-5"></i>
+                            <span class="ms-3">Cancel</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- Cancel Irn -->
+
+<form [formGroup]="cancelirnForm" #form="ngForm">
+    <div class="modal mt-20" id="myModalcancel" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+                    <div>
+                        <h2 class="fw-bolder ms-5 mt-4" style="color: #ffffff;">Cancel IRN</h2>
+                    </div>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="d-flex flex-row flex-wrap">
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><b>Invoice Ref.No</b>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input formControlName="invoice_refno_cancel" type="text" name="invoice_refno_cancel"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input" />
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12"><b>Invoice Date</b>
+                            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+                                <input formControlName="invoice_date_cancel" type="text" name="invoice_date_cancel"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row flex-wrap mt-4">
+                        <span><b>IRN No</b></span>
+                        <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+                            <input formControlName="irn_no_cancel" type="text" name="irn_no_cancel"
+                                class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input" />
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row flex-wrap mt-4">
+                        <div class="col-12 col-lg-9 col-md-9 col-sm-12"><b>Customer Name</b>
+                            <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <input formControlName="invoice_custname_cancel" type="text"
+                                    name="invoice_custname_cancel"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input" />
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-3 col-md-3 col-sm-12"><b>Invoice Amount</b>
+                            <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex">
+                                <input formControlName="invoice_amount_cancel" type="text" name="invoice_amount_cancel"
+                                    class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input"
+                                    style="text-align: right;" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="text-center my-4 mt-8">
+                        <button class="btn-success me-4" (click)="onsubmit()" [disabled]="cancelirnForm.invalid"
+                            [ngClass]="{'primary-button': !cancelirnForm.invalid, 'secondary-button': cancelirnForm.invalid}"
+                            data-bs-dismiss="modal">
+                            <i class="bi bi-check-square fs-5"></i>
+                            <span class="ms-3">Submit</span>
+                        </button>
+                        <button class="btn-danger btn-sm text-white me-4" (click)="onClose()" data-bs-dismiss="modal">
+                            <i class="fas fa-close text-white fs-5"></i>
+                            <span class="ms-3">Cancel</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

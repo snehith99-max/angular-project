@@ -1,0 +1,295 @@
+<div class="row" style="margin-top: 10px;">
+    <div class="col-lg-2 col-md-2 col-sm-2" routerLink="/ITS/ItsTrnManager">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-orange"
+            >
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Pending</h5>
+                        <div class="mt-2">
+                            <span class="badge-brown  badge-outline-brown fs-4 mt-2">{{pending_count}}</span>
+                        </div>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-darkgreen text-white ms-auto"><i
+                            class="fa-solid fa-hourglass fs-3"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2" routerLink="/ITS/ItsTrnAssignedSummary">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-orange"
+        style="background-color: rgb(251, 247, 206);">
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Assigned</h5>
+                        <div class="mt-2">
+                            <span class="badge-brown  badge-outline-brown fs-4 mt-2">{{assigned_count}}</span>
+                        </div>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-darkgreen text-white ms-auto"><i
+                            class="fa-solid fa-user fs-3"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2" routerLink="/ITS/ItsTrnManagerHoldSummary">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-orange"
+          >
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Hold</h5>
+                        <div class="mt-2">
+                            <span class="badge-brown  badge-outline-brown fs-4 mt-2">{{holdmanager_count}}</span>
+                        </div>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-darkgreen text-white ms-auto"><i
+                            class="fa-solid fa-pause fs-3"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2" routerLink="/ITS/ItsTrnManagerTestSummary">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-orange"
+            >
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Testing</h5>
+                        <div class="mt-2">
+                            <span class="badge-brown  badge-outline-brown fs-4 mt-2">{{testmanager_count}}</span>
+                        </div>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-darkgreen text-white ms-auto"><i
+                            class="fa-solid fa-magnifying-glass fs-3"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2" routerLink="/ITS/ItsTrnCompletedSummary">
+        <div class="cardHead radius-10 border-start border-0 border-3 border-orange"
+           >
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">In Live</h5>
+                        <div class="mt-2">
+                            <span class="badge-brown  badge-outline-brown fs-4 mt-2">{{completed_count}}</span>
+                        </div>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-darkgreen text-white ms-auto"><i
+                            class="fa-solid fa-check fs-3"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2" routerLink="/ITS/ItsTrnManagerView">
+        <div class="cardHead radius-10"
+           style="background-color: #bfba1a47;cursor: pointer;border-radius: 10px;    box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);">
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div class="ico-card">
+                        <i class="fa-solid is fa-people-group"></i>
+                    </div>
+                    <div class="text-center fw-bold ms-18 mt-3 fs-5">
+                        My Teams
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="col-lg-2 col-md-2 col-sm-2" >
+        <div class="cardHeadLeads radius-10 border-start border-0 border-3 border-orange"
+        style="background-color:#F5F5F5;">
+            <div class="card-body12">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0 text-secondary">Total</h5>
+                        <div class="mt-2">
+                            <span class="badge-brown  badge-outline-brown  badge-secondary fs-4 mt-2">{{total}}</span>
+                        </div>
+                    </div>
+                    <div class="widgets-icons-2 rounded-circle bg-gradient-darkgreen text-white ms-auto"><i
+                            class="fa-solid fa-list-check fs-3"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="text-end mb-3">
+        <marquee direction="right">
+        <h5 class="card-title inline me-5">Show Stopper -<b class="animated-label badge badge-primary text-white ms-3"> {{show_stopper}}</b></h5>
+        <h5 class="card-title inline">Critical Mandatory -<b class="animated-label badge badge-primary text-white ms-3"> {{mandatory}}</b></h5>
+        <h5 class="card-title inline">Critical Non-Mandatory -<b class="animated-label badge badge-primary text-white ms-3"> {{non_mandatory}}</b></h5>
+        <h5 class="card-title inline">Nice To Have -<b class="animated-label badge badge-primary text-white ms-3"> {{nice_to_count}}</b ></h5>
+            </marquee>
+    </div>
+</div>
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+        <div class="col">
+            <h3 class="card-title">Task Manager</h3>
+        </div>
+    </div>
+            <div class="table-responsive">
+                <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+                    <table id="assigned" class="table table-striped table-row-bordered border-bottom gs-7 align-middle">
+                        <thead>
+                            <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                                <th>S.No</th>
+                                <th>Module</th>
+                                <th>Task Title</th>
+                                <th>Severity</th>
+                                <th>Estimated Hrs</th>
+                                <th>Assigned To</th>
+                                <th>Assigned Date</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of taskassigned_list; let i=index;">
+                                <td>{{i+1}}</td>
+                                <td>{{data.module_name}}</td>
+                                <td>{{data.task_name}}</td>
+                                <td>{{data.severity_name}}</td>
+                                <td>{{data.estimated_hours}}</td>
+                                <td>{{data.assigned_member}}</td>
+                                <td>{{data.assigned_Date}}</td>
+                                <td class="text-center text-nowrap">
+                                    <button title="360 View" type="button" class="btn btn-icon btn-sm bg-primary me-2" (click)="view(data.task_gid)"><span class="fa-solid fa-arrows-spin fa-spin text-white  fs-6"></span></button> 
+                                    <button title="Hold" type="button" (click)="holdtask(data.task_gid,data.task_code,data.task_name)" class="btn btn-icon btn-sm bg-warning me-2" data-bs-toggle="modal"  data-bs-target="#Holdcurrent" ><span class="fa-solid fa fa-pause text-white  fs-6"></span></button>
+                                    <button title="Initiate Transfer" type="button" class="btn btn-icon btn-sm bg-success me-2"
+                                    data-bs-target="#TransferRm" (click)="transfer(data)"
+                                    data-bs-toggle="modal"><span
+                                        class="fa-solid fa  fa-exchange text-white  fs-6"></span>
+                                </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+      
+    </div>
+    
+
+    <div class="modal top fade" id="TransferRm" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+    data-mdb-backdrop="static" data-mdb-keyboard="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered ">
+        <div class="modal-content rounded-top">
+            <div class=" bg-primary rounded-top">
+                <h3 class="p-4 pt-5 text-white "> <i class="fa-solid fa-user fs-5 ms-3"></i>&nbsp;&nbsp;{{task_title}} /
+                    {{task_code}}
+                </h3>
+            </div>
+            <!-- <div class="card m-3 border p-2" style="background-color: #eaf2ff;"> 
+            <div class="row col-lg-12 col-md-12 col-sm-12 text-center mt-3 ">
+              
+              <h3 class="text-black fw-bold">Task : <span class="text-blue">{{task_title}} / {{task_code}}</span>
+              </h3>      
+            </div>
+       </div> -->
+            <div class="modal-body">
+                <form [formGroup]="assignteamform">
+                    <div class="mb-4 row d-flex flex-row">
+                        <div class="mb-3 col col-lg-4 col-md-11 col-sm-11"><span class="fw-bold ">Reporting
+                                Manager</span>
+                            <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <label>{{assgn_manager}}</label>
+                            </div>
+                        </div>
+                        <div class="mb-3 col col-lg-4 col-md-11 col-sm-11"><span class="fw-bold ">Assigned Member</span>
+                            <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <label>{{assigned_member}}</label>
+                            </div>
+                        </div>
+                        <div class="mb-3 col col-lg-4 col-md-11 col-sm-11"><span class="fw-bold ">Module</span>
+                            <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <label>{{module_name}}</label>
+                            </div>
+                        </div>
+                        <!-- <div class="mb-3 col col-lg-3 col-md-11 col-sm-11"><span class="fw-bold ">Client</span>
+                            <div class="col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                                <label>{{client}}</label>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="col-lg-4 mb-4">
+                        <label for="exampleFormControlInput1" class="required fw-bold mb-1">Member</label>
+                        <ng-select [items]="member" bindLabel="employee_name"
+                            class="custom col-lg-12 col-12 col-md-11 col-sm-11 fv-row mt-1"
+                            placeholder="Select an option" [(ngModel)]="team"
+                            [ngClass]="{'invalid-border': assignteamform.get('team_name')?.invalid && (assignteamform.get('team_name')?.touched || assignteamform.get('team_name')?.dirty)}"
+                            formControlName="team_name">
+                        </ng-select>
+                        <div *ngIf="assignteamform.get('team_name')?.hasError('required') && assignteamform.get('team_name')?.touched"
+                            class="text-red">
+                            Member is required.
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn-success text-white" (click)="submitassign()"
+                            [disabled]="assignteamform.invalid" data-bs-dismiss="modal">
+                            <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                            Submit
+                        </button> &nbsp;
+                        <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                            <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                            Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal top fade" id="Holdcurrent" data-bs-backdrop='static' tabindex="-1" aria-hidden="true"
+data-mdb-backdrop="static" data-mdb-keyboard="true">
+<div class="modal-dialog modal-dialog-centered ">
+    
+    <div class="modal-content ">
+        <div class=" bg-primary rounded-top">
+            <h3 class="p-4 pt-5 text-white "> <i class="fa fa-pause fs-5"></i>&nbsp;&nbsp;&nbsp;Hold Task
+            </h3>
+        </div>
+        <form [formGroup]="holdform" >
+        <div class="modal-body">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <h4>Do you want to Hold this Task ?</h4>
+                <label class="text-center text-blue fs-4">{{task_code}} / {{task_name}}</label><span></span>
+                
+            </div>
+            <div class="d-flex flex-row mt-3 ">
+                <div class="col fw-bold fs-6">Task Hold Reason
+                    <span class="ms-1 text-red">*</span>
+                    <div class="col-lg-12 fv-row mt-3">
+                        <textarea class="form-control rounded-0" formControlName="txholdtremarks" [(ngModel)]="txthold_reason" placeholder="Enter Task Hold Reason" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+           
+                 <br><br>
+                <div class="text-center">
+                    <button  class="btn-success text-white" (click)="Submithold()" [disabled]="holdform.invalid"
+                        data-bs-dismiss="modal">
+                        <i class="fas fa-check text-white fs-5"></i>&nbsp;
+                        Confirm
+                    </button> &nbsp;
+                    <button type="button" class="btn-danger " data-bs-dismiss="modal">
+                        <i class="fa fa-close fs-5 text-center"></i>&nbsp;
+                        Close
+                    </button>
+                </div>
+        </div>
+    </form>
+    </div>
+
+</div>
+</div>

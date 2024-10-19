@@ -1,0 +1,113 @@
+<div class="card m-3">
+    <div class="card-header bg-primary card-height55">
+        <div class="card-title m-0">
+            <h4 class="fw-bolder text-white">Dynamic DB Creation</h4>
+        </div>
+        <button style="margin-top: 20px; margin-left: 150px;" title="Export Excel" type="button"  (click)="exportExcel()"
+        class="btn btn-icon btn-sm bg-success mb-8">
+        <i class="fas fa-file-excel"></i>
+    </button>
+    </div>
+    <form [formGroup]="reactiveform" #ngform>
+        <div class="d-flex flex-row m-6 flex-wrap">
+            <div class="col-6 col-lg-3 col-md-3 col-sm-6"><span class="font-bold">Server Name</span>
+                <ng-select class="mt-2 me-2" formControlName="server_name" bindLabel="server_name"
+                    bindValue="server_gid" [items]="server_list" placeholder="Select an option"></ng-select>
+            </div>
+            <div class="col-6 col-lg-3 col-md-3 col-sm-6"><span class="font-bold ms-4">Module Name</span>
+                <ng-select class="mt-2 me-2" [(ngModel)]="mdlmodule_name" formControlName="module_name"
+                    bindLabel="module_name" bindValue="module_name" [items]="module_list"
+                    placeholder="Select an option"></ng-select>
+            </div>
+            <div class="col-6 col-lg-3 col-md-3 col-sm-6"><span class="font-bold ms-5">Product Type</span>
+                <ng-select [items]="productlists" class="mt-2 me-2" [multiple]="true" [selectableGroup]="true"
+                    formControlName="productmodule_name" [closeOnSelect]="false" bindLabel="productmodule_name"
+                    bindValue="productmodule_name" placeholder="Select an option" [(ngModel)]="cboproductmodule">
+                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index"><input
+                            id="item-{{index}}" style="z-index: -1;" type="checkbox" />&nbsp;&nbsp;
+                        {{item.productmodule_name}}</ng-template>
+                </ng-select>
+            </div>
+            <div class="col-6 col-lg-3 col-md-3 col-sm-6"><span class="font-bold ms-4">Database Name</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                    <input formControlName="database_name" type="text"
+                        class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 border-secondary bg-white custom-input  ms-4"
+                        placeholder="Enter Database Name" />
+                </div>
+            </div>
+        </div>
+        <div class="text-center mb-10">
+            <button type="submit" class="btn-success text-white" data-bs-dismiss="modal"
+                [disabled]="reactiveform.invalid" (click)="onsubmit()">
+                <i class="fas fa-check text-white fs-5"></i>
+                &nbsp;&nbsp;Submit
+            </button>
+        </div>
+    </form>
+    <div class="table-responsive ">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="dynamicdb_list" class="table table-striped table-row-bordered border-bottom gs-7">
+                <thead>
+                    <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                        <th>S.No</th>
+                        <th>Server Name</th>
+                        <th>Module Name</th>
+                        <th>Database Name</th>
+                        <th>Created by</th>
+                        <th>Created date</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of dynamicdb_list; let i=index;" class="align-middle">
+                        <td>{{i+1}}</td>
+                        <td class="text-nowrap">{{data.server_name}}</td>
+                        <td class="text-nowrap">{{data.module_name}}</td>
+                        <td class="text-nowrap">{{data.company_code}}</td>
+                        <td class="text-nowrap">{{data.created_by}}</td>
+                        <td class="text-nowrap">{{data.created_date}}</td>
+                        <td class="text-center text-nowrap">
+                            <button title="Error View" type="button" class="btn btn-icon btn-sm bg-primary me-2"
+                                (click)="onexceptionview(data.dynamicdbscriptmanagement_gid)">
+                                <span class="fa fa-eye fs-6"></span>
+                            </button>
+                            <button title="Delete" type="button" class="btn btn-icon btn-sm bg-danger  me-2"
+                                data-bs-toggle="modal" data-bs-target="#myModaldelete"
+                                (click)="openModaldelete(data.server_name,data.dynamicdbscriptmanagement_gid)">
+                                <i class="fa-solid fa-trash text-white fs-6"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<form [formGroup]="deletedb">
+<div id="myModaldelete" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+                <div>
+                    <h2 class="fw-bolder ms-5 mt-4 text-white">Delete Database</h2>
+                </div>
+            </div>
+            <div class="d-flex flex-row flex-wrap">
+                <div class="col-12 col-lg-12 col-md-12 col-sm-12 mt-2"><span class="font-bold required ms-4">Database
+                        Name</span>
+                    <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                        <input formControlName="database_name" type="text"
+                            class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white border-secondary custom-input  mb-3 mb-lg-0 ms-4"
+                            placeholder="Enter Database Name" />
+                    </div>
+                </div>
+            </div>
+            <div class="text-center my-4 mt-8">
+                <button type="button" class="btn-secondary" data-bs-dismiss="modal">Cancel</button>&nbsp;&nbsp;
+                <button type="button" class="btn-danger" data-bs-dismiss="modal" (click)="ondelete()"><span class="text-white"></span>Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>

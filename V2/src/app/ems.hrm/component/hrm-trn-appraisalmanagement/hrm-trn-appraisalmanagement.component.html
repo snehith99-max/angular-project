@@ -1,0 +1,99 @@
+<div class="card">
+    <div class="row ms-3 mt-3 d-flex align-items-center">
+      <div class="col">
+        <h3 class="card-title">Appraisal Management Summary</h3>
+      </div>
+
+      <div class="col me-5">
+
+        <button title="Add" class="btn-primary btn-sm text-white me-4  ms-2 mb-2 mt-2 float-end" data-bs-toggle="modal" data-bs-target="#myModaladd">
+          <span class="fa-solid fa-plus text-white fs-6 fw-bold"></span>&nbsp;Add Appraisal</button>
+        </div>
+
+        <div class="table-responsive">
+            <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+              <table id="review_list" class="table table-striped table-row-bordered gy-5 gs-7 ">
+                <thead>
+                  <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                    <th>S.No</th>
+                    <th>Appraisal Date</th>
+                    <th>Employee Name</th>
+                    <th>Department</th>
+                    <th>Designation</th>
+                    <th>Branch</th>
+                    <th>Created By</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of review_list; let i=index;" class="align-middle">
+                    <td>{{i+1}}</td>
+                    <td>{{data.created_date}}</td>
+                    <td>{{data.emp_firstname}}</td>
+                    <td>{{data.emp_department}}</td>
+                    <td>{{data.emp_designation}}</td>
+                    <td>{{data.emp_branch}}</td>
+                    <td>{{data.created_by}}</td>
+                    <td class="text-center text-nowrap">
+                      <button title="Appraisal 360" type="button" class="btn btn-icon btn-sm bg-primary me-2" (click)="openModalappraisal(data.user_gid)">
+                        <span class="fa-solid fa-user fs-6" style="color: #ffffff;"></span>
+                      </button>
+                    </td>
+                  </tr>
+
+                    </tbody>
+                    </table>
+                    </div>
+                    </div>
+
+                    <!-- The Modal ADD -->
+<form [formGroup]="reactiveForm" #form="ngForm">
+    <div class="modal mt-20" id="myModaladd" data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+            <div>
+              <h2 class="fw-bolder ms-5 mt-4 text-white">
+                <span class="fa-solid fa-plus text-white fs-6 fw-bold"></span>&nbsp;Add Appraisal Details</h2>
+            </div>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="d-flex flex-row flex-wrap">
+              <div class="col-12 col-lg-12 col-md-12 col-sm-12"><span class="font-bold required">Employee Name</span>
+                <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                 
+                  <ng-select formControlName="employee_name" [items]="employee_list"
+                  class="mt-2" bindLabel="user_code"
+                  [class.is-invalid]="reactiveForm.get('employee_name')?.invalid && (reactiveForm.get('employee_name')?.dirty || reactiveForm.get('employee_name')?.touched)"
+                  [ngClass]="{'invalid-border': reactiveForm.get('employee_name')?.invalid && reactiveForm.get('employee_name')?.touched}"
+                  bindValue="user_gid" placeholder="Select Employee"></ng-select>
+
+                  <div *ngIf="employee_name.invalid && (employee_name.dirty || employee_name.touched)">
+                    <div *ngIf="employee_name.errors?.['required']">
+                      <span class="text-red">Employee Name is required</span>
+                    </div>
+                  </div>
+                </div>              
+              </div>
+              </div>
+
+                <!-- Modal footer -->
+          <div class="text-center my-4">
+            <button class="me-4 btn-success" (click)="onsubmit()" [disabled]="reactiveForm.invalid" [ngClass]="{'primary-button': !reactiveForm.invalid, 'secondary-button': reactiveForm.invalid}" data-bs-dismiss="modal">
+              <i class="bi bi-check-square fs-5"></i>
+                  <span class="ms-3">Submit</span>
+            </button>
+            <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+              <i class="fas fa-close text-white fs-5"></i>
+              <span class="ms-3">Cancel</span>
+            </button>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          </form>
+  
+  

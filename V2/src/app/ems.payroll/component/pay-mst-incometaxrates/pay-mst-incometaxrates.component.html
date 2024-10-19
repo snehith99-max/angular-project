@@ -1,0 +1,519 @@
+<div class="card">
+  <div class="row ms-3 mt-3 d-flex align-items-center">
+    <div class="col">
+      <h3 class="card-title">Income Tax Rates Summary</h3>
+      <button type="button" class="btn-primary btn-sm text-white me-2 mb-2 mt-2 float-end" data-bs-toggle="modal" data-bs-target="#myModaladd">
+        <i class="fas fa-plus me-4"></i> Add Income Tax Rate
+      </button>
+    </div>
+  </div>
+
+  <div class="d-flex flex-row flex-wrap mt-6">
+    <div class="col-12 col-lg-7 col-md-7 col-sm-12">
+      <div class="mt-2">
+        <div class="table-responsive">
+          <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded mt-2">
+            <div class="col">
+              <h3 class="card-title mb-5">Old Tax Regime</h3>
+            </div>
+            <table id="incomemaster_list" class="table table-striped table-row-bordered gy-5 gs-7">
+              <thead>
+                <tr class="fw-bolder fs-7 text-nowrap bg-lightblue text-blue">
+                  <th>S.No</th>
+                  <th>Tax Slabs</th>
+                  <th style="text-align: center;">Individuals <br> (Age < 60 years)</th>
+                  <th style="text-align: center;">Resident Senior Citizens <br> (>= 60 but < 80 years)</th>
+                  <th style="text-align: center;">Resident Super Senior Citizens <br> (80 years and above)</th>
+                  <th style="text-align: center;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of incomemaster_list; let i=index;" class="align-middle fs-7">
+                  <td>{{i+1}}</td>
+                  <td>{{data.tax_slab}}</td>
+                  <td style="text-align: center;">{{data.individuals}}</td>
+                  <td style="text-align: center;">{{data.resident_senior_citizens}}</td>
+                  <td style="text-align: center;">{{data.resident_super_senior_citizens}}</td>
+                  <td class="text-center">
+                    <button title="Edit" type="button" class="btn btn-icon btn-sm bg-success me-2" data-bs-toggle="modal" data-bs-target="#myModaledit" (click)="onedit(data)">
+                      <span class="fa-solid fa-pencil text-white  fs-6"></span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-5 col-md-5 col-sm-12">
+      <div class="mt-2">
+        <div class="table-responsive">
+          <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded mt-2">
+            <div class="col">
+              <h3 class="card-title mb-5">New Tax Regime</h3>
+            </div>
+            <table id="incomemasternew_list" class="table table-striped table-row-bordered gy-5 gs-7">
+              <thead style="height: 37px;">
+                <tr class="fw-bolder fs-7 text-nowrap bg-lightblue text-blue">
+                  <th>S.No</th>
+                  <th>Tax Slabs</th>
+                  <th style="text-align: center;">Income Tax Rates</th>
+                  <th style="text-align: center;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of incomemasternew_list; let i=index;" class="align-middle fs-7">
+                  <td>{{i+1}}</td>
+                  <td>{{data.tax_slabnew}}</td>
+                  <td style="text-align: center;">{{data.income_tax_rates1}}</td>
+                  <td class="text-center">
+                    <button title="Edit" type="button" class="btn btn-icon btn-sm bg-success me-2" data-bs-toggle="modal" data-bs-target="#myModaledit" (click)="onedit(data)">
+                      <span class="fa-solid fa-pencil text-white fs-6"></span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal ADD -->
+<form [formGroup]="reactiveForm" #form="ngForm">
+  <div class="modal mt-20" id="myModaladd" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+          <div>
+            <h2 class="fw-bolder ms-5 mt-4 text-white">Add Income Tax Rates Details</h2>
+          </div>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold">Tax Name</span>
+              <div class="col-lg-11 col-12 col-md-11 col-sm-11 fv-row mt-2">
+                <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                  <input class="form-check-input" type="radio" value="Old Regime" formControlName="tax_name" [(ngModel)]="tax_name" />
+                  <label class="form-check-label text-gray-700 text-nowrap" for="taxconfirmedNew">Old Regime</label>
+
+                  <input class="form-check-input ms-6" type="radio" value="New Regime" formControlName="tax_name" [(ngModel)]="tax_name" />
+                  <label class="form-check-label text-gray-700 text-nowrap" for="taxconfirmedOld">New Regime</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row flex-wrap mt-3" *ngIf="tax_name === 'Old Regime'">
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-2"><span class="font-bold required">Tax Slab From</span>
+              <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="tax_slabs_fromold" type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input" [ngStyle]="{'border-color': tax_slabs_fromold.invalid && tax_slabs_fromold.touched ? 'red' : 'rgb(209, 209, 209)'}" placeholder="Enter Tax Slabs From" name="tax_slabs_fromold" required />
+                <div *ngIf="tax_slabs_fromold.invalid && (tax_slabs_fromold.dirty || tax_slabs_fromold.touched)">
+                  <div *ngIf="tax_slabs_fromold.errors?.['required']">
+                    <span class="text-red">Tax Slabs From is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-2"><span class="font-bold required">Tax Slab To</span>
+              <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="tax_slabs_toold" type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input" [ngStyle]="{'border-color': tax_slabs_toold.invalid && tax_slabs_toold.touched ? 'red' : 'rgb(209, 209, 209)'}" placeholder="Enter Tax Slabs To" pattern="^(?!\s*$).+" name="tax_slabs_toold" required />
+                <div *ngIf="tax_slabs_toold.invalid && (tax_slabs_toold.dirty || tax_slabs_toold.touched)">
+                  <div *ngIf="tax_slabs_toold.errors?.['required']">
+                    <span class="text-red">Tax Slabs To is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row flex-wrap mt-3" *ngIf="tax_name === 'Old Regime'">
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-2"><span class="font-bold required">Individuals</span>
+              <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="individuals" type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input" [ngStyle]="{'border-color': individuals.invalid && individuals.touched ? 'red' : 'rgb(209, 209, 209)'}" placeholder="Enter Individuals" name="individuals" required />
+                <div *ngIf="individuals.invalid && (individuals.dirty || individuals.touched)">
+                  <div *ngIf="individuals.errors?.['required']">
+                    <span class="text-red">Individuals is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-2"><span class="font-bold required">Resident Senior Citizens</span>
+              <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="resident_senior_citizens" type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input" [ngStyle]="{'border-color': resident_senior_citizens.invalid && resident_senior_citizens.touched ? 'red' : 'rgb(209, 209, 209)'}" placeholder="Enter Resident Senior Citizens" pattern="^(?!\s*$).+" name="resident_senior_citizens" required />
+                <div *ngIf="resident_senior_citizens.invalid && (resident_senior_citizens.dirty || resident_senior_citizens.touched)">
+                  <div *ngIf="resident_senior_citizens.errors?.['required']">
+                    <span class="text-red">Resident Senior Citizens is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row flex-wrap mt-3" *ngIf="tax_name === 'Old Regime' ">
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-2"><span class="font-bold required">Resident Super Senior Citizens</span>
+              <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="resident_super_senior_citizens" type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input" [ngStyle]="{'border-color': resident_super_senior_citizens.invalid && resident_super_senior_citizens.touched ? 'red' : 'rgb(209, 209, 209)'}" placeholder="Resident Super Senior Citizens" name="resident_super_senior_citizens" required />
+                <div *ngIf="resident_super_senior_citizens.invalid && (resident_super_senior_citizens.dirty || resident_super_senior_citizens.touched)">
+                  <div *ngIf="resident_super_senior_citizens.errors?.['required']">
+                    <span class="text-red">Resident Super Senior Citizens is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-2"><span class="font-bold">Remarks</span>
+              <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                <textarea formControlName="remarks_old" type="text" class="form-control form-control-lg form-control-solid borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input" placeholder="Enter Remarks" rows="1" name="remarks_old" required></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row flex-wrap mt-3" *ngIf="tax_name === 'New Regime' ">
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-2"><span class="font-bold required">Tax Slab From</span>
+              <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="tax_slabs_fromnew" type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input" [ngStyle]="{'border-color': tax_slabs_fromnew.invalid && tax_slabs_fromnew.touched ? 'red' : 'rgb(209, 209, 209)'}" placeholder="Enter Tax Slabs From" pattern="^(?!\s*$).+" name="tax_slabs_fromnew" required />
+                <div *ngIf="tax_slabs_fromnew.invalid && (tax_slabs_fromnew.dirty || tax_slabs_fromnew.touched)">
+                  <div *ngIf="tax_slabs_fromnew.errors?.['required']">
+                    <span class="text-red">Tax Slabs From is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-2"><span class="font-bold required">Tax Slab To</span>
+              <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="tax_slabs_tonew" type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input" [ngStyle]="{'border-color': tax_slabs_tonew.invalid && tax_slabs_tonew.touched ? 'red' : 'rgb(209, 209, 209)'}" placeholder="Enter Tax Slabs To" name="tax_slabs_tonew" required />
+                <div *ngIf="tax_slabs_tonew.invalid && (tax_slabs_tonew.dirty || tax_slabs_tonew.touched)">
+                  <div *ngIf="tax_slabs_tonew.errors?.['required']">
+                    <span class="text-red">Tax Slabs To is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row flex-wrap mt-3" *ngIf="tax_name === 'New Regime' ">
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-2"><span class="font-bold required">Income Tax Rates</span>
+              <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="income_tax_rates" type="text" class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input" [ngStyle]="{'border-color': income_tax_rates.invalid && income_tax_rates.touched ? 'red' : 'rgb(209, 209, 209)'}" placeholder="Enter Income Tax Rates" name="income_tax_rates" required />
+                <div *ngIf="income_tax_rates.invalid && (income_tax_rates.dirty || income_tax_rates.touched)">
+                  <div *ngIf="income_tax_rates.errors?.['required']">
+                    <span class="text-red">Income Tax Rates is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-2"><span class="font-bold">Remarks</span>
+              <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                <textarea formControlName="remarks_new" type="text" class="form-control form-control-lg form-control-solid borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input" placeholder="Enter Remarks" rows="1" name="remarks_new" required></textarea>
+              </div>
+            </div>
+          </div>
+          <!-- Modal footer -->
+          <div class="text-center my-4 mt-8">
+            <button class="me-4 btn-success" (click)="onsubmit()" data-bs-dismiss="modal">
+              <i class="bi bi-check-square fs-5"></i>
+              <span class="ms-3">Submit</span>
+            </button>
+            <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+              <i class="fas fa-close text-white fs-5"></i>
+              <span class="ms-3">Close</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- The Modal EDIT -->
+<form [formGroup]="reactiveFormEdit" #form="ngForm">
+  <div class="modal mt-20" id="myModaledit" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="card-header p-1 pb-3 pt-2 rounded-top bg-primary">
+          <div>
+            <h2 class="fw-bolder ms-5 mt-4 text-white">Edit Income Tax Rate Detail</h2>
+          </div>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12"><span class="font-bold">Tax Name</span>
+              <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                <div class="form-check form-check-custom form-check-primary form-check-solid form-check-sm">
+                  <input class="form-check-input" type="radio" value="Old Regime" formControlName="tax_nameedit"
+                    [(ngModel)]="tax_nameedit" />
+                  <label class="form-check-label text-gray-700 text-nowrap" for="taxconfirmedNew">Old Regime</label>
+
+                  <input class="form-check-input ms-6" type="radio" value="New Regime" formControlName="tax_nameedit"
+                    [(ngModel)]="tax_nameedit" />
+                  <label class="form-check-label text-gray-700 text-nowrap" for="taxconfirmedOld">New Regime</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row flex-wrap mt-3" *ngIf="tax_nameedit === 'Old Regime'">
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-2"><span class="font-bold required">Tax Slab From</span>
+              <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="tax_slabs_fromoldedit" type="text"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                  [ngStyle]="{'border-color': tax_slabs_fromoldedit.invalid && tax_slabs_fromoldedit.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                  placeholder="Enter Tax Slabs From" name="tax_slabs_fromoldedit" required />
+                <div
+                  *ngIf="tax_slabs_fromoldedit.invalid && (tax_slabs_fromoldedit.dirty || tax_slabs_fromoldedit.touched)">
+                  <div *ngIf="tax_slabs_fromoldedit.errors?.['required']">
+                    <span class="text-red">Tax Slabs From is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-2"><span class="font-bold required">Tax Slab To</span>
+              <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="tax_slabs_tooldedit" type="text"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                  [ngStyle]="{'border-color': tax_slabs_tooldedit.invalid && tax_slabs_tooldedit.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                  placeholder="Enter Tax Slabs To" pattern="^(?!\s*$).+" name="tax_slabs_tooldedit" required />
+                <div *ngIf="tax_slabs_tooldedit.invalid && (tax_slabs_tooldedit.dirty || tax_slabs_tooldedit.touched)">
+                  <div *ngIf="tax_slabs_tooldedit.errors?.['required']">
+                    <span class="text-red">Tax Slabs To is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row flex-wrap mt-3" *ngIf="tax_nameedit === 'Old Regime' ">
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-2"><span class="font-bold required">Individuals</span>
+              <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="individuals_edit" type="text"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                  [ngStyle]="{'border-color': individuals_edit.invalid && individuals_edit.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                  placeholder="Enter Individuals" name="individuals_edit" required />
+                <div *ngIf="individuals_edit.invalid && (individuals_edit.dirty || individuals_edit.touched)">
+                  <div *ngIf="individuals_edit.errors?.['required']">
+                    <span class="text-red">Individuals is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-2"><span class="font-bold required">Resident Senior Citizens</span>
+                  <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="resident_senior_citizensedit" type="text"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                  [ngStyle]="{'border-color': resident_senior_citizensedit.invalid && resident_senior_citizensedit.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                  placeholder="Enter Resident Senior Citizens" pattern="^(?!\s*$).+" name="resident_senior_citizensedit"
+                  required />
+                <div
+                  *ngIf="resident_senior_citizensedit.invalid && (resident_senior_citizensedit.dirty || resident_senior_citizensedit.touched)">
+                  <div *ngIf="resident_senior_citizensedit.errors?.['required']">
+                    <span class="text-red">Resident Senior Citizens is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row flex-wrap mt-3" *ngIf="tax_nameedit === 'Old Regime'">
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-2"><span class="font-bold required">Resident Super Senior Citizens</span>
+                  <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="resident_super_senior_citizensedit" type="text"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                  [ngStyle]="{'border-color': resident_super_senior_citizensedit.invalid && resident_super_senior_citizensedit.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                  placeholder="Resident Super Senior Citizens" name="resident_super_senior_citizensedit"
+                  required />
+                <div
+                  *ngIf="resident_super_senior_citizensedit.invalid && (resident_super_senior_citizensedit.dirty || resident_super_senior_citizensedit.touched)">
+                  <div *ngIf="resident_super_senior_citizensedit.errors?.['required']">
+                    <span class="text-red">Resident Super Senior Citizens is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-2"><span class="font-bold">Remarks</span>
+              <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                <textarea formControlName="remarksold_edit" type="text"
+                  class="form-control form-control-lg form-control-solid borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+                  placeholder="Enter Remarks" rows="1" name="remarksold_edit" required></textarea>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="d-flex flex-row flex-wrap mt-3" *ngIf="tax_nameedit === 'New Regime' ">
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-2"><span class="font-bold required">Tax Slab From</span>
+              <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="tax_slabs_fromnewedit" type="text"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                  [ngStyle]="{'border-color': tax_slabs_fromnewedit.invalid && tax_slabs_fromnewedit.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                  placeholder="Enter Tax Slabs From" pattern="^(?!\s*$).+" name="tax_slabs_fromnewedit" required />
+                <div
+                  *ngIf="tax_slabs_fromnewedit.invalid && (tax_slabs_fromnewedit.dirty || tax_slabs_fromnewedit.touched)">
+                  <div *ngIf="tax_slabs_fromnewedit.errors?.['required']">
+                    <span class="text-red">Tax Slabs From is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-2"><span class="font-bold required">Tax Slab To</span>
+              <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="tax_slabs_tonewedit" type="text"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                  [ngStyle]="{'border-color': tax_slabs_tonewedit.invalid && tax_slabs_tonewedit.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                  placeholder="Enter Tax Slabs To" name="tax_slabs_tonewedit" required />
+                <div *ngIf="tax_slabs_tonewedit.invalid && (tax_slabs_tonewedit.dirty || tax_slabs_tonewedit.touched)">
+                  <div *ngIf="tax_slabs_tonewedit.errors?.['required']">
+                    <span class="text-red">Tax Slabs To is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row flex-wrap mt-3" *ngIf="tax_nameedit === 'New Regime' ">
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-2"><span class="font-bold required">Income Tax Rates</span>
+                  <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                <input formControlName="income_tax_ratesedit" type="text"
+                  class="form-control form-control-lg form-control-solid custom-input mb-3 mb-lg-0 bg-white custom-input"
+                  [ngStyle]="{'border-color': income_tax_ratesedit.invalid && income_tax_ratesedit.touched ? 'red' : 'rgb(209, 209, 209)'}"
+                  placeholder="Enter Income Tax Rates" name="income_tax_ratesedit" required />
+                <div
+                  *ngIf="income_tax_ratesedit.invalid && (income_tax_ratesedit.dirty || income_tax_ratesedit.touched)">
+                  <div *ngIf="income_tax_ratesedit.errors?.['required']">
+                    <span class="text-red">Income Tax Rates is required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-2"><span class="font-bold">Remarks</span>
+              <div class="col-12 col-lg-11 col-md-11 col-sm-11 fv-row mt-2">
+                <textarea formControlName="remarksnew_edit" type="text"
+                  class="form-control form-control-lg form-control-solid borderc-secondary custom-input mb-3 mb-lg-0 bg-white custom-input"
+                  placeholder="Enter Remarks" rows="1" name="remarksnew_edit" required></textarea>
+              </div>
+            </div>
+          </div>
+          <!-- Modal footer -->
+          <div class="text-center my-4 mt-8">
+            <button class="me-4 btn-success" (click)="onupdate()" data-bs-dismiss="modal">
+              <i class="bi bi-check-square fs-5"></i>
+              <span class="ms-3">Update</span>
+            </button>
+            <button class="btn-danger btn-sm text-white me-4" (click)="onclose()" data-bs-dismiss="modal">
+              <i class="fas fa-close text-white fs-5"></i>
+              <span class="ms-3">Close</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="card">
+
+  <div class="col ms-7">
+    <h3 class="card-title">Income Tax Rates Summary</h3>
+  </div>
+
+  <div class="col me-5">
+    <button type="button" class="btn-primary btn-sm text-white me-2 mb-2 mt-2 float-end" data-bs-toggle="modal"
+      data-bs-target="#myModaladd">
+      <i class="fas fa-plus me-4"></i>Add Income Tax Rate
+    </button>
+  </div>
+
+  <div class="table-responsive">
+    <div class="card card-body m-1 shadow-lg p-3 mb-5 bg-white rounded">
+      <div class="col">
+        <h3 class="card-title">Old Tax Regime</h3>
+      </div>
+      <table id="incomemaster_list" class="table table-striped table-row-bordered gy-5 gs-7">
+        <thead>
+          <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+            <th>S.No</th>
+            <th>Tax Slabs From</th>
+            <th style="text-align: center;">Individuals</th>
+            <th style="text-align: center;">Resident Senior Citizens</th>
+            <th style="text-align: center;">Resident Super Senior Citizens</th>
+            <th style="text-align: center;">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of incomemaster_list; let i=index;">
+            <td>{{i+1}}</td>
+            <td>{{data.tax_slab}}</td>
+            <td style="text-align: center;">{{data.individuals}}</td>
+            <td style="text-align: center;">{{data.resident_senior_citizens}}</td>
+            <td style="text-align: center;">{{data.resident_super_senior_citizens}}</td>
+            <td class="text-center">
+              <button title="Edit" type="button" class="btn btn-icon btn-sm bg-success me-2" data-bs-toggle="modal"
+                data-bs-target="#myModaledit" (click)="onedit(data)"><span
+                  class="fa-solid fa-pencil text-white  fs-6"></span></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="row ms-3 mt-3 d-flex align-items-center">
+    <div class="table-responsive">
+      <div class="card card-body m-1 shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="col">
+          <h3 class="card-title">New Tax Regime</h3>
+        </div>
+        <table id="incomemasternew_list" class="table table-striped table-row-bordered gy-5 gs-7">
+          <thead>
+            <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+              <th>S.No</th>
+              <th>Tax Slabs</th>
+              <th style="text-align: center;">Income Tax Rates</th>
+              <th style="text-align: center;">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of incomemasternew_list; let i=index;">
+              <td>{{i+1}}</td>
+              <td>{{data.tax_slabnew}}</td>
+              <td style="text-align: center;">{{data.income_tax_rates1}}</td>
+              <td class="text-center text-nowrap">
+                <button title="Edit" type="button" class="btn btn-icon btn-sm bg-success me-2" data-bs-toggle="modal"
+                  data-bs-target="#myModaledit" (click)="onedit(data)"><span
+                    class="fa-solid fa-pencil text-white  fs-6"></span></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div> -->

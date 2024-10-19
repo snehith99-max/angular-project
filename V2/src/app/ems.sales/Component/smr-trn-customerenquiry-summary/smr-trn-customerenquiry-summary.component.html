@@ -1,0 +1,296 @@
+<div class="card">
+  <div class="row ms-3 mt-3 d-flex align-items-center">
+    <div class="col">
+      <h3 class="card-title">Enquiry Summary</h3>
+    </div>
+    <!-- <div class="col me-5">
+      <button type="button" title="Raise Enquiry" class="btn-primary btn-sm text-white me-4 float-end"
+        data-bs-toggle="modal" data-bs-target="#myModaladd" (click)="onadd()">>
+        <i class="fas fa-plus"></i>&nbsp;Raise Enquiry
+      </button>
+    </div> -->
+    <div class="col me-5">
+      <button type="button" title="Raise Enquiry" class="btn-primary btn-sm text-white me-4 float-end"
+        data-bs-toggle="modal" data-bs-target="#myModaladd" (click)="onadd()">
+        &nbsp;<i class="fa-solid fa-plus text-white fs-5"></i>&nbsp;&nbsp; Raise Enquiry
+      </button>
+    </div>
+  </div>
+
+
+
+  <div class="table-responsive">
+    <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+      <table id="cusenquiry_list" class="table table-striped table-row-bordered gy-5 gs-7 ">
+        <thead>
+          <tr class="fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+            <!-- <th>S.No</th> -->
+            <th>Date</th>
+            <th>Enquiry Ref.No</th>
+            <!-- <th>Branch</th> -->
+            <th>Customer</th>
+            <th class="text-center">Details</th>
+            <th class="text-end">Potential Value</th>
+            <th>Rating</th>
+            <th>Status</th>
+            <!-- <th>Created By</th> -->
+            <th>Assign To</th>
+            <th style="display: none;">Created Date</th>
+            <th class="text-center bg-lightblue ">Action</th> 
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of cusenquiry_list; let i = index" style="white-space: nowrap;">
+            <!-- <td>{{i+1}}</td> -->
+            <td>{{data.enquiry_date}}</td>
+            <td>{{data.enquiry_referencenumber}}</td>
+            <!-- <td>{{data.branch_prefix}}</td> -->
+            <td>{{data.customer_name}}</td>
+            <td class="text-center">
+              <label title="Customer Details" data-bs-toggle="modal" data-bs-target="#myModalcustomerdetail"
+                (click)="GetCustomerAddress(data.customer_gid)">
+                <i class="fas fa-question-circle fa-5x text-primary fs-2" style="cursor: pointer;"></i>
+              </label>
+            </td>
+            <td class="text-end">{{data.potorder_value}}</td>
+            <td [ngStyle]="{'color': getColor(data.customer_rating)}"
+              style="background-color:'getColor(data.customer_rating)'; font-weight: bolder ;font-size: larger; text-transform:uppercase;">
+              {{data.customer_rating}}</td>
+            <td>{{data.enquiry_status}}</td>
+            <td>{{data.assign_to}}</td>
+            <!-- <td>{{data.created_by}}</td>  -->
+            <td style="display: none;">{{data.created_date}}</td>
+            <td class="text-center text-nowrap">
+              <button title="View" type="button" (click)="onview(data.enquiry_gid)"
+                [disabled]="data.enquiry_status === 'Drop'" data-bs-toggle="modal"
+                class="btn btn-icon btn-sm bg-primary me-2"><span
+                  class="fa-solid fa-eye text-white  fs-6"></span></button>
+              <button title="Edit" type="button" class="btn btn-icon btn-sm bg-etdark me-2"
+                [disabled]="data.enquiry_status === 'Drop'" (click)="openModaledit(data.enquiry_gid)"
+                data-bs-toggle="modal" data-bs-target="#myModaledit"><span
+                  class="fa-solid fa-pencil text-white  fs-6"></span></button>
+              <!-- <button title="Re-Assign Enquiry" type="button" class="btn btn-icon btn-sm background-color4  me-2"
+                [disabled]="data.enquiry_status === 'Drop'" (click)="openModal(data)" data-bs-toggle="modal"
+                data-bs-target="#myModalassign"><span class="fa-solid fa-repeat text-white  fs-6"></span></button> -->
+              <!-- <button title="Raise Proposal" type="button" class="btn btn-icon btn-sm background-color1 me-2"
+                [disabled]="data.enquiry_status === 'Drop'" (click)="openrequest(data.enquiry_gid)"><span
+                  class="fa-solid fa-arrows-up-to-line"></span></button> -->
+
+                  <ng-container *ngIf="data.customer === '' || data.customer === null; else showQuoteButton">
+                    <!-- When data.customer is null or empty, show this button -->
+                    <button (click)="onLead(data.leadbank_gid)" title="Lead To Customer" type="button"
+                      class="btn btn-icon btn-sm bg-warning me-2"><i class="bi bi-person-check-fill"></i></button>
+                  </ng-container>
+                  
+                  <ng-template #showQuoteButton>
+                    <!-- When data.customer is not null or empty, show this button -->
+                    <button title="Raise Quote" type="button" class="btn btn-icon btn-sm background-color3 me-2"
+                      (click)="openquote(data.enquiry_gid)">
+                      <span class="fa-solid fa-arrow-up text-white fs-6"></span>
+                    </button>
+                  </ng-template>
+                  
+              <!-- <span (click)="toggleOptions(data.enquiry_gid)" style="cursor: pointer;">
+                <button class="btn me-2 p-1 "><span class="fa-solid fa-ellipsis-vertical fs-1"
+                    style="color: #4d4d4d;"></span></button>
+                <div *ngIf="showOptionsDivId === data.enquiry_gid"
+                  class="pb-0 rounded bg-white cursor-pointer icon_menu">
+
+
+
+                  <div class="d-flex p-3 pb-3 Icon_hover" [ngClass]="{'disabled': data.enquiry_status === 'Drop'}"
+                    (click)="data.enquiry_status !== 'Drop' && onview(data.enquiry_gid)" data-bs-toggle="modal">
+                    <span><i class="fa-solid fa-eye fs-3 me-4"></i></span>
+                    <span>View</span>
+                  </div>
+
+                  <div class="d-flex p-3 pb-3 Icon_hover" [ngClass]="{'disabled': data.enquiry_status === 'Drop'}"
+                    (click)="data.enquiry_status !== 'Drop' && openModaledit(data.enquiry_gid)" data-bs-toggle="modal"
+                    data-bs-target="#myModaledit">
+                    <span><i class="fa-solid fa-pencil fs-3 me-4"></i></span>
+                    <span>Edit</span>
+                  </div>
+
+                  
+
+                  
+
+
+                  <div class="d-flex p-3 pb-3 Icon_hover" [ngClass]="{'disabled': data.enquiry_status === 'Drop'}"
+                    (click)="data.enquiry_status !== 'Drop' && openquote(data.enquiry_gid)">
+                    <span><i class="fa-solid fa-arrow-up fs-3 me-4"></i></span>
+                    <span>Raise Quote</span>
+                  </div>
+                </div>
+              </span> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!--Close popup-->
+  <form [formGroup]="customerenquiryForm" #form="ngForm">
+    <input type="hidden" formControlName="enquiry_gid">
+    <div class="modal" id="myModalclose" data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="text-center my-4">
+            <h2 style="display: block;">Do You Want Move To Drop ?</h2>
+          </div>
+
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label"><b>Remarks</b></label>
+
+              <textarea formControlName="internal_notes" required class="   form-control form-control-lg form-control-solid
+                 custom-input
+                 mb-3 mb-lg-0
+                 bg-white
+                 custom-input borderc-secondary
+                 " rows="6" required placeholder="Drop a Reason"></textarea>
+              <div *ngIf="
+                 internal_notes.invalid && (internal_notes.dirty || internal_notes.touched)
+                              " class="invalid-feedback">
+                <div *ngIf="internal_notes.errors?.['required']">
+                  Remarks Required.
+                </div>
+              </div>
+
+            </div>
+            <!--Modal Footer-->
+            <div class="text-center my-4">
+              <button (click)="onsubmit()" class="btn-danger btn-sm text-white me-4" data-bs-dismiss="modal">
+                <i class="fa-solid fa-circle-down text-white fs-5 "></i> &nbsp;Drop
+              </button> &nbsp;&nbsp;
+              <button (click)="onclose()" class="btn-primary btn-sm text-white me-4" data-bs-dismiss="modal">
+                <i class="fas fa-close text-white"></i> &nbsp;Close
+              </button>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </form>
+
+  <!--Close Popup Ends-->
+
+
+  <!--Re-Assign Popup Starts-->
+
+  <form [formGroup]="ReassignForm" #form="ngForm">
+    <div class="modal" id="myModalassign" data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="card-header  pb-3 pt-6 rounded-top bg-primary">
+            <h3 class=" text-white"><i class="fa-solid fa-repeat text-white  fs-3"> </i>&nbsp; &nbsp;ReAssign Enquiry
+            </h3>
+          </div>
+
+          <div class="modal-body">
+            <div class="row">
+              <span class="font-bold"><b>Branch</b></span>
+              <div class="col-lg-12 col-md-12 col-sm-12 fv-row mt-2 d-flex ">
+                <input formControlName="branch_name" readonly class=" form-control  form-control-solid
+                 custom-input
+                 mb-3 mb-lg-0 mb-2
+                 bg-white
+                 custom-input borderc-secondary" name="branch_name" style="height:40px;" />
+              </div>
+            </div>
+            <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-3">
+              <span class="font-bold required"><b>Team</b></span>
+
+              <ng-select formControlName="campaign_title" [(ngModel)]="selectteam" [class.is-invalid]="
+                          campaign_title.invalid && (campaign_title.dirty || campaign_title.touched)
+                            " [ngClass]="{'invalid-border': campaign_title.invalid && campaign_title.touched}"
+                [items]="Team_list" required
+                class="custom col-lg-12 col-12 col-md-12 col-sm-12 mb-3 fv-row mt-2 select2" bindLabel="campaign_title"
+                bindValue="campaign_gid" placeholder="Select an option"></ng-select>
+              <div *ngIf="
+                          campaign_title.invalid && (campaign_title.dirty || campaign_title.touched)
+                            " class="invalid-feedback">
+                <div *ngIf="campaign_title.errors?.['required']">
+                  Team Code is required..
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-12 col-12 col-md-12 col-sm-12 fv-row mt-2">
+              <span class="font-bold required"><b>Employee Name</b></span>
+
+              <ng-select formControlName="employee_name" [(ngModel)]="selectemp" [class.is-invalid]="
+                           employee_name.invalid && (employee_name.dirty || employee_name.touched)
+                             " [ngClass]="{'invalid-border': employee_name.invalid && employee_name.touched}"
+                [items]="Employee_list" required
+                class="custom col-lg-12 col-12 col-md-12 col-sm-12 mb-2 fv-row mt-2 select2" bindLabel="employee_name"
+                bindValue="employee_gid" placeholder="Select an option"></ng-select>
+              <div *ngIf="
+                            employee_name.invalid && (employee_name.dirty || employee_name.touched)
+                              " class="invalid-feedback">
+                <div *ngIf="employee_name.errors?.['required']">
+                  Employee Code is required..
+                </div>
+              </div>
+            </div>
+            <br>
+            <!--Modal Footer-->
+            <div class="text-center my-4">
+              <button (click)="onupdate()" class="btn-success text-white me-4" [disabled]="ReassignForm.invalid"
+                [ngClass]="{
+                      'primary-button': !ReassignForm.invalid,
+                      'secondary-button': ReassignForm.invalid
+                    }" data-bs-dismiss="modal">
+                <i class="fas fa-check text-white fs-5 "></i> &nbsp;Update
+              </button> &nbsp;&nbsp;
+              <button class="btn-danger btn-sm text-white me-4" (click)="oncloses()" data-bs-dismiss="modal">
+                <i class="fas fa-close text-white"></i> &nbsp;Close
+              </button>
+            </div>
+          </div>
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="modal" id="myModalcustomerdetail" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog p-10 modal-dialog-centered">
+      <div class="modal-content">
+        <div class="card-header  pb-3 pt-6 rounded-top bg-primary">
+          <h3 class=" text-white"><i class="fa-solid fa-user text-white  fs-3"> </i>&nbsp; &nbsp; Lead Detail
+          </h3>
+        </div>
+
+        <div class="modal-body" *ngFor="let data of cusaddress_list;">
+          <div>
+            <div class="font-bold"><b>Lead Name</b></div>
+            <div>{{data.leadbank_name}}</div>
+          </div>
+          <br>
+          <div>
+            <div class="font-bold"><b>Address</b></div>
+            <div>
+              <span [innerHTML]="address"></span>
+            </div>
+          </div>
+        </div>
+        <div class="text-center my-4">
+          <button class="btn-danger btn-sm text-white me-4" (click)="oncloses()" data-bs-dismiss="modal">
+            <i class="fas fa-close text-white"></i> &nbsp;Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

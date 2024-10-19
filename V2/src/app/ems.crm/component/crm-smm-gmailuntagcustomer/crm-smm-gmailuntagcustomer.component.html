@@ -1,0 +1,67 @@
+<div class="card shadow-sm">
+
+    <div class="card-title p-5 pb-6 pt-6 rounded-top bg-primary ">
+        <h3 class="fw-bolder text-white">
+            <i class="fa-solid fa-unlink fs-3 me-5"></i>Untag Customer  
+        </h3>
+    </div>
+
+    <div class="table-responsive">
+        <div class="mx-3 p-3 pt-0 pb-0 bg-white rounded">
+            <table id="unassigncustomer_list" class="table table-striped table-row-bordered border-bottom gs-7 align-middle ">
+                <thead>
+                    <tr class="text-white fw-bolder fs-5 text-nowrap bg-lightblue text-blue align-middle">
+                         <th>
+                            <!-- <input type="checkbox" id="checkAll" (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()" />
+                            All -->
+                        </th>
+                        <!-- <th>Customer Code </th> -->
+                        <th>Customer </th>
+                        <th>Contact Person  </th>
+                        <th>Email </th>
+                        <th>Address </th>
+                        <th>City</th>
+                        <th>Country</th>
+                        <!-- <th>Customer Since </th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of unassigncustomer_list; let i=index;" class="align-middle">
+                        <td> <input type="checkbox" (click)="$event.stopPropagation()"
+                                (change)="$event ? selection.toggle(data) : null"
+                                [checked]="selection.isSelected(data)" /></td>
+                        <!-- <td>{{data.customer_code}}</td> -->
+                        <td>{{data.customer_name}}</td>
+                        <td>{{data.customercontact_name}}</td>
+                        <td>{{data.email}}</td>
+                        <td>{{data.address1}}</td>
+                        <td>{{data.city}}</td>
+                        <td>{{data.country}}</td>
+                        <!-- <td class="text-align:center">
+                            <a class="ms-6 count font-bold">{{data.created_date}}</a></td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="text-center my-4">
+        <button type="submit" class="btn-success btn-sm text-white me-2"(click)="untagcustomer()">
+            <i class="fa-solid fa-unlink fs-3 me-5"></i>Untag
+        </button>
+
+        <button class="btn-primary btn-sm text-white me-4" (click)="onback()">
+            <i class="fas fa-arrow-left me-3"></i>Back
+        </button>
+    </div>
+
+
+
+
+
+
+
+</div>
